@@ -114,7 +114,7 @@ public class CityListAdapter extends BaseAdapter implements SectionIndexer {
 		public void onClick(View v) {
 			ComParams.IPAREA = sIpArea;
 			Util.saveIpArea(context);
-			Toast.makeText(context, "城市切换成", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, "城市切换成:" + sIpArea , Toast.LENGTH_LONG).show();
 
 			ULog.d(tag, "ComParams.IPAREA = " + ComParams.IPAREA);
 		}
