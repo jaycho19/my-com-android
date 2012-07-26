@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout style="@style/top_menu_layout_style" >
+
+        <Button
+            android:id="@+id/button_kzmw_login"
+            style="@style/top_menu_button_login_style" />
+
+        <Button
+            android:id="@+id/button_kzmw_signe"
+            style="@style/top_menu_button_sign_style" />
+
+        <TextView
+            android:id="@+id/textview_kzmw_top_title"
+            style="@style/top_menu_textview_style"
+            android:text="@string/top_title_dicos" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <!-- <ScrollView -->
+        <!-- android:id="@+id/scrollview_kzmw_info" -->
+        <!-- android:layout_width="wrap_content" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:orientation="vertical" > -->
+
+        <ImageSwitcher
+            android:id="@+id/imageswitcher_kzmw_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             >
+        </ImageSwitcher>
+        <!-- </ScrollView> -->
+
+        <Button
+            android:id="@+id/button_kzmw_ipad3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/win_prizes_btn"
+            android:paddingLeft="15dp" />
+    </RelativeLayout>
+
+</LinearLayout>

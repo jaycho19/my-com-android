@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        style="@style/top_menu_layout_style"
+        android:layout_width="fill_parent" >
+
+        <Button
+            android:id="@+id/button_store_detail_back"
+            style="@style/top_menu_button_back_style" />
+
+        <TextView
+            style="@style/top_menu_textview_style"
+            android:text="@string/top_title_store_detail" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textview_store_detail_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="德克士豫园餐厅"
+        android:textColor="#FF5c9200" />
+
+    <TextView
+        android:id="@+id/textview_store_detail_address"
+        style="@style/editview_normal_style"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_top_bg"
+        android:text="地址：上海黄浦区xxxx" />
+
+    <TextView
+        android:id="@+id/textview_store_detail_tel"
+        style="@style/editview_normal_style"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_bottom_bg"
+        android:text="电话：021-6355xxxx" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/button_store_detail_sign"
+            style="@style/button_normal_ok"
+            android:text="立即签到" />
+    </LinearLayout>
+
+</LinearLayout>

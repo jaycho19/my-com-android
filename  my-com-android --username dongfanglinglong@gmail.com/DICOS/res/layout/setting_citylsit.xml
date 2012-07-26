@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <RelativeLayout style="@style/top_menu_layout_style" >
+
+        <Button
+            android:id="@+id/button_setting_citylist_back"
+            style="@style/top_menu_button_back_style" />
+
+        <TextView
+            android:id="@+id/textView1"
+            style="@style/top_menu_textview_style"
+            android:text="@string/top_title_citylist" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/city_search"
+        android:gravity="center_vertical" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:src="@drawable/search_ico" />
+
+        <EditText
+            android:id="@+id/edittext_setting_citylist_search"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="20dp" 
+            android:background="@null"
+            android:singleLine="true"
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ListView
+            android:id="@+id/listview_setting_citylist"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <com.dongfang.dicos.view.SideBar
+            android:id="@+id/sidebar_setting_citylist"
+            android:layout_width="22dp"
+            android:layout_height="fill_parent"
+            android:background="@drawable/sidebar_bg"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+</LinearLayout>

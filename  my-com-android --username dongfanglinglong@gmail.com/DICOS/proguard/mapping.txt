@@ -1,0 +1,1219 @@
+com.baidu.mapapi.BMapManager -> com.baidu.mapapi.b:
+    com.baidu.mapapi.Mj a -> a
+    android.content.Context c -> c
+    boolean b -> b
+    boolean init(java.lang.String,com.baidu.mapapi.MKGeneralListener) -> a
+    com.baidu.mapapi.MKLocationManager getLocationManager() -> a
+    boolean start() -> b
+    boolean stop() -> c
+    void destroy() -> d
+com.baidu.mapapi.CoordinateConvert -> com.baidu.mapapi.c:
+    com.baidu.mapapi.GeoPoint bundleDecode(android.os.Bundle) -> a
+    android.os.Bundle a(com.baidu.mapapi.GeoPoint,int) -> a
+com.baidu.mapapi.GeoPoint -> com.baidu.mapapi.d:
+    int a -> a
+    int b -> b
+    int getLatitudeE6() -> a
+    int getLongitudeE6() -> b
+    void setLatitudeE6(int) -> a
+    void setLongitudeE6(int) -> b
+    int hashCode() -> hashCode
+    java.lang.String toString() -> toString
+    boolean equals(java.lang.Object) -> equals
+com.baidu.mapapi.ItemizedOverlay -> com.baidu.mapapi.e:
+    android.graphics.drawable.Drawable b -> a
+    int d -> b
+    com.baidu.mapapi.ItemizedOverlay$a e -> c
+    com.baidu.mapapi.ItemizedOverlay$OnFocusChangeListener f -> d
+    int g -> e
+    int h -> f
+    android.graphics.drawable.Drawable a(com.baidu.mapapi.ItemizedOverlay) -> a
+    void setFocus(com.baidu.mapapi.OverlayItem) -> a
+    boolean onTap(com.baidu.mapapi.GeoPoint,com.baidu.mapapi.MapView) -> a
+    boolean hitTest$6571e7d8(android.graphics.drawable.Drawable,int,int) -> a
+    boolean onTap(int) -> a
+com.baidu.mapapi.ItemizedOverlay$OnFocusChangeListener -> com.baidu.mapapi.f:
+com.baidu.mapapi.ItemizedOverlay$a -> com.baidu.mapapi.g:
+    java.util.ArrayList b -> a
+    com.baidu.mapapi.ItemizedOverlay d -> b
+    int a(com.baidu.mapapi.OverlayItem) -> a
+    com.baidu.mapapi.OverlayItem a(int) -> a
+    boolean a(com.baidu.mapapi.GeoPoint,com.baidu.mapapi.MapView) -> a
+    int compare(java.lang.Object,java.lang.Object) -> compare
+com.baidu.mapapi.LocationListener -> com.baidu.mapapi.h:
+com.baidu.mapapi.MKGeneralListener -> com.baidu.mapapi.i:
+com.baidu.mapapi.MKLocationManager -> com.baidu.mapapi.j:
+    android.location.Location a -> a
+    android.location.Location b -> b
+    long c -> c
+    long d -> d
+    java.util.List e -> e
+    java.util.List f -> f
+    android.hardware.SensorEventListener g -> g
+    boolean a(com.baidu.mapapi.BMapManager) -> a
+    void a() -> a
+    boolean enableProvider(int) -> a
+    void b() -> b
+    boolean setNotifyInternal$255f299() -> c
+    android.location.Location getLocationInfo() -> d
+    void requestLocationUpdates(com.baidu.mapapi.LocationListener) -> a
+    void removeUpdates(com.baidu.mapapi.LocationListener) -> b
+    boolean a(android.hardware.SensorEventListener) -> a
+    void b(android.hardware.SensorEventListener) -> b
+    void e() -> e
+    java.util.List a(com.baidu.mapapi.MKLocationManager) -> a
+com.baidu.mapapi.MKLocationManager$1 -> com.baidu.mapapi.k:
+    com.baidu.mapapi.MKLocationManager a -> a
+    void onSensorChanged(android.hardware.SensorEvent) -> onSensorChanged
+    void onAccuracyChanged(android.hardware.Sensor,int) -> onAccuracyChanged
+com.baidu.mapapi.MapActivity -> com.baidu.mapapi.MapActivity:
+    com.baidu.mapapi.MapView a -> a
+    void onNewIntent(android.content.Intent) -> onNewIntent
+    void onCreate(android.os.Bundle) -> onCreate
+    boolean a(com.baidu.mapapi.MapView) -> a
+    boolean initMapActivity(com.baidu.mapapi.BMapManager) -> a
+    void onDestroy() -> onDestroy
+    void onPause() -> onPause
+    void onResume() -> onResume
+com.baidu.mapapi.MapController -> com.baidu.mapapi.l:
+    com.baidu.mapapi.MapView a -> a
+    boolean onKey(android.view.View,int,android.view.KeyEvent) -> onKey
+    void scrollBy(int,int) -> a
+com.baidu.mapapi.MapView -> com.baidu.mapapi.MapView:
+    com.baidu.mapapi.GeoPoint c -> c
+    int d -> d
+    int e -> e
+    int f -> f
+    int g -> g
+    boolean h -> h
+    boolean i -> i
+    android.os.Message j -> j
+    java.lang.Runnable k -> k
+    com.baidu.mapapi.MapActivity l -> l
+    com.baidu.mapapi.MapController m -> m
+    com.baidu.mapapi.d a -> a
+    android.widget.ZoomControls n -> n
+    android.widget.ImageView o -> o
+    com.baidu.mapapi.a b -> b
+    boolean a(android.content.Context) -> a
+    boolean a() -> a
+    void b() -> b
+    boolean checkLayoutParams(android.view.ViewGroup$LayoutParams) -> checkLayoutParams
+    void computeScroll() -> computeScroll
+    android.view.ViewGroup$LayoutParams generateDefaultLayoutParams() -> generateDefaultLayoutParams
+    android.view.ViewGroup$LayoutParams generateLayoutParams(android.util.AttributeSet) -> generateLayoutParams
+    android.view.ViewGroup$LayoutParams generateLayoutParams(android.view.ViewGroup$LayoutParams) -> generateLayoutParams
+    java.util.List getOverlays() -> c
+    com.baidu.mapapi.Projection getProjection() -> d
+    void setDoubleClickZooming(boolean) -> setDoubleClickZooming
+    int getZoomLevel() -> e
+    void onDetachedFromWindow() -> onDetachedFromWindow
+    void onFocusChanged(boolean,int,android.graphics.Rect) -> onFocusChanged
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+    boolean onKeyUp(int,android.view.KeyEvent) -> onKeyUp
+    boolean onTouchEvent(android.view.MotionEvent) -> onTouchEvent
+    boolean onTrackballEvent(android.view.MotionEvent) -> onTrackballEvent
+    void onLayout(boolean,int,int,int,int) -> onLayout
+    void e() -> f
+    void a(android.view.View,android.view.ViewGroup$LayoutParams) -> a
+    void onDraw(android.graphics.Canvas) -> onDraw
+    void onMeasure(int,int) -> onMeasure
+    void onSizeChanged(int,int,int,int) -> onSizeChanged
+    void onWindowFocusChanged(boolean) -> onWindowFocusChanged
+    void setDrawOverlayWhenZooming(boolean) -> setDrawOverlayWhenZooming
+    void setBuiltInZoomControls(boolean) -> setBuiltInZoomControls
+    void setReticleDrawMode(com.baidu.mapapi.MapView$a) -> setReticleDrawMode
+    void setSatellite(boolean) -> setSatellite
+    void setStreetView(boolean) -> setStreetView
+    void setTraffic(boolean) -> setTraffic
+    boolean f() -> g
+    boolean g() -> h
+    void b(int,int) -> a
+    double h() -> i
+com.baidu.mapapi.MapView$1 -> com.baidu.mapapi.m:
+    com.baidu.mapapi.MapView a -> a
+    void onClick(android.view.View) -> onClick
+com.baidu.mapapi.MapView$2 -> com.baidu.mapapi.n:
+    com.baidu.mapapi.MapView a -> a
+    void onClick(android.view.View) -> onClick
+com.baidu.mapapi.MapView$LayoutParams -> com.baidu.mapapi.MapView$LayoutParams:
+    int mode -> a
+    com.baidu.mapapi.GeoPoint point -> b
+    int x -> c
+    int y -> d
+    int alignment -> e
+com.baidu.mapapi.MapView$a -> com.baidu.mapapi.o:
+    com.baidu.mapapi.MapView$a a -> a
+    com.baidu.mapapi.MapView$a b -> b
+    com.baidu.mapapi.MapView$a c -> c
+    com.baidu.mapapi.MapView$a[] d -> d
+    com.baidu.mapapi.MapView$a[] values() -> values
+    com.baidu.mapapi.MapView$a valueOf(java.lang.String) -> valueOf
+com.baidu.mapapi.Mj -> com.baidu.mapapi.Mj:
+    com.baidu.mapapi.e a -> a
+    com.baidu.mapapi.MKLocationManager b -> b
+    int c -> c
+    com.baidu.mapapi.MapView d -> d
+    android.os.Handler t -> t
+    android.content.Context e -> e
+    java.net.ServerSocket f -> f
+    int g -> g
+    int h -> h
+    int i -> i
+    float j -> j
+    java.lang.String u -> u
+    java.lang.String v -> v
+    java.lang.String w -> w
+    java.lang.String x -> x
+    java.lang.String y -> y
+    android.telephony.TelephonyManager z -> z
+    android.net.wifi.WifiManager A -> A
+    com.baidu.mapapi.h B -> B
+    com.baidu.mapapi.h C -> C
+    com.baidu.mapapi.h D -> D
+    com.baidu.mapapi.h E -> E
+    int k -> k
+    int l -> l
+    int m -> m
+    int n -> n
+    int o -> o
+    java.lang.String F -> F
+    java.lang.String G -> G
+    long H -> H
+    long I -> I
+    java.util.List J -> J
+    long K -> K
+    long L -> L
+    int M -> M
+    int N -> N
+    int O -> O
+    int P -> P
+    int Q -> Q
+    int R -> R
+    boolean p -> p
+    boolean q -> q
+    java.util.List S -> S
+    java.util.List T -> T
+    int r -> r
+    com.baidu.mapapi.b U -> U
+    java.lang.reflect.Method V -> V
+    java.lang.reflect.Method W -> W
+    java.lang.Class X -> X
+    android.os.Handler Y -> Y
+    java.util.ArrayList Z -> Z
+    android.net.Uri s -> s
+    boolean a(java.lang.String,com.baidu.mapapi.MKGeneralListener) -> a
+    boolean a() -> a
+    boolean b() -> b
+    int InitMapApiEngine() -> InitMapApiEngine
+    int initClass(java.lang.Object,int) -> initClass
+    int UnInitMapApiEngine() -> UnInitMapApiEngine
+    int StartApiEngineCC(java.lang.String,java.lang.String) -> StartApiEngineCC
+    int StopApiEngineCC() -> StopApiEngineCC
+    int SetCacheDirectoryCC(java.lang.String) -> SetCacheDirectoryCC
+    int InitLocationCC() -> InitLocationCC
+    int EnableProviderCC(int) -> EnableProviderCC
+    int DisableProviderCC(int) -> DisableProviderCC
+    int SetNotifyInternal(int,int) -> SetNotifyInternal
+    android.os.Bundle GetNotifyInternal() -> GetNotifyInternal
+    void SetLocationCoordinateType(int) -> SetLocationCoordinateType
+    void UpdataGPS(double,double,float,float,float,int) -> UpdataGPS
+    android.os.Bundle GetGPSStatus() -> GetGPSStatus
+    void SetCellInfo(int,int,int,int,java.lang.String) -> SetCellInfo
+    void SetCellData(int,int,int,int,java.lang.String,java.lang.String,java.lang.String) -> SetCellData
+    void SetUpdateWifi(java.lang.String) -> SetUpdateWifi
+    int initSearchCC() -> initSearchCC
+    int initOfflineCC() -> initOfflineCC
+    int MapProc(int,int,int) -> MapProc
+    int MsgMapProc(int,int,int,int) -> MsgMapProc
+    android.os.Bundle getNewBundle(int,int,int) -> getNewBundle
+    int sendBundle(android.os.Bundle) -> sendBundle
+    void nativeInit() -> nativeInit
+    void nativeResize(int,int) -> nativeResize
+    void nativeRender() -> nativeRender
+    void nativeDone() -> nativeDone
+    int InitMapControlCC(int,int) -> InitMapControlCC
+    android.os.Bundle GetMapStatus() -> GetMapStatus
+    void renderBaiduMap(android.graphics.Bitmap) -> renderBaiduMap
+    void renderUpdateScreen(short[],int,int) -> renderUpdateScreen
+    void renderFlsScreenPos(android.os.Bundle) -> renderFlsScreenPos
+    void renderCalDisScreenPos(android.os.Bundle) -> renderCalDisScreenPos
+    void sendPhoneInfo(android.os.Bundle) -> sendPhoneInfo
+    int SetProxyInfo(java.lang.String,int) -> SetProxyInfo
+    void changeGprsConnect() -> c
+    java.lang.String h() -> d
+    android.os.Handler a(com.baidu.mapapi.Mj) -> a
+com.baidu.mapapi.Mj$1 -> com.baidu.mapapi.p:
+    com.baidu.mapapi.Mj a -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.baidu.mapapi.Mj$a -> com.baidu.mapapi.q:
+    int a -> a
+    int b -> b
+    int c -> c
+    int d -> d
+com.baidu.mapapi.Mj$b -> com.baidu.mapapi.r:
+    int a -> a
+    int b -> b
+    com.baidu.mapapi.Mj c -> c
+    void run() -> run
+com.baidu.mapapi.MyLocationOverlay -> com.baidu.mapapi.s:
+    android.location.Location a -> a
+    com.baidu.mapapi.GeoPoint b -> b
+    com.baidu.mapapi.GeoPoint c -> c
+    java.lang.Runnable d -> d
+    com.baidu.mapapi.MapView e -> e
+    android.graphics.Bitmap f -> f
+    android.graphics.Bitmap g -> g
+    android.graphics.Bitmap h -> h
+    boolean i -> i
+    boolean j -> j
+    float k -> k
+    android.graphics.Paint l -> l
+    boolean enableCompass() -> a
+    void disableCompass() -> b
+    boolean enableMyLocation() -> c
+    void disableMyLocation() -> d
+    boolean onTap(com.baidu.mapapi.GeoPoint,com.baidu.mapapi.MapView) -> a
+    boolean draw$1bb12301(android.graphics.Canvas,com.baidu.mapapi.MapView) -> a
+    void onAccuracyChanged(android.hardware.Sensor,int) -> onAccuracyChanged
+    void onSensorChanged(android.hardware.SensorEvent) -> onSensorChanged
+com.baidu.mapapi.Overlay -> com.baidu.mapapi.t:
+    boolean draw$1bb12301(android.graphics.Canvas,com.baidu.mapapi.MapView) -> a
+    boolean onTap(com.baidu.mapapi.GeoPoint,com.baidu.mapapi.MapView) -> a
+com.baidu.mapapi.OverlayItem -> com.baidu.mapapi.u:
+    com.baidu.mapapi.GeoPoint mPoint -> a
+    android.graphics.drawable.Drawable mMarker -> b
+    com.baidu.mapapi.GeoPoint getPoint() -> a
+com.baidu.mapapi.Projection -> com.baidu.mapapi.v:
+    com.baidu.mapapi.GeoPoint fromPixels(int,int) -> a
+    float metersToEquatorPixels(float) -> a
+    android.graphics.Point toPixels$1cab718(com.baidu.mapapi.GeoPoint) -> a
+com.baidu.mapapi.a -> com.baidu.mapapi.a:
+    android.graphics.Bitmap h -> h
+    java.nio.ShortBuffer i -> i
+    short[] j -> j
+    int k -> k
+    int l -> l
+    int m -> m
+    boolean a -> a
+    int n -> n
+    int o -> o
+    int p -> p
+    int q -> q
+    com.baidu.mapapi.MapView r -> r
+    java.util.List s -> s
+    int b -> b
+    int c -> c
+    int d -> d
+    boolean t -> t
+    boolean u -> u
+    long v -> v
+    long w -> w
+    long x -> x
+    float y -> y
+    float z -> z
+    float A -> A
+    float B -> B
+    float C -> C
+    float D -> D
+    double e -> e
+    int E -> E
+    int f -> f
+    int g -> g
+    int F -> F
+    boolean G -> G
+    android.graphics.Paint H -> H
+    java.lang.reflect.Method I -> I
+    java.lang.reflect.Method J -> J
+    java.lang.reflect.Method K -> K
+    com.baidu.mapapi.MapView$a L -> L
+    void a$3b4dfe4b(int,int) -> a
+    void a() -> a
+    void d(android.graphics.Canvas) -> a
+    void a(int,int,int) -> a
+    void onDraw(android.graphics.Canvas) -> onDraw
+    void b(android.graphics.Canvas) -> b
+    void onLayout(boolean,int,int,int,int) -> onLayout
+    void a(boolean) -> a
+    boolean a(android.view.MotionEvent) -> a
+    void a(boolean,int,android.graphics.Rect) -> a
+    boolean a$4765ad2() -> b
+    boolean b$53fcfd4e() -> c
+    boolean b$4765ad2() -> d
+    java.util.List c() -> e
+    void b(boolean) -> b
+com.baidu.mapapi.a$1 -> com.baidu.mapapi.w:
+    int[] a -> a
+com.baidu.mapapi.b -> com.baidu.mapapi.x:
+    void onReceive(android.content.Context,android.content.Intent) -> onReceive
+com.baidu.mapapi.c -> com.baidu.mapapi.y:
+    char[] a -> a
+    byte[] b -> b
+    char[] a(char[]) -> a
+    char[] b(char[]) -> b
+com.baidu.mapapi.d -> com.baidu.mapapi.z:
+    com.baidu.mapapi.MapView a -> a
+    com.baidu.mapapi.GeoPoint fromPixels(int,int) -> a
+    float metersToEquatorPixels(float) -> a
+    android.graphics.Point toPixels$1cab718(com.baidu.mapapi.GeoPoint) -> a
+com.baidu.mapapi.e -> com.baidu.mapapi.aa:
+    android.location.LocationManager b -> b
+    android.location.LocationListener c -> c
+    android.location.Location a -> a
+    android.content.Context d -> d
+    com.baidu.mapapi.e$a e -> e
+    int f -> f
+    android.location.GpsStatus g -> g
+    android.location.LocationManager a(com.baidu.mapapi.e) -> a
+    android.location.LocationManager a(com.baidu.mapapi.e,android.location.LocationManager) -> a
+    android.content.Context b(com.baidu.mapapi.e) -> b
+    android.location.GpsStatus c(com.baidu.mapapi.e) -> c
+    android.location.GpsStatus a(com.baidu.mapapi.e,android.location.GpsStatus) -> a
+    int d(com.baidu.mapapi.e) -> d
+    int a(com.baidu.mapapi.e,int) -> a
+com.baidu.mapapi.e$a -> com.baidu.mapapi.ab:
+    com.baidu.mapapi.e a -> a
+    void onGpsStatusChanged(int) -> onGpsStatusChanged
+com.baidu.mapapi.f -> com.baidu.mapapi.ac:
+    com.baidu.mapapi.MKGeneralListener a -> a
+com.baidu.mapapi.h -> com.baidu.mapapi.ad:
+com.dongfang.dicos.DicosMainActivity -> com.dongfang.dicos.DicosMainActivity:
+    android.widget.RadioGroup radioGroup -> a
+    android.widget.TabHost tabHost -> b
+    void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
+    void onResume() -> onResume
+    void onPause() -> onPause
+    void onStop() -> onStop
+    void onDestroy() -> onDestroy
+    void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
+com.dongfang.dicos.DiscountCouponActivity -> com.dongfang.dicos.DiscountCouponActivity:
+    void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
+    void onResume() -> onResume
+    void onPause() -> onPause
+    void onStop() -> onStop
+    void onDestroy() -> onDestroy
+com.dongfang.dicos.FirstpageActivity -> com.dongfang.dicos.FirstpageActivity:
+    java.lang.Runnable gotoMain -> a
+    void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
+    void onResume() -> onResume
+com.dongfang.dicos.FirstpageActivity$1 -> com.dongfang.dicos.a:
+    com.dongfang.dicos.FirstpageActivity this$0 -> a
+    void run() -> run
+com.dongfang.dicos.KaZiMeiWeiActivity -> com.dongfang.dicos.KaZiMeiWeiActivity:
+    android.widget.TextView tvTitle -> a
+    android.widget.Button bLogin -> b
+    android.widget.Button bSigne -> c
+    android.widget.Button bIpad3 -> d
+    android.widget.ImageSwitcher vfInfo -> e
+    int[] array_img_name -> f
+    int array_param -> g
+    android.view.GestureDetector gestureDetector -> h
+    void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
+    void onResume() -> onResume
+    void onClick(android.view.View) -> onClick
+    android.view.View makeView() -> makeView
+    void showImage() -> a
+    android.view.GestureDetector access$0(com.dongfang.dicos.KaZiMeiWeiActivity) -> a
+    void access$1(com.dongfang.dicos.KaZiMeiWeiActivity) -> b
+    void access$2(com.dongfang.dicos.KaZiMeiWeiActivity) -> c
+com.dongfang.dicos.KaZiMeiWeiActivity$MyGestureDetector -> com.dongfang.dicos.b:
+    com.dongfang.dicos.KaZiMeiWeiActivity this$0 -> a
+    boolean onFling(android.view.MotionEvent,android.view.MotionEvent,float,float) -> onFling
+    boolean onDown(android.view.MotionEvent) -> onDown
+    void onShowPress(android.view.MotionEvent) -> onShowPress
+    void onLongPress(android.view.MotionEvent) -> onLongPress
+    boolean onSingleTapConfirmed(android.view.MotionEvent) -> onSingleTapConfirmed
+    boolean onSingleTapUp(android.view.MotionEvent) -> onSingleTapUp
+    boolean onScroll(android.view.MotionEvent,android.view.MotionEvent,float,float) -> onScroll
+com.dongfang.dicos.KaZiMeiWeiActivity$MyOnTouchListener -> com.dongfang.dicos.c:
+    com.dongfang.dicos.KaZiMeiWeiActivity this$0 -> a
+    boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
+com.dongfang.dicos.MoreActivity -> com.dongfang.dicos.MoreActivity:
+    android.widget.Button bTongbu -> a
+    android.widget.Button bTuisong -> b
+    android.widget.Button bChengshi -> c
+    android.widget.Button bFeedback -> d
+    android.widget.Button bExit -> e
+    android.widget.Button bBack -> f
+    com.dongfang.dicos.MoreActivity$MoreHandler handler -> g
+    android.widget.TextView tvBanben -> h
+    void onCreate(android.os.Bundle) -> onCreate
+    void onClick(android.view.View) -> onClick
+    android.widget.Button access$0(com.dongfang.dicos.MoreActivity) -> a
+    com.dongfang.dicos.MoreActivity$MoreHandler access$1(com.dongfang.dicos.MoreActivity) -> b
+com.dongfang.dicos.MoreActivity$1 -> com.dongfang.dicos.d:
+    com.dongfang.dicos.MoreActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dongfang.dicos.MoreActivity$2 -> com.dongfang.dicos.e:
+    com.dongfang.dicos.MoreActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dongfang.dicos.MoreActivity$MoreHandler -> com.dongfang.dicos.f:
+    com.dongfang.dicos.MoreActivity this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.dongfang.dicos.MyDicosActivity -> com.dongfang.dicos.MyDicosActivity:
+    android.widget.ProgressBar progressBar -> a
+    android.widget.Button bSigne -> b
+    android.widget.Button bLogin -> c
+    android.widget.ListView lvSignHistory -> d
+    com.dongfang.dicos.mydicos.SignHistoryAdapter adapter -> e
+    com.dongfang.dicos.MyDicosActivity$MyDICOSHandler handler -> f
+    android.app.AlertDialog dialog -> g
+    void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
+    void onResume() -> onResume
+    void onClick(android.view.View) -> onClick
+    com.dongfang.dicos.mydicos.SignHistoryAdapter access$0(com.dongfang.dicos.MyDicosActivity) -> a
+    android.widget.ProgressBar access$1(com.dongfang.dicos.MyDicosActivity) -> b
+com.dongfang.dicos.MyDicosActivity$1 -> com.dongfang.dicos.g:
+    com.dongfang.dicos.MyDicosActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dongfang.dicos.MyDicosActivity$2 -> com.dongfang.dicos.h:
+    com.dongfang.dicos.MyDicosActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dongfang.dicos.MyDicosActivity$MyDICOSHandler -> com.dongfang.dicos.i:
+    com.dongfang.dicos.MyDicosActivity this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.dongfang.dicos.StoreSearchActivity -> com.dongfang.dicos.StoreSearchActivity:
+    android.widget.ProgressBar progressBar -> a
+    android.widget.AutoCompleteTextView etProvince -> b
+    android.widget.AutoCompleteTextView etCity -> c
+    android.widget.Button bSeach -> d
+    android.widget.Button bShowMore -> e
+    android.widget.ListView lvStoreInfo -> f
+    com.dongfang.dicos.store.StoreListAdapter adapter -> g
+    com.dongfang.dicos.StoreSearchActivity$StoreSeachHandler handler -> h
+    void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
+    void onClick(android.view.View) -> onClick
+    com.dongfang.dicos.store.StoreListAdapter access$0(com.dongfang.dicos.StoreSearchActivity) -> a
+    android.widget.ProgressBar access$1(com.dongfang.dicos.StoreSearchActivity) -> b
+    android.widget.Button access$2(com.dongfang.dicos.StoreSearchActivity) -> c
+com.dongfang.dicos.StoreSearchActivity$StoreSeachHandler -> com.dongfang.dicos.j:
+    com.dongfang.dicos.StoreSearchActivity this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.dongfang.dicos.kaixin.Kaixin -> com.dongfang.dicos.a.a:
+    java.lang.String KX_AUTHORIZE_CALLBACK_URL -> a
+    java.lang.String KX_REFRESHTOKEN_URL -> b
+    java.lang.String KX_REFRESHTOKEN_URL_S -> c
+    java.lang.String KX_LOGIN_URL -> d
+    java.lang.String KX_REST_URL -> e
+    java.lang.String mAccessToken -> f
+    java.lang.String mRefreshToken -> g
+    long mAccessExpires -> h
+    com.dongfang.dicos.kaixin.Kaixin instance -> i
+    com.dongfang.dicos.kaixin.KaixinAuthListener listener -> j
+    javax.net.ssl.X509TrustManager xtm -> k
+    javax.net.ssl.HostnameVerifier hnv -> l
+    com.dongfang.dicos.kaixin.KaixinAuthListener getKaixinAuthListener() -> a
+    com.dongfang.dicos.kaixin.Kaixin getInstance() -> b
+    void authorizeByActivity(android.content.Context,java.lang.String[],com.dongfang.dicos.kaixin.KaixinAuthListener) -> a
+    boolean isSessionValid() -> c
+    void setAccessToken(java.lang.String) -> a
+    void setRefreshToken(java.lang.String) -> b
+    void setAccessExpires$1349ef() -> d
+    void setAccessExpiresIn(java.lang.String) -> c
+    java.lang.String uploadContent$20ec678e(android.content.Context,java.lang.String,android.os.Bundle) -> a
+    boolean loadStorage(android.content.Context) -> a
+    boolean updateStorage(android.content.Context) -> b
+    void clearStorage(android.content.Context) -> c
+com.dongfang.dicos.kaixin.Kaixin$1 -> com.dongfang.dicos.a.b:
+    com.dongfang.dicos.kaixin.Kaixin this$0 -> a
+    void checkClientTrusted(java.security.cert.X509Certificate[],java.lang.String) -> checkClientTrusted
+    void checkServerTrusted(java.security.cert.X509Certificate[],java.lang.String) -> checkServerTrusted
+    java.security.cert.X509Certificate[] getAcceptedIssuers() -> getAcceptedIssuers
+com.dongfang.dicos.kaixin.Kaixin$2 -> com.dongfang.dicos.a.c:
+    com.dongfang.dicos.kaixin.Kaixin this$0 -> a
+    boolean verify(java.lang.String,javax.net.ssl.SSLSession) -> verify
+com.dongfang.dicos.kaixin.KaixinAuthError -> com.dongfang.dicos.a.d:
+    java.lang.String mError -> a
+    java.lang.String mErrorDescription -> b
+    java.lang.String mErrorUri -> c
+    java.lang.String getErrorDescription() -> a
+com.dongfang.dicos.kaixin.KaixinAuthListener -> com.dongfang.dicos.a.e:
+    void onAuthComplete(android.os.Bundle) -> a
+    void onAuthError(com.dongfang.dicos.kaixin.KaixinAuthError) -> a
+    void onAuthCancelLogin() -> a
+    void onAuthCancel$79e5e33f() -> b
+com.dongfang.dicos.kaixin.KaixinError -> com.dongfang.dicos.a.f:
+    int mErrorCode -> a
+    java.lang.String mRequest -> b
+    java.lang.String mResponse -> c
+    java.lang.String toString() -> toString
+com.dongfang.dicos.kaixin.PostRecordTask -> com.dongfang.dicos.a.g:
+    android.os.Handler handler -> a
+    java.lang.Integer doInBackground(java.lang.Object[]) -> a
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+com.dongfang.dicos.kaixin.UtilKaiXin -> com.dongfang.dicos.a.h:
+    android.os.Bundle decodeUrl(java.lang.String) -> c
+    android.os.Bundle parseUrl(java.lang.String) -> a
+    java.lang.String encodeUrl(android.os.Bundle) -> a
+    java.lang.String openUrl$6c7f7458(android.content.Context,java.lang.String,java.lang.String,android.os.Bundle) -> a
+    java.lang.String encodePostBody(android.os.Bundle,java.lang.String) -> a
+    java.lang.String read(java.io.InputStream) -> a
+    com.dongfang.dicos.kaixin.KaixinError parseRequestError(java.lang.String) -> b
+    com.dongfang.dicos.kaixin.KaixinError parseJson(java.lang.String) -> d
+    java.lang.String md5(java.lang.String) -> e
+com.dongfang.dicos.kzmw.LoginActivity -> com.dongfang.dicos.kzmw.LoginActivity:
+    android.widget.Button bBack -> a
+    android.widget.Button bGetAuthCode -> b
+    android.widget.Button bOK -> c
+    android.widget.EditText etPhoneNumber -> d
+    android.widget.EditText etAuthCode -> e
+    int lockSeconds -> f
+    android.os.Handler loginHandler -> g
+    void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
+    void onClick(android.view.View) -> onClick
+    void access$0(com.dongfang.dicos.kzmw.LoginActivity) -> a
+    android.widget.EditText access$1(com.dongfang.dicos.kzmw.LoginActivity) -> b
+    android.widget.Button access$2(com.dongfang.dicos.kzmw.LoginActivity) -> c
+    android.widget.Button access$3(com.dongfang.dicos.kzmw.LoginActivity) -> d
+    int access$4(com.dongfang.dicos.kzmw.LoginActivity) -> e
+    void access$5(com.dongfang.dicos.kzmw.LoginActivity,int) -> a
+com.dongfang.dicos.kzmw.LoginActivity$1 -> com.dongfang.dicos.kzmw.a:
+    com.dongfang.dicos.kzmw.LoginActivity this$0 -> a
+    void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
+    void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
+    void afterTextChanged(android.text.Editable) -> afterTextChanged
+com.dongfang.dicos.kzmw.LoginActivity$LoginHandler -> com.dongfang.dicos.kzmw.b:
+    com.dongfang.dicos.kzmw.LoginActivity this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.dongfang.dicos.kzmw.LotteryActivity -> com.dongfang.dicos.kzmw.LotteryActivity:
+    android.widget.Button bBack -> a
+    android.widget.Button bJoinIn -> b
+    android.widget.Button bDetail -> c
+    android.widget.Button bInfo -> d
+    android.widget.Button bPrizeInfo -> e
+    android.widget.Button bPrizeProvide -> f
+    void onCreate(android.os.Bundle) -> onCreate
+    void onClick(android.view.View) -> onClick
+com.dongfang.dicos.kzmw.SigneInActivity -> com.dongfang.dicos.kzmw.SigneInActivity:
+    android.widget.Button bBack -> a
+    android.widget.Button bOK -> b
+    android.widget.CheckBox cbSina -> c
+    android.widget.CheckBox cbKaiXing -> d
+    android.widget.EditText etMessage -> e
+    android.widget.ProgressBar progressbar -> f
+    com.dongfang.dicos.sina.Weibo weibo -> g
+    com.dongfang.dicos.kaixin.Kaixin kaixin -> h
+    com.dongfang.dicos.kzmw.SigneInActivity$SigneInHandler handler -> i
+    java.lang.String lon -> j
+    java.lang.String lat -> k
+    void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
+    void onClick(android.view.View) -> onClick
+    void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
+    void showDialog(java.lang.String) -> b
+    void onComplete(java.lang.String) -> a
+    void onError(com.dongfang.dicos.sina.WeiboException) -> a
+    android.widget.EditText access$0(com.dongfang.dicos.kzmw.SigneInActivity) -> a
+    com.dongfang.dicos.kzmw.SigneInActivity$SigneInHandler access$1(com.dongfang.dicos.kzmw.SigneInActivity) -> b
+    android.widget.CheckBox access$2(com.dongfang.dicos.kzmw.SigneInActivity) -> c
+    com.dongfang.dicos.kaixin.Kaixin access$3(com.dongfang.dicos.kzmw.SigneInActivity) -> d
+    android.widget.CheckBox access$4(com.dongfang.dicos.kzmw.SigneInActivity) -> e
+    com.dongfang.dicos.sina.Weibo access$5(com.dongfang.dicos.kzmw.SigneInActivity) -> f
+    java.lang.String access$6(com.dongfang.dicos.kzmw.SigneInActivity,com.dongfang.dicos.sina.Weibo,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
+com.dongfang.dicos.kzmw.SigneInActivity$1 -> com.dongfang.dicos.kzmw.c:
+    com.dongfang.dicos.kzmw.SigneInActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dongfang.dicos.kzmw.SigneInActivity$2 -> com.dongfang.dicos.kzmw.d:
+    com.dongfang.dicos.kzmw.SigneInActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dongfang.dicos.kzmw.SigneInActivity$SigneInHandler -> com.dongfang.dicos.kzmw.e:
+    com.dongfang.dicos.kzmw.SigneInActivity this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.dongfang.dicos.lottery.DetailActivity -> com.dongfang.dicos.lottery.DetailActivity:
+    android.widget.Button bBack -> a
+    android.widget.Button bOK -> b
+    android.widget.TextView tvDetail -> c
+    void onCreate(android.os.Bundle) -> onCreate
+    void onClick(android.view.View) -> onClick
+com.dongfang.dicos.lottery.InfoActivity -> com.dongfang.dicos.lottery.InfoActivity:
+    android.widget.RadioGroup radioGroup -> a
+    android.widget.TabHost tabHost -> b
+    android.widget.Button bBack -> c
+    void onCreate(android.os.Bundle) -> onCreate
+    void onClick(android.view.View) -> onClick
+    void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
+com.dongfang.dicos.lottery.JoinInActivity -> com.dongfang.dicos.lottery.JoinInActivity:
+    android.widget.Button bBack -> a
+    android.widget.Button bOK -> b
+    android.widget.EditText etTickerNumber -> c
+    android.widget.EditText etTickerAmount -> d
+    android.content.Context context -> e
+    com.dongfang.dicos.lottery.JoinInActivity$JoinInHandler handler -> f
+    void onCreate(android.os.Bundle) -> onCreate
+    void onClick(android.view.View) -> onClick
+    android.content.Context access$0(com.dongfang.dicos.lottery.JoinInActivity) -> a
+com.dongfang.dicos.lottery.JoinInActivity$JoinInHandler -> com.dongfang.dicos.lottery.a:
+    com.dongfang.dicos.lottery.JoinInActivity this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.dongfang.dicos.lottery.PrizeInfoActivity -> com.dongfang.dicos.lottery.PrizeInfoActivity:
+    android.widget.Button bBack -> a
+    android.widget.Button bShowMore -> b
+    android.widget.ListView lvInfo -> c
+    com.dongfang.dicos.lottery.PrizeInfoAdapter adapter -> d
+    com.dongfang.dicos.lottery.PrizeInfoActivity$MyHandler handler -> e
+    void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
+    void onClick(android.view.View) -> onClick
+    com.dongfang.dicos.lottery.PrizeInfoAdapter access$0(com.dongfang.dicos.lottery.PrizeInfoActivity) -> a
+com.dongfang.dicos.lottery.PrizeInfoActivity$MyHandler -> com.dongfang.dicos.lottery.b:
+    com.dongfang.dicos.lottery.PrizeInfoActivity this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.dongfang.dicos.lottery.PrizeInfoAdapter -> com.dongfang.dicos.lottery.c:
+    java.lang.String[] aMobileArray -> a
+    android.content.Context context -> b
+    void setArray(java.lang.String[]) -> a
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+com.dongfang.dicos.lottery.PrizeInfoElement -> com.dongfang.dicos.lottery.d:
+    android.widget.TextView tvMobile1 -> a
+    android.widget.TextView tvMobile2 -> b
+    android.widget.TextView tvMobile3 -> c
+    void initElement(java.lang.String,java.lang.String,java.lang.String) -> a
+com.dongfang.dicos.lottery.PrizeProvideActivity -> com.dongfang.dicos.lottery.PrizeProvideActivity:
+    android.widget.Button bBack -> a
+    android.widget.Button bShowMore -> b
+    android.widget.ListView lvInfo -> c
+    com.dongfang.dicos.lottery.PrizeProvideAdapter adapter -> d
+    com.dongfang.dicos.lottery.PrizeProvideActivity$MyHandler handler -> e
+    void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
+    void onClick(android.view.View) -> onClick
+    com.dongfang.dicos.lottery.PrizeProvideAdapter access$0(com.dongfang.dicos.lottery.PrizeProvideActivity) -> a
+com.dongfang.dicos.lottery.PrizeProvideActivity$MyHandler -> com.dongfang.dicos.lottery.e:
+    com.dongfang.dicos.lottery.PrizeProvideActivity this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.dongfang.dicos.lottery.PrizeProvideAdapter -> com.dongfang.dicos.lottery.f:
+    java.lang.String[] aMobileArray -> a
+    android.content.Context context -> b
+    void setArray(java.lang.String[]) -> a
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+com.dongfang.dicos.lottery.PrizeProvideElement -> com.dongfang.dicos.lottery.g:
+    android.widget.TextView tvCompanyName -> a
+    android.widget.TextView tvAddress -> b
+    android.widget.TextView tvTel -> c
+com.dongfang.dicos.lottery.info.MyInfoActivity -> com.dongfang.dicos.lottery.info.MyInfoActivity:
+    android.widget.Button bShowMore -> a
+    android.widget.TextView tvOpportunityNumber -> b
+    android.widget.ListView lvInfo -> c
+    com.dongfang.dicos.lottery.info.MyInfoAdapter adapter -> d
+    com.dongfang.dicos.lottery.info.MyInfoActivity$MyHandler handler -> e
+    void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
+    void onClick(android.view.View) -> onClick
+    com.dongfang.dicos.lottery.info.MyInfoAdapter access$0(com.dongfang.dicos.lottery.info.MyInfoActivity) -> a
+    android.widget.TextView access$1(com.dongfang.dicos.lottery.info.MyInfoActivity) -> b
+com.dongfang.dicos.lottery.info.MyInfoActivity$MyHandler -> com.dongfang.dicos.lottery.info.a:
+    com.dongfang.dicos.lottery.info.MyInfoActivity this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.dongfang.dicos.lottery.info.MyInfoAdapter -> com.dongfang.dicos.lottery.info.b:
+    java.lang.String[] aJSONStoreArray -> a
+    android.content.Context context -> b
+    void setArray(java.lang.String[]) -> a
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+com.dongfang.dicos.lottery.info.MyInfoElement -> com.dongfang.dicos.lottery.info.c:
+    android.widget.TextView tvCode -> a
+    android.widget.TextView tvAmount -> b
+    android.widget.TextView tvStatus -> c
+    android.widget.TextView tvDate -> d
+com.dongfang.dicos.lottery.info.ProbabilityAdapter -> com.dongfang.dicos.lottery.info.d:
+    java.lang.String[] aJSONStoreArray -> a
+    android.content.Context context -> b
+    void setArray(java.lang.String[]) -> a
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+com.dongfang.dicos.lottery.info.ProbabilityElement -> com.dongfang.dicos.lottery.info.e:
+    android.widget.TextView tvMobile -> a
+    android.widget.TextView tvTimes -> b
+com.dongfang.dicos.lottery.info.ProbabilityListActivity -> com.dongfang.dicos.lottery.info.ProbabilityListActivity:
+    android.widget.Button bShowMore -> a
+    android.widget.TextView tvOpportunityNumber -> b
+    android.widget.ListView lvInfo -> c
+    com.dongfang.dicos.lottery.info.ProbabilityAdapter adapter -> d
+    com.dongfang.dicos.lottery.info.ProbabilityListActivity$MyHandler handler -> e
+    void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
+    void onClick(android.view.View) -> onClick
+    com.dongfang.dicos.lottery.info.ProbabilityAdapter access$0(com.dongfang.dicos.lottery.info.ProbabilityListActivity) -> a
+    android.widget.TextView access$1(com.dongfang.dicos.lottery.info.ProbabilityListActivity) -> b
+com.dongfang.dicos.lottery.info.ProbabilityListActivity$MyHandler -> com.dongfang.dicos.lottery.info.f:
+    com.dongfang.dicos.lottery.info.ProbabilityListActivity this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.dongfang.dicos.more.CityListActivity -> com.dongfang.dicos.more.CityListActivity:
+    android.widget.Button bBack -> b
+    com.dongfang.dicos.more.CityListAdapter adapter -> c
+    java.util.ArrayList stringList -> a
+    void onCreate(android.os.Bundle) -> onCreate
+    void onClick(android.view.View) -> onClick
+    com.dongfang.dicos.more.CityListAdapter access$0(com.dongfang.dicos.more.CityListActivity) -> a
+    java.util.ArrayList access$1(com.dongfang.dicos.more.CityListActivity,java.lang.String) -> a
+com.dongfang.dicos.more.CityListActivity$1 -> com.dongfang.dicos.more.a:
+    com.dongfang.dicos.more.CityListActivity this$0 -> a
+    android.widget.EditText val$editText -> b
+    void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
+    void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
+    void afterTextChanged(android.text.Editable) -> afterTextChanged
+com.dongfang.dicos.more.CityListAdapter -> com.dongfang.dicos.more.b:
+    java.util.ArrayList stringArray -> a
+    android.content.Context context -> b
+    void setList(java.util.ArrayList) -> a
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    int getPositionForSection(int) -> getPositionForSection
+    int getSectionForPosition(int) -> getSectionForPosition
+    java.lang.Object[] getSections() -> getSections
+    android.content.Context access$0(com.dongfang.dicos.more.CityListAdapter) -> a
+com.dongfang.dicos.more.CityListAdapter$MyOnClickListener -> com.dongfang.dicos.more.c:
+    java.lang.String sIpArea -> b
+    com.dongfang.dicos.more.CityListAdapter this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.dongfang.dicos.more.CityListElement -> com.dongfang.dicos.more.d:
+    android.widget.TextView header -> a
+    android.widget.TextView cityName -> b
+    android.widget.LinearLayout linearLayout -> c
+com.dongfang.dicos.more.FeedBackActivity -> com.dongfang.dicos.more.FeedBackActivity:
+    android.widget.Button bBack -> a
+    android.widget.Button bOk -> b
+    android.widget.EditText etFeedback -> c
+    android.widget.ProgressBar progressBar -> d
+    com.dongfang.dicos.more.FeedBackActivity$MyHandler handler -> e
+    void onCreate(android.os.Bundle) -> onCreate
+    void onClick(android.view.View) -> onClick
+    android.widget.EditText access$0(com.dongfang.dicos.more.FeedBackActivity) -> a
+    android.widget.ProgressBar access$1(com.dongfang.dicos.more.FeedBackActivity) -> b
+com.dongfang.dicos.more.FeedBackActivity$MyHandler -> com.dongfang.dicos.more.e:
+    com.dongfang.dicos.more.FeedBackActivity this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.dongfang.dicos.more.KaixinWeiboAuthorization -> com.dongfang.dicos.more.KaixinWeiboAuthorization:
+    android.widget.Button bBack -> a
+    android.webkit.WebView wvKaiXin -> b
+    android.widget.ProgressBar pbKaiXin -> c
+    com.dongfang.dicos.more.KaixinWeiboAuthorization$MyKaixinDialogListener mListener -> d
+    void onCreate(android.os.Bundle) -> onCreate
+    void onClick(android.view.View) -> onClick
+    com.dongfang.dicos.more.KaixinWeiboAuthorization$MyKaixinDialogListener access$0(com.dongfang.dicos.more.KaixinWeiboAuthorization) -> a
+    android.widget.ProgressBar access$1(com.dongfang.dicos.more.KaixinWeiboAuthorization) -> b
+com.dongfang.dicos.more.KaixinWeiboAuthorization$KaixinWebViewClient -> com.dongfang.dicos.more.f:
+    com.dongfang.dicos.more.KaixinWeiboAuthorization this$0 -> a
+    boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> shouldOverrideUrlLoading
+    void onPageStarted(android.webkit.WebView,java.lang.String,android.graphics.Bitmap) -> onPageStarted
+    void onReceivedError(android.webkit.WebView,int,java.lang.String,java.lang.String) -> onReceivedError
+    void onPageFinished(android.webkit.WebView,java.lang.String) -> onPageFinished
+com.dongfang.dicos.more.KaixinWeiboAuthorization$MyKaixinDialogListener -> com.dongfang.dicos.more.g:
+    com.dongfang.dicos.more.KaixinWeiboAuthorization this$0 -> a
+    boolean onPageStart(java.lang.String) -> a
+    void authComplete(android.os.Bundle,java.lang.String) -> a
+com.dongfang.dicos.more.SinaWeiboAuthorization -> com.dongfang.dicos.more.SinaWeiboAuthorization:
+    android.widget.Button bBack -> a
+    android.webkit.WebView wvSina -> b
+    android.widget.ProgressBar pbSina -> c
+    void onCreate(android.os.Bundle) -> onCreate
+    void onClick(android.view.View) -> onClick
+    void access$0$22758613(java.lang.String) -> a
+    android.widget.ProgressBar access$1(com.dongfang.dicos.more.SinaWeiboAuthorization) -> a
+com.dongfang.dicos.more.SinaWeiboAuthorization$WeiboWebViewClient -> com.dongfang.dicos.more.h:
+    com.dongfang.dicos.more.SinaWeiboAuthorization this$0 -> a
+    boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> shouldOverrideUrlLoading
+    void onReceivedError(android.webkit.WebView,int,java.lang.String,java.lang.String) -> onReceivedError
+    void onPageStarted(android.webkit.WebView,java.lang.String,android.graphics.Bitmap) -> onPageStarted
+    void onPageFinished(android.webkit.WebView,java.lang.String) -> onPageFinished
+com.dongfang.dicos.more.TongBuActivity -> com.dongfang.dicos.more.TongBuActivity:
+    android.widget.Button bBack -> a
+    android.widget.RelativeLayout rlSina -> b
+    android.widget.RelativeLayout rlKaiXin -> c
+    com.dongfang.dicos.kaixin.Kaixin kaixin -> d
+    com.dongfang.dicos.sina.Weibo weibo -> e
+    com.dongfang.dicos.view.SlipButton slipButton_Sina -> f
+    com.dongfang.dicos.view.SlipButton slipButton_Kaixin -> g
+    void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
+    void onClick(android.view.View) -> onClick
+    void tongbuToSina() -> a
+    void tongbuToKaiXin() -> b
+    void showSinaChkDialog(com.dongfang.dicos.sina.Weibo) -> a
+    void showKaixinChkDialog(com.dongfang.dicos.kaixin.Kaixin) -> a
+    com.dongfang.dicos.view.SlipButton access$0(com.dongfang.dicos.more.TongBuActivity) -> a
+    com.dongfang.dicos.view.SlipButton access$1(com.dongfang.dicos.more.TongBuActivity) -> b
+    com.dongfang.dicos.sina.Weibo access$2(com.dongfang.dicos.more.TongBuActivity) -> c
+    com.dongfang.dicos.kaixin.Kaixin access$3(com.dongfang.dicos.more.TongBuActivity) -> d
+com.dongfang.dicos.more.TongBuActivity$1 -> com.dongfang.dicos.more.i:
+    com.dongfang.dicos.more.TongBuActivity this$0 -> a
+    void OnChanged(boolean) -> a
+com.dongfang.dicos.more.TongBuActivity$2 -> com.dongfang.dicos.more.j:
+    com.dongfang.dicos.more.TongBuActivity this$0 -> a
+    void OnChanged(boolean) -> a
+com.dongfang.dicos.more.TongBuActivity$3 -> com.dongfang.dicos.more.k:
+    com.dongfang.dicos.more.TongBuActivity this$0 -> a
+    com.dongfang.dicos.sina.Weibo val$weibo -> b
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dongfang.dicos.more.TongBuActivity$4 -> com.dongfang.dicos.more.l:
+    com.dongfang.dicos.more.TongBuActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dongfang.dicos.more.TongBuActivity$5 -> com.dongfang.dicos.more.m:
+    com.dongfang.dicos.more.TongBuActivity this$0 -> a
+    com.dongfang.dicos.kaixin.Kaixin val$kaixin -> b
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dongfang.dicos.more.TongBuActivity$6 -> com.dongfang.dicos.more.n:
+    com.dongfang.dicos.more.TongBuActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dongfang.dicos.more.TongBuActivity$AuthDialogListener -> com.dongfang.dicos.more.o:
+    com.dongfang.dicos.more.TongBuActivity this$0 -> a
+    void onComplete(android.os.Bundle) -> a
+    void onError(com.dongfang.dicos.sina.DialogError) -> a
+    void onCancel() -> a
+    void onWeiboException(com.dongfang.dicos.sina.WeiboException) -> a
+com.dongfang.dicos.more.TongBuActivity$MyKaixinAuthListener -> com.dongfang.dicos.more.p:
+    com.dongfang.dicos.more.TongBuActivity this$0 -> a
+    void onAuthCancel$79e5e33f() -> b
+    void onAuthCancelLogin() -> a
+    void onAuthComplete(android.os.Bundle) -> a
+    void onAuthError(com.dongfang.dicos.kaixin.KaixinAuthError) -> a
+com.dongfang.dicos.more.TuiSongActivity -> com.dongfang.dicos.more.TuiSongActivity:
+    android.widget.Button bBack -> b
+    com.dongfang.dicos.view.SlipButton slipButton_KZMW -> a
+    void onCreate(android.os.Bundle) -> onCreate
+    void onClick(android.view.View) -> onClick
+com.dongfang.dicos.mydicos.SignHistoryAdapter -> com.dongfang.dicos.b.a:
+    java.lang.String[] aJSONSignHistoryArray -> a
+    android.content.Context context -> b
+    android.os.Handler handler -> c
+    void setArray(java.lang.String[]) -> a
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+com.dongfang.dicos.mydicos.SignHistoryElement -> com.dongfang.dicos.b.b:
+    android.widget.TextView tvStoreName -> a
+    android.widget.TextView tvSignTime -> b
+    java.lang.String infoJSON -> c
+    void initElement(java.lang.String) -> a
+com.dongfang.dicos.net.HttpActions -> com.dongfang.dicos.c.a:
+    com.dongfang.dicos.net.Https https -> a
+    java.util.List list -> b
+    java.lang.String login(java.lang.String) -> a
+    java.lang.String validate(java.lang.String,java.lang.String) -> a
+    java.lang.String logout(java.lang.String) -> b
+    java.lang.String lottery(java.lang.String,java.lang.String,java.lang.String) -> a
+    java.lang.String lotteryHistory(java.lang.String) -> c
+    java.lang.String lotteryRateList(java.lang.String) -> d
+    java.lang.String lotteryWinner(java.lang.String) -> e
+    java.lang.String lotteryDistributionInfo(java.lang.String) -> f
+    java.lang.String restaurentList$e96e693(java.lang.String,java.lang.String) -> b
+    java.lang.String sign(java.lang.String,java.lang.String) -> c
+    java.lang.String signHistory(java.lang.String) -> g
+    java.lang.String advice(java.lang.String,java.lang.String) -> d
+    java.lang.String ipArea(java.lang.String) -> h
+com.dongfang.dicos.net.Https -> com.dongfang.dicos.c.b:
+    android.content.Context context -> a
+    java.lang.String post(java.util.List) -> a
+    org.apache.http.client.HttpClient getNewHttpClient() -> a
+    java.lang.String read(org.apache.http.HttpResponse) -> a
+com.dongfang.dicos.net.thread.AdviceThread -> com.dongfang.dicos.c.a.a:
+    android.os.Handler handler -> a
+    android.content.Context context -> b
+    java.lang.String msg -> c
+    java.lang.String phoneNumber -> d
+    void run() -> run
+com.dongfang.dicos.net.thread.IPArea -> com.dongfang.dicos.c.a.b:
+    android.content.Context context -> a
+    java.lang.String phoneNumber -> b
+    void run() -> run
+com.dongfang.dicos.net.thread.LoginThread -> com.dongfang.dicos.c.a.c:
+    android.os.Handler handler -> a
+    android.content.Context context -> b
+    java.lang.String phoneNumber -> c
+    void run() -> run
+com.dongfang.dicos.net.thread.LogoutThread -> com.dongfang.dicos.c.a.d:
+    android.os.Handler handler -> a
+    android.content.Context context -> b
+    java.lang.String phoneNumber -> c
+    void run() -> run
+com.dongfang.dicos.net.thread.LotteryDistributionInfoThread -> com.dongfang.dicos.c.a.e:
+    android.os.Handler handler -> a
+    android.content.Context context -> b
+    java.lang.String phoneNumber -> c
+    void run() -> run
+com.dongfang.dicos.net.thread.LotteryHistoryThread -> com.dongfang.dicos.c.a.f:
+    android.os.Handler handler -> a
+    android.content.Context context -> b
+    java.lang.String phoneNumber -> c
+    void run() -> run
+com.dongfang.dicos.net.thread.LotteryRateListThread -> com.dongfang.dicos.c.a.g:
+    android.os.Handler handler -> a
+    android.content.Context context -> b
+    java.lang.String phoneNumber -> c
+    void run() -> run
+com.dongfang.dicos.net.thread.LotteryThread -> com.dongfang.dicos.c.a.h:
+    android.os.Handler handler -> a
+    android.content.Context context -> b
+    java.lang.String code -> c
+    java.lang.String amount -> d
+    java.lang.String phoneNumber -> e
+    void run() -> run
+com.dongfang.dicos.net.thread.LotteryWinnerThread -> com.dongfang.dicos.c.a.i:
+    android.os.Handler handler -> a
+    android.content.Context context -> b
+    java.lang.String phoneNumber -> c
+    void run() -> run
+com.dongfang.dicos.net.thread.RestaurentListThread -> com.dongfang.dicos.c.a.j:
+    android.os.Handler handler -> a
+    android.content.Context context -> b
+    java.lang.String phoneNumber -> c
+    java.lang.String province -> d
+    java.lang.String city -> e
+    void run() -> run
+com.dongfang.dicos.net.thread.SignHistoryThread -> com.dongfang.dicos.c.a.k:
+    android.os.Handler handler -> a
+    android.content.Context context -> b
+    java.lang.String phoneNumber -> c
+    void run() -> run
+com.dongfang.dicos.net.thread.SignThread -> com.dongfang.dicos.c.a.l:
+    android.os.Handler handler -> a
+    android.content.Context context -> b
+    java.lang.String id -> c
+    java.lang.String phoneNumber -> d
+    void run() -> run
+com.dongfang.dicos.net.thread.ValidateThread -> com.dongfang.dicos.c.a.m:
+    android.os.Handler handler -> a
+    android.content.Context context -> b
+    java.lang.String phoneNumber -> c
+    java.lang.String authCode -> d
+    void run() -> run
+com.dongfang.dicos.sina.AsyncWeiboRunner -> com.dongfang.dicos.d.a:
+    com.dongfang.dicos.sina.Weibo mWeibo -> a
+    void request(android.content.Context,java.lang.String,com.dongfang.dicos.sina.WeiboParameters,java.lang.String,com.dongfang.dicos.sina.AsyncWeiboRunner$RequestListener) -> a
+    com.dongfang.dicos.sina.Weibo access$0(com.dongfang.dicos.sina.AsyncWeiboRunner) -> a
+com.dongfang.dicos.sina.AsyncWeiboRunner$MyThread -> com.dongfang.dicos.d.b:
+    android.content.Context context -> a
+    java.lang.String url -> b
+    com.dongfang.dicos.sina.WeiboParameters params -> c
+    java.lang.String httpMethod -> d
+    com.dongfang.dicos.sina.AsyncWeiboRunner$RequestListener listener -> e
+    com.dongfang.dicos.sina.AsyncWeiboRunner this$0 -> f
+    void run() -> run
+com.dongfang.dicos.sina.AsyncWeiboRunner$RequestListener -> com.dongfang.dicos.d.c:
+    void onComplete(java.lang.String) -> a
+    void onError(com.dongfang.dicos.sina.WeiboException) -> a
+com.dongfang.dicos.sina.DialogError -> com.dongfang.dicos.d.d:
+    int mErrorCode -> a
+    java.lang.String mFailingUrl -> b
+com.dongfang.dicos.sina.HttpHeaderFactory -> com.dongfang.dicos.d.e:
+    java.lang.String getWeiboAuthHeader$315a830e(java.lang.String,java.lang.String,com.dongfang.dicos.sina.WeiboParameters,com.dongfang.dicos.sina.Token) -> a
+    void parseUrlParameters(java.lang.String,com.dongfang.dicos.sina.WeiboParameters) -> a
+    java.lang.String generateSignature$5f4bab47() -> a
+    java.lang.String encodeParameters(com.dongfang.dicos.sina.WeiboParameters,java.lang.String,boolean) -> a
+    java.lang.String encode(java.lang.String) -> a
+com.dongfang.dicos.sina.Oauth2AccessTokenHeader -> com.dongfang.dicos.d.f:
+    java.lang.String getWeiboAuthHeader$315a830e(java.lang.String,java.lang.String,com.dongfang.dicos.sina.WeiboParameters,com.dongfang.dicos.sina.Token) -> a
+    java.lang.String generateSignature$5f4bab47() -> a
+com.dongfang.dicos.sina.RequestToken -> com.dongfang.dicos.d.g:
+com.dongfang.dicos.sina.Token -> com.dongfang.dicos.d.h:
+    java.lang.String mToken -> c
+    java.lang.String mRefreshToken -> d
+    long mExpiresIn -> e
+    java.lang.String mOauth_verifier -> f
+    java.lang.String mOauth_Token_Secret -> a
+    java.lang.String[] responseStr -> b
+    java.lang.String getToken() -> a
+    long getExpiresIn() -> b
+    void setExpiresIn(java.lang.String) -> a
+    void setToken(java.lang.String) -> b
+    java.lang.String getSecret() -> c
+com.dongfang.dicos.sina.UtilSina -> com.dongfang.dicos.d.i:
+    com.dongfang.dicos.sina.WeiboParameters mRequestHeader -> a
+    com.dongfang.dicos.sina.HttpHeaderFactory mAuth -> b
+    com.dongfang.dicos.sina.Token mToken -> c
+    void setTokenObject(com.dongfang.dicos.sina.Token) -> a
+    void setAuthorization(com.dongfang.dicos.sina.HttpHeaderFactory) -> a
+    void setHeader(java.lang.String,org.apache.http.client.methods.HttpUriRequest,com.dongfang.dicos.sina.WeiboParameters,java.lang.String,com.dongfang.dicos.sina.Token) -> a
+    boolean isBundleEmpty(com.dongfang.dicos.sina.WeiboParameters) -> b
+    void setRequestHeader(java.lang.String,java.lang.String) -> a
+    java.lang.String encodeUrl(com.dongfang.dicos.sina.WeiboParameters) -> a
+    android.os.Bundle decodeUrl(java.lang.String) -> b
+    android.os.Bundle parseUrl(java.lang.String) -> a
+    java.lang.String openUrl(android.content.Context,java.lang.String,java.lang.String,com.dongfang.dicos.sina.WeiboParameters,com.dongfang.dicos.sina.Token) -> a
+    java.lang.String openUrl(android.content.Context,java.lang.String,java.lang.String,com.dongfang.dicos.sina.WeiboParameters,java.lang.String,com.dongfang.dicos.sina.Token) -> a
+    org.apache.http.client.HttpClient getNewHttpClient(android.content.Context) -> a
+    void paramToUpload(java.io.OutputStream,com.dongfang.dicos.sina.WeiboParameters) -> a
+    java.lang.String read(org.apache.http.HttpResponse) -> a
+    void showAlert(android.content.Context,java.lang.String,java.lang.String) -> a
+    java.lang.String encodeParameters(com.dongfang.dicos.sina.WeiboParameters) -> c
+com.dongfang.dicos.sina.UtilSina$MySSLSocketFactory -> com.dongfang.dicos.d.j:
+    javax.net.ssl.SSLContext sslContext -> a
+    java.net.Socket createSocket(java.net.Socket,java.lang.String,int,boolean) -> createSocket
+    java.net.Socket createSocket() -> createSocket
+com.dongfang.dicos.sina.UtilSina$MySSLSocketFactory$1 -> com.dongfang.dicos.d.k:
+    com.dongfang.dicos.sina.UtilSina$MySSLSocketFactory this$1 -> a
+    void checkClientTrusted(java.security.cert.X509Certificate[],java.lang.String) -> checkClientTrusted
+    void checkServerTrusted(java.security.cert.X509Certificate[],java.lang.String) -> checkServerTrusted
+    java.security.cert.X509Certificate[] getAcceptedIssuers() -> getAcceptedIssuers
+com.dongfang.dicos.sina.Weibo -> com.dongfang.dicos.d.l:
+    java.lang.String SERVER -> a
+    java.lang.String URL_OAUTH_TOKEN -> b
+    java.lang.String URL_AUTHORIZE -> c
+    java.lang.String URL_ACCESS_TOKEN -> d
+    java.lang.String URL_AUTHENTICATION -> e
+    java.lang.String URL_OAUTH2_ACCESS_TOKEN -> f
+    java.lang.String URL_OAUTH2_ACCESS_AUTHORIZE -> g
+    java.lang.String APP_KEY -> h
+    java.lang.String APP_SECRET -> i
+    com.dongfang.dicos.sina.Weibo mWeiboInstance -> j
+    com.dongfang.dicos.sina.Token mAccessToken -> k
+    com.dongfang.dicos.sina.RequestToken mRequestToken -> l
+    com.dongfang.dicos.sina.WeiboDialogListener mAuthDialogListener -> m
+    com.dongfang.dicos.sina.Weibo$AuthOwnDialogListener mAuthOwnDialogListener -> n
+    java.lang.String mRedirectUrl -> o
+    com.dongfang.dicos.sina.Weibo getInstance() -> a
+    com.dongfang.dicos.sina.Token getAccessToken() -> b
+    void setupConsumerConfig(java.lang.String,java.lang.String) -> a
+    java.lang.String getAppKey() -> c
+    java.lang.String getAppSecret() -> d
+    void setRedirectUrl(java.lang.String) -> a
+    java.lang.String request(android.content.Context,java.lang.String,com.dongfang.dicos.sina.WeiboParameters,java.lang.String,com.dongfang.dicos.sina.Token) -> a
+    com.dongfang.dicos.sina.Weibo$AuthOwnDialogListener getAuthOwnDialogListener() -> e
+    void authorizeByActivity(android.app.Activity,com.dongfang.dicos.sina.WeiboDialogListener) -> a
+    boolean isSessionValid() -> f
+    boolean loadStorage(android.content.Context) -> a
+    boolean updateStorage(android.content.Context,java.lang.String,long) -> a
+    void clearStorage(android.content.Context) -> b
+    com.dongfang.dicos.sina.Token access$0(com.dongfang.dicos.sina.Weibo) -> a
+    void access$1(com.dongfang.dicos.sina.Weibo,com.dongfang.dicos.sina.Token) -> a
+    com.dongfang.dicos.sina.WeiboDialogListener access$2(com.dongfang.dicos.sina.Weibo) -> b
+com.dongfang.dicos.sina.Weibo$AuthOwnDialogListener -> com.dongfang.dicos.d.m:
+    com.dongfang.dicos.sina.Weibo this$0 -> a
+    void onComplete(android.os.Bundle) -> a
+    void onError(com.dongfang.dicos.sina.DialogError) -> a
+    void onWeiboException(com.dongfang.dicos.sina.WeiboException) -> a
+    void onCancel() -> a
+com.dongfang.dicos.sina.WeiboDialogListener -> com.dongfang.dicos.d.n:
+    void onComplete(android.os.Bundle) -> a
+    void onWeiboException(com.dongfang.dicos.sina.WeiboException) -> a
+    void onError(com.dongfang.dicos.sina.DialogError) -> a
+    void onCancel() -> a
+com.dongfang.dicos.sina.WeiboException -> com.dongfang.dicos.d.o:
+    int statusCode -> a
+com.dongfang.dicos.sina.WeiboParameters -> com.dongfang.dicos.d.p:
+    android.os.Bundle mParameters -> a
+    java.util.List mKeys -> b
+    void add(java.lang.String,java.lang.String) -> a
+    void remove(java.lang.String) -> a
+    java.lang.String getKey(int) -> a
+    java.lang.String getValue(java.lang.String) -> b
+    java.lang.String getValue(int) -> b
+    int size() -> a
+    void addAll(com.dongfang.dicos.sina.WeiboParameters) -> a
+com.dongfang.dicos.store.StoreDetailActivity -> com.dongfang.dicos.store.StoreDetailActivity:
+    android.widget.Button bBack -> a
+    android.widget.Button bSign -> b
+    android.widget.TextView tvName -> c
+    android.widget.TextView tvAddress -> d
+    android.widget.TextView tvTel -> e
+    java.lang.String json -> f
+    double x -> g
+    double y -> h
+    java.lang.String telNumber -> i
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+    void onClick(android.view.View) -> onClick
+com.dongfang.dicos.store.StoreDetailMapActivity -> com.dongfang.dicos.store.StoreDetailMapActivity:
+    android.widget.Button bBack -> a
+    android.widget.TextView tvTitle -> b
+    java.lang.Double x -> c
+    java.lang.Double y -> d
+    com.baidu.mapapi.BMapManager mBMapMan -> e
+    com.baidu.mapapi.MapView mMapView -> f
+    com.baidu.mapapi.LocationListener mLocationListener -> g
+    com.baidu.mapapi.MyLocationOverlay mLocationOverlay -> h
+    java.lang.String mStrKey -> i
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+    void onPause() -> onPause
+    void onDestroy() -> onDestroy
+    void onClick(android.view.View) -> onClick
+com.dongfang.dicos.store.StoreDetailMapActivity$1 -> com.dongfang.dicos.store.a:
+    com.dongfang.dicos.store.StoreDetailMapActivity this$0 -> a
+com.dongfang.dicos.store.StoreDetailMapActivity$MyGeneralListener -> com.dongfang.dicos.store.b:
+    com.dongfang.dicos.store.StoreDetailMapActivity this$0 -> a
+com.dongfang.dicos.store.StoreListAdapter -> com.dongfang.dicos.store.c:
+    java.lang.String[] aJSONStoreArray -> a
+    android.content.Context context -> b
+    android.os.Handler handler -> c
+    void setArray(java.lang.String[]) -> a
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    android.os.Handler access$0(com.dongfang.dicos.store.StoreListAdapter) -> a
+com.dongfang.dicos.store.StoreListAdapter$gotoOnClickListener -> com.dongfang.dicos.store.d:
+    java.lang.String json -> b
+    com.dongfang.dicos.store.StoreListAdapter this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.dongfang.dicos.store.StoreListElement -> com.dongfang.dicos.store.e:
+    android.widget.ImageView ivDICOS_IC -> a
+    android.widget.ImageView ivGoto -> b
+    android.widget.TextView tvStoreName -> c
+    android.widget.TextView tvStoreAddress -> d
+    java.lang.String infoJSON -> e
+    void initElement(java.lang.String) -> a
+com.dongfang.dicos.util.ComParams -> com.dongfang.dicos.e.a:
+    java.lang.String IPAREA -> a
+com.dongfang.dicos.util.ULog -> com.dongfang.dicos.e.b:
+    java.lang.Boolean isDug -> a
+    void d(java.lang.String,java.lang.String) -> a
+    void e(java.lang.String,java.lang.String) -> b
+com.dongfang.dicos.util.Util -> com.dongfang.dicos.e.c:
+    java.lang.String getPhoneNumber(android.content.Context) -> a
+    void setLoginStatus(android.content.Context,boolean) -> a
+    boolean isLogin(android.content.Context) -> b
+    boolean isNetworkAvailable(android.content.Context) -> c
+    void showDialogSetNetWork(android.content.Context) -> d
+    void showDialogLogin(android.content.Context) -> e
+    void saveIpArea(android.content.Context) -> f
+com.dongfang.dicos.view.SideBar -> com.dongfang.dicos.view.SideBar:
+    char[] aCharacter -> a
+    android.widget.SectionIndexer sectionIndexter -> b
+    android.widget.ListView list -> c
+    int m_nItemHeight -> d
+    void init() -> a
+    void setListView(android.widget.ListView) -> setListView
+    boolean onTouchEvent(android.view.MotionEvent) -> onTouchEvent
+    void onDraw(android.graphics.Canvas) -> onDraw
+com.dongfang.dicos.view.SlipButton -> com.dongfang.dicos.view.SlipButton:
+    boolean NowChoose -> a
+    boolean isChecked -> b
+    boolean OnSlip -> c
+    float DownX -> d
+    float NowX -> e
+    android.graphics.Rect Btn_On -> f
+    android.graphics.Rect Btn_Off -> g
+    boolean isChgLsnOn -> h
+    com.dongfang.dicos.view.SlipButton$OnChangedListener ChgLsn -> i
+    android.graphics.Bitmap bg_on -> j
+    android.graphics.Bitmap bg_off -> k
+    android.graphics.Bitmap slip_btn -> l
+    void init() -> a
+    void onDraw(android.graphics.Canvas) -> onDraw
+    boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
+    void SetOnChangedListener(com.dongfang.dicos.view.SlipButton$OnChangedListener) -> a
+    void setCheck(boolean) -> setCheck
+com.dongfang.dicos.view.SlipButton$OnChangedListener -> com.dongfang.dicos.view.a:
+    void OnChanged(boolean) -> a

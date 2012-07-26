@@ -1,0 +1,153 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppTheme" parent="android:Theme.Light.NoTitleBar">
+        <item name="android:windowAnimationStyle">@style/AnimationActivity</item>
+    </style>
+
+    <style name="AnimationActivity" mce_bogus="1" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/anim_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/anim_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/back_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/back_exit</item>
+    </style>
+
+    <style name="button_normal_ok">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/button_ok_xml</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="button_normal">
+        <item name="android:background">@drawable/button_bg</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!-- 顶部菜单中间显示文字 -->
+    <style name="top_menu_textview_style">
+        <item name="android:textColor">#FF5c9200</item>
+        <item name="android:textSize">22dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+
+    <!-- 顶部菜单布局 -->
+    <style name="top_menu_layout_style">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:background">@drawable/top_layout_bg_wood</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <!-- <item name="android:layout_marginBottom">20dp</item> -->
+    </style>
+
+    <!-- 顶部菜单左侧返回按钮 -->
+    <style name="top_menu_button_back_style">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:background">@drawable/top_button_back_xml</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentLeft">true</item>
+    </style>
+
+    <!-- 顶部菜单左侧取消按钮 -->
+    <style name="top_menu_button_cancel_style">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:background">@drawable/top_button_cancel</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentLeft">true</item>
+    </style>
+
+    <!-- 顶部菜单左侧登录按钮 -->
+    <style name="top_menu_button_login_style">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:background">@drawable/top_button_login_xml</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentLeft">true</item>
+    </style>
+
+    <!-- 顶部菜单右侧签到按钮 -->
+    <style name="top_menu_button_sign_style">
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:background">@drawable/top_button_qiandao_xml</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+
+    <!-- 顶部菜单右进度条 -->
+    <style name="top_menu_progressbar_style" parent="@android:style/Widget.ProgressBar.Small">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <!-- 输入框的基本设置 -->
+    <style name="editview_normal_style">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:inputType">number</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ems">10</item>
+    </style>
+
+    <!-- 自定复选按钮 -->
+    <style name="checkbox_style" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/button_chk_bg</item>
+        <item name="android:paddingLeft">25dip</item>
+        <item name="android:maxHeight">10dp</item>
+        <item name="android:textColor">#FF5c9200</item>
+    </style>
+
+    <!-- 文本输入框（大型） -->
+    <style name="edittext_wide_style">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:background">@drawable/editview_wide_bg</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:maxLines">10</item>
+        <item name="android:gravity">top</item>
+        <item name="android:isScrollContainer">true</item>
+        <item name="android:capitalize">sentences</item>
+        <item name="android:imeOptions">actionDone</item>
+        <item name="android:inputType">textMultiLine</item>
+    </style>
+
+    <!-- 自动完成输入框 -->
+    <style name="autocompletetextview_normal_style">
+        <item name="android:paddingRight">38dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:inputType">text</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:background">@drawable/store_search_textview_bg_all</item>
+        <item name="android:completionThreshold">1</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="ContentOverlay" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+</resources>
