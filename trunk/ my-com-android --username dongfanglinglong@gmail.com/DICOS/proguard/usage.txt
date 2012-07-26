@@ -1,0 +1,547 @@
+android.annotation.SuppressLint
+android.annotation.TargetApi
+com.baidu.mapapi.CoordinateConvert:
+    public CoordinateConvert()
+com.baidu.mapapi.ItemizedOverlay:
+    public ItemizedOverlay(android.graphics.drawable.Drawable)
+    protected static android.graphics.drawable.Drawable boundCenterBottom(android.graphics.drawable.Drawable)
+    protected static android.graphics.drawable.Drawable boundCenter(android.graphics.drawable.Drawable)
+    private static android.graphics.drawable.Drawable a(android.graphics.drawable.Drawable,com.baidu.mapapi.ItemizedOverlay$b)
+    protected abstract com.baidu.mapapi.OverlayItem createItem(int)
+    public abstract int size()
+    public com.baidu.mapapi.GeoPoint getCenter()
+    public int getLatSpanE6()
+    public int getLonSpanE6()
+    protected final void populate()
+    public final int getLastFocusedIndex()
+    public com.baidu.mapapi.OverlayItem nextFocus(boolean)
+    public void setOnFocusChangeListener(com.baidu.mapapi.ItemizedOverlay$OnFocusChangeListener)
+    public void setDrawFocusedItem(boolean)
+    public boolean onSnapToItem(int,int,android.graphics.Point,com.baidu.mapapi.MapView)
+com.baidu.mapapi.ItemizedOverlay$a:
+    final synthetic com.baidu.mapapi.ItemizedOverlay a
+    public ItemizedOverlay$a(com.baidu.mapapi.ItemizedOverlay)
+    public final int a(boolean)
+com.baidu.mapapi.ItemizedOverlay$b
+com.baidu.mapapi.LocationListener:
+    public abstract void onLocationChanged(android.location.Location)
+com.baidu.mapapi.MKAddrInfo
+com.baidu.mapapi.MKBusLineResult
+com.baidu.mapapi.MKCityListInfo
+com.baidu.mapapi.MKDrivingRouteResult
+com.baidu.mapapi.MKEvent
+com.baidu.mapapi.MKGeneralListener:
+    public abstract void onGetNetworkState(int)
+    public abstract void onGetPermissionState(int)
+com.baidu.mapapi.MKGeocoderAddressComponent
+com.baidu.mapapi.MKLine
+com.baidu.mapapi.MKLocationManager:
+    public static final int MK_GPS_PROVIDER
+    public static final int MK_NETWORK_PROVIDER
+    public static final int MK_COORDINATE_WGS84
+    public static final int MK_COORDINATE_GCJ
+    public static final int MK_COORDINATE_BAIDU09
+    public boolean disableProvider(int)
+    public android.os.Bundle getNotifyInternal()
+    public void setLocationCoordinateType(int)
+    void c()
+com.baidu.mapapi.MKMapViewListener
+com.baidu.mapapi.MKOLSearchRecord
+com.baidu.mapapi.MKOLUpdateElement
+com.baidu.mapapi.MKOfflineMap
+com.baidu.mapapi.MKOfflineMapListener
+com.baidu.mapapi.MKPlanNode
+com.baidu.mapapi.MKPoiInfo
+com.baidu.mapapi.MKPoiResult
+com.baidu.mapapi.MKRoute
+com.baidu.mapapi.MKRouteAddrResult
+com.baidu.mapapi.MKRoutePlan
+com.baidu.mapapi.MKSearch
+com.baidu.mapapi.MKSearchListener
+com.baidu.mapapi.MKStep
+com.baidu.mapapi.MKSuggestionInfo
+com.baidu.mapapi.MKSuggestionResult
+com.baidu.mapapi.MKTransitRoutePlan
+com.baidu.mapapi.MKTransitRouteResult
+com.baidu.mapapi.MKWalkingRouteResult
+com.baidu.mapapi.MapActivity:
+    protected boolean isLocationDisplayed()
+    protected abstract boolean isRouteDisplayed()
+com.baidu.mapapi.MapController:
+    public void animateTo(com.baidu.mapapi.GeoPoint)
+    public void animateTo(com.baidu.mapapi.GeoPoint,android.os.Message)
+    public void animateTo(com.baidu.mapapi.GeoPoint,java.lang.Runnable)
+    public void setCenter(com.baidu.mapapi.GeoPoint)
+    public int setZoom(int)
+    public void stopAnimation(boolean)
+    public void stopPanning()
+    public boolean zoomIn()
+    public boolean zoomInFixing(int,int)
+    public boolean zoomOut()
+    public boolean zoomOutFixing(int,int)
+    public void zoomToSpan(int,int)
+com.baidu.mapapi.MapView:
+    void c()
+    public boolean canCoverCenter()
+    public void displayZoomControls(boolean)
+    public com.baidu.mapapi.MapController getController()
+    public int getLatitudeSpan()
+    public int getLongitudeSpan()
+    public com.baidu.mapapi.GeoPoint getMapCenter()
+    public int getMaxZoomLevel()
+    public boolean isDoubleClickZooming()
+    public android.view.View getZoomControls()
+    public boolean isStreetView()
+    public boolean isTraffic()
+    public boolean isSatellite()
+    public void onRestoreInstanceState(android.os.Bundle)
+    public void onSaveInstanceState(android.os.Bundle)
+    public void preLoad()
+    boolean a(int)
+    void a(int,int)
+    void a(com.baidu.mapapi.GeoPoint)
+    void a(com.baidu.mapapi.GeoPoint,android.os.Message,java.lang.Runnable)
+    void a(boolean)
+    boolean a(int,int,int)
+    private void b(int)
+    public void regMapViewListener(com.baidu.mapapi.BMapManager,com.baidu.mapapi.MKMapViewListener)
+com.baidu.mapapi.MapView$LayoutParams:
+    public static final int MODE_MAP
+    public static final int MODE_VIEW
+    public static final int LEFT
+    public static final int RIGHT
+    public static final int TOP
+    public static final int BOTTOM
+    public static final int CENTER_HORIZONTAL
+    public static final int CENTER_VERTICAL
+    public static final int CENTER
+    public static final int TOP_LEFT
+    public static final int BOTTOM_CENTER
+    public MapView$LayoutParams(int,int,com.baidu.mapapi.GeoPoint,int)
+    public MapView$LayoutParams(int,int,com.baidu.mapapi.GeoPoint,int,int,int)
+    public MapView$LayoutParams(int,int,int,int,int)
+com.baidu.mapapi.Mj:
+    void a(com.baidu.mapapi.MKSearchListener)
+    void a(com.baidu.mapapi.MKOfflineMapListener)
+    void a(com.baidu.mapapi.MKMapViewListener)
+    public void JNI_callBackProc(int,int,int)
+    public void JNI_MapcallBackProc(int,int,int,int)
+    private int d()
+    public android.os.Bundle J_GetDevInfo(int)
+    boolean c()
+    private void a(int,int)
+    private void a(int)
+com.baidu.mapapi.Mj$a:
+    final synthetic com.baidu.mapapi.Mj e
+    Mj$a(com.baidu.mapapi.Mj)
+com.baidu.mapapi.Mj$b:
+    private Mj$b(com.baidu.mapapi.Mj)
+    synthetic Mj$b(com.baidu.mapapi.Mj,com.baidu.mapapi.Mj$1)
+com.baidu.mapapi.MyLocationOverlay:
+    public void onLocationChanged(android.location.Location)
+    public boolean isCompassEnabled()
+    public boolean isMyLocationEnabled()
+    public boolean onSnapToItem(int,int,android.graphics.Point,com.baidu.mapapi.MapView)
+    public android.location.Location getLastFix()
+    public float getOrientation()
+    public boolean runOnFirstFix(java.lang.Runnable)
+    public void onProviderDisabled(java.lang.String)
+    public void onProviderEnabled(java.lang.String)
+com.baidu.mapapi.Overlay:
+    protected static final float SHADOW_X_SKEW
+    protected static final float SHADOW_Y_SCALE
+com.baidu.mapapi.Overlay$Snappable
+com.baidu.mapapi.OverlayItem:
+    protected final java.lang.String mTitle
+    protected final java.lang.String mSnippet
+    public static final int ITEM_STATE_NORMAL_MASK
+    public static final int ITEM_STATE_PRESSED_MASK
+    public static final int ITEM_STATE_SELECTED_MASK
+    public static final int ITEM_STATE_FOCUSED_MASK
+    public OverlayItem(com.baidu.mapapi.GeoPoint,java.lang.String,java.lang.String)
+    public static void setState(android.graphics.drawable.Drawable,int)
+    public java.lang.String getSnippet()
+    public java.lang.String getTitle()
+    public java.lang.String routableAddress()
+    public void setMarker(android.graphics.drawable.Drawable)
+com.baidu.mapapi.PoiOverlay
+com.baidu.mapapi.RouteOverlay
+com.baidu.mapapi.RouteOverlay$1
+com.baidu.mapapi.RouteOverlay$a
+com.baidu.mapapi.RouteOverlay$b
+com.baidu.mapapi.TransitOverlay
+com.baidu.mapapi.TransitOverlay$1
+com.baidu.mapapi.TransitOverlay$a
+com.baidu.mapapi.VersionInfo
+com.baidu.mapapi.a:
+    boolean b()
+    boolean d()
+com.baidu.mapapi.c:
+    public c()
+com.baidu.mapapi.d:
+    android.graphics.Point a(com.baidu.mapapi.GeoPoint,android.graphics.Point)
+com.baidu.mapapi.e:
+    public void a(int,int,long)
+    void a()
+    void b()
+    java.lang.String a(int,int,int,int,java.util.List,java.lang.String)
+    public void a(java.util.List)
+    public java.lang.String a(java.util.List,java.lang.String)
+    public java.lang.String b(java.util.List,java.lang.String)
+    public boolean a(java.util.List,java.util.List)
+com.baidu.mapapi.e$1
+com.baidu.mapapi.e$a:
+    private e$a(com.baidu.mapapi.e)
+    synthetic e$a(com.baidu.mapapi.e,com.baidu.mapapi.e$1)
+com.baidu.mapapi.f:
+    public void a(com.baidu.mapapi.MKEvent)
+com.baidu.mapapi.g
+com.baidu.mapapi.h:
+    public abstract void a(com.baidu.mapapi.MKEvent)
+com.baidu.mapapi.i
+com.baidu.mapapi.j
+com.baidu.mapapi.k
+com.baidu.mapapi.k$1
+com.baidu.mapapi.k$a
+com.dongfang.dicos.BuildConfig
+com.dongfang.dicos.DicosMainActivity:
+    public static final java.lang.String tag
+    public static final java.lang.String TAB_ITEM_1
+    public static final java.lang.String TAB_ITEM_2
+    public static final java.lang.String TAB_ITEM_3
+    public static final java.lang.String TAB_ITEM_4
+    public static final java.lang.String TAB_ITEM_5
+com.dongfang.dicos.KaZiMeiWeiActivity:
+    public static final java.lang.String tag
+com.dongfang.dicos.MoreActivity:
+    public static final java.lang.String tag
+com.dongfang.dicos.MyDicosActivity:
+    public static final java.lang.String tag
+com.dongfang.dicos.R
+com.dongfang.dicos.R$anim
+com.dongfang.dicos.R$array
+com.dongfang.dicos.R$attr
+com.dongfang.dicos.R$color
+com.dongfang.dicos.R$dimen
+com.dongfang.dicos.R$drawable
+com.dongfang.dicos.R$id
+com.dongfang.dicos.R$layout
+com.dongfang.dicos.R$string
+com.dongfang.dicos.R$style
+com.dongfang.dicos.StoreSearchActivity:
+    public static final java.lang.String tag
+com.dongfang.dicos.kaixin.AsyncKaixin
+com.dongfang.dicos.kaixin.AsyncKaixin$1
+com.dongfang.dicos.kaixin.AsyncKaixin$2
+com.dongfang.dicos.kaixin.AsyncKaixinListener
+com.dongfang.dicos.kaixin.BaseParameter
+com.dongfang.dicos.kaixin.Constant
+com.dongfang.dicos.kaixin.Kaixin:
+    private static final java.lang.String tag
+    public static final java.lang.String API_KEY
+    public static final java.lang.String SECRET_KEY
+    private static final java.lang.String KX_AUTHORIZE_URL
+    private static final java.lang.String OAUTH_VERSION
+    public static final java.lang.String SESSION_KEY
+    public static final java.lang.String ACCESS_TOKEN
+    public static final java.lang.String REFRESH_TOKEN
+    public static final java.lang.String EXPIRES_IN
+    public static final java.lang.String ACCESS_DENIED
+    public static final java.lang.String LOGIN_DENIED
+    private static final java.lang.String KAIXIN_SDK_STORAGE
+    private static final java.lang.String KAIXIN_SDK_STORAGE_ACCESS_TOKEN
+    private static final java.lang.String KAIXIN_SDK_STORAGE_REFRESH_TOKEN
+    private static final java.lang.String KAIXIN_SDK_STORAGE_EXPIRES
+    private static final long ONE_HOUR
+    182:183:public void authorize(android.content.Context,com.dongfang.dicos.kaixin.KaixinAuthListener)
+    193:198:public void authorize(android.content.Context,java.lang.String[],com.dongfang.dicos.kaixin.KaixinAuthListener)
+    251:338:private void authorize(android.content.Context,java.lang.String[],com.dongfang.dicos.kaixin.KaixinAuthListener,java.lang.String,java.lang.String)
+    363:363:public java.lang.String getRefreshToken()
+    399:414:public java.lang.String refreshAccessToken(android.content.Context,java.lang.String[])
+    462:466:public java.lang.String request(android.content.Context,java.lang.String,android.os.Bundle,java.lang.String)
+    470:487:public java.lang.String login(android.os.Bundle,android.content.Context)
+    493:517:public java.lang.String setOauth(java.lang.String,android.content.Context)
+    64:64:static synthetic java.lang.String access$0()
+com.dongfang.dicos.kaixin.Kaixin$3
+com.dongfang.dicos.kaixin.KaixinAuthError:
+    private static final long serialVersionUID
+    41:41:public org.json.JSONObject getJSONObjectError()
+    45:59:public static org.json.JSONObject genJSONObjectError(java.lang.String,java.lang.String,java.lang.String)
+    63:63:public java.lang.String getError()
+    71:71:public java.lang.String getErrorUri()
+com.dongfang.dicos.kaixin.KaixinDialog
+com.dongfang.dicos.kaixin.KaixinDialog$KaixinWebViewClient
+com.dongfang.dicos.kaixin.KaixinDialogListener
+com.dongfang.dicos.kaixin.KaixinError:
+    private static final long serialVersionUID
+    33:34:public KaixinError(java.lang.String)
+    44:44:public int getErrorCode()
+    48:48:public java.lang.String getRequest()
+    52:52:public java.lang.String getResponse()
+com.dongfang.dicos.kaixin.PostRecordTask:
+    private static final java.lang.String TAG
+    private static final java.lang.String RESTAPI_INTERFACE_POSTRECORD
+com.dongfang.dicos.kaixin.UtilKaiXin:
+    public static final java.lang.String LOG_TAG
+    private static final int UPLOAD_BUFFER_SIZE
+    51:51:public UtilKaiXin()
+    397:408:public static boolean isContainChinese(java.lang.String)
+com.dongfang.dicos.kzmw.LoginActivity:
+    public static final java.lang.String tag
+com.dongfang.dicos.kzmw.LotteryActivity:
+    public static final java.lang.String tag
+com.dongfang.dicos.kzmw.SigneInActivity:
+    public static final java.lang.String tag
+    private static final java.lang.String TYPE_SINA
+    private static final java.lang.String TYPE_KAIXIN
+    203:212:private void shareToSina(java.lang.String)
+    317:320:public void onIOException(java.io.IOException)
+com.dongfang.dicos.lottery.DetailActivity:
+    public static final java.lang.String tag
+com.dongfang.dicos.lottery.InfoActivity:
+    public static final java.lang.String tag
+    public static final java.lang.String TAB_ITEM_1
+    public static final java.lang.String TAB_ITEM_2
+com.dongfang.dicos.lottery.JoinInActivity:
+    public static final java.lang.String tag
+com.dongfang.dicos.lottery.PrizeInfoActivity:
+    public static final java.lang.String tag
+com.dongfang.dicos.lottery.PrizeInfoAdapter:
+    private static final java.lang.String tag
+com.dongfang.dicos.lottery.PrizeInfoElement:
+    private static final java.lang.String tag
+com.dongfang.dicos.lottery.PrizeProvideActivity:
+    public static final java.lang.String tag
+com.dongfang.dicos.lottery.PrizeProvideAdapter:
+    private static final java.lang.String tag
+com.dongfang.dicos.lottery.PrizeProvideElement:
+    private static final java.lang.String tag
+com.dongfang.dicos.lottery.info.MyInfoActivity:
+    public static final java.lang.String tag
+com.dongfang.dicos.lottery.info.MyInfoAdapter:
+    private static final java.lang.String tag
+com.dongfang.dicos.lottery.info.MyInfoElement:
+    private static final java.lang.String tag
+com.dongfang.dicos.lottery.info.ProbabilityAdapter:
+    private static final java.lang.String tag
+com.dongfang.dicos.lottery.info.ProbabilityElement:
+    private static final java.lang.String tag
+com.dongfang.dicos.lottery.info.ProbabilityListActivity:
+    public static final java.lang.String tag
+com.dongfang.dicos.more.CityListActivity:
+    public static final java.lang.String tag
+com.dongfang.dicos.more.CityListAdapter:
+    private static final java.lang.String tag
+com.dongfang.dicos.more.FeedBackActivity:
+    public static final java.lang.String tag
+com.dongfang.dicos.more.KaixinWeiboAuthorization:
+    public static final java.lang.String tag
+com.dongfang.dicos.more.SinaWeiboAuthorization:
+    public static final java.lang.String tag
+com.dongfang.dicos.more.SinaWeiboAuthorization$WeiboWebViewClient:
+    150:151:public void onReceivedSslError(android.webkit.WebView,android.webkit.SslErrorHandler,com.dongfang.dicos.sina.SslError)
+com.dongfang.dicos.more.TongBuActivity:
+    public static final java.lang.String tag
+com.dongfang.dicos.more.TuiSongActivity:
+    public static final java.lang.String tag
+    com.dongfang.dicos.view.SlipButton slipButton_TuiSong
+com.dongfang.dicos.mydicos.SignHistoryAdapter:
+    private static final java.lang.String tag
+com.dongfang.dicos.mydicos.SignHistoryElement:
+    private static final java.lang.String tag
+com.dongfang.dicos.net.Actions
+com.dongfang.dicos.net.HttpActions:
+    public static final java.lang.String tag
+    private static final java.lang.String KEY
+    120:131:public java.lang.String lotteryLegal(java.lang.String)
+com.dongfang.dicos.net.Https:
+    private static final java.lang.String tag
+    private static final int SET_CONNECTION_TIMEOUT
+    private static final int SET_SOCKET_TIMEOUT
+    private static final java.lang.String url
+    68:78:public java.io.InputStream get(java.lang.String)
+com.dongfang.dicos.net.thread.AdviceThread:
+    public static final java.lang.String tag
+com.dongfang.dicos.net.thread.IPArea:
+    public static final java.lang.String tag
+com.dongfang.dicos.net.thread.LoginThread:
+    public static final java.lang.String tag
+com.dongfang.dicos.net.thread.LogoutThread:
+    public static final java.lang.String tag
+com.dongfang.dicos.net.thread.LotteryDistributionInfoThread:
+    public static final java.lang.String tag
+com.dongfang.dicos.net.thread.LotteryHistoryThread:
+    public static final java.lang.String tag
+com.dongfang.dicos.net.thread.LotteryLegalThread
+com.dongfang.dicos.net.thread.LotteryRateListThread:
+    public static final java.lang.String tag
+com.dongfang.dicos.net.thread.LotteryThread:
+    public static final java.lang.String tag
+com.dongfang.dicos.net.thread.LotteryWinnerThread:
+    public static final java.lang.String tag
+com.dongfang.dicos.net.thread.RestaurentListThread:
+    public static final java.lang.String tag
+com.dongfang.dicos.net.thread.SignHistoryThread:
+    public static final java.lang.String tag
+com.dongfang.dicos.net.thread.SignThread:
+    public static final java.lang.String tag
+com.dongfang.dicos.net.thread.ValidateThread:
+    private static final java.lang.String tag
+com.dongfang.dicos.sina.AccessToken
+com.dongfang.dicos.sina.AccessTokenHeader
+com.dongfang.dicos.sina.AsyncWeiboRunner:
+    60:61:public void post(android.content.Context,java.lang.String,java.lang.String,java.lang.String,java.lang.String,com.dongfang.dicos.sina.AsyncWeiboRunner$RequestListener)
+com.dongfang.dicos.sina.AsyncWeiboRunner$MyPost
+com.dongfang.dicos.sina.AsyncWeiboRunner$RequestListener:
+    public abstract void onIOException(java.io.IOException)
+com.dongfang.dicos.sina.DialogError:
+    private static final long serialVersionUID
+    34:34:int getErrorCode()
+    38:38:java.lang.String getFailingUrl()
+com.dongfang.dicos.sina.HttpHeaderFactory:
+    public static final java.lang.String CONST_HMAC_SHA1
+    public static final java.lang.String CONST_SIGNATURE_METHOD
+    public static final java.lang.String CONST_OAUTH_VERSION
+    150:170:public static java.lang.String encodeParameters(android.os.Bundle,java.lang.String,boolean)
+com.dongfang.dicos.sina.Oauth2AccessToken
+com.dongfang.dicos.sina.RequestToken:
+    30:31:public RequestToken(java.lang.String)
+com.dongfang.dicos.sina.RequestTokenHeader
+com.dongfang.dicos.sina.SslError
+com.dongfang.dicos.sina.Token:
+    protected javax.crypto.spec.SecretKeySpec mSecretKeySpec
+    50:50:public java.lang.String getRefreshToken()
+    54:55:public void setRefreshToken(java.lang.String)
+    76:77:public void setVerifier(java.lang.String)
+    80:80:public java.lang.String getVerifier()
+    87:91:public Token(java.lang.String)
+    99:106:public java.lang.String getParameter(java.lang.String)
+    110:111:protected void setSecretKeySpec(javax.crypto.spec.SecretKeySpec)
+    114:114:protected javax.crypto.spec.SecretKeySpec getSecretKeySpec()
+com.dongfang.dicos.sina.UtilSina:
+    private static final java.lang.String tag
+    public static final java.lang.String BOUNDARY
+    public static final java.lang.String MP_BOUNDARY
+    public static final java.lang.String END_MP_BOUNDARY
+    public static final java.lang.String MULTIPART_FORM_DATA
+    public static final java.lang.String HTTPMETHOD_POST
+    public static final java.lang.String HTTPMETHOD_GET
+    public static final java.lang.String HTTPMETHOD_DELETE
+    private static final int SET_CONNECTION_TIMEOUT
+    private static final int SET_SOCKET_TIMEOUT
+    102:102:public UtilSina()
+    164:165:public static void setRequestHeader(com.dongfang.dicos.sina.WeiboParameters)
+    168:170:public static void clearRequestHeader()
+    173:186:public static java.lang.String encodePostBody(android.os.Bundle,java.lang.String)
+    246:257:public static org.apache.http.client.entity.UrlEncodedFormEntity getPostParamters(android.os.Bundle)
+    298:338:public static java.lang.String post(android.content.Context,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    503:524:public static org.apache.http.client.HttpClient getHttpClient(android.content.Context)
+    637:643:private static java.lang.String read(java.io.InputStream)
+    656:659:public static void clearCookies(android.content.Context)
+    706:730:public static char[] base64Encode(byte[])
+com.dongfang.dicos.sina.Weibo:
+    private static final java.lang.String tag
+    private static final java.lang.String SINA_SDK_STORAGE
+    private static final java.lang.String SINA_SDK_STORAGE_ACCESS_TOKEN
+    private static final java.lang.String SINA_SDK_STORAGE_ACCESS_EXPIRES
+    private static final int DEFAULT_AUTH_ACTIVITY_CODE
+    public static final java.lang.String TOKEN
+    public static final java.lang.String EXPIRES
+    public static final java.lang.String DEFAULT_REDIRECT_URI
+    public static final java.lang.String DEFAULT_CANCEL_URI
+    102:103:public void setAccessToken(com.dongfang.dicos.sina.AccessToken)
+    123:124:public void setRequestToken(com.dongfang.dicos.sina.RequestToken)
+    127:127:public static java.lang.String getSERVER()
+    131:132:public static void setSERVER(java.lang.String)
+    136:137:public void addOauthverifier(java.lang.String)
+    140:140:public java.lang.String getRedirectUrl()
+    175:182:public com.dongfang.dicos.sina.RequestToken getRequestToken(android.content.Context,java.lang.String,java.lang.String,java.lang.String)
+    186:193:public com.dongfang.dicos.sina.AccessToken generateAccessToken(android.content.Context,com.dongfang.dicos.sina.RequestToken)
+    198:206:public com.dongfang.dicos.sina.AccessToken getXauthAccessToken(android.content.Context,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    226:236:public com.dongfang.dicos.sina.Oauth2AccessToken getOauth2AccessToken(android.content.Context,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    245:262:public boolean share2weibo(android.app.Activity,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    292:301:private void startDialogAuth(android.app.Activity,java.lang.String[])
+    312:313:public void authorize(android.app.Activity,com.dongfang.dicos.sina.WeiboDialogListener)
+    316:317:private void authorize(android.app.Activity,java.lang.String[],com.dongfang.dicos.sina.WeiboDialogListener)
+    320:334:private void authorize(android.app.Activity,java.lang.String[],int,com.dongfang.dicos.sina.WeiboDialogListener)
+    352:352:private void authorizeCallBack(int,int,android.content.Intent)
+    377:391:public void dialog(android.content.Context,com.dongfang.dicos.sina.WeiboParameters,com.dongfang.dicos.sina.WeiboDialogListener)
+com.dongfang.dicos.sina.WeiboDialog
+com.dongfang.dicos.sina.WeiboDialog$1
+com.dongfang.dicos.sina.WeiboDialog$WeiboWebViewClient
+com.dongfang.dicos.sina.WeiboException:
+    private static final long serialVersionUID
+    145:146:public WeiboException(java.lang.String,java.lang.Exception)
+    149:151:public WeiboException(java.lang.String,java.lang.Exception,int)
+    154:154:public int getStatusCode()
+    162:163:public WeiboException(java.lang.String,java.lang.Throwable)
+    166:167:public WeiboException(java.lang.Throwable)
+    170:172:public WeiboException(int)
+    175:176:public void setStatusCode(int)
+com.dongfang.dicos.sina.WeiboParameters:
+    55:58:public void remove(int)
+    61:64:public int getLocation(java.lang.String)
+    97:99:public void clear()
+com.dongfang.dicos.sina.XAuthHeader
+com.dongfang.dicos.store.StoreDetailActivity:
+    private static final java.lang.String tag
+com.dongfang.dicos.store.StoreDetailMapActivity:
+    private static final java.lang.String tag
+    164:164:protected boolean isRouteDisplayed()
+    37:37:static synthetic java.lang.Double access$0(com.dongfang.dicos.store.StoreDetailMapActivity)
+    37:37:static synthetic java.lang.Double access$1(com.dongfang.dicos.store.StoreDetailMapActivity)
+    40:40:static synthetic com.baidu.mapapi.MapView access$2(com.dongfang.dicos.store.StoreDetailMapActivity)
+com.dongfang.dicos.store.StoreDetailMapActivity$1:
+    98:112:public void onLocationChanged(android.location.Location)
+com.dongfang.dicos.store.StoreDetailMapActivity$MyGeneralListener:
+    170:172:public void onGetNetworkState(int)
+    176:182:public void onGetPermissionState(int)
+com.dongfang.dicos.store.StoreListAdapter:
+    private static final java.lang.String tag
+com.dongfang.dicos.store.StoreListElement:
+    private static final java.lang.String tag
+    30:30:public java.lang.String getInfo()
+com.dongfang.dicos.util.ComParams:
+    public static final java.lang.String SINA_APP_KEY
+    public static final java.lang.String SINA_APP_SECRET
+    public static final java.lang.String SINA_APP_URL
+    public static final java.lang.String SINA_AUTH_BY_ACTIVITY_INTENT_URL_NAME
+    public static final java.lang.String KAIXIN_APP_KEY
+    public static final java.lang.String KAIXIN_APP_SECRET
+    public static final java.lang.String KAIXIN_APP_URL
+    public static final java.lang.String KAIXIN_AUTH_BY_ACTIVITY_INTENT_URL_NAME
+    public static final java.lang.String SHAREDPREFERENCES_FILE_NAME
+    public static final java.lang.String SHAREDPREFERENCES_PHONE_NUMBER
+    public static final java.lang.String SHAREDPREFERENCES_LOGIN_STATUE
+    public static final java.lang.String SHAREDPREFERENCES_IP_AREA
+    public static final int BUTTON_GET_AUTH_CODE_LOCKED_SECOND
+    public static final int HANDLER_KAIXIN_LOGIN_ERROR
+    public static final int HANDLER_LOGIN_GET_AUTH_CODE
+    public static final int HANDLER_LOGIN_GET_AUTH_CODE_LOCKED
+    public static final int HANDLER_LOGIN_LOGIN
+    public static final int HANDLER_SIGNE_IN
+    public static final int HANDLER_RESULT_LOGIN
+    public static final int HANDLER_RESULT_VALIDATE
+    public static final int HANDLER_RESULT_LOGOUT
+    public static final int HANDLER_RESULT_LOTTERY
+    public static final int HANDLER_RESULT_LOTTERYHISTORY
+    public static final int HANDLER_RESULT_LOTTERYLEGAL
+    public static final int HANDLER_RESULT_LOTTERYWINNER
+    public static final int HANDLER_RESULT_LOTTERYDISTRIBUTIONINFO
+    public static final int HANDLER_RESULT_LOTTERYRATELIST
+    public static final int HANDLER_RESULT_RESTAURENTLIST
+    public static final int HANDLER_RESULT_SIGNHISTORY
+    public static final int HANDLER_RESULT_SIGN
+    public static final int HANDLER_RESULT_ADVICE
+    public static final int HANDLER_INTENT_GOTO_STORE_DETAIL
+    3:3:public ComParams()
+com.dongfang.dicos.util.ULog:
+    3:3:public ULog()
+    8:12:public static void i(java.lang.String,java.lang.String)
+    15:19:public static void v(java.lang.String,java.lang.String)
+    29:33:public static void w(java.lang.String,java.lang.String)
+com.dongfang.dicos.util.Util:
+    private static final java.lang.String tag
+    12:12:public Util()
+com.dongfang.dicos.view.SideBar:
+    private static final java.lang.String tag

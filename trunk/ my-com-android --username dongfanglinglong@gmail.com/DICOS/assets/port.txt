@@ -1,0 +1,73 @@
+﻿1. 登陆 要传号码
+c->s {"act":"login","mobile":13512341234}
+s->c 德克士验证码:123123
+c->s {"act":"validate","mobile":13512341234,"code":短信验证码}
+s->c {"act":"validate","result":1}    //1成功 0失败
+
+2. 退出登陆  要传号码
+c->s {"act":"logout","mobile":13512341234}
+s->c {"act":"logout","result":1}	//1成功 0失败
+
+3. 抽奖（输小票）要传号码
+c->s {"act":"lottery","code":32838834248,"amount":20.6,"mobile":13512341234}		//code 小票号，amount 金额
+s->c {"act":"lottery","result":1}	//1成功 0失败
+
+4. 列出我的抽奖信息 要传号码
+c->s {"act":"lotteryHistory","mobile":13512341234}
+s->s {"act":"lotteryHistory","data":[
+									{"code":3747473272,"amount":20.5,"status":1,"date":"2012.7.1"},		//code 小票号，amount 金额, status 0未审核 1已审核，date 提交时间
+									{"code":3747473272,"amount":20.5,"status":1,"date":"2012.7.1"},
+									{"code":3747473272,"amount":20.5,"status":1,"date":"2012.7.1"}
+								]}
+
+5. 检测当前抽奖活动是否结束
+c->s {"act":"lotteryLegal","mobile":13512341234}
+s->c {"act":"lotteryLegal","result":1} //1合法 0非法
+
+6. 获取门店列表
+2012.06.19更新:
+c->s {"act":"restaurentList","mobile":13512341234,"province":"上海市","city":"徐汇区"}
+s->c {"act":"restaurentList","data":[
+									{"id":213213,province":"上海","city":"徐汇区","name":"豫园店","address":"黄浦区XX路","tel":"021-67823457","x":123.223323,"y":34.234234},	//id 门店id,province 省/直辖市 ,city 市/区，name 店名 ,address 地址, tel 地址, x 经度，y 纬度
+									{"id":213213,"province":"上海","city":"徐汇区","name":"豫园店","address":"黄浦区XX路","tel":"021-67823457","x":123.223323,"y":34.234234}
+
+								]}
+								
+
+
+
+7. 历史签到 要传号码
+c->s {"act":"signHistory","mobile":13512341234}
+s->c {"act":"signHistory","data":[
+								{"name":"豫园店","time":"7月1号 18:38"},			//address 签到的地址，time 签到的时间
+								{"name":"豫园店","time":"7月1号 18:38"}
+								]}
+
+
+8. 签到 要传号码
+c->s {"act":"sign","id":342342,"mobile":13512341234}	//id 门店id
+s->c {"act":"sign","result":1}	//result 1 成功|0 失败
+
+9. 意见反馈 要传号码
+c->s {"act":"advice","msg":"受到豆腐块","mobile":13512341234}
+s->c {"act":"advice","result":1} //result 1成功|0 失败
+
+10. 抽奖次数排行榜
+c->s {"act":"lotteryRateList","mobile":13512341234}
+s->c {"act":"lotteryRateList","data":[
+								{"mobile":"134xxxx3492","times":10}，	//mobile 手机号，times 次数
+								{"mobile":"134xxxx3492","times":10}
+									]}
+
+11. 获奖公布
+c->s {"act":"lotteryWinner","mobile":13512341234}
+s->c {"act":"lotteryWinner","data":[
+								{"mobile":"134xxxx3492"},	//mobile 手机号
+								{"mobile":"134xxxx3492"}
+								]}
+
+12. 奖品发放
+c->s {"act":"lotteryDistributionInfo","mobile":13512341234}
+s->c {"act":"lotteryDistributionInfo","data":[
+										{"address":"xx路xx号","tel":"021-65475683","company":"XX子公司"} //company 公司名称,tel 联系电话,address 联系地址
+										]}

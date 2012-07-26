@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <RelativeLayout style="@style/top_menu_layout_style" >
+
+        <Button
+            android:id="@+id/button_setting_tongbu_back"
+            style="@style/top_menu_button_back_style" />
+
+        <TextView
+            style="@style/top_menu_textview_style"
+            android:text="同步设置" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_setting_tongbu_sina"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/editview_top_bg" >
+
+        <ImageView
+            android:id="@+id/imageView_setting_tongbu_sina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/sina_logo" />
+
+        <TextView
+            android:id="@+id/textView_setting_tongbu_sina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView_setting_tongbu_sina"
+            android:text="新浪微博"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <com.dongfang.dicos.view.SlipButton
+            android:id="@+id/slipButton_setting_tongbu_sina"
+            android:layout_width="90dip"
+            android:layout_height="27dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_setting_tongbu_kaixin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/editview_bottom_bg" >
+
+        <ImageView
+            android:id="@+id/imageView_setting_tongbu_kaixin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/kaixin_logo" />
+
+        <TextView
+            android:id="@+id/textView_setting_tongbu_kaixin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView_setting_tongbu_kaixin"
+            android:text="开心网"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <com.dongfang.dicos.view.SlipButton
+            android:id="@+id/slipButton_setting_tongbu_kaixin"
+            android:layout_width="90dip"
+            android:layout_height="27dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+</LinearLayout>

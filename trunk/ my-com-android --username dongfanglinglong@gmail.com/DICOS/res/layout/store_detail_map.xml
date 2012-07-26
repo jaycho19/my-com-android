@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        style="@style/top_menu_layout_style"
+        android:layout_width="fill_parent" >
+
+        <Button
+            android:id="@+id/button_store_detail_map_back"
+            style="@style/top_menu_button_back_style" />
+
+        <TextView
+            android:id="@+id/textview_store_detail_map_title"
+            style="@style/top_menu_textview_style"
+            android:text="@string/top_title_store_detail" />
+    </RelativeLayout>
+
+    <com.baidu.mapapi.MapView
+        android:id="@+id/mapview_store_detail_map"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true" />
+
+</LinearLayout>

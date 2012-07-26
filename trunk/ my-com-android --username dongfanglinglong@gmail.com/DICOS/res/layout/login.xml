@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout style="@style/top_menu_layout_style" >
+
+        <Button
+            android:id="@+id/button_login_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/top_button_back" />
+
+        <TextView
+            android:id="@+id/textView1"
+            style="@style/top_menu_textview_style"
+            android:text="@string/top_title_login" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="请输入手机号码和手机验证码！"
+        android:textColor="#FFB3B3B3" />
+
+    <EditText
+        android:id="@+id/editview_login_phonenumber"
+        style="@style/editview_normal_style"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/editview_top_bg"
+        android:hint="输入手机号码"
+        android:inputType="phone"
+        android:maxLength="11" />
+
+    <EditText
+        android:id="@+id/editview_login_authcode"
+        style="@style/editview_normal_style"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/editview_bottom_bg"
+        android:hint="输入手机验证码"
+        android:inputType="number"
+        android:maxLength="6" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/button_login_getauthcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_short_orange_xml"
+            android:text="@string/button_get_auth_code" />
+
+        <Button
+            android:id="@+id/button_login_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/button_short_green_xml"
+            android:text="确认递交" />
+    </LinearLayout>
+
+</LinearLayout>

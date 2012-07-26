@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout style="@style/top_menu_layout_style" >
+
+        <TextView
+            style="@style/top_menu_textview_style"
+            android:text="@string/top_title_storesearch" />
+
+        <ProgressBar
+            android:id="@+id/progressbar_storesearch"
+            style="@style/top_menu_progressbar_style" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:weightSum="5" >
+
+        <AutoCompleteTextView
+            android:id="@+id/autocompletetextview_storeseach_province"
+            style="@style/autocompletetextview_normal_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="2"
+            android:hint="省市" />
+
+        <AutoCompleteTextView
+            android:id="@+id/autocompletetextview_storeseach_city"
+            style="@style/autocompletetextview_normal_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="2"
+            android:hint="区县" />
+
+        <Button
+            android:id="@+id/button_storeseach_seach"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_search_ok"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <Button
+            android:id="@+id/button_storeseach_showmore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/top_button_showmore" />
+
+        <ListView
+            android:id="@+id/listView_storeseach_info"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button_storeseach_showmore"
+            android:layout_alignParentTop="true"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp" >
+        </ListView>
+    </RelativeLayout>
+
+</LinearLayout>

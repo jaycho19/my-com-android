@@ -1,0 +1,91 @@
+# view res/layout/setting_tongbu_kaixin.xml #generated:23
+# view res/layout/setting_tongbu_sina.xml #generated:23
+-keep class android.webkit.WebView { <init>(...); }
+
+# view res/layout/store_detail_map.xml #generated:21
+-keep class com.baidu.mapapi.MapView { <init>(...); }
+
+# view AndroidManifest.xml #generated:44
+-keep class com.dongfang.dicos.DicosMainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:51
+-keep class com.dongfang.dicos.DiscountCouponActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:34
+-keep class com.dongfang.dicos.FirstpageActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:54
+-keep class com.dongfang.dicos.KaZiMeiWeiActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:53
+-keep class com.dongfang.dicos.MoreActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:55
+-keep class com.dongfang.dicos.MyDicosActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:52
+-keep class com.dongfang.dicos.StoreSearchActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:64
+-keep class com.dongfang.dicos.kzmw.LoginActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:66
+-keep class com.dongfang.dicos.kzmw.LotteryActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:65
+-keep class com.dongfang.dicos.kzmw.SigneInActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:72
+-keep class com.dongfang.dicos.lottery.DetailActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:69
+-keep class com.dongfang.dicos.lottery.InfoActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:68
+-keep class com.dongfang.dicos.lottery.JoinInActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:70
+-keep class com.dongfang.dicos.lottery.PrizeInfoActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:71
+-keep class com.dongfang.dicos.lottery.PrizeProvideActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:75
+-keep class com.dongfang.dicos.lottery.info.MyInfoActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:74
+-keep class com.dongfang.dicos.lottery.info.ProbabilityListActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:59
+-keep class com.dongfang.dicos.more.CityListActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:60
+-keep class com.dongfang.dicos.more.FeedBackActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:62
+-keep class com.dongfang.dicos.more.KaixinWeiboAuthorization { <init>(...); }
+
+# view AndroidManifest.xml #generated:61
+-keep class com.dongfang.dicos.more.SinaWeiboAuthorization { <init>(...); }
+
+# view AndroidManifest.xml #generated:57
+-keep class com.dongfang.dicos.more.TongBuActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:58
+-keep class com.dongfang.dicos.more.TuiSongActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:77
+-keep class com.dongfang.dicos.store.StoreDetailActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:78
+-keep class com.dongfang.dicos.store.StoreDetailMapActivity { <init>(...); }
+
+# view res/layout/setting_citylsit.xml #generated:52
+-keep class com.dongfang.dicos.view.SideBar { <init>(...); }
+
+# view res/layout/setting_tongbu.xml #generated:47
+# view res/layout/setting_tongbu.xml #generated:82
+# view res/layout/setting_tuisong.xml #generated:38
+# view res/layout/setting_tuisong.xml #generated:63
+-keep class com.dongfang.dicos.view.SlipButton { <init>(...); }
+

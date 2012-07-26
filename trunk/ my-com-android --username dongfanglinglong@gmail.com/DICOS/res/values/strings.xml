@@ -1,0 +1,35 @@
+<resources>
+
+    <string name="app_name">DICOS</string>
+    <!-- 底部菜单 -->
+    <!-- <string name="main_bottom_button_0">味滋美味</string> -->
+    <!-- <string name="main_bottom_button_1">优惠券</string> -->
+    <!-- <string name="main_bottom_button_2">门店查询</string> -->
+    <!-- <string name="main_bottom_button_3">我的德克士</string> -->
+    <!-- <string name="main_bottom_button_4">更多</string> -->
+
+    <!-- 顶部标题 -->
+    <string name="top_title_login">登  录</string>
+    <string name="top_title_signein">签  到</string>
+    <string name="top_title_dicos">德克士</string>
+    <string name="top_title_mydicos">我的德克士</string>
+    <string name="top_title_citylist">城市列表</string>
+    <string name="top_title_lottery">抽奖活动</string>
+    <string name="top_title_storesearch">门店查询</string>
+    <string name="top_title_store_detail">门店信息</string>
+    <string name="top_title_discountcoupon">我的优惠券</string>
+
+    <!-- 验证码 -->
+    <string name="button_get_auth_code">获取验证码</string>
+    <string name="button_get_auth_code_locked">获取验证码(%1$d)</string>
+    <!-- 登录 -->
+    <string name="login_sending_code">验证码获取成功，发送中</string>
+    <string name="login_input_error">请输入正确的手机号码和验证码</string>
+    <string name="login_result_success">登录成功</string>
+    <string name="login_result_fail">登录失败</string>
+    
+    <!-- google map key -->
+    <string name="googleMapsAPIKeyDebug">0c_FcXI5sXzTNMrC5wyNUq8irQCdPr-4fxjwT0g</string>
+    <string name="googleMapsAPIKeyRelease">0c_FcXI5sXzSrDcysNLJ4-pBBpBJ9vtYhI1ze-A</string>
+
+</resources>
