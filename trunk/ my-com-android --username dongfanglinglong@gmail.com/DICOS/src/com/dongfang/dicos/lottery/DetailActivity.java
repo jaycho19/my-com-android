@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.dongfang.dicos.R;
 import com.dongfang.dicos.util.ULog;
@@ -19,7 +18,7 @@ public class DetailActivity extends Activity implements OnClickListener {
 	private Button				bOK;
 
 	/** ≥ÈΩ±œÍ«È */
-	private TextView			tvDetail;
+	// private TextView tvDetail;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,8 @@ public class DetailActivity extends Activity implements OnClickListener {
 		bOK = (Button) findViewById(R.id.button_lottery_detail_ok);
 		bOK.setOnClickListener(this);
 
-		tvDetail = (TextView) findViewById(R.id.textView_lottery_detail_detail);
+		// tvDetail = (TextView)
+		// findViewById(R.id.textView_lottery_detail_detail);
 
 	}
 
@@ -41,10 +41,10 @@ public class DetailActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		ULog.d(tag, "onClick v.getId() = " + v.getId());
 		switch (v.getId()) {
-		case R.id.button_lottery_detail_ok:
-			ULog.d(tag, tvDetail.getText().toString());
-			finish();
-			break;
+		// case R.id.button_lottery_detail_ok:
+		// ULog.d(tag, tvDetail.getText().toString());
+		// finish();
+		// break;
 		case R.id.button_lottery_detail_back:
 			finish();
 			break;

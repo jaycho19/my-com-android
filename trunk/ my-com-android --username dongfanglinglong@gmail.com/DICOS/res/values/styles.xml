@@ -131,7 +131,7 @@
     </style>
 
     <!-- 自动完成输入框 -->
-    <style name="autocompletetextview_normal_style">
+    <style name="autocompletetextview_normal_style" parent="android:style/Widget.TextView">
         <item name="android:paddingRight">38dp</item>
         <item name="android:paddingLeft">5dp</item>
         <item name="android:inputType">text</item>

@@ -24,7 +24,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_margin="10dp"
         android:orientation="vertical" >
 
         <Button
@@ -34,20 +33,21 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
+            android:layout_margin="5dp"
             android:text="立即参与" />
 
         <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_above="@+id/button_lottery_detail_ok"
-            android:layout_centerHorizontal="true" >
+            android:layout_centerHorizontal="true"
+            android:layout_margin="2dp" >
 
-            <TextView
-                android:id="@+id/textView_lottery_detail_detail"
+            <ImageView
+                android:id="@+id/imageview_lottery_detail_detail"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:text="TextView" />
+                android:src="@drawable/lottery_rule" />
         </ScrollView>
     </RelativeLayout>
 

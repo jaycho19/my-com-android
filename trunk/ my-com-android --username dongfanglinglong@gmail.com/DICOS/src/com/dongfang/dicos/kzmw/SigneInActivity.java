@@ -70,6 +70,7 @@ public class SigneInActivity extends Activity implements OnClickListener, CheckB
 
 	private String				lon			= "";
 	private String				lat			= "";
+	private String				id			= "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -99,8 +100,8 @@ public class SigneInActivity extends Activity implements OnClickListener, CheckB
 			etMessage.setText("Œ“‘⁄" + intent.getStringExtra("store_name"));
 			lon = intent.getStringExtra("x");
 			lat = intent.getStringExtra("y");
-
-			ULog.d(tag, "lon = " + lon + ",lat = " + lat);
+			id = intent.getStringExtra("id");
+			ULog.d(tag, "lon = " + lon + ",lat = " + lat + ",id = " + id);
 		}
 
 	}
@@ -271,12 +272,14 @@ public class SigneInActivity extends Activity implements OnClickListener, CheckB
 					Toast.makeText(SigneInActivity.this, "«©µΩ ß∞‹", Toast.LENGTH_LONG).show();
 				}
 
+				
+				progressbar.setVisibility(View.GONE);
+				bOK.setClickable(true);
 				break;
 			case ComParams.HANDLER_SIGNE_IN:
 				String sMsg = etMessage.getText().toString().trim();
 				sMsg = TextUtils.isEmpty(sMsg) ? etMessage.getHint().toString() : sMsg;
-				new SignThread(SigneInActivity.this, handler, "123123", Util.getPhoneNumber(SigneInActivity.this))
-						.start();
+				new SignThread(SigneInActivity.this, handler, id, Util.getPhoneNumber(SigneInActivity.this)).start();
 
 				if (cbKaiXing.isChecked()) {
 					PostRecordTask getDataTask = new PostRecordTask();

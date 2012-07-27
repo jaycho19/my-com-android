@@ -17,7 +17,7 @@
     <string name="top_title_lottery">抽奖活动</string>
     <string name="top_title_storesearch">门店查询</string>
     <string name="top_title_store_detail">门店信息</string>
-    <string name="top_title_discountcoupon">我的优惠券</string>
+    <string name="top_title_discountcoupon">我的优惠信息</string>
 
     <!-- 验证码 -->
     <string name="button_get_auth_code">获取验证码</string>

@@ -46,7 +46,6 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.storesearch);
 		handler = new StoreSeachHandler();
@@ -54,8 +53,7 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 		progressBar = (ProgressBar) findViewById(R.id.progressbar_storesearch);
 
 		etProvince = (AutoCompleteTextView) findViewById(R.id.autocompletetextview_storeseach_province);
-		etProvince.setAdapter(new ArrayAdapter<String>(this, R.layout.storesearch_province, getResources()
-				.getStringArray(R.array.province)));
+		etProvince.setAdapter(new ArrayAdapter<String>(this, R.layout.storesearch_province, getResources().getStringArray(R.array.province)));
 
 		etProvince.setOnClickListener(this);
 
@@ -179,6 +177,8 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 			aCity = getResources().getStringArray(R.array.city_zhejiang);
 		} else if (province.startsWith("÷ÿ«Ï")) {
 			aCity = getResources().getStringArray(R.array.city_chongqing);
+		} else if (province.startsWith("ÃÏΩÚ")) {
+			aCity = getResources().getStringArray(R.array.city_tianjin);
 		}
 
 		return aCity;
@@ -187,7 +187,7 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-
+		ULog.d(tag, "onClick " + v.getId());
 		switch (v.getId()) {
 		// case R.id.button_storeseach_city_showlist:
 		// break;
@@ -206,8 +206,7 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 					ULog.d(tag, "onFocusChange " + s);
 				}
 
-				etCity.setAdapter(new ArrayAdapter<String>(StoreSearchActivity.this, R.layout.storesearch_province,
-						aCity));
+				etCity.setAdapter(new ArrayAdapter<String>(StoreSearchActivity.this, R.layout.storesearch_province, aCity));
 				etCity.showDropDown();
 			}
 			break;
