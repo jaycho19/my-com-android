@@ -184,8 +184,8 @@ public class HttpActions {
 		JSONObject js = new JSONObject();
 		try {
 			js.put(Actions.ACTIONS_KEY_ACT, Actions.ACTIONS_TYPE_RESTAURENTLIST);
-			js.put(Actions.ACTIONS_KEY_MOBILE, "15921890763");
-			// js.put(Actions.ACTIONS_KEY_MOBILE, phoneNumber);
+			// js.put(Actions.ACTIONS_KEY_MOBILE, "15921890763");
+			js.put(Actions.ACTIONS_KEY_MOBILE, phoneNumber);
 			js.put(Actions.ACTIONS_KEY_PROVINCE, province);
 			js.put(Actions.ACTIONS_KEY_CITY, city);
 		} catch (JSONException e) {
@@ -248,7 +248,7 @@ public class HttpActions {
 		ULog.d(tag, js.toString());
 		return https.post(list);
 	}
-	
+
 	/**
 	 * 获取ip所在地址
 	 */
@@ -267,6 +267,5 @@ public class HttpActions {
 		ULog.d(tag, js.toString());
 		return https.post(list);
 	}
-	
 
 }

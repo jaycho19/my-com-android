@@ -5,8 +5,6 @@ import java.io.InputStream;
 import java.security.KeyStore;
 import java.util.List;
 
-import org.apache.http.Header;
-import org.apache.http.HeaderElement;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -43,12 +41,15 @@ import com.dongfang.dicos.util.ULog;
  * @author dongfang
  * */
 public class Https {
-	private static final String	tag						= "Https";
+	private static final String	tag								= "Https";
 
-	private static final int	SET_CONNECTION_TIMEOUT	= 50000;
-	private static final int	SET_SOCKET_TIMEOUT		= 200000;
+	private static final String	HTTP_HEADER_CONTENT_TYPE_KEY	= "Content-Type";
+	private static final String	HTTP_HEADER_CONTENT_TYPE_VALUE	= "application/x-www-form-urlencoded";
 
-	private static final String	url						= "http://222.73.127.95:8080/dicos/dicos/interface.jsp";
+	private static final int	SET_CONNECTION_TIMEOUT			= 50000;
+	private static final int	SET_SOCKET_TIMEOUT				= 200000;
+
+	private static final String	url								= "http://222.73.127.95:8080/dicos/dicos/interface.jsp";
 
 	private Context				context;
 
@@ -62,20 +63,28 @@ public class Https {
 	 * @param url
 	 * @return InputStream
 	 * */
-	public InputStream get(String url) {
+	public String get(String jsToString) {
 		try {
+
+			ULog.d(tag, url + "?key=" + jsToString);
 			// 创建HttpGet对象
-			HttpGet request = new HttpGet(url);
+			HttpGet request = new HttpGet(url + "?key=" + jsToString);
+			ULog.d(tag, url + "?key=" + jsToString);
+
 			// 创建HttpClient对象
 			HttpClient client = this.getNewHttpClient();
+			ULog.d(tag, url + "?key=" + jsToString);
 			HttpResponse httpResponse = client.execute(request);
+			ULog.d(tag, "get " + httpResponse.getStatusLine().getStatusCode());
+
 			if (null != httpResponse && httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-				return httpResponse.getEntity().getContent();
+				ULog.d(tag, "post 200");
+				return read(httpResponse);
 			}
 		} catch (Exception e) {
 			ULog.d(tag, "get " + e.toString());
 		}
-		return null;
+		return "";
 	}
 
 	/**
@@ -91,6 +100,10 @@ public class Https {
 			HttpPost request = new HttpPost(url);
 			// ULog.d(tag,"null != request = " + (null != request));
 			request.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));
+			// Header header = new BasicHeader(HTTP_HEADER_CONTENT_TYPE_KEY ,
+			// HTTP_HEADER_CONTENT_TYPE_VALUE);
+			// request.setHeader(header);
+
 			// 创建连接对象
 			HttpClient client = this.getNewHttpClient();
 			// ULog.d(tag,"null != client = " + (null != client));
@@ -100,12 +113,12 @@ public class Https {
 			// ULog.d(tag,"HttpStatus = " +
 			// httpResponse.getStatusLine().getStatusCode());
 
-			for (Header h : httpResponse.getAllHeaders()) {
-				ULog.d(tag, h.getName() + " ++ " + h.getValue());
-				for (HeaderElement s : h.getElements()) {
-					ULog.d(tag, s.getParameterCount() + " -- " + s.getValue());
-				}
-			}
+			// for (Header h : httpResponse.getAllHeaders()) {
+			// ULog.d(tag, h.getName() + " ++ " + h.getValue());
+			// for (HeaderElement s : h.getElements()) {
+			// ULog.d(tag, s.getParameterCount() + " -- " + s.getValue());
+			// }
+			// }
 
 			if (null != httpResponse && httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				ULog.d(tag, "post 200");
@@ -182,7 +195,7 @@ public class Https {
 			while ((readBytes = inputStream.read(sBuffer)) != -1) {
 				content.write(sBuffer, 0, readBytes);
 			}
-			result = new String(content.toByteArray(),"gbk").trim();
+			result = new String(content.toByteArray(), "gbk").trim();
 			ULog.d(tag, "read = " + result);
 		} catch (Exception e) {
 			ULog.e(tag, "read " + e.toString());

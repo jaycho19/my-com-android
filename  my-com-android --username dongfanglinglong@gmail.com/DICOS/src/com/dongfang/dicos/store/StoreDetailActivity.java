@@ -37,6 +37,7 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 	private String				json;
 	private double				x, y;
 	private String				telNumber;
+	private String				id;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -99,8 +100,8 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 			x = js.getDouble(Actions.ACTIONS_KEY_X);
 			y = js.getDouble(Actions.ACTIONS_KEY_Y);
 
-			
-			ULog.d(tag, "x = " + x + " ; y = " + y);
+			id = js.getInt(Actions.ACTIONS_KEY_ID) + "";
+			ULog.d(tag, "x = " + x + " ; y = " + y + " ; id = " + id);
 
 		} catch (JSONException e) {
 			ULog.d(tag, e.toString());
@@ -120,6 +121,7 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 				intent.putExtra("store_name", tvName.getText().toString());
 				intent.putExtra("x", x + "");
 				intent.putExtra("y", y + "");
+				intent.putExtra("id", id);
 				startActivity(intent);
 			} else {
 				Util.showDialogSetNetWork(StoreDetailActivity.this);
