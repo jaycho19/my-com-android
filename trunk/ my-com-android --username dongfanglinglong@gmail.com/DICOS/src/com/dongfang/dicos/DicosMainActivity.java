@@ -28,7 +28,6 @@ public class DicosMainActivity extends TabActivity implements OnCheckedChangeLis
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
@@ -79,24 +78,6 @@ public class DicosMainActivity extends TabActivity implements OnCheckedChangeLis
 	}
 
 	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-	}
-
-	@Override
-	protected void onStop() {
-		// TODO Auto-generated method stub
-		super.onStop();
-	}
-
-	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-	}
-
-	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		switch (checkedId) {
 		case R.id.radio_button1:
@@ -114,8 +95,7 @@ public class DicosMainActivity extends TabActivity implements OnCheckedChangeLis
 		case R.id.radio_button5:
 			tabHost.setCurrentTabByTag(TAB_ITEM_5);
 			break;
-		default:
-			break;
 		}
 	}
+
 }

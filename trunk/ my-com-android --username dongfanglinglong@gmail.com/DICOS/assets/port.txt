@@ -25,6 +25,11 @@ c->s {"act":"lotteryLegal","mobile":13512341234}
 s->c {"act":"lotteryLegal","result":1} //1合法 0非法
 
 6. 获取门店列表
+c->s {"act":"restaurentListAndroid","mobile":13512341234,"province":"上海市","city":"徐汇区"}
+s->c {"act":"restaurentListAndroid","data":[ {"id":213213,province":"上海","city":"徐汇区","name":"豫园店","address":"黄浦区XX路","tel":"021-67823457","x":123.223323,"y":34.234234}, {"id":213213,"province":"上海","city":"徐汇区","name":"豫园店","address":"黄浦区XX路","tel":"021-67823457","x":123.223323,"y":34.234234} ]}
+   //id 门店id,province 省/直辖市 ,city 市/区，name 店名 ,address 地址, tel 地址, x 经度，y 纬度
+
+6. 获取门店列表
 2012.06.19更新:
 c->s {"act":"restaurentList","mobile":13512341234,"province":"上海市","city":"徐汇区"}
 s->c {"act":"restaurentList","data":[
@@ -47,6 +52,13 @@ s->c {"act":"signHistory","data":[
 8. 签到 要传号码
 c->s {"act":"sign","id":342342,"mobile":13512341234}	//id 门店id
 s->c {"act":"sign","result":1}	//result 1 成功|0 失败
+
+
+9. 意见反馈 要传号码
+c->s {"act":"adviceAndroid","msg":"受到豆腐块","mobile":13512341234}
+s->c {"act":"adviceAndroid","result":1}
+//result 1成功|0 失败
+
 
 9. 意见反馈 要传号码
 c->s {"act":"advice","msg":"受到豆腐块","mobile":13512341234}

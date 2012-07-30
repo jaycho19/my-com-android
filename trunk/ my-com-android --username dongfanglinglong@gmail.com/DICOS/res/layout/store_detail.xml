@@ -32,7 +32,10 @@
         style="@style/editview_normal_style"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:paddingRight="20dp"
         android:background="@drawable/button_top_bg"
+        android:inputType="textMultiLine"
+        android:singleLine="false"
         android:text="地址：上海黄浦区xxxx" />
 
     <TextView

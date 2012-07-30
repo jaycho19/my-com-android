@@ -61,13 +61,13 @@ public class Actions {
 	/** 抽奖是否结束 */
 	public static final String	ACTIONS_TYPE_LOTTERYLEGAL				= "lotteryLegal";
 	/** 饭店列表 */
-	public static final String	ACTIONS_TYPE_RESTAURENTLIST				= "restaurentList";
+	public static final String	ACTIONS_TYPE_RESTAURENTLIST				= "restaurentListAndroid";
 	/** 签到 */
 	public static final String	ACTIONS_TYPE_SIGN						= "sign";
 	/** 签到历史 */
 	public static final String	ACTIONS_TYPE_SIGNHISTORY				= "signHistory";
 	/** 意见反馈 */
-	public static final String	ACTIONS_TYPE_ADVICE						= "advice";
+	public static final String	ACTIONS_TYPE_ADVICE						= "adviceAndroid";
 	/** 抽奖次数排行 */
 	public static final String	ACTIONS_TYPE_LOTTERYRATELIST			= "lotteryRateList";
 	/** 抽奖公布 */

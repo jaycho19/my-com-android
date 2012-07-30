@@ -196,7 +196,7 @@ public class HttpActions {
 		String s = js.toString();
 		ULog.d(tag, s);
 		list.add(new BasicNameValuePair(KEY, s));
-		return https.post(list);
+		return https.post(list,Https.URL_RESTAURENTLIST);
 	}
 
 	/** Ç©µ½ */
@@ -246,7 +246,7 @@ public class HttpActions {
 		list.clear();
 		list.add(new BasicNameValuePair(KEY, js.toString()));
 		ULog.d(tag, js.toString());
-		return https.post(list);
+		return https.post(list,Https.URL_ADVICE);
 	}
 
 	/**

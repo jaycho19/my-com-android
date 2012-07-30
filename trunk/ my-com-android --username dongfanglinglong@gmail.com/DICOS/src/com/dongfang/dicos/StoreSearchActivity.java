@@ -35,6 +35,7 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 
 	private Button					bSeach;
 	private Button					bShowMore;
+	private Button					bBack;
 
 	// private Button bShowProvinceList;
 	// private Button bShowCityList;
@@ -52,8 +53,12 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 
 		progressBar = (ProgressBar) findViewById(R.id.progressbar_storesearch);
 
+		bBack = (Button) findViewById(R.id.button_storesearch_back);
+		bBack.setOnClickListener(this);
+
 		etProvince = (AutoCompleteTextView) findViewById(R.id.autocompletetextview_storeseach_province);
-		etProvince.setAdapter(new ArrayAdapter<String>(this, R.layout.storesearch_province, getResources().getStringArray(R.array.province)));
+		etProvince.setAdapter(new ArrayAdapter<String>(this, R.layout.storesearch_province, getResources()
+				.getStringArray(R.array.province)));
 
 		etProvince.setOnClickListener(this);
 
@@ -102,6 +107,11 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 
 		lvStoreInfo = (ListView) findViewById(R.id.listView_storeseach_info);
 		adapter = new StoreListAdapter(this, handler);
+
+		Intent intent = getIntent();
+		if (intent.getBooleanExtra("visibility", false)) {
+			bBack.setVisibility(View.VISIBLE);
+		}
 
 	}
 
@@ -199,6 +209,9 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 		// etProvince.showDropDown();
 		// }
 		// break;
+		case R.id.button_storesearch_back:
+			finish();
+			break;
 		case R.id.autocompletetextview_storeseach_city:
 			String[] aCity = getCityArray(etProvince.getText().toString().trim());
 			if (null != aCity) {
@@ -206,7 +219,8 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 					ULog.d(tag, "onFocusChange " + s);
 				}
 
-				etCity.setAdapter(new ArrayAdapter<String>(StoreSearchActivity.this, R.layout.storesearch_province, aCity));
+				etCity.setAdapter(new ArrayAdapter<String>(StoreSearchActivity.this, R.layout.storesearch_province,
+						aCity));
 				etCity.showDropDown();
 			}
 			break;
@@ -263,9 +277,9 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 					adapter.setArray(data.getStringArray(Actions.ACTIONS_KEY_DATA));
 					adapter.notifyDataSetChanged();
 
-					if (progressBar.isShown()) {
-						progressBar.setVisibility(View.GONE);
-					}
+				}
+				if (progressBar.isShown()) {
+					progressBar.setVisibility(View.GONE);
 				}
 
 				// JSONObject json = new JSONObject();

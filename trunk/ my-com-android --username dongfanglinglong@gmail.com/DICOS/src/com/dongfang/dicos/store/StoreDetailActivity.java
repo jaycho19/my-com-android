@@ -93,7 +93,7 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 			tvAddress.setText("地址： " + address);
 
 			telNumber = js.getString(Actions.ACTIONS_KEY_TEL);
-			tvTel.setText("电话： " + telNumber);
+			tvTel.setText("电话： " + (telNumber.equalsIgnoreCase("null") ? "" : telNumber));
 
 			tvName.setText("德克士" + js.getString(Actions.ACTIONS_KEY_NAME));
 
@@ -129,11 +129,12 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 
 			break;
 		case R.id.textview_store_detail_address:
-			intent = new Intent(StoreDetailActivity.this, StoreDetailMapActivity.class);
-			intent.putExtra("x", x);
-			intent.putExtra("y", y);
-
-			startActivity(intent);
+			if (x > 0 && y > 0) {
+				intent = new Intent(StoreDetailActivity.this, StoreDetailMapActivity.class);
+				intent.putExtra("x", x);
+				intent.putExtra("y", y);
+				startActivity(intent);
+			}
 			break;
 		case R.id.textview_store_detail_tel:
 			intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + telNumber));
