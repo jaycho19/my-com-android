@@ -294,8 +294,8 @@ com.dongfang.dicos.kzmw.SigneInActivity:
     public static final java.lang.String tag
     private static final java.lang.String TYPE_SINA
     private static final java.lang.String TYPE_KAIXIN
-    203:212:private void shareToSina(java.lang.String)
-    317:320:public void onIOException(java.io.IOException)
+    204:213:private void shareToSina(java.lang.String)
+    320:323:public void onIOException(java.io.IOException)
 com.dongfang.dicos.lottery.DetailActivity:
     public static final java.lang.String tag
 com.dongfang.dicos.lottery.InfoActivity:
@@ -358,8 +358,10 @@ com.dongfang.dicos.net.Https:
     private static final java.lang.String tag
     private static final int SET_CONNECTION_TIMEOUT
     private static final int SET_SOCKET_TIMEOUT
-    private static final java.lang.String url
-    68:78:public java.io.InputStream get(java.lang.String)
+    private static final java.lang.String URL
+    public static final java.lang.String URL_ADVICE
+    public static final java.lang.String URL_RESTAURENTLIST
+    74:92:public java.lang.String get(java.lang.String)
 com.dongfang.dicos.net.thread.AdviceThread:
     public static final java.lang.String tag
 com.dongfang.dicos.net.thread.IPArea:

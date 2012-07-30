@@ -20,7 +20,6 @@ import android.widget.ViewSwitcher.ViewFactory;
 
 import com.dongfang.dicos.kzmw.LoginActivity;
 import com.dongfang.dicos.kzmw.LotteryActivity;
-import com.dongfang.dicos.kzmw.SigneInActivity;
 import com.dongfang.dicos.more.CityListActivity;
 import com.dongfang.dicos.util.ComParams;
 import com.dongfang.dicos.util.ULog;
@@ -111,17 +110,16 @@ public class KaZiMeiWeiActivity extends Activity implements OnClickListener, Vie
 		super.onResume();
 		/** µÇÂ¼×´Ì¬£¬²»ÏÔÊ¾µÇÂ¼°´Å¥ */
 		ULog.d(tag, "onResume = " + bLogin.isShown());
-		if (Util.isLogin(this)){
+		if (Util.isLogin(this)) {
 			bLogin.setVisibility(View.GONE);
-		}
-		else{
+		} else {
 			bLogin.setVisibility(View.VISIBLE);
 		}
-		
+
 		if (TextUtils.isEmpty(ComParams.IPAREA)) {
 			Util.iniIPArea(this);
 		}
-		
+
 		if (ComParams.IPAREA.length() > 5)
 			tvTitle.setText(ComParams.IPAREA.substring(0, 5) + "***");
 		else if (ComParams.IPAREA.length() > 0)
@@ -152,8 +150,10 @@ public class KaZiMeiWeiActivity extends Activity implements OnClickListener, Vie
 			if (!Util.isLogin(KaZiMeiWeiActivity.this)) {
 				Util.showDialogLogin(KaZiMeiWeiActivity.this);
 			} else {
-				intent = new Intent(KaZiMeiWeiActivity.this, SigneInActivity.class);
+				intent = new Intent(KaZiMeiWeiActivity.this, StoreSearchActivity.class);
+				intent.putExtra("visibility", true);
 				startActivity(intent);
+
 			}
 			break;
 		case R.id.button_kzmw_ipad3:

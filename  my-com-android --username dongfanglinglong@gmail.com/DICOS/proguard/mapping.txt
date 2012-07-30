@@ -383,9 +383,6 @@ com.dongfang.dicos.DicosMainActivity -> com.dongfang.dicos.DicosMainActivity:
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onResume() -> onResume
-    void onPause() -> onPause
-    void onStop() -> onStop
-    void onDestroy() -> onDestroy
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
 com.dongfang.dicos.DiscountCouponActivity -> com.dongfang.dicos.DiscountCouponActivity:
     void onCreate(android.os.Bundle) -> onCreate
@@ -483,9 +480,10 @@ com.dongfang.dicos.StoreSearchActivity -> com.dongfang.dicos.StoreSearchActivity
     android.widget.AutoCompleteTextView etCity -> c
     android.widget.Button bSeach -> d
     android.widget.Button bShowMore -> e
-    android.widget.ListView lvStoreInfo -> f
-    com.dongfang.dicos.store.StoreListAdapter adapter -> g
-    com.dongfang.dicos.StoreSearchActivity$StoreSeachHandler handler -> h
+    android.widget.Button bBack -> f
+    android.widget.ListView lvStoreInfo -> g
+    com.dongfang.dicos.store.StoreListAdapter adapter -> h
+    com.dongfang.dicos.StoreSearchActivity$StoreSeachHandler handler -> i
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onClick(android.view.View) -> onClick
@@ -604,6 +602,7 @@ com.dongfang.dicos.kzmw.SigneInActivity -> com.dongfang.dicos.kzmw.SigneInActivi
     com.dongfang.dicos.kzmw.SigneInActivity$SigneInHandler handler -> i
     java.lang.String lon -> j
     java.lang.String lat -> k
+    java.lang.String id -> l
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onClick(android.view.View) -> onClick
@@ -611,13 +610,16 @@ com.dongfang.dicos.kzmw.SigneInActivity -> com.dongfang.dicos.kzmw.SigneInActivi
     void showDialog(java.lang.String) -> b
     void onComplete(java.lang.String) -> a
     void onError(com.dongfang.dicos.sina.WeiboException) -> a
-    android.widget.EditText access$0(com.dongfang.dicos.kzmw.SigneInActivity) -> a
-    com.dongfang.dicos.kzmw.SigneInActivity$SigneInHandler access$1(com.dongfang.dicos.kzmw.SigneInActivity) -> b
-    android.widget.CheckBox access$2(com.dongfang.dicos.kzmw.SigneInActivity) -> c
-    com.dongfang.dicos.kaixin.Kaixin access$3(com.dongfang.dicos.kzmw.SigneInActivity) -> d
-    android.widget.CheckBox access$4(com.dongfang.dicos.kzmw.SigneInActivity) -> e
-    com.dongfang.dicos.sina.Weibo access$5(com.dongfang.dicos.kzmw.SigneInActivity) -> f
-    java.lang.String access$6(com.dongfang.dicos.kzmw.SigneInActivity,com.dongfang.dicos.sina.Weibo,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
+    android.widget.ProgressBar access$0(com.dongfang.dicos.kzmw.SigneInActivity) -> a
+    android.widget.Button access$1(com.dongfang.dicos.kzmw.SigneInActivity) -> b
+    android.widget.EditText access$2(com.dongfang.dicos.kzmw.SigneInActivity) -> c
+    com.dongfang.dicos.kzmw.SigneInActivity$SigneInHandler access$3(com.dongfang.dicos.kzmw.SigneInActivity) -> d
+    java.lang.String access$4(com.dongfang.dicos.kzmw.SigneInActivity) -> e
+    android.widget.CheckBox access$5(com.dongfang.dicos.kzmw.SigneInActivity) -> f
+    com.dongfang.dicos.kaixin.Kaixin access$6(com.dongfang.dicos.kzmw.SigneInActivity) -> g
+    android.widget.CheckBox access$7(com.dongfang.dicos.kzmw.SigneInActivity) -> h
+    com.dongfang.dicos.sina.Weibo access$8(com.dongfang.dicos.kzmw.SigneInActivity) -> i
+    java.lang.String access$9(com.dongfang.dicos.kzmw.SigneInActivity,com.dongfang.dicos.sina.Weibo,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
 com.dongfang.dicos.kzmw.SigneInActivity$1 -> com.dongfang.dicos.kzmw.c:
     com.dongfang.dicos.kzmw.SigneInActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
@@ -630,7 +632,6 @@ com.dongfang.dicos.kzmw.SigneInActivity$SigneInHandler -> com.dongfang.dicos.kzm
 com.dongfang.dicos.lottery.DetailActivity -> com.dongfang.dicos.lottery.DetailActivity:
     android.widget.Button bBack -> a
     android.widget.Button bOK -> b
-    android.widget.TextView tvDetail -> c
     void onCreate(android.os.Bundle) -> onCreate
     void onClick(android.view.View) -> onClick
 com.dongfang.dicos.lottery.InfoActivity -> com.dongfang.dicos.lottery.InfoActivity:
@@ -917,14 +918,15 @@ com.dongfang.dicos.net.HttpActions -> com.dongfang.dicos.c.a:
     java.lang.String lotteryRateList(java.lang.String) -> d
     java.lang.String lotteryWinner(java.lang.String) -> e
     java.lang.String lotteryDistributionInfo(java.lang.String) -> f
-    java.lang.String restaurentList$e96e693(java.lang.String,java.lang.String) -> b
-    java.lang.String sign(java.lang.String,java.lang.String) -> c
+    java.lang.String restaurentList(java.lang.String,java.lang.String,java.lang.String) -> b
+    java.lang.String sign(java.lang.String,java.lang.String) -> b
     java.lang.String signHistory(java.lang.String) -> g
-    java.lang.String advice(java.lang.String,java.lang.String) -> d
+    java.lang.String advice(java.lang.String,java.lang.String) -> c
     java.lang.String ipArea(java.lang.String) -> h
 com.dongfang.dicos.net.Https -> com.dongfang.dicos.c.b:
     android.content.Context context -> a
     java.lang.String post(java.util.List) -> a
+    java.lang.String post(java.util.List,java.lang.String) -> a
     org.apache.http.client.HttpClient getNewHttpClient() -> a
     java.lang.String read(org.apache.http.HttpResponse) -> a
 com.dongfang.dicos.net.thread.AdviceThread -> com.dongfang.dicos.c.a.a:
@@ -1131,6 +1133,7 @@ com.dongfang.dicos.store.StoreDetailActivity -> com.dongfang.dicos.store.StoreDe
     double x -> g
     double y -> h
     java.lang.String telNumber -> i
+    java.lang.String id -> j
     void onCreate(android.os.Bundle) -> onCreate
     void onResume() -> onResume
     void onClick(android.view.View) -> onClick
