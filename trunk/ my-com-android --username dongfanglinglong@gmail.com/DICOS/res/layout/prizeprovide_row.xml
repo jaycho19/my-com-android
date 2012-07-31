@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="5dp" >
+    android:padding="5dp"
+    android:paddingLeft="20dp" 
+    android:background="#FFFFEEB9"
+    >
 
     <TextView
         android:id="@+id/textview_prizeprovide_companyname"
@@ -54,6 +57,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
             android:text="负责区域： "
             android:textColor="#FF04B404" />
 

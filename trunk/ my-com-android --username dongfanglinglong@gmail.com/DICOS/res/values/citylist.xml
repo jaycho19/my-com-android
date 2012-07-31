@@ -1205,5 +1205,62 @@
         <item>忠县</item>
         <item>重庆市</item>
     </string-array>
+    <string-array name="lotteryDistributionInfo_company">
+        <item>成都子公司</item>
+        <item>重庆子公司</item>
+        <item>昆明子公司</item>
+        <item>两湖子公司</item>
+        <item>东北子公司</item>
+        <item>天津子公司</item>
+        <item>北京子公司</item>
+        <item>西安子公司</item>
+        <item>兰州子公司</item>
+        <item>郑州子公司</item>
+        <item>山东子公司</item>
+        <item>山西子公司</item>
+        <item>福州子公司</item>
+        <item>广东子公司</item>
+        <item>上海子公司</item>
+        <item>杭州子公司</item>
+        <item>顶佳公司</item>
+    </string-array>
+    <string-array name="lotteryDistributionInfo_address">
+        <item>成都市红照壁街27号百川大厦A座10楼</item>
+        <item>重庆市渝中区人民路248号盛迪亚商务大厦26楼</item>
+        <item>昆明市三市街6号柏联广场写字楼A座1205-1206室</item>
+        <item>长沙市解放西路122号蓝色地标7058室</item>
+        <item>哈尔滨市南岗区铁路街8好昆仑大酒店28楼2808室</item>
+        <item>天津市和平区南京路85号君隆广场B2座601-602室</item>
+        <item>北京市朝阳区建国路现代城C座809</item>
+        <item>西安市北大街246号德克士2楼</item>
+        <item>甘肃省兰州市张掖路中段中环广场A座1402室</item>
+        <item>郑州市金水区文化路26号文化路与黄河路交叉口向南50米路东德克士建文餐厅2楼办公室</item>
+        <item>济南市泺源大街229号金龙大厦东楼18楼AB室</item>
+        <item>太原市柳巷南路千里商厦1216室</item>
+        <item>福州市东街33号武夷中心25层</item>
+        <item>广州市天河区天河北路612号金海花园金瀚阁1101室</item>
+        <item>上海市静安区南京西路819号中创大厦19楼</item>
+        <item>杭州市上城区庆春路87-1号A9号中都大厦9楼903室</item>
+        <item>新疆乌市友好南路378号5楼</item>
+    </string-array>
+    <string-array name="lotteryDistributionInfo_tel">
+        <item>028-86124232</item>
+        <item>023-63650515/63650503</item>
+        <item>0871-5263310</item>
+        <item>0731-88285701</item>
+        <item>0451-53605464</item>
+        <item>022-58683593</item>
+        <item>010-85654258-625</item>
+        <item>029-87270781</item>
+        <item>0931-8458712</item>
+        <item>0371-63938195</item>
+        <item>0531-83130260</item>
+        <item>0351-5263310</item>
+        <item>0591-87279753</item>
+        <item>020-38250257</item>
+        <item>021-32303529</item>
+        <item>0571-87921776</item>
+        <item>0991-4505776</item>
+    </string-array>
 
 </resources>

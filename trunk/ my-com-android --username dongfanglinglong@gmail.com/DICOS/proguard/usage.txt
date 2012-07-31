@@ -354,6 +354,7 @@ com.dongfang.dicos.net.HttpActions:
     public static final java.lang.String tag
     private static final java.lang.String KEY
     120:131:public java.lang.String lotteryLegal(java.lang.String)
+    168:179:public java.lang.String lotteryDistributionInfo(java.lang.String)
 com.dongfang.dicos.net.Https:
     private static final java.lang.String tag
     private static final int SET_CONNECTION_TIMEOUT
@@ -361,7 +362,7 @@ com.dongfang.dicos.net.Https:
     private static final java.lang.String URL
     public static final java.lang.String URL_ADVICE
     public static final java.lang.String URL_RESTAURENTLIST
-    74:92:public java.lang.String get(java.lang.String)
+    76:94:public java.lang.String get(java.lang.String)
 com.dongfang.dicos.net.thread.AdviceThread:
     public static final java.lang.String tag
 com.dongfang.dicos.net.thread.IPArea:
@@ -370,8 +371,7 @@ com.dongfang.dicos.net.thread.LoginThread:
     public static final java.lang.String tag
 com.dongfang.dicos.net.thread.LogoutThread:
     public static final java.lang.String tag
-com.dongfang.dicos.net.thread.LotteryDistributionInfoThread:
-    public static final java.lang.String tag
+com.dongfang.dicos.net.thread.LotteryDistributionInfoThread
 com.dongfang.dicos.net.thread.LotteryHistoryThread:
     public static final java.lang.String tag
 com.dongfang.dicos.net.thread.LotteryLegalThread
@@ -536,6 +536,8 @@ com.dongfang.dicos.util.ComParams:
     public static final int HANDLER_RESULT_SIGN
     public static final int HANDLER_RESULT_ADVICE
     public static final int HANDLER_INTENT_GOTO_STORE_DETAIL
+    public static final int HANDLER_FINISH_CITYLIST_ACTIVITY
+    public static final int HANDLER_CHANGE_TITLE_CITYLIST_ACTIVITY
     3:3:public ComParams()
 com.dongfang.dicos.util.ULog:
     3:3:public ULog()

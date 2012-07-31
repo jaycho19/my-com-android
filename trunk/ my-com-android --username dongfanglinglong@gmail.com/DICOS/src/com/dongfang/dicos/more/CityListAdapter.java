@@ -3,6 +3,7 @@ package com.dongfang.dicos.more;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,9 +29,12 @@ public class CityListAdapter extends BaseAdapter implements SectionIndexer {
 	private ArrayList<String>	stringArray;
 	private Context				context;
 
-	public CityListAdapter(Context context, ArrayList<String> stringArray) {
+	private Handler				handler;
+
+	public CityListAdapter(Context context, ArrayList<String> stringArray, Handler handler) {
 		this.stringArray = stringArray;
 		this.context = context;
+		this.handler = handler;
 	}
 
 	public void setList(ArrayList<String> list) {
@@ -62,7 +66,8 @@ public class CityListAdapter extends BaseAdapter implements SectionIndexer {
 
 			cityListElement = new CityListElement();
 
-			cityListElement.linearLayout = (LinearLayout) convertView.findViewById(R.id.linearlayou_citylist_listview_row);
+			cityListElement.linearLayout = (LinearLayout) convertView
+					.findViewById(R.id.linearlayou_citylist_listview_row);
 			cityListElement.header = (TextView) convertView.findViewById(R.id.textview_citylist_listview_row_header);
 			cityListElement.cityName = (TextView) convertView.findViewById(R.id.textview_citylist_listview_row_content);
 
@@ -114,9 +119,12 @@ public class CityListAdapter extends BaseAdapter implements SectionIndexer {
 		public void onClick(View v) {
 			ComParams.IPAREA = sIpArea;
 			Util.saveIpArea(context);
-			Toast.makeText(context, "城市切换成:" + sIpArea , Toast.LENGTH_LONG).show();
-
+			Toast.makeText(context, "城市切换成:" + sIpArea, Toast.LENGTH_LONG).show();
 			ULog.d(tag, "ComParams.IPAREA = " + ComParams.IPAREA);
+			if (null != handler) {
+				handler.sendEmptyMessage(ComParams.HANDLER_CHANGE_TITLE_CITYLIST_ACTIVITY);
+				handler.sendEmptyMessageDelayed(ComParams.HANDLER_FINISH_CITYLIST_ACTIVITY, 1000);
+			}
 		}
 
 	}
