@@ -1,5 +1,7 @@
 package com.dongfang.dicos.lottery;
 
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,10 +14,8 @@ import android.widget.ListView;
 
 import com.dongfang.dicos.R;
 import com.dongfang.dicos.net.Actions;
-import com.dongfang.dicos.net.thread.LotteryDistributionInfoThread;
 import com.dongfang.dicos.util.ComParams;
 import com.dongfang.dicos.util.ULog;
-import com.dongfang.dicos.util.Util;
 
 public class PrizeProvideActivity extends Activity implements OnClickListener {
 
@@ -58,7 +58,30 @@ public class PrizeProvideActivity extends Activity implements OnClickListener {
 	protected void onStart() {
 		super.onStart();
 
-		new LotteryDistributionInfoThread(this, handler, Util.getPhoneNumber(this)).start();
+		// new LotteryDistributionInfoThread(this, handler,
+		// Util.getPhoneNumber(this)).start();
+
+		String[] company = getResources().getStringArray(R.array.lotteryDistributionInfo_company);
+		String[] add = getResources().getStringArray(R.array.lotteryDistributionInfo_address);
+		String[] tel = getResources().getStringArray(R.array.lotteryDistributionInfo_tel);
+
+		try {
+			String[] as = new String[company.length];
+			for (int i = 0; i < company.length; i++) {
+				JSONObject json = new JSONObject();
+				json.put(Actions.ACTIONS_KEY_COMPANY, company[i]);
+				json.put(Actions.ACTIONS_KEY_ADDRESS, add[i]);
+				json.put(Actions.ACTIONS_KEY_TEL, tel[i]);
+				as[i] = json.toString();
+			}
+
+			adapter.setArray(as);
+			adapter.notifyDataSetChanged();
+
+		} catch (Exception e) {
+			ULog.d(tag, e.toString());
+		}
+
 	}
 
 	@Override

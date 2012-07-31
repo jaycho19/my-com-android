@@ -6,6 +6,8 @@ import java.util.Arrays;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -13,8 +15,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.dongfang.dicos.R;
+import com.dongfang.dicos.util.ComParams;
 import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.view.SideBar;
 
@@ -23,21 +27,29 @@ public class CityListActivity extends Activity implements OnClickListener {
 
 	/** ·µ»Ø°´Å¥ */
 	private Button				bBack;
+	private TextView			tvTitle;
+
 	private CityListAdapter		adapter;
 
-	ArrayList<String>			stringList;
+	private ArrayList<String>	stringList;
+	private MyHandler			handler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.setting_citylsit);
 
+		handler = new MyHandler();
+
 		bBack = (Button) findViewById(R.id.button_setting_citylist_back);
 		bBack.setOnClickListener(this);
 
+		tvTitle = (TextView) findViewById(R.id.textview_setting_citylist_title);
+		tvTitle.setText(ComParams.IPAREA);
+
 		ListView list = (ListView) findViewById(R.id.listview_setting_citylist);
 		stringList = InitListViewData();
-		adapter = new CityListAdapter(this, stringList);
+		adapter = new CityListAdapter(this, stringList, handler);
 		list.setAdapter(adapter);
 		SideBar indexBar = (SideBar) findViewById(R.id.sidebar_setting_citylist);
 		indexBar.setListView(list);
@@ -106,4 +118,26 @@ public class CityListActivity extends Activity implements OnClickListener {
 			break;
 		}
 	}
+
+	class MyHandler extends Handler {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.Handler#handleMessage(android.os.Message)
+		 */
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case ComParams.HANDLER_FINISH_CITYLIST_ACTIVITY:
+				finish();
+				break;
+			case ComParams.HANDLER_CHANGE_TITLE_CITYLIST_ACTIVITY:
+				tvTitle.setText(ComParams.IPAREA);
+				break;
+			}
+		}
+
+	}
+
 }

@@ -84,6 +84,10 @@ public class ComParams {
 
 	/** 跳转到门店详情页 */
 	public static final int		HANDLER_INTENT_GOTO_STORE_DETAIL		= 3000;
+	/** finish 城市切换页面 */
+	public static final int		HANDLER_FINISH_CITYLIST_ACTIVITY		= 3001;
+	/** 修改城市切换页面title */
+	public static final int		HANDLER_CHANGE_TITLE_CITYLIST_ACTIVITY	= 3002;
 
 	// ----------------------------------------------------------------------------
 	public static String		IPAREA									= "";

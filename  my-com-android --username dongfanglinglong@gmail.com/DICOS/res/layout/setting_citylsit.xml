@@ -12,7 +12,7 @@
             style="@style/top_menu_button_back_style" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/textview_setting_citylist_title"
             style="@style/top_menu_textview_style"
             android:text="@string/top_title_citylist" />
     </RelativeLayout>

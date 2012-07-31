@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -59,11 +60,13 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 		etProvince = (AutoCompleteTextView) findViewById(R.id.autocompletetextview_storeseach_province);
 		etProvince.setAdapter(new ArrayAdapter<String>(this, R.layout.storesearch_province, getResources()
 				.getStringArray(R.array.province)));
-
 		etProvince.setOnClickListener(this);
 
 		etCity = (AutoCompleteTextView) findViewById(R.id.autocompletetextview_storeseach_city);
 		etCity.setOnClickListener(this);
+		
+		etProvince.setInputType(InputType.TYPE_DATETIME_VARIATION_NORMAL);
+		etCity.setInputType(InputType.TYPE_DATETIME_VARIATION_NORMAL);
 
 		// etCity.setOnFocusChangeListener(new OnFocusChangeListener() {
 		// /*
@@ -226,6 +229,7 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.autocompletetextview_storeseach_province:
 			etProvince.showDropDown();
+			etCity.setText("");
 			break;
 		case R.id.button_storeseach_seach:
 			if (Util.isNetworkAvailable(StoreSearchActivity.this)) {

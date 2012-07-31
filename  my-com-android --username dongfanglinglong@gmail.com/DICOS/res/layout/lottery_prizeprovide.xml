@@ -51,7 +51,11 @@
             android:layout_above="@+id/button_lottery_prizeprovide_showmore"
             android:layout_below="@+id/textView_lottery_prizeprovide_prizeprovide"
             android:paddingBottom="5dp"
-            android:paddingTop="5dp" >
+            android:paddingTop="20dp" 
+            android:paddingLeft="20dp"
+            android:background="@drawable/lottery_provider"
+            
+            >
         </ListView>
     </RelativeLayout>
 

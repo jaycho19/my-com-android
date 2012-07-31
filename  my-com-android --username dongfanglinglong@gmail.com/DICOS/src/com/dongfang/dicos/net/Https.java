@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.security.KeyStore;
 import java.util.List;
 
+import org.apache.http.Header;
+import org.apache.http.HeaderElement;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -118,12 +120,12 @@ public class Https {
 			// ULog.d(tag,"HttpStatus = " +
 			// httpResponse.getStatusLine().getStatusCode());
 
-			// for (Header h : httpResponse.getAllHeaders()) {
-			// ULog.d(tag, h.getName() + " ++ " + h.getValue());
-			// for (HeaderElement s : h.getElements()) {
-			// ULog.d(tag, s.getParameterCount() + " -- " + s.getValue());
-			// }
-			// }
+			for (Header h : httpResponse.getAllHeaders()) {
+				ULog.d(tag, h.getName() + " ++ " + h.getValue());
+				for (HeaderElement s : h.getElements()) {
+					ULog.d(tag, s.getParameterCount() + " -- " + s.getValue());
+				}
+			}
 
 			if (null != httpResponse && httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				ULog.d(tag, "post 200");
