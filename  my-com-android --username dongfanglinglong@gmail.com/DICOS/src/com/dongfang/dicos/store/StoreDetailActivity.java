@@ -96,7 +96,7 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 			tvTel.setText((telNumber.equalsIgnoreCase("null") ? "" : telNumber));
 
 			name = js.getString(Actions.ACTIONS_KEY_NAME).trim();
-			tvName.setText(name.startsWith("德克士") ? name : "德克士" + name);
+			tvName.setText(name.contains("德克士") ? name : "德克士" + name);
 
 			x = js.getDouble(Actions.ACTIONS_KEY_X);
 			y = js.getDouble(Actions.ACTIONS_KEY_Y);

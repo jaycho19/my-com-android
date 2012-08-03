@@ -49,7 +49,7 @@ public class StoreListElement {
 
 			tvStoreAddress.setText(address);
 			String name = js.getString(Actions.ACTIONS_KEY_NAME);
-			tvStoreName.setText(name.startsWith("德克士") ? name : "德克士" + name);
+			tvStoreName.setText(name.contains("德克士") ? name : "德克士" + name);
 
 		} catch (JSONException e) {
 			ULog.d(tag, e.toString());
