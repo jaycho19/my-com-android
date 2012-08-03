@@ -69,7 +69,7 @@ public class LotteryActivity extends Activity implements OnClickListener {
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.button_lottery_joinin:
-			intent = new Intent(LotteryActivity.this, JoinInActivity.class);
+			intent = new Intent(LotteryActivity.this, DetailActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.button_lottery_detail:
