@@ -90,13 +90,13 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 
 			ULog.d(tag, "address = " + address);
 
-			tvAddress.setText("地址： " + address);
+			tvAddress.setText(address);
 
 			telNumber = js.getString(Actions.ACTIONS_KEY_TEL);
-			tvTel.setText("电话： " + (telNumber.equalsIgnoreCase("null") ? "" : telNumber));
+			tvTel.setText((telNumber.equalsIgnoreCase("null") ? "" : telNumber));
 
 			name = js.getString(Actions.ACTIONS_KEY_NAME).trim();
-			tvName.setText("德克士" + name);
+			tvName.setText(name.startsWith("德克士") ? name : "德克士" + name);
 
 			x = js.getDouble(Actions.ACTIONS_KEY_X);
 			y = js.getDouble(Actions.ACTIONS_KEY_Y);

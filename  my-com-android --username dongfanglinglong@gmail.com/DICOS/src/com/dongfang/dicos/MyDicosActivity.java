@@ -129,7 +129,8 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 			if (!Util.isLogin(MyDicosActivity.this)) {
 				Util.showDialogLogin(MyDicosActivity.this);
 			} else {
-				intent = new Intent(MyDicosActivity.this, SigneInActivity.class);
+				intent = new Intent(MyDicosActivity.this, StoreSearchActivity.class);
+				intent.putExtra("visibility", true);
 				startActivity(intent);
 			}
 			break;

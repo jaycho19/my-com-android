@@ -27,24 +27,52 @@
         android:text="德克士豫园餐厅"
         android:textColor="#FF5c9200" />
 
-    <TextView
-        android:id="@+id/textview_store_detail_address"
-        style="@style/editview_normal_style"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingRight="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/button_top_bg"
-        android:inputType="textMultiLine"
-        android:singleLine="false"
-        android:text="地址：上海黄浦区xxxx" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
-    <TextView
-        android:id="@+id/textview_store_detail_tel"
-        style="@style/editview_normal_style"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:text="地址: " />
+
+        <TextView
+            android:id="@+id/textview_store_detail_address"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="上海黄浦区 xxxxxxxxxxxxxxxxxxxxxxxxx" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/button_bottom_bg"
-        android:text="电话：021-6355xxxx" />
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:text="电话: " />
+
+        <TextView
+            android:id="@+id/textview_store_detail_tel"
+          android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="021-6355xxxx" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
