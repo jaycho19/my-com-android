@@ -64510,7 +64510,7 @@ Constant Pool (count = 72):
   + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
   + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
   + Methodref [java/lang/Object.<init> ()V]
-  + Methodref [java/lang/String.startsWith (Ljava/lang/String;)Z]
+  + Methodref [java/lang/String.contains (Ljava/lang/CharSequence;)Z]
   + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
   + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
@@ -64524,17 +64524,17 @@ Constant Pool (count = 72):
   + NameAndType [append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + NameAndType [b Landroid/widget/TextView;]
   + NameAndType [c Ljava/lang/String;]
+  + NameAndType [contains (Ljava/lang/CharSequence;)Z]
   + NameAndType [getString (Ljava/lang/String;)Ljava/lang/String;]
   + NameAndType [setText (Ljava/lang/CharSequence;)V]
-  + NameAndType [startsWith (Ljava/lang/String;)Z]
   + NameAndType [toString ()Ljava/lang/String;]
   + Utf8 [()Ljava/lang/String;]
   + Utf8 [()V]
   + Utf8 [(Ljava/lang/CharSequence;)V]
+  + Utf8 [(Ljava/lang/CharSequence;)Z]
   + Utf8 [(Ljava/lang/String;)Ljava/lang/String;]
   + Utf8 [(Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + Utf8 [(Ljava/lang/String;)V]
-  + Utf8 [(Ljava/lang/String;)Z]
   + Utf8 [(Ljava/lang/String;Ljava/lang/String;)V]
   + Utf8 [<init>]
   + Utf8 [Code]
@@ -64549,6 +64549,7 @@ Constant Pool (count = 72):
   + Utf8 [c]
   + Utf8 [com/dongfang/dicos/b/b]
   + Utf8 [com/dongfang/dicos/e/b]
+  + Utf8 [contains]
   + Utf8 [getString]
   + Utf8 [initElement ]
   + Utf8 [java/lang/Object]
@@ -64558,7 +64559,6 @@ Constant Pool (count = 72):
   + Utf8 [org/json/JSONException]
   + Utf8 [org/json/JSONObject]
   + Utf8 [setText]
-  + Utf8 [startsWith]
   + Utf8 [time]
   + Utf8 [toString]
   + Utf8 [德克士]
@@ -64631,7 +64631,7 @@ Methods (count = 2):
       [47] ldc #5
         + String [德克士]
       [49] invokevirtual #20
-        + Methodref [java/lang/String.startsWith (Ljava/lang/String;)Z]
+        + Methodref [java/lang/String.contains (Ljava/lang/CharSequence;)Z]
       [52] ifeq +7 (target=59)
       [55] aload_2 v2
       [56] goto +19 (target=75)
@@ -75877,7 +75877,7 @@ _____________________________________________________________________
 Interfaces (count = 1):
   + Class [android/view/View$OnClickListener]
 
-Constant Pool (count = 249):
+Constant Pool (count = 250):
   + Integer [2130903071]
   + Integer [2131361911]
   + Integer [2131361912]
@@ -75955,8 +75955,8 @@ Constant Pool (count = 249):
   + Methodref [com/dongfang/dicos/store/StoreDetailActivity.getIntent ()Landroid/content/Intent;]
   + Methodref [com/dongfang/dicos/store/StoreDetailActivity.setContentView (I)V]
   + Methodref [com/dongfang/dicos/store/StoreDetailActivity.startActivity (Landroid/content/Intent;)V]
+  + Methodref [java/lang/String.contains (Ljava/lang/CharSequence;)Z]
   + Methodref [java/lang/String.equalsIgnoreCase (Ljava/lang/String;)Z]
-  + Methodref [java/lang/String.startsWith (Ljava/lang/String;)Z]
   + Methodref [java/lang/String.trim ()Ljava/lang/String;]
   + Methodref [java/lang/String.valueOf (D)Ljava/lang/String;]
   + Methodref [java/lang/String.valueOf (I)Ljava/lang/String;]
@@ -75982,6 +75982,7 @@ Constant Pool (count = 249):
   + NameAndType [b Landroid/widget/Button;]
   + NameAndType [c (Landroid/content/Context;)Z]
   + NameAndType [c Landroid/widget/TextView;]
+  + NameAndType [contains (Ljava/lang/CharSequence;)Z]
   + NameAndType [d (Landroid/content/Context;)V]
   + NameAndType [d Landroid/widget/TextView;]
   + NameAndType [e Landroid/widget/TextView;]
@@ -76010,7 +76011,6 @@ Constant Pool (count = 249):
   + NameAndType [setOnClickListener (Landroid/view/View$OnClickListener;)V]
   + NameAndType [setText (Ljava/lang/CharSequence;)V]
   + NameAndType [startActivity (Landroid/content/Intent;)V]
-  + NameAndType [startsWith (Ljava/lang/String;)Z]
   + NameAndType [toString ()Ljava/lang/String;]
   + NameAndType [trim ()Ljava/lang/String;]
   + NameAndType [valueOf (D)Ljava/lang/String;]
@@ -76037,6 +76037,7 @@ Constant Pool (count = 249):
   + Utf8 [(Landroid/view/View$OnClickListener;)V]
   + Utf8 [(Landroid/view/View;)V]
   + Utf8 [(Ljava/lang/CharSequence;)V]
+  + Utf8 [(Ljava/lang/CharSequence;)Z]
   + Utf8 [(Ljava/lang/Object;)Ljava/lang/String;]
   + Utf8 [(Ljava/lang/String;)D]
   + Utf8 [(Ljava/lang/String;)I]
@@ -76078,6 +76079,7 @@ Constant Pool (count = 249):
   + Utf8 [com/dongfang/dicos/kzmw/SigneInActivity]
   + Utf8 [com/dongfang/dicos/store/StoreDetailActivity]
   + Utf8 [com/dongfang/dicos/store/StoreDetailMapActivity]
+  + Utf8 [contains]
   + Utf8 [d]
   + Utf8 [e]
   + Utf8 [equalsIgnoreCase]
@@ -76115,7 +76117,6 @@ Constant Pool (count = 249):
   + Utf8 [setOnClickListener]
   + Utf8 [setText]
   + Utf8 [startActivity]
-  + Utf8 [startsWith]
   + Utf8 [store_name]
   + Utf8 [tel]
   + Utf8 [tel:]
@@ -76381,7 +76382,7 @@ Methods (count = 4):
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.i Ljava/lang/String;]
       [126] ldc #19
         + String [null]
-      [128] invokevirtual #78
+      [128] invokevirtual #79
         + Methodref [java/lang/String.equalsIgnoreCase (Ljava/lang/String;)Z]
       [131] ifeq +8 (target=139)
       [134] ldc #7
@@ -76410,8 +76411,8 @@ Methods (count = 4):
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.j Ljava/lang/String;]
       [167] ldc #27
         + String [德克士]
-      [169] invokevirtual #79
-        + Methodref [java/lang/String.startsWith (Ljava/lang/String;)Z]
+      [169] invokevirtual #78
+        + Methodref [java/lang/String.contains (Ljava/lang/CharSequence;)Z]
       [172] ifeq +10 (target=182)
       [175] aload_1 v1
       [176] getfield #54
@@ -78815,7 +78816,7 @@ Constant Pool (count = 85):
   + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
   + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
   + Methodref [java/lang/Object.<init> ()V]
-  + Methodref [java/lang/String.startsWith (Ljava/lang/String;)Z]
+  + Methodref [java/lang/String.contains (Ljava/lang/CharSequence;)Z]
   + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
   + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
   + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
@@ -78828,21 +78829,21 @@ Constant Pool (count = 85):
   + NameAndType [a (Ljava/lang/String;Ljava/lang/String;)V]
   + NameAndType [append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + NameAndType [c Landroid/widget/TextView;]
+  + NameAndType [contains (Ljava/lang/CharSequence;)Z]
   + NameAndType [d Landroid/widget/TextView;]
   + NameAndType [e Ljava/lang/String;]
   + NameAndType [getString (Ljava/lang/String;)Ljava/lang/String;]
   + NameAndType [setText (Ljava/lang/CharSequence;)V]
-  + NameAndType [startsWith (Ljava/lang/String;)Z]
   + NameAndType [toString ()Ljava/lang/String;]
   + NameAndType [valueOf (Ljava/lang/Object;)Ljava/lang/String;]
   + Utf8 [()Ljava/lang/String;]
   + Utf8 [()V]
   + Utf8 [(Ljava/lang/CharSequence;)V]
+  + Utf8 [(Ljava/lang/CharSequence;)Z]
   + Utf8 [(Ljava/lang/Object;)Ljava/lang/String;]
   + Utf8 [(Ljava/lang/String;)Ljava/lang/String;]
   + Utf8 [(Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + Utf8 [(Ljava/lang/String;)V]
-  + Utf8 [(Ljava/lang/String;)Z]
   + Utf8 [(Ljava/lang/String;Ljava/lang/String;)V]
   + Utf8 [<init>]
   + Utf8 [Code]
@@ -78861,6 +78862,7 @@ Constant Pool (count = 85):
   + Utf8 [city]
   + Utf8 [com/dongfang/dicos/e/b]
   + Utf8 [com/dongfang/dicos/store/f]
+  + Utf8 [contains]
   + Utf8 [d]
   + Utf8 [e]
   + Utf8 [getString]
@@ -78873,7 +78875,6 @@ Constant Pool (count = 85):
   + Utf8 [org/json/JSONObject]
   + Utf8 [province]
   + Utf8 [setText]
-  + Utf8 [startsWith]
   + Utf8 [toString]
   + Utf8 [valueOf]
   + Utf8 [德克士]
@@ -79003,7 +79004,7 @@ Methods (count = 2):
       [114] ldc #8
         + String [德克士]
       [116] invokevirtual #23
-        + Methodref [java/lang/String.startsWith (Ljava/lang/String;)Z]
+        + Methodref [java/lang/String.contains (Ljava/lang/CharSequence;)Z]
       [119] ifeq +7 (target=126)
       [122] aload_1 v1
       [123] goto +19 (target=142)
