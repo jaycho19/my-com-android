@@ -12,6 +12,7 @@ import com.dongfang.dicos.lottery.DetailActivity;
 import com.dongfang.dicos.lottery.InfoActivity;
 import com.dongfang.dicos.lottery.JoinInActivity;
 import com.dongfang.dicos.lottery.PrizeInfoActivity;
+import com.dongfang.dicos.lottery.PrizeInfoTempActivity;
 import com.dongfang.dicos.lottery.PrizeProvideActivity;
 import com.dongfang.dicos.util.ULog;
 
@@ -80,7 +81,8 @@ public class LotteryActivity extends Activity implements OnClickListener {
 			startActivity(intent);
 			break;
 		case R.id.button_lottery_prizeinfo:
-			intent = new Intent(LotteryActivity.this, PrizeInfoActivity.class);
+			// intent = new Intent(LotteryActivity.this, PrizeInfoActivity.class);
+			intent = new Intent(LotteryActivity.this, PrizeInfoTempActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.button_lottery_prizeprovide:

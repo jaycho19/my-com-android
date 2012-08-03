@@ -1,208 +1,5 @@
 android.annotation.SuppressLint
 android.annotation.TargetApi
-com.baidu.mapapi.CoordinateConvert:
-    public CoordinateConvert()
-com.baidu.mapapi.ItemizedOverlay:
-    public ItemizedOverlay(android.graphics.drawable.Drawable)
-    protected static android.graphics.drawable.Drawable boundCenterBottom(android.graphics.drawable.Drawable)
-    protected static android.graphics.drawable.Drawable boundCenter(android.graphics.drawable.Drawable)
-    private static android.graphics.drawable.Drawable a(android.graphics.drawable.Drawable,com.baidu.mapapi.ItemizedOverlay$b)
-    protected abstract com.baidu.mapapi.OverlayItem createItem(int)
-    public abstract int size()
-    public com.baidu.mapapi.GeoPoint getCenter()
-    public int getLatSpanE6()
-    public int getLonSpanE6()
-    protected final void populate()
-    public final int getLastFocusedIndex()
-    public com.baidu.mapapi.OverlayItem nextFocus(boolean)
-    public void setOnFocusChangeListener(com.baidu.mapapi.ItemizedOverlay$OnFocusChangeListener)
-    public void setDrawFocusedItem(boolean)
-    public boolean onSnapToItem(int,int,android.graphics.Point,com.baidu.mapapi.MapView)
-com.baidu.mapapi.ItemizedOverlay$a:
-    final synthetic com.baidu.mapapi.ItemizedOverlay a
-    public ItemizedOverlay$a(com.baidu.mapapi.ItemizedOverlay)
-    public final int a(boolean)
-com.baidu.mapapi.ItemizedOverlay$b
-com.baidu.mapapi.LocationListener:
-    public abstract void onLocationChanged(android.location.Location)
-com.baidu.mapapi.MKAddrInfo
-com.baidu.mapapi.MKBusLineResult
-com.baidu.mapapi.MKCityListInfo
-com.baidu.mapapi.MKDrivingRouteResult
-com.baidu.mapapi.MKEvent
-com.baidu.mapapi.MKGeneralListener:
-    public abstract void onGetNetworkState(int)
-    public abstract void onGetPermissionState(int)
-com.baidu.mapapi.MKGeocoderAddressComponent
-com.baidu.mapapi.MKLine
-com.baidu.mapapi.MKLocationManager:
-    public static final int MK_GPS_PROVIDER
-    public static final int MK_NETWORK_PROVIDER
-    public static final int MK_COORDINATE_WGS84
-    public static final int MK_COORDINATE_GCJ
-    public static final int MK_COORDINATE_BAIDU09
-    public boolean disableProvider(int)
-    public android.os.Bundle getNotifyInternal()
-    public void setLocationCoordinateType(int)
-    void c()
-com.baidu.mapapi.MKMapViewListener
-com.baidu.mapapi.MKOLSearchRecord
-com.baidu.mapapi.MKOLUpdateElement
-com.baidu.mapapi.MKOfflineMap
-com.baidu.mapapi.MKOfflineMapListener
-com.baidu.mapapi.MKPlanNode
-com.baidu.mapapi.MKPoiInfo
-com.baidu.mapapi.MKPoiResult
-com.baidu.mapapi.MKRoute
-com.baidu.mapapi.MKRouteAddrResult
-com.baidu.mapapi.MKRoutePlan
-com.baidu.mapapi.MKSearch
-com.baidu.mapapi.MKSearchListener
-com.baidu.mapapi.MKStep
-com.baidu.mapapi.MKSuggestionInfo
-com.baidu.mapapi.MKSuggestionResult
-com.baidu.mapapi.MKTransitRoutePlan
-com.baidu.mapapi.MKTransitRouteResult
-com.baidu.mapapi.MKWalkingRouteResult
-com.baidu.mapapi.MapActivity:
-    protected boolean isLocationDisplayed()
-    protected abstract boolean isRouteDisplayed()
-com.baidu.mapapi.MapController:
-    public void animateTo(com.baidu.mapapi.GeoPoint)
-    public void animateTo(com.baidu.mapapi.GeoPoint,android.os.Message)
-    public void animateTo(com.baidu.mapapi.GeoPoint,java.lang.Runnable)
-    public void setCenter(com.baidu.mapapi.GeoPoint)
-    public int setZoom(int)
-    public void stopAnimation(boolean)
-    public void stopPanning()
-    public boolean zoomIn()
-    public boolean zoomInFixing(int,int)
-    public boolean zoomOut()
-    public boolean zoomOutFixing(int,int)
-    public void zoomToSpan(int,int)
-com.baidu.mapapi.MapView:
-    void c()
-    public boolean canCoverCenter()
-    public void displayZoomControls(boolean)
-    public com.baidu.mapapi.MapController getController()
-    public int getLatitudeSpan()
-    public int getLongitudeSpan()
-    public com.baidu.mapapi.GeoPoint getMapCenter()
-    public int getMaxZoomLevel()
-    public boolean isDoubleClickZooming()
-    public android.view.View getZoomControls()
-    public boolean isStreetView()
-    public boolean isTraffic()
-    public boolean isSatellite()
-    public void onRestoreInstanceState(android.os.Bundle)
-    public void onSaveInstanceState(android.os.Bundle)
-    public void preLoad()
-    boolean a(int)
-    void a(int,int)
-    void a(com.baidu.mapapi.GeoPoint)
-    void a(com.baidu.mapapi.GeoPoint,android.os.Message,java.lang.Runnable)
-    void a(boolean)
-    boolean a(int,int,int)
-    private void b(int)
-    public void regMapViewListener(com.baidu.mapapi.BMapManager,com.baidu.mapapi.MKMapViewListener)
-com.baidu.mapapi.MapView$LayoutParams:
-    public static final int MODE_MAP
-    public static final int MODE_VIEW
-    public static final int LEFT
-    public static final int RIGHT
-    public static final int TOP
-    public static final int BOTTOM
-    public static final int CENTER_HORIZONTAL
-    public static final int CENTER_VERTICAL
-    public static final int CENTER
-    public static final int TOP_LEFT
-    public static final int BOTTOM_CENTER
-    public MapView$LayoutParams(int,int,com.baidu.mapapi.GeoPoint,int)
-    public MapView$LayoutParams(int,int,com.baidu.mapapi.GeoPoint,int,int,int)
-    public MapView$LayoutParams(int,int,int,int,int)
-com.baidu.mapapi.Mj:
-    void a(com.baidu.mapapi.MKSearchListener)
-    void a(com.baidu.mapapi.MKOfflineMapListener)
-    void a(com.baidu.mapapi.MKMapViewListener)
-    public void JNI_callBackProc(int,int,int)
-    public void JNI_MapcallBackProc(int,int,int,int)
-    private int d()
-    public android.os.Bundle J_GetDevInfo(int)
-    boolean c()
-    private void a(int,int)
-    private void a(int)
-com.baidu.mapapi.Mj$a:
-    final synthetic com.baidu.mapapi.Mj e
-    Mj$a(com.baidu.mapapi.Mj)
-com.baidu.mapapi.Mj$b:
-    private Mj$b(com.baidu.mapapi.Mj)
-    synthetic Mj$b(com.baidu.mapapi.Mj,com.baidu.mapapi.Mj$1)
-com.baidu.mapapi.MyLocationOverlay:
-    public void onLocationChanged(android.location.Location)
-    public boolean isCompassEnabled()
-    public boolean isMyLocationEnabled()
-    public boolean onSnapToItem(int,int,android.graphics.Point,com.baidu.mapapi.MapView)
-    public android.location.Location getLastFix()
-    public float getOrientation()
-    public boolean runOnFirstFix(java.lang.Runnable)
-    public void onProviderDisabled(java.lang.String)
-    public void onProviderEnabled(java.lang.String)
-com.baidu.mapapi.Overlay:
-    protected static final float SHADOW_X_SKEW
-    protected static final float SHADOW_Y_SCALE
-com.baidu.mapapi.Overlay$Snappable
-com.baidu.mapapi.OverlayItem:
-    protected final java.lang.String mTitle
-    protected final java.lang.String mSnippet
-    public static final int ITEM_STATE_NORMAL_MASK
-    public static final int ITEM_STATE_PRESSED_MASK
-    public static final int ITEM_STATE_SELECTED_MASK
-    public static final int ITEM_STATE_FOCUSED_MASK
-    public OverlayItem(com.baidu.mapapi.GeoPoint,java.lang.String,java.lang.String)
-    public static void setState(android.graphics.drawable.Drawable,int)
-    public java.lang.String getSnippet()
-    public java.lang.String getTitle()
-    public java.lang.String routableAddress()
-    public void setMarker(android.graphics.drawable.Drawable)
-com.baidu.mapapi.PoiOverlay
-com.baidu.mapapi.RouteOverlay
-com.baidu.mapapi.RouteOverlay$1
-com.baidu.mapapi.RouteOverlay$a
-com.baidu.mapapi.RouteOverlay$b
-com.baidu.mapapi.TransitOverlay
-com.baidu.mapapi.TransitOverlay$1
-com.baidu.mapapi.TransitOverlay$a
-com.baidu.mapapi.VersionInfo
-com.baidu.mapapi.a:
-    boolean b()
-    boolean d()
-com.baidu.mapapi.c:
-    public c()
-com.baidu.mapapi.d:
-    android.graphics.Point a(com.baidu.mapapi.GeoPoint,android.graphics.Point)
-com.baidu.mapapi.e:
-    public void a(int,int,long)
-    void a()
-    void b()
-    java.lang.String a(int,int,int,int,java.util.List,java.lang.String)
-    public void a(java.util.List)
-    public java.lang.String a(java.util.List,java.lang.String)
-    public java.lang.String b(java.util.List,java.lang.String)
-    public boolean a(java.util.List,java.util.List)
-com.baidu.mapapi.e$1
-com.baidu.mapapi.e$a:
-    private e$a(com.baidu.mapapi.e)
-    synthetic e$a(com.baidu.mapapi.e,com.baidu.mapapi.e$1)
-com.baidu.mapapi.f:
-    public void a(com.baidu.mapapi.MKEvent)
-com.baidu.mapapi.g
-com.baidu.mapapi.h:
-    public abstract void a(com.baidu.mapapi.MKEvent)
-com.baidu.mapapi.i
-com.baidu.mapapi.j
-com.baidu.mapapi.k
-com.baidu.mapapi.k$1
-com.baidu.mapapi.k$a
 com.dongfang.dicos.BuildConfig
 com.dongfang.dicos.DicosMainActivity:
     public static final java.lang.String tag
@@ -310,6 +107,8 @@ com.dongfang.dicos.lottery.PrizeInfoAdapter:
     private static final java.lang.String tag
 com.dongfang.dicos.lottery.PrizeInfoElement:
     private static final java.lang.String tag
+com.dongfang.dicos.lottery.PrizeInfoTempActivity:
+    public static final java.lang.String tag
 com.dongfang.dicos.lottery.PrizeProvideActivity:
     public static final java.lang.String tag
 com.dongfang.dicos.lottery.PrizeProvideAdapter:
@@ -362,7 +161,7 @@ com.dongfang.dicos.net.Https:
     private static final java.lang.String URL
     public static final java.lang.String URL_ADVICE
     public static final java.lang.String URL_RESTAURENTLIST
-    76:94:public java.lang.String get(java.lang.String)
+    77:95:public java.lang.String get(java.lang.String)
 com.dongfang.dicos.net.thread.AdviceThread:
     public static final java.lang.String tag
 com.dongfang.dicos.net.thread.IPArea:
@@ -489,15 +288,8 @@ com.dongfang.dicos.store.StoreDetailActivity:
     private static final java.lang.String tag
 com.dongfang.dicos.store.StoreDetailMapActivity:
     private static final java.lang.String tag
-    164:164:protected boolean isRouteDisplayed()
-    37:37:static synthetic java.lang.Double access$0(com.dongfang.dicos.store.StoreDetailMapActivity)
-    37:37:static synthetic java.lang.Double access$1(com.dongfang.dicos.store.StoreDetailMapActivity)
-    40:40:static synthetic com.baidu.mapapi.MapView access$2(com.dongfang.dicos.store.StoreDetailMapActivity)
-com.dongfang.dicos.store.StoreDetailMapActivity$1:
-    98:112:public void onLocationChanged(android.location.Location)
-com.dongfang.dicos.store.StoreDetailMapActivity$MyGeneralListener:
-    170:172:public void onGetNetworkState(int)
-    176:182:public void onGetPermissionState(int)
+com.dongfang.dicos.store.StoreDetailMapActivity$OverItemT:
+    227:228:public void updateOverlay()
 com.dongfang.dicos.store.StoreListAdapter:
     private static final java.lang.String tag
 com.dongfang.dicos.store.StoreListElement:
