@@ -34,6 +34,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.text.TextUtils;
 
 import com.dongfang.dicos.util.ULog;
 
@@ -164,12 +165,12 @@ public class Https {
 			// ULog.d(tag,"HttpStatus = " +
 			// httpResponse.getStatusLine().getStatusCode());
 
-			// for (Header h : httpResponse.getAllHeaders()) {
-			// ULog.d(tag, h.getName() + " ++ " + h.getValue());
-			// for (HeaderElement s : h.getElements()) {
-			// ULog.d(tag, s.getParameterCount() + " -- " + s.getValue());
-			// }
-			// }
+//			for (Header h : httpResponse.getAllHeaders()) {
+//				ULog.d(tag, h.getName() + " ++ " + h.getValue());
+//				for (HeaderElement s : h.getElements()) {
+//					ULog.d(tag, s.getParameterCount() + " -- " + s.getName() + " -- " + s.getValue());
+//				}
+//			}
 
 			if (null != httpResponse && httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				ULog.d(tag, "post 200");
@@ -246,7 +247,16 @@ public class Https {
 			while ((readBytes = inputStream.read(sBuffer)) != -1) {
 				content.write(sBuffer, 0, readBytes);
 			}
-			result = new String(content.toByteArray(), "gbk").trim();
+
+			String content_type = response.getFirstHeader(HTTP.CONTENT_TYPE).getValue();
+			String charset = content_type.substring(content_type.indexOf("charset=") + 8);
+			ULog.e(tag, "charset=" + charset);
+			
+			if (TextUtils.isEmpty(charset))
+				result = new String(content.toByteArray(), "gbk").trim();
+			else
+				result = new String(content.toByteArray(), charset).trim();
+
 			ULog.d(tag, "read = " + result);
 		} catch (Exception e) {
 			ULog.e(tag, "read " + e.toString());

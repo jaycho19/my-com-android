@@ -36,7 +36,7 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 
 	private String				json;
 	private double				x, y;
-	private String				telNumber;
+	private String				telNumber, name;
 	private String				id;
 
 	@Override
@@ -95,7 +95,8 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 			telNumber = js.getString(Actions.ACTIONS_KEY_TEL);
 			tvTel.setText("电话： " + (telNumber.equalsIgnoreCase("null") ? "" : telNumber));
 
-			tvName.setText("德克士" + js.getString(Actions.ACTIONS_KEY_NAME));
+			name = js.getString(Actions.ACTIONS_KEY_NAME).trim();
+			tvName.setText("德克士" + name);
 
 			x = js.getDouble(Actions.ACTIONS_KEY_X);
 			y = js.getDouble(Actions.ACTIONS_KEY_Y);
@@ -133,6 +134,7 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 				intent = new Intent(StoreDetailActivity.this, StoreDetailMapActivity.class);
 				intent.putExtra("x", x);
 				intent.putExtra("y", y);
+				intent.putExtra("name", name);
 				startActivity(intent);
 			}
 			break;

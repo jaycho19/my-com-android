@@ -1,84 +1,474 @@
-com.baidu.mapapi.BMapManager -> com.baidu.mapapi.b:
+com.baidu.mapapi.BMapManager -> com.baidu.mapapi.BMapManager:
     com.baidu.mapapi.Mj a -> a
     android.content.Context c -> c
     boolean b -> b
-    boolean init(java.lang.String,com.baidu.mapapi.MKGeneralListener) -> a
-    com.baidu.mapapi.MKLocationManager getLocationManager() -> a
-    boolean start() -> b
-    boolean stop() -> c
-    void destroy() -> d
-com.baidu.mapapi.CoordinateConvert -> com.baidu.mapapi.c:
-    com.baidu.mapapi.GeoPoint bundleDecode(android.os.Bundle) -> a
+    boolean init(java.lang.String,com.baidu.mapapi.MKGeneralListener) -> init
+    com.baidu.mapapi.MKLocationManager getLocationManager() -> getLocationManager
+    boolean start() -> start
+    boolean stop() -> stop
+    void destroy() -> destroy
+com.baidu.mapapi.CoordinateConvert -> com.baidu.mapapi.CoordinateConvert:
+    android.os.Bundle fromWgs84ToBaidu(com.baidu.mapapi.GeoPoint) -> fromWgs84ToBaidu
+    android.os.Bundle fromGcjToBaidu(com.baidu.mapapi.GeoPoint) -> fromGcjToBaidu
+    com.baidu.mapapi.GeoPoint bundleDecode(android.os.Bundle) -> bundleDecode
     android.os.Bundle a(com.baidu.mapapi.GeoPoint,int) -> a
-com.baidu.mapapi.GeoPoint -> com.baidu.mapapi.d:
+com.baidu.mapapi.GeoPoint -> com.baidu.mapapi.GeoPoint:
     int a -> a
     int b -> b
-    int getLatitudeE6() -> a
-    int getLongitudeE6() -> b
-    void setLatitudeE6(int) -> a
-    void setLongitudeE6(int) -> b
+    int getLatitudeE6() -> getLatitudeE6
+    int getLongitudeE6() -> getLongitudeE6
+    void setLatitudeE6(int) -> setLatitudeE6
+    void setLongitudeE6(int) -> setLongitudeE6
     int hashCode() -> hashCode
     java.lang.String toString() -> toString
     boolean equals(java.lang.Object) -> equals
-com.baidu.mapapi.ItemizedOverlay -> com.baidu.mapapi.e:
-    android.graphics.drawable.Drawable b -> a
-    int d -> b
-    com.baidu.mapapi.ItemizedOverlay$a e -> c
-    com.baidu.mapapi.ItemizedOverlay$OnFocusChangeListener f -> d
-    int g -> e
-    int h -> f
+com.baidu.mapapi.ItemizedOverlay -> com.baidu.mapapi.ItemizedOverlay:
+    boolean a -> a
+    android.graphics.drawable.Drawable b -> b
+    android.graphics.drawable.Drawable c -> c
+    int d -> d
+    com.baidu.mapapi.ItemizedOverlay$a e -> e
+    com.baidu.mapapi.ItemizedOverlay$OnFocusChangeListener f -> f
+    int g -> g
+    int h -> h
+    android.graphics.drawable.Drawable boundCenterBottom(android.graphics.drawable.Drawable) -> boundCenterBottom
+    android.graphics.drawable.Drawable boundCenter(android.graphics.drawable.Drawable) -> boundCenter
+    android.graphics.drawable.Drawable a(android.graphics.drawable.Drawable,com.baidu.mapapi.ItemizedOverlay$b) -> a
+    com.baidu.mapapi.OverlayItem createItem(int) -> createItem
+    int size() -> size
+    com.baidu.mapapi.GeoPoint getCenter() -> getCenter
+    int getIndexToDraw(int) -> getIndexToDraw
+    void draw(android.graphics.Canvas,com.baidu.mapapi.MapView,boolean) -> draw
+    void a(android.graphics.Canvas,com.baidu.mapapi.MapView,boolean,com.baidu.mapapi.OverlayItem,int) -> a
     android.graphics.drawable.Drawable a(com.baidu.mapapi.ItemizedOverlay) -> a
-    void setFocus(com.baidu.mapapi.OverlayItem) -> a
-    boolean onTap(com.baidu.mapapi.GeoPoint,com.baidu.mapapi.MapView) -> a
-    boolean hitTest$6571e7d8(android.graphics.drawable.Drawable,int,int) -> a
-    boolean onTap(int) -> a
-com.baidu.mapapi.ItemizedOverlay$OnFocusChangeListener -> com.baidu.mapapi.f:
-com.baidu.mapapi.ItemizedOverlay$a -> com.baidu.mapapi.g:
-    java.util.ArrayList b -> a
-    com.baidu.mapapi.ItemizedOverlay d -> b
+    int getLatSpanE6() -> getLatSpanE6
+    int getLonSpanE6() -> getLonSpanE6
+    void populate() -> populate
+    void setLastFocusedIndex(int) -> setLastFocusedIndex
+    void setFocus(com.baidu.mapapi.OverlayItem) -> setFocus
+    com.baidu.mapapi.OverlayItem getFocus() -> getFocus
+    int getLastFocusedIndex() -> getLastFocusedIndex
+    com.baidu.mapapi.OverlayItem getItem(int) -> getItem
+    com.baidu.mapapi.OverlayItem nextFocus(boolean) -> nextFocus
+    boolean onTap(com.baidu.mapapi.GeoPoint,com.baidu.mapapi.MapView) -> onTap
+    boolean onTrackballEvent(android.view.MotionEvent,com.baidu.mapapi.MapView) -> onTrackballEvent
+    boolean onKeyUp(int,android.view.KeyEvent,com.baidu.mapapi.MapView) -> onKeyUp
+    boolean onTouchEvent(android.view.MotionEvent,com.baidu.mapapi.MapView) -> onTouchEvent
+    boolean hitTest(com.baidu.mapapi.OverlayItem,android.graphics.drawable.Drawable,int,int) -> hitTest
+    void setOnFocusChangeListener(com.baidu.mapapi.ItemizedOverlay$OnFocusChangeListener) -> setOnFocusChangeListener
+    void setDrawFocusedItem(boolean) -> setDrawFocusedItem
+    boolean onTap(int) -> onTap
+    boolean onSnapToItem(int,int,android.graphics.Point,com.baidu.mapapi.MapView) -> onSnapToItem
+com.baidu.mapapi.ItemizedOverlay$OnFocusChangeListener -> com.baidu.mapapi.ItemizedOverlay$OnFocusChangeListener:
+    void onFocusChanged(com.baidu.mapapi.ItemizedOverlay,com.baidu.mapapi.OverlayItem) -> onFocusChanged
+com.baidu.mapapi.ItemizedOverlay$a -> com.baidu.mapapi.ItemizedOverlay$a:
+    java.util.ArrayList b -> b
+    java.util.ArrayList c -> c
+    com.baidu.mapapi.ItemizedOverlay d -> d
+    com.baidu.mapapi.ItemizedOverlay a -> a
+    int a() -> a
     int a(com.baidu.mapapi.OverlayItem) -> a
     com.baidu.mapapi.OverlayItem a(int) -> a
+    int b(int) -> b
+    int a(boolean) -> a
     boolean a(com.baidu.mapapi.GeoPoint,com.baidu.mapapi.MapView) -> a
+    android.graphics.Point a(com.baidu.mapapi.OverlayItem,com.baidu.mapapi.Projection,android.graphics.Point) -> a
+    int a(java.lang.Integer,java.lang.Integer) -> a
     int compare(java.lang.Object,java.lang.Object) -> compare
-com.baidu.mapapi.LocationListener -> com.baidu.mapapi.h:
-com.baidu.mapapi.MKGeneralListener -> com.baidu.mapapi.i:
-com.baidu.mapapi.MKLocationManager -> com.baidu.mapapi.j:
+com.baidu.mapapi.ItemizedOverlay$b -> com.baidu.mapapi.ItemizedOverlay$b:
+    com.baidu.mapapi.ItemizedOverlay$b a -> a
+    com.baidu.mapapi.ItemizedOverlay$b b -> b
+    com.baidu.mapapi.ItemizedOverlay$b c -> c
+    com.baidu.mapapi.ItemizedOverlay$b[] d -> d
+    com.baidu.mapapi.ItemizedOverlay$b[] values() -> values
+    com.baidu.mapapi.ItemizedOverlay$b valueOf(java.lang.String) -> valueOf
+com.baidu.mapapi.LocationListener -> com.baidu.mapapi.LocationListener:
+    void onLocationChanged(android.location.Location) -> onLocationChanged
+com.baidu.mapapi.MKAddrInfo -> com.baidu.mapapi.MKAddrInfo:
+    int MK_GEOCODE -> MK_GEOCODE
+    int MK_REVERSEGEOCODE -> MK_REVERSEGEOCODE
+    int type -> type
+    java.lang.String strBusiness -> strBusiness
+    java.lang.String strAddr -> strAddr
+    com.baidu.mapapi.MKGeocoderAddressComponent addressComponents -> addressComponents
+    com.baidu.mapapi.GeoPoint geoPt -> geoPt
+    java.util.ArrayList poiList -> poiList
+com.baidu.mapapi.MKBusLineResult -> com.baidu.mapapi.MKBusLineResult:
+    java.lang.String a -> a
+    java.lang.String b -> b
+    int c -> c
+    java.lang.String d -> d
+    java.lang.String e -> e
+    com.baidu.mapapi.MKRoute f -> f
+    com.baidu.mapapi.MKRoute getBusRoute() -> getBusRoute
+    java.lang.String getBusCompany() -> getBusCompany
+    java.lang.String getBusName() -> getBusName
+    java.lang.String getStartTime() -> getStartTime
+    java.lang.String getEndTime() -> getEndTime
+    int isMonTicket() -> isMonTicket
+    com.baidu.mapapi.MKStep getStation(int) -> getStation
+    void a(java.lang.String) -> a
+    void b(java.lang.String) -> b
+    void a(java.lang.String,java.lang.String,int) -> a
+com.baidu.mapapi.MKCityListInfo -> com.baidu.mapapi.MKCityListInfo:
+    java.lang.String city -> city
+    int num -> num
+com.baidu.mapapi.MKDrivingRouteResult -> com.baidu.mapapi.MKDrivingRouteResult:
+    com.baidu.mapapi.MKPlanNode a -> a
+    com.baidu.mapapi.MKPlanNode b -> b
+    java.util.ArrayList c -> c
+    com.baidu.mapapi.MKRouteAddrResult d -> d
+    void a(java.util.ArrayList) -> a
+    void a(com.baidu.mapapi.MKPlanNode) -> a
+    void a(com.baidu.mapapi.MKRouteAddrResult) -> a
+    com.baidu.mapapi.MKRouteAddrResult getAddrResult() -> getAddrResult
+    com.baidu.mapapi.MKPlanNode getStart() -> getStart
+    void b(com.baidu.mapapi.MKPlanNode) -> b
+    com.baidu.mapapi.MKPlanNode getEnd() -> getEnd
+    int getNumPlan() -> getNumPlan
+    com.baidu.mapapi.MKRoutePlan getPlan(int) -> getPlan
+com.baidu.mapapi.MKEvent -> com.baidu.mapapi.MKEvent:
+    int MKEVENT_MAP_MOVE_FINISH -> MKEVENT_MAP_MOVE_FINISH
+    int MKEVENT_BUS_DETAIL -> MKEVENT_BUS_DETAIL
+    int MKEVENT_SUGGESTION -> MKEVENT_SUGGESTION
+    int ERROR_NETWORK_CONNECT -> ERROR_NETWORK_CONNECT
+    int ERROR_NETWORK_DATA -> ERROR_NETWORK_DATA
+    int ERROR_ROUTE_ADDR -> ERROR_ROUTE_ADDR
+    int ERROR_RESULT_NOT_FOUND -> ERROR_RESULT_NOT_FOUND
+    int ERROR_LOCATION_FAILED -> ERROR_LOCATION_FAILED
+    int ERROR_PERMISSION_DENIED -> ERROR_PERMISSION_DENIED
+    int a -> a
+    int b -> b
+    int c -> c
+com.baidu.mapapi.MKGeneralListener -> com.baidu.mapapi.MKGeneralListener:
+    void onGetNetworkState(int) -> onGetNetworkState
+    void onGetPermissionState(int) -> onGetPermissionState
+com.baidu.mapapi.MKGeocoderAddressComponent -> com.baidu.mapapi.MKGeocoderAddressComponent:
+    java.lang.String streetNumber -> streetNumber
+    java.lang.String street -> street
+    java.lang.String district -> district
+    java.lang.String city -> city
+    java.lang.String province -> province
+com.baidu.mapapi.MKLine -> com.baidu.mapapi.MKLine:
+    int LINE_TYPE_BUS -> LINE_TYPE_BUS
+    int LINE_TYPE_SUBWAY -> LINE_TYPE_SUBWAY
+    int b -> b
+    int c -> c
+    int d -> d
+    java.lang.String e -> e
+    java.lang.String f -> f
+    java.lang.String g -> g
+    com.baidu.mapapi.MKPoiInfo h -> h
+    com.baidu.mapapi.MKPoiInfo i -> i
+    java.util.ArrayList j -> j
+    java.util.ArrayList a -> a
+    void a(int) -> a
+    int getNumViaStops() -> getNumViaStops
+    void a(com.baidu.mapapi.MKPoiInfo) -> a
+    com.baidu.mapapi.MKPoiInfo getGetOnStop() -> getGetOnStop
+    void b(com.baidu.mapapi.MKPoiInfo) -> b
+    com.baidu.mapapi.MKPoiInfo getGetOffStop() -> getGetOffStop
+    void b(int) -> b
+    void a(java.lang.String) -> a
+    java.lang.String a() -> a
+    int getDistance() -> getDistance
+    void b(java.lang.String) -> b
+    java.lang.String getTitle() -> getTitle
+    void c(java.lang.String) -> c
+    int getType() -> getType
+    void c(int) -> c
+    java.lang.String getUid() -> getUid
+    void a(java.util.ArrayList) -> a
+    java.util.ArrayList getPoints() -> getPoints
+com.baidu.mapapi.MKLocationManager -> com.baidu.mapapi.MKLocationManager:
     android.location.Location a -> a
     android.location.Location b -> b
     long c -> c
     long d -> d
+    int MK_GPS_PROVIDER -> MK_GPS_PROVIDER
+    int MK_NETWORK_PROVIDER -> MK_NETWORK_PROVIDER
+    int MK_COORDINATE_WGS84 -> MK_COORDINATE_WGS84
+    int MK_COORDINATE_GCJ -> MK_COORDINATE_GCJ
+    int MK_COORDINATE_BAIDU09 -> MK_COORDINATE_BAIDU09
     java.util.List e -> e
     java.util.List f -> f
     android.hardware.SensorEventListener g -> g
     boolean a(com.baidu.mapapi.BMapManager) -> a
     void a() -> a
-    boolean enableProvider(int) -> a
+    boolean enableProvider(int) -> enableProvider
+    boolean disableProvider(int) -> disableProvider
     void b() -> b
-    boolean setNotifyInternal$255f299() -> c
-    android.location.Location getLocationInfo() -> d
-    void requestLocationUpdates(com.baidu.mapapi.LocationListener) -> a
-    void removeUpdates(com.baidu.mapapi.LocationListener) -> b
+    boolean setNotifyInternal(int,int) -> setNotifyInternal
+    android.os.Bundle getNotifyInternal() -> getNotifyInternal
+    void setLocationCoordinateType(int) -> setLocationCoordinateType
+    android.location.Location getLocationInfo() -> getLocationInfo
+    void requestLocationUpdates(com.baidu.mapapi.LocationListener) -> requestLocationUpdates
+    void removeUpdates(com.baidu.mapapi.LocationListener) -> removeUpdates
+    void c() -> c
     boolean a(android.hardware.SensorEventListener) -> a
     void b(android.hardware.SensorEventListener) -> b
+    boolean d() -> d
     void e() -> e
     java.util.List a(com.baidu.mapapi.MKLocationManager) -> a
-com.baidu.mapapi.MKLocationManager$1 -> com.baidu.mapapi.k:
+com.baidu.mapapi.MKLocationManager$1 -> com.baidu.mapapi.MKLocationManager$1:
     com.baidu.mapapi.MKLocationManager a -> a
     void onSensorChanged(android.hardware.SensorEvent) -> onSensorChanged
     void onAccuracyChanged(android.hardware.Sensor,int) -> onAccuracyChanged
+com.baidu.mapapi.MKMapViewListener -> com.baidu.mapapi.MKMapViewListener:
+    void onMapMoveFinish() -> onMapMoveFinish
+com.baidu.mapapi.MKOLSearchRecord -> com.baidu.mapapi.MKOLSearchRecord:
+    int cityID -> cityID
+    int size -> size
+    java.lang.String cityName -> cityName
+com.baidu.mapapi.MKOLUpdateElement -> com.baidu.mapapi.MKOLUpdateElement:
+    int UNDEFINED -> UNDEFINED
+    int DOWNLOADING -> DOWNLOADING
+    int WAITING -> WAITING
+    int SUSPENDED -> SUSPENDED
+    int FINISHED -> FINISHED
+    int cityID -> cityID
+    java.lang.String cityName -> cityName
+    int ratio -> ratio
+    int status -> status
+    com.baidu.mapapi.GeoPoint geoPt -> geoPt
+    int size -> size
+    int serversize -> serversize
+    boolean update -> update
+com.baidu.mapapi.MKOfflineMap -> com.baidu.mapapi.MKOfflineMap:
+    int TYPE_NEW_OFFLINE -> TYPE_NEW_OFFLINE
+    int TYPE_DOWNLOAD_UPDATE -> TYPE_DOWNLOAD_UPDATE
+    int TYPE_VER_UPDATE -> TYPE_VER_UPDATE
+    android.os.Bundle a -> a
+    boolean init(com.baidu.mapapi.BMapManager,com.baidu.mapapi.MKOfflineMapListener) -> init
+    boolean start(int) -> start
+    boolean pause(int) -> pause
+    boolean remove(int) -> remove
+    java.util.ArrayList getHotCityList() -> getHotCityList
+    java.util.ArrayList getOfflineCityList() -> getOfflineCityList
+    java.util.ArrayList searchCity(java.lang.String) -> searchCity
+    java.util.ArrayList getAllUpdateInfo() -> getAllUpdateInfo
+    com.baidu.mapapi.MKOLUpdateElement getUpdateInfo(int) -> getUpdateInfo
+    int scan() -> scan
+    boolean a() -> a
+com.baidu.mapapi.MKOfflineMapListener -> com.baidu.mapapi.MKOfflineMapListener:
+    void onGetOfflineMapState(int,int) -> onGetOfflineMapState
+com.baidu.mapapi.MKPlanNode -> com.baidu.mapapi.MKPlanNode:
+    java.lang.String name -> name
+    com.baidu.mapapi.GeoPoint pt -> pt
+com.baidu.mapapi.MKPoiInfo -> com.baidu.mapapi.MKPoiInfo:
+    java.lang.String name -> name
+    java.lang.String uid -> uid
+    java.lang.String address -> address
+    java.lang.String city -> city
+    java.lang.String phoneNum -> phoneNum
+    java.lang.String postCode -> postCode
+    int ePoiType -> ePoiType
+    com.baidu.mapapi.GeoPoint pt -> pt
+com.baidu.mapapi.MKPoiResult -> com.baidu.mapapi.MKPoiResult:
+    int a -> a
+    int b -> b
+    int c -> c
+    int d -> d
+    java.util.ArrayList e -> e
+    java.util.ArrayList f -> f
+    java.util.ArrayList g -> g
+    java.util.ArrayList getAllPoi() -> getAllPoi
+    java.util.ArrayList getMultiPoiResult() -> getMultiPoiResult
+    void a(java.util.ArrayList) -> a
+    void b(java.util.ArrayList) -> b
+    void c(java.util.ArrayList) -> c
+    com.baidu.mapapi.MKPoiInfo getPoi(int) -> getPoi
+    com.baidu.mapapi.MKCityListInfo getCityListInfo(int) -> getCityListInfo
+    void a(int) -> a
+    int getCurrentNumPois() -> getCurrentNumPois
+    void b(int) -> b
+    int getNumPois() -> getNumPois
+    void c(int) -> c
+    int getNumPages() -> getNumPages
+    void d(int) -> d
+    int getPageIndex() -> getPageIndex
+    int getCityListNum() -> getCityListNum
+com.baidu.mapapi.MKRoute -> com.baidu.mapapi.MKRoute:
+    int ROUTE_TYPE_UNKNOW -> ROUTE_TYPE_UNKNOW
+    int ROUTE_TYPE_DRIVING -> ROUTE_TYPE_DRIVING
+    int ROUTE_TYPE_WALKING -> ROUTE_TYPE_WALKING
+    int ROUTE_TYPE_BUS_LINE -> ROUTE_TYPE_BUS_LINE
+    int b -> b
+    int c -> c
+    int d -> d
+    com.baidu.mapapi.GeoPoint e -> e
+    com.baidu.mapapi.GeoPoint f -> f
+    java.util.ArrayList g -> g
+    java.util.ArrayList a -> a
+    java.util.ArrayList h -> h
+    java.lang.String i -> i
+    int getNumSteps() -> getNumSteps
+    com.baidu.mapapi.MKStep getStep(int) -> getStep
+    void a(java.util.ArrayList) -> a
+    void a(int) -> a
+    int getDistance() -> getDistance
+    int getIndex() -> getIndex
+    void a(java.lang.String) -> a
+    java.lang.String a() -> a
+    void b(java.util.ArrayList) -> b
+    java.util.ArrayList getArrayPoints() -> getArrayPoints
+    com.baidu.mapapi.GeoPoint getStart() -> getStart
+    void a(com.baidu.mapapi.GeoPoint) -> a
+    com.baidu.mapapi.GeoPoint getEnd() -> getEnd
+    void b(com.baidu.mapapi.GeoPoint) -> b
+    void b(int) -> b
+    int getRouteType() -> getRouteType
+com.baidu.mapapi.MKRouteAddrResult -> com.baidu.mapapi.MKRouteAddrResult:
+    java.util.ArrayList mStartPoiList -> mStartPoiList
+    java.util.ArrayList mEndPoiList -> mEndPoiList
+    java.util.ArrayList mStartCityList -> mStartCityList
+    java.util.ArrayList mEndCityList -> mEndCityList
+com.baidu.mapapi.MKRoutePlan -> com.baidu.mapapi.MKRoutePlan:
+    int a -> a
+    java.util.ArrayList b -> b
+    void a(java.util.ArrayList) -> a
+    int getNumRoutes() -> getNumRoutes
+    com.baidu.mapapi.MKRoute getRoute(int) -> getRoute
+    void a(int) -> a
+    int getDistance() -> getDistance
+com.baidu.mapapi.MKSearch -> com.baidu.mapapi.MKSearch:
+    int ECAR_TIME_FIRST -> ECAR_TIME_FIRST
+    int ECAR_DIS_FIRST -> ECAR_DIS_FIRST
+    int ECAR_FEE_FIRST -> ECAR_FEE_FIRST
+    int EBUS_TIME_FIRST -> EBUS_TIME_FIRST
+    int EBUS_TRANSFER_FIRST -> EBUS_TRANSFER_FIRST
+    int EBUS_WALK_FIRST -> EBUS_WALK_FIRST
+    int EBUS_NO_SUBWAY -> EBUS_NO_SUBWAY
+    int TYPE_CITY_LIST -> TYPE_CITY_LIST
+    int TYPE_POI_LIST -> TYPE_POI_LIST
+    int TYPE_AREA_POI_LIST -> TYPE_AREA_POI_LIST
+    int TYPE_AREA_MULTI_POI_LIST -> TYPE_AREA_MULTI_POI_LIST
+    android.os.Bundle a -> a
+    int b -> b
+    int c -> c
+    int d -> d
+    boolean init(com.baidu.mapapi.BMapManager,com.baidu.mapapi.MKSearchListener) -> init
+    int suggestionSearch(java.lang.String) -> suggestionSearch
+    int poiSearchInCity(java.lang.String,java.lang.String) -> poiSearchInCity
+    int poiSearchInbounds(java.lang.String,com.baidu.mapapi.GeoPoint,com.baidu.mapapi.GeoPoint) -> poiSearchInbounds
+    int poiMultiSearchInbounds(java.lang.String[],com.baidu.mapapi.GeoPoint,com.baidu.mapapi.GeoPoint) -> poiMultiSearchInbounds
+    int poiSearchNearBy(java.lang.String,com.baidu.mapapi.GeoPoint,int) -> poiSearchNearBy
+    int poiMultiSearchNearBy(java.lang.String[],com.baidu.mapapi.GeoPoint,int) -> poiMultiSearchNearBy
+    int reverseGeocode(com.baidu.mapapi.GeoPoint) -> reverseGeocode
+    int geocode(java.lang.String,java.lang.String) -> geocode
+    int goToPoiPage(int) -> goToPoiPage
+    void setPoiPageCapacity(int) -> setPoiPageCapacity
+    int getPoiPageCapacity() -> getPoiPageCapacity
+    int setTransitPolicy(int) -> setTransitPolicy
+    int setDrivingPolicy(int) -> setDrivingPolicy
+    int busLineSearch(java.lang.String,java.lang.String) -> busLineSearch
+    int transitSearch(java.lang.String,com.baidu.mapapi.MKPlanNode,com.baidu.mapapi.MKPlanNode) -> transitSearch
+    int drivingSearch(java.lang.String,com.baidu.mapapi.MKPlanNode,java.lang.String,com.baidu.mapapi.MKPlanNode) -> drivingSearch
+    int walkingSearch(java.lang.String,com.baidu.mapapi.MKPlanNode,java.lang.String,com.baidu.mapapi.MKPlanNode) -> walkingSearch
+    int offlineSearch(int) -> offlineSearch
+com.baidu.mapapi.MKSearchListener -> com.baidu.mapapi.MKSearchListener:
+    void onGetPoiResult(com.baidu.mapapi.MKPoiResult,int,int) -> onGetPoiResult
+    void onGetTransitRouteResult(com.baidu.mapapi.MKTransitRouteResult,int) -> onGetTransitRouteResult
+    void onGetDrivingRouteResult(com.baidu.mapapi.MKDrivingRouteResult,int) -> onGetDrivingRouteResult
+    void onGetWalkingRouteResult(com.baidu.mapapi.MKWalkingRouteResult,int) -> onGetWalkingRouteResult
+    void onGetAddrResult(com.baidu.mapapi.MKAddrInfo,int) -> onGetAddrResult
+    void onGetBusDetailResult(com.baidu.mapapi.MKBusLineResult,int) -> onGetBusDetailResult
+    void onGetSuggestionResult(com.baidu.mapapi.MKSuggestionResult,int) -> onGetSuggestionResult
+com.baidu.mapapi.MKStep -> com.baidu.mapapi.MKStep:
+    com.baidu.mapapi.GeoPoint a -> a
+    java.lang.String b -> b
+    int c -> c
+    com.baidu.mapapi.GeoPoint getPoint() -> getPoint
+    void a(com.baidu.mapapi.GeoPoint) -> a
+    int a() -> a
+    void a(int) -> a
+    java.lang.String getContent() -> getContent
+    void a(java.lang.String) -> a
+com.baidu.mapapi.MKSuggestionInfo -> com.baidu.mapapi.MKSuggestionInfo:
+    java.lang.String key -> key
+    java.lang.String city -> city
+com.baidu.mapapi.MKSuggestionResult -> com.baidu.mapapi.MKSuggestionResult:
+    int a -> a
+    java.util.ArrayList b -> b
+    java.util.ArrayList getAllSuggestions() -> getAllSuggestions
+    void a(java.util.ArrayList) -> a
+    int getSuggestionNum() -> getSuggestionNum
+    com.baidu.mapapi.MKSuggestionInfo getSuggestion(int) -> getSuggestion
+com.baidu.mapapi.MKTransitRoutePlan -> com.baidu.mapapi.MKTransitRoutePlan:
+    int a -> a
+    java.lang.String b -> b
+    java.util.ArrayList c -> c
+    java.util.ArrayList d -> d
+    com.baidu.mapapi.GeoPoint e -> e
+    com.baidu.mapapi.GeoPoint f -> f
+    void setLine(java.util.ArrayList) -> setLine
+    int getNumLines() -> getNumLines
+    com.baidu.mapapi.MKLine getLine(int) -> getLine
+    void a(java.util.ArrayList) -> a
+    int getNumRoute() -> getNumRoute
+    com.baidu.mapapi.MKRoute getRoute(int) -> getRoute
+    void a(int) -> a
+    int getDistance() -> getDistance
+    com.baidu.mapapi.GeoPoint getStart() -> getStart
+    void a(com.baidu.mapapi.GeoPoint) -> a
+    com.baidu.mapapi.GeoPoint getEnd() -> getEnd
+    void b(com.baidu.mapapi.GeoPoint) -> b
+    java.lang.String getContent() -> getContent
+com.baidu.mapapi.MKTransitRouteResult -> com.baidu.mapapi.MKTransitRouteResult:
+    com.baidu.mapapi.MKPlanNode a -> a
+    com.baidu.mapapi.MKPlanNode b -> b
+    java.util.ArrayList c -> c
+    com.baidu.mapapi.MKRouteAddrResult d -> d
+    void a(java.util.ArrayList) -> a
+    void a(com.baidu.mapapi.MKPlanNode) -> a
+    void a(com.baidu.mapapi.MKRouteAddrResult) -> a
+    com.baidu.mapapi.MKRouteAddrResult getAddrResult() -> getAddrResult
+    com.baidu.mapapi.MKPlanNode getStart() -> getStart
+    void b(com.baidu.mapapi.MKPlanNode) -> b
+    com.baidu.mapapi.MKPlanNode getEnd() -> getEnd
+    int getNumPlan() -> getNumPlan
+    com.baidu.mapapi.MKTransitRoutePlan getPlan(int) -> getPlan
+com.baidu.mapapi.MKWalkingRouteResult -> com.baidu.mapapi.MKWalkingRouteResult:
+    com.baidu.mapapi.MKPlanNode a -> a
+    com.baidu.mapapi.MKPlanNode b -> b
+    java.util.ArrayList c -> c
+    com.baidu.mapapi.MKRouteAddrResult d -> d
+    void a(java.util.ArrayList) -> a
+    void a(com.baidu.mapapi.MKPlanNode) -> a
+    void a(com.baidu.mapapi.MKRouteAddrResult) -> a
+    com.baidu.mapapi.MKRouteAddrResult getAddrResult() -> getAddrResult
+    com.baidu.mapapi.MKPlanNode getStart() -> getStart
+    void b(com.baidu.mapapi.MKPlanNode) -> b
+    com.baidu.mapapi.MKPlanNode getEnd() -> getEnd
+    int getNumPlan() -> getNumPlan
+    com.baidu.mapapi.MKRoutePlan getPlan(int) -> getPlan
 com.baidu.mapapi.MapActivity -> com.baidu.mapapi.MapActivity:
     com.baidu.mapapi.MapView a -> a
+    boolean isLocationDisplayed() -> isLocationDisplayed
+    boolean isRouteDisplayed() -> isRouteDisplayed
     void onNewIntent(android.content.Intent) -> onNewIntent
     void onCreate(android.os.Bundle) -> onCreate
     boolean a(com.baidu.mapapi.MapView) -> a
-    boolean initMapActivity(com.baidu.mapapi.BMapManager) -> a
+    boolean initMapActivity(com.baidu.mapapi.BMapManager) -> initMapActivity
     void onDestroy() -> onDestroy
     void onPause() -> onPause
     void onResume() -> onResume
-com.baidu.mapapi.MapController -> com.baidu.mapapi.l:
+com.baidu.mapapi.MapController -> com.baidu.mapapi.MapController:
     com.baidu.mapapi.MapView a -> a
+    void animateTo(com.baidu.mapapi.GeoPoint) -> animateTo
+    void animateTo(com.baidu.mapapi.GeoPoint,android.os.Message) -> animateTo
+    void animateTo(com.baidu.mapapi.GeoPoint,java.lang.Runnable) -> animateTo
     boolean onKey(android.view.View,int,android.view.KeyEvent) -> onKey
-    void scrollBy(int,int) -> a
+    void scrollBy(int,int) -> scrollBy
+    void setCenter(com.baidu.mapapi.GeoPoint) -> setCenter
+    int setZoom(int) -> setZoom
+    void stopAnimation(boolean) -> stopAnimation
+    void stopPanning() -> stopPanning
+    boolean zoomIn() -> zoomIn
+    boolean zoomInFixing(int,int) -> zoomInFixing
+    boolean zoomOut() -> zoomOut
+    boolean zoomOutFixing(int,int) -> zoomOutFixing
+    void zoomToSpan(int,int) -> zoomToSpan
 com.baidu.mapapi.MapView -> com.baidu.mapapi.MapView:
     com.baidu.mapapi.GeoPoint c -> c
     int d -> d
@@ -98,15 +488,29 @@ com.baidu.mapapi.MapView -> com.baidu.mapapi.MapView:
     boolean a(android.content.Context) -> a
     boolean a() -> a
     void b() -> b
+    void c() -> c
+    int d() -> d
+    boolean canCoverCenter() -> canCoverCenter
     boolean checkLayoutParams(android.view.ViewGroup$LayoutParams) -> checkLayoutParams
     void computeScroll() -> computeScroll
+    void displayZoomControls(boolean) -> displayZoomControls
     android.view.ViewGroup$LayoutParams generateDefaultLayoutParams() -> generateDefaultLayoutParams
     android.view.ViewGroup$LayoutParams generateLayoutParams(android.util.AttributeSet) -> generateLayoutParams
     android.view.ViewGroup$LayoutParams generateLayoutParams(android.view.ViewGroup$LayoutParams) -> generateLayoutParams
-    java.util.List getOverlays() -> c
-    com.baidu.mapapi.Projection getProjection() -> d
+    com.baidu.mapapi.MapController getController() -> getController
+    int getLatitudeSpan() -> getLatitudeSpan
+    int getLongitudeSpan() -> getLongitudeSpan
+    com.baidu.mapapi.GeoPoint getMapCenter() -> getMapCenter
+    int getMaxZoomLevel() -> getMaxZoomLevel
+    java.util.List getOverlays() -> getOverlays
+    com.baidu.mapapi.Projection getProjection() -> getProjection
+    boolean isDoubleClickZooming() -> isDoubleClickZooming
     void setDoubleClickZooming(boolean) -> setDoubleClickZooming
-    int getZoomLevel() -> e
+    android.view.View getZoomControls() -> getZoomControls
+    int getZoomLevel() -> getZoomLevel
+    boolean isStreetView() -> isStreetView
+    boolean isTraffic() -> isTraffic
+    boolean isSatellite() -> isSatellite
     void onDetachedFromWindow() -> onDetachedFromWindow
     void onFocusChanged(boolean,int,android.graphics.Rect) -> onFocusChanged
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
@@ -114,35 +518,57 @@ com.baidu.mapapi.MapView -> com.baidu.mapapi.MapView:
     boolean onTouchEvent(android.view.MotionEvent) -> onTouchEvent
     boolean onTrackballEvent(android.view.MotionEvent) -> onTrackballEvent
     void onLayout(boolean,int,int,int,int) -> onLayout
-    void e() -> f
+    void e() -> e
     void a(android.view.View,android.view.ViewGroup$LayoutParams) -> a
     void onDraw(android.graphics.Canvas) -> onDraw
     void onMeasure(int,int) -> onMeasure
+    void onRestoreInstanceState(android.os.Bundle) -> onRestoreInstanceState
+    void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
     void onSizeChanged(int,int,int,int) -> onSizeChanged
     void onWindowFocusChanged(boolean) -> onWindowFocusChanged
+    void preLoad() -> preLoad
     void setDrawOverlayWhenZooming(boolean) -> setDrawOverlayWhenZooming
     void setBuiltInZoomControls(boolean) -> setBuiltInZoomControls
     void setReticleDrawMode(com.baidu.mapapi.MapView$a) -> setReticleDrawMode
     void setSatellite(boolean) -> setSatellite
     void setStreetView(boolean) -> setStreetView
     void setTraffic(boolean) -> setTraffic
-    boolean f() -> g
-    boolean g() -> h
-    void b(int,int) -> a
-    double h() -> i
-com.baidu.mapapi.MapView$1 -> com.baidu.mapapi.m:
+    boolean f() -> f
+    boolean g() -> g
+    boolean a(int) -> a
+    void a(int,int) -> a
+    void a(com.baidu.mapapi.GeoPoint) -> a
+    void a(com.baidu.mapapi.GeoPoint,android.os.Message,java.lang.Runnable) -> a
+    void a(boolean) -> a
+    void b(int,int) -> b
+    boolean a(int,int,int) -> a
+    void b(int) -> b
+    double h() -> h
+    void regMapViewListener(com.baidu.mapapi.BMapManager,com.baidu.mapapi.MKMapViewListener) -> regMapViewListener
+com.baidu.mapapi.MapView$1 -> com.baidu.mapapi.MapView$1:
     com.baidu.mapapi.MapView a -> a
     void onClick(android.view.View) -> onClick
-com.baidu.mapapi.MapView$2 -> com.baidu.mapapi.n:
+com.baidu.mapapi.MapView$2 -> com.baidu.mapapi.MapView$2:
     com.baidu.mapapi.MapView a -> a
     void onClick(android.view.View) -> onClick
 com.baidu.mapapi.MapView$LayoutParams -> com.baidu.mapapi.MapView$LayoutParams:
-    int mode -> a
-    com.baidu.mapapi.GeoPoint point -> b
-    int x -> c
-    int y -> d
-    int alignment -> e
-com.baidu.mapapi.MapView$a -> com.baidu.mapapi.o:
+    int MODE_MAP -> MODE_MAP
+    int MODE_VIEW -> MODE_VIEW
+    int LEFT -> LEFT
+    int RIGHT -> RIGHT
+    int TOP -> TOP
+    int BOTTOM -> BOTTOM
+    int CENTER_HORIZONTAL -> CENTER_HORIZONTAL
+    int CENTER_VERTICAL -> CENTER_VERTICAL
+    int CENTER -> CENTER
+    int TOP_LEFT -> TOP_LEFT
+    int BOTTOM_CENTER -> BOTTOM_CENTER
+    int mode -> mode
+    com.baidu.mapapi.GeoPoint point -> point
+    int x -> x
+    int y -> y
+    int alignment -> alignment
+com.baidu.mapapi.MapView$a -> com.baidu.mapapi.MapView$a:
     com.baidu.mapapi.MapView$a a -> a
     com.baidu.mapapi.MapView$a b -> b
     com.baidu.mapapi.MapView$a c -> c
@@ -205,6 +631,9 @@ com.baidu.mapapi.Mj -> com.baidu.mapapi.Mj:
     boolean a(java.lang.String,com.baidu.mapapi.MKGeneralListener) -> a
     boolean a() -> a
     boolean b() -> b
+    void a(com.baidu.mapapi.MKSearchListener) -> a
+    void a(com.baidu.mapapi.MKOfflineMapListener) -> a
+    void a(com.baidu.mapapi.MKMapViewListener) -> a
     int InitMapApiEngine() -> InitMapApiEngine
     int initClass(java.lang.Object,int) -> initClass
     int UnInitMapApiEngine() -> UnInitMapApiEngine
@@ -240,23 +669,34 @@ com.baidu.mapapi.Mj -> com.baidu.mapapi.Mj:
     void renderCalDisScreenPos(android.os.Bundle) -> renderCalDisScreenPos
     void sendPhoneInfo(android.os.Bundle) -> sendPhoneInfo
     int SetProxyInfo(java.lang.String,int) -> SetProxyInfo
-    void changeGprsConnect() -> c
-    java.lang.String h() -> d
+    void JNI_callBackProc(int,int,int) -> JNI_callBackProc
+    void JNI_MapcallBackProc(int,int,int,int) -> JNI_MapcallBackProc
+    int d() -> d
+    void e() -> e
+    android.os.Bundle J_GetDevInfo(int) -> J_GetDevInfo
+    boolean c() -> c
+    void changeGprsConnect() -> changeGprsConnect
+    void f() -> f
+    java.lang.String g() -> g
+    java.lang.String h() -> h
+    void a(int,int) -> a
+    void a(int) -> a
     android.os.Handler a(com.baidu.mapapi.Mj) -> a
-com.baidu.mapapi.Mj$1 -> com.baidu.mapapi.p:
+com.baidu.mapapi.Mj$1 -> com.baidu.mapapi.Mj$1:
     com.baidu.mapapi.Mj a -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.baidu.mapapi.Mj$a -> com.baidu.mapapi.q:
+com.baidu.mapapi.Mj$a -> com.baidu.mapapi.Mj$a:
     int a -> a
     int b -> b
     int c -> c
     int d -> d
-com.baidu.mapapi.Mj$b -> com.baidu.mapapi.r:
+    com.baidu.mapapi.Mj e -> e
+com.baidu.mapapi.Mj$b -> com.baidu.mapapi.Mj$b:
     int a -> a
     int b -> b
     com.baidu.mapapi.Mj c -> c
     void run() -> run
-com.baidu.mapapi.MyLocationOverlay -> com.baidu.mapapi.s:
+com.baidu.mapapi.MyLocationOverlay -> com.baidu.mapapi.MyLocationOverlay:
     android.location.Location a -> a
     com.baidu.mapapi.GeoPoint b -> b
     com.baidu.mapapi.GeoPoint c -> c
@@ -269,25 +709,124 @@ com.baidu.mapapi.MyLocationOverlay -> com.baidu.mapapi.s:
     boolean j -> j
     float k -> k
     android.graphics.Paint l -> l
-    boolean enableCompass() -> a
-    void disableCompass() -> b
-    boolean enableMyLocation() -> c
-    void disableMyLocation() -> d
-    boolean onTap(com.baidu.mapapi.GeoPoint,com.baidu.mapapi.MapView) -> a
-    boolean draw$1bb12301(android.graphics.Canvas,com.baidu.mapapi.MapView) -> a
+    com.baidu.mapapi.GeoPoint GetBaidu09Point(com.baidu.mapapi.GeoPoint,int) -> GetBaidu09Point
+    void onLocationChanged(android.location.Location) -> onLocationChanged
+    boolean enableCompass() -> enableCompass
+    void disableCompass() -> disableCompass
+    boolean isCompassEnabled() -> isCompassEnabled
+    boolean enableMyLocation() -> enableMyLocation
+    void disableMyLocation() -> disableMyLocation
+    boolean isMyLocationEnabled() -> isMyLocationEnabled
+    boolean onSnapToItem(int,int,android.graphics.Point,com.baidu.mapapi.MapView) -> onSnapToItem
+    boolean onTap(com.baidu.mapapi.GeoPoint,com.baidu.mapapi.MapView) -> onTap
+    boolean dispatchTap() -> dispatchTap
+    boolean draw(android.graphics.Canvas,com.baidu.mapapi.MapView,boolean,long) -> draw
+    void drawMyLocation(android.graphics.Canvas,com.baidu.mapapi.MapView,android.location.Location,com.baidu.mapapi.GeoPoint,long) -> drawMyLocation
+    void drawCompass(android.graphics.Canvas,float) -> drawCompass
+    com.baidu.mapapi.GeoPoint getMyLocation() -> getMyLocation
+    android.location.Location getLastFix() -> getLastFix
+    float getOrientation() -> getOrientation
+    boolean runOnFirstFix(java.lang.Runnable) -> runOnFirstFix
     void onAccuracyChanged(android.hardware.Sensor,int) -> onAccuracyChanged
+    void onProviderDisabled(java.lang.String) -> onProviderDisabled
+    void onProviderEnabled(java.lang.String) -> onProviderEnabled
     void onSensorChanged(android.hardware.SensorEvent) -> onSensorChanged
-com.baidu.mapapi.Overlay -> com.baidu.mapapi.t:
-    boolean draw$1bb12301(android.graphics.Canvas,com.baidu.mapapi.MapView) -> a
-    boolean onTap(com.baidu.mapapi.GeoPoint,com.baidu.mapapi.MapView) -> a
-com.baidu.mapapi.OverlayItem -> com.baidu.mapapi.u:
-    com.baidu.mapapi.GeoPoint mPoint -> a
-    android.graphics.drawable.Drawable mMarker -> b
-    com.baidu.mapapi.GeoPoint getPoint() -> a
-com.baidu.mapapi.Projection -> com.baidu.mapapi.v:
-    com.baidu.mapapi.GeoPoint fromPixels(int,int) -> a
-    float metersToEquatorPixels(float) -> a
-    android.graphics.Point toPixels$1cab718(com.baidu.mapapi.GeoPoint) -> a
+com.baidu.mapapi.Overlay -> com.baidu.mapapi.Overlay:
+    float SHADOW_X_SKEW -> SHADOW_X_SKEW
+    float SHADOW_Y_SCALE -> SHADOW_Y_SCALE
+    boolean draw(android.graphics.Canvas,com.baidu.mapapi.MapView,boolean,long) -> draw
+    void draw(android.graphics.Canvas,com.baidu.mapapi.MapView,boolean) -> draw
+    boolean onKeyDown(int,android.view.KeyEvent,com.baidu.mapapi.MapView) -> onKeyDown
+    boolean onKeyUp(int,android.view.KeyEvent,com.baidu.mapapi.MapView) -> onKeyUp
+    boolean onTap(com.baidu.mapapi.GeoPoint,com.baidu.mapapi.MapView) -> onTap
+    boolean onTouchEvent(android.view.MotionEvent,com.baidu.mapapi.MapView) -> onTouchEvent
+    boolean onTrackballEvent(android.view.MotionEvent,com.baidu.mapapi.MapView) -> onTrackballEvent
+    void drawAt(android.graphics.Canvas,android.graphics.drawable.Drawable,int,int,boolean) -> drawAt
+    void a(android.graphics.Canvas,android.graphics.drawable.Drawable,int,int) -> a
+    void a(int,int,int,int) -> a
+com.baidu.mapapi.Overlay$Snappable -> com.baidu.mapapi.Overlay$Snappable:
+    boolean onSnapToItem(int,int,android.graphics.Point,com.baidu.mapapi.MapView) -> onSnapToItem
+com.baidu.mapapi.OverlayItem -> com.baidu.mapapi.OverlayItem:
+    com.baidu.mapapi.GeoPoint mPoint -> mPoint
+    java.lang.String mTitle -> mTitle
+    java.lang.String mSnippet -> mSnippet
+    android.graphics.drawable.Drawable mMarker -> mMarker
+    int ITEM_STATE_NORMAL_MASK -> ITEM_STATE_NORMAL_MASK
+    int ITEM_STATE_PRESSED_MASK -> ITEM_STATE_PRESSED_MASK
+    int ITEM_STATE_SELECTED_MASK -> ITEM_STATE_SELECTED_MASK
+    int ITEM_STATE_FOCUSED_MASK -> ITEM_STATE_FOCUSED_MASK
+    void setState(android.graphics.drawable.Drawable,int) -> setState
+    android.graphics.drawable.Drawable getMarker(int) -> getMarker
+    com.baidu.mapapi.GeoPoint getPoint() -> getPoint
+    java.lang.String getSnippet() -> getSnippet
+    java.lang.String getTitle() -> getTitle
+    java.lang.String routableAddress() -> routableAddress
+    void setMarker(android.graphics.drawable.Drawable) -> setMarker
+    int[] a(int) -> a
+com.baidu.mapapi.PoiOverlay -> com.baidu.mapapi.PoiOverlay:
+    java.util.ArrayList mList -> mList
+    com.baidu.mapapi.MapView a -> a
+    android.content.Context b -> b
+    int c -> c
+    boolean mUseToast -> mUseToast
+    void setData(java.util.ArrayList) -> setData
+    void animateTo() -> animateTo
+    com.baidu.mapapi.OverlayItem createItem(int) -> createItem
+    int size() -> size
+    boolean onTap(int) -> onTap
+    com.baidu.mapapi.MKPoiInfo getPoi(int) -> getPoi
+com.baidu.mapapi.Projection -> com.baidu.mapapi.Projection:
+    com.baidu.mapapi.GeoPoint fromPixels(int,int) -> fromPixels
+    float metersToEquatorPixels(float) -> metersToEquatorPixels
+    android.graphics.Point toPixels(com.baidu.mapapi.GeoPoint,android.graphics.Point) -> toPixels
+com.baidu.mapapi.RouteOverlay -> com.baidu.mapapi.RouteOverlay:
+    com.baidu.mapapi.MKRoute mRoute -> mRoute
+    java.util.ArrayList a -> a
+    com.baidu.mapapi.MapView b -> b
+    android.content.Context c -> c
+    android.util.DisplayMetrics d -> d
+    int e -> e
+    java.util.HashMap f -> f
+    void setData(com.baidu.mapapi.MKRoute) -> setData
+    void animateTo() -> animateTo
+    boolean onTap(int) -> onTap
+    com.baidu.mapapi.OverlayItem createItem(int) -> createItem
+    int size() -> size
+    void a(int,int,int,int) -> a
+    boolean draw(android.graphics.Canvas,com.baidu.mapapi.MapView,boolean,long) -> draw
+com.baidu.mapapi.RouteOverlay$1 -> com.baidu.mapapi.RouteOverlay$1:
+com.baidu.mapapi.RouteOverlay$a -> com.baidu.mapapi.RouteOverlay$a:
+    com.baidu.mapapi.GeoPoint a -> a
+    java.util.ArrayList b -> b
+    com.baidu.mapapi.RouteOverlay c -> c
+com.baidu.mapapi.RouteOverlay$b -> com.baidu.mapapi.RouteOverlay$b:
+    java.lang.String a -> a
+    com.baidu.mapapi.GeoPoint b -> b
+    int c -> c
+    int d -> d
+    com.baidu.mapapi.RouteOverlay e -> e
+com.baidu.mapapi.TransitOverlay -> com.baidu.mapapi.TransitOverlay:
+    com.baidu.mapapi.MKTransitRoutePlan mPlan -> mPlan
+    java.util.ArrayList a -> a
+    com.baidu.mapapi.MapView b -> b
+    android.content.Context c -> c
+    int d -> d
+    android.util.DisplayMetrics e -> e
+    boolean mUseToast -> mUseToast
+    void animateTo() -> animateTo
+    void setData(com.baidu.mapapi.MKTransitRoutePlan) -> setData
+    com.baidu.mapapi.OverlayItem createItem(int) -> createItem
+    int size() -> size
+    boolean onTap(int) -> onTap
+    boolean draw(android.graphics.Canvas,com.baidu.mapapi.MapView,boolean,long) -> draw
+com.baidu.mapapi.TransitOverlay$1 -> com.baidu.mapapi.TransitOverlay$1:
+com.baidu.mapapi.TransitOverlay$a -> com.baidu.mapapi.TransitOverlay$a:
+    java.lang.String a -> a
+    com.baidu.mapapi.GeoPoint b -> b
+    int c -> c
+    com.baidu.mapapi.TransitOverlay d -> d
+com.baidu.mapapi.VersionInfo -> com.baidu.mapapi.VersionInfo:
+    java.lang.String getApiVersion() -> getApiVersion
 com.baidu.mapapi.a -> com.baidu.mapapi.a:
     android.graphics.Bitmap h -> h
     java.nio.ShortBuffer i -> i
@@ -327,36 +866,41 @@ com.baidu.mapapi.a -> com.baidu.mapapi.a:
     java.lang.reflect.Method J -> J
     java.lang.reflect.Method K -> K
     com.baidu.mapapi.MapView$a L -> L
-    void a$3b4dfe4b(int,int) -> a
+    void a(int,int,int,int) -> a
     void a() -> a
-    void d(android.graphics.Canvas) -> a
+    void a(android.graphics.Canvas) -> a
+    void c(android.graphics.Canvas) -> c
+    void d(android.graphics.Canvas) -> d
     void a(int,int,int) -> a
     void onDraw(android.graphics.Canvas) -> onDraw
     void b(android.graphics.Canvas) -> b
     void onLayout(boolean,int,int,int,int) -> onLayout
+    boolean b() -> b
     void a(boolean) -> a
     boolean a(android.view.MotionEvent) -> a
     void a(boolean,int,android.graphics.Rect) -> a
-    boolean a$4765ad2() -> b
-    boolean b$53fcfd4e() -> c
-    boolean b$4765ad2() -> d
-    java.util.List c() -> e
+    boolean a(int,android.view.KeyEvent) -> a
+    boolean b(android.view.MotionEvent) -> b
+    boolean b(int,android.view.KeyEvent) -> b
+    java.util.List c() -> c
     void b(boolean) -> b
-com.baidu.mapapi.a$1 -> com.baidu.mapapi.w:
+    boolean d() -> d
+com.baidu.mapapi.a$1 -> com.baidu.mapapi.a$1:
     int[] a -> a
-com.baidu.mapapi.b -> com.baidu.mapapi.x:
+com.baidu.mapapi.b -> com.baidu.mapapi.b:
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
-com.baidu.mapapi.c -> com.baidu.mapapi.y:
+com.baidu.mapapi.c -> com.baidu.mapapi.c:
     char[] a -> a
     byte[] b -> b
     char[] a(char[]) -> a
     char[] b(char[]) -> b
-com.baidu.mapapi.d -> com.baidu.mapapi.z:
+com.baidu.mapapi.d -> com.baidu.mapapi.d:
     com.baidu.mapapi.MapView a -> a
-    com.baidu.mapapi.GeoPoint fromPixels(int,int) -> a
-    float metersToEquatorPixels(float) -> a
-    android.graphics.Point toPixels$1cab718(com.baidu.mapapi.GeoPoint) -> a
-com.baidu.mapapi.e -> com.baidu.mapapi.aa:
+    com.baidu.mapapi.GeoPoint fromPixels(int,int) -> fromPixels
+    float metersToEquatorPixels(float) -> metersToEquatorPixels
+    android.graphics.Point toPixels(com.baidu.mapapi.GeoPoint,android.graphics.Point) -> toPixels
+    android.graphics.Point a(com.baidu.mapapi.GeoPoint,android.graphics.Point) -> a
+com.baidu.mapapi.e -> com.baidu.mapapi.e:
     android.location.LocationManager b -> b
     android.location.LocationListener c -> c
     android.location.Location a -> a
@@ -364,6 +908,14 @@ com.baidu.mapapi.e -> com.baidu.mapapi.aa:
     com.baidu.mapapi.e$a e -> e
     int f -> f
     android.location.GpsStatus g -> g
+    void a(int,int,long) -> a
+    void a() -> a
+    void b() -> b
+    java.lang.String a(int,int,int,int,java.util.List,java.lang.String) -> a
+    void a(java.util.List) -> a
+    java.lang.String a(java.util.List,java.lang.String) -> a
+    java.lang.String b(java.util.List,java.lang.String) -> b
+    boolean a(java.util.List,java.util.List) -> a
     android.location.LocationManager a(com.baidu.mapapi.e) -> a
     android.location.LocationManager a(com.baidu.mapapi.e,android.location.LocationManager) -> a
     android.content.Context b(com.baidu.mapapi.e) -> b
@@ -371,12 +923,76 @@ com.baidu.mapapi.e -> com.baidu.mapapi.aa:
     android.location.GpsStatus a(com.baidu.mapapi.e,android.location.GpsStatus) -> a
     int d(com.baidu.mapapi.e) -> d
     int a(com.baidu.mapapi.e,int) -> a
-com.baidu.mapapi.e$a -> com.baidu.mapapi.ab:
+com.baidu.mapapi.e$1 -> com.baidu.mapapi.e$1:
+    com.baidu.mapapi.e a -> a
+    void onLocationChanged(android.location.Location) -> onLocationChanged
+    void onProviderDisabled(java.lang.String) -> onProviderDisabled
+    void onProviderEnabled(java.lang.String) -> onProviderEnabled
+    void onStatusChanged(java.lang.String,int,android.os.Bundle) -> onStatusChanged
+com.baidu.mapapi.e$a -> com.baidu.mapapi.e$a:
     com.baidu.mapapi.e a -> a
     void onGpsStatusChanged(int) -> onGpsStatusChanged
-com.baidu.mapapi.f -> com.baidu.mapapi.ac:
+com.baidu.mapapi.f -> com.baidu.mapapi.f:
     com.baidu.mapapi.MKGeneralListener a -> a
-com.baidu.mapapi.h -> com.baidu.mapapi.ad:
+    void a(com.baidu.mapapi.MKEvent) -> a
+com.baidu.mapapi.g -> com.baidu.mapapi.g:
+    com.baidu.mapapi.MKMapViewListener a -> a
+    void a(com.baidu.mapapi.MKEvent) -> a
+com.baidu.mapapi.h -> com.baidu.mapapi.h:
+    void a(com.baidu.mapapi.MKEvent) -> a
+com.baidu.mapapi.i -> com.baidu.mapapi.i:
+    com.baidu.mapapi.MKOfflineMapListener a -> a
+    void a(com.baidu.mapapi.MKEvent) -> a
+com.baidu.mapapi.j -> com.baidu.mapapi.j:
+    com.baidu.mapapi.MKSearchListener a -> a
+    void a(com.baidu.mapapi.MKEvent) -> a
+    void a(android.os.Bundle,com.baidu.mapapi.MKAddrInfo,int) -> a
+    void a(android.os.Bundle,com.baidu.mapapi.MKAddrInfo) -> a
+    void a(android.os.Bundle,com.baidu.mapapi.MKSuggestionResult,int) -> a
+    void a(android.os.Bundle,com.baidu.mapapi.MKPoiResult,int) -> a
+    void a(android.os.Bundle,com.baidu.mapapi.MKTransitRouteResult,int) -> a
+    void a(android.os.Bundle,com.baidu.mapapi.MKDrivingRouteResult,int) -> a
+    void a(android.os.Bundle,com.baidu.mapapi.MKWalkingRouteResult,int) -> a
+    int a(android.os.Bundle,com.baidu.mapapi.MKRouteAddrResult) -> a
+    void a(android.os.Bundle,java.util.ArrayList) -> a
+    void b(android.os.Bundle,java.util.ArrayList) -> b
+    boolean a(android.os.Bundle,com.baidu.mapapi.MKBusLineResult) -> a
+com.baidu.mapapi.k -> com.baidu.mapapi.k:
+    java.lang.reflect.Constructor a -> a
+    int b -> b
+    double a(int,com.baidu.mapapi.k$a) -> a
+    int a(java.util.ArrayList,int[],int,int,double) -> a
+    long a(com.baidu.mapapi.GeoPoint,com.baidu.mapapi.GeoPoint,com.baidu.mapapi.GeoPoint) -> a
+    boolean a(android.graphics.Point,android.graphics.Point,int,int) -> a
+    int a(java.util.ArrayList,java.util.ArrayList,int,java.util.ArrayList) -> a
+    int a(java.util.ArrayList,java.util.ArrayList,java.util.ArrayList,double) -> a
+    android.graphics.drawable.Drawable a(android.content.Context,java.lang.String) -> a
+    android.graphics.drawable.Drawable a(android.content.Context,java.lang.String,float) -> a
+com.baidu.mapapi.k$1 -> com.baidu.mapapi.k$1:
+    int[] a -> a
+com.baidu.mapapi.k$a -> com.baidu.mapapi.k$a:
+    com.baidu.mapapi.k$a a -> a
+    com.baidu.mapapi.k$a b -> b
+    com.baidu.mapapi.k$a c -> c
+    com.baidu.mapapi.k$a[] d -> d
+    com.baidu.mapapi.k$a[] values() -> values
+    com.baidu.mapapi.k$a valueOf(java.lang.String) -> valueOf
+com.baidu.mapapi.l -> com.baidu.mapapi.l:
+    android.graphics.Bitmap a -> a
+    android.graphics.Canvas b -> b
+    android.graphics.Bitmap$Config c -> c
+    void a(int,int) -> a
+    void a() -> a
+    void a(com.baidu.mapapi.m) -> a
+    android.graphics.Bitmap b() -> b
+com.baidu.mapapi.m -> com.baidu.mapapi.m:
+    void a(android.graphics.Canvas) -> a
+com.baidu.mapapi.n -> com.baidu.mapapi.n:
+    com.baidu.mapapi.l a -> a
+    android.graphics.drawable.Drawable b -> b
+    android.graphics.drawable.Drawable a(android.graphics.drawable.Drawable) -> a
+    void a(android.graphics.Canvas) -> a
+    void a(android.graphics.drawable.Drawable,android.graphics.drawable.Drawable) -> a
 com.dongfang.dicos.DicosMainActivity -> com.dongfang.dicos.DicosMainActivity:
     android.widget.RadioGroup radioGroup -> a
     android.widget.TabHost tabHost -> b
@@ -680,6 +1296,10 @@ com.dongfang.dicos.lottery.PrizeInfoElement -> com.dongfang.dicos.lottery.d:
     android.widget.TextView tvMobile2 -> b
     android.widget.TextView tvMobile3 -> c
     void initElement(java.lang.String,java.lang.String,java.lang.String) -> a
+com.dongfang.dicos.lottery.PrizeInfoTempActivity -> com.dongfang.dicos.lottery.PrizeInfoTempActivity:
+    android.widget.Button bBack -> a
+    void onCreate(android.os.Bundle) -> onCreate
+    void onClick(android.view.View) -> onClick
 com.dongfang.dicos.lottery.PrizeProvideActivity -> com.dongfang.dicos.lottery.PrizeProvideActivity:
     android.widget.Button bBack -> a
     android.widget.Button bShowMore -> b
@@ -1136,30 +1756,49 @@ com.dongfang.dicos.store.StoreDetailActivity -> com.dongfang.dicos.store.StoreDe
     double x -> g
     double y -> h
     java.lang.String telNumber -> i
-    java.lang.String id -> j
+    java.lang.String name -> j
+    java.lang.String id -> k
     void onCreate(android.os.Bundle) -> onCreate
     void onResume() -> onResume
     void onClick(android.view.View) -> onClick
 com.dongfang.dicos.store.StoreDetailMapActivity -> com.dongfang.dicos.store.StoreDetailMapActivity:
-    android.widget.Button bBack -> a
-    android.widget.TextView tvTitle -> b
-    java.lang.Double x -> c
-    java.lang.Double y -> d
-    com.baidu.mapapi.BMapManager mBMapMan -> e
-    com.baidu.mapapi.MapView mMapView -> f
-    com.baidu.mapapi.LocationListener mLocationListener -> g
-    com.baidu.mapapi.MyLocationOverlay mLocationOverlay -> h
-    java.lang.String mStrKey -> i
+    android.widget.Button bBack -> c
+    android.widget.TextView tvTitle -> d
+    java.lang.Double x -> e
+    java.lang.Double y -> f
+    java.lang.String name -> g
+    com.baidu.mapapi.BMapManager mBMapMan -> h
+    com.baidu.mapapi.MapView mMapView -> i
+    com.baidu.mapapi.LocationListener mLocationListener -> j
+    com.baidu.mapapi.MyLocationOverlay mLocationOverlay -> k
+    android.view.View mPopView -> a
+    com.dongfang.dicos.store.StoreDetailMapActivity$OverItemT overitem -> b
+    java.lang.String mStrKey -> l
     void onCreate(android.os.Bundle) -> onCreate
     void onResume() -> onResume
     void onPause() -> onPause
     void onDestroy() -> onDestroy
     void onClick(android.view.View) -> onClick
+    boolean isRouteDisplayed() -> isRouteDisplayed
+    com.baidu.mapapi.MapView access$0(com.dongfang.dicos.store.StoreDetailMapActivity) -> a
 com.dongfang.dicos.store.StoreDetailMapActivity$1 -> com.dongfang.dicos.store.a:
     com.dongfang.dicos.store.StoreDetailMapActivity this$0 -> a
+    com.baidu.mapapi.GeoPoint val$point -> b
+    void onLocationChanged(android.location.Location) -> onLocationChanged
 com.dongfang.dicos.store.StoreDetailMapActivity$MyGeneralListener -> com.dongfang.dicos.store.b:
     com.dongfang.dicos.store.StoreDetailMapActivity this$0 -> a
-com.dongfang.dicos.store.StoreListAdapter -> com.dongfang.dicos.store.c:
+    void onGetNetworkState(int) -> onGetNetworkState
+    void onGetPermissionState(int) -> onGetPermissionState
+com.dongfang.dicos.store.StoreDetailMapActivity$OverItemT -> com.dongfang.dicos.store.c:
+    java.util.List mGeoList -> a
+    android.graphics.drawable.Drawable marker -> c
+    com.dongfang.dicos.store.StoreDetailMapActivity this$0 -> b
+    void draw(android.graphics.Canvas,com.baidu.mapapi.MapView,boolean) -> draw
+    com.baidu.mapapi.OverlayItem createItem(int) -> createItem
+    int size() -> size
+    boolean onTap(int) -> onTap
+    boolean onTap(com.baidu.mapapi.GeoPoint,com.baidu.mapapi.MapView) -> onTap
+com.dongfang.dicos.store.StoreListAdapter -> com.dongfang.dicos.store.d:
     java.lang.String[] aJSONStoreArray -> a
     android.content.Context context -> b
     android.os.Handler handler -> c
@@ -1169,11 +1808,11 @@ com.dongfang.dicos.store.StoreListAdapter -> com.dongfang.dicos.store.c:
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     android.os.Handler access$0(com.dongfang.dicos.store.StoreListAdapter) -> a
-com.dongfang.dicos.store.StoreListAdapter$gotoOnClickListener -> com.dongfang.dicos.store.d:
+com.dongfang.dicos.store.StoreListAdapter$gotoOnClickListener -> com.dongfang.dicos.store.e:
     java.lang.String json -> b
     com.dongfang.dicos.store.StoreListAdapter this$0 -> a
     void onClick(android.view.View) -> onClick
-com.dongfang.dicos.store.StoreListElement -> com.dongfang.dicos.store.e:
+com.dongfang.dicos.store.StoreListElement -> com.dongfang.dicos.store.f:
     android.widget.ImageView ivDICOS_IC -> a
     android.widget.ImageView ivGoto -> b
     android.widget.TextView tvStoreName -> c
