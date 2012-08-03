@@ -31,7 +31,8 @@ public class SignHistoryElement {
 		try {
 			JSONObject js = new JSONObject(json);
 
-			tvStoreName.setText(js.getString(Actions.ACTIONS_KEY_NAME));
+			String name = js.getString(Actions.ACTIONS_KEY_NAME);
+			tvStoreName.setText(name.startsWith("德克士") ? name : "德克士" + name);
 			tvSignTime.setText(js.getString(Actions.ACTIONS_KEY_TIME));
 
 		} catch (JSONException e) {
