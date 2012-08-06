@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -271,6 +272,23 @@ public class KaZiMeiWeiActivity extends Activity implements OnClickListener, Vie
 			return super.onScroll(e1, e2, distanceX, distanceY);
 		}
 
+	}
+
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			Util.showExitDialog(this);
+
+			return false;
+		}
+
+		return super.onKeyDown(keyCode, event);
 	}
 
 }

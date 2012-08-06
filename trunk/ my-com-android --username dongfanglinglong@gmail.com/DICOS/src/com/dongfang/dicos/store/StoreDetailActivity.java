@@ -85,8 +85,10 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 		try {
 			JSONObject js = new JSONObject(json);
 
-			String address = js.getString(Actions.ACTIONS_KEY_PROVINCE) + js.getString(Actions.ACTIONS_KEY_CITY)
-					+ js.getString(Actions.ACTIONS_KEY_ADDRESS);
+			String address = js.getString(Actions.ACTIONS_KEY_ADDRESS);
+			// String address = js.getString(Actions.ACTIONS_KEY_PROVINCE) +
+			// js.getString(Actions.ACTIONS_KEY_CITY)
+			// + js.getString(Actions.ACTIONS_KEY_ADDRESS);
 
 			ULog.d(tag, "address = " + address);
 
@@ -120,6 +122,8 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 			if (Util.isNetworkAvailable(StoreDetailActivity.this)) {
 				intent = new Intent(StoreDetailActivity.this, SigneInActivity.class);
 				intent.putExtra("store_name", tvName.getText().toString());
+				intent.putExtra("store_add", tvAddress.getText().toString());
+				intent.putExtra("store_tel", tvTel.getText().toString());
 				intent.putExtra("x", x + "");
 				intent.putExtra("y", y + "");
 				intent.putExtra("id", id);
@@ -132,6 +136,9 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 		case R.id.textview_store_detail_address:
 			if (x > 0 && y > 0) {
 				intent = new Intent(StoreDetailActivity.this, StoreDetailMapActivity.class);
+				intent.putExtra("store_name", name);
+				intent.putExtra("store_add", tvAddress.getText().toString());
+				intent.putExtra("store_tel", tvTel.getText().toString());
 				intent.putExtra("x", x);
 				intent.putExtra("y", y);
 				intent.putExtra("name", name);

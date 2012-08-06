@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -98,7 +99,7 @@ public class MoreActivity extends Activity implements OnClickListener {
 	/** 退出对话框 */
 	public void showSystemExitDialog() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("德克士").setIcon(R.drawable.ic_menu_notifications).setMessage("是否要退出德克士？").setCancelable(false)
+		builder.setTitle("德克士").setIcon(R.drawable.ic_menu_notifications).setMessage("退出之后需重新登录，是否仍要退出德克士？").setCancelable(false)
 				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						/** 保存登录状态 */
@@ -184,4 +185,19 @@ public class MoreActivity extends Activity implements OnClickListener {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			Util.showExitDialog(this);
+
+			return false;
+		}
+
+		return super.onKeyDown(keyCode, event);
+	}
 }

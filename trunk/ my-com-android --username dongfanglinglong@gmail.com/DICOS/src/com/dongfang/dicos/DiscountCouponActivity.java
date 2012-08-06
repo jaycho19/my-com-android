@@ -1,7 +1,11 @@
 package com.dongfang.dicos;
 
+import com.dongfang.dicos.util.ULog;
+import com.dongfang.dicos.util.Util;
+
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 /**
  * ”≈ª›»Ø“≥√Ê
@@ -45,6 +49,21 @@ public class DiscountCouponActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			Util.showExitDialog(this);
 
+			return false;
+		}
+
+		return super.onKeyDown(keyCode, event);
+	}
 
 }

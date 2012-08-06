@@ -3,12 +3,15 @@ package com.dongfang.dicos.store;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -44,7 +47,7 @@ public class StoreDetailMapActivity extends MapActivity implements OnClickListen
 	private TextView			tvTitle;
 
 	private Double				x, y;
-	private String				name;
+	private String				name, add, tel;
 
 	private BMapManager			mBMapMan			= null;
 	private MapView				mMapView			= null;
@@ -64,7 +67,9 @@ public class StoreDetailMapActivity extends MapActivity implements OnClickListen
 		Intent intent = getIntent();
 		x = intent.getExtras().getDouble("x");
 		y = intent.getExtras().getDouble("y");
-		name = intent.getExtras().getString("name");
+		name = intent.getExtras().getString("store_name");
+		add = intent.getExtras().getString("store_add");
+		tel = intent.getExtras().getString("store_tel");
 
 		ULog.d(tag, "onCreate x = " + x + " ; y = " + y + " ; name = " + name);
 
@@ -109,6 +114,17 @@ public class StoreDetailMapActivity extends MapActivity implements OnClickListen
 		// 创建点击mark时的弹出泡泡
 		mPopView = super.getLayoutInflater().inflate(R.layout.popview, null);
 		((TextView) mPopView.findViewById(R.id.textview_popview_store_name)).setText(name);
+		if (!TextUtils.isEmpty(add)) {
+			TextView tv = ((TextView) mPopView.findViewById(R.id.textview_popview_store_add));
+			tv.setText(add);
+			tv.setVisibility(View.VISIBLE);
+		}
+		if (!TextUtils.isEmpty(tel)) {
+			TextView tv = ((TextView) mPopView.findViewById(R.id.textview_popview_store_tel));
+			tv.setText(tel);
+			tv.setVisibility(View.VISIBLE);
+		}
+
 		mMapView.addView(mPopView, new MapView.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, null,
 				MapView.LayoutParams.TOP_LEFT));
 		mPopView.setVisibility(View.GONE);
