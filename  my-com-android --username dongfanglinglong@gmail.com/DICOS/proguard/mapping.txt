@@ -1007,6 +1007,7 @@ com.dongfang.dicos.DiscountCouponActivity -> com.dongfang.dicos.DiscountCouponAc
     void onPause() -> onPause
     void onStop() -> onStop
     void onDestroy() -> onDestroy
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
 com.dongfang.dicos.FirstpageActivity -> com.dongfang.dicos.FirstpageActivity:
     java.lang.Runnable gotoMain -> a
     void onCreate(android.os.Bundle) -> onCreate
@@ -1030,6 +1031,7 @@ com.dongfang.dicos.KaZiMeiWeiActivity -> com.dongfang.dicos.KaZiMeiWeiActivity:
     void onClick(android.view.View) -> onClick
     android.view.View makeView() -> makeView
     void showImage() -> a
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     android.view.GestureDetector access$0(com.dongfang.dicos.KaZiMeiWeiActivity) -> a
     void access$1(com.dongfang.dicos.KaZiMeiWeiActivity) -> b
     void access$2(com.dongfang.dicos.KaZiMeiWeiActivity) -> c
@@ -1056,6 +1058,7 @@ com.dongfang.dicos.MoreActivity -> com.dongfang.dicos.MoreActivity:
     android.widget.TextView tvBanben -> h
     void onCreate(android.os.Bundle) -> onCreate
     void onClick(android.view.View) -> onClick
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     android.widget.Button access$0(com.dongfang.dicos.MoreActivity) -> a
     com.dongfang.dicos.MoreActivity$MoreHandler access$1(com.dongfang.dicos.MoreActivity) -> b
 com.dongfang.dicos.MoreActivity$1 -> com.dongfang.dicos.d:
@@ -1079,6 +1082,7 @@ com.dongfang.dicos.MyDicosActivity -> com.dongfang.dicos.MyDicosActivity:
     void onStart() -> onStart
     void onResume() -> onResume
     void onClick(android.view.View) -> onClick
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     com.dongfang.dicos.mydicos.SignHistoryAdapter access$0(com.dongfang.dicos.MyDicosActivity) -> a
     android.widget.ProgressBar access$1(com.dongfang.dicos.MyDicosActivity) -> b
 com.dongfang.dicos.MyDicosActivity$1 -> com.dongfang.dicos.g:
@@ -1103,6 +1107,7 @@ com.dongfang.dicos.StoreSearchActivity -> com.dongfang.dicos.StoreSearchActivity
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onClick(android.view.View) -> onClick
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     com.dongfang.dicos.store.StoreListAdapter access$0(com.dongfang.dicos.StoreSearchActivity) -> a
     android.widget.ProgressBar access$1(com.dongfang.dicos.StoreSearchActivity) -> b
     android.widget.Button access$2(com.dongfang.dicos.StoreSearchActivity) -> c
@@ -1767,13 +1772,15 @@ com.dongfang.dicos.store.StoreDetailMapActivity -> com.dongfang.dicos.store.Stor
     java.lang.Double x -> e
     java.lang.Double y -> f
     java.lang.String name -> g
-    com.baidu.mapapi.BMapManager mBMapMan -> h
-    com.baidu.mapapi.MapView mMapView -> i
-    com.baidu.mapapi.LocationListener mLocationListener -> j
-    com.baidu.mapapi.MyLocationOverlay mLocationOverlay -> k
+    java.lang.String add -> h
+    java.lang.String tel -> i
+    com.baidu.mapapi.BMapManager mBMapMan -> j
+    com.baidu.mapapi.MapView mMapView -> k
+    com.baidu.mapapi.LocationListener mLocationListener -> l
+    com.baidu.mapapi.MyLocationOverlay mLocationOverlay -> m
     android.view.View mPopView -> a
     com.dongfang.dicos.store.StoreDetailMapActivity$OverItemT overitem -> b
-    java.lang.String mStrKey -> l
+    java.lang.String mStrKey -> n
     void onCreate(android.os.Bundle) -> onCreate
     void onResume() -> onResume
     void onPause() -> onPause
@@ -1833,6 +1840,12 @@ com.dongfang.dicos.util.Util -> com.dongfang.dicos.e.c:
     void showDialogSetNetWork(android.content.Context) -> d
     void showDialogLogin(android.content.Context) -> e
     void saveIpArea(android.content.Context) -> f
+    void showExitDialog(android.app.Activity) -> a
+com.dongfang.dicos.util.Util$1 -> com.dongfang.dicos.e.d:
+    android.app.Activity val$activity -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dongfang.dicos.util.Util$2 -> com.dongfang.dicos.e.e:
+    void onClick(android.content.DialogInterface,int) -> onClick
 com.dongfang.dicos.view.SideBar -> com.dongfang.dicos.view.SideBar:
     char[] aCharacter -> a
     android.widget.SectionIndexer sectionIndexter -> b

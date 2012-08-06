@@ -289,7 +289,7 @@ com.dongfang.dicos.store.StoreDetailActivity:
 com.dongfang.dicos.store.StoreDetailMapActivity:
     private static final java.lang.String tag
 com.dongfang.dicos.store.StoreDetailMapActivity$OverItemT:
-    227:228:public void updateOverlay()
+    243:244:public void updateOverlay()
 com.dongfang.dicos.store.StoreListAdapter:
     private static final java.lang.String tag
 com.dongfang.dicos.store.StoreListElement:
@@ -338,6 +338,6 @@ com.dongfang.dicos.util.ULog:
     29:33:public static void w(java.lang.String,java.lang.String)
 com.dongfang.dicos.util.Util:
     private static final java.lang.String tag
-    12:12:public Util()
+    18:18:public Util()
 com.dongfang.dicos.view.SideBar:
     private static final java.lang.String tag

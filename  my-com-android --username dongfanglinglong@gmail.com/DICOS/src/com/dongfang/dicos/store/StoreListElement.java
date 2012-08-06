@@ -42,8 +42,11 @@ public class StoreListElement {
 		try {
 			JSONObject js = new JSONObject(json);
 
-			String address = js.getString(Actions.ACTIONS_KEY_PROVINCE) + js.getString(Actions.ACTIONS_KEY_CITY)
-					+ js.getString(Actions.ACTIONS_KEY_ADDRESS);
+			// String address = js.getString(Actions.ACTIONS_KEY_PROVINCE) +
+			// js.getString(Actions.ACTIONS_KEY_CITY)
+			// + js.getString(Actions.ACTIONS_KEY_ADDRESS);
+
+			String address = js.getString(Actions.ACTIONS_KEY_ADDRESS);
 
 			ULog.d(tag, "address = " + address);
 

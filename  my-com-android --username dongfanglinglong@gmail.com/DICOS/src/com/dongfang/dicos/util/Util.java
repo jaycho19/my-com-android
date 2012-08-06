@@ -1,7 +1,13 @@
 package com.dongfang.dicos.util;
 
+import com.dongfang.dicos.MoreActivity;
+import com.dongfang.dicos.R;
+import com.dongfang.dicos.net.thread.LogoutThread;
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -84,6 +90,21 @@ public class Util {
 		ComParams.IPAREA = TextUtils.isEmpty(ComParams.IPAREA) ? setConfig.getString(
 				ComParams.SHAREDPREFERENCES_IP_AREA, "") : ComParams.IPAREA;
 
+	}
+
+	/** 退出对话框 */
+	public static void showExitDialog(final Activity activity) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		builder.setTitle("德克士").setIcon(R.drawable.ic_menu_notifications).setMessage("是否要退出德克士？")// .setCancelable(false)
+				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						activity.finish();
+					}
+				}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				}).show();
 	}
 
 }

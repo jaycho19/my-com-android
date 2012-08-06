@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -64,7 +65,7 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 
 		etCity = (AutoCompleteTextView) findViewById(R.id.autocompletetextview_storeseach_city);
 		etCity.setOnClickListener(this);
-		
+
 		etProvince.setInputType(InputType.TYPE_DATETIME_VARIATION_NORMAL);
 		etCity.setInputType(InputType.TYPE_DATETIME_VARIATION_NORMAL);
 
@@ -317,5 +318,21 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 				break;
 			}
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			Util.showExitDialog(this);
+
+			return false;
+		}
+
+		return super.onKeyDown(keyCode, event);
 	}
 }
