@@ -71,6 +71,9 @@ public class SigneInActivity extends Activity implements OnClickListener, CheckB
 	private String				lon			= "";
 	private String				lat			= "";
 	private String				id			= "";
+	private String				province	= "";
+	private String				city		= "";
+	private String				name		= "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -97,11 +100,28 @@ public class SigneInActivity extends Activity implements OnClickListener, CheckB
 
 		Intent intent = getIntent();
 		if (!TextUtils.isEmpty(intent.getStringExtra("store_name"))) {
-			etMessage.setText("我在" + intent.getStringExtra("store_name"));
+			// etMessage.setText("我在" + intent.getStringExtra("store_name"));
+
 			lon = intent.getStringExtra("x");
 			lat = intent.getStringExtra("y");
 			id = intent.getStringExtra("id");
-			ULog.d(tag, "lon = " + lon + ",lat = " + lat + ",id = " + id);
+			name = Util.initNameDicos(intent.getStringExtra("store_name").trim());
+			// etMessage.setText("我在" + name);
+			province = intent.getStringExtra("store_province").trim();
+			city = intent.getStringExtra("store_city").trim();
+
+			ULog.d(tag, "lon = " + lon + ",lat = " + lat + ",id = " + id + ",city = " + city + ",province = "
+					+ province);
+
+			// province = "黑龙江省";
+
+			if (!TextUtils.isEmpty(province)) {
+				province = (province.startsWith("黑龙江") || province.startsWith("内蒙古")) ? province = province.substring(
+						0, 3) : province.substring(0, 2);
+			}
+
+			etMessage.setHint("我在" + province + " " + city + name);
+
 		}
 
 	}
@@ -272,7 +292,6 @@ public class SigneInActivity extends Activity implements OnClickListener, CheckB
 					Toast.makeText(SigneInActivity.this, "签到失败", Toast.LENGTH_LONG).show();
 				}
 
-				
 				progressbar.setVisibility(View.GONE);
 				bOK.setClickable(true);
 				break;

@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import com.dongfang.dicos.net.Actions;
 import com.dongfang.dicos.util.ULog;
+import com.dongfang.dicos.util.Util;
 
 import android.widget.TextView;
 
@@ -31,8 +32,8 @@ public class SignHistoryElement {
 		try {
 			JSONObject js = new JSONObject(json);
 
-			String name = js.getString(Actions.ACTIONS_KEY_NAME);
-			tvStoreName.setText(name.contains("德克士") ? name : "德克士" + name);
+			String name = Util.initNameDicos(js.getString(Actions.ACTIONS_KEY_NAME));
+			tvStoreName.setText(name);
 			tvSignTime.setText(js.getString(Actions.ACTIONS_KEY_TIME));
 
 		} catch (JSONException e) {

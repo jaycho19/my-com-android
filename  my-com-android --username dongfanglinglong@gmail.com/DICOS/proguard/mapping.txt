@@ -1224,6 +1224,9 @@ com.dongfang.dicos.kzmw.SigneInActivity -> com.dongfang.dicos.kzmw.SigneInActivi
     java.lang.String lon -> j
     java.lang.String lat -> k
     java.lang.String id -> l
+    java.lang.String province -> m
+    java.lang.String city -> n
+    java.lang.String name -> o
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onClick(android.view.View) -> onClick
@@ -1763,6 +1766,8 @@ com.dongfang.dicos.store.StoreDetailActivity -> com.dongfang.dicos.store.StoreDe
     java.lang.String telNumber -> i
     java.lang.String name -> j
     java.lang.String id -> k
+    java.lang.String provinec -> l
+    java.lang.String city -> m
     void onCreate(android.os.Bundle) -> onCreate
     void onResume() -> onResume
     void onClick(android.view.View) -> onClick
@@ -1841,6 +1846,7 @@ com.dongfang.dicos.util.Util -> com.dongfang.dicos.e.c:
     void showDialogLogin(android.content.Context) -> e
     void saveIpArea(android.content.Context) -> f
     void showExitDialog(android.app.Activity) -> a
+    java.lang.String initNameDicos(java.lang.String) -> a
 com.dongfang.dicos.util.Util$1 -> com.dongfang.dicos.e.d:
     android.app.Activity val$activity -> a
     void onClick(android.content.DialogInterface,int) -> onClick

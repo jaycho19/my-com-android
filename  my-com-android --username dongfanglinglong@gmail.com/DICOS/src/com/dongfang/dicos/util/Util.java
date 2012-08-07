@@ -107,4 +107,13 @@ public class Util {
 				}).show();
 	}
 
+	/**
+	 * 初始化德克士店名，如果名称中没有包含德克士，就在添加上德克士字符串
+	 * @param name
+	 * @return
+	 */
+	public static String initNameDicos(String name) {
+		return name.contains("德克士") ? name : "德克士" + name;
+	}
+
 }

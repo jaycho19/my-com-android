@@ -37,7 +37,7 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 	private String				json;
 	private double				x, y;
 	private String				telNumber, name;
-	private String				id;
+	private String				id, provinec, city;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -97,13 +97,18 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 			telNumber = js.getString(Actions.ACTIONS_KEY_TEL);
 			tvTel.setText((telNumber.equalsIgnoreCase("null") ? "" : telNumber));
 
-			name = js.getString(Actions.ACTIONS_KEY_NAME).trim();
-			tvName.setText(name.contains("德克士") ? name : "德克士" + name);
+			name = Util.initNameDicos(js.getString(Actions.ACTIONS_KEY_NAME).trim());
+			tvName.setText(name);
 
 			x = js.getDouble(Actions.ACTIONS_KEY_X);
 			y = js.getDouble(Actions.ACTIONS_KEY_Y);
 
 			id = js.getInt(Actions.ACTIONS_KEY_ID) + "";
+			
+			provinec = js.getString(Actions.ACTIONS_KEY_PROVINCE).trim();
+			city = js.getString(Actions.ACTIONS_KEY_CITY).trim();
+			
+			
 			ULog.d(tag, "x = " + x + " ; y = " + y + " ; id = " + id);
 
 		} catch (JSONException e) {
@@ -122,8 +127,8 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 			if (Util.isNetworkAvailable(StoreDetailActivity.this)) {
 				intent = new Intent(StoreDetailActivity.this, SigneInActivity.class);
 				intent.putExtra("store_name", tvName.getText().toString());
-				intent.putExtra("store_add", tvAddress.getText().toString());
-				intent.putExtra("store_tel", tvTel.getText().toString());
+				intent.putExtra("store_province", provinec);
+				intent.putExtra("store_city", city);
 				intent.putExtra("x", x + "");
 				intent.putExtra("y", y + "");
 				intent.putExtra("id", id);

@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import com.dongfang.dicos.net.Actions;
 import com.dongfang.dicos.util.ULog;
+import com.dongfang.dicos.util.Util;
 
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -51,8 +52,8 @@ public class StoreListElement {
 			ULog.d(tag, "address = " + address);
 
 			tvStoreAddress.setText(address);
-			String name = js.getString(Actions.ACTIONS_KEY_NAME);
-			tvStoreName.setText(name.contains("德克士") ? name : "德克士" + name);
+			String name = Util.initNameDicos(js.getString(Actions.ACTIONS_KEY_NAME));
+			tvStoreName.setText(name);
 
 		} catch (JSONException e) {
 			ULog.d(tag, e.toString());
