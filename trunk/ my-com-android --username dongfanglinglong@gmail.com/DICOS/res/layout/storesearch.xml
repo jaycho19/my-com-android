@@ -72,7 +72,9 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/top_button_showmore" />
+            android:background="@drawable/top_button_showmore" 
+            android:visibility="gone"
+            />
 
         <ListView
             android:id="@+id/listView_storeseach_info"

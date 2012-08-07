@@ -91,8 +91,8 @@ com.dongfang.dicos.kzmw.SigneInActivity:
     public static final java.lang.String tag
     private static final java.lang.String TYPE_SINA
     private static final java.lang.String TYPE_KAIXIN
-    204:213:private void shareToSina(java.lang.String)
-    320:323:public void onIOException(java.io.IOException)
+    224:233:private void shareToSina(java.lang.String)
+    339:342:public void onIOException(java.io.IOException)
 com.dongfang.dicos.lottery.DetailActivity:
     public static final java.lang.String tag
 com.dongfang.dicos.lottery.InfoActivity:
@@ -294,7 +294,7 @@ com.dongfang.dicos.store.StoreListAdapter:
     private static final java.lang.String tag
 com.dongfang.dicos.store.StoreListElement:
     private static final java.lang.String tag
-    30:30:public java.lang.String getInfo()
+    31:31:public java.lang.String getInfo()
 com.dongfang.dicos.util.ComParams:
     public static final java.lang.String SINA_APP_KEY
     public static final java.lang.String SINA_APP_SECRET

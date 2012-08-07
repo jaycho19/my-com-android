@@ -50431,7 +50431,7 @@ Interfaces (count = 3):
   + Class [android/widget/CompoundButton$OnCheckedChangeListener]
   + Class [com/dongfang/dicos/d/c]
 
-Constant Pool (count = 332):
+Constant Pool (count = 372):
   + Integer [2130837547]
   + Integer [2130903069]
   + Integer [2131361905]
@@ -50441,9 +50441,12 @@ Constant Pool (count = 332):
   + Integer [2131361909]
   + Integer [2131361910]
   + String []
+  + String [ ]
   + String [ isChecked  = ]
+  + String [,city = ]
   + String [,id = ]
   + String [,lat = ]
+  + String [,province = ]
   + String [POST]
   + String [SigneInActivity]
   + String [id]
@@ -50458,18 +50461,23 @@ Constant Pool (count = 332):
   + String [source]
   + String [status]
   + String [statuses/update.json]
+  + String [store_city]
   + String [store_name]
+  + String [store_province]
   + String [x]
   + String [y]
+  + String [内蒙古]
   + String [取消]
   + String [德克士]
   + String [我在]
   + String [是否要同步到开心网？]
   + String [是否要同步到新浪微博？]
   + String [确定]
+  + String [黑龙江]
   + Class [android/app/Activity]
   + Class [android/app/AlertDialog$Builder]
   + Class [android/content/Intent]
+  + Class [android/os/Bundle]
   + Class [android/text/TextUtils]
   + Class [android/view/View]
   + Class [android/view/View$OnClickListener]
@@ -50486,6 +50494,7 @@ Constant Pool (count = 332):
   + Class [com/dongfang/dicos/d/o]
   + Class [com/dongfang/dicos/d/p]
   + Class [com/dongfang/dicos/e/b]
+  + Class [com/dongfang/dicos/e/c]
   + Class [com/dongfang/dicos/kzmw/SigneInActivity]
   + Class [com/dongfang/dicos/kzmw/c]
   + Class [com/dongfang/dicos/kzmw/d]
@@ -50505,6 +50514,9 @@ Constant Pool (count = 332):
   + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.j Ljava/lang/String;]
   + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.k Ljava/lang/String;]
   + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.l Ljava/lang/String;]
+  + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.m Ljava/lang/String;]
+  + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.n Ljava/lang/String;]
+  + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.o Ljava/lang/String;]
   + Methodref [android/app/Activity.<init> ()V]
   + Methodref [android/app/Activity.onCreate (Landroid/os/Bundle;)V]
   + Methodref [android/app/Activity.onStart ()V]
@@ -50525,7 +50537,7 @@ Constant Pool (count = 332):
   + Methodref [android/widget/CheckBox.setOnCheckedChangeListener (Landroid/widget/CompoundButton$OnCheckedChangeListener;)V]
   + Methodref [android/widget/CompoundButton.getId ()I]
   + Methodref [android/widget/CompoundButton.setChecked (Z)V]
-  + Methodref [android/widget/EditText.setText (Ljava/lang/CharSequence;)V]
+  + Methodref [android/widget/EditText.setHint (Ljava/lang/CharSequence;)V]
   + Methodref [android/widget/ProgressBar.isShown ()Z]
   + Methodref [android/widget/ProgressBar.setVisibility (I)V]
   + Methodref [com/dongfang/dicos/a/a.a (Landroid/content/Context;)Z]
@@ -50540,6 +50552,7 @@ Constant Pool (count = 332):
   + Methodref [com/dongfang/dicos/d/p.<init> ()V]
   + Methodref [com/dongfang/dicos/d/p.a (Ljava/lang/String;Ljava/lang/String;)V]
   + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
+  + Methodref [com/dongfang/dicos/e/c.a (Ljava/lang/String;)Ljava/lang/String;]
   + Methodref [com/dongfang/dicos/kzmw/SigneInActivity.b (Ljava/lang/String;)V]
   + Methodref [com/dongfang/dicos/kzmw/SigneInActivity.findViewById (I)Landroid/view/View;]
   + Methodref [com/dongfang/dicos/kzmw/SigneInActivity.finish ()V]
@@ -50550,6 +50563,9 @@ Constant Pool (count = 332):
   + Methodref [com/dongfang/dicos/kzmw/e.<init> (Lcom/dongfang/dicos/kzmw/SigneInActivity;)V]
   + Methodref [com/dongfang/dicos/kzmw/e.sendEmptyMessage (I)Z]
   + Methodref [java/lang/String.equals (Ljava/lang/Object;)Z]
+  + Methodref [java/lang/String.startsWith (Ljava/lang/String;)Z]
+  + Methodref [java/lang/String.substring (II)Ljava/lang/String;]
+  + Methodref [java/lang/String.trim ()Ljava/lang/String;]
   + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
   + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
   + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
@@ -50564,6 +50580,7 @@ Constant Pool (count = 332):
   + NameAndType [a ()Lcom/dongfang/dicos/d/l;]
   + NameAndType [a (Landroid/content/Context;)Z]
   + NameAndType [a (Landroid/content/Context;Ljava/lang/String;Lcom/dongfang/dicos/d/p;Ljava/lang/String;Lcom/dongfang/dicos/d/c;)V]
+  + NameAndType [a (Ljava/lang/String;)Ljava/lang/String;]
   + NameAndType [a (Ljava/lang/String;Ljava/lang/String;)V]
   + NameAndType [a Landroid/widget/Button;]
   + NameAndType [a Ljava/lang/String;]
@@ -50593,6 +50610,9 @@ Constant Pool (count = 332):
   + NameAndType [j Ljava/lang/String;]
   + NameAndType [k Ljava/lang/String;]
   + NameAndType [l Ljava/lang/String;]
+  + NameAndType [m Ljava/lang/String;]
+  + NameAndType [n Ljava/lang/String;]
+  + NameAndType [o Ljava/lang/String;]
   + NameAndType [onCreate (Landroid/os/Bundle;)V]
   + NameAndType [onStart ()V]
   + NameAndType [sendEmptyMessage (I)Z]
@@ -50600,19 +50620,23 @@ Constant Pool (count = 332):
   + NameAndType [setChecked (Z)V]
   + NameAndType [setClickable (Z)V]
   + NameAndType [setContentView (I)V]
+  + NameAndType [setHint (Ljava/lang/CharSequence;)V]
   + NameAndType [setIcon (I)Landroid/app/AlertDialog$Builder;]
   + NameAndType [setMessage (Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
   + NameAndType [setNegativeButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
   + NameAndType [setOnCheckedChangeListener (Landroid/widget/CompoundButton$OnCheckedChangeListener;)V]
   + NameAndType [setOnClickListener (Landroid/view/View$OnClickListener;)V]
   + NameAndType [setPositiveButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
-  + NameAndType [setText (Ljava/lang/CharSequence;)V]
   + NameAndType [setTitle (Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
   + NameAndType [setVisibility (I)V]
   + NameAndType [show ()Landroid/app/AlertDialog;]
+  + NameAndType [startsWith (Ljava/lang/String;)Z]
+  + NameAndType [substring (II)Ljava/lang/String;]
   + NameAndType [toString ()Ljava/lang/String;]
+  + NameAndType [trim ()Ljava/lang/String;]
   + NameAndType [valueOf (Ljava/lang/Object;)Ljava/lang/String;]
   + Utf8 []
+  + Utf8 [ ]
   + Utf8 [ isChecked  = ]
   + Utf8 [()I]
   + Utf8 [()Landroid/app/AlertDialog;]
@@ -50627,6 +50651,7 @@ Constant Pool (count = 332):
   + Utf8 [(I)Ljava/lang/StringBuilder;]
   + Utf8 [(I)V]
   + Utf8 [(I)Z]
+  + Utf8 [(II)Ljava/lang/String;]
   + Utf8 [(Landroid/content/Context;)V]
   + Utf8 [(Landroid/content/Context;)Z]
   + Utf8 [(Landroid/content/Context;Ljava/lang/String;Lcom/dongfang/dicos/d/p;Ljava/lang/String;Lcom/dongfang/dicos/d/c;)V]
@@ -50656,12 +50681,15 @@ Constant Pool (count = 332):
   + Utf8 [(Ljava/lang/String;)Ljava/lang/String;]
   + Utf8 [(Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + Utf8 [(Ljava/lang/String;)V]
+  + Utf8 [(Ljava/lang/String;)Z]
   + Utf8 [(Ljava/lang/String;Ljava/lang/String;)V]
   + Utf8 [(Z)Landroid/app/AlertDialog$Builder;]
   + Utf8 [(Z)Ljava/lang/StringBuilder;]
   + Utf8 [(Z)V]
+  + Utf8 [,city = ]
   + Utf8 [,id = ]
   + Utf8 [,lat = ]
+  + Utf8 [,province = ]
   + Utf8 [<init>]
   + Utf8 [Code]
   + Utf8 [Landroid/widget/Button;]
@@ -50679,6 +50707,7 @@ Constant Pool (count = 332):
   + Utf8 [android/app/Activity]
   + Utf8 [android/app/AlertDialog$Builder]
   + Utf8 [android/content/Intent]
+  + Utf8 [android/os/Bundle]
   + Utf8 [android/text/TextUtils]
   + Utf8 [android/view/View]
   + Utf8 [android/view/View$OnClickListener]
@@ -50698,6 +50727,7 @@ Constant Pool (count = 332):
   + Utf8 [com/dongfang/dicos/d/o]
   + Utf8 [com/dongfang/dicos/d/p]
   + Utf8 [com/dongfang/dicos/e/b]
+  + Utf8 [com/dongfang/dicos/e/c]
   + Utf8 [com/dongfang/dicos/kzmw/SigneInActivity]
   + Utf8 [com/dongfang/dicos/kzmw/c]
   + Utf8 [com/dongfang/dicos/kzmw/d]
@@ -50726,6 +50756,9 @@ Constant Pool (count = 332):
   + Utf8 [lat]
   + Utf8 [lon]
   + Utf8 [lon = ]
+  + Utf8 [m]
+  + Utf8 [n]
+  + Utf8 [o]
   + Utf8 [onCheckedChanged]
   + Utf8 [onClick]
   + Utf8 [onClick v.getId() = ]
@@ -50738,33 +50771,40 @@ Constant Pool (count = 332):
   + Utf8 [setChecked]
   + Utf8 [setClickable]
   + Utf8 [setContentView]
+  + Utf8 [setHint]
   + Utf8 [setIcon]
   + Utf8 [setMessage]
   + Utf8 [setNegativeButton]
   + Utf8 [setOnCheckedChangeListener]
   + Utf8 [setOnClickListener]
   + Utf8 [setPositiveButton]
-  + Utf8 [setText]
   + Utf8 [setTitle]
   + Utf8 [setVisibility]
   + Utf8 [show]
   + Utf8 [sina]
   + Utf8 [source]
+  + Utf8 [startsWith]
   + Utf8 [status]
   + Utf8 [statuses/update.json]
+  + Utf8 [store_city]
   + Utf8 [store_name]
+  + Utf8 [store_province]
+  + Utf8 [substring]
   + Utf8 [toString]
+  + Utf8 [trim]
   + Utf8 [valueOf]
   + Utf8 [x]
   + Utf8 [y]
+  + Utf8 [内蒙古]
   + Utf8 [取消]
   + Utf8 [德克士]
   + Utf8 [我在]
   + Utf8 [是否要同步到开心网？]
   + Utf8 [是否要同步到新浪微博？]
   + Utf8 [确定]
+  + Utf8 [黑龙江]
 
-Fields (count = 12):
+Fields (count = 15):
   + Field:        a Landroid/widget/Button;
     Access flags: 0x2
       = private android.widget.Button a
@@ -50801,308 +50841,442 @@ Fields (count = 12):
   + Field:        l Ljava/lang/String;
     Access flags: 0x2
       = private java.lang.String l
+  + Field:        m Ljava/lang/String;
+    Access flags: 0x2
+      = private java.lang.String m
+  + Field:        n Ljava/lang/String;
+    Access flags: 0x2
+      = private java.lang.String n
+  + Field:        o Ljava/lang/String;
+    Access flags: 0x2
+      = private java.lang.String o
 
 Methods (count = 18):
   - Method:       <init>()V
     Access flags: 0x1
       = public SigneInActivity()
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 23, locals = 1, stack = 2):
+    + Code attribute instructions (code length = 41, locals = 1, stack = 2):
       [0] aload_0 v0
-      [1] invokespecial #74
+      [1] invokespecial #86
         + Methodref [android/app/Activity.<init> ()V]
       [4] aload_0 v0
       [5] ldc #9
         + String []
-      [7] putfield #71
+      [7] putfield #80
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.j Ljava/lang/String;]
       [10] aload_0 v0
       [11] ldc #9
         + String []
-      [13] putfield #72
+      [13] putfield #81
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.k Ljava/lang/String;]
       [16] aload_0 v0
       [17] ldc #9
         + String []
-      [19] putfield #73
+      [19] putfield #82
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.l Ljava/lang/String;]
-      [22] return
+      [22] aload_0 v0
+      [23] ldc #9
+        + String []
+      [25] putfield #83
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.m Ljava/lang/String;]
+      [28] aload_0 v0
+      [29] ldc #9
+        + String []
+      [31] putfield #84
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.n Ljava/lang/String;]
+      [34] aload_0 v0
+      [35] ldc #9
+        + String []
+      [37] putfield #85
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.o Ljava/lang/String;]
+      [40] return
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 0):
   + Method:       onCreate(Landroid/os/Bundle;)V
     Access flags: 0x4
       = protected void onCreate(android.os.Bundle)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 257, locals = 2, stack = 4):
+    + Code attribute instructions (code length = 404, locals = 2, stack = 5):
       [0] aload_0 v0
       [1] aload_1 v1
-      [2] invokespecial #75
+      [2] invokespecial #87
         + Methodref [android/app/Activity.onCreate (Landroid/os/Bundle;)V]
       [5] aload_0 v0
       [6] ldc #2
         + Integer [2130903069]
-      [8] invokevirtual #113
+      [8] invokevirtual #126
         + Methodref [com/dongfang/dicos/kzmw/SigneInActivity.setContentView (I)V]
       [11] aload_0 v0
-      [12] new #58
+      [12] new #67
         + Class [com/dongfang/dicos/kzmw/e]
       [15] dup
       [16] aload_0 v0
-      [17] invokespecial #116
+      [17] invokespecial #129
         + Methodref [com/dongfang/dicos/kzmw/e.<init> (Lcom/dongfang/dicos/kzmw/SigneInActivity;)V]
-      [20] putfield #70
+      [20] putfield #79
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.i Lcom/dongfang/dicos/kzmw/e;]
       [23] aload_0 v0
       [24] aload_0 v0
       [25] ldc #3
         + Integer [2131361905]
-      [27] invokevirtual #110
+      [27] invokevirtual #123
         + Methodref [com/dongfang/dicos/kzmw/SigneInActivity.findViewById (I)Landroid/view/View;]
-      [30] checkcast #42
+      [30] checkcast #50
         + Class [android/widget/Button]
-      [33] putfield #62
+      [33] putfield #71
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.a Landroid/widget/Button;]
       [36] aload_0 v0
-      [37] getfield #62
+      [37] getfield #71
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.a Landroid/widget/Button;]
       [40] aload_0 v0
-      [41] invokevirtual #89
+      [41] invokevirtual #101
         + Methodref [android/widget/Button.setOnClickListener (Landroid/view/View$OnClickListener;)V]
       [44] aload_0 v0
       [45] aload_0 v0
       [46] ldc #8
         + Integer [2131361910]
-      [48] invokevirtual #110
+      [48] invokevirtual #123
         + Methodref [com/dongfang/dicos/kzmw/SigneInActivity.findViewById (I)Landroid/view/View;]
-      [51] checkcast #42
+      [51] checkcast #50
         + Class [android/widget/Button]
-      [54] putfield #63
+      [54] putfield #72
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.b Landroid/widget/Button;]
       [57] aload_0 v0
-      [58] getfield #63
+      [58] getfield #72
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.b Landroid/widget/Button;]
       [61] aload_0 v0
-      [62] invokevirtual #89
+      [62] invokevirtual #101
         + Methodref [android/widget/Button.setOnClickListener (Landroid/view/View$OnClickListener;)V]
       [65] aload_0 v0
       [66] aload_0 v0
       [67] ldc #6
         + Integer [2131361908]
-      [69] invokevirtual #110
+      [69] invokevirtual #123
         + Methodref [com/dongfang/dicos/kzmw/SigneInActivity.findViewById (I)Landroid/view/View;]
-      [72] checkcast #43
+      [72] checkcast #51
         + Class [android/widget/CheckBox]
-      [75] putfield #64
+      [75] putfield #73
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.c Landroid/widget/CheckBox;]
       [78] aload_0 v0
-      [79] getfield #64
+      [79] getfield #73
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.c Landroid/widget/CheckBox;]
       [82] aload_0 v0
-      [83] invokevirtual #91
+      [83] invokevirtual #103
         + Methodref [android/widget/CheckBox.setOnCheckedChangeListener (Landroid/widget/CompoundButton$OnCheckedChangeListener;)V]
       [86] aload_0 v0
       [87] aload_0 v0
       [88] ldc #7
         + Integer [2131361909]
-      [90] invokevirtual #110
+      [90] invokevirtual #123
         + Methodref [com/dongfang/dicos/kzmw/SigneInActivity.findViewById (I)Landroid/view/View;]
-      [93] checkcast #43
+      [93] checkcast #51
         + Class [android/widget/CheckBox]
-      [96] putfield #65
+      [96] putfield #74
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.d Landroid/widget/CheckBox;]
       [99] aload_0 v0
-      [100] getfield #65
+      [100] getfield #74
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.d Landroid/widget/CheckBox;]
       [103] aload_0 v0
-      [104] invokevirtual #91
+      [104] invokevirtual #103
         + Methodref [android/widget/CheckBox.setOnCheckedChangeListener (Landroid/widget/CompoundButton$OnCheckedChangeListener;)V]
       [107] aload_0 v0
       [108] aload_0 v0
       [109] ldc #5
         + Integer [2131361907]
-      [111] invokevirtual #110
+      [111] invokevirtual #123
         + Methodref [com/dongfang/dicos/kzmw/SigneInActivity.findViewById (I)Landroid/view/View;]
-      [114] checkcast #46
+      [114] checkcast #54
         + Class [android/widget/EditText]
-      [117] putfield #66
+      [117] putfield #75
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.e Landroid/widget/EditText;]
       [120] aload_0 v0
       [121] aload_0 v0
       [122] ldc #4
         + Integer [2131361906]
-      [124] invokevirtual #110
+      [124] invokevirtual #123
         + Methodref [com/dongfang/dicos/kzmw/SigneInActivity.findViewById (I)Landroid/view/View;]
-      [127] checkcast #47
+      [127] checkcast #55
         + Class [android/widget/ProgressBar]
-      [130] putfield #67
+      [130] putfield #76
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.f Landroid/widget/ProgressBar;]
       [133] aload_0 v0
-      [134] invokevirtual #112
+      [134] invokevirtual #125
         + Methodref [com/dongfang/dicos/kzmw/SigneInActivity.getIntent ()Landroid/content/Intent;]
       [137] dup
       [138] astore_1 v1
-      [139] ldc #27
+      [139] ldc #31
         + String [store_name]
-      [141] invokevirtual #85
+      [141] invokevirtual #97
         + Methodref [android/content/Intent.getStringExtra (Ljava/lang/String;)Ljava/lang/String;]
-      [144] invokestatic #86
+      [144] invokestatic #98
         + Methodref [android/text/TextUtils.isEmpty (Ljava/lang/CharSequence;)Z]
-      [147] ifne +109 (target=256)
+      [147] ifne +256 (target=403)
       [150] aload_0 v0
-      [151] getfield #66
-        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.e Landroid/widget/EditText;]
-      [154] new #60
-        + Class [java/lang/StringBuilder]
-      [157] dup
-      [158] ldc #32
-        + String [我在]
-      [160] invokespecial #120
-        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [163] aload_1 v1
-      [164] ldc #27
-        + String [store_name]
-      [166] invokevirtual #85
-        + Methodref [android/content/Intent.getStringExtra (Ljava/lang/String;)Ljava/lang/String;]
-      [169] invokevirtual #122
-        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [172] invokevirtual #124
-        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [175] invokevirtual #94
-        + Methodref [android/widget/EditText.setText (Ljava/lang/CharSequence;)V]
-      [178] aload_0 v0
-      [179] aload_1 v1
-      [180] ldc #28
+      [151] aload_1 v1
+      [152] ldc #33
         + String [x]
-      [182] invokevirtual #85
+      [154] invokevirtual #97
         + Methodref [android/content/Intent.getStringExtra (Ljava/lang/String;)Ljava/lang/String;]
-      [185] putfield #71
+      [157] putfield #80
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.j Ljava/lang/String;]
-      [188] aload_0 v0
-      [189] aload_1 v1
-      [190] ldc #29
+      [160] aload_0 v0
+      [161] aload_1 v1
+      [162] ldc #34
         + String [y]
-      [192] invokevirtual #85
+      [164] invokevirtual #97
         + Methodref [android/content/Intent.getStringExtra (Ljava/lang/String;)Ljava/lang/String;]
-      [195] putfield #72
+      [167] putfield #81
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.k Ljava/lang/String;]
-      [198] aload_0 v0
-      [199] aload_1 v1
-      [200] ldc #15
+      [170] aload_0 v0
+      [171] aload_1 v1
+      [172] ldc #18
         + String [id]
-      [202] invokevirtual #85
+      [174] invokevirtual #97
         + Methodref [android/content/Intent.getStringExtra (Ljava/lang/String;)Ljava/lang/String;]
-      [205] putfield #73
+      [177] putfield #82
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.l Ljava/lang/String;]
-      [208] ldc #14
+      [180] aload_0 v0
+      [181] aload_1 v1
+      [182] ldc #31
+        + String [store_name]
+      [184] invokevirtual #97
+        + Methodref [android/content/Intent.getStringExtra (Ljava/lang/String;)Ljava/lang/String;]
+      [187] invokevirtual #134
+        + Methodref [java/lang/String.trim ()Ljava/lang/String;]
+      [190] invokestatic #121
+        + Methodref [com/dongfang/dicos/e/c.a (Ljava/lang/String;)Ljava/lang/String;]
+      [193] putfield #85
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.o Ljava/lang/String;]
+      [196] aload_0 v0
+      [197] aload_1 v1
+      [198] ldc #32
+        + String [store_province]
+      [200] invokevirtual #97
+        + Methodref [android/content/Intent.getStringExtra (Ljava/lang/String;)Ljava/lang/String;]
+      [203] invokevirtual #134
+        + Methodref [java/lang/String.trim ()Ljava/lang/String;]
+      [206] putfield #83
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.m Ljava/lang/String;]
+      [209] aload_0 v0
+      [210] aload_1 v1
+      [211] ldc #30
+        + String [store_city]
+      [213] invokevirtual #97
+        + Methodref [android/content/Intent.getStringExtra (Ljava/lang/String;)Ljava/lang/String;]
+      [216] invokevirtual #134
+        + Methodref [java/lang/String.trim ()Ljava/lang/String;]
+      [219] putfield #84
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.n Ljava/lang/String;]
+      [222] ldc #17
         + String [SigneInActivity]
-      [210] new #60
+      [224] new #69
         + Class [java/lang/StringBuilder]
-      [213] dup
-      [214] ldc #19
+      [227] dup
+      [228] ldc #22
         + String [lon = ]
-      [216] invokespecial #120
+      [230] invokespecial #136
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [219] aload_0 v0
-      [220] getfield #71
+      [233] aload_0 v0
+      [234] getfield #80
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.j Ljava/lang/String;]
-      [223] invokevirtual #122
+      [237] invokevirtual #138
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [226] ldc #12
+      [240] ldc #14
         + String [,lat = ]
-      [228] invokevirtual #122
+      [242] invokevirtual #138
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [231] aload_0 v0
-      [232] getfield #72
+      [245] aload_0 v0
+      [246] getfield #81
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.k Ljava/lang/String;]
-      [235] invokevirtual #122
+      [249] invokevirtual #138
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [238] ldc #11
+      [252] ldc #13
         + String [,id = ]
-      [240] invokevirtual #122
+      [254] invokevirtual #138
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [243] aload_0 v0
-      [244] getfield #73
+      [257] aload_0 v0
+      [258] getfield #82
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.l Ljava/lang/String;]
-      [247] invokevirtual #122
+      [261] invokevirtual #138
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [250] invokevirtual #124
+      [264] ldc #12
+        + String [,city = ]
+      [266] invokevirtual #138
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [269] aload_0 v0
+      [270] getfield #84
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.n Ljava/lang/String;]
+      [273] invokevirtual #138
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [276] ldc #15
+        + String [,province = ]
+      [278] invokevirtual #138
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [281] aload_0 v0
+      [282] getfield #83
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.m Ljava/lang/String;]
+      [285] invokevirtual #138
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [288] invokevirtual #140
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [253] invokestatic #108
+      [291] invokestatic #120
         + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
-      [256] return
+      [294] aload_0 v0
+      [295] getfield #83
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.m Ljava/lang/String;]
+      [298] invokestatic #98
+        + Methodref [android/text/TextUtils.isEmpty (Ljava/lang/CharSequence;)Z]
+      [301] ifne +57 (target=358)
+      [304] aload_0 v0
+      [305] aload_0 v0
+      [306] getfield #83
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.m Ljava/lang/String;]
+      [309] ldc #42
+        + String [黑龙江]
+      [311] invokevirtual #132
+        + Methodref [java/lang/String.startsWith (Ljava/lang/String;)Z]
+      [314] ifne +15 (target=329)
+      [317] aload_0 v0
+      [318] getfield #83
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.m Ljava/lang/String;]
+      [321] ldc #35
+        + String [内蒙古]
+      [323] invokevirtual #132
+        + Methodref [java/lang/String.startsWith (Ljava/lang/String;)Z]
+      [326] ifeq +20 (target=346)
+      [329] aload_0 v0
+      [330] aload_0 v0
+      [331] getfield #83
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.m Ljava/lang/String;]
+      [334] iconst_0
+      [335] iconst_3
+      [336] invokevirtual #133
+        + Methodref [java/lang/String.substring (II)Ljava/lang/String;]
+      [339] dup_x1
+      [340] putfield #83
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.m Ljava/lang/String;]
+      [343] goto +12 (target=355)
+      [346] aload_0 v0
+      [347] getfield #83
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.m Ljava/lang/String;]
+      [350] iconst_0
+      [351] iconst_2
+      [352] invokevirtual #133
+        + Methodref [java/lang/String.substring (II)Ljava/lang/String;]
+      [355] putfield #83
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.m Ljava/lang/String;]
+      [358] aload_0 v0
+      [359] getfield #75
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.e Landroid/widget/EditText;]
+      [362] new #69
+        + Class [java/lang/StringBuilder]
+      [365] dup
+      [366] ldc #38
+        + String [我在]
+      [368] invokespecial #136
+        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
+      [371] aload_0 v0
+      [372] getfield #83
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.m Ljava/lang/String;]
+      [375] invokevirtual #138
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [378] ldc #10
+        + String [ ]
+      [380] invokevirtual #138
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [383] aload_0 v0
+      [384] getfield #84
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.n Ljava/lang/String;]
+      [387] invokevirtual #138
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [390] aload_0 v0
+      [391] getfield #85
+        + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.o Ljava/lang/String;]
+      [394] invokevirtual #138
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [397] invokevirtual #140
+        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
+      [400] invokevirtual #106
+        + Methodref [android/widget/EditText.setHint (Ljava/lang/CharSequence;)V]
+      [403] return
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 1):
-      + Stack map table attribute (count = 1):
-        - [256] Var: ...[a:android/content/Intent], Stack: (empty)
+      + Stack map table attribute (count = 5):
+        - [329] Var: [a:com/dongfang/dicos/kzmw/SigneInActivity][a:android/os/Bundle][a:android/content/Intent], Stack: [a:com/dongfang/dicos/kzmw/SigneInActivity]
+        - [346] Var: ..., Stack: [a:com/dongfang/dicos/kzmw/SigneInActivity]
+        - [355] Var: [a:com/dongfang/dicos/kzmw/SigneInActivity][a:android/os/Bundle][a:android/content/Intent], Stack: [a:com/dongfang/dicos/kzmw/SigneInActivity][a:java/lang/String]
+        - [358] Var: ..., Stack: (empty)
+        - [403] Var: ..., Stack: (empty)
   + Method:       onStart()V
     Access flags: 0x4
       = protected void onStart()
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 93, locals = 1, stack = 2):
       [0] aload_0 v0
-      [1] invokespecial #76
+      [1] invokespecial #88
         + Methodref [android/app/Activity.onStart ()V]
       [4] aload_0 v0
-      [5] invokestatic #102
+      [5] invokestatic #114
         + Methodref [com/dongfang/dicos/d/l.a ()Lcom/dongfang/dicos/d/l;]
-      [8] putfield #68
+      [8] putfield #77
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.g Lcom/dongfang/dicos/d/l;]
       [11] aload_0 v0
-      [12] getfield #68
+      [12] getfield #77
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.g Lcom/dongfang/dicos/d/l;]
       [15] aload_0 v0
-      [16] invokevirtual #103
+      [16] invokevirtual #115
         + Methodref [com/dongfang/dicos/d/l.a (Landroid/content/Context;)Z]
       [19] pop
       [20] aload_0 v0
-      [21] invokestatic #98
+      [21] invokestatic #110
         + Methodref [com/dongfang/dicos/a/a.b ()Lcom/dongfang/dicos/a/a;]
-      [24] putfield #69
+      [24] putfield #78
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.h Lcom/dongfang/dicos/a/a;]
       [27] aload_0 v0
-      [28] getfield #69
+      [28] getfield #78
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.h Lcom/dongfang/dicos/a/a;]
       [31] aload_0 v0
-      [32] invokevirtual #97
+      [32] invokevirtual #109
         + Methodref [com/dongfang/dicos/a/a.a (Landroid/content/Context;)Z]
       [35] pop
       [36] aload_0 v0
-      [37] getfield #68
+      [37] getfield #77
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.g Lcom/dongfang/dicos/d/l;]
-      [40] invokevirtual #104
+      [40] invokevirtual #116
         + Methodref [com/dongfang/dicos/d/l.f ()Z]
       [43] ifeq +14 (target=57)
       [46] aload_0 v0
-      [47] getfield #64
+      [47] getfield #73
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.c Landroid/widget/CheckBox;]
       [50] iconst_1
-      [51] invokevirtual #90
+      [51] invokevirtual #102
         + Methodref [android/widget/CheckBox.setChecked (Z)V]
       [54] goto +11 (target=65)
       [57] aload_0 v0
-      [58] getfield #64
+      [58] getfield #73
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.c Landroid/widget/CheckBox;]
       [61] iconst_0
-      [62] invokevirtual #90
+      [62] invokevirtual #102
         + Methodref [android/widget/CheckBox.setChecked (Z)V]
       [65] aload_0 v0
-      [66] getfield #69
+      [66] getfield #78
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.h Lcom/dongfang/dicos/a/a;]
-      [69] invokevirtual #99
+      [69] invokevirtual #111
         + Methodref [com/dongfang/dicos/a/a.c ()Z]
       [72] ifeq +12 (target=84)
       [75] aload_0 v0
-      [76] getfield #65
+      [76] getfield #74
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.d Landroid/widget/CheckBox;]
       [79] iconst_1
-      [80] invokevirtual #90
+      [80] invokevirtual #102
         + Methodref [android/widget/CheckBox.setChecked (Z)V]
       [83] return
       [84] aload_0 v0
-      [85] getfield #65
+      [85] getfield #74
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.d Landroid/widget/CheckBox;]
       [88] iconst_0
-      [89] invokevirtual #90
+      [89] invokevirtual #102
         + Methodref [android/widget/CheckBox.setChecked (Z)V]
       [92] return
       Code attribute exceptions (count = 0):
@@ -51117,26 +51291,26 @@ Methods (count = 18):
       = public void onClick(android.view.View)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 108, locals = 2, stack = 4):
-      [0] ldc #14
+      [0] ldc #17
         + String [SigneInActivity]
-      [2] new #60
+      [2] new #69
         + Class [java/lang/StringBuilder]
       [5] dup
-      [6] ldc #20
+      [6] ldc #23
         + String [onClick v.getId() = ]
-      [8] invokespecial #120
+      [8] invokespecial #136
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [11] aload_1 v1
-      [12] invokevirtual #87
+      [12] invokevirtual #99
         + Methodref [android/view/View.getId ()I]
-      [15] invokevirtual #121
+      [15] invokevirtual #137
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [18] invokevirtual #124
+      [18] invokevirtual #140
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [21] invokestatic #108
+      [21] invokestatic #120
         + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
       [24] aload_1 v1
-      [25] invokevirtual #87
+      [25] invokevirtual #99
         + Methodref [android/view/View.getId ()I]
       [28] lookupswitch (3 offsets, default=79) (target=107)
         2131361804: offset = 36, target = 64
@@ -51145,33 +51319,33 @@ Methods (count = 18):
         default: offset = 79, target = 107
       [64] return
       [65] aload_0 v0
-      [66] getfield #67
+      [66] getfield #76
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.f Landroid/widget/ProgressBar;]
-      [69] invokevirtual #95
+      [69] invokevirtual #107
         + Methodref [android/widget/ProgressBar.isShown ()Z]
       [72] ifne +11 (target=83)
       [75] aload_0 v0
-      [76] getfield #67
+      [76] getfield #76
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.f Landroid/widget/ProgressBar;]
       [79] iconst_0
-      [80] invokevirtual #96
+      [80] invokevirtual #108
         + Methodref [android/widget/ProgressBar.setVisibility (I)V]
       [83] aload_0 v0
-      [84] getfield #63
+      [84] getfield #72
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.b Landroid/widget/Button;]
       [87] iconst_0
-      [88] invokevirtual #88
+      [88] invokevirtual #100
         + Methodref [android/widget/Button.setClickable (Z)V]
       [91] aload_0 v0
-      [92] getfield #70
+      [92] getfield #79
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.i Lcom/dongfang/dicos/kzmw/e;]
       [95] sipush 1003
-      [98] invokevirtual #117
+      [98] invokevirtual #130
         + Methodref [com/dongfang/dicos/kzmw/e.sendEmptyMessage (I)Z]
       [101] pop
       [102] return
       [103] aload_0 v0
-      [104] invokevirtual #111
+      [104] invokevirtual #124
         + Methodref [com/dongfang/dicos/kzmw/SigneInActivity.finish ()V]
       [107] return
       Code attribute exceptions (count = 0):
@@ -51187,33 +51361,33 @@ Methods (count = 18):
       = public void onCheckedChanged(android.widget.CompoundButton,boolean)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 112, locals = 3, stack = 4):
-      [0] ldc #14
+      [0] ldc #17
         + String [SigneInActivity]
-      [2] new #60
+      [2] new #69
         + Class [java/lang/StringBuilder]
       [5] dup
-      [6] ldc #20
+      [6] ldc #23
         + String [onClick v.getId() = ]
-      [8] invokespecial #120
+      [8] invokespecial #136
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [11] aload_1 v1
-      [12] invokevirtual #92
+      [12] invokevirtual #104
         + Methodref [android/widget/CompoundButton.getId ()I]
-      [15] invokevirtual #121
+      [15] invokevirtual #137
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [18] ldc #10
+      [18] ldc #11
         + String [ isChecked  = ]
-      [20] invokevirtual #122
+      [20] invokevirtual #138
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [23] iload_2 v2
-      [24] invokevirtual #123
+      [24] invokevirtual #139
         + Methodref [java/lang/StringBuilder.append (Z)Ljava/lang/StringBuilder;]
-      [27] invokevirtual #124
+      [27] invokevirtual #140
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [30] invokestatic #108
+      [30] invokestatic #120
         + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
       [33] aload_1 v1
-      [34] invokevirtual #92
+      [34] invokevirtual #104
         + Methodref [android/widget/CompoundButton.getId ()I]
       [37] tableswitch (2 offsets, default=74) (target=111)
         2131361908: offset = 23, target = 60
@@ -51222,37 +51396,37 @@ Methods (count = 18):
       [60] iload_2 v2
       [61] ifeq +50 (target=111)
       [64] aload_0 v0
-      [65] getfield #68
+      [65] getfield #77
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.g Lcom/dongfang/dicos/d/l;]
-      [68] invokevirtual #104
+      [68] invokevirtual #116
         + Methodref [com/dongfang/dicos/d/l.f ()Z]
       [71] ifne +40 (target=111)
       [74] aload_0 v0
-      [75] ldc #23
+      [75] ldc #26
         + String [sina]
-      [77] invokespecial #109
+      [77] invokespecial #122
         + Methodref [com/dongfang/dicos/kzmw/SigneInActivity.b (Ljava/lang/String;)V]
       [80] aload_1 v1
       [81] iconst_0
-      [82] invokevirtual #93
+      [82] invokevirtual #105
         + Methodref [android/widget/CompoundButton.setChecked (Z)V]
       [85] return
       [86] iload_2 v2
       [87] ifeq +24 (target=111)
       [90] aload_0 v0
-      [91] getfield #69
+      [91] getfield #78
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.h Lcom/dongfang/dicos/a/a;]
-      [94] invokevirtual #99
+      [94] invokevirtual #111
         + Methodref [com/dongfang/dicos/a/a.c ()Z]
       [97] ifne +14 (target=111)
       [100] aload_1 v1
       [101] iconst_0
-      [102] invokevirtual #93
+      [102] invokevirtual #105
         + Methodref [android/widget/CompoundButton.setChecked (Z)V]
       [105] aload_0 v0
-      [106] ldc #16
+      [106] ldc #19
         + String [kaixin]
-      [108] invokespecial #109
+      [108] invokespecial #122
         + Methodref [com/dongfang/dicos/kzmw/SigneInActivity.b (Ljava/lang/String;)V]
       [111] return
       Code attribute exceptions (count = 0):
@@ -51267,73 +51441,73 @@ Methods (count = 18):
       = private void b(java.lang.String)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 92, locals = 3, stack = 5):
-      [0] new #37
+      [0] new #44
         + Class [android/app/AlertDialog$Builder]
       [3] dup
       [4] aload_0 v0
-      [5] invokespecial #77
+      [5] invokespecial #89
         + Methodref [android/app/AlertDialog$Builder.<init> (Landroid/content/Context;)V]
       [8] dup
       [9] astore_2 v2
-      [10] ldc #31
+      [10] ldc #37
         + String [德克士]
-      [12] invokevirtual #83
+      [12] invokevirtual #95
         + Methodref [android/app/AlertDialog$Builder.setTitle (Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
       [15] ldc #1
         + Integer [2130837547]
-      [17] invokevirtual #79
+      [17] invokevirtual #91
         + Methodref [android/app/AlertDialog$Builder.setIcon (I)Landroid/app/AlertDialog$Builder;]
       [20] iconst_0
-      [21] invokevirtual #78
+      [21] invokevirtual #90
         + Methodref [android/app/AlertDialog$Builder.setCancelable (Z)Landroid/app/AlertDialog$Builder;]
       [24] pop
-      [25] ldc #23
+      [25] ldc #26
         + String [sina]
       [27] aload_1 v1
-      [28] invokevirtual #118
+      [28] invokevirtual #131
         + Methodref [java/lang/String.equals (Ljava/lang/Object;)Z]
       [31] ifeq +13 (target=44)
       [34] aload_2 v2
-      [35] ldc #34
+      [35] ldc #40
         + String [是否要同步到新浪微博？]
-      [37] invokevirtual #80
+      [37] invokevirtual #92
         + Methodref [android/app/AlertDialog$Builder.setMessage (Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
       [40] pop
       [41] goto +19 (target=60)
-      [44] ldc #16
+      [44] ldc #19
         + String [kaixin]
       [46] aload_1 v1
-      [47] invokevirtual #118
+      [47] invokevirtual #131
         + Methodref [java/lang/String.equals (Ljava/lang/Object;)Z]
       [50] ifeq +10 (target=60)
       [53] aload_2 v2
-      [54] ldc #33
+      [54] ldc #39
         + String [是否要同步到开心网？]
-      [56] invokevirtual #80
+      [56] invokevirtual #92
         + Methodref [android/app/AlertDialog$Builder.setMessage (Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
       [59] pop
       [60] aload_2 v2
-      [61] ldc #35
+      [61] ldc #41
         + String [确定]
-      [63] new #56
+      [63] new #65
         + Class [com/dongfang/dicos/kzmw/c]
       [66] dup
       [67] aload_0 v0
-      [68] invokespecial #114
+      [68] invokespecial #127
         + Methodref [com/dongfang/dicos/kzmw/c.<init> (Lcom/dongfang/dicos/kzmw/SigneInActivity;)V]
-      [71] invokevirtual #82
+      [71] invokevirtual #94
         + Methodref [android/app/AlertDialog$Builder.setPositiveButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
-      [74] ldc #30
+      [74] ldc #36
         + String [取消]
-      [76] new #57
+      [76] new #66
         + Class [com/dongfang/dicos/kzmw/d]
       [79] dup
       [80] aload_0 v0
-      [81] invokespecial #115
+      [81] invokespecial #128
         + Methodref [com/dongfang/dicos/kzmw/d.<init> (Lcom/dongfang/dicos/kzmw/SigneInActivity;)V]
-      [84] invokevirtual #81
+      [84] invokevirtual #93
         + Methodref [android/app/AlertDialog$Builder.setNegativeButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
-      [87] invokevirtual #84
+      [87] invokevirtual #96
         + Methodref [android/app/AlertDialog$Builder.show ()Landroid/app/AlertDialog;]
       [90] pop
       [91] return
@@ -51347,21 +51521,21 @@ Methods (count = 18):
       = public final void a(java.lang.String)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 22, locals = 2, stack = 4):
-      [0] ldc #14
+      [0] ldc #17
         + String [SigneInActivity]
-      [2] new #60
+      [2] new #69
         + Class [java/lang/StringBuilder]
       [5] dup
-      [6] ldc #21
+      [6] ldc #24
         + String [onComplete ]
-      [8] invokespecial #120
+      [8] invokespecial #136
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [11] aload_1 v1
-      [12] invokevirtual #122
+      [12] invokevirtual #138
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [15] invokevirtual #124
+      [15] invokevirtual #140
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [18] invokestatic #108
+      [18] invokestatic #120
         + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
       [21] return
       Code attribute exceptions (count = 0):
@@ -51371,23 +51545,23 @@ Methods (count = 18):
       = public final void a(com.dongfang.dicos.d.o)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 25, locals = 2, stack = 4):
-      [0] ldc #14
+      [0] ldc #17
         + String [SigneInActivity]
-      [2] new #60
+      [2] new #69
         + Class [java/lang/StringBuilder]
       [5] dup
-      [6] ldc #22
+      [6] ldc #25
         + String [onError ]
-      [8] invokespecial #120
+      [8] invokespecial #136
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [11] aload_1 v1
-      [12] invokevirtual #105
+      [12] invokevirtual #117
         + Methodref [com/dongfang/dicos/d/o.toString ()Ljava/lang/String;]
-      [15] invokevirtual #122
+      [15] invokevirtual #138
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [18] invokevirtual #124
+      [18] invokevirtual #140
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [21] invokestatic #108
+      [21] invokestatic #120
         + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
       [24] return
       Code attribute exceptions (count = 0):
@@ -51398,7 +51572,7 @@ Methods (count = 18):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #67
+      [1] getfield #76
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.f Landroid/widget/ProgressBar;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -51409,7 +51583,7 @@ Methods (count = 18):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #63
+      [1] getfield #72
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.b Landroid/widget/Button;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -51420,7 +51594,7 @@ Methods (count = 18):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #66
+      [1] getfield #75
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.e Landroid/widget/EditText;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -51431,7 +51605,7 @@ Methods (count = 18):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #70
+      [1] getfield #79
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.i Lcom/dongfang/dicos/kzmw/e;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -51442,7 +51616,7 @@ Methods (count = 18):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #73
+      [1] getfield #82
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.l Ljava/lang/String;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -51453,7 +51627,7 @@ Methods (count = 18):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #65
+      [1] getfield #74
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.d Landroid/widget/CheckBox;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -51464,7 +51638,7 @@ Methods (count = 18):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #69
+      [1] getfield #78
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.h Lcom/dongfang/dicos/a/a;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -51475,7 +51649,7 @@ Methods (count = 18):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #64
+      [1] getfield #73
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.c Landroid/widget/CheckBox;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -51486,7 +51660,7 @@ Methods (count = 18):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #68
+      [1] getfield #77
         + Fieldref [com/dongfang/dicos/kzmw/SigneInActivity.g Lcom/dongfang/dicos/d/l;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -51500,76 +51674,76 @@ Methods (count = 18):
       [1] aload_1 v1
       [2] astore_1 v1
       [3] astore_0 v0
-      [4] new #53
+      [4] new #61
         + Class [com/dongfang/dicos/d/p]
       [7] dup
-      [8] invokespecial #106
+      [8] invokespecial #118
         + Methodref [com/dongfang/dicos/d/p.<init> ()V]
       [11] dup
       [12] astore v6
-      [14] ldc #24
+      [14] ldc #27
         + String [source]
       [16] aload_2 v2
-      [17] invokevirtual #107
+      [17] invokevirtual #119
         + Methodref [com/dongfang/dicos/d/p.a (Ljava/lang/String;Ljava/lang/String;)V]
       [20] aload v6
-      [22] ldc #25
+      [22] ldc #28
         + String [status]
       [24] aload_3 v3
-      [25] invokevirtual #107
+      [25] invokevirtual #119
         + Methodref [com/dongfang/dicos/d/p.a (Ljava/lang/String;Ljava/lang/String;)V]
       [28] aload v4
-      [30] invokestatic #86
+      [30] invokestatic #98
         + Methodref [android/text/TextUtils.isEmpty (Ljava/lang/CharSequence;)Z]
       [33] ifne +12 (target=45)
       [36] aload v6
-      [38] ldc #18
+      [38] ldc #21
         + String [lon]
       [40] aload v4
-      [42] invokevirtual #107
+      [42] invokevirtual #119
         + Methodref [com/dongfang/dicos/d/p.a (Ljava/lang/String;Ljava/lang/String;)V]
       [45] aload v5
-      [47] invokestatic #86
+      [47] invokestatic #98
         + Methodref [android/text/TextUtils.isEmpty (Ljava/lang/CharSequence;)Z]
       [50] ifne +12 (target=62)
       [53] aload v6
-      [55] ldc #17
+      [55] ldc #20
         + String [lat]
       [57] aload v5
-      [59] invokevirtual #107
+      [59] invokevirtual #119
         + Methodref [com/dongfang/dicos/d/p.a (Ljava/lang/String;Ljava/lang/String;)V]
       [62] ldc #9
         + String []
       [64] astore_2 v2
-      [65] new #60
+      [65] new #69
         + Class [java/lang/StringBuilder]
       [68] dup
-      [69] getstatic #61
+      [69] getstatic #70
         + Fieldref [com/dongfang/dicos/d/l.a Ljava/lang/String;]
-      [72] invokestatic #119
+      [72] invokestatic #135
         + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [75] invokespecial #120
+      [75] invokespecial #136
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [78] ldc #26
+      [78] ldc #29
         + String [statuses/update.json]
-      [80] invokevirtual #122
+      [80] invokevirtual #138
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [83] invokevirtual #124
+      [83] invokevirtual #140
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
       [86] astore_3 v3
-      [87] new #49
+      [87] new #57
         + Class [com/dongfang/dicos/d/a]
       [90] dup
       [91] aload_1 v1
-      [92] invokespecial #100
+      [92] invokespecial #112
         + Methodref [com/dongfang/dicos/d/a.<init> (Lcom/dongfang/dicos/d/l;)V]
       [95] aload_0 v0
       [96] aload_3 v3
       [97] aload v6
-      [99] ldc #13
+      [99] ldc #16
         + String [POST]
       [101] aload_0 v0
-      [102] invokevirtual #101
+      [102] invokevirtual #113
         + Methodref [com/dongfang/dicos/d/a.a (Landroid/content/Context;Ljava/lang/String;Lcom/dongfang/dicos/d/p;Ljava/lang/String;Lcom/dongfang/dicos/d/c;)V]
       [105] aload_2 v2
       [106] areturn
@@ -64644,17 +64818,16 @@ _____________________________________________________________________
 
 Interfaces (count = 0):
 
-Constant Pool (count = 72):
+Constant Pool (count = 68):
   + String [SignHistoryElement]
   + String [initElement ]
   + String [name]
   + String [time]
-  + String [德克士]
   + Class [android/widget/TextView]
   + Class [com/dongfang/dicos/b/b]
   + Class [com/dongfang/dicos/e/b]
+  + Class [com/dongfang/dicos/e/c]
   + Class [java/lang/Object]
-  + Class [java/lang/String]
   + Class [java/lang/StringBuilder]
   + Class [org/json/JSONException]
   + Class [org/json/JSONObject]
@@ -64663,8 +64836,8 @@ Constant Pool (count = 72):
   + Fieldref [com/dongfang/dicos/b/b.c Ljava/lang/String;]
   + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
   + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
+  + Methodref [com/dongfang/dicos/e/c.a (Ljava/lang/String;)Ljava/lang/String;]
   + Methodref [java/lang/Object.<init> ()V]
-  + Methodref [java/lang/String.contains (Ljava/lang/CharSequence;)Z]
   + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
   + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
@@ -64673,19 +64846,18 @@ Constant Pool (count = 72):
   + Methodref [org/json/JSONObject.getString (Ljava/lang/String;)Ljava/lang/String;]
   + NameAndType [<init> ()V]
   + NameAndType [<init> (Ljava/lang/String;)V]
+  + NameAndType [a (Ljava/lang/String;)Ljava/lang/String;]
   + NameAndType [a (Ljava/lang/String;Ljava/lang/String;)V]
   + NameAndType [a Landroid/widget/TextView;]
   + NameAndType [append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + NameAndType [b Landroid/widget/TextView;]
   + NameAndType [c Ljava/lang/String;]
-  + NameAndType [contains (Ljava/lang/CharSequence;)Z]
   + NameAndType [getString (Ljava/lang/String;)Ljava/lang/String;]
   + NameAndType [setText (Ljava/lang/CharSequence;)V]
   + NameAndType [toString ()Ljava/lang/String;]
   + Utf8 [()Ljava/lang/String;]
   + Utf8 [()V]
   + Utf8 [(Ljava/lang/CharSequence;)V]
-  + Utf8 [(Ljava/lang/CharSequence;)Z]
   + Utf8 [(Ljava/lang/String;)Ljava/lang/String;]
   + Utf8 [(Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + Utf8 [(Ljava/lang/String;)V]
@@ -64703,11 +64875,10 @@ Constant Pool (count = 72):
   + Utf8 [c]
   + Utf8 [com/dongfang/dicos/b/b]
   + Utf8 [com/dongfang/dicos/e/b]
-  + Utf8 [contains]
+  + Utf8 [com/dongfang/dicos/e/c]
   + Utf8 [getString]
   + Utf8 [initElement ]
   + Utf8 [java/lang/Object]
-  + Utf8 [java/lang/String]
   + Utf8 [java/lang/StringBuilder]
   + Utf8 [name]
   + Utf8 [org/json/JSONException]
@@ -64715,7 +64886,6 @@ Constant Pool (count = 72):
   + Utf8 [setText]
   + Utf8 [time]
   + Utf8 [toString]
-  + Utf8 [德克士]
 
 Fields (count = 3):
   + Field:        a Landroid/widget/TextView;
@@ -64744,94 +64914,75 @@ Methods (count = 2):
     Access flags: 0x11
       = public final void a(java.lang.String)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 103, locals = 3, stack = 4):
+    + Code attribute instructions (code length = 78, locals = 3, stack = 4):
       [0] ldc #1
         + String [SignHistoryElement]
-      [2] new #11
+      [2] new #10
         + Class [java/lang/StringBuilder]
       [5] dup
       [6] ldc #2
         + String [initElement ]
-      [8] invokespecial #21
+      [8] invokespecial #20
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [11] aload_1 v1
-      [12] invokevirtual #22
+      [12] invokevirtual #21
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [15] invokevirtual #23
+      [15] invokevirtual #22
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [18] invokestatic #18
+      [18] invokestatic #17
         + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
       [21] aload_0 v0
       [22] aload_1 v1
-      [23] putfield #16
+      [23] putfield #15
         + Fieldref [com/dongfang/dicos/b/b.c Ljava/lang/String;]
-      [26] new #13
+      [26] new #12
         + Class [org/json/JSONObject]
       [29] dup
       [30] aload_1 v1
-      [31] invokespecial #25
+      [31] invokespecial #24
         + Methodref [org/json/JSONObject.<init> (Ljava/lang/String;)V]
       [34] dup
       [35] astore_1 v1
       [36] ldc #3
         + String [name]
-      [38] invokevirtual #26
+      [38] invokevirtual #25
         + Methodref [org/json/JSONObject.getString (Ljava/lang/String;)Ljava/lang/String;]
-      [41] astore_2 v2
-      [42] aload_0 v0
-      [43] getfield #14
+      [41] invokestatic #18
+        + Methodref [com/dongfang/dicos/e/c.a (Ljava/lang/String;)Ljava/lang/String;]
+      [44] astore_2 v2
+      [45] aload_0 v0
+      [46] getfield #13
         + Fieldref [com/dongfang/dicos/b/b.a Landroid/widget/TextView;]
-      [46] aload_2 v2
-      [47] ldc #5
-        + String [德克士]
-      [49] invokevirtual #20
-        + Methodref [java/lang/String.contains (Ljava/lang/CharSequence;)Z]
-      [52] ifeq +7 (target=59)
-      [55] aload_2 v2
-      [56] goto +19 (target=75)
-      [59] new #11
-        + Class [java/lang/StringBuilder]
-      [62] dup
-      [63] ldc #5
-        + String [德克士]
-      [65] invokespecial #21
-        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [68] aload_2 v2
-      [69] invokevirtual #22
-        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [72] invokevirtual #23
-        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [75] invokevirtual #17
+      [49] aload_2 v2
+      [50] invokevirtual #16
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
-      [78] aload_0 v0
-      [79] getfield #15
+      [53] aload_0 v0
+      [54] getfield #14
         + Fieldref [com/dongfang/dicos/b/b.b Landroid/widget/TextView;]
-      [82] aload_1 v1
-      [83] ldc #4
+      [57] aload_1 v1
+      [58] ldc #4
         + String [time]
-      [85] invokevirtual #26
+      [60] invokevirtual #25
         + Methodref [org/json/JSONObject.getString (Ljava/lang/String;)Ljava/lang/String;]
-      [88] invokevirtual #17
+      [63] invokevirtual #16
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
-      [91] return
-      [92] astore_1 v1
-      [93] ldc #1
+      [66] return
+      [67] astore_1 v1
+      [68] ldc #1
         + String [SignHistoryElement]
-      [95] aload_1 v1
-      [96] invokevirtual #24
+      [70] aload_1 v1
+      [71] invokevirtual #23
         + Methodref [org/json/JSONException.toString ()Ljava/lang/String;]
-      [99] invokestatic #18
+      [74] invokestatic #17
         + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
-      [102] return
+      [77] return
       Code attribute exceptions (count = 1):
-      - ExceptionInfo (26 -> 91: 92):
+      - ExceptionInfo (26 -> 66: 67):
       + Class [org/json/JSONException]
       Code attribute attributes (attribute count = 1):
-      + Stack map table attribute (count = 4):
-        - [59] Var: [a:com/dongfang/dicos/b/b][a:java/lang/String][a:org/json/JSONObject][a:java/lang/String], Stack: [a:android/widget/TextView]
-        - [75] Var: [a:com/dongfang/dicos/b/b][a:java/lang/String][a:org/json/JSONObject][a:java/lang/String], Stack: [a:android/widget/TextView][a:java/lang/String]
-        - [92] Var: [a:com/dongfang/dicos/b/b][a:java/lang/String], Stack: [a:org/json/JSONException]
-        - [102] Var: ..., Stack: (empty)
+      + Stack map table attribute (count = 2):
+        - [67] Var: ..., Stack: [a:org/json/JSONException]
+        - [77] Var: ..., Stack: (empty)
 
 Class file attributes (count = 0):
 
@@ -76031,7 +76182,7 @@ _____________________________________________________________________
 Interfaces (count = 1):
   + Class [android/view/View$OnClickListener]
 
-Constant Pool (count = 247):
+Constant Pool (count = 257):
   + Integer [2130903071]
   + Integer [2131361913]
   + Integer [2131361914]
@@ -76046,19 +76197,22 @@ Constant Pool (count = 247):
   + String [address]
   + String [address = ]
   + String [android.intent.action.DIAL]
+  + String [city]
   + String [id]
   + String [initElement ]
   + String [name]
   + String [null]
+  + String [province]
   + String [store_add]
+  + String [store_city]
   + String [store_name]
+  + String [store_province]
   + String [store_tel]
   + String [tel]
   + String [tel:]
   + String [x]
   + String [x = ]
   + String [y]
-  + String [德克士]
   + Class [android/app/Activity]
   + Class [android/content/Intent]
   + Class [android/net/Uri]
@@ -76087,6 +76241,8 @@ Constant Pool (count = 247):
   + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.i Ljava/lang/String;]
   + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.j Ljava/lang/String;]
   + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.k Ljava/lang/String;]
+  + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.l Ljava/lang/String;]
+  + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.m Ljava/lang/String;]
   + Methodref [android/app/Activity.<init> ()V]
   + Methodref [android/app/Activity.onCreate (Landroid/os/Bundle;)V]
   + Methodref [android/app/Activity.onResume ()V]
@@ -76102,6 +76258,7 @@ Constant Pool (count = 247):
   + Methodref [android/widget/TextView.setOnClickListener (Landroid/view/View$OnClickListener;)V]
   + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
   + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
+  + Methodref [com/dongfang/dicos/e/c.a (Ljava/lang/String;)Ljava/lang/String;]
   + Methodref [com/dongfang/dicos/e/c.c (Landroid/content/Context;)Z]
   + Methodref [com/dongfang/dicos/e/c.d (Landroid/content/Context;)V]
   + Methodref [com/dongfang/dicos/store/StoreDetailActivity.findViewById (I)Landroid/view/View;]
@@ -76109,7 +76266,6 @@ Constant Pool (count = 247):
   + Methodref [com/dongfang/dicos/store/StoreDetailActivity.getIntent ()Landroid/content/Intent;]
   + Methodref [com/dongfang/dicos/store/StoreDetailActivity.setContentView (I)V]
   + Methodref [com/dongfang/dicos/store/StoreDetailActivity.startActivity (Landroid/content/Intent;)V]
-  + Methodref [java/lang/String.contains (Ljava/lang/CharSequence;)Z]
   + Methodref [java/lang/String.equalsIgnoreCase (Ljava/lang/String;)Z]
   + Methodref [java/lang/String.trim ()Ljava/lang/String;]
   + Methodref [java/lang/String.valueOf (D)Ljava/lang/String;]
@@ -76128,6 +76284,7 @@ Constant Pool (count = 247):
   + NameAndType [<init> (Landroid/content/Context;Ljava/lang/Class;)V]
   + NameAndType [<init> (Ljava/lang/String;)V]
   + NameAndType [<init> (Ljava/lang/String;Landroid/net/Uri;)V]
+  + NameAndType [a (Ljava/lang/String;)Ljava/lang/String;]
   + NameAndType [a (Ljava/lang/String;Ljava/lang/String;)V]
   + NameAndType [a Landroid/widget/Button;]
   + NameAndType [append (D)Ljava/lang/StringBuilder;]
@@ -76135,7 +76292,6 @@ Constant Pool (count = 247):
   + NameAndType [b Landroid/widget/Button;]
   + NameAndType [c (Landroid/content/Context;)Z]
   + NameAndType [c Landroid/widget/TextView;]
-  + NameAndType [contains (Ljava/lang/CharSequence;)Z]
   + NameAndType [d (Landroid/content/Context;)V]
   + NameAndType [d Landroid/widget/TextView;]
   + NameAndType [e Landroid/widget/TextView;]
@@ -76155,6 +76311,8 @@ Constant Pool (count = 247):
   + NameAndType [i Ljava/lang/String;]
   + NameAndType [j Ljava/lang/String;]
   + NameAndType [k Ljava/lang/String;]
+  + NameAndType [l Ljava/lang/String;]
+  + NameAndType [m Ljava/lang/String;]
   + NameAndType [onCreate (Landroid/os/Bundle;)V]
   + NameAndType [onResume ()V]
   + NameAndType [parse (Ljava/lang/String;)Landroid/net/Uri;]
@@ -76189,7 +76347,6 @@ Constant Pool (count = 247):
   + Utf8 [(Landroid/view/View$OnClickListener;)V]
   + Utf8 [(Landroid/view/View;)V]
   + Utf8 [(Ljava/lang/CharSequence;)V]
-  + Utf8 [(Ljava/lang/CharSequence;)Z]
   + Utf8 [(Ljava/lang/String;)D]
   + Utf8 [(Ljava/lang/String;)I]
   + Utf8 [(Ljava/lang/String;)Landroid/net/Uri;]
@@ -76224,12 +76381,12 @@ Constant Pool (count = 247):
   + Utf8 [append]
   + Utf8 [b]
   + Utf8 [c]
+  + Utf8 [city]
   + Utf8 [com/dongfang/dicos/e/b]
   + Utf8 [com/dongfang/dicos/e/c]
   + Utf8 [com/dongfang/dicos/kzmw/SigneInActivity]
   + Utf8 [com/dongfang/dicos/store/StoreDetailActivity]
   + Utf8 [com/dongfang/dicos/store/StoreDetailMapActivity]
-  + Utf8 [contains]
   + Utf8 [d]
   + Utf8 [e]
   + Utf8 [equalsIgnoreCase]
@@ -76253,6 +76410,8 @@ Constant Pool (count = 247):
   + Utf8 [java/lang/String]
   + Utf8 [java/lang/StringBuilder]
   + Utf8 [k]
+  + Utf8 [l]
+  + Utf8 [m]
   + Utf8 [name]
   + Utf8 [null]
   + Utf8 [onClick]
@@ -76261,13 +76420,16 @@ Constant Pool (count = 247):
   + Utf8 [org/json/JSONException]
   + Utf8 [org/json/JSONObject]
   + Utf8 [parse]
+  + Utf8 [province]
   + Utf8 [putExtra]
   + Utf8 [setContentView]
   + Utf8 [setOnClickListener]
   + Utf8 [setText]
   + Utf8 [startActivity]
   + Utf8 [store_add]
+  + Utf8 [store_city]
   + Utf8 [store_name]
+  + Utf8 [store_province]
   + Utf8 [store_tel]
   + Utf8 [tel]
   + Utf8 [tel:]
@@ -76277,9 +76439,8 @@ Constant Pool (count = 247):
   + Utf8 [x]
   + Utf8 [x = ]
   + Utf8 [y]
-  + Utf8 [德克士]
 
-Fields (count = 11):
+Fields (count = 13):
   + Field:        a Landroid/widget/Button;
     Access flags: 0x2
       = private android.widget.Button a
@@ -76313,6 +76474,12 @@ Fields (count = 11):
   + Field:        k Ljava/lang/String;
     Access flags: 0x2
       = private java.lang.String k
+  + Field:        l Ljava/lang/String;
+    Access flags: 0x2
+      = private java.lang.String l
+  + Field:        m Ljava/lang/String;
+    Access flags: 0x2
+      = private java.lang.String m
 
 Methods (count = 4):
   - Method:       <init>()V
@@ -76321,7 +76488,7 @@ Methods (count = 4):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokespecial #56
+      [1] invokespecial #61
         + Methodref [android/app/Activity.<init> ()V]
       [4] return
       Code attribute exceptions (count = 0):
@@ -76333,98 +76500,98 @@ Methods (count = 4):
     + Code attribute instructions (code length = 124, locals = 2, stack = 3):
       [0] aload_0 v0
       [1] aload_1 v1
-      [2] invokespecial #57
+      [2] invokespecial #62
         + Methodref [android/app/Activity.onCreate (Landroid/os/Bundle;)V]
       [5] aload_0 v0
       [6] ldc #1
         + Integer [2130903071]
-      [8] invokevirtual #76
+      [8] invokevirtual #82
         + Methodref [com/dongfang/dicos/store/StoreDetailActivity.setContentView (I)V]
       [11] aload_0 v0
       [12] aload_0 v0
       [13] ldc #2
         + Integer [2131361913]
-      [15] invokevirtual #73
+      [15] invokevirtual #79
         + Methodref [com/dongfang/dicos/store/StoreDetailActivity.findViewById (I)Landroid/view/View;]
-      [18] checkcast #33
+      [18] checkcast #36
         + Class [android/widget/Button]
-      [21] putfield #45
+      [21] putfield #48
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.a Landroid/widget/Button;]
       [24] aload_0 v0
-      [25] getfield #45
+      [25] getfield #48
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.a Landroid/widget/Button;]
       [28] aload_0 v0
-      [29] invokevirtual #66
+      [29] invokevirtual #71
         + Methodref [android/widget/Button.setOnClickListener (Landroid/view/View$OnClickListener;)V]
       [32] aload_0 v0
       [33] aload_0 v0
       [34] ldc #6
         + Integer [2131361917]
-      [36] invokevirtual #73
+      [36] invokevirtual #79
         + Methodref [com/dongfang/dicos/store/StoreDetailActivity.findViewById (I)Landroid/view/View;]
-      [39] checkcast #33
+      [39] checkcast #36
         + Class [android/widget/Button]
-      [42] putfield #46
+      [42] putfield #49
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.b Landroid/widget/Button;]
       [45] aload_0 v0
-      [46] getfield #46
+      [46] getfield #49
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.b Landroid/widget/Button;]
       [49] aload_0 v0
-      [50] invokevirtual #66
+      [50] invokevirtual #71
         + Methodref [android/widget/Button.setOnClickListener (Landroid/view/View$OnClickListener;)V]
       [53] aload_0 v0
       [54] aload_0 v0
       [55] ldc #3
         + Integer [2131361914]
-      [57] invokevirtual #73
+      [57] invokevirtual #79
         + Methodref [com/dongfang/dicos/store/StoreDetailActivity.findViewById (I)Landroid/view/View;]
-      [60] checkcast #34
+      [60] checkcast #37
         + Class [android/widget/TextView]
-      [63] putfield #47
+      [63] putfield #50
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.c Landroid/widget/TextView;]
       [66] aload_0 v0
       [67] aload_0 v0
       [68] ldc #4
         + Integer [2131361915]
-      [70] invokevirtual #73
+      [70] invokevirtual #79
         + Methodref [com/dongfang/dicos/store/StoreDetailActivity.findViewById (I)Landroid/view/View;]
-      [73] checkcast #34
+      [73] checkcast #37
         + Class [android/widget/TextView]
-      [76] putfield #48
+      [76] putfield #51
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.d Landroid/widget/TextView;]
       [79] aload_0 v0
-      [80] getfield #48
+      [80] getfield #51
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.d Landroid/widget/TextView;]
       [83] aload_0 v0
-      [84] invokevirtual #68
+      [84] invokevirtual #73
         + Methodref [android/widget/TextView.setOnClickListener (Landroid/view/View$OnClickListener;)V]
       [87] aload_0 v0
       [88] aload_0 v0
       [89] ldc #5
         + Integer [2131361916]
-      [91] invokevirtual #73
+      [91] invokevirtual #79
         + Methodref [com/dongfang/dicos/store/StoreDetailActivity.findViewById (I)Landroid/view/View;]
-      [94] checkcast #34
+      [94] checkcast #37
         + Class [android/widget/TextView]
-      [97] putfield #49
+      [97] putfield #52
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.e Landroid/widget/TextView;]
       [100] aload_0 v0
-      [101] getfield #49
+      [101] getfield #52
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.e Landroid/widget/TextView;]
       [104] aload_0 v0
-      [105] invokevirtual #68
+      [105] invokevirtual #73
         + Methodref [android/widget/TextView.setOnClickListener (Landroid/view/View$OnClickListener;)V]
       [108] aload_0 v0
-      [109] invokevirtual #75
+      [109] invokevirtual #81
         + Methodref [com/dongfang/dicos/store/StoreDetailActivity.getIntent ()Landroid/content/Intent;]
       [112] astore_1 v1
       [113] aload_0 v0
       [114] aload_1 v1
       [115] ldc #10
         + String [JSON]
-      [117] invokevirtual #61
+      [117] invokevirtual #66
         + Methodref [android/content/Intent.getStringExtra (Ljava/lang/String;)Ljava/lang/String;]
-      [120] putfield #50
+      [120] putfield #53
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.f Ljava/lang/String;]
       [123] return
       Code attribute exceptions (count = 0):
@@ -76433,471 +76600,462 @@ Methods (count = 4):
     Access flags: 0x4
       = protected void onResume()
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 276, locals = 4, stack = 5):
+    + Code attribute instructions (code length = 271, locals = 4, stack = 5):
       [0] aload_0 v0
-      [1] invokespecial #58
+      [1] invokespecial #63
         + Methodref [android/app/Activity.onResume ()V]
       [4] aload_0 v0
       [5] aload_0 v0
-      [6] getfield #50
+      [6] getfield #53
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.f Ljava/lang/String;]
       [9] astore_2 v2
       [10] astore_1 v1
       [11] ldc #11
         + String [StoreDetailActivity]
-      [13] new #42
+      [13] new #45
         + Class [java/lang/StringBuilder]
       [16] dup
-      [17] ldc #16
+      [17] ldc #17
         + String [initElement ]
-      [19] invokespecial #83
+      [19] invokespecial #88
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [22] aload_2 v2
-      [23] invokevirtual #85
+      [23] invokevirtual #90
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [26] invokevirtual #86
+      [26] invokevirtual #91
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [29] invokestatic #70
+      [29] invokestatic #75
         + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
-      [32] new #44
+      [32] new #47
         + Class [org/json/JSONObject]
       [35] dup
       [36] aload_2 v2
-      [37] invokespecial #88
+      [37] invokespecial #93
         + Methodref [org/json/JSONObject.<init> (Ljava/lang/String;)V]
       [40] dup
       [41] astore_2 v2
       [42] ldc #12
         + String [address]
-      [44] invokevirtual #91
+      [44] invokevirtual #96
         + Methodref [org/json/JSONObject.getString (Ljava/lang/String;)Ljava/lang/String;]
       [47] astore_3 v3
       [48] ldc #11
         + String [StoreDetailActivity]
-      [50] new #42
+      [50] new #45
         + Class [java/lang/StringBuilder]
       [53] dup
       [54] ldc #13
         + String [address = ]
-      [56] invokespecial #83
+      [56] invokespecial #88
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [59] aload_3 v3
-      [60] invokevirtual #85
+      [60] invokevirtual #90
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [63] invokevirtual #86
+      [63] invokevirtual #91
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [66] invokestatic #70
+      [66] invokestatic #75
         + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
       [69] aload_1 v1
-      [70] getfield #48
+      [70] getfield #51
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.d Landroid/widget/TextView;]
       [73] aload_3 v3
-      [74] invokevirtual #69
+      [74] invokevirtual #74
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [77] aload_1 v1
       [78] aload_2 v2
-      [79] ldc #22
+      [79] ldc #26
         + String [tel]
-      [81] invokevirtual #91
+      [81] invokevirtual #96
         + Methodref [org/json/JSONObject.getString (Ljava/lang/String;)Ljava/lang/String;]
-      [84] putfield #53
+      [84] putfield #56
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.i Ljava/lang/String;]
       [87] aload_1 v1
-      [88] getfield #49
+      [88] getfield #52
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.e Landroid/widget/TextView;]
       [91] aload_1 v1
-      [92] getfield #53
+      [92] getfield #56
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.i Ljava/lang/String;]
-      [95] ldc #18
+      [95] ldc #19
         + String [null]
-      [97] invokevirtual #79
+      [97] invokevirtual #84
         + Methodref [java/lang/String.equalsIgnoreCase (Ljava/lang/String;)Z]
       [100] ifeq +8 (target=108)
       [103] ldc #7
         + String []
       [105] goto +7 (target=112)
       [108] aload_1 v1
-      [109] getfield #53
+      [109] getfield #56
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.i Ljava/lang/String;]
-      [112] invokevirtual #69
+      [112] invokevirtual #74
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [115] aload_1 v1
       [116] aload_2 v2
-      [117] ldc #17
+      [117] ldc #18
         + String [name]
-      [119] invokevirtual #91
+      [119] invokevirtual #96
         + Methodref [org/json/JSONObject.getString (Ljava/lang/String;)Ljava/lang/String;]
-      [122] invokevirtual #80
+      [122] invokevirtual #85
         + Methodref [java/lang/String.trim ()Ljava/lang/String;]
-      [125] putfield #54
+      [125] invokestatic #76
+        + Methodref [com/dongfang/dicos/e/c.a (Ljava/lang/String;)Ljava/lang/String;]
+      [128] putfield #57
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.j Ljava/lang/String;]
-      [128] aload_1 v1
-      [129] getfield #47
+      [131] aload_1 v1
+      [132] getfield #50
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.c Landroid/widget/TextView;]
-      [132] aload_1 v1
-      [133] getfield #54
+      [135] aload_1 v1
+      [136] getfield #57
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.j Ljava/lang/String;]
-      [136] ldc #27
-        + String [德克士]
-      [138] invokevirtual #78
-        + Methodref [java/lang/String.contains (Ljava/lang/CharSequence;)Z]
-      [141] ifeq +10 (target=151)
-      [144] aload_1 v1
-      [145] getfield #54
-        + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.j Ljava/lang/String;]
-      [148] goto +22 (target=170)
-      [151] new #42
-        + Class [java/lang/StringBuilder]
-      [154] dup
-      [155] ldc #27
-        + String [德克士]
-      [157] invokespecial #83
-        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [160] aload_1 v1
-      [161] getfield #54
-        + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.j Ljava/lang/String;]
-      [164] invokevirtual #85
-        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [167] invokevirtual #86
-        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [170] invokevirtual #69
+      [139] invokevirtual #74
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
-      [173] aload_1 v1
-      [174] aload_2 v2
-      [175] ldc #24
+      [142] aload_1 v1
+      [143] aload_2 v2
+      [144] ldc #28
         + String [x]
-      [177] invokevirtual #89
+      [146] invokevirtual #94
         + Methodref [org/json/JSONObject.getDouble (Ljava/lang/String;)D]
-      [180] putfield #51
+      [149] putfield #54
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.g D]
-      [183] aload_1 v1
-      [184] aload_2 v2
-      [185] ldc #26
+      [152] aload_1 v1
+      [153] aload_2 v2
+      [154] ldc #30
         + String [y]
-      [187] invokevirtual #89
+      [156] invokevirtual #94
         + Methodref [org/json/JSONObject.getDouble (Ljava/lang/String;)D]
-      [190] putfield #52
+      [159] putfield #55
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.h D]
-      [193] aload_1 v1
-      [194] new #42
+      [162] aload_1 v1
+      [163] new #45
         + Class [java/lang/StringBuilder]
-      [197] dup
-      [198] aload_2 v2
-      [199] ldc #15
+      [166] dup
+      [167] aload_2 v2
+      [168] ldc #16
         + String [id]
-      [201] invokevirtual #90
+      [170] invokevirtual #95
         + Methodref [org/json/JSONObject.getInt (Ljava/lang/String;)I]
-      [204] invokestatic #82
+      [173] invokestatic #87
         + Methodref [java/lang/String.valueOf (I)Ljava/lang/String;]
-      [207] invokespecial #83
+      [176] invokespecial #88
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [210] invokevirtual #86
+      [179] invokevirtual #91
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [213] putfield #55
+      [182] putfield #58
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.k Ljava/lang/String;]
-      [216] ldc #11
+      [185] aload_1 v1
+      [186] aload_2 v2
+      [187] ldc #20
+        + String [province]
+      [189] invokevirtual #96
+        + Methodref [org/json/JSONObject.getString (Ljava/lang/String;)Ljava/lang/String;]
+      [192] invokevirtual #85
+        + Methodref [java/lang/String.trim ()Ljava/lang/String;]
+      [195] putfield #59
+        + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.l Ljava/lang/String;]
+      [198] aload_1 v1
+      [199] aload_2 v2
+      [200] ldc #15
+        + String [city]
+      [202] invokevirtual #96
+        + Methodref [org/json/JSONObject.getString (Ljava/lang/String;)Ljava/lang/String;]
+      [205] invokevirtual #85
+        + Methodref [java/lang/String.trim ()Ljava/lang/String;]
+      [208] putfield #60
+        + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.m Ljava/lang/String;]
+      [211] ldc #11
         + String [StoreDetailActivity]
-      [218] new #42
+      [213] new #45
         + Class [java/lang/StringBuilder]
-      [221] dup
-      [222] ldc #25
+      [216] dup
+      [217] ldc #29
         + String [x = ]
-      [224] invokespecial #83
+      [219] invokespecial #88
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [227] aload_1 v1
-      [228] getfield #51
+      [222] aload_1 v1
+      [223] getfield #54
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.g D]
-      [231] invokevirtual #84
+      [226] invokevirtual #89
         + Methodref [java/lang/StringBuilder.append (D)Ljava/lang/StringBuilder;]
-      [234] ldc #9
+      [229] ldc #9
         + String [ ; y = ]
-      [236] invokevirtual #85
+      [231] invokevirtual #90
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [239] aload_1 v1
-      [240] getfield #52
+      [234] aload_1 v1
+      [235] getfield #55
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.h D]
-      [243] invokevirtual #84
+      [238] invokevirtual #89
         + Methodref [java/lang/StringBuilder.append (D)Ljava/lang/StringBuilder;]
-      [246] ldc #8
+      [241] ldc #8
         + String [ ; id = ]
-      [248] invokevirtual #85
+      [243] invokevirtual #90
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [251] aload_1 v1
-      [252] getfield #55
+      [246] aload_1 v1
+      [247] getfield #58
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.k Ljava/lang/String;]
-      [255] invokevirtual #85
+      [250] invokevirtual #90
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [258] invokevirtual #86
+      [253] invokevirtual #91
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [261] invokestatic #70
+      [256] invokestatic #75
         + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
-      [264] return
-      [265] astore_2 v2
-      [266] ldc #11
+      [259] return
+      [260] astore_2 v2
+      [261] ldc #11
         + String [StoreDetailActivity]
-      [268] aload_2 v2
-      [269] invokevirtual #87
+      [263] aload_2 v2
+      [264] invokevirtual #92
         + Methodref [org/json/JSONException.toString ()Ljava/lang/String;]
-      [272] invokestatic #70
+      [267] invokestatic #75
         + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
-      [275] return
+      [270] return
       Code attribute exceptions (count = 1):
-      - ExceptionInfo (32 -> 264: 265):
+      - ExceptionInfo (32 -> 259: 260):
       + Class [org/json/JSONException]
       Code attribute attributes (attribute count = 0):
   + Method:       onClick(Landroid/view/View;)V
     Access flags: 0x1
       = public void onClick(android.view.View)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 345, locals = 2, stack = 6):
+    + Code attribute instructions (code length = 329, locals = 2, stack = 6):
       [0] aload_1 v1
-      [1] invokevirtual #65
+      [1] invokevirtual #70
         + Methodref [android/view/View.getId ()I]
-      [4] tableswitch (5 offsets, default=340) (target=344)
+      [4] tableswitch (5 offsets, default=324) (target=328)
         2131361913: offset = 36, target = 40
-        2131361914: offset = 340, target = 344
-        2131361915: offset = 186, target = 190
-        2131361916: offset = 303, target = 307
+        2131361914: offset = 324, target = 328
+        2131361915: offset = 170, target = 174
+        2131361916: offset = 287, target = 291
         2131361917: offset = 41, target = 45
-        default: offset = 340, target = 344
+        default: offset = 324, target = 328
       [40] aload_0 v0
-      [41] invokevirtual #74
+      [41] invokevirtual #80
         + Methodref [com/dongfang/dicos/store/StoreDetailActivity.finish ()V]
       [44] return
       [45] aload_0 v0
-      [46] invokestatic #71
+      [46] invokestatic #77
         + Methodref [com/dongfang/dicos/e/c.c (Landroid/content/Context;)Z]
-      [49] ifeq +136 (target=185)
-      [52] new #29
+      [49] ifeq +120 (target=169)
+      [52] new #32
         + Class [android/content/Intent]
       [55] dup
       [56] aload_0 v0
-      [57] ldc #37
+      [57] ldc #40
         + Class [com/dongfang/dicos/kzmw/SigneInActivity]
-      [59] invokespecial #59
+      [59] invokespecial #64
         + Methodref [android/content/Intent.<init> (Landroid/content/Context;Ljava/lang/Class;)V]
       [62] dup
       [63] astore_1 v1
-      [64] ldc #20
+      [64] ldc #23
         + String [store_name]
       [66] aload_0 v0
-      [67] getfield #47
+      [67] getfield #50
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.c Landroid/widget/TextView;]
-      [70] invokevirtual #67
+      [70] invokevirtual #72
         + Methodref [android/widget/TextView.getText ()Ljava/lang/CharSequence;]
-      [73] invokeinterface #92
+      [73] invokeinterface #97
         + InterfaceMethodref [java/lang/CharSequence.toString ()Ljava/lang/String;]
-      [78] invokevirtual #63
+      [78] invokevirtual #68
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;]
       [81] pop
       [82] aload_1 v1
-      [83] ldc #19
-        + String [store_add]
+      [83] ldc #24
+        + String [store_province]
       [85] aload_0 v0
-      [86] getfield #48
-        + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.d Landroid/widget/TextView;]
-      [89] invokevirtual #67
-        + Methodref [android/widget/TextView.getText ()Ljava/lang/CharSequence;]
-      [92] invokeinterface #92
-        + InterfaceMethodref [java/lang/CharSequence.toString ()Ljava/lang/String;]
-      [97] invokevirtual #63
+      [86] getfield #59
+        + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.l Ljava/lang/String;]
+      [89] invokevirtual #68
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;]
-      [100] pop
-      [101] aload_1 v1
-      [102] ldc #21
-        + String [store_tel]
-      [104] aload_0 v0
-      [105] getfield #49
-        + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.e Landroid/widget/TextView;]
-      [108] invokevirtual #67
-        + Methodref [android/widget/TextView.getText ()Ljava/lang/CharSequence;]
-      [111] invokeinterface #92
-        + InterfaceMethodref [java/lang/CharSequence.toString ()Ljava/lang/String;]
-      [116] invokevirtual #63
+      [92] pop
+      [93] aload_1 v1
+      [94] ldc #22
+        + String [store_city]
+      [96] aload_0 v0
+      [97] getfield #60
+        + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.m Ljava/lang/String;]
+      [100] invokevirtual #68
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;]
-      [119] pop
-      [120] aload_1 v1
-      [121] ldc #24
+      [103] pop
+      [104] aload_1 v1
+      [105] ldc #28
         + String [x]
-      [123] new #42
+      [107] new #45
         + Class [java/lang/StringBuilder]
-      [126] dup
-      [127] aload_0 v0
-      [128] getfield #51
+      [110] dup
+      [111] aload_0 v0
+      [112] getfield #54
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.g D]
-      [131] invokestatic #81
+      [115] invokestatic #86
         + Methodref [java/lang/String.valueOf (D)Ljava/lang/String;]
-      [134] invokespecial #83
+      [118] invokespecial #88
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [137] invokevirtual #86
+      [121] invokevirtual #91
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [140] invokevirtual #63
+      [124] invokevirtual #68
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;]
-      [143] pop
-      [144] aload_1 v1
-      [145] ldc #26
+      [127] pop
+      [128] aload_1 v1
+      [129] ldc #30
         + String [y]
-      [147] new #42
+      [131] new #45
         + Class [java/lang/StringBuilder]
-      [150] dup
-      [151] aload_0 v0
-      [152] getfield #52
+      [134] dup
+      [135] aload_0 v0
+      [136] getfield #55
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.h D]
-      [155] invokestatic #81
+      [139] invokestatic #86
         + Methodref [java/lang/String.valueOf (D)Ljava/lang/String;]
-      [158] invokespecial #83
+      [142] invokespecial #88
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [161] invokevirtual #86
+      [145] invokevirtual #91
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [164] invokevirtual #63
+      [148] invokevirtual #68
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;]
-      [167] pop
-      [168] aload_1 v1
-      [169] ldc #15
+      [151] pop
+      [152] aload_1 v1
+      [153] ldc #16
         + String [id]
-      [171] aload_0 v0
-      [172] getfield #55
+      [155] aload_0 v0
+      [156] getfield #58
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.k Ljava/lang/String;]
-      [175] invokevirtual #63
+      [159] invokevirtual #68
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;]
-      [178] pop
-      [179] aload_0 v0
-      [180] aload_1 v1
-      [181] invokevirtual #77
+      [162] pop
+      [163] aload_0 v0
+      [164] aload_1 v1
+      [165] invokevirtual #83
         + Methodref [com/dongfang/dicos/store/StoreDetailActivity.startActivity (Landroid/content/Intent;)V]
-      [184] return
-      [185] aload_0 v0
-      [186] invokestatic #72
+      [168] return
+      [169] aload_0 v0
+      [170] invokestatic #78
         + Methodref [com/dongfang/dicos/e/c.d (Landroid/content/Context;)V]
-      [189] return
-      [190] aload_0 v0
-      [191] getfield #51
+      [173] return
+      [174] aload_0 v0
+      [175] getfield #54
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.g D]
-      [194] dconst_0
-      [195] dcmpl
-      [196] ifle +148 (target=344)
-      [199] aload_0 v0
-      [200] getfield #52
+      [178] dconst_0
+      [179] dcmpl
+      [180] ifle +148 (target=328)
+      [183] aload_0 v0
+      [184] getfield #55
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.h D]
-      [203] dconst_0
-      [204] dcmpl
-      [205] ifle +139 (target=344)
-      [208] new #29
+      [187] dconst_0
+      [188] dcmpl
+      [189] ifle +139 (target=328)
+      [192] new #32
         + Class [android/content/Intent]
-      [211] dup
-      [212] aload_0 v0
-      [213] ldc #39
+      [195] dup
+      [196] aload_0 v0
+      [197] ldc #42
         + Class [com/dongfang/dicos/store/StoreDetailMapActivity]
-      [215] invokespecial #59
+      [199] invokespecial #64
         + Methodref [android/content/Intent.<init> (Landroid/content/Context;Ljava/lang/Class;)V]
-      [218] dup
-      [219] astore_1 v1
-      [220] ldc #20
+      [202] dup
+      [203] astore_1 v1
+      [204] ldc #23
         + String [store_name]
-      [222] aload_0 v0
-      [223] getfield #54
+      [206] aload_0 v0
+      [207] getfield #57
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.j Ljava/lang/String;]
-      [226] invokevirtual #63
+      [210] invokevirtual #68
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;]
-      [229] pop
-      [230] aload_1 v1
-      [231] ldc #19
+      [213] pop
+      [214] aload_1 v1
+      [215] ldc #21
         + String [store_add]
-      [233] aload_0 v0
-      [234] getfield #48
+      [217] aload_0 v0
+      [218] getfield #51
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.d Landroid/widget/TextView;]
-      [237] invokevirtual #67
+      [221] invokevirtual #72
         + Methodref [android/widget/TextView.getText ()Ljava/lang/CharSequence;]
-      [240] invokeinterface #92
+      [224] invokeinterface #97
         + InterfaceMethodref [java/lang/CharSequence.toString ()Ljava/lang/String;]
-      [245] invokevirtual #63
+      [229] invokevirtual #68
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;]
-      [248] pop
-      [249] aload_1 v1
-      [250] ldc #21
+      [232] pop
+      [233] aload_1 v1
+      [234] ldc #25
         + String [store_tel]
-      [252] aload_0 v0
-      [253] getfield #49
+      [236] aload_0 v0
+      [237] getfield #52
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.e Landroid/widget/TextView;]
-      [256] invokevirtual #67
+      [240] invokevirtual #72
         + Methodref [android/widget/TextView.getText ()Ljava/lang/CharSequence;]
-      [259] invokeinterface #92
+      [243] invokeinterface #97
         + InterfaceMethodref [java/lang/CharSequence.toString ()Ljava/lang/String;]
-      [264] invokevirtual #63
+      [248] invokevirtual #68
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;]
-      [267] pop
-      [268] aload_1 v1
-      [269] ldc #24
+      [251] pop
+      [252] aload_1 v1
+      [253] ldc #28
         + String [x]
-      [271] aload_0 v0
-      [272] getfield #51
+      [255] aload_0 v0
+      [256] getfield #54
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.g D]
-      [275] invokevirtual #62
+      [259] invokevirtual #67
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;D)Landroid/content/Intent;]
-      [278] pop
-      [279] aload_1 v1
-      [280] ldc #26
+      [262] pop
+      [263] aload_1 v1
+      [264] ldc #30
         + String [y]
-      [282] aload_0 v0
-      [283] getfield #52
+      [266] aload_0 v0
+      [267] getfield #55
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.h D]
-      [286] invokevirtual #62
+      [270] invokevirtual #67
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;D)Landroid/content/Intent;]
-      [289] pop
-      [290] aload_1 v1
-      [291] ldc #17
+      [273] pop
+      [274] aload_1 v1
+      [275] ldc #18
         + String [name]
-      [293] aload_0 v0
-      [294] getfield #54
+      [277] aload_0 v0
+      [278] getfield #57
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.j Ljava/lang/String;]
-      [297] invokevirtual #63
+      [281] invokevirtual #68
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;]
-      [300] pop
-      [301] aload_0 v0
-      [302] aload_1 v1
-      [303] invokevirtual #77
+      [284] pop
+      [285] aload_0 v0
+      [286] aload_1 v1
+      [287] invokevirtual #83
         + Methodref [com/dongfang/dicos/store/StoreDetailActivity.startActivity (Landroid/content/Intent;)V]
-      [306] return
-      [307] new #29
+      [290] return
+      [291] new #32
         + Class [android/content/Intent]
-      [310] dup
-      [311] ldc #14
+      [294] dup
+      [295] ldc #14
         + String [android.intent.action.DIAL]
-      [313] new #42
+      [297] new #45
         + Class [java/lang/StringBuilder]
-      [316] dup
-      [317] ldc #23
+      [300] dup
+      [301] ldc #27
         + String [tel:]
-      [319] invokespecial #83
+      [303] invokespecial #88
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [322] aload_0 v0
-      [323] getfield #53
+      [306] aload_0 v0
+      [307] getfield #56
         + Fieldref [com/dongfang/dicos/store/StoreDetailActivity.i Ljava/lang/String;]
-      [326] invokevirtual #85
+      [310] invokevirtual #90
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [329] invokevirtual #86
+      [313] invokevirtual #91
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [332] invokestatic #64
+      [316] invokestatic #69
         + Methodref [android/net/Uri.parse (Ljava/lang/String;)Landroid/net/Uri;]
-      [335] invokespecial #60
+      [319] invokespecial #65
         + Methodref [android/content/Intent.<init> (Ljava/lang/String;Landroid/net/Uri;)V]
-      [338] astore_1 v1
-      [339] aload_0 v0
-      [340] aload_1 v1
-      [341] invokevirtual #77
+      [322] astore_1 v1
+      [323] aload_0 v0
+      [324] aload_1 v1
+      [325] invokevirtual #83
         + Methodref [com/dongfang/dicos/store/StoreDetailActivity.startActivity (Landroid/content/Intent;)V]
-      [344] return
+      [328] return
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 1):
       + Stack map table attribute (count = 8):
         - [40] Var: ..., Stack: (empty)
         - [45] Var: ..., Stack: (empty)
-        - [185] Var: ..., Stack: (empty)
-        - [189] Var: ..., Stack: (empty)
-        - [190] Var: ..., Stack: (empty)
-        - [306] Var: ..., Stack: (empty)
-        - [307] Var: ..., Stack: (empty)
-        - [344] Var: ..., Stack: (empty)
+        - [169] Var: ..., Stack: (empty)
+        - [173] Var: ..., Stack: (empty)
+        - [174] Var: ..., Stack: (empty)
+        - [290] Var: ..., Stack: (empty)
+        - [291] Var: ..., Stack: (empty)
+        - [328] Var: ..., Stack: (empty)
 
 Class file attributes (count = 0):
 
@@ -79080,18 +79238,17 @@ _____________________________________________________________________
 
 Interfaces (count = 0):
 
-Constant Pool (count = 77):
+Constant Pool (count = 73):
   + String [StoreListElement]
   + String [address]
   + String [address = ]
   + String [initElement ]
   + String [name]
-  + String [德克士]
   + Class [android/widget/TextView]
   + Class [com/dongfang/dicos/e/b]
+  + Class [com/dongfang/dicos/e/c]
   + Class [com/dongfang/dicos/store/f]
   + Class [java/lang/Object]
-  + Class [java/lang/String]
   + Class [java/lang/StringBuilder]
   + Class [org/json/JSONException]
   + Class [org/json/JSONObject]
@@ -79100,8 +79257,8 @@ Constant Pool (count = 77):
   + Fieldref [com/dongfang/dicos/store/f.e Ljava/lang/String;]
   + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
   + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
+  + Methodref [com/dongfang/dicos/e/c.a (Ljava/lang/String;)Ljava/lang/String;]
   + Methodref [java/lang/Object.<init> ()V]
-  + Methodref [java/lang/String.contains (Ljava/lang/CharSequence;)Z]
   + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
   + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
@@ -79110,10 +79267,10 @@ Constant Pool (count = 77):
   + Methodref [org/json/JSONObject.getString (Ljava/lang/String;)Ljava/lang/String;]
   + NameAndType [<init> ()V]
   + NameAndType [<init> (Ljava/lang/String;)V]
+  + NameAndType [a (Ljava/lang/String;)Ljava/lang/String;]
   + NameAndType [a (Ljava/lang/String;Ljava/lang/String;)V]
   + NameAndType [append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + NameAndType [c Landroid/widget/TextView;]
-  + NameAndType [contains (Ljava/lang/CharSequence;)Z]
   + NameAndType [d Landroid/widget/TextView;]
   + NameAndType [e Ljava/lang/String;]
   + NameAndType [getString (Ljava/lang/String;)Ljava/lang/String;]
@@ -79122,7 +79279,6 @@ Constant Pool (count = 77):
   + Utf8 [()Ljava/lang/String;]
   + Utf8 [()V]
   + Utf8 [(Ljava/lang/CharSequence;)V]
-  + Utf8 [(Ljava/lang/CharSequence;)Z]
   + Utf8 [(Ljava/lang/String;)Ljava/lang/String;]
   + Utf8 [(Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + Utf8 [(Ljava/lang/String;)V]
@@ -79142,21 +79298,19 @@ Constant Pool (count = 77):
   + Utf8 [b]
   + Utf8 [c]
   + Utf8 [com/dongfang/dicos/e/b]
+  + Utf8 [com/dongfang/dicos/e/c]
   + Utf8 [com/dongfang/dicos/store/f]
-  + Utf8 [contains]
   + Utf8 [d]
   + Utf8 [e]
   + Utf8 [getString]
   + Utf8 [initElement ]
   + Utf8 [java/lang/Object]
-  + Utf8 [java/lang/String]
   + Utf8 [java/lang/StringBuilder]
   + Utf8 [name]
   + Utf8 [org/json/JSONException]
   + Utf8 [org/json/JSONObject]
   + Utf8 [setText]
   + Utf8 [toString]
-  + Utf8 [德克士]
 
 Fields (count = 5):
   + Field:        a Landroid/widget/ImageView;
@@ -79191,112 +79345,93 @@ Methods (count = 2):
     Access flags: 0x11
       = public final void a(java.lang.String)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 126, locals = 3, stack = 4):
+    + Code attribute instructions (code length = 101, locals = 3, stack = 4):
       [0] ldc #1
         + String [StoreListElement]
-      [2] new #12
+      [2] new #11
         + Class [java/lang/StringBuilder]
       [5] dup
       [6] ldc #4
         + String [initElement ]
-      [8] invokespecial #22
+      [8] invokespecial #21
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [11] aload_1 v1
-      [12] invokevirtual #23
+      [12] invokevirtual #22
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [15] invokevirtual #24
+      [15] invokevirtual #23
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [18] invokestatic #19
+      [18] invokestatic #18
         + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
       [21] aload_0 v0
       [22] aload_1 v1
-      [23] putfield #17
+      [23] putfield #16
         + Fieldref [com/dongfang/dicos/store/f.e Ljava/lang/String;]
-      [26] new #14
+      [26] new #13
         + Class [org/json/JSONObject]
       [29] dup
       [30] aload_1 v1
-      [31] invokespecial #26
+      [31] invokespecial #25
         + Methodref [org/json/JSONObject.<init> (Ljava/lang/String;)V]
       [34] dup
       [35] astore_1 v1
       [36] ldc #2
         + String [address]
-      [38] invokevirtual #27
+      [38] invokevirtual #26
         + Methodref [org/json/JSONObject.getString (Ljava/lang/String;)Ljava/lang/String;]
       [41] astore_2 v2
       [42] ldc #1
         + String [StoreListElement]
-      [44] new #12
+      [44] new #11
         + Class [java/lang/StringBuilder]
       [47] dup
       [48] ldc #3
         + String [address = ]
-      [50] invokespecial #22
+      [50] invokespecial #21
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [53] aload_2 v2
-      [54] invokevirtual #23
+      [54] invokevirtual #22
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [57] invokevirtual #24
+      [57] invokevirtual #23
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [60] invokestatic #19
+      [60] invokestatic #18
         + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
       [63] aload_0 v0
-      [64] getfield #16
+      [64] getfield #15
         + Fieldref [com/dongfang/dicos/store/f.d Landroid/widget/TextView;]
       [67] aload_2 v2
-      [68] invokevirtual #18
+      [68] invokevirtual #17
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [71] aload_1 v1
       [72] ldc #5
         + String [name]
-      [74] invokevirtual #27
+      [74] invokevirtual #26
         + Methodref [org/json/JSONObject.getString (Ljava/lang/String;)Ljava/lang/String;]
-      [77] astore_1 v1
-      [78] aload_0 v0
-      [79] getfield #15
+      [77] invokestatic #19
+        + Methodref [com/dongfang/dicos/e/c.a (Ljava/lang/String;)Ljava/lang/String;]
+      [80] astore_1 v1
+      [81] aload_0 v0
+      [82] getfield #14
         + Fieldref [com/dongfang/dicos/store/f.c Landroid/widget/TextView;]
-      [82] aload_1 v1
-      [83] ldc #6
-        + String [德克士]
-      [85] invokevirtual #21
-        + Methodref [java/lang/String.contains (Ljava/lang/CharSequence;)Z]
-      [88] ifeq +7 (target=95)
-      [91] aload_1 v1
-      [92] goto +19 (target=111)
-      [95] new #12
-        + Class [java/lang/StringBuilder]
-      [98] dup
-      [99] ldc #6
-        + String [德克士]
-      [101] invokespecial #22
-        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [104] aload_1 v1
-      [105] invokevirtual #23
-        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [108] invokevirtual #24
-        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [111] invokevirtual #18
+      [85] aload_1 v1
+      [86] invokevirtual #17
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
-      [114] return
-      [115] astore_1 v1
-      [116] ldc #1
+      [89] return
+      [90] astore_1 v1
+      [91] ldc #1
         + String [StoreListElement]
-      [118] aload_1 v1
-      [119] invokevirtual #25
+      [93] aload_1 v1
+      [94] invokevirtual #24
         + Methodref [org/json/JSONException.toString ()Ljava/lang/String;]
-      [122] invokestatic #19
+      [97] invokestatic #18
         + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
-      [125] return
+      [100] return
       Code attribute exceptions (count = 1):
-      - ExceptionInfo (26 -> 114: 115):
+      - ExceptionInfo (26 -> 89: 90):
       + Class [org/json/JSONException]
       Code attribute attributes (attribute count = 1):
-      + Stack map table attribute (count = 4):
-        - [95] Var: [a:com/dongfang/dicos/store/f][a:java/lang/String][a:org/json/JSONObject][a:java/lang/String][a:java/lang/String], Stack: [a:android/widget/TextView]
-        - [111] Var: [a:com/dongfang/dicos/store/f][a:java/lang/String][a:org/json/JSONObject][a:java/lang/String][a:java/lang/String], Stack: [a:android/widget/TextView][a:java/lang/String]
-        - [115] Var: [a:com/dongfang/dicos/store/f][a:java/lang/String], Stack: [a:org/json/JSONException]
-        - [125] Var: ..., Stack: (empty)
+      + Stack map table attribute (count = 2):
+        - [90] Var: ..., Stack: [a:org/json/JSONException]
+        - [100] Var: ..., Stack: (empty)
 
 Class file attributes (count = 0):
 
@@ -79463,7 +79598,7 @@ _____________________________________________________________________
 
 Interfaces (count = 0):
 
-Constant Pool (count = 168):
+Constant Pool (count = 175):
   + Integer [2130837547]
   + String []
   + String [Util]
@@ -79493,6 +79628,7 @@ Constant Pool (count = 168):
   + Class [com/dongfang/dicos/e/d]
   + Class [com/dongfang/dicos/e/e]
   + Class [java/lang/Object]
+  + Class [java/lang/String]
   + Class [java/lang/StringBuilder]
   + Fieldref [com/dongfang/dicos/e/a.a Ljava/lang/String;]
   + Methodref [android/app/AlertDialog$Builder.<init> (Landroid/content/Context;)V]
@@ -79511,6 +79647,7 @@ Constant Pool (count = 168):
   + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
   + Methodref [com/dongfang/dicos/e/d.<init> (Landroid/app/Activity;)V]
   + Methodref [com/dongfang/dicos/e/e.<init> ()V]
+  + Methodref [java/lang/String.contains (Ljava/lang/CharSequence;)Z]
   + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
   + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + Methodref [java/lang/StringBuilder.append (Z)Ljava/lang/StringBuilder;]
@@ -79530,6 +79667,7 @@ Constant Pool (count = 168):
   + NameAndType [append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + NameAndType [append (Z)Ljava/lang/StringBuilder;]
   + NameAndType [commit ()Z]
+  + NameAndType [contains (Ljava/lang/CharSequence;)Z]
   + NameAndType [edit ()Landroid/content/SharedPreferences$Editor;]
   + NameAndType [getActiveNetworkInfo ()Landroid/net/NetworkInfo;]
   + NameAndType [getBoolean (Ljava/lang/String;Z)Z]
@@ -79563,8 +79701,10 @@ Constant Pool (count = 168):
   + Utf8 [(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;]
   + Utf8 [(Landroid/content/Context;Z)V]
   + Utf8 [(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
+  + Utf8 [(Ljava/lang/CharSequence;)Z]
   + Utf8 [(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
   + Utf8 [(Ljava/lang/String;)Ljava/lang/Object;]
+  + Utf8 [(Ljava/lang/String;)Ljava/lang/String;]
   + Utf8 [(Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + Utf8 [(Ljava/lang/String;)V]
   + Utf8 [(Ljava/lang/String;I)Landroid/content/SharedPreferences;]
@@ -79597,6 +79737,7 @@ Constant Pool (count = 168):
   + Utf8 [com/dongfang/dicos/e/e]
   + Utf8 [commit]
   + Utf8 [connectivity]
+  + Utf8 [contains]
   + Utf8 [d]
   + Utf8 [dicos]
   + Utf8 [e]
@@ -79611,6 +79752,7 @@ Constant Pool (count = 168):
   + Utf8 [isAvailable]
   + Utf8 [isLogin = ]
   + Utf8 [java/lang/Object]
+  + Utf8 [java/lang/String]
   + Utf8 [java/lang/StringBuilder]
   + Utf8 [loginStatus]
   + Utf8 [makeText]
@@ -79634,7 +79776,7 @@ Constant Pool (count = 168):
 
 Fields (count = 0):
 
-Methods (count = 8):
+Methods (count = 9):
   + Method:       a(Landroid/content/Context;)Ljava/lang/String;
     Access flags: 0x9
       = public static java.lang.String a(android.content.Context)
@@ -79644,13 +79786,13 @@ Methods (count = 8):
       [1] ldc #5
         + String [dicos]
       [3] iconst_0
-      [4] invokevirtual #39
+      [4] invokevirtual #40
         + Methodref [android/content/Context.getSharedPreferences (Ljava/lang/String;I)Landroid/content/SharedPreferences;]
       [7] ldc #9
         + String [phoneNumber]
       [9] ldc #2
         + String []
-      [11] invokeinterface #54
+      [11] invokeinterface #56
         + InterfaceMethodref [android/content/SharedPreferences.getString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;]
       [16] areturn
       Code attribute exceptions (count = 0):
@@ -79664,16 +79806,16 @@ Methods (count = 8):
       [1] ldc #5
         + String [dicos]
       [3] iconst_0
-      [4] invokevirtual #39
+      [4] invokevirtual #40
         + Methodref [android/content/Context.getSharedPreferences (Ljava/lang/String;I)Landroid/content/SharedPreferences;]
-      [7] invokeinterface #52
+      [7] invokeinterface #54
         + InterfaceMethodref [android/content/SharedPreferences.edit ()Landroid/content/SharedPreferences$Editor;]
       [12] ldc #8
         + String [loginStatus]
       [14] iload_1 v1
-      [15] invokeinterface #56
+      [15] invokeinterface #58
         + InterfaceMethodref [android/content/SharedPreferences$Editor.putBoolean (Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;]
-      [20] invokeinterface #55
+      [20] invokeinterface #57
         + InterfaceMethodref [android/content/SharedPreferences$Editor.commit ()Z]
       [25] pop
       [26] return
@@ -79688,29 +79830,29 @@ Methods (count = 8):
       [1] ldc #5
         + String [dicos]
       [3] iconst_0
-      [4] invokevirtual #39
+      [4] invokevirtual #40
         + Methodref [android/content/Context.getSharedPreferences (Ljava/lang/String;I)Landroid/content/SharedPreferences;]
       [7] ldc #8
         + String [loginStatus]
       [9] iconst_0
-      [10] invokeinterface #53
+      [10] invokeinterface #55
         + InterfaceMethodref [android/content/SharedPreferences.getBoolean (Ljava/lang/String;Z)Z]
       [15] istore_0 v0
       [16] ldc #3
         + String [Util]
-      [18] new #30
+      [18] new #31
         + Class [java/lang/StringBuilder]
       [21] dup
       [22] ldc #7
         + String [isLogin = ]
-      [24] invokespecial #48
+      [24] invokespecial #50
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [27] iload_0 v0
-      [28] invokevirtual #50
+      [28] invokevirtual #52
         + Methodref [java/lang/StringBuilder.append (Z)Ljava/lang/StringBuilder;]
-      [31] invokevirtual #51
+      [31] invokevirtual #53
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [34] invokestatic #45
+      [34] invokestatic #46
         + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
       [37] iload_0 v0
       [38] ireturn
@@ -79724,17 +79866,17 @@ Methods (count = 8):
       [0] aload_0 v0
       [1] ldc #4
         + String [connectivity]
-      [3] invokevirtual #40
+      [3] invokevirtual #41
         + Methodref [android/content/Context.getSystemService (Ljava/lang/String;)Ljava/lang/Object;]
       [6] checkcast #21
         + Class [android/net/ConnectivityManager]
-      [9] invokevirtual #41
+      [9] invokevirtual #42
         + Methodref [android/net/ConnectivityManager.getActiveNetworkInfo ()Landroid/net/NetworkInfo;]
       [12] dup
       [13] astore_0 v0
       [14] ifnull +12 (target=26)
       [17] aload_0 v0
-      [18] invokevirtual #42
+      [18] invokevirtual #43
         + Methodref [android/net/NetworkInfo.isAvailable ()Z]
       [21] ifeq +5 (target=26)
       [24] iconst_1
@@ -79754,9 +79896,9 @@ Methods (count = 8):
       [1] ldc #16
         + String [请先链接网络...]
       [3] iconst_1
-      [4] invokestatic #43
+      [4] invokestatic #44
         + Methodref [android/widget/Toast.makeText (Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;]
-      [7] invokevirtual #44
+      [7] invokevirtual #45
         + Methodref [android/widget/Toast.show ()V]
       [10] return
       Code attribute exceptions (count = 0):
@@ -79770,9 +79912,9 @@ Methods (count = 8):
       [1] ldc #15
         + String [请先登录...]
       [3] iconst_1
-      [4] invokestatic #43
+      [4] invokestatic #44
         + Methodref [android/widget/Toast.makeText (Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;]
-      [7] invokevirtual #44
+      [7] invokevirtual #45
         + Methodref [android/widget/Toast.show ()V]
       [10] return
       Code attribute exceptions (count = 0):
@@ -79786,35 +79928,35 @@ Methods (count = 8):
       [1] ldc #5
         + String [dicos]
       [3] iconst_0
-      [4] invokevirtual #39
+      [4] invokevirtual #40
         + Methodref [android/content/Context.getSharedPreferences (Ljava/lang/String;I)Landroid/content/SharedPreferences;]
-      [7] invokeinterface #52
+      [7] invokeinterface #54
         + InterfaceMethodref [android/content/SharedPreferences.edit ()Landroid/content/SharedPreferences$Editor;]
       [12] ldc #6
         + String [iparea]
-      [14] getstatic #31
+      [14] getstatic #32
         + Fieldref [com/dongfang/dicos/e/a.a Ljava/lang/String;]
-      [17] invokeinterface #57
+      [17] invokeinterface #59
         + InterfaceMethodref [android/content/SharedPreferences$Editor.putString (Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;]
-      [22] invokeinterface #55
+      [22] invokeinterface #57
         + InterfaceMethodref [android/content/SharedPreferences$Editor.commit ()Z]
       [27] pop
       [28] ldc #3
         + String [Util]
-      [30] new #30
+      [30] new #31
         + Class [java/lang/StringBuilder]
       [33] dup
       [34] ldc #10
         + String [saveIpArea = ]
-      [36] invokespecial #48
+      [36] invokespecial #50
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [39] getstatic #31
+      [39] getstatic #32
         + Fieldref [com/dongfang/dicos/e/a.a Ljava/lang/String;]
-      [42] invokevirtual #49
+      [42] invokevirtual #51
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [45] invokevirtual #51
+      [45] invokevirtual #53
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [48] invokestatic #45
+      [48] invokestatic #46
         + Methodref [com/dongfang/dicos/e/b.a (Ljava/lang/String;Ljava/lang/String;)V]
       [51] return
       Code attribute exceptions (count = 0):
@@ -79828,19 +79970,19 @@ Methods (count = 8):
         + Class [android/app/AlertDialog$Builder]
       [3] dup
       [4] aload_0 v0
-      [5] invokespecial #32
+      [5] invokespecial #33
         + Methodref [android/app/AlertDialog$Builder.<init> (Landroid/content/Context;)V]
       [8] ldc #12
         + String [德克士]
-      [10] invokevirtual #37
+      [10] invokevirtual #38
         + Methodref [android/app/AlertDialog$Builder.setTitle (Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
       [13] ldc #1
         + Integer [2130837547]
-      [15] invokevirtual #33
+      [15] invokevirtual #34
         + Methodref [android/app/AlertDialog$Builder.setIcon (I)Landroid/app/AlertDialog$Builder;]
       [18] ldc #13
         + String [是否要退出德克士？]
-      [20] invokevirtual #34
+      [20] invokevirtual #35
         + Methodref [android/app/AlertDialog$Builder.setMessage (Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
       [23] ldc #14
         + String [确定]
@@ -79848,25 +79990,56 @@ Methods (count = 8):
         + Class [com/dongfang/dicos/e/d]
       [28] dup
       [29] aload_0 v0
-      [30] invokespecial #46
+      [30] invokespecial #47
         + Methodref [com/dongfang/dicos/e/d.<init> (Landroid/app/Activity;)V]
-      [33] invokevirtual #36
+      [33] invokevirtual #37
         + Methodref [android/app/AlertDialog$Builder.setPositiveButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
       [36] ldc #11
         + String [取消]
       [38] new #28
         + Class [com/dongfang/dicos/e/e]
       [41] dup
-      [42] invokespecial #47
+      [42] invokespecial #48
         + Methodref [com/dongfang/dicos/e/e.<init> ()V]
-      [45] invokevirtual #35
+      [45] invokevirtual #36
         + Methodref [android/app/AlertDialog$Builder.setNegativeButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
-      [48] invokevirtual #38
+      [48] invokevirtual #39
         + Methodref [android/app/AlertDialog$Builder.show ()Landroid/app/AlertDialog;]
       [51] pop
       [52] return
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 0):
+  + Method:       a(Ljava/lang/String;)Ljava/lang/String;
+    Access flags: 0x9
+      = public static java.lang.String a(java.lang.String)
+    Class member attributes (count = 1):
+    + Code attribute instructions (code length = 28, locals = 1, stack = 3):
+      [0] aload_0 v0
+      [1] ldc #12
+        + String [德克士]
+      [3] invokevirtual #49
+        + Methodref [java/lang/String.contains (Ljava/lang/CharSequence;)Z]
+      [6] ifeq +5 (target=11)
+      [9] aload_0 v0
+      [10] areturn
+      [11] new #31
+        + Class [java/lang/StringBuilder]
+      [14] dup
+      [15] ldc #12
+        + String [德克士]
+      [17] invokespecial #50
+        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
+      [20] aload_0 v0
+      [21] invokevirtual #51
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [24] invokevirtual #53
+        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
+      [27] areturn
+      Code attribute exceptions (count = 0):
+      Code attribute attributes (attribute count = 1):
+      + Stack map table attribute (count = 2):
+        - [11] Var: ..., Stack: (empty)
+        - [27] Var: ..., Stack: [a:java/lang/String]
 
 Class file attributes (count = 0):
 
