@@ -23,6 +23,9 @@ public class ComParams {
 	/** 开心用activity进行建权时，在intent中传url时的键 */
 	public static final String	KAIXIN_AUTH_BY_ACTIVITY_INTENT_URL_NAME	= "URL";
 
+	/** 下载缓存单元大小 */
+	public static final int		BUF_SIZE								= 2 * 1024;
+
 	// ----------------------------------------------------------------------------
 	/** 项目中，SharedPreferences 的文件目录 */
 	public static final String	SHAREDPREFERENCES_FILE_NAME				= "dicos";
@@ -88,6 +91,19 @@ public class ComParams {
 	public static final int		HANDLER_FINISH_CITYLIST_ACTIVITY		= 3001;
 	/** 修改城市切换页面title */
 	public static final int		HANDLER_CHANGE_TITLE_CITYLIST_ACTIVITY	= 3002;
+
+	// ----------------------------------------------------------------------------
+
+	/** 图片下载完成 */
+	public static final int		HANDLER_IMAGE_DOWNLOAD_END				= 4000;
+	/** 图片下载开始 */
+	public static final int		HANDLER_IMAGE_DOWNLOAD_START			= 4001;
+	/** 图片下载ING */
+	public static final int		HANDLER_IMAGE_DOWNLOAD_ING				= 4002;
+	/** 图片下载出错 */
+	public static final int		HANDLER_IMAGE_DOWNLOAD_ERROR			= 4003;
+	/** 图片下载没有网络 */
+	public static final int		HANDLER_IMAGE_DOWNLOAD_NONET			= 4004;
 
 	// ----------------------------------------------------------------------------
 	public static String		IPAREA									= "";
