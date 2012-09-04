@@ -1,8 +1,6 @@
 package com.dongfang.dicos.util;
 
-import com.dongfang.dicos.MoreActivity;
-import com.dongfang.dicos.R;
-import com.dongfang.dicos.net.thread.LogoutThread;
+import java.io.File;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,6 +11,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.TextUtils;
 import android.widget.Toast;
+
+import com.dongfang.dicos.R;
 
 /** 工具类 */
 public class Util {
@@ -109,11 +109,17 @@ public class Util {
 
 	/**
 	 * 初始化德克士店名，如果名称中没有包含德克士，就在添加上德克士字符串
+	 * 
 	 * @param name
 	 * @return
 	 */
 	public static String initNameDicos(String name) {
 		return name.contains("德克士") ? name : "德克士" + name;
+	}
+
+	public static boolean chkFileExist(Context context, String filename) {
+		ULog.d(tag, "path = " + context.getCacheDir());
+		return (new File(context.getCacheDir(), filename)).exists();
 	}
 
 }

@@ -20,8 +20,8 @@ public class DicosMainActivity extends TabActivity implements OnCheckedChangeLis
 	/** 底部餐单按钮的group */
 	private RadioGroup			radioGroup;
 	private TabHost				tabHost;
-	public static final String	TAB_ITEM_1	= "kazimeiwei";
-	public static final String	TAB_ITEM_2	= "DiscountCoupon";
+	public static final String	TAB_ITEM_1	= "DiscountCoupon";
+	public static final String	TAB_ITEM_2	= "kazimeiwei";
 	public static final String	TAB_ITEM_3	= "StorSearch";
 	public static final String	TAB_ITEM_4	= "MyDicos";
 	public static final String	TAB_ITEM_5	= "more";
@@ -42,8 +42,8 @@ public class DicosMainActivity extends TabActivity implements OnCheckedChangeLis
 		TabSpec tab4 = tabHost.newTabSpec(TAB_ITEM_4);
 		TabSpec tab5 = tabHost.newTabSpec(TAB_ITEM_5);
 
-		tab1.setIndicator(TAB_ITEM_1).setContent(new Intent(this, KaZiMeiWeiActivity.class));
-		tab2.setIndicator(TAB_ITEM_2).setContent(new Intent(this, DiscountCouponActivity.class));
+		tab1.setIndicator(TAB_ITEM_1).setContent(new Intent(this, DiscountCouponActivity.class));
+		tab2.setIndicator(TAB_ITEM_2).setContent(new Intent(this, KaZiMeiWeiActivity.class));
 		tab3.setIndicator(TAB_ITEM_3).setContent(new Intent(this, StoreSearchActivity.class));
 		tab4.setIndicator(TAB_ITEM_4).setContent(new Intent(this, MyDicosActivity.class));
 		tab5.setIndicator(TAB_ITEM_5).setContent(new Intent(this, MoreActivity.class));
