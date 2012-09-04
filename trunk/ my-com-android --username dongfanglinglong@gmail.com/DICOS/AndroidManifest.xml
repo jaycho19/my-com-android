@@ -51,7 +51,8 @@
         <activity android:name=".DiscountCouponActivity" android:screenOrientation="portrait" android:launchMode="singleTask"> </activity>
         <activity android:name=".StoreSearchActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         <activity android:name=".MoreActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
-        <activity android:name=".KaZiMeiWeiActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
+        <activity android:name=".KaZiMeiWeiActivity" android:screenOrientation="portrait" android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Black"></activity>
         <activity android:name=".MyDicosActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         
         <activity android:name=".more.TongBuActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>

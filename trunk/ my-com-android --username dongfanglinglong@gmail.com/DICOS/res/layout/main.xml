@@ -34,18 +34,17 @@
             <RadioButton
                 android:id="@+id/radio_button1"
                 android:layout_weight="1"
-                android:background="@drawable/main_bottom_button_bg_0_xml"
+                android:background="@drawable/main_bottom_button_bg_1_xml"
                 android:button="@null"
-                android:tag="radio_button0"
                 android:checked="true"
-                 />
+                android:tag="radio_button1" />
 
             <RadioButton
                 android:id="@+id/radio_button2"
                 android:layout_weight="1"
-                android:background="@drawable/main_bottom_button_bg_1_xml"
+                android:background="@drawable/main_bottom_button_bg_0_xml"
                 android:button="@null"
-                android:tag="radio_button1" />
+                android:tag="radio_button0" />
 
             <RadioButton
                 android:id="@+id/radio_button3"

@@ -29,4 +29,18 @@
     <string name="login_result_success">登录成功</string>
     <string name="login_result_fail">登录失败</string>
 
+    <!-- 菜单 -->
+    <string-array name="sub_manu">
+        <item>汉堡</item>
+        <item>焗饭</item>
+        <item>卷</item>
+        <item>汤</item>
+        <item>炸</item>
+        <item>冰品</item>
+        <item>冷甜品</item>
+        <item>热甜品</item>
+        <item>冷饮</item>
+        <item>热饮</item>
+    </string-array>
+
 </resources>
