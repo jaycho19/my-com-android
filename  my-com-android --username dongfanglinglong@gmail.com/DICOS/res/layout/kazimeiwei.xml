@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+     >
 
     <RelativeLayout style="@style/top_menu_layout_style" >
 
@@ -20,23 +21,47 @@
             android:text="@string/top_title_dicos" />
     </RelativeLayout>
 
+    <com.dongfang.dicos.view.MyHorizontalScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@color/dicosyellow"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:scrollbars="none" >
+
+        <com.dongfang.dicos.view.SubMenuLayout
+            android:id="@+id/submenulayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    </com.dongfang.dicos.view.MyHorizontalScrollView>
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
 
-        <!-- <ScrollView -->
-        <!-- android:id="@+id/scrollview_kzmw_info" -->
-        <!-- android:layout_width="wrap_content" -->
-        <!-- android:layout_height="wrap_content" -->
-        <!-- android:orientation="vertical" > -->
+        <LinearLayout
+            android:id="@+id/ll_fling_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:minHeight="100dp" >
+        </LinearLayout>
 
-        <ImageSwitcher
-            android:id="@+id/imageswitcher_kzmw_info"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/ll_fling_desc_image"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-             >
-        </ImageSwitcher>
-        <!-- </ScrollView> -->
+            android:layout_alignBottom="@+id/ll_fling_view"
+            android:gravity="center"
+            android:minHeight="20dp" >
+        </LinearLayout>
+        <!-- <ImageSwitcher -->
+        <!-- android:id="@+id/imageswitcher_kzmw_info" -->
+        <!-- android:layout_width="wrap_content" -->
+        <!-- android:layout_height="wrap_content" > -->
+        <!-- </ImageSwitcher> -->
 
         <Button
             android:id="@+id/button_kzmw_ipad3"
