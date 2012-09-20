@@ -13,10 +13,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.dongfang.dicos.R;
-import com.dongfang.dicos.download.DownloadIMG;
+import com.dongfang.dicos.dl.DownloadIMG;
 import com.dongfang.dicos.util.ComParams;
 import com.dongfang.dicos.util.ULog;
 
+
+/**
+ * 
+ * @author dongfang
+ *
+ */
 public class MyImageView extends LinearLayout {
 	private Context			context;
 
@@ -77,9 +83,12 @@ public class MyImageView extends LinearLayout {
 				if (null != defaultDraw) {
 					imageView.setBackgroundDrawable(defaultDraw);
 				}
+				myProgressBar.setVisibility(View.GONE);
+				imageView.refreshDrawableState();
 				break;
 			case ComParams.HANDLER_IMAGE_DOWNLOAD_ING:
-				myProgressBar.setMax(msg.arg1);
+				ULog.d("MyImageView", "downloading " + imageName + " = " + msg.arg1);
+				myProgressBar.setProgress(msg.arg1);
 				break;
 			case ComParams.HANDLER_IMAGE_DOWNLOAD_START:
 				myProgressBar.setMax(msg.arg1);
