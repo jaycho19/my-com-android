@@ -1,4 +1,4 @@
-package com.dongfang.dicos.download;
+package com.dongfang.dicos.dl;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,6 +19,9 @@ import com.dongfang.dicos.util.Util;
 
 public class DownloadIMG extends Thread {
 	public static final String	tag	= "DownloadIMG";
+
+	private static final int	READ_TIMEOUT	= 30 * 1000;
+	private static final int	CONNECT_TIMEOUT	= 30 * 1000;
 
 	private Context				context;
 	private Handler				hanlder;
@@ -53,10 +56,10 @@ public class DownloadIMG extends Thread {
 
 		InputStream ins = null;
 
-		if (Integer.parseInt(Build.VERSION.SDK) >= 14) {
-			ins = getInputStreamFromURL(handler, url, 0);
-		} else {
+		if (Integer.parseInt(Build.VERSION.SDK) < 14) {
 			ins = getInputStreamFromURLV2(handler, url, 0);
+		} else {
+			ins = getInputStreamFromURL(handler, url, 0);
 		}
 
 		if (null == ins)
@@ -76,8 +79,8 @@ public class DownloadIMG extends Thread {
 			if (0 < length)
 				urlConn.setRequestProperty("RANGE", "bytes=" + length + "-");
 
-			urlConn.setReadTimeout(30 * 1000);
-			urlConn.setConnectTimeout(30 * 1000);
+			urlConn.setReadTimeout(READ_TIMEOUT);
+			urlConn.setConnectTimeout(CONNECT_TIMEOUT);
 			urlConn.setRequestMethod("POST");
 			urlConn.setDoInput(true);
 			urlConn.setDefaultUseCaches(false);
@@ -107,6 +110,16 @@ public class DownloadIMG extends Thread {
 		return null;
 	}
 
+	/**
+	 * 适用于android 3.0 以下版本
+	 * 
+	 * @param handler
+	 * @param urlStr
+	 *            目标URL
+	 * @param length
+	 *            需要开始下载的字节
+	 * @return
+	 */
 	private InputStream getInputStreamFromURLV2(Handler handler, String urlStr, long length) {
 		URLConnection urlConn = null;
 		try {
@@ -114,8 +127,8 @@ public class DownloadIMG extends Thread {
 			if (0 < length)
 				urlConn.setRequestProperty("RANGE", "bytes=" + length + "-");
 
-			urlConn.setReadTimeout(30 * 1000);
-			urlConn.setConnectTimeout(30 * 1000);
+			urlConn.setReadTimeout(READ_TIMEOUT);
+			urlConn.setConnectTimeout(CONNECT_TIMEOUT);
 			int code = ((HttpURLConnection) urlConn).getResponseCode();
 
 			ULog.d(tag, "code = " + code);
@@ -137,6 +150,16 @@ public class DownloadIMG extends Thread {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param ins
+	 *            输入流
+	 * @param filename
+	 *            文件名称 需要绝对路径
+	 * @param handler
+	 * @param array_param
+	 * @return 返回文件名称 filename + "e"
+	 */
 	private String saveFile(InputStream ins, String filename, Handler handler, int array_param) {
 		if (TextUtils.isEmpty(filename))
 			return filename;
@@ -181,6 +204,6 @@ public class DownloadIMG extends Thread {
 				handler.sendEmptyMessage(ComParams.HANDLER_IMAGE_DOWNLOAD_ERROR);
 			}
 		}
-		return filename;
+		return filename + "e";
 	}
 }
