@@ -2,6 +2,7 @@ package com.dongfang.dicos.net;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.security.KeyStore;
 import java.util.List;
 
@@ -73,17 +74,11 @@ public class Https {
 	 * */
 	public String get(String jsToString) {
 		try {
-
-			ULog.d(tag, URL + "?key=" + jsToString);
-			// 创建HttpGet对象
 			HttpGet request = new HttpGet(URL + "?key=" + jsToString);
-			ULog.d(tag, URL + "?key=" + jsToString);
 
 			// 创建HttpClient对象
 			HttpClient client = this.getNewHttpClient();
-			ULog.d(tag, URL + "?key=" + jsToString);
 			HttpResponse httpResponse = client.execute(request);
-			ULog.d(tag, "get " + httpResponse.getStatusLine().getStatusCode());
 
 			if (null != httpResponse && httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				ULog.d(tag, "post 200");
@@ -93,6 +88,31 @@ public class Https {
 			ULog.d(tag, "get " + e.toString());
 		}
 		return "";
+	}
+
+	public String get(String url, List<NameValuePair> list) {
+		if (null != list && list.size() > 0)
+			url = url + "?" + encodeUrl(list);
+		ULog.v(tag, "URL = " + url);
+		try {
+			HttpGet request = new HttpGet(url);
+			// 创建HttpClient对象
+			HttpClient client = this.getNewHttpClient();
+			HttpResponse httpResponse;
+			httpResponse = client.execute(request);
+
+			// ULog.d(TAG, "get statusCode = " +
+			// httpResponse.getStatusLine().getStatusCode());
+
+			int statusCode = httpResponse.getStatusLine().getStatusCode();
+			if (HttpStatus.SC_OK != statusCode) {
+				return null;
+			}
+			return read(httpResponse);
+		} catch (Exception e) {
+			ULog.e(tag, e.toString());
+			return null;
+		}
 	}
 
 	/**
@@ -247,7 +267,8 @@ public class Https {
 			}
 
 			String content_type = response.getFirstHeader(HTTP.CONTENT_TYPE).getValue();
-			String charset = content_type.contains("charset=") ? content_type.substring(content_type.indexOf("charset=") + 8) : "";
+			String charset = content_type.contains("charset=") ? content_type.substring(content_type
+					.indexOf("charset=") + 8) : "";
 			ULog.i(tag, "content_type =" + content_type);
 			ULog.i(tag, "charset=" + charset);
 
@@ -255,10 +276,27 @@ public class Https {
 				result = new String(content.toByteArray(), "gbk").trim();
 			else
 				result = new String(content.toByteArray(), "uft-8").trim();
-			
+
 		} catch (Exception e) {
 			ULog.e(tag, "read " + e.toString());
 		}
 		return result;
+	}
+
+	public static String encodeUrl(List<NameValuePair> list) {
+		if (list == null || 0 == list.size()) {
+			return "";
+		}
+
+		StringBuilder sb = new StringBuilder();
+		boolean first = true;
+		for (int loc = 0, lenght = list.size(); loc < lenght; loc++) {
+			if (first)
+				first = false;
+			else
+				sb.append("&");
+			sb.append(URLEncoder.encode(list.get(loc).getName()) + "=" + URLEncoder.encode(list.get(loc).getValue()));
+		}
+		return sb.toString();
 	}
 }

@@ -6,6 +6,8 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -23,9 +25,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher.ViewFactory;
 
+import com.dongfang.dicos.kzmw.Category;
 import com.dongfang.dicos.kzmw.LoginActivity;
 import com.dongfang.dicos.kzmw.LotteryActivity;
 import com.dongfang.dicos.more.CityListActivity;
+import com.dongfang.dicos.net.HttpActions;
+import com.dongfang.dicos.util.Analysis;
 import com.dongfang.dicos.util.ComParams;
 import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.util.Util;
@@ -110,21 +115,7 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 		flingViewList.add("http://list.image.baidu.com/t/image_category/galleryimg/wallpaper/scene/gui_lss.jpg");
 		flingViewList.add("http://list.image.baidu.com/t/image_category/galleryimg/wallpaper/scene/ri_crl.jpg");
 		flingViewList.add("http://list.image.baidu.com/t/image_category/galleryimg/wallpaper/scene/hao_hxk.jpg");
-		String[] imageUrl = { "http://list.image.baidu.com/t/image_category/galleryimg/wallpaper/scene/lan_tby.jpg",
-				"http://list.image.baidu.com/t/image_category/galleryimg/wallpaper/scene/yuan_yfg.jpg",
-				"http://list.image.baidu.com/t/image_category/galleryimg/wallpaper/scene/gui_lss.jpg",
-				"http://list.image.baidu.com/t/image_category/galleryimg/wallpaper/scene/ri_crl.jpg",
-				"http://list.image.baidu.com/t/image_category/galleryimg/wallpaper/scene/hao_hxk.jpg" };
 
-		String[] tvListText = getResources().getStringArray(R.array.sub_manu);
-		int length = tvListText.length;
-
-		for (int i = 0; i < length; i++) {
-			SubMenuItem item = (SubMenuItem) LayoutInflater.from(this).inflate(R.layout.textview_sub, null);
-			item.setText(tvListText[i]);
-			item.setImageUrl(imageUrl);
-			subMenuItemList.add(item);
-		}
 	}
 
 	/*
@@ -137,8 +128,9 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 		super.onStart();
 		ULog.d(tag, "onStart");
 		// showImage();
-		initSubMenuLayout(subMenuItemList);
+		// initSubMenuLayout(subMenuItemList);
 		// initFlingView(flingViewList);
+		new getInfoAsyncTask().execute("");
 
 	}
 
@@ -166,6 +158,7 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 			tvTitle.setText(ComParams.IPAREA.substring(0, 5) + "***");
 		else if (ComParams.IPAREA.length() > 0)
 			tvTitle.setText(ComParams.IPAREA);
+
 	}
 
 	@Override
@@ -320,8 +313,8 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 	// }
 
 	/** 初始化子菜单 */
-	private void initSubMenuLayout(final List<SubMenuItem> subMenuItemList) {
-		subMenuLayout.setTVListText(subMenuItemList);
+	public void initSubMenuLayout(Category category) {
+		subMenuLayout.setTVListText(category.getMenuList());
 		int size = subMenuItemList.size();
 		MyOnClickListener[] onClickList = new MyOnClickListener[size];
 		for (int i = 0; i < size; i++) {
@@ -340,7 +333,7 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 
 		@Override
 		public void onClick(View v) {
-			initFlingView(Arrays.asList(subMenuItem.getImageUrl()));
+			// initFlingView(Arrays.asList(subMenuItem.getImageUrl()));
 		}
 
 	}
@@ -400,6 +393,44 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 			return mGallery.onGalleryTouchEvent(event);
 		}
 		return super.onTouchEvent(event);
+	}
+
+	class getInfoAsyncTask extends AsyncTask<String, String, Category> {
+		@Override
+		protected Category doInBackground(String... params) {
+			Category category;
+
+			String kzmwInfo = new HttpActions(KaZiMeiWeiActivity.this).getKaZiMeiWeiInfo();
+
+			category = Analysis.analysisKZMWInfo(kzmwInfo);
+
+			SharedPreferences setConfig = getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
+					Activity.MODE_PRIVATE);
+			if (null != category) {
+				setConfig.edit().putString(ComParams.SHAREDPREFERENCES_KZME_IFNO, kzmwInfo).commit();
+			} else {
+				category = Analysis.analysisKZMWInfo(setConfig.getString(ComParams.SHAREDPREFERENCES_KZME_IFNO, ""));
+			}
+			return category;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+		 */
+		@Override
+		protected void onPostExecute(Category result) {
+			super.onPostExecute(result);
+
+			if (null == result) {
+				Toast.makeText(KaZiMeiWeiActivity.this, "获取数据失败", Toast.LENGTH_LONG).show();
+			} else {
+				initSubMenuLayout(result);
+			}
+
+		}
+
 	}
 
 }

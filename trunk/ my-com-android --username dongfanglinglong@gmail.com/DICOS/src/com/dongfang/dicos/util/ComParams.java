@@ -39,10 +39,11 @@ public class ComParams {
 
 	/** ip地址 */
 	public static final String	SHAREDPREFERENCES_IP_AREA					= "iparea";
-	
-	
+
 	/** 当季活动图片地址 */
 	public static final String	SHAREDPREFERENCES_CRUUENTSEASON_IMG_URLS	= "cruuentSeasonImgUrls";
+	/** 卡滋美味首页数据 */
+	public static final String	SHAREDPREFERENCES_KZME_IFNO					= "kzme_ifno";
 
 	// ----------------------------------------------------------------------------
 	/** 获取验证码时，锁定获取验证码按钮事件（秒） */

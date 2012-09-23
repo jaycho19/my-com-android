@@ -57,11 +57,11 @@ public class FirstpageActivity extends Activity {
 			Bundle data = new Bundle();
 			SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
 					Activity.MODE_PRIVATE);
-			setConfig
-					.edit()
-					.putString(ComParams.SHAREDPREFERENCES_CRUUENTSEASON_IMG_URLS,
-							"[\"http:\\/\\/www.dicos.com.cn\\/  images\\/  app\\/action\\/9_1348134247.jpg\"]")
-					.commit();
+//			setConfig
+//					.edit()
+//					.putString(ComParams.SHAREDPREFERENCES_CRUUENTSEASON_IMG_URLS,
+//							"[\"http:\\/\\/www.dicos.com.cn\\/  images\\/  app\\/action\\/9_1348134247.jpg\"]")
+//					.commit();
 			String[] aImgUrl = null;
 
 			if (Util.isNetworkAvailable(context)) {
