@@ -32,6 +32,11 @@ public class Analysis {
 		return str.replaceAll("\\[|\\]|\"|\\\\| ", "").split(",");
 	}
 
+	/** 解析卡滋美味二级菜单显示数据 */
+	public static String[] analysisKZMWInfo_type(String str) {
+		return analysisCurrentSeasonImgUrl(str);
+	}
+
 	/** 解析卡滋美味首页数据 */
 	public static Category analysisKZMWInfo(String str) {
 		if (TextUtils.isEmpty(str) || str.equals("[]") || str.equals("-999"))

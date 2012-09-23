@@ -77,7 +77,6 @@ public class SubMenuLayout extends LinearLayout {
 
 	public void setOnClickListener(OnClickListener[] clickListener) {
 		int l = Math.min(length, clickListener.length);
-
 		for (int i = 0; i < l; i++) {
 			tvList[i].setOnClickListener(clickListener[i]);
 		}

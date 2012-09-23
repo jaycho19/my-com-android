@@ -28,10 +28,12 @@ public class Category {
 		return imgUrls;
 	}
 
+	public void setImageUrls(List<String> list) {
+		imgUrls = list;
+	}
+
 	public void add2ImgUrls(String imgUrl) {
 		imgUrls.add(imgUrl);
 	}
-
-
 
 }
