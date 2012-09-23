@@ -22,41 +22,27 @@ public class SubMenuItem extends TextView {
 	}
 
 	private String	name;
-	private String	imageUrl[];
+	private String	id;
 
-	public void init(String name, String[] imageUrl, int id) {
+	public void init(String name, String id) {
 		this.name = name;
-		this.imageUrl = imageUrl;
+		this.id = id;
 	}
 
-	/**
-	 * @return the name
-	 */
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * @param name
-	 *            the name to set
-	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/**
-	 * @return the imageUrl
-	 */
-	public String[] getImageUrl() {
-		return imageUrl;
+	public String getid() {
+		return id;
 	}
 
-	/**
-	 * @param imageUrl
-	 *            the imageUrl to set
-	 */
-	public void setImageUrl(String[] imageUrl) {
-		this.imageUrl = imageUrl;
+	public void setid(String id) {
+		this.id = id;
 	}
 
 }

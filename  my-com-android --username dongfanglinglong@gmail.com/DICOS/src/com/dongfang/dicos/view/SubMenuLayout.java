@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 
 import com.dongfang.dicos.R;
+import com.dongfang.dicos.kzmw.KeyValue;
 
 public class SubMenuLayout extends LinearLayout {
 
@@ -17,7 +18,7 @@ public class SubMenuLayout extends LinearLayout {
 	/** TextView 对象列表 */
 	private SubMenuItem[]			tvList;
 	/** 显示的文字 */
-	private String[]				tvListText;
+	private List<KeyValue>			menulist;
 
 	private int						length			= 0;
 
@@ -33,49 +34,43 @@ public class SubMenuLayout extends LinearLayout {
 	public SubMenuLayout(Context context) {
 		super(context);
 		this.context = context;
-		//initSubMenuLayout();
+		// initSubMenuLayout();
 	}
 
 	public SubMenuLayout(Context context, AttributeSet paramAttributeSet) {
 		super(context, paramAttributeSet);
 		this.context = context;
-		//initSubMenuLayout();
+		// initSubMenuLayout();
 	}
 
 	private void initSubMenuLayout() {
-		tvListText = getResources().getStringArray(R.array.sub_manu);
+		String[] tvListText = getResources().getStringArray(R.array.sub_manu);
 		length = tvListText.length;
 		tvList = new SubMenuItem[length];
 
 		for (int i = 0; i < length; i++) {
 			tvList[i] = (SubMenuItem) LayoutInflater.from(context).inflate(R.layout.textview_sub, null);
 			tvList[i].setText(tvListText[i]);
+			tvList[i].setid(3 + "");
 			this.addView(tvList[i]);
 
 		}
 	}
 
-	public void setTVListText(String[] tvlistText) {
-		tvListText = tvlistText;
-		length = tvListText.length;
-		refresh();
-	}
-
-	public void setTVListText(List<SubMenuItem> subMenuItemList) {
-		length = subMenuItemList.size();
-		tvListText = new String[length];
-		for (int i = 0; i < length; i++) {
-			tvListText[i] = subMenuItemList.get(i).getName();
-		}
+	public void setTVListText(List<KeyValue> list) {
+		menulist = list;
+		length = list.size();
 		refresh();
 	}
 
 	public void refresh() {
 		removeAllViews();
 		tvList = new SubMenuItem[length];
+
 		for (int i = 0; i < length; i++) {
 			tvList[i] = (SubMenuItem) LayoutInflater.from(context).inflate(R.layout.textview_sub, null);
-			tvList[i].setText(tvListText[i]);
+			tvList[i].setText(menulist.get(i).value);
+			tvList[i].setid(menulist.get(i).key);
 			this.addView(tvList[i]);
 		}
 	}

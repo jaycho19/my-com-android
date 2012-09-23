@@ -273,13 +273,46 @@ public class HttpActions {
 	 * 
 	 * @return 成功 <br>
 	 *         [
-	 *         "http:\/\/www.dicos.com.cn\/images\/app\/action\/8_1347870892.jpg","http:\/\/www.dicos.com.cn\/images\/app\/action\/7_1347605021.jp
-	 *         g " ] <br>
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/action\/8_1347870892.jpg","http:\/\/www.dicos.com.cn\/images\/app\/action\/7_1347
+	 *         6 0 5 0 2 1 .jpg" ] <br>
 	 *         无资料 <br>
 	 *         []
 	 */
 	public String getCurrentSeasonImgUrl() {
 		return https.post(null, "http://www.dicos.com.cn/app/api/app_action.php");
+	}
+
+	/**
+	 * 
+	 * @return 返回格式：json 回传值:<br>
+	 *         cate:分类<br>
+	 *         key(键值):分类号码<br>
+	 *         value(值):分类名称<br>
+	 *         newest:最新图檔路径<br>
+	 *         例:<br>
+	 *         成功<br>
+	 *         {"cate":{"1":"\u65e9\u9910"},"newest":
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal\/3_1347873388.jpg"}
+	 */
+	public String getKaZiMeiWeiInfo() {
+		return https.post(null, "http://www.dicos.com.cn/app/api/app_meal_category.php");
+	}
+
+	/**
+	 * 
+	 * @param cateId
+	 * @return 返回格式: json<br>
+	 *         例:<br>
+	 *         成功<br>
+	 *         [
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal\/3_1347873388.jpg","http:\/\/www.dicos.com.cn\/images\/app\/meal\/5_1347892514.jp
+	 *         g " ] 无资料<br>
+	 *         []<br>
+	 *         其他<br>
+	 *         -999:参数错误
+	 */
+	public String getKaZiMeiWei_type(String cateId) {
+		return https.get("http://www.dicos.com.cn/app/api/app_meal.php?cate=" + cateId, null);
 	}
 
 }
