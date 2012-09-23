@@ -274,7 +274,7 @@ public class HttpActions {
 	 * @return 成功 <br>
 	 *         [
 	 *         "http:\/\/www.dicos.com.cn\/images\/app\/action\/8_1347870892.jpg","http:\/\/www.dicos.com.cn\/images\/app\/action\/7_1347
-	 *         6 0 5 0 2 1 .jpg" ] <br>
+	 *         605021.jpg" ] <br>
 	 *         无资料 <br>
 	 *         []
 	 */

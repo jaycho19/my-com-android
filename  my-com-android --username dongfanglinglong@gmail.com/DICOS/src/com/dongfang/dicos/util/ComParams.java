@@ -44,6 +44,8 @@ public class ComParams {
 	public static final String	SHAREDPREFERENCES_CRUUENTSEASON_IMG_URLS	= "cruuentSeasonImgUrls";
 	/** 卡滋美味首页数据 */
 	public static final String	SHAREDPREFERENCES_KZME_IFNO					= "kzme_ifno";
+	/** 卡滋美味二级餐单点击数据 */
+	public static final String	SHAREDPREFERENCES_KZME_IFNO_TYPE_CATE		= "kzme_ifno_type_cate";
 
 	// ----------------------------------------------------------------------------
 	/** 获取验证码时，锁定获取验证码按钮事件（秒） */

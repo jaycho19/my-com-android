@@ -21,13 +21,15 @@
     </RelativeLayout>
 
     <com.dongfang.dicos.view.MyHorizontalScrollView
+        android:id="@+id/my_horizontal_scroll_view_kazm"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:background="@color/dicosyellow"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
-        android:scrollbars="none" >
+        android:scrollbars="none"
+        android:visibility="gone" >
 
         <com.dongfang.dicos.view.SubMenuLayout
             android:id="@+id/submenulayout"

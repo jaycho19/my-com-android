@@ -5,13 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,6 +36,7 @@ import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.util.Util;
 import com.dongfang.dicos.view.FlingAdapter;
 import com.dongfang.dicos.view.FlingGallery;
+import com.dongfang.dicos.view.MyHorizontalScrollView;
 import com.dongfang.dicos.view.SubMenuItem;
 import com.dongfang.dicos.view.SubMenuLayout;
 
@@ -46,16 +47,16 @@ import com.dongfang.dicos.view.SubMenuLayout;
  * */
 public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnClickListener, ViewFactory {
 
-	public static final String	tag					= "KaZiMeiWeiActivity";
+	public static final String		tag					= "KaZiMeiWeiActivity";
 
-	private TextView			tvTitle;
+	private TextView				tvTitle;
 
 	/** 登录按钮 */
-	private Button				bLogin;
+	private Button					bLogin;
 	/** 签到按钮 */
-	private Button				bSigne;
+	private Button					bSigne;
 	/** Ipad 抽奖 */
-	private Button				bIpad3;
+	private Button					bIpad3;
 
 	// /** 图片Flipper */
 	// private ImageSwitcher vfInfo;
@@ -66,13 +67,14 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 
 	// private GestureDetector gestureDetector;
 
-	private FlingGallery		mGallery			= null;
-	private LinearLayout		ll_fling_view		= null;
-	private LinearLayout		ll_fling_desc_image	= null;
-	public List<String>			flingViewList		= new ArrayList<String>();
-	public List<SubMenuItem>	subMenuItemList		= new ArrayList<SubMenuItem>();
+	private FlingGallery			mGallery			= null;
+	private LinearLayout			ll_fling_view		= null;
+	private LinearLayout			ll_fling_desc_image	= null;
+	public List<String>				flingViewList		= new ArrayList<String>();
+	public List<SubMenuItem>		subMenuItemList		= new ArrayList<SubMenuItem>();
 
-	private SubMenuLayout		subMenuLayout		= null;
+	private MyHorizontalScrollView	myHorizontalScrollView;
+	private SubMenuLayout			subMenuLayout		= null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -104,18 +106,13 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 		// findViewById(R.id.framelayout_kzmw_info);
 		// scrollview_kzmw_info.setOnTouchListener(new MyOnTouchListener());
 
+		myHorizontalScrollView = (MyHorizontalScrollView) findViewById(R.id.my_horizontal_scroll_view_kazm);
 		subMenuLayout = (SubMenuLayout) findViewById(R.id.submenulayout);
 
 		ll_fling_view = (LinearLayout) findViewById(R.id.ll_fling_view);
 		ll_fling_desc_image = (LinearLayout) findViewById(R.id.ll_fling_desc_image);
 
-		flingViewList.clear();
-		flingViewList.add("http://list.image.baidu.com/t/image_category/galleryimg/wallpaper/scene/lan_tby.jpg");
-		flingViewList.add("http://list.image.baidu.com/t/image_category/galleryimg/wallpaper/scene/yuan_yfg.jpg");
-		flingViewList.add("http://list.image.baidu.com/t/image_category/galleryimg/wallpaper/scene/gui_lss.jpg");
-		flingViewList.add("http://list.image.baidu.com/t/image_category/galleryimg/wallpaper/scene/ri_crl.jpg");
-		flingViewList.add("http://list.image.baidu.com/t/image_category/galleryimg/wallpaper/scene/hao_hxk.jpg");
-
+		new getInfoAsyncTask().execute("");
 	}
 
 	/*
@@ -127,10 +124,6 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 	protected void onStart() {
 		super.onStart();
 		ULog.d(tag, "onStart");
-		// showImage();
-		// initSubMenuLayout(subMenuItemList);
-		// initFlingView(flingViewList);
-		new getInfoAsyncTask().execute("");
 
 	}
 
@@ -206,6 +199,221 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 		i.setLayoutParams(new ImageSwitcher.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
 				RelativeLayout.LayoutParams.WRAP_CONTENT));
 		return i;
+	}
+
+	/** 初始化子菜单 */
+	public void initSubMenuLayout(Category category) {
+		subMenuLayout.setTVListText(category.getMenuList());
+		int size = category.getMenuList().size();
+		MyOnClickListener[] onClickList = new MyOnClickListener[size];
+		for (int i = 0; i < size; i++) {
+			onClickList[i] = new MyOnClickListener(category.getMenuList().get(i).key);
+		}
+		subMenuLayout.setOnClickListener(onClickList);
+
+	}
+
+	class MyOnClickListener implements OnClickListener {
+		String	cateId;
+
+		MyOnClickListener(String cateId) {
+			this.cateId = cateId;
+		}
+
+		@Override
+		public void onClick(View v) {
+			ULog.e(tag, "MyOnClickListener");
+			new getInfoTypeAsyncTask().execute(cateId);
+
+		}
+
+	}
+
+	public void initFlingView(final List<String> flingViewList) {
+		ll_fling_view = (LinearLayout) findViewById(R.id.ll_fling_view);
+		ll_fling_desc_image = (LinearLayout) findViewById(R.id.ll_fling_desc_image);
+
+		int size = flingViewList.size();
+		ll_fling_desc_image.removeAllViews();
+		for (int i = 0; i < size; i++) {
+			ImageView image = new ImageView(this);
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(10, 10);
+			params.setMargins(5, 0, 5, 0);
+			ll_fling_desc_image.addView(image, params);
+			if (i == 0) {
+				image.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.fling_point_focsed));
+			} else {
+				image.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.fling_point_unfocsed));
+			}
+		}
+
+		if (mGallery != null) {
+			mGallery.setAdapter(new FlingAdapter(this, flingViewList));
+			mGallery.refreshDrawableState();
+		} else {
+			mGallery = new FlingGallery(this, null, ll_fling_desc_image);
+			mGallery.setPaddingWidth(0);
+			mGallery.setAdapter(new FlingAdapter(this, flingViewList));
+			mGallery.setIsGalleryCircular(false);
+		}
+
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
+				LinearLayout.LayoutParams.FILL_PARENT);
+		ll_fling_view.setOrientation(LinearLayout.HORIZONTAL);
+		ll_fling_view.removeAllViews();
+		ll_fling_view.addView(mGallery, layoutParams);
+		ll_fling_view.setOnTouchListener(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			Util.showExitDialog(this);
+
+			return false;
+		}
+
+		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		switch (v.getId()) {
+		case R.id.ll_fling_view:
+			return mGallery.onGalleryTouchEvent(event);
+		}
+		return super.onTouchEvent(event);
+	}
+
+	/** 初始化卡滋美味页面菜单数据 */
+	class getInfoAsyncTask extends AsyncTask<String, String, Category> {
+		ProgressDialog	progressDialog;
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+
+			progressDialog = ProgressDialog.show(KaZiMeiWeiActivity.this, "", "数据加载中...");
+
+		}
+
+		@Override
+		protected Category doInBackground(String... params) {
+			Category category = null;
+			SharedPreferences setConfig = getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
+					Activity.MODE_PRIVATE);
+			if (Util.isNetworkAvailable(KaZiMeiWeiActivity.this)) {
+				String kzmwInfo = new HttpActions(KaZiMeiWeiActivity.this).getKaZiMeiWeiInfo();
+
+				category = Analysis.analysisKZMWInfo(kzmwInfo);
+
+				if (null != category) {
+					setConfig.edit().putString(ComParams.SHAREDPREFERENCES_KZME_IFNO, kzmwInfo).commit();
+				} else {
+					category = Analysis
+							.analysisKZMWInfo(setConfig.getString(ComParams.SHAREDPREFERENCES_KZME_IFNO, ""));
+				}
+			} else {
+				category = Analysis.analysisKZMWInfo(setConfig.getString(ComParams.SHAREDPREFERENCES_KZME_IFNO, ""));
+			}
+			return category;
+		}
+
+		@Override
+		protected void onPostExecute(Category result) {
+			super.onPostExecute(result);
+
+			progressDialog.dismiss();
+
+			if (null == result) {
+				Toast.makeText(KaZiMeiWeiActivity.this, "获取数据失败", Toast.LENGTH_LONG).show();
+			} else {
+				initSubMenuLayout(result);
+				myHorizontalScrollView.setVisibility(View.VISIBLE);
+				initFlingView(result.getImgUrls());
+
+			}
+
+		}
+
+	}
+
+	/** 卡滋美味二级菜单 */
+	class getInfoTypeAsyncTask extends AsyncTask<String, String, Category> {
+
+		ProgressDialog	progressDialog;
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+
+			progressDialog = ProgressDialog.show(KaZiMeiWeiActivity.this, "", "数据加载中...");
+
+		}
+
+		@Override
+		protected Category doInBackground(String... params) {
+			ULog.i(tag, "cateId = " + params[0]);
+			Category category = null;
+			SharedPreferences setConfig = getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
+					Activity.MODE_PRIVATE);
+			String[] imgUrls = null;
+			if (Util.isNetworkAvailable(KaZiMeiWeiActivity.this)) {
+				String kzmwInfo_type = new HttpActions(KaZiMeiWeiActivity.this).getKaZiMeiWei_type(params[0]);
+				ULog.i(tag, "kzmwInfo_type = " + kzmwInfo_type);
+
+				imgUrls = Analysis.analysisKZMWInfo_type(kzmwInfo_type);
+
+				if (null != imgUrls && imgUrls.length > 0) {
+					category = new Category();
+					category.setImageUrls(Arrays.asList(imgUrls));
+					setConfig.edit()
+							.putString(ComParams.SHAREDPREFERENCES_KZME_IFNO_TYPE_CATE + params[0], kzmwInfo_type)
+							.commit();
+				} else {
+					imgUrls = Analysis.analysisKZMWInfo_type(setConfig.getString(
+							ComParams.SHAREDPREFERENCES_KZME_IFNO_TYPE_CATE + params[0], ""));
+					if (null != imgUrls && imgUrls.length > 0) {
+						category = new Category();
+						category.setImageUrls(Arrays.asList(imgUrls));
+					}
+				}
+			} else {
+				imgUrls = Analysis.analysisKZMWInfo_type(setConfig.getString(
+						ComParams.SHAREDPREFERENCES_KZME_IFNO_TYPE_CATE + params[0], ""));
+				if (null != imgUrls && imgUrls.length > 0) {
+					category = new Category();
+					category.setImageUrls(Arrays.asList(imgUrls));
+				}
+			}
+
+			return category;
+		}
+
+		@Override
+		protected void onPostExecute(Category result) {
+			super.onPostExecute(result);
+
+			progressDialog.dismiss();
+
+			if (null == result) {
+				Toast.makeText(KaZiMeiWeiActivity.this, "获取数据失败", Toast.LENGTH_LONG).show();
+			} else {
+				// initSubMenuLayout(result);
+				// myHorizontalScrollView.setVisibility(View.VISIBLE);
+
+				ULog.d(tag, result.getImgUrls().get(0));
+
+				initFlingView(result.getImgUrls());
+			}
+
+		}
+
 	}
 
 	// private void showImage() {
@@ -311,126 +519,5 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 	// }
 	//
 	// }
-
-	/** 初始化子菜单 */
-	public void initSubMenuLayout(Category category) {
-		subMenuLayout.setTVListText(category.getMenuList());
-		int size = subMenuItemList.size();
-		MyOnClickListener[] onClickList = new MyOnClickListener[size];
-		for (int i = 0; i < size; i++) {
-			onClickList[i] = new MyOnClickListener(subMenuItemList.get(i));
-		}
-		subMenuLayout.setOnClickListener(onClickList);
-
-	}
-
-	class MyOnClickListener implements OnClickListener {
-		SubMenuItem	subMenuItem;
-
-		MyOnClickListener(SubMenuItem subMenuItem) {
-			this.subMenuItem = subMenuItem;
-		}
-
-		@Override
-		public void onClick(View v) {
-			// initFlingView(Arrays.asList(subMenuItem.getImageUrl()));
-		}
-
-	}
-
-	public void initFlingView(final List<String> flingViewList) {
-		ll_fling_view = (LinearLayout) findViewById(R.id.ll_fling_view);
-		ll_fling_desc_image = (LinearLayout) findViewById(R.id.ll_fling_desc_image);
-
-		int size = flingViewList.size();
-		for (int i = 0; i < size; i++) {
-			ImageView image = new ImageView(this);
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(10, 10);
-			params.setMargins(5, 0, 5, 0);
-			ll_fling_desc_image.addView(image, params);
-			if (i == 0) {
-				image.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.fling_point_focsed));
-			} else {
-				image.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.fling_point_unfocsed));
-			}
-		}
-
-		if (mGallery != null) {
-			return;
-		}
-		mGallery = new FlingGallery(this, null, ll_fling_desc_image);
-		mGallery.setPaddingWidth(0);
-		mGallery.setAdapter(new FlingAdapter(this, flingViewList));
-		mGallery.setIsGalleryCircular(false);
-
-		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
-				LinearLayout.LayoutParams.FILL_PARENT);
-		ll_fling_view.setOrientation(LinearLayout.HORIZONTAL);
-		ll_fling_view.addView(mGallery, layoutParams);
-		ll_fling_view.setOnTouchListener(this);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
-	 */
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			Util.showExitDialog(this);
-
-			return false;
-		}
-
-		return super.onKeyDown(keyCode, event);
-	}
-
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		switch (v.getId()) {
-		case R.id.ll_fling_view:
-			return mGallery.onGalleryTouchEvent(event);
-		}
-		return super.onTouchEvent(event);
-	}
-
-	class getInfoAsyncTask extends AsyncTask<String, String, Category> {
-		@Override
-		protected Category doInBackground(String... params) {
-			Category category;
-
-			String kzmwInfo = new HttpActions(KaZiMeiWeiActivity.this).getKaZiMeiWeiInfo();
-
-			category = Analysis.analysisKZMWInfo(kzmwInfo);
-
-			SharedPreferences setConfig = getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
-					Activity.MODE_PRIVATE);
-			if (null != category) {
-				setConfig.edit().putString(ComParams.SHAREDPREFERENCES_KZME_IFNO, kzmwInfo).commit();
-			} else {
-				category = Analysis.analysisKZMWInfo(setConfig.getString(ComParams.SHAREDPREFERENCES_KZME_IFNO, ""));
-			}
-			return category;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
-		 */
-		@Override
-		protected void onPostExecute(Category result) {
-			super.onPostExecute(result);
-
-			if (null == result) {
-				Toast.makeText(KaZiMeiWeiActivity.this, "获取数据失败", Toast.LENGTH_LONG).show();
-			} else {
-				initSubMenuLayout(result);
-			}
-
-		}
-
-	}
 
 }
