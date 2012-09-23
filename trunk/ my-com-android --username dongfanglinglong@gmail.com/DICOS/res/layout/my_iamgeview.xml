@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/black" >
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:background="@color/black"
+    android:minHeight="150dp"
+    android:paddingBottom="2dp"
+    android:paddingTop="2dp" >
 
     <ImageView
         android:id="@+id/imageview_show"
@@ -14,7 +18,7 @@
     <com.dongfang.dicos.view.MyProgressBar
         android:id="@+id/imageview_myprogressbar"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
 
 </RelativeLayout>

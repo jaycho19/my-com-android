@@ -12,7 +12,7 @@
 
     <uses-sdk
         android:minSdkVersion="7"
-        android:targetSdkVersion="15" />
+        android:targetSdkVersion="16" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -49,11 +49,14 @@
         </activity>
         
         <activity android:name=".DiscountCouponActivity" android:screenOrientation="portrait" android:launchMode="singleTask"> </activity>
+        <activity android:name=".CurrentSeason" android:screenOrientation="portrait" android:launchMode="singleTask"> </activity>
         <activity android:name=".StoreSearchActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         <activity android:name=".MoreActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         <activity android:name=".KaZiMeiWeiActivity" android:screenOrientation="portrait" android:launchMode="singleTask"
             android:theme="@android:style/Theme.Black"></activity>
         <activity android:name=".MyDicosActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
+        
+        <activity android:name=".CurrentSeasonDetail" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         
         <activity android:name=".more.TongBuActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         <activity android:name=".more.TuiSongActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>

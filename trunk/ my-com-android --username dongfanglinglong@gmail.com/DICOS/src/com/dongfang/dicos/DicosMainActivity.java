@@ -8,6 +8,8 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
+import com.dongfang.dicos.util.ComParams;
+
 /**
  * 主ACTIVITY
  * 
@@ -20,7 +22,7 @@ public class DicosMainActivity extends TabActivity implements OnCheckedChangeLis
 	/** 底部餐单按钮的group */
 	private RadioGroup			radioGroup;
 	private TabHost				tabHost;
-	public static final String	TAB_ITEM_1	= "DiscountCoupon";
+	public static final String	TAB_ITEM_1	= "CurrentSeason";
 	public static final String	TAB_ITEM_2	= "kazimeiwei";
 	public static final String	TAB_ITEM_3	= "StorSearch";
 	public static final String	TAB_ITEM_4	= "MyDicos";
@@ -42,7 +44,13 @@ public class DicosMainActivity extends TabActivity implements OnCheckedChangeLis
 		TabSpec tab4 = tabHost.newTabSpec(TAB_ITEM_4);
 		TabSpec tab5 = tabHost.newTabSpec(TAB_ITEM_5);
 
-		tab1.setIndicator(TAB_ITEM_1).setContent(new Intent(this, DiscountCouponActivity.class));
+		Intent intent = new Intent(this, CurrentSeason.class);
+		if (null != getIntent() && getIntent().hasExtra(ComParams.CURRENT_SEASON_IMG_ARRARY)) {
+			intent.putExtra(ComParams.CURRENT_SEASON_IMG_ARRARY,
+					getIntent().getStringArrayExtra(ComParams.CURRENT_SEASON_IMG_ARRARY));
+		}
+
+		tab1.setIndicator(TAB_ITEM_1).setContent(intent);
 		tab2.setIndicator(TAB_ITEM_2).setContent(new Intent(this, KaZiMeiWeiActivity.class));
 		tab3.setIndicator(TAB_ITEM_3).setContent(new Intent(this, StoreSearchActivity.class));
 		tab4.setIndicator(TAB_ITEM_4).setContent(new Intent(this, MyDicosActivity.class));
