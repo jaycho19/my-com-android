@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.widget.Toast;
 
 import com.dongfang.dicos.R;
@@ -117,9 +118,40 @@ public class Util {
 		return name.contains("德克士") ? name : "德克士" + name;
 	}
 
+	/**
+	 * 判断文件是否存在
+	 * 
+	 * @param context
+	 * @param filename
+	 * @return
+	 */
 	public static boolean chkFileExist(Context context, String filename) {
 		ULog.d(tag, "path = " + context.getCacheDir());
 		return (new File(context.getCacheDir(), filename)).exists();
+	}
+
+	/**
+	 * 返回屏幕宽度
+	 * 
+	 * @param context
+	 * @return
+	 */
+	public static int getWindowWidth(Context context) {
+		DisplayMetrics dm = new android.util.DisplayMetrics();
+		((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(dm);
+		return dm.widthPixels;
+	}
+
+	/**
+	 * 返回屏幕高度
+	 * 
+	 * @param context
+	 * @return
+	 */
+	public static int getWindowHeight(Context context) {
+		DisplayMetrics dm = new android.util.DisplayMetrics();
+		((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(dm);
+		return dm.heightPixels;
 	}
 
 }

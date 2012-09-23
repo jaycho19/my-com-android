@@ -150,11 +150,8 @@ public class Https {
 		try {
 			// 创建HttpPost对象
 			HttpPost request = new HttpPost(url);
-			// ULog.d(tag,"null != request = " + (null != request));
-			request.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));
-			// Header header = new BasicHeader(HTTP_HEADER_CONTENT_TYPE_KEY ,
-			// HTTP_HEADER_CONTENT_TYPE_VALUE);
-			// request.setHeader(header);
+			if (null != list && list.size() > 0)
+				request.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));
 
 			// 创建连接对象
 			HttpClient client = this.getNewHttpClient();
@@ -165,12 +162,13 @@ public class Https {
 			// ULog.d(tag,"HttpStatus = " +
 			// httpResponse.getStatusLine().getStatusCode());
 
-//			for (Header h : httpResponse.getAllHeaders()) {
-//				ULog.d(tag, h.getName() + " ++ " + h.getValue());
-//				for (HeaderElement s : h.getElements()) {
-//					ULog.d(tag, s.getParameterCount() + " -- " + s.getName() + " -- " + s.getValue());
-//				}
-//			}
+			// for (Header h : httpResponse.getAllHeaders()) {
+			// ULog.d(tag, h.getName() + " ++ " + h.getValue());
+			// for (HeaderElement s : h.getElements()) {
+			// ULog.d(tag, s.getParameterCount() + " -- " + s.getName() + " -- "
+			// + s.getValue());
+			// }
+			// }
 
 			if (null != httpResponse && httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				ULog.d(tag, "post 200");
@@ -249,15 +247,15 @@ public class Https {
 			}
 
 			String content_type = response.getFirstHeader(HTTP.CONTENT_TYPE).getValue();
-			String charset = content_type.substring(content_type.indexOf("charset=") + 8);
-			ULog.e(tag, "charset=" + charset);
-			
-			if (TextUtils.isEmpty(charset))
+			String charset = content_type.contains("charset=") ? content_type.substring(content_type.indexOf("charset=") + 8) : "";
+			ULog.i(tag, "content_type =" + content_type);
+			ULog.i(tag, "charset=" + charset);
+
+			if (TextUtils.isEmpty(charset) || "gbk".equalsIgnoreCase(charset))
 				result = new String(content.toByteArray(), "gbk").trim();
 			else
-				result = new String(content.toByteArray(), charset).trim();
-
-			ULog.d(tag, "read = " + result);
+				result = new String(content.toByteArray(), "uft-8").trim();
+			
 		} catch (Exception e) {
 			ULog.e(tag, "read " + e.toString());
 		}

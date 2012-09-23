@@ -196,7 +196,7 @@ public class HttpActions {
 		String s = js.toString();
 		ULog.d(tag, s);
 		list.add(new BasicNameValuePair(KEY, s));
-		return https.post(list,Https.URL_RESTAURENTLIST);
+		return https.post(list, Https.URL_RESTAURENTLIST);
 	}
 
 	/** 签到 */
@@ -246,7 +246,7 @@ public class HttpActions {
 		list.clear();
 		list.add(new BasicNameValuePair(KEY, js.toString()));
 		ULog.d(tag, js.toString());
-		return https.post(list,Https.URL_ADVICE);
+		return https.post(list, Https.URL_ADVICE);
 	}
 
 	/**
@@ -266,6 +266,20 @@ public class HttpActions {
 		list.add(new BasicNameValuePair(KEY, js.toString()));
 		ULog.d(tag, js.toString());
 		return https.post(list);
+	}
+
+	/**
+	 * 6． 当季活动
+	 * 
+	 * @return 成功 <br>
+	 *         [
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/action\/8_1347870892.jpg","http:\/\/www.dicos.com.cn\/images\/app\/action\/7_1347605021.jp
+	 *         g " ] <br>
+	 *         无资料 <br>
+	 *         []
+	 */
+	public String getCurrentSeasonImgUrl() {
+		return https.post(null, "http://www.dicos.com.cn/app/api/app_action.php");
 	}
 
 }
