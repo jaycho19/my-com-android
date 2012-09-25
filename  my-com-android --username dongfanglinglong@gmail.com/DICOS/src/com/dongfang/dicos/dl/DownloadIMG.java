@@ -18,7 +18,7 @@ import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.util.Util;
 
 public class DownloadIMG extends Thread {
-	public static final String	tag	= "DownloadIMG";
+	public static final String	tag				= "DownloadIMG";
 
 	private static final int	READ_TIMEOUT	= 30 * 1000;
 	private static final int	CONNECT_TIMEOUT	= 30 * 1000;
@@ -42,7 +42,7 @@ public class DownloadIMG extends Thread {
 		ULog.d(tag, "run");
 		if (Util.isNetworkAvailable(context)) {
 			ULog.d(tag, "array_param = " + array_param + " , url = " + imageUrl);
-			saveFileByURL(imageUrl, context.getCacheDir()+ "/" + imageName, hanlder, array_param);
+			saveFileByURL(imageUrl, context.getCacheDir() + "/" + imageName, hanlder, array_param);
 		} else {
 			Message msg = new Message();
 			msg.what = ComParams.HANDLER_IMAGE_DOWNLOAD_NONET;
@@ -81,7 +81,7 @@ public class DownloadIMG extends Thread {
 
 			urlConn.setReadTimeout(READ_TIMEOUT);
 			urlConn.setConnectTimeout(CONNECT_TIMEOUT);
-			urlConn.setRequestMethod("POST");
+			urlConn.setRequestMethod("GET");
 			urlConn.setDoInput(true);
 			urlConn.setDefaultUseCaches(false);
 			urlConn.setChunkedStreamingMode(0);
@@ -195,7 +195,7 @@ public class DownloadIMG extends Thread {
 			(new File(filename)).renameTo(new File(filename + "e"));
 
 			if (null != handler) {
-				handler.sendEmptyMessage(ComParams.HANDLER_IMAGE_DOWNLOAD_END);
+				handler.sendEmptyMessageDelayed(ComParams.HANDLER_IMAGE_DOWNLOAD_END, 100);
 			}
 
 		} catch (Exception e) {

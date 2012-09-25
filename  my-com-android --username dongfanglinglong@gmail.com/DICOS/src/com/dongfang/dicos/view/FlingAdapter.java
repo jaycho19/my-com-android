@@ -3,7 +3,6 @@ package com.dongfang.dicos.view;
 import java.util.List;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -39,8 +38,6 @@ public class FlingAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Log.d(TAG, "getView() position = " + position);
-
 		return new GalleryViewItem(context, position, list);
 
 	}
@@ -53,7 +50,6 @@ public class FlingAdapter extends BaseAdapter {
 
 		public GalleryViewItem(Context context, int position, List<String> list) {
 			super(context);
-			Log.d(TAG, "GalleryViewItem() position = " + position);
 			this.setOrientation(LinearLayout.VERTICAL);
 
 			this.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
