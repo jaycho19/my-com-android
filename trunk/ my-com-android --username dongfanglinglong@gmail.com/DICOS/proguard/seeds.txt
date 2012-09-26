@@ -1084,6 +1084,10 @@ com.baidu.mapapi.n: n()
 com.baidu.mapapi.n: android.graphics.drawable.Drawable a(android.graphics.drawable.Drawable)
 com.baidu.mapapi.n: void a(android.graphics.Canvas)
 com.baidu.mapapi.n: void a(android.graphics.drawable.Drawable,android.graphics.drawable.Drawable)
+com.dongfang.dicos.CurrentSeason
+com.dongfang.dicos.CurrentSeason: CurrentSeason()
+com.dongfang.dicos.CurrentSeasonDetail
+com.dongfang.dicos.CurrentSeasonDetail: CurrentSeasonDetail()
 com.dongfang.dicos.DicosMainActivity
 com.dongfang.dicos.DicosMainActivity: DicosMainActivity()
 com.dongfang.dicos.DiscountCouponActivity
@@ -1136,6 +1140,32 @@ com.dongfang.dicos.store.StoreDetailActivity
 com.dongfang.dicos.store.StoreDetailActivity: StoreDetailActivity()
 com.dongfang.dicos.store.StoreDetailMapActivity
 com.dongfang.dicos.store.StoreDetailMapActivity: StoreDetailMapActivity()
+com.dongfang.dicos.view.FlingGallery
+com.dongfang.dicos.view.FlingGallery: void setPaddingWidth(int)
+com.dongfang.dicos.view.FlingGallery: void setAnimationDuration(int)
+com.dongfang.dicos.view.FlingGallery: void setSnapBorderRatio(float)
+com.dongfang.dicos.view.FlingGallery: void setIsGalleryCircular(boolean)
+com.dongfang.dicos.view.FlingGallery: void setAdapter(android.widget.Adapter)
+com.dongfang.dicos.view.ImageShowView
+com.dongfang.dicos.view.ImageShowView: ImageShowView(android.content.Context)
+com.dongfang.dicos.view.ImageShowView: void setScale(double)
+com.dongfang.dicos.view.MyHorizontalScrollView
+com.dongfang.dicos.view.MyHorizontalScrollView: MyHorizontalScrollView(android.content.Context,android.util.AttributeSet,int)
+com.dongfang.dicos.view.MyHorizontalScrollView: MyHorizontalScrollView(android.content.Context,android.util.AttributeSet)
+com.dongfang.dicos.view.MyHorizontalScrollView: MyHorizontalScrollView(android.content.Context)
+com.dongfang.dicos.view.MyHorizontalScrollView: void setHeight(int)
+com.dongfang.dicos.view.MyImageView
+com.dongfang.dicos.view.MyImageView: MyImageView(android.content.Context,android.util.AttributeSet)
+com.dongfang.dicos.view.MyImageView: MyImageView(android.content.Context)
+com.dongfang.dicos.view.MyImageView: void setImage(java.lang.String)
+com.dongfang.dicos.view.MyImageView: void setImageBy(java.lang.String)
+com.dongfang.dicos.view.MyImageView: void setImageBitmap(android.graphics.Bitmap)
+com.dongfang.dicos.view.MyProgressBar
+com.dongfang.dicos.view.MyProgressBar: MyProgressBar(android.content.Context,android.util.AttributeSet)
+com.dongfang.dicos.view.MyProgressBar: MyProgressBar(android.content.Context)
+com.dongfang.dicos.view.MyProgressBar: void setProgress(int)
+com.dongfang.dicos.view.MyProgressBar: void setSecondaryProgress(int)
+com.dongfang.dicos.view.MyProgressBar: void setMax(int)
 com.dongfang.dicos.view.SideBar
 com.dongfang.dicos.view.SideBar: SideBar(android.content.Context)
 com.dongfang.dicos.view.SideBar: SideBar(android.content.Context,android.util.AttributeSet)
@@ -1146,3 +1176,14 @@ com.dongfang.dicos.view.SlipButton: SlipButton(android.content.Context)
 com.dongfang.dicos.view.SlipButton: SlipButton(android.content.Context,android.util.AttributeSet)
 com.dongfang.dicos.view.SlipButton: SlipButton(android.content.Context,android.util.AttributeSet,int)
 com.dongfang.dicos.view.SlipButton: void setCheck(boolean)
+com.dongfang.dicos.view.SubMenuItem
+com.dongfang.dicos.view.SubMenuItem: SubMenuItem(android.content.Context,android.util.AttributeSet,int)
+com.dongfang.dicos.view.SubMenuItem: SubMenuItem(android.content.Context,android.util.AttributeSet)
+com.dongfang.dicos.view.SubMenuItem: SubMenuItem(android.content.Context)
+com.dongfang.dicos.view.SubMenuItem: void setName(java.lang.String)
+com.dongfang.dicos.view.SubMenuItem: void setid(java.lang.String)
+com.dongfang.dicos.view.SubMenuLayout
+com.dongfang.dicos.view.SubMenuLayout: SubMenuLayout(android.content.Context)
+com.dongfang.dicos.view.SubMenuLayout: SubMenuLayout(android.content.Context,android.util.AttributeSet)
+com.dongfang.dicos.view.SubMenuLayout: void setTVListText(java.util.List)
+com.dongfang.dicos.view.SubMenuLayout: void setOnClickListener(android.view.View$OnClickListener[])

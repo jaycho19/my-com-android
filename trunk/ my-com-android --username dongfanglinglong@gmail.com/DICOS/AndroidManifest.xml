@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dongfang.dicos"
-    android:versionCode="21010010"
-    android:versionName="1.0.10" >
+    android:versionCode="21010011"
+    android:versionName="1.0.11" >
     
     <supports-screens
         android:anyDensity="true"
