@@ -20,8 +20,8 @@ import com.dongfang.dicos.util.Util;
 public class DownloadIMG extends Thread {
 	public static final String	tag				= "DownloadIMG";
 
-	private static final int	READ_TIMEOUT	= 30 * 1000;
-	private static final int	CONNECT_TIMEOUT	= 30 * 1000;
+	private static final int	READ_TIMEOUT	= 12 * 1000;
+	private static final int	CONNECT_TIMEOUT	= 12 * 1000;
 
 	private Context				context;
 	private Handler				hanlder;
