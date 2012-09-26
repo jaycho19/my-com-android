@@ -4,10 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
-
-import com.dongfang.dicos.R;
 
 public class ImageShowView extends View implements Runnable {
 
@@ -22,10 +19,10 @@ public class ImageShowView extends View implements Runnable {
 	public ImageShowView(Context context) {
 		super(context);
 
-		mBitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.image1)).getBitmap();
+		// mBitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.image1)).getBitmap();
 
-		mBitmapWidth = mBitmap.getWidth();
-		mBitmapHeight = mBitmap.getHeight();
+		// mBitmapWidth = mBitmap.getWidth();
+		// mBitmapHeight = mBitmap.getHeight();
 
 		// ¿ªÆôÏß³Ì
 		new Thread(this).start();

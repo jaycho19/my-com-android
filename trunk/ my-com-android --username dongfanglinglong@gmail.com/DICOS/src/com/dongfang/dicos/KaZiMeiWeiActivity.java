@@ -6,6 +6,8 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -47,7 +49,7 @@ import com.dongfang.dicos.view.SubMenuLayout;
  * */
 public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnClickListener, ViewFactory {
 
-	public static final String		tag					= "KaZiMeiWeiActivity";
+	public static final String		tag						= "KaZiMeiWeiActivity";
 
 	private TextView				tvTitle;
 
@@ -67,14 +69,17 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 
 	// private GestureDetector gestureDetector;
 
-	private FlingGallery			mGallery			= null;
-	private LinearLayout			ll_fling_view		= null;
-	private LinearLayout			ll_fling_desc_image	= null;
-	public List<String>				flingViewList		= new ArrayList<String>();
-	public List<SubMenuItem>		subMenuItemList		= new ArrayList<SubMenuItem>();
+	private FlingGallery			mGallery				= null;
+	private LinearLayout			ll_fling_view			= null;
+	private LinearLayout			ll_fling_desc_image		= null;
+	public List<String>				flingViewList			= new ArrayList<String>();
+	public List<SubMenuItem>		subMenuItemList			= new ArrayList<SubMenuItem>();
 
 	private MyHorizontalScrollView	myHorizontalScrollView;
-	private SubMenuLayout			subMenuLayout		= null;
+	private SubMenuLayout			subMenuLayout			= null;
+
+	private GetInfoAsyncTask		getInfoAsyncTask		= null;
+	private GetInfoTypeAsyncTask	getInfoTypeAsyncTask	= null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +117,8 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 		ll_fling_view = (LinearLayout) findViewById(R.id.ll_fling_view);
 		ll_fling_desc_image = (LinearLayout) findViewById(R.id.ll_fling_desc_image);
 
-		new getInfoAsyncTask().execute("");
+		getInfoAsyncTask = new GetInfoAsyncTask();
+		getInfoAsyncTask.execute("");
 	}
 
 	/*
@@ -223,8 +229,8 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 		@Override
 		public void onClick(View v) {
 			ULog.e(tag, "MyOnClickListener");
-			new getInfoTypeAsyncTask().execute(cateId);
-
+			getInfoTypeAsyncTask = new GetInfoTypeAsyncTask();
+			getInfoTypeAsyncTask.execute(cateId);
 		}
 
 	}
@@ -272,9 +278,18 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			Util.showExitDialog(this);
+		ULog.d(tag, "4 keyCode = " + keyCode);
 
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if (null != this.getInfoAsyncTask) {
+				getInfoAsyncTask.cancel(true);
+			}
+
+			if (null != this.getInfoTypeAsyncTask) {
+				getInfoTypeAsyncTask.cancel(true);
+			}
+
+			Util.showExitDialog(this);
 			return false;
 		}
 
@@ -291,14 +306,24 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 	}
 
 	/** 初始化卡滋美味页面菜单数据 */
-	class getInfoAsyncTask extends AsyncTask<String, String, Category> {
+	class GetInfoAsyncTask extends AsyncTask<String, String, Category> {
 		ProgressDialog	progressDialog;
 
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
 
-			progressDialog = ProgressDialog.show(KaZiMeiWeiActivity.this, "", "数据加载中...");
+			progressDialog = ProgressDialog.show(KaZiMeiWeiActivity.this, "", "数据加载中...", true);
+			progressDialog.setCancelable(true);
+			progressDialog.setOnCancelListener(new OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					ULog.d(tag, "OnCancelListener + getInfoTypeAsyncTask");
+
+					getInfoAsyncTask.cancel(true);
+				}
+			});
 
 		}
 
@@ -338,13 +363,18 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 				initFlingView(result.getImgUrls());
 
 			}
+		}
 
+		@Override
+		protected void onCancelled() {
+			progressDialog.dismiss();
+			super.onCancelled();
 		}
 
 	}
 
 	/** 卡滋美味二级菜单 */
-	class getInfoTypeAsyncTask extends AsyncTask<String, String, Category> {
+	class GetInfoTypeAsyncTask extends AsyncTask<String, String, Category> {
 
 		ProgressDialog	progressDialog;
 
@@ -352,8 +382,16 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 		protected void onPreExecute() {
 			super.onPreExecute();
 
-			progressDialog = ProgressDialog.show(KaZiMeiWeiActivity.this, "", "数据加载中...");
-
+			progressDialog = ProgressDialog.show(KaZiMeiWeiActivity.this, "", "数据加载中...", true);
+			progressDialog.setCancelable(true);
+			progressDialog.setOnCancelListener(new OnCancelListener() {
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					ULog.d(tag, "OnCancelListener + getInfoTypeAsyncTask");
+					getInfoTypeAsyncTask.cancel(true);
+					progressDialog.cancel();
+				}
+			});
 		}
 
 		@Override
@@ -406,12 +444,16 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 			} else {
 				// initSubMenuLayout(result);
 				// myHorizontalScrollView.setVisibility(View.VISIBLE);
-
 				ULog.d(tag, result.getImgUrls().get(0));
-
 				initFlingView(result.getImgUrls());
 			}
 
+		}
+
+		@Override
+		protected void onCancelled() {
+			progressDialog.dismiss();
+			super.onCancelled();
 		}
 
 	}

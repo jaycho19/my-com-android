@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import android.text.TextUtils;
 
@@ -23,7 +22,7 @@ public class Analysis {
 	public static String[] analysisCurrentSeasonImgUrl(String str) {
 		if (null == str || str.length() < 3)
 			return null;
-		// ULog.i(TAG, str);
+		ULog.i(TAG, str);
 		// str =
 		// "[\"http:\\/\\/www.dicos.com.cn\\/  images\\/  app\\/action\\/9_1348134247.jpg\"]";
 		ULog.i(TAG, str);
@@ -39,6 +38,8 @@ public class Analysis {
 
 	/** 解析卡滋美味首页数据 */
 	public static Category analysisKZMWInfo(String str) {
+		ULog.i(TAG, str);
+
 		if (TextUtils.isEmpty(str) || str.equals("[]") || str.equals("-999"))
 			return null;
 
