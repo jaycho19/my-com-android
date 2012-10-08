@@ -40,14 +40,13 @@ public class CurrentSeasonDetail extends Activity implements OnTouchListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.currentseason_detail);
-		
+
 		if (null != getIntent() && getIntent().hasExtra("imgUrl")) {
 			imgUrl = getIntent().getStringExtra("imgUrl");
 		}
 		String imageName = TextUtils.isEmpty(imgUrl) ? "" : imgUrl.substring(imgUrl.lastIndexOf("/") + 1);
 		String path = this.getCacheDir() + "/" + imageName + "e";
-		
-		
+
 		mImageView = (ImageView) findViewById(R.id.imageview_cruuentseason_detail);
 		mImageView.setOnTouchListener(this);
 		mImageView.setLongClickable(true);
@@ -61,21 +60,27 @@ public class CurrentSeasonDetail extends Activity implements OnTouchListener {
 			@Override
 			public boolean onDoubleTap(MotionEvent e) {
 				ULog.d(TAG, "onDoubleTap");
-				ULog.i(TAG, "windowWidth = " + windowWidth + ", width = " + drawable.getIntrinsicWidth() + ",higth = " + drawable.getIntrinsicHeight());
+				ULog.i(TAG, "windowWidth = " + windowWidth + ", width = " + drawable.getIntrinsicWidth() + ",higth = "
+						+ drawable.getIntrinsicHeight());
 				if (drawable.getIntrinsicWidth() > 0) {
 					if (bigger) {
-						mImageView.setLayoutParams(new LinearLayout.LayoutParams(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight()));
+						mImageView.setLayoutParams(new LinearLayout.LayoutParams(drawable.getIntrinsicWidth(), drawable
+								.getIntrinsicHeight()));
 						// mImageView.requestLayout();
 					} else {
-						ULog.i(TAG, "windowWidth = " + windowWidth + ", higth = " + windowWidth * drawable.getIntrinsicHeight() / drawable.getIntrinsicWidth());
-						mImageView.setLayoutParams(new LinearLayout.LayoutParams(windowWidth, windowWidth * drawable.getIntrinsicHeight() / drawable.getIntrinsicWidth()));
+						ULog.i(TAG,
+								"windowWidth = " + windowWidth + ", higth = " + windowWidth
+										* drawable.getIntrinsicHeight() / drawable.getIntrinsicWidth());
+						mImageView.setLayoutParams(new LinearLayout.LayoutParams(windowWidth, windowWidth
+								* drawable.getIntrinsicHeight() / drawable.getIntrinsicWidth()));
 						// mImageView.requestLayout();
 					}
 
 					bigger = !bigger;
 				}
-				
-				ULog.i(TAG, "windowWidth = " + windowWidth + ", width = " + drawable.getIntrinsicWidth() + ",higth = " + drawable.getIntrinsicHeight());
+
+				ULog.i(TAG, "windowWidth = " + windowWidth + ", width = " + drawable.getIntrinsicWidth() + ",higth = "
+						+ drawable.getIntrinsicHeight());
 
 				ULog.v("daming", "onDoubleTap");
 				return true;
@@ -99,7 +104,8 @@ public class CurrentSeasonDetail extends Activity implements OnTouchListener {
 		drawable = Drawable.createFromPath(path);
 		mImageView.setBackgroundDrawable(Drawable.createFromPath(path));
 		windowWidth = Util.getWindowWidth(this);
-		mImageView.setLayoutParams(new LinearLayout.LayoutParams(windowWidth, windowWidth * drawable.getIntrinsicHeight() / drawable.getIntrinsicWidth()));
+		mImageView.setLayoutParams(new LinearLayout.LayoutParams(windowWidth, windowWidth
+				* drawable.getIntrinsicHeight() / drawable.getIntrinsicWidth()));
 	}
 
 	@Override

@@ -310,7 +310,7 @@ com.dongfang.dicos.store.StoreListElement:
     31:31:public java.lang.String getInfo()
 com.dongfang.dicos.util.Analysis:
     public static final java.lang.String TAG
-    13:13:public Analysis()
+    12:12:public Analysis()
 com.dongfang.dicos.util.ComParams:
     public static final java.lang.String SINA_APP_KEY
     public static final java.lang.String SINA_APP_SECRET
@@ -366,9 +366,9 @@ com.dongfang.dicos.util.Util:
     129:130:public static boolean chkFileExist(android.content.Context,java.lang.String)
     152:154:public static int getWindowHeight(android.content.Context)
 com.dongfang.dicos.view.FlingAdapter$GalleryViewItem:
-    49:48:public FlingAdapter$GalleryViewItem(com.dongfang.dicos.view.FlingAdapter,android.content.Context)
+    47:46:public FlingAdapter$GalleryViewItem(com.dongfang.dicos.view.FlingAdapter,android.content.Context)
 com.dongfang.dicos.view.FlingGallery:
-    228:228:public int getCurrentPosition()
+    214:214:public int getCurrentPosition()
 com.dongfang.dicos.view.MyHorizontalScrollView:
     private static final java.lang.String tag
 com.dongfang.dicos.view.MyImageView:

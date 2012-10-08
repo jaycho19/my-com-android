@@ -9,8 +9,6 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 
-import com.dongfang.dicos.R;
-
 public class FlingAdapter extends BaseAdapter {
 	private static String	TAG	= "FlingAdapter";
 	private List<String>	list;
@@ -58,29 +56,29 @@ public class FlingAdapter extends BaseAdapter {
 			MyImageView fling_image = new MyImageView(context);
 			fling_image.setImage(list.get(position));
 
-//			switch (position) {
-//			case 0:
-//				fling_image.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image0));
-//				break;
-//			case 1:
-//				fling_image.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image1));
-//				break;
-//			case 2:
-//				fling_image.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image2));
-//				break;
-//			case 3:
-//				fling_image.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image3));
-//				break;
-//			case 4:
-//				fling_image.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image4));
-//				break;
-//			case 5:
-//				fling_image.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image5));
-//				break;
-//			case 6:
-//				fling_image.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image6));
-//				break;
-//			}
+			// switch (position) {
+			// case 0:
+			// fling_image.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image0));
+			// break;
+			// case 1:
+			// fling_image.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image1));
+			// break;
+			// case 2:
+			// fling_image.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image2));
+			// break;
+			// case 3:
+			// fling_image.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image3));
+			// break;
+			// case 4:
+			// fling_image.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image4));
+			// break;
+			// case 5:
+			// fling_image.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image5));
+			// break;
+			// case 6:
+			// fling_image.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image6));
+			// break;
+			// }
 
 			this.addView(fling_image, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
 					LinearLayout.LayoutParams.FILL_PARENT));
