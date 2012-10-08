@@ -143,9 +143,9 @@ public class Https {
 
 			for (Header h : httpResponse.getAllHeaders()) {
 				ULog.d(tag, h.getName() + " ++ " + h.getValue());
-				for (HeaderElement s : h.getElements()) {
-					ULog.d(tag, s.getParameterCount() + " -- " + s.getValue());
-				}
+				// for (HeaderElement s : h.getElements()) {
+				// ULog.d(tag, s.getParameterCount() + " -- " + s.getValue());
+				// }
 			}
 
 			if (null != httpResponse && httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {

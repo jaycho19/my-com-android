@@ -8,10 +8,18 @@
         style="@style/top_menu_layout_style"
         android:layout_width="fill_parent" >
 
+        <Button
+            android:id="@+id/button_currentseason_login"
+            style="@style/top_menu_button_login_style" />
+
+        <Button
+            android:id="@+id/button_currentseason_signe"
+            style="@style/top_menu_button_sign_style" />
+
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/textview_currentseason_top_title"
             style="@style/top_menu_textview_style"
-            android:text="@string/top_title_currentseason" />
+            android:text="@string/top_title_dicos" />
     </RelativeLayout>
 
     <ListView

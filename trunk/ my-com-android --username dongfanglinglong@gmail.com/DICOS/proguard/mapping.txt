@@ -997,7 +997,12 @@ com.dongfang.dicos.CurrentSeason -> com.dongfang.dicos.CurrentSeason:
     android.widget.ListView lvCurrentSeasonImg -> a
     com.dongfang.dicos.adapter.ImgAdapter imgAdater -> b
     java.lang.String[] aImgUrl -> c
+    android.widget.TextView tvTitle -> d
+    android.widget.Button bLogin -> e
+    android.widget.Button bSigne -> f
     void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+    void onClick(android.view.View) -> onClick
 com.dongfang.dicos.CurrentSeasonDetail -> com.dongfang.dicos.CurrentSeasonDetail:
     android.view.GestureDetector mGestureDetector -> a
     android.widget.ImageView mImageView -> b
@@ -1055,6 +1060,8 @@ com.dongfang.dicos.KaZiMeiWeiActivity -> com.dongfang.dicos.KaZiMeiWeiActivity:
     java.util.List subMenuItemList -> b
     com.dongfang.dicos.view.MyHorizontalScrollView myHorizontalScrollView -> j
     com.dongfang.dicos.view.SubMenuLayout subMenuLayout -> k
+    com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoAsyncTask getInfoAsyncTask -> l
+    com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoTypeAsyncTask getInfoTypeAsyncTask -> m
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onResume() -> onResume
@@ -1064,23 +1071,36 @@ com.dongfang.dicos.KaZiMeiWeiActivity -> com.dongfang.dicos.KaZiMeiWeiActivity:
     void initFlingView(java.util.List) -> a
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
-    com.dongfang.dicos.view.MyHorizontalScrollView access$0(com.dongfang.dicos.KaZiMeiWeiActivity) -> a
-com.dongfang.dicos.KaZiMeiWeiActivity$MyOnClickListener -> com.dongfang.dicos.c:
+    void access$0(com.dongfang.dicos.KaZiMeiWeiActivity,com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoTypeAsyncTask) -> a
+    com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoTypeAsyncTask access$1(com.dongfang.dicos.KaZiMeiWeiActivity) -> a
+    com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoAsyncTask access$2(com.dongfang.dicos.KaZiMeiWeiActivity) -> b
+    com.dongfang.dicos.view.MyHorizontalScrollView access$3(com.dongfang.dicos.KaZiMeiWeiActivity) -> c
+com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoAsyncTask -> com.dongfang.dicos.c:
+    android.app.ProgressDialog progressDialog -> a
+    com.dongfang.dicos.KaZiMeiWeiActivity this$0 -> b
+    void onPreExecute() -> onPreExecute
+    void onCancelled() -> onCancelled
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+    com.dongfang.dicos.KaZiMeiWeiActivity access$2(com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoAsyncTask) -> a
+com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoAsyncTask$1 -> com.dongfang.dicos.d:
+    com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoAsyncTask this$1 -> a
+    void onCancel(android.content.DialogInterface) -> onCancel
+com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoTypeAsyncTask -> com.dongfang.dicos.e:
+    android.app.ProgressDialog progressDialog -> a
+    com.dongfang.dicos.KaZiMeiWeiActivity this$0 -> b
+    void onPreExecute() -> onPreExecute
+    void onCancelled() -> onCancelled
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+    com.dongfang.dicos.KaZiMeiWeiActivity access$2(com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoTypeAsyncTask) -> a
+com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoTypeAsyncTask$1 -> com.dongfang.dicos.f:
+    com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoTypeAsyncTask this$1 -> a
+    void onCancel(android.content.DialogInterface) -> onCancel
+com.dongfang.dicos.KaZiMeiWeiActivity$MyOnClickListener -> com.dongfang.dicos.g:
     java.lang.String cateId -> a
     com.dongfang.dicos.KaZiMeiWeiActivity this$0 -> b
     void onClick(android.view.View) -> onClick
-com.dongfang.dicos.KaZiMeiWeiActivity$getInfoAsyncTask -> com.dongfang.dicos.d:
-    android.app.ProgressDialog progressDialog -> a
-    com.dongfang.dicos.KaZiMeiWeiActivity this$0 -> b
-    void onPreExecute() -> onPreExecute
-    void onPostExecute(java.lang.Object) -> onPostExecute
-    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.dongfang.dicos.KaZiMeiWeiActivity$getInfoTypeAsyncTask -> com.dongfang.dicos.e:
-    android.app.ProgressDialog progressDialog -> a
-    com.dongfang.dicos.KaZiMeiWeiActivity this$0 -> b
-    void onPreExecute() -> onPreExecute
-    void onPostExecute(java.lang.Object) -> onPostExecute
-    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
 com.dongfang.dicos.MoreActivity -> com.dongfang.dicos.MoreActivity:
     android.widget.Button bTongbu -> a
     android.widget.Button bTuisong -> b
@@ -1095,13 +1115,13 @@ com.dongfang.dicos.MoreActivity -> com.dongfang.dicos.MoreActivity:
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     android.widget.Button access$0(com.dongfang.dicos.MoreActivity) -> a
     com.dongfang.dicos.MoreActivity$MoreHandler access$1(com.dongfang.dicos.MoreActivity) -> b
-com.dongfang.dicos.MoreActivity$1 -> com.dongfang.dicos.f:
+com.dongfang.dicos.MoreActivity$1 -> com.dongfang.dicos.h:
     com.dongfang.dicos.MoreActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.dongfang.dicos.MoreActivity$2 -> com.dongfang.dicos.g:
+com.dongfang.dicos.MoreActivity$2 -> com.dongfang.dicos.i:
     com.dongfang.dicos.MoreActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.dongfang.dicos.MoreActivity$MoreHandler -> com.dongfang.dicos.h:
+com.dongfang.dicos.MoreActivity$MoreHandler -> com.dongfang.dicos.j:
     com.dongfang.dicos.MoreActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 com.dongfang.dicos.MyDicosActivity -> com.dongfang.dicos.MyDicosActivity:
@@ -1119,13 +1139,13 @@ com.dongfang.dicos.MyDicosActivity -> com.dongfang.dicos.MyDicosActivity:
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     com.dongfang.dicos.mydicos.SignHistoryAdapter access$0(com.dongfang.dicos.MyDicosActivity) -> a
     android.widget.ProgressBar access$1(com.dongfang.dicos.MyDicosActivity) -> b
-com.dongfang.dicos.MyDicosActivity$1 -> com.dongfang.dicos.i:
+com.dongfang.dicos.MyDicosActivity$1 -> com.dongfang.dicos.k:
     com.dongfang.dicos.MyDicosActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.dongfang.dicos.MyDicosActivity$2 -> com.dongfang.dicos.j:
+com.dongfang.dicos.MyDicosActivity$2 -> com.dongfang.dicos.l:
     com.dongfang.dicos.MyDicosActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.dongfang.dicos.MyDicosActivity$MyDICOSHandler -> com.dongfang.dicos.k:
+com.dongfang.dicos.MyDicosActivity$MyDICOSHandler -> com.dongfang.dicos.m:
     com.dongfang.dicos.MyDicosActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 com.dongfang.dicos.StoreSearchActivity -> com.dongfang.dicos.StoreSearchActivity:
@@ -1145,7 +1165,7 @@ com.dongfang.dicos.StoreSearchActivity -> com.dongfang.dicos.StoreSearchActivity
     com.dongfang.dicos.store.StoreListAdapter access$0(com.dongfang.dicos.StoreSearchActivity) -> a
     android.widget.ProgressBar access$1(com.dongfang.dicos.StoreSearchActivity) -> b
     android.widget.Button access$2(com.dongfang.dicos.StoreSearchActivity) -> c
-com.dongfang.dicos.StoreSearchActivity$StoreSeachHandler -> com.dongfang.dicos.l:
+com.dongfang.dicos.StoreSearchActivity$StoreSeachHandler -> com.dongfang.dicos.n:
     com.dongfang.dicos.StoreSearchActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 com.dongfang.dicos.adapter.ImgAdapter -> com.dongfang.dicos.a.a:
@@ -1923,9 +1943,10 @@ com.dongfang.dicos.util.Util -> com.dongfang.dicos.g.d:
     void showDialogSetNetWork(android.content.Context) -> d
     void showDialogLogin(android.content.Context) -> e
     void saveIpArea(android.content.Context) -> f
+    void iniIPArea(android.content.Context) -> g
     void showExitDialog(android.app.Activity) -> a
     java.lang.String initNameDicos(java.lang.String) -> a
-    int getWindowWidth(android.content.Context) -> g
+    int getWindowWidth(android.content.Context) -> h
 com.dongfang.dicos.util.Util$1 -> com.dongfang.dicos.g.e:
     android.app.Activity val$activity -> a
     void onClick(android.content.DialogInterface,int) -> onClick
@@ -1965,7 +1986,6 @@ com.dongfang.dicos.view.FlingGallery -> com.dongfang.dicos.view.FlingGallery:
     android.view.GestureDetector mGestureDetector -> u
     android.view.animation.Interpolator mDecelerateInterpolater -> v
     android.widget.LinearLayout llFlingViews -> w
-    android.widget.TextView tvDesc -> x
     void changeDescInfo() -> a
     void setPaddingWidth(int) -> setPaddingWidth
     void setAnimationDuration(int) -> setAnimationDuration
@@ -2005,6 +2025,7 @@ com.dongfang.dicos.view.FlingGallery -> com.dongfang.dicos.view.FlingGallery:
     int access$17(com.dongfang.dicos.view.FlingGallery) -> l
     long access$18(com.dongfang.dicos.view.FlingGallery) -> m
     float access$19(com.dongfang.dicos.view.FlingGallery) -> n
+    int access$20(com.dongfang.dicos.view.FlingGallery) -> o
 com.dongfang.dicos.view.FlingGallery$1 -> com.dongfang.dicos.view.c:
     com.dongfang.dicos.view.FlingGallery this$0 -> a
     void onAnimationStart(android.view.animation.Animation) -> onAnimationStart
