@@ -20,14 +20,16 @@
             android:text="@string/top_title_dicos" />
     </RelativeLayout>
 
+    <!-- android:background="@color/dicosyellow" -->
+    <!-- android:paddingBottom="10dp" -->
+    <!-- android:paddingTop="10dp" -->
+
     <com.dongfang.dicos.view.MyHorizontalScrollView
         android:id="@+id/my_horizontal_scroll_view_kazm"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:background="@color/dicosyellow"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
+        android:background="@color/dicosgreen"
         android:scrollbars="none"
         android:visibility="gone" >
 

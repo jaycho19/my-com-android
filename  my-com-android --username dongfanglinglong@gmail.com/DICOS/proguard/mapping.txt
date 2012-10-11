@@ -1191,7 +1191,7 @@ com.dongfang.dicos.dl.DownloadIMG -> com.dongfang.dicos.b.a:
     void run() -> run
     java.io.InputStream getInputStreamFromURL$7b5f1937(android.os.Handler,java.lang.String) -> a
     java.io.InputStream getInputStreamFromURLV2$3a6f4d88(android.os.Handler,java.lang.String) -> b
-    java.lang.String saveFile$25d6a4b(java.io.InputStream,java.lang.String,android.os.Handler) -> a
+    java.lang.String saveFile(java.io.InputStream,java.lang.String,android.os.Handler,int) -> a
 com.dongfang.dicos.kaixin.Kaixin -> com.dongfang.dicos.c.a:
     java.lang.String KX_AUTHORIZE_CALLBACK_URL -> a
     java.lang.String KX_REFRESHTOKEN_URL -> b
@@ -1258,14 +1258,18 @@ com.dongfang.dicos.kaixin.UtilKaiXin -> com.dongfang.dicos.c.h:
 com.dongfang.dicos.kzmw.Category -> com.dongfang.dicos.kzmw.a:
     java.util.List menulist -> a
     java.util.List imgUrls -> b
-    void add2MenuList(java.lang.String,java.lang.String) -> a
+    void add2MenuList(java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
     java.util.List getMenuList() -> a
     java.util.List getImgUrls() -> b
     void setImageUrls(java.util.List) -> a
     void add2ImgUrls(java.lang.String) -> a
+    java.lang.String toString() -> toString
 com.dongfang.dicos.kzmw.KeyValue -> com.dongfang.dicos.kzmw.b:
     java.lang.String key -> a
-    java.lang.String value -> b
+    java.lang.String name -> b
+    java.lang.String focus_img -> c
+    java.lang.String blur_img -> d
+    java.lang.String toString() -> toString
 com.dongfang.dicos.kzmw.LoginActivity -> com.dongfang.dicos.kzmw.LoginActivity:
     android.widget.Button bBack -> a
     android.widget.Button bGetAuthCode -> b
@@ -2140,9 +2144,22 @@ com.dongfang.dicos.view.SubMenuItem -> com.dongfang.dicos.view.SubMenuItem:
 com.dongfang.dicos.view.SubMenuLayout -> com.dongfang.dicos.view.SubMenuLayout:
     java.lang.String TAG -> a
     android.content.Context context -> b
-    com.dongfang.dicos.view.SubMenuItem[] tvList -> c
+    android.widget.ImageView[] ivList -> c
     java.util.List menulist -> d
     int length -> e
-    com.dongfang.dicos.view.SubMenuLayout submenuLayout -> f
+    android.os.Handler handler -> f
+    com.dongfang.dicos.view.SubMenuLayout submenuLayout -> g
     void setTVListText(java.util.List) -> setTVListText
+    void refresh() -> a
     void setOnClickListener(android.view.View$OnClickListener[]) -> setOnClickListener
+    java.util.List access$0(com.dongfang.dicos.view.SubMenuLayout) -> a
+    android.content.Context access$1(com.dongfang.dicos.view.SubMenuLayout) -> b
+    android.widget.ImageView[] access$2(com.dongfang.dicos.view.SubMenuLayout) -> c
+    int access$3(com.dongfang.dicos.view.SubMenuLayout) -> d
+com.dongfang.dicos.view.SubMenuLayout$MyHandler -> com.dongfang.dicos.view.i:
+    com.dongfang.dicos.view.SubMenuLayout this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.dongfang.dicos.view.SubMenuLayout$MyTouchListener -> com.dongfang.dicos.view.j:
+    int index -> b
+    com.dongfang.dicos.view.SubMenuLayout this$0 -> a
+    boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch

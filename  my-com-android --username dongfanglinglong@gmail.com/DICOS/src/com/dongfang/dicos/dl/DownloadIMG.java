@@ -175,7 +175,7 @@ public class DownloadIMG extends Thread {
 			while (num != -1) {
 				outs.write(b, 0, num);
 				num = ins.read(b);
-				ULog.d(tag, filename + " " + (totle += num));
+				// ULog.d(tag, filename + " " + (totle += num));
 				if (10 < i++) {
 					i = 0;
 					if (null != handler) {
@@ -195,7 +195,10 @@ public class DownloadIMG extends Thread {
 			(new File(filename)).renameTo(new File(filename + "e"));
 
 			if (null != handler) {
-				handler.sendEmptyMessageDelayed(ComParams.HANDLER_IMAGE_DOWNLOAD_END, 100);
+				Message msg = new Message();
+				msg.what = ComParams.HANDLER_IMAGE_DOWNLOAD_END;
+				msg.arg1 = array_param;
+				handler.sendMessageDelayed(msg, 100);
 			}
 
 		} catch (Exception e) {

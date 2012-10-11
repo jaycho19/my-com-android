@@ -2,6 +2,7 @@ package com.dongfang.dicos.util;
 
 import java.util.Iterator;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,7 +26,7 @@ public class Analysis {
 		ULog.i(TAG, str);
 		// str =
 		// "[\"http:\\/\\/www.dicos.com.cn\\/  images\\/  app\\/action\\/9_1348134247.jpg\"]";
-		ULog.i(TAG, str);
+		// ULog.i(TAG, str);
 
 		/** 替换所有中括号，冒号，反斜杠和空格 */
 		return str.replaceAll("\\[|\\]|\"|\\\\| ", "").split(",");
@@ -53,9 +54,12 @@ public class Analysis {
 			JSONObject cateObj = jsonObj.getJSONObject("cate");
 			for (Iterator<String> iter = cateObj.keys(); iter.hasNext();) {
 				String key = iter.next();
-				category.add2MenuList(key, cateObj.getString(key));
+				JSONObject valueObj = cateObj.getJSONObject(key);
+				if (valueObj.has("name") && valueObj.has("focus_img") && valueObj.has("blur_img")) {
+					category.add2MenuList(key, valueObj.getString("name"), valueObj.getString("focus_img"),
+							valueObj.getString("blur_img"));
+				}
 			}
-
 			if (!jsonObj.isNull("newest"))
 				category.add2ImgUrls(jsonObj.getString("newest"));
 
