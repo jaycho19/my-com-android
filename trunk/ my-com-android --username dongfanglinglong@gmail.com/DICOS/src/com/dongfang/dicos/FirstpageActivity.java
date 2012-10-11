@@ -66,7 +66,7 @@ public class FirstpageActivity extends Activity {
 
 			if (Util.isNetworkAvailable(context)) {
 				String cruuentSeasonImgUrls = new HttpActions(context).getCurrentSeasonImgUrl();
-				ULog.i(TAG, cruuentSeasonImgUrls);
+				// ULog.i(TAG, cruuentSeasonImgUrls);
 				aImgUrl = Analysis.analysisCurrentSeasonImgUrl(cruuentSeasonImgUrls);
 
 				if (null != aImgUrl && aImgUrl.length > 0) {

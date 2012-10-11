@@ -129,7 +129,6 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 	@Override
 	protected void onStart() {
 		super.onStart();
-		ULog.d(tag, "onStart");
 
 	}
 
@@ -358,6 +357,9 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 			if (null == result) {
 				Toast.makeText(KaZiMeiWeiActivity.this, "获取数据失败", Toast.LENGTH_LONG).show();
 			} else {
+				
+				// ULog.v(tag, "result = " + result.toString());
+				
 				initSubMenuLayout(result);
 				myHorizontalScrollView.setVisibility(View.VISIBLE);
 				initFlingView(result.getImgUrls());

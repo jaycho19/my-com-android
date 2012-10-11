@@ -291,8 +291,13 @@ public class HttpActions {
 	 *         newest:最新图檔路径<br>
 	 *         例:<br>
 	 *         成功<br>
-	 *         {"cate":{"1":"\u65e9\u9910"},"newest":
-	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal\/3_1347873388.jpg"}
+	 *         {"cate": {"3":{"name":"\u4e3b\u9910","focus_img":
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/focus\/3_1349922212.jpg","blur_img":"http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/blur\/3_1349922212.jpg"}
+	 *         , "11":{"name":"\u5e38\u6001\u5957\u9910","focus_img":
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/focus\/11_1349920688.jpg","blur_img":"http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/blur\/11_1349920688.jpg"
+	 *         } }, "newest":
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal\/newest.jpg?1348647370
+	 *         " }
 	 */
 	public String getKaZiMeiWeiInfo() {
 		return https.post(null, "http://www.dicos.com.cn/app/api/app_meal_category.php");

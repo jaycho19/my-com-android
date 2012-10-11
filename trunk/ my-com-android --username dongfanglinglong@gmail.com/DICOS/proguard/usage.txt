@@ -95,7 +95,7 @@ com.dongfang.dicos.kaixin.UtilKaiXin:
     51:51:public UtilKaiXin()
     397:408:public static boolean isContainChinese(java.lang.String)
 com.dongfang.dicos.kzmw.Category:
-    24:25:public void setList(java.util.List)
+    30:31:public void setList(java.util.List)
 com.dongfang.dicos.kzmw.LoginActivity:
     public static final java.lang.String tag
 com.dongfang.dicos.kzmw.LotteryActivity:
@@ -310,7 +310,7 @@ com.dongfang.dicos.store.StoreListElement:
     31:31:public java.lang.String getInfo()
 com.dongfang.dicos.util.Analysis:
     public static final java.lang.String TAG
-    12:12:public Analysis()
+    13:13:public Analysis()
 com.dongfang.dicos.util.ComParams:
     public static final java.lang.String SINA_APP_KEY
     public static final java.lang.String SINA_APP_SECRET
@@ -384,5 +384,6 @@ com.dongfang.dicos.view.SubMenuItem:
     33:33:public java.lang.String getName()
     41:41:public java.lang.String getid()
 com.dongfang.dicos.view.SubMenuLayout:
-    28:30:public static com.dongfang.dicos.view.SubMenuLayout getSubMenuLayout(android.content.Context)
-    47:58:private void initSubMenuLayout()
+    46:48:public static com.dongfang.dicos.view.SubMenuLayout getSubMenuLayout(android.content.Context)
+    157:188:private void initImageMenu(int)
+com.dongfang.dicos.view.SubMenuLayout$1
