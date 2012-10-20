@@ -49,7 +49,6 @@ public class DownloadIMG extends Thread {
 			msg.arg1 = array_param;
 			hanlder.sendMessage(msg);
 		}
-
 	}
 
 	private String saveFileByURL(String url, String filename, Handler handler, int array_param) {
@@ -175,7 +174,8 @@ public class DownloadIMG extends Thread {
 			while (num != -1) {
 				outs.write(b, 0, num);
 				num = ins.read(b);
-				// ULog.d(tag, filename + " " + (totle += num));
+				totle += num;
+				// ULog.d(tag, filename + " " + (totle));
 				if (10 < i++) {
 					i = 0;
 					if (null != handler) {

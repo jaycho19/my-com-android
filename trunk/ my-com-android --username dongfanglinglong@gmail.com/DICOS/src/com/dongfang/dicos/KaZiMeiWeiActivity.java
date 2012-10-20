@@ -1,5 +1,6 @@
 package com.dongfang.dicos;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -212,7 +214,7 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 		int size = category.getMenuList().size();
 		MyOnClickListener[] onClickList = new MyOnClickListener[size];
 		for (int i = 0; i < size; i++) {
-			onClickList[i] = new MyOnClickListener(category.getMenuList().get(i).key);
+			onClickList[i] = new MyOnClickListener(category.getMenuList().get(i).key,i);
 		}
 		subMenuLayout.setOnClickListener(onClickList);
 
@@ -220,14 +222,17 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 
 	class MyOnClickListener implements OnClickListener {
 		String	cateId;
+		int index;
 
-		MyOnClickListener(String cateId) {
+		MyOnClickListener(String cateId,int index) {
 			this.cateId = cateId;
+			this.index = index;
 		}
 
 		@Override
 		public void onClick(View v) {
 			ULog.e(tag, "MyOnClickListener");
+			subMenuLayout.chageClicked(index);
 			getInfoTypeAsyncTask = new GetInfoTypeAsyncTask();
 			getInfoTypeAsyncTask.execute(cateId);
 		}

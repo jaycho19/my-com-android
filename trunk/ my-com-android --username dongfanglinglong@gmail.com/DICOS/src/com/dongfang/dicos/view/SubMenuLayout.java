@@ -11,7 +11,6 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -148,45 +147,65 @@ public class SubMenuLayout extends LinearLayout {
 		}
 	}
 
-	/**
-	 * 初始化图片子菜单
-	 * 
-	 * @param i
-	 */
-	private void initImageMenu(int i) {
-		String url = menulist.get(i).blur_img;
-		String imageName = url.substring(url.lastIndexOf("/") + 1);
+//	/**
+//	 * 初始化图片子菜单
+//	 * 
+//	 * @param i
+//	 */
+//	public void initImageMenu(int i) {
+//		String url = menulist.get(i).blur_img;
+//		String imageName = url.substring(url.lastIndexOf("/") + 1);
+//
+//		ivList[i] = new ImageView(context);
+//		if (new File(context.getCacheDir(), imageName + "e").exists()) {
+//			ULog.i(TAG, "11111");
+//			final Drawable d = Drawable.createFromPath(context.getCacheDir() + "/" + imageName + "e");
+//			if (null != d) {
+//				ULog.i(TAG, "22222");
+//				ivList[i].setBackgroundDrawable(d);
+//				String furl = menulist.get(i).focus_img;
+//				String fimageName = furl.substring(furl.lastIndexOf("/") + 1);
+//				final Drawable fd = Drawable.createFromPath(context.getCacheDir() + "/" + fimageName + "e");
+//				if (new File(context.getCacheDir(), fimageName + "e").exists() && fd != null) {
+//					ULog.i(TAG, "33333");
+//					ivList[i].setOnTouchListener(new OnTouchListener() {
+//						@Override
+//						public boolean onTouch(View v, MotionEvent event) {
+//							if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//								v.setBackgroundDrawable(fd);
+//							} else if (event.getAction() == MotionEvent.ACTION_UP) {
+//								v.setBackgroundDrawable(d);
+//							}
+//							return false;
+//						}
+//					});
+//				}
+//			}
+//			ivList[i].refreshDrawableState();
+//		}
+//		this.refreshDrawableState();
+//	}
 
-		ivList[i] = new ImageView(context);
-		if (new File(context.getCacheDir(), imageName + "e").exists()) {
-			ULog.i(TAG, "11111");
-			final Drawable d = Drawable.createFromPath(context.getCacheDir() + "/" + imageName + "e");
-			if (null != d) {
-				ULog.i(TAG, "22222");
-				ivList[i].setBackgroundDrawable(d);
-				String furl = menulist.get(i).focus_img;
-				String fimageName = furl.substring(furl.lastIndexOf("/") + 1);
-				final Drawable fd = Drawable.createFromPath(context.getCacheDir() + "/" + fimageName + "e");
-				if (new File(context.getCacheDir(), fimageName + "e").exists() && fd != null) {
-					ULog.i(TAG, "33333");
-					ivList[i].setOnTouchListener(new OnTouchListener() {
-						@Override
-						public boolean onTouch(View v, MotionEvent event) {
-							if (event.getAction() == MotionEvent.ACTION_DOWN) {
-								v.setBackgroundDrawable(fd);
-							} else if (event.getAction() == MotionEvent.ACTION_UP) {
-								v.setBackgroundDrawable(d);
-							}
-							return false;
-						}
-					});
-				}
+	public void chageClicked(int index) {
+
+		for (int i = 0, length = ivList.length; i < length; i++) {
+			String url = menulist.get(i).blur_img;
+			String imageName = url.substring(url.lastIndexOf("/") + 1);
+			if (new File(context.getCacheDir() + "/" + imageName + "e").exists()) {
+				ivList[i].setBackgroundDrawable(Drawable.createFromPath(context.getCacheDir() + "/" + imageName + "e"));
 			}
-			ivList[i].refreshDrawableState();
+			ULog.i(TAG, "url = " + url);
 		}
-		this.refreshDrawableState();
+		String furl = menulist.get(index).focus_img;
+		ULog.i(TAG, "furl = " + furl);
+		String fimageName = furl.substring(furl.lastIndexOf("/") + 1);
+		final Drawable fd = Drawable.createFromPath(context.getCacheDir() + "/" + fimageName + "fe");
+		if (new File(context.getCacheDir() + "/" + fimageName + "fe").exists() && fd != null) {
+			ivList[index].setBackgroundDrawable(fd);
+		}
 	}
-
+	
+	
 	class MyTouchListener implements OnTouchListener {
 
 		private int	index	= 0;
@@ -233,5 +252,7 @@ public class SubMenuLayout extends LinearLayout {
 			}
 		}
 	}
+
+	
 
 }
