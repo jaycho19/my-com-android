@@ -1071,10 +1071,11 @@ com.dongfang.dicos.KaZiMeiWeiActivity -> com.dongfang.dicos.KaZiMeiWeiActivity:
     void initFlingView(java.util.List) -> a
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
-    void access$0(com.dongfang.dicos.KaZiMeiWeiActivity,com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoTypeAsyncTask) -> a
-    com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoTypeAsyncTask access$1(com.dongfang.dicos.KaZiMeiWeiActivity) -> a
-    com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoAsyncTask access$2(com.dongfang.dicos.KaZiMeiWeiActivity) -> b
-    com.dongfang.dicos.view.MyHorizontalScrollView access$3(com.dongfang.dicos.KaZiMeiWeiActivity) -> c
+    com.dongfang.dicos.view.SubMenuLayout access$0(com.dongfang.dicos.KaZiMeiWeiActivity) -> a
+    void access$1(com.dongfang.dicos.KaZiMeiWeiActivity,com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoTypeAsyncTask) -> a
+    com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoTypeAsyncTask access$2(com.dongfang.dicos.KaZiMeiWeiActivity) -> b
+    com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoAsyncTask access$3(com.dongfang.dicos.KaZiMeiWeiActivity) -> c
+    com.dongfang.dicos.view.MyHorizontalScrollView access$4(com.dongfang.dicos.KaZiMeiWeiActivity) -> d
 com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoAsyncTask -> com.dongfang.dicos.c:
     android.app.ProgressDialog progressDialog -> a
     com.dongfang.dicos.KaZiMeiWeiActivity this$0 -> b
@@ -1099,7 +1100,8 @@ com.dongfang.dicos.KaZiMeiWeiActivity$GetInfoTypeAsyncTask$1 -> com.dongfang.dic
     void onCancel(android.content.DialogInterface) -> onCancel
 com.dongfang.dicos.KaZiMeiWeiActivity$MyOnClickListener -> com.dongfang.dicos.g:
     java.lang.String cateId -> a
-    com.dongfang.dicos.KaZiMeiWeiActivity this$0 -> b
+    int index -> b
+    com.dongfang.dicos.KaZiMeiWeiActivity this$0 -> c
     void onClick(android.view.View) -> onClick
 com.dongfang.dicos.MoreActivity -> com.dongfang.dicos.MoreActivity:
     android.widget.Button bTongbu -> a
@@ -2152,6 +2154,7 @@ com.dongfang.dicos.view.SubMenuLayout -> com.dongfang.dicos.view.SubMenuLayout:
     void setTVListText(java.util.List) -> setTVListText
     void refresh() -> a
     void setOnClickListener(android.view.View$OnClickListener[]) -> setOnClickListener
+    void chageClicked(int) -> a
     java.util.List access$0(com.dongfang.dicos.view.SubMenuLayout) -> a
     android.content.Context access$1(com.dongfang.dicos.view.SubMenuLayout) -> b
     android.widget.ImageView[] access$2(com.dongfang.dicos.view.SubMenuLayout) -> c

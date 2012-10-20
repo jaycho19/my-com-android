@@ -42012,7 +42012,7 @@ Interfaces (count = 3):
   + Class [android/view/View$OnTouchListener]
   + Class [android/widget/ViewSwitcher$ViewFactory]
 
-Constant Pool (count = 391):
+Constant Pool (count = 392):
   + Integer [2130837547]
   + Integer [2130837548]
   + Integer [2130903045]
@@ -42124,7 +42124,7 @@ Constant Pool (count = 391):
   + Methodref [com/dongfang/dicos/c.cancel (Z)Z]
   + Methodref [com/dongfang/dicos/c.execute ([Ljava/lang/Object;)Landroid/os/AsyncTask;]
   + Methodref [com/dongfang/dicos/e.cancel (Z)Z]
-  + Methodref [com/dongfang/dicos/g.<init> (Lcom/dongfang/dicos/KaZiMeiWeiActivity;Ljava/lang/String;)V]
+  + Methodref [com/dongfang/dicos/g.<init> (Lcom/dongfang/dicos/KaZiMeiWeiActivity;Ljava/lang/String;I)V]
   + Methodref [com/dongfang/dicos/g/c.c (Ljava/lang/String;Ljava/lang/String;)V]
   + Methodref [com/dongfang/dicos/g/d.a (Landroid/app/Activity;)V]
   + Methodref [com/dongfang/dicos/g/d.b (Landroid/content/Context;)Z]
@@ -42160,7 +42160,7 @@ Constant Pool (count = 391):
   + NameAndType [<init> (Landroid/content/Context;Ljava/lang/Class;)V]
   + NameAndType [<init> (Landroid/content/Context;Ljava/util/List;)V]
   + NameAndType [<init> (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)V]
-  + NameAndType [<init> (Lcom/dongfang/dicos/KaZiMeiWeiActivity;Ljava/lang/String;)V]
+  + NameAndType [<init> (Lcom/dongfang/dicos/KaZiMeiWeiActivity;Ljava/lang/String;I)V]
   + NameAndType [<init> (Ljava/lang/String;)V]
   + NameAndType [FIT_XY Landroid/widget/ImageView$ScaleType;]
   + NameAndType [a ()Ljava/util/List;]
@@ -42269,9 +42269,10 @@ Constant Pool (count = 391):
   + Utf8 [(Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/c;]
   + Utf8 [(Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/e;]
   + Utf8 [(Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/view/MyHorizontalScrollView;]
+  + Utf8 [(Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/view/SubMenuLayout;]
   + Utf8 [(Lcom/dongfang/dicos/KaZiMeiWeiActivity;)V]
   + Utf8 [(Lcom/dongfang/dicos/KaZiMeiWeiActivity;Lcom/dongfang/dicos/e;)V]
-  + Utf8 [(Lcom/dongfang/dicos/KaZiMeiWeiActivity;Ljava/lang/String;)V]
+  + Utf8 [(Lcom/dongfang/dicos/KaZiMeiWeiActivity;Ljava/lang/String;I)V]
   + Utf8 [(Lcom/dongfang/dicos/kzmw/a;)V]
   + Utf8 [(Ljava/lang/CharSequence;)V]
   + Utf8 [(Ljava/lang/CharSequence;)Z]
@@ -42445,7 +42446,7 @@ Fields (count = 13):
     Access flags: 0x2
       = private com.dongfang.dicos.e m
 
-Methods (count = 14):
+Methods (count = 15):
   - Method:       <init>()V
     Access flags: 0x1
       = public KaZiMeiWeiActivity()
@@ -42939,7 +42940,7 @@ Methods (count = 14):
     Access flags: 0x11
       = public final void a(com.dongfang.dicos.kzmw.a)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 79, locals = 5, stack = 7):
+    + Code attribute instructions (code length = 81, locals = 5, stack = 7):
       [0] aload_0 v0
       [1] getfield #70
         + Fieldref [com/dongfang/dicos/KaZiMeiWeiActivity.k Lcom/dongfang/dicos/view/SubMenuLayout;]
@@ -42960,7 +42961,7 @@ Methods (count = 14):
       [25] astore_3 v3
       [26] iconst_0
       [27] istore v4
-      [29] goto +35 (target=64)
+      [29] goto +37 (target=66)
       [32] aload_3 v3
       [33] iload v4
       [35] new #42
@@ -42977,25 +42978,26 @@ Methods (count = 14):
         + Class [com/dongfang/dicos/kzmw/b]
       [54] getfield #74
         + Fieldref [com/dongfang/dicos/kzmw/b.a Ljava/lang/String;]
-      [57] invokespecial #112
-        + Methodref [com/dongfang/dicos/g.<init> (Lcom/dongfang/dicos/KaZiMeiWeiActivity;Ljava/lang/String;)V]
-      [60] aastore
-      [61] iinc v4, 1
-      [64] iload v4
-      [66] iload_2 v2
-      [67] ificmplt -35 (target=32)
-      [70] aload_0 v0
-      [71] getfield #70
+      [57] iload v4
+      [59] invokespecial #112
+        + Methodref [com/dongfang/dicos/g.<init> (Lcom/dongfang/dicos/KaZiMeiWeiActivity;Ljava/lang/String;I)V]
+      [62] aastore
+      [63] iinc v4, 1
+      [66] iload v4
+      [68] iload_2 v2
+      [69] ificmplt -37 (target=32)
+      [72] aload_0 v0
+      [73] getfield #70
         + Fieldref [com/dongfang/dicos/KaZiMeiWeiActivity.k Lcom/dongfang/dicos/view/SubMenuLayout;]
-      [74] aload_3 v3
-      [75] invokevirtual #127
+      [76] aload_3 v3
+      [77] invokevirtual #127
         + Methodref [com/dongfang/dicos/view/SubMenuLayout.setOnClickListener ([Landroid/view/View$OnClickListener;)V]
-      [78] return
+      [80] return
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 1):
       + Stack map table attribute (count = 2):
         - [32] Var: ...[i][a:[Lcom/dongfang/dicos/g;][i], Stack: (empty)
-        - [64] Var: ..., Stack: (empty)
+        - [66] Var: ..., Stack: (empty)
   + Method:       a(Ljava/util/List;)V
     Access flags: 0x11
       = public final void a(java.util.List)
@@ -43282,6 +43284,17 @@ Methods (count = 14):
       + Stack map table attribute (count = 2):
         - [24] Var: ..., Stack: (empty)
         - [33] Var: ..., Stack: (empty)
+  + Method:       a(Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/view/SubMenuLayout;
+    Access flags: 0x1008
+      = static synthetic com.dongfang.dicos.view.SubMenuLayout a(com.dongfang.dicos.KaZiMeiWeiActivity)
+    Class member attributes (count = 1):
+    + Code attribute instructions (code length = 5, locals = 1, stack = 1):
+      [0] aload_0 v0
+      [1] getfield #70
+        + Fieldref [com/dongfang/dicos/KaZiMeiWeiActivity.k Lcom/dongfang/dicos/view/SubMenuLayout;]
+      [4] areturn
+      Code attribute exceptions (count = 0):
+      Code attribute attributes (attribute count = 0):
   + Method:       a(Lcom/dongfang/dicos/KaZiMeiWeiActivity;Lcom/dongfang/dicos/e;)V
     Access flags: 0x1008
       = static synthetic void a(com.dongfang.dicos.KaZiMeiWeiActivity,com.dongfang.dicos.e)
@@ -43294,9 +43307,9 @@ Methods (count = 14):
       [5] return
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 0):
-  + Method:       a(Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/e;
+  + Method:       b(Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/e;
     Access flags: 0x1008
-      = static synthetic com.dongfang.dicos.e a(com.dongfang.dicos.KaZiMeiWeiActivity)
+      = static synthetic com.dongfang.dicos.e b(com.dongfang.dicos.KaZiMeiWeiActivity)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
@@ -43305,9 +43318,9 @@ Methods (count = 14):
       [4] areturn
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 0):
-  + Method:       b(Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/c;
+  + Method:       c(Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/c;
     Access flags: 0x1008
-      = static synthetic com.dongfang.dicos.c b(com.dongfang.dicos.KaZiMeiWeiActivity)
+      = static synthetic com.dongfang.dicos.c c(com.dongfang.dicos.KaZiMeiWeiActivity)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
@@ -43316,9 +43329,9 @@ Methods (count = 14):
       [4] areturn
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 0):
-  + Method:       c(Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/view/MyHorizontalScrollView;
+  + Method:       d(Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/view/MyHorizontalScrollView;
     Access flags: 0x1008
-      = static synthetic com.dongfang.dicos.view.MyHorizontalScrollView c(com.dongfang.dicos.KaZiMeiWeiActivity)
+      = static synthetic com.dongfang.dicos.view.MyHorizontalScrollView d(com.dongfang.dicos.KaZiMeiWeiActivity)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
@@ -43340,7 +43353,7 @@ _____________________________________________________________________
 
 Interfaces (count = 0):
 
-Constant Pool (count = 137):
+Constant Pool (count = 138):
   + String []
   + String [dicos]
   + String [kzme_ifno]
@@ -43373,7 +43386,7 @@ Constant Pool (count = 137):
   + Methodref [android/widget/Toast.show ()V]
   + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.a (Lcom/dongfang/dicos/kzmw/a;)V]
   + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.a (Ljava/util/List;)V]
-  + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.c (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/view/MyHorizontalScrollView;]
+  + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.d (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/view/MyHorizontalScrollView;]
   + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.getSharedPreferences (Ljava/lang/String;I)Landroid/content/SharedPreferences;]
   + Methodref [com/dongfang/dicos/d.<init> (Lcom/dongfang/dicos/c;)V]
   + Methodref [com/dongfang/dicos/e/a.<init> (Landroid/content/Context;)V]
@@ -43397,8 +43410,8 @@ Constant Pool (count = 137):
   + NameAndType [b (Ljava/lang/String;)Lcom/dongfang/dicos/kzmw/a;]
   + NameAndType [b Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
   + NameAndType [c (Landroid/content/Context;)Z]
-  + NameAndType [c (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/view/MyHorizontalScrollView;]
   + NameAndType [commit ()Z]
+  + NameAndType [d (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/view/MyHorizontalScrollView;]
   + NameAndType [dismiss ()V]
   + NameAndType [edit ()Landroid/content/SharedPreferences$Editor;]
   + NameAndType [getSharedPreferences (Ljava/lang/String;I)Landroid/content/SharedPreferences;]
@@ -43459,6 +43472,7 @@ Constant Pool (count = 137):
   + Utf8 [com/dongfang/dicos/kzmw/a]
   + Utf8 [com/dongfang/dicos/view/MyHorizontalScrollView]
   + Utf8 [commit]
+  + Utf8 [d]
   + Utf8 [dicos]
   + Utf8 [dismiss]
   + Utf8 [doInBackground]
@@ -43602,7 +43616,7 @@ Methods (count = 6):
       [46] getfield #20
         + Fieldref [com/dongfang/dicos/c.b Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
       [49] invokestatic #33
-        + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.c (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/view/MyHorizontalScrollView;]
+        + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.d (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/view/MyHorizontalScrollView;]
       [52] iconst_0
       [53] invokevirtual #41
         + Methodref [com/dongfang/dicos/view/MyHorizontalScrollView.setVisibility (I)V]
@@ -43718,7 +43732,7 @@ _____________________________________________________________________
 Interfaces (count = 1):
   + Class [android/content/DialogInterface$OnCancelListener]
 
-Constant Pool (count = 44):
+Constant Pool (count = 43):
   + String [KaZiMeiWeiActivity]
   + String [OnCancelListener + getInfoTypeAsyncTask]
   + Class [android/content/DialogInterface$OnCancelListener]
@@ -43728,7 +43742,7 @@ Constant Pool (count = 44):
   + Class [com/dongfang/dicos/g/c]
   + Class [java/lang/Object]
   + Fieldref [com/dongfang/dicos/d.a Lcom/dongfang/dicos/c;]
-  + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.b (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/c;]
+  + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.c (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/c;]
   + Methodref [com/dongfang/dicos/c.a (Lcom/dongfang/dicos/c;)Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
   + Methodref [com/dongfang/dicos/c.cancel (Z)Z]
   + Methodref [com/dongfang/dicos/g/c.c (Ljava/lang/String;Ljava/lang/String;)V]
@@ -43736,7 +43750,7 @@ Constant Pool (count = 44):
   + NameAndType [<init> ()V]
   + NameAndType [a (Lcom/dongfang/dicos/c;)Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
   + NameAndType [a Lcom/dongfang/dicos/c;]
-  + NameAndType [b (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/c;]
+  + NameAndType [c (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/c;]
   + NameAndType [c (Ljava/lang/String;Ljava/lang/String;)V]
   + NameAndType [cancel (Z)Z]
   + Utf8 [()V]
@@ -43753,7 +43767,6 @@ Constant Pool (count = 44):
   + Utf8 [OnCancelListener + getInfoTypeAsyncTask]
   + Utf8 [a]
   + Utf8 [android/content/DialogInterface$OnCancelListener]
-  + Utf8 [b]
   + Utf8 [c]
   + Utf8 [cancel]
   + Utf8 [com/dongfang/dicos/KaZiMeiWeiActivity]
@@ -43801,7 +43814,7 @@ Methods (count = 2):
       [11] invokestatic #11
         + Methodref [com/dongfang/dicos/c.a (Lcom/dongfang/dicos/c;)Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
       [14] invokestatic #10
-        + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.b (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/c;]
+        + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.c (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/c;]
       [17] iconst_1
       [18] invokevirtual #12
         + Methodref [com/dongfang/dicos/c.cancel (Z)Z]
@@ -44359,7 +44372,7 @@ _____________________________________________________________________
 Interfaces (count = 1):
   + Class [android/content/DialogInterface$OnCancelListener]
 
-Constant Pool (count = 50):
+Constant Pool (count = 51):
   + String [KaZiMeiWeiActivity]
   + String [OnCancelListener + getInfoTypeAsyncTask]
   + Class [android/app/ProgressDialog]
@@ -44372,16 +44385,16 @@ Constant Pool (count = 50):
   + Fieldref [com/dongfang/dicos/e.a Landroid/app/ProgressDialog;]
   + Fieldref [com/dongfang/dicos/f.a Lcom/dongfang/dicos/e;]
   + Methodref [android/app/ProgressDialog.cancel ()V]
-  + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.a (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/e;]
+  + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.b (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/e;]
   + Methodref [com/dongfang/dicos/e.a (Lcom/dongfang/dicos/e;)Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
   + Methodref [com/dongfang/dicos/e.cancel (Z)Z]
   + Methodref [com/dongfang/dicos/g/c.c (Ljava/lang/String;Ljava/lang/String;)V]
   + Methodref [java/lang/Object.<init> ()V]
   + NameAndType [<init> ()V]
-  + NameAndType [a (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/e;]
   + NameAndType [a (Lcom/dongfang/dicos/e;)Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
   + NameAndType [a Landroid/app/ProgressDialog;]
   + NameAndType [a Lcom/dongfang/dicos/e;]
+  + NameAndType [b (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/e;]
   + NameAndType [c (Ljava/lang/String;Ljava/lang/String;)V]
   + NameAndType [cancel ()V]
   + NameAndType [cancel (Z)Z]
@@ -44401,6 +44414,7 @@ Constant Pool (count = 50):
   + Utf8 [a]
   + Utf8 [android/app/ProgressDialog]
   + Utf8 [android/content/DialogInterface$OnCancelListener]
+  + Utf8 [b]
   + Utf8 [c]
   + Utf8 [cancel]
   + Utf8 [com/dongfang/dicos/KaZiMeiWeiActivity]
@@ -44448,7 +44462,7 @@ Methods (count = 2):
       [11] invokestatic #14
         + Methodref [com/dongfang/dicos/e.a (Lcom/dongfang/dicos/e;)Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
       [14] invokestatic #13
-        + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.a (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/e;]
+        + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.b (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/e;]
       [17] iconst_1
       [18] invokevirtual #15
         + Methodref [com/dongfang/dicos/e.cancel (Z)Z]
@@ -44477,7 +44491,7 @@ _____________________________________________________________________
 Interfaces (count = 1):
   + Class [android/view/View$OnClickListener]
 
-Constant Pool (count = 52):
+Constant Pool (count = 64):
   + String [KaZiMeiWeiActivity]
   + String [MyOnClickListener]
   + Class [android/view/View$OnClickListener]
@@ -44485,34 +44499,44 @@ Constant Pool (count = 52):
   + Class [com/dongfang/dicos/e]
   + Class [com/dongfang/dicos/g]
   + Class [com/dongfang/dicos/g/c]
+  + Class [com/dongfang/dicos/view/SubMenuLayout]
   + Class [java/lang/Object]
   + Class [java/lang/String]
   + Fieldref [com/dongfang/dicos/g.a Ljava/lang/String;]
-  + Fieldref [com/dongfang/dicos/g.b Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
-  + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.a (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/e;]
+  + Fieldref [com/dongfang/dicos/g.b I]
+  + Fieldref [com/dongfang/dicos/g.c Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
+  + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.a (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/view/SubMenuLayout;]
   + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.a (Lcom/dongfang/dicos/KaZiMeiWeiActivity;Lcom/dongfang/dicos/e;)V]
+  + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.b (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/e;]
   + Methodref [com/dongfang/dicos/e.<init> (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)V]
   + Methodref [com/dongfang/dicos/e.execute ([Ljava/lang/Object;)Landroid/os/AsyncTask;]
   + Methodref [com/dongfang/dicos/g/c.d (Ljava/lang/String;Ljava/lang/String;)V]
+  + Methodref [com/dongfang/dicos/view/SubMenuLayout.a (I)V]
   + Methodref [java/lang/Object.<init> ()V]
   + NameAndType [<init> ()V]
   + NameAndType [<init> (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)V]
-  + NameAndType [a (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/e;]
+  + NameAndType [a (I)V]
+  + NameAndType [a (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/view/SubMenuLayout;]
   + NameAndType [a (Lcom/dongfang/dicos/KaZiMeiWeiActivity;Lcom/dongfang/dicos/e;)V]
   + NameAndType [a Ljava/lang/String;]
-  + NameAndType [b Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
+  + NameAndType [b (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/e;]
+  + NameAndType [b I]
+  + NameAndType [c Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
   + NameAndType [d (Ljava/lang/String;Ljava/lang/String;)V]
   + NameAndType [execute ([Ljava/lang/Object;)Landroid/os/AsyncTask;]
   + Utf8 [()V]
+  + Utf8 [(I)V]
   + Utf8 [(Landroid/view/View;)V]
   + Utf8 [(Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/e;]
+  + Utf8 [(Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/view/SubMenuLayout;]
   + Utf8 [(Lcom/dongfang/dicos/KaZiMeiWeiActivity;)V]
   + Utf8 [(Lcom/dongfang/dicos/KaZiMeiWeiActivity;Lcom/dongfang/dicos/e;)V]
-  + Utf8 [(Lcom/dongfang/dicos/KaZiMeiWeiActivity;Ljava/lang/String;)V]
+  + Utf8 [(Lcom/dongfang/dicos/KaZiMeiWeiActivity;Ljava/lang/String;I)V]
   + Utf8 [(Ljava/lang/String;Ljava/lang/String;)V]
   + Utf8 [([Ljava/lang/Object;)Landroid/os/AsyncTask;]
   + Utf8 [<init>]
   + Utf8 [Code]
+  + Utf8 [I]
   + Utf8 [KaZiMeiWeiActivity]
   + Utf8 [Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
   + Utf8 [Ljava/lang/String;]
@@ -44520,86 +44544,105 @@ Constant Pool (count = 52):
   + Utf8 [a]
   + Utf8 [android/view/View$OnClickListener]
   + Utf8 [b]
+  + Utf8 [c]
   + Utf8 [com/dongfang/dicos/KaZiMeiWeiActivity]
   + Utf8 [com/dongfang/dicos/e]
   + Utf8 [com/dongfang/dicos/g]
   + Utf8 [com/dongfang/dicos/g/c]
+  + Utf8 [com/dongfang/dicos/view/SubMenuLayout]
   + Utf8 [d]
   + Utf8 [execute]
   + Utf8 [java/lang/Object]
   + Utf8 [java/lang/String]
   + Utf8 [onClick]
 
-Fields (count = 2):
+Fields (count = 3):
   + Field:        a Ljava/lang/String;
     Access flags: 0x0
       = java.lang.String a
-  + Field:        b Lcom/dongfang/dicos/KaZiMeiWeiActivity;
+  + Field:        b I
+    Access flags: 0x0
+      = int b
+  + Field:        c Lcom/dongfang/dicos/KaZiMeiWeiActivity;
     Access flags: 0x1010
-      = final synthetic com.dongfang.dicos.KaZiMeiWeiActivity b
+      = final synthetic com.dongfang.dicos.KaZiMeiWeiActivity c
 
 Methods (count = 2):
-  - Method:       <init>(Lcom/dongfang/dicos/KaZiMeiWeiActivity;Ljava/lang/String;)V
+  - Method:       <init>(Lcom/dongfang/dicos/KaZiMeiWeiActivity;Ljava/lang/String;I)V
     Access flags: 0x0
-      = g(com.dongfang.dicos.KaZiMeiWeiActivity,java.lang.String)
+      = g(com.dongfang.dicos.KaZiMeiWeiActivity,java.lang.String,int)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 15, locals = 3, stack = 2):
+    + Code attribute instructions (code length = 20, locals = 4, stack = 2):
       [0] aload_0 v0
       [1] aload_1 v1
-      [2] putfield #11
-        + Fieldref [com/dongfang/dicos/g.b Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
+      [2] putfield #13
+        + Fieldref [com/dongfang/dicos/g.c Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
       [5] aload_0 v0
-      [6] invokespecial #17
+      [6] invokespecial #21
         + Methodref [java/lang/Object.<init> ()V]
       [9] aload_0 v0
       [10] aload_2 v2
-      [11] putfield #10
+      [11] putfield #11
         + Fieldref [com/dongfang/dicos/g.a Ljava/lang/String;]
-      [14] return
+      [14] aload_0 v0
+      [15] iload_3 v3
+      [16] putfield #12
+        + Fieldref [com/dongfang/dicos/g.b I]
+      [19] return
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 0):
   + Method:       onClick(Landroid/view/View;)V
     Access flags: 0x11
       = public final void onClick(android.view.View)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 48, locals = 2, stack = 5):
+    + Code attribute instructions (code length = 62, locals = 2, stack = 5):
       [0] ldc #1
         + String [KaZiMeiWeiActivity]
       [2] ldc #2
         + String [MyOnClickListener]
-      [4] invokestatic #16
+      [4] invokestatic #19
         + Methodref [com/dongfang/dicos/g/c.d (Ljava/lang/String;Ljava/lang/String;)V]
       [7] aload_0 v0
-      [8] getfield #11
-        + Fieldref [com/dongfang/dicos/g.b Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
-      [11] new #5
+      [8] getfield #13
+        + Fieldref [com/dongfang/dicos/g.c Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
+      [11] invokestatic #14
+        + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.a (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/view/SubMenuLayout;]
+      [14] aload_0 v0
+      [15] getfield #12
+        + Fieldref [com/dongfang/dicos/g.b I]
+      [18] invokevirtual #20
+        + Methodref [com/dongfang/dicos/view/SubMenuLayout.a (I)V]
+      [21] aload_0 v0
+      [22] getfield #13
+        + Fieldref [com/dongfang/dicos/g.c Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
+      [25] new #5
         + Class [com/dongfang/dicos/e]
-      [14] dup
-      [15] aload_0 v0
-      [16] getfield #11
-        + Fieldref [com/dongfang/dicos/g.b Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
-      [19] invokespecial #14
+      [28] dup
+      [29] aload_0 v0
+      [30] getfield #13
+        + Fieldref [com/dongfang/dicos/g.c Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
+      [33] invokespecial #17
         + Methodref [com/dongfang/dicos/e.<init> (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)V]
-      [22] invokestatic #13
+      [36] invokestatic #15
         + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.a (Lcom/dongfang/dicos/KaZiMeiWeiActivity;Lcom/dongfang/dicos/e;)V]
-      [25] aload_0 v0
-      [26] getfield #11
-        + Fieldref [com/dongfang/dicos/g.b Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
-      [29] invokestatic #12
-        + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.a (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/e;]
-      [32] iconst_1
-      [33] anewarray #9
+      [39] aload_0 v0
+      [40] getfield #13
+        + Fieldref [com/dongfang/dicos/g.c Lcom/dongfang/dicos/KaZiMeiWeiActivity;]
+      [43] invokestatic #16
+        + Methodref [com/dongfang/dicos/KaZiMeiWeiActivity.b (Lcom/dongfang/dicos/KaZiMeiWeiActivity;)Lcom/dongfang/dicos/e;]
+      [46] iconst_1
+      [47] anewarray #10
         + Class [java/lang/String]
-      [36] dup
-      [37] iconst_0
-      [38] aload_0 v0
-      [39] getfield #10
+      [50] dup
+      [51] iconst_0
+      [52] aload_0 v0
+      [53] getfield #11
         + Fieldref [com/dongfang/dicos/g.a Ljava/lang/String;]
-      [42] aastore
-      [43] invokevirtual #15
+      [56] aastore
+      [57] invokevirtual #18
         + Methodref [com/dongfang/dicos/e.execute ([Ljava/lang/Object;)Landroid/os/AsyncTask;]
-      [46] pop
-      [47] return
+      [60] pop
+      [61] return
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 0):
 
@@ -49456,7 +49499,7 @@ Methods (count = 5):
     Access flags: 0xa
       = private static java.lang.String a(java.io.InputStream,java.lang.String,android.os.Handler,int)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 281, locals = 9, stack = 6):
+    + Code attribute instructions (code length = 292, locals = 10, stack = 6):
       [0] aload_1 v1
       [1] invokestatic #51
         + Methodref [android/text/TextUtils.isEmpty (Ljava/lang/CharSequence;)Z]
@@ -49491,166 +49534,172 @@ Methods (count = 5):
       [45] astore v5
       [47] iconst_0
       [48] istore v6
-      [50] aload_0 v0
-      [51] aload v5
-      [53] invokevirtual #64
+      [50] iconst_0
+      [51] istore v7
+      [53] aload_0 v0
+      [54] aload v5
+      [56] invokevirtual #64
         + Methodref [java/io/InputStream.read ([B)I]
-      [56] istore v7
-      [58] goto +67 (target=125)
-      [61] aload v4
-      [63] aload v5
-      [65] iconst_0
-      [66] iload v7
-      [68] invokevirtual #62
+      [59] istore v8
+      [61] goto +75 (target=136)
+      [64] aload v4
+      [66] aload v5
+      [68] iconst_0
+      [69] iload v8
+      [71] invokevirtual #62
         + Methodref [java/io/FileOutputStream.write ([BII)V]
-      [71] aload_0 v0
-      [72] aload v5
-      [74] invokevirtual #64
+      [74] aload_0 v0
+      [75] aload v5
+      [77] invokevirtual #64
         + Methodref [java/io/InputStream.read ([B)I]
-      [77] istore v7
-      [79] bipush 10
-      [81] iload v6
-      [83] iinc v6, 1
-      [86] ificmpge +39 (target=125)
-      [89] iconst_0
-      [90] istore v6
-      [92] aload_2 v2
-      [93] ifnull +32 (target=125)
-      [96] new #18
+      [80] istore v8
+      [82] iload v7
+      [84] iload v8
+      [86] iadd
+      [87] istore v7
+      [89] bipush 10
+      [91] iload v6
+      [93] iinc v6, 1
+      [96] ificmpge +40 (target=136)
+      [99] iconst_0
+      [100] istore v6
+      [102] aload_2 v2
+      [103] ifnull +33 (target=136)
+      [106] new #18
         + Class [android/os/Message]
-      [99] dup
-      [100] invokespecial #50
+      [109] dup
+      [110] invokespecial #50
         + Methodref [android/os/Message.<init> ()V]
-      [103] dup
-      [104] astore v8
-      [106] sipush 4002
-      [109] putfield #39
+      [113] dup
+      [114] astore v9
+      [116] sipush 4002
+      [119] putfield #39
         + Fieldref [android/os/Message.what I]
-      [112] aload v8
-      [114] iconst_0
-      [115] putfield #38
+      [122] aload v9
+      [124] iload v7
+      [126] putfield #38
         + Fieldref [android/os/Message.arg1 I]
-      [118] aload_2 v2
-      [119] aload v8
-      [121] invokevirtual #48
+      [129] aload_2 v2
+      [130] aload v9
+      [132] invokevirtual #48
         + Methodref [android/os/Handler.sendMessage (Landroid/os/Message;)Z]
-      [124] pop
-      [125] iload v7
-      [127] iconst_m1
-      [128] ificmpne -67 (target=61)
-      [131] aload v4
-      [133] invokevirtual #61
+      [135] pop
+      [136] iload v8
+      [138] iconst_m1
+      [139] ificmpne -75 (target=64)
+      [142] aload v4
+      [144] invokevirtual #61
         + Methodref [java/io/FileOutputStream.flush ()V]
-      [136] aload_0 v0
-      [137] invokevirtual #63
+      [147] aload_0 v0
+      [148] invokevirtual #63
         + Methodref [java/io/InputStream.close ()V]
-      [140] aload v4
-      [142] invokevirtual #60
+      [151] aload v4
+      [153] invokevirtual #60
         + Methodref [java/io/FileOutputStream.close ()V]
-      [145] new #23
+      [156] new #23
         + Class [java/io/File]
-      [148] dup
-      [149] aload_1 v1
-      [150] invokespecial #57
+      [159] dup
+      [160] aload_1 v1
+      [161] invokespecial #57
         + Methodref [java/io/File.<init> (Ljava/lang/String;)V]
-      [153] new #23
+      [164] new #23
         + Class [java/io/File]
-      [156] dup
-      [157] new #29
+      [167] dup
+      [168] new #29
         + Class [java/lang/StringBuilder]
-      [160] dup
-      [161] aload_1 v1
-      [162] invokestatic #69
+      [171] dup
+      [172] aload_1 v1
+      [173] invokestatic #69
         + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [165] invokespecial #71
+      [176] invokespecial #71
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [168] ldc #10
+      [179] ldc #10
         + String [e]
-      [170] invokevirtual #74
+      [181] invokevirtual #74
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [173] invokevirtual #75
+      [184] invokevirtual #75
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [176] invokespecial #57
+      [187] invokespecial #57
         + Methodref [java/io/File.<init> (Ljava/lang/String;)V]
-      [179] invokevirtual #58
+      [190] invokevirtual #58
         + Methodref [java/io/File.renameTo (Ljava/io/File;)Z]
-      [182] pop
-      [183] aload_2 v2
-      [184] ifnull +77 (target=261)
-      [187] new #18
+      [193] pop
+      [194] aload_2 v2
+      [195] ifnull +77 (target=272)
+      [198] new #18
         + Class [android/os/Message]
-      [190] dup
-      [191] invokespecial #50
+      [201] dup
+      [202] invokespecial #50
         + Methodref [android/os/Message.<init> ()V]
-      [194] dup
-      [195] astore v8
-      [197] sipush 4000
-      [200] putfield #39
+      [205] dup
+      [206] astore v9
+      [208] sipush 4000
+      [211] putfield #39
         + Fieldref [android/os/Message.what I]
-      [203] aload v8
-      [205] iload_3 v3
-      [206] putfield #38
+      [214] aload v9
+      [216] iload_3 v3
+      [217] putfield #38
         + Fieldref [android/os/Message.arg1 I]
-      [209] aload_2 v2
-      [210] aload v8
-      [212] ldc2_w #35
+      [220] aload_2 v2
+      [221] aload v9
+      [223] ldc2_w #35
         + Long [100]
-      [215] invokevirtual #49
+      [226] invokevirtual #49
         + Methodref [android/os/Handler.sendMessageDelayed (Landroid/os/Message;J)Z]
-      [218] pop
-      [219] goto +42 (target=261)
-      [222] astore v4
-      [224] ldc #3
+      [229] pop
+      [230] goto +42 (target=272)
+      [233] astore v4
+      [235] ldc #3
         + String [DownloadIMG]
-      [226] new #29
+      [237] new #29
         + Class [java/lang/StringBuilder]
-      [229] dup
-      [230] ldc #4
+      [240] dup
+      [241] ldc #4
         + String [Exception = ]
-      [232] invokespecial #71
+      [243] invokespecial #71
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [235] aload v4
-      [237] invokevirtual #65
+      [246] aload v4
+      [248] invokevirtual #65
         + Methodref [java/lang/Exception.getMessage ()Ljava/lang/String;]
-      [240] invokevirtual #74
+      [251] invokevirtual #74
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [243] invokevirtual #75
+      [254] invokevirtual #75
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [246] invokestatic #55
+      [257] invokestatic #55
         + Methodref [com/dongfang/dicos/g/c.c (Ljava/lang/String;Ljava/lang/String;)V]
-      [249] aload_2 v2
-      [250] ifnull +11 (target=261)
-      [253] aload_2 v2
-      [254] sipush 4003
-      [257] invokevirtual #47
+      [260] aload_2 v2
+      [261] ifnull +11 (target=272)
+      [264] aload_2 v2
+      [265] sipush 4003
+      [268] invokevirtual #47
         + Methodref [android/os/Handler.sendEmptyMessage (I)Z]
-      [260] pop
-      [261] new #29
+      [271] pop
+      [272] new #29
         + Class [java/lang/StringBuilder]
-      [264] dup
-      [265] aload_1 v1
-      [266] invokestatic #69
+      [275] dup
+      [276] aload_1 v1
+      [277] invokestatic #69
         + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [269] invokespecial #71
+      [280] invokespecial #71
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [272] ldc #10
+      [283] ldc #10
         + String [e]
-      [274] invokevirtual #74
+      [285] invokevirtual #74
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [277] invokevirtual #75
+      [288] invokevirtual #75
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [280] areturn
+      [291] areturn
       Code attribute exceptions (count = 1):
-      - ExceptionInfo (9 -> 219: 222):
+      - ExceptionInfo (9 -> 230: 233):
       + Class [java/lang/Exception]
       Code attribute attributes (attribute count = 1):
       + Stack map table attribute (count = 6):
         - [9] Var: ..., Stack: (empty)
-        - [61] Var: [a:com/dongfang/dicos/b/a][a:java/io/InputStream][a:java/lang/String][a:android/os/Handler][i][a:java/io/FileOutputStream][a:[B][i][i][i], Stack: 
-        - [125] Var: ..., Stack: (empty)
-        - [219] Var: ..., Stack: (empty)
-        - [222] Var: [a:com/dongfang/dicos/b/a][a:java/io/InputStream][a:java/lang/String][a:android/os/Handler][i], Stack: [a:java/lang/Exception]
-        - [261] Var: ..., Stack: (empty)
+        - [64] Var: [a:com/dongfang/dicos/b/a][a:java/io/InputStream][a:java/lang/String][a:android/os/Handler][i][a:java/io/FileOutputStream][a:[B][i][i][i], Stack: 
+        - [136] Var: ..., Stack: (empty)
+        - [230] Var: ..., Stack: (empty)
+        - [233] Var: [a:com/dongfang/dicos/b/a][a:java/io/InputStream][a:java/lang/String][a:android/os/Handler][i], Stack: [a:java/lang/Exception]
+        - [272] Var: ..., Stack: (empty)
 
 Class file attributes (count = 0):
 
@@ -93023,18 +93072,22 @@ _____________________________________________________________________
 
 Interfaces (count = 0):
 
-Constant Pool (count = 195):
+Constant Pool (count = 206):
   + Integer [2130837597]
   + String [/]
   + String [SubMenuLayout]
   + String [e]
   + String [f]
+  + String [fe]
+  + String [furl = ]
+  + String [url = ]
   + Class [android/content/Context]
   + Class [android/graphics/drawable/Drawable]
   + Class [android/widget/ImageView]
   + Class [android/widget/LinearLayout]
   + Class [android/widget/LinearLayout$LayoutParams]
   + Class [com/dongfang/dicos/b/a]
+  + Class [com/dongfang/dicos/g/c]
   + Class [com/dongfang/dicos/g/d]
   + Class [com/dongfang/dicos/kzmw/b]
   + Class [com/dongfang/dicos/view/SubMenuLayout]
@@ -93069,6 +93122,7 @@ Constant Pool (count = 195):
   + Methodref [android/widget/LinearLayout$LayoutParams.<init> (II)V]
   + Methodref [com/dongfang/dicos/b/a.<init> (Landroid/content/Context;Landroid/os/Handler;Ljava/lang/String;Ljava/lang/String;I)V]
   + Methodref [com/dongfang/dicos/b/a.start ()V]
+  + Methodref [com/dongfang/dicos/g/c.a (Ljava/lang/String;Ljava/lang/String;)V]
   + Methodref [com/dongfang/dicos/g/d.h (Landroid/content/Context;)I]
   + Methodref [com/dongfang/dicos/view/SubMenuLayout.a ()V]
   + Methodref [com/dongfang/dicos/view/SubMenuLayout.addView (Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V]
@@ -93097,6 +93151,7 @@ Constant Pool (count = 195):
   + NameAndType [<init> (Lcom/dongfang/dicos/view/SubMenuLayout;I)V]
   + NameAndType [<init> (Ljava/lang/String;)V]
   + NameAndType [a ()V]
+  + NameAndType [a (Ljava/lang/String;Ljava/lang/String;)V]
   + NameAndType [a Ljava/lang/String;]
   + NameAndType [addView (Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V]
   + NameAndType [append (Ljava/lang/Object;)Ljava/lang/StringBuilder;]
@@ -93156,6 +93211,7 @@ Constant Pool (count = 195):
   + Utf8 [(Ljava/lang/String;)Landroid/graphics/drawable/Drawable;]
   + Utf8 [(Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + Utf8 [(Ljava/lang/String;)V]
+  + Utf8 [(Ljava/lang/String;Ljava/lang/String;)V]
   + Utf8 [(Ljava/util/List;)V]
   + Utf8 [([Landroid/view/View$OnClickListener;)V]
   + Utf8 [/]
@@ -93183,6 +93239,7 @@ Constant Pool (count = 195):
   + Utf8 [b]
   + Utf8 [c]
   + Utf8 [com/dongfang/dicos/b/a]
+  + Utf8 [com/dongfang/dicos/g/c]
   + Utf8 [com/dongfang/dicos/g/d]
   + Utf8 [com/dongfang/dicos/kzmw/b]
   + Utf8 [com/dongfang/dicos/view/SubMenuLayout]
@@ -93193,6 +93250,8 @@ Constant Pool (count = 195):
   + Utf8 [e]
   + Utf8 [exists]
   + Utf8 [f]
+  + Utf8 [fe]
+  + Utf8 [furl = ]
   + Utf8 [g]
   + Utf8 [get]
   + Utf8 [getCacheDir]
@@ -93214,6 +93273,7 @@ Constant Pool (count = 195):
   + Utf8 [start]
   + Utf8 [substring]
   + Utf8 [toString]
+  + Utf8 [url = ]
   + Utf8 [valueOf]
 
 Fields (count = 7):
@@ -93242,14 +93302,14 @@ Fields (count = 7):
     Access flags: 0xa
       = private static com.dongfang.dicos.view.SubMenuLayout g
 
-Methods (count = 10):
+Methods (count = 11):
   - Method:       <clinit>()V
     Access flags: 0x8
       = static void <clinit>()
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 0, stack = 1):
       [0] aconst_null
-      [1] putstatic #36
+      [1] putstatic #40
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.g Lcom/dongfang/dicos/view/SubMenuLayout;]
       [4] return
       Code attribute exceptions (count = 0):
@@ -93261,33 +93321,33 @@ Methods (count = 10):
     + Code attribute instructions (code length = 39, locals = 2, stack = 4):
       [0] aload_0 v0
       [1] aload_1 v1
-      [2] invokespecial #44
+      [2] invokespecial #48
         + Methodref [android/widget/LinearLayout.<init> (Landroid/content/Context;)V]
       [5] aload_0 v0
       [6] ldc #3
         + String [SubMenuLayout]
-      [8] putfield #30
+      [8] putfield #34
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.a Ljava/lang/String;]
       [11] aload_0 v0
       [12] iconst_0
-      [13] putfield #34
+      [13] putfield #38
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.e I]
       [16] aload_0 v0
       [17] aconst_null
-      [18] putfield #35
+      [18] putfield #39
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.f Landroid/os/Handler;]
       [21] aload_0 v0
       [22] aload_1 v1
-      [23] putfield #31
+      [23] putfield #35
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.b Landroid/content/Context;]
       [26] aload_0 v0
-      [27] new #15
+      [27] new #19
         + Class [com/dongfang/dicos/view/i]
       [30] dup
       [31] aload_0 v0
-      [32] invokespecial #53
+      [32] invokespecial #58
         + Methodref [com/dongfang/dicos/view/i.<init> (Lcom/dongfang/dicos/view/SubMenuLayout;)V]
-      [35] putfield #35
+      [35] putfield #39
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.f Landroid/os/Handler;]
       [38] return
       Code attribute exceptions (count = 0):
@@ -93300,33 +93360,33 @@ Methods (count = 10):
       [0] aload_0 v0
       [1] aload_1 v1
       [2] aload_2 v2
-      [3] invokespecial #45
+      [3] invokespecial #49
         + Methodref [android/widget/LinearLayout.<init> (Landroid/content/Context;Landroid/util/AttributeSet;)V]
       [6] aload_0 v0
       [7] ldc #3
         + String [SubMenuLayout]
-      [9] putfield #30
+      [9] putfield #34
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.a Ljava/lang/String;]
       [12] aload_0 v0
       [13] iconst_0
-      [14] putfield #34
+      [14] putfield #38
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.e I]
       [17] aload_0 v0
       [18] aconst_null
-      [19] putfield #35
+      [19] putfield #39
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.f Landroid/os/Handler;]
       [22] aload_0 v0
       [23] aload_1 v1
-      [24] putfield #31
+      [24] putfield #35
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.b Landroid/content/Context;]
       [27] aload_0 v0
-      [28] new #15
+      [28] new #19
         + Class [com/dongfang/dicos/view/i]
       [31] dup
       [32] aload_0 v0
-      [33] invokespecial #53
+      [33] invokespecial #58
         + Methodref [com/dongfang/dicos/view/i.<init> (Lcom/dongfang/dicos/view/SubMenuLayout;)V]
-      [36] putfield #35
+      [36] putfield #39
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.f Landroid/os/Handler;]
       [39] return
       Code attribute exceptions (count = 0):
@@ -93338,16 +93398,16 @@ Methods (count = 10):
     + Code attribute instructions (code length = 20, locals = 2, stack = 2):
       [0] aload_0 v0
       [1] aload_1 v1
-      [2] putfield #33
+      [2] putfield #37
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.d Ljava/util/List;]
       [5] aload_0 v0
       [6] aload_1 v1
-      [7] invokeinterface #67
+      [7] invokeinterface #72
         + InterfaceMethodref [java/util/List.size ()I]
-      [12] putfield #34
+      [12] putfield #38
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.e I]
       [15] aload_0 v0
-      [16] invokevirtual #50
+      [16] invokevirtual #55
         + Methodref [com/dongfang/dicos/view/SubMenuLayout.a ()V]
       [19] return
       Code attribute exceptions (count = 0):
@@ -93358,263 +93418,263 @@ Methods (count = 10):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 367, locals = 8, stack = 9):
       [0] aload_0 v0
-      [1] invokevirtual #52
+      [1] invokevirtual #57
         + Methodref [com/dongfang/dicos/view/SubMenuLayout.removeAllViews ()V]
       [4] aload_0 v0
       [5] aload_0 v0
-      [6] getfield #34
+      [6] getfield #38
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.e I]
-      [9] anewarray #8
+      [9] anewarray #11
         + Class [android/widget/ImageView]
-      [12] putfield #32
+      [12] putfield #36
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.c [Landroid/widget/ImageView;]
       [15] iconst_0
       [16] istore_1 v1
       [17] goto +341 (target=358)
       [20] aload_0 v0
-      [21] getfield #33
+      [21] getfield #37
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.d Ljava/util/List;]
       [24] iload_1 v1
-      [25] invokeinterface #66
+      [25] invokeinterface #71
         + InterfaceMethodref [java/util/List.get (I)Ljava/lang/Object;]
-      [30] checkcast #13
+      [30] checkcast #17
         + Class [com/dongfang/dicos/kzmw/b]
-      [33] getfield #29
+      [33] getfield #33
         + Fieldref [com/dongfang/dicos/kzmw/b.d Ljava/lang/String;]
       [36] astore_2 v2
       [37] aload_0 v0
-      [38] getfield #33
+      [38] getfield #37
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.d Ljava/util/List;]
       [41] iload_1 v1
-      [42] invokeinterface #66
+      [42] invokeinterface #71
         + InterfaceMethodref [java/util/List.get (I)Ljava/lang/Object;]
-      [47] checkcast #13
+      [47] checkcast #17
         + Class [com/dongfang/dicos/kzmw/b]
-      [50] getfield #28
+      [50] getfield #32
         + Fieldref [com/dongfang/dicos/kzmw/b.c Ljava/lang/String;]
       [53] astore_3 v3
       [54] aload_2 v2
       [55] aload_2 v2
       [56] ldc #2
         + String [/]
-      [58] invokevirtual #58
+      [58] invokevirtual #63
         + Methodref [java/lang/String.lastIndexOf (Ljava/lang/String;)I]
       [61] iconst_1
       [62] iadd
-      [63] invokevirtual #59
+      [63] invokevirtual #64
         + Methodref [java/lang/String.substring (I)Ljava/lang/String;]
       [66] astore v4
       [68] aload_3 v3
       [69] aload_3 v3
       [70] ldc #2
         + String [/]
-      [72] invokevirtual #58
+      [72] invokevirtual #63
         + Methodref [java/lang/String.lastIndexOf (Ljava/lang/String;)I]
       [75] iconst_1
       [76] iadd
-      [77] invokevirtual #59
+      [77] invokevirtual #64
         + Methodref [java/lang/String.substring (I)Ljava/lang/String;]
       [80] astore v5
       [82] aload_0 v0
-      [83] getfield #32
+      [83] getfield #36
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.c [Landroid/widget/ImageView;]
       [86] iload_1 v1
-      [87] new #8
+      [87] new #11
         + Class [android/widget/ImageView]
       [90] dup
       [91] aload_0 v0
-      [92] getfield #31
+      [92] getfield #35
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.b Landroid/content/Context;]
-      [95] invokespecial #39
+      [95] invokespecial #43
         + Methodref [android/widget/ImageView.<init> (Landroid/content/Context;)V]
       [98] aastore
       [99] aload_0 v0
-      [100] getfield #32
+      [100] getfield #36
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.c [Landroid/widget/ImageView;]
       [103] iload_1 v1
       [104] aaload
-      [105] new #16
+      [105] new #20
         + Class [com/dongfang/dicos/view/j]
       [108] dup
       [109] aload_0 v0
       [110] iload_1 v1
-      [111] invokespecial #54
+      [111] invokespecial #59
         + Methodref [com/dongfang/dicos/view/j.<init> (Lcom/dongfang/dicos/view/SubMenuLayout;I)V]
-      [114] invokevirtual #43
+      [114] invokevirtual #47
         + Methodref [android/widget/ImageView.setOnTouchListener (Landroid/view/View$OnTouchListener;)V]
-      [117] new #17
+      [117] new #21
         + Class [java/io/File]
       [120] dup
-      [121] new #20
+      [121] new #24
         + Class [java/lang/StringBuilder]
       [124] dup
-      [125] invokespecial #61
+      [125] invokespecial #66
         + Methodref [java/lang/StringBuilder.<init> ()V]
       [128] aload_0 v0
-      [129] getfield #31
+      [129] getfield #35
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.b Landroid/content/Context;]
-      [132] invokevirtual #37
+      [132] invokevirtual #41
         + Methodref [android/content/Context.getCacheDir ()Ljava/io/File;]
-      [135] invokevirtual #63
+      [135] invokevirtual #68
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;]
       [138] ldc #2
         + String [/]
-      [140] invokevirtual #64
+      [140] invokevirtual #69
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [143] aload v4
-      [145] invokevirtual #64
+      [145] invokevirtual #69
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [148] ldc #4
         + String [e]
-      [150] invokevirtual #64
+      [150] invokevirtual #69
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [153] invokevirtual #65
+      [153] invokevirtual #70
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [156] invokespecial #55
+      [156] invokespecial #60
         + Methodref [java/io/File.<init> (Ljava/lang/String;)V]
-      [159] invokevirtual #56
+      [159] invokevirtual #61
         + Methodref [java/io/File.exists ()Z]
       [162] ifeq +75 (target=237)
-      [165] new #20
+      [165] new #24
         + Class [java/lang/StringBuilder]
       [168] dup
-      [169] invokespecial #61
+      [169] invokespecial #66
         + Methodref [java/lang/StringBuilder.<init> ()V]
       [172] aload_0 v0
-      [173] getfield #31
+      [173] getfield #35
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.b Landroid/content/Context;]
-      [176] invokevirtual #37
+      [176] invokevirtual #41
         + Methodref [android/content/Context.getCacheDir ()Ljava/io/File;]
-      [179] invokevirtual #63
+      [179] invokevirtual #68
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;]
       [182] ldc #2
         + String [/]
-      [184] invokevirtual #64
+      [184] invokevirtual #69
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [187] aload v4
-      [189] invokevirtual #64
+      [189] invokevirtual #69
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [192] ldc #4
         + String [e]
-      [194] invokevirtual #64
+      [194] invokevirtual #69
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [197] invokevirtual #65
+      [197] invokevirtual #70
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [200] invokestatic #38
+      [200] invokestatic #42
         + Methodref [android/graphics/drawable/Drawable.createFromPath (Ljava/lang/String;)Landroid/graphics/drawable/Drawable;]
       [203] dup
       [204] astore v6
       [206] ifnull +17 (target=223)
       [209] aload_0 v0
-      [210] getfield #32
+      [210] getfield #36
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.c [Landroid/widget/ImageView;]
       [213] iload_1 v1
       [214] aaload
       [215] aload v6
-      [217] invokevirtual #40
+      [217] invokevirtual #44
         + Methodref [android/widget/ImageView.setBackgroundDrawable (Landroid/graphics/drawable/Drawable;)V]
       [220] goto +90 (target=310)
       [223] aload_0 v0
-      [224] getfield #32
+      [224] getfield #36
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.c [Landroid/widget/ImageView;]
       [227] iload_1 v1
       [228] aaload
       [229] ldc #1
         + Integer [2130837597]
-      [231] invokevirtual #41
+      [231] invokevirtual #45
         + Methodref [android/widget/ImageView.setBackgroundResource (I)V]
       [234] goto +76 (target=310)
       [237] aload_0 v0
-      [238] getfield #32
+      [238] getfield #36
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.c [Landroid/widget/ImageView;]
       [241] iload_1 v1
       [242] aaload
       [243] ldc #1
         + Integer [2130837597]
-      [245] invokevirtual #41
+      [245] invokevirtual #45
         + Methodref [android/widget/ImageView.setBackgroundResource (I)V]
-      [248] new #11
+      [248] new #14
         + Class [com/dongfang/dicos/b/a]
       [251] dup
       [252] aload_0 v0
-      [253] getfield #31
+      [253] getfield #35
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.b Landroid/content/Context;]
       [256] aload_0 v0
-      [257] getfield #35
+      [257] getfield #39
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.f Landroid/os/Handler;]
       [260] aload_2 v2
       [261] aload v4
       [263] iload_1 v1
-      [264] invokespecial #47
+      [264] invokespecial #51
         + Methodref [com/dongfang/dicos/b/a.<init> (Landroid/content/Context;Landroid/os/Handler;Ljava/lang/String;Ljava/lang/String;I)V]
-      [267] invokevirtual #48
+      [267] invokevirtual #52
         + Methodref [com/dongfang/dicos/b/a.start ()V]
-      [270] new #11
+      [270] new #14
         + Class [com/dongfang/dicos/b/a]
       [273] dup
       [274] aload_0 v0
-      [275] getfield #31
+      [275] getfield #35
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.b Landroid/content/Context;]
       [278] aload_0 v0
-      [279] getfield #35
+      [279] getfield #39
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.f Landroid/os/Handler;]
       [282] aload_3 v3
-      [283] new #20
+      [283] new #24
         + Class [java/lang/StringBuilder]
       [286] dup
       [287] aload v5
-      [289] invokestatic #60
+      [289] invokestatic #65
         + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [292] invokespecial #62
+      [292] invokespecial #67
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [295] ldc #5
         + String [f]
-      [297] invokevirtual #64
+      [297] invokevirtual #69
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [300] invokevirtual #65
+      [300] invokevirtual #70
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
       [303] iload_1 v1
-      [304] invokespecial #47
+      [304] invokespecial #51
         + Methodref [com/dongfang/dicos/b/a.<init> (Landroid/content/Context;Landroid/os/Handler;Ljava/lang/String;Ljava/lang/String;I)V]
-      [307] invokevirtual #48
+      [307] invokevirtual #52
         + Methodref [com/dongfang/dicos/b/a.start ()V]
       [310] aload_0 v0
-      [311] getfield #31
+      [311] getfield #35
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.b Landroid/content/Context;]
-      [314] invokestatic #49
+      [314] invokestatic #54
         + Methodref [com/dongfang/dicos/g/d.h (Landroid/content/Context;)I]
       [317] i2d
-      [318] ldc2_w #26
+      [318] ldc2_w #30
         + Double [480.0]
       [321] ddiv
       [322] dstore v6
       [324] aload_0 v0
       [325] aload_0 v0
-      [326] getfield #32
+      [326] getfield #36
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.c [Landroid/widget/ImageView;]
       [329] iload_1 v1
       [330] aaload
-      [331] new #10
+      [331] new #13
         + Class [android/widget/LinearLayout$LayoutParams]
       [334] dup
-      [335] ldc2_w #24
+      [335] ldc2_w #28
         + Double [96.0]
       [338] dload v6
       [340] dmul
       [341] d2i
-      [342] ldc2_w #22
+      [342] ldc2_w #26
         + Double [48.0]
       [345] dload v6
       [347] dmul
       [348] d2i
-      [349] invokespecial #46
+      [349] invokespecial #50
         + Methodref [android/widget/LinearLayout$LayoutParams.<init> (II)V]
-      [352] invokevirtual #51
+      [352] invokevirtual #56
         + Methodref [com/dongfang/dicos/view/SubMenuLayout.addView (Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V]
       [355] iinc v1, 1
       [358] iload_1 v1
       [359] aload_0 v0
-      [360] getfield #34
+      [360] getfield #38
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.e I]
       [363] ificmplt -343 (target=20)
       [366] return
@@ -93635,23 +93695,23 @@ Methods (count = 10):
       [0] iconst_0
       [1] istore_2 v2
       [2] aload_0 v0
-      [3] getfield #34
+      [3] getfield #38
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.e I]
       [6] aload_1 v1
       [7] arraylength
-      [8] invokestatic #57
+      [8] invokestatic #62
         + Methodref [java/lang/Math.min (II)I]
       [11] istore_3 v3
       [12] goto +18 (target=30)
       [15] aload_0 v0
-      [16] getfield #32
+      [16] getfield #36
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.c [Landroid/widget/ImageView;]
       [19] iload_2 v2
       [20] aaload
       [21] aload_1 v1
       [22] iload_2 v2
       [23] aaload
-      [24] invokevirtual #42
+      [24] invokevirtual #46
         + Methodref [android/widget/ImageView.setOnClickListener (Landroid/view/View$OnClickListener;)V]
       [27] iinc v2, 1
       [30] iload_2 v2
@@ -93663,13 +93723,252 @@ Methods (count = 10):
       + Stack map table attribute (count = 2):
         - [15] Var: ...[i][i], Stack: (empty)
         - [30] Var: ..., Stack: (empty)
+  + Method:       a(I)V
+    Access flags: 0x11
+      = public final void a(int)
+    Class member attributes (count = 1):
+    + Code attribute instructions (code length = 322, locals = 6, stack = 4):
+      [0] iconst_0
+      [1] istore_2 v2
+      [2] aload_0 v0
+      [3] getfield #36
+        + Fieldref [com/dongfang/dicos/view/SubMenuLayout.c [Landroid/widget/ImageView;]
+      [6] arraylength
+      [7] istore_3 v3
+      [8] goto +155 (target=163)
+      [11] aload_0 v0
+      [12] getfield #37
+        + Fieldref [com/dongfang/dicos/view/SubMenuLayout.d Ljava/util/List;]
+      [15] iload_2 v2
+      [16] invokeinterface #71
+        + InterfaceMethodref [java/util/List.get (I)Ljava/lang/Object;]
+      [21] checkcast #17
+        + Class [com/dongfang/dicos/kzmw/b]
+      [24] getfield #33
+        + Fieldref [com/dongfang/dicos/kzmw/b.d Ljava/lang/String;]
+      [27] dup
+      [28] dup
+      [29] astore v4
+      [31] ldc #2
+        + String [/]
+      [33] invokevirtual #63
+        + Methodref [java/lang/String.lastIndexOf (Ljava/lang/String;)I]
+      [36] iconst_1
+      [37] iadd
+      [38] invokevirtual #64
+        + Methodref [java/lang/String.substring (I)Ljava/lang/String;]
+      [41] astore v5
+      [43] new #21
+        + Class [java/io/File]
+      [46] dup
+      [47] new #24
+        + Class [java/lang/StringBuilder]
+      [50] dup
+      [51] invokespecial #66
+        + Methodref [java/lang/StringBuilder.<init> ()V]
+      [54] aload_0 v0
+      [55] getfield #35
+        + Fieldref [com/dongfang/dicos/view/SubMenuLayout.b Landroid/content/Context;]
+      [58] invokevirtual #41
+        + Methodref [android/content/Context.getCacheDir ()Ljava/io/File;]
+      [61] invokevirtual #68
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;]
+      [64] ldc #2
+        + String [/]
+      [66] invokevirtual #69
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [69] aload v5
+      [71] invokevirtual #69
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [74] ldc #4
+        + String [e]
+      [76] invokevirtual #69
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [79] invokevirtual #70
+        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
+      [82] invokespecial #60
+        + Methodref [java/io/File.<init> (Ljava/lang/String;)V]
+      [85] invokevirtual #61
+        + Methodref [java/io/File.exists ()Z]
+      [88] ifeq +50 (target=138)
+      [91] aload_0 v0
+      [92] getfield #36
+        + Fieldref [com/dongfang/dicos/view/SubMenuLayout.c [Landroid/widget/ImageView;]
+      [95] iload_2 v2
+      [96] aaload
+      [97] new #24
+        + Class [java/lang/StringBuilder]
+      [100] dup
+      [101] invokespecial #66
+        + Methodref [java/lang/StringBuilder.<init> ()V]
+      [104] aload_0 v0
+      [105] getfield #35
+        + Fieldref [com/dongfang/dicos/view/SubMenuLayout.b Landroid/content/Context;]
+      [108] invokevirtual #41
+        + Methodref [android/content/Context.getCacheDir ()Ljava/io/File;]
+      [111] invokevirtual #68
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;]
+      [114] ldc #2
+        + String [/]
+      [116] invokevirtual #69
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [119] aload v5
+      [121] invokevirtual #69
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [124] ldc #4
+        + String [e]
+      [126] invokevirtual #69
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [129] invokevirtual #70
+        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
+      [132] invokestatic #42
+        + Methodref [android/graphics/drawable/Drawable.createFromPath (Ljava/lang/String;)Landroid/graphics/drawable/Drawable;]
+      [135] invokevirtual #44
+        + Methodref [android/widget/ImageView.setBackgroundDrawable (Landroid/graphics/drawable/Drawable;)V]
+      [138] ldc #3
+        + String [SubMenuLayout]
+      [140] new #24
+        + Class [java/lang/StringBuilder]
+      [143] dup
+      [144] ldc #8
+        + String [url = ]
+      [146] invokespecial #67
+        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
+      [149] aload v4
+      [151] invokevirtual #69
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [154] invokevirtual #70
+        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
+      [157] invokestatic #53
+        + Methodref [com/dongfang/dicos/g/c.a (Ljava/lang/String;Ljava/lang/String;)V]
+      [160] iinc v2, 1
+      [163] iload_2 v2
+      [164] iload_3 v3
+      [165] ificmplt -154 (target=11)
+      [168] aload_0 v0
+      [169] getfield #37
+        + Fieldref [com/dongfang/dicos/view/SubMenuLayout.d Ljava/util/List;]
+      [172] iload_1 v1
+      [173] invokeinterface #71
+        + InterfaceMethodref [java/util/List.get (I)Ljava/lang/Object;]
+      [178] checkcast #17
+        + Class [com/dongfang/dicos/kzmw/b]
+      [181] getfield #32
+        + Fieldref [com/dongfang/dicos/kzmw/b.c Ljava/lang/String;]
+      [184] astore_2 v2
+      [185] ldc #3
+        + String [SubMenuLayout]
+      [187] new #24
+        + Class [java/lang/StringBuilder]
+      [190] dup
+      [191] ldc #7
+        + String [furl = ]
+      [193] invokespecial #67
+        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
+      [196] aload_2 v2
+      [197] invokevirtual #69
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [200] invokevirtual #70
+        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
+      [203] invokestatic #53
+        + Methodref [com/dongfang/dicos/g/c.a (Ljava/lang/String;Ljava/lang/String;)V]
+      [206] aload_2 v2
+      [207] aload_2 v2
+      [208] ldc #2
+        + String [/]
+      [210] invokevirtual #63
+        + Methodref [java/lang/String.lastIndexOf (Ljava/lang/String;)I]
+      [213] iconst_1
+      [214] iadd
+      [215] invokevirtual #64
+        + Methodref [java/lang/String.substring (I)Ljava/lang/String;]
+      [218] astore_3 v3
+      [219] new #24
+        + Class [java/lang/StringBuilder]
+      [222] dup
+      [223] invokespecial #66
+        + Methodref [java/lang/StringBuilder.<init> ()V]
+      [226] aload_0 v0
+      [227] getfield #35
+        + Fieldref [com/dongfang/dicos/view/SubMenuLayout.b Landroid/content/Context;]
+      [230] invokevirtual #41
+        + Methodref [android/content/Context.getCacheDir ()Ljava/io/File;]
+      [233] invokevirtual #68
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;]
+      [236] ldc #2
+        + String [/]
+      [238] invokevirtual #69
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [241] aload_3 v3
+      [242] invokevirtual #69
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [245] ldc #6
+        + String [fe]
+      [247] invokevirtual #69
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [250] invokevirtual #70
+        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
+      [253] invokestatic #42
+        + Methodref [android/graphics/drawable/Drawable.createFromPath (Ljava/lang/String;)Landroid/graphics/drawable/Drawable;]
+      [256] astore v4
+      [258] new #21
+        + Class [java/io/File]
+      [261] dup
+      [262] new #24
+        + Class [java/lang/StringBuilder]
+      [265] dup
+      [266] invokespecial #66
+        + Methodref [java/lang/StringBuilder.<init> ()V]
+      [269] aload_0 v0
+      [270] getfield #35
+        + Fieldref [com/dongfang/dicos/view/SubMenuLayout.b Landroid/content/Context;]
+      [273] invokevirtual #41
+        + Methodref [android/content/Context.getCacheDir ()Ljava/io/File;]
+      [276] invokevirtual #68
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;]
+      [279] ldc #2
+        + String [/]
+      [281] invokevirtual #69
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [284] aload_3 v3
+      [285] invokevirtual #69
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [288] ldc #6
+        + String [fe]
+      [290] invokevirtual #69
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [293] invokevirtual #70
+        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
+      [296] invokespecial #60
+        + Methodref [java/io/File.<init> (Ljava/lang/String;)V]
+      [299] invokevirtual #61
+        + Methodref [java/io/File.exists ()Z]
+      [302] ifeq +19 (target=321)
+      [305] aload v4
+      [307] ifnull +14 (target=321)
+      [310] aload_0 v0
+      [311] getfield #36
+        + Fieldref [com/dongfang/dicos/view/SubMenuLayout.c [Landroid/widget/ImageView;]
+      [314] iload_1 v1
+      [315] aaload
+      [316] aload v4
+      [318] invokevirtual #44
+        + Methodref [android/widget/ImageView.setBackgroundDrawable (Landroid/graphics/drawable/Drawable;)V]
+      [321] return
+      Code attribute exceptions (count = 0):
+      Code attribute attributes (attribute count = 1):
+      + Stack map table attribute (count = 4):
+        - [11] Var: ...[i][i], Stack: (empty)
+        - [138] Var: ...[a:java/lang/String][a:java/lang/String], Stack: (empty)
+        - [163] Var: -2, Stack: (empty)
+        - [321] Var: [a:com/dongfang/dicos/view/SubMenuLayout][i][a:java/lang/String][a:java/lang/String][a:android/graphics/drawable/Drawable], Stack: 
   + Method:       a(Lcom/dongfang/dicos/view/SubMenuLayout;)Ljava/util/List;
     Access flags: 0x1008
       = static synthetic java.util.List a(com.dongfang.dicos.view.SubMenuLayout)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #33
+      [1] getfield #37
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.d Ljava/util/List;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -93680,7 +93979,7 @@ Methods (count = 10):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #31
+      [1] getfield #35
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.b Landroid/content/Context;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -93691,7 +93990,7 @@ Methods (count = 10):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #32
+      [1] getfield #36
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.c [Landroid/widget/ImageView;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -93702,7 +94001,7 @@ Methods (count = 10):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #34
+      [1] getfield #38
         + Fieldref [com/dongfang/dicos/view/SubMenuLayout.e I]
       [4] ireturn
       Code attribute exceptions (count = 0):

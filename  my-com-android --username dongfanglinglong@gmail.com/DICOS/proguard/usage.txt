@@ -384,6 +384,4 @@ com.dongfang.dicos.view.SubMenuItem:
     33:33:public java.lang.String getName()
     41:41:public java.lang.String getid()
 com.dongfang.dicos.view.SubMenuLayout:
-    46:48:public static com.dongfang.dicos.view.SubMenuLayout getSubMenuLayout(android.content.Context)
-    157:188:private void initImageMenu(int)
-com.dongfang.dicos.view.SubMenuLayout$1
+    45:47:public static com.dongfang.dicos.view.SubMenuLayout getSubMenuLayout(android.content.Context)
