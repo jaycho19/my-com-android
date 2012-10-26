@@ -7,55 +7,51 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 
 import com.dongfang.dicos.net.Actions;
 import com.dongfang.dicos.net.HttpActions;
 import com.dongfang.dicos.util.ComParams;
 import com.dongfang.dicos.util.ULog;
 
-public class ValidateThread extends Thread {
-	private static final String	tag	= "ValidateThread";
+public class GetPasswordThread extends Thread {
+
+	public static final String	TAG	= "GetPasswordThread";
 
 	private Handler				handler;
 	private Context				context;
 	private String				phoneNumber;
-	private String				authCode;
 
-	public ValidateThread(Context context, Handler handler, String phoneNumber, String authCode) {
+	public GetPasswordThread(Context context, Handler handler, String phoneNumber) {
 		this.handler = handler;
 		this.context = context;
 		this.phoneNumber = phoneNumber;
-		this.authCode = authCode;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Thread#run()
-	 */
 	@Override
 	public void run() {
-		String str = new HttpActions(context).validate(phoneNumber, authCode);
-		ULog.d(tag, str);
+		String str = new HttpActions(context).getPassword(phoneNumber);
+		ULog.d(TAG, "result = " + str);
 		int result = Integer.valueOf(str);
 
 		Message msg = new Message();
+
 		if (-1000 == result) {
-			msg.obj = "用户名密码不得为空";
+			msg.obj = "请输入有效的手机号码";
 			msg.arg1 = -1000;
 		} else if (-999 == result) {
 			msg.arg1 = -999;
-			msg.obj = "手机号码格式错误";
+			msg.obj = "查无此号，请核对输入和号码是否正确";
 		} else if (-1 == result) {
 			msg.arg1 = -1;
-			msg.obj = "帐号或密码错误";
-		} else if (1 == result) {
+			msg.obj = "获取失败";
+		} else if (1 == result || -998 == result) {
 			msg.arg1 = 1;
-			msg.obj = "登录成功";
+			msg.obj = "查看一下自己手机短信，已经获取过咯~~";
 		}
-		msg.what = ComParams.HANDLER_RESULT_VALIDATE;
+
+		msg.what = ComParams.HANDLER_RESULT_GET_PASSWORD;
 		handler.sendMessage(msg);
 
 	}
-
 }

@@ -1,7 +1,8 @@
 package com.dongfang.dicos.kzmw;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
+import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,10 +12,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dongfang.dicos.R;
 import com.dongfang.dicos.net.Actions;
+import com.dongfang.dicos.net.thread.GetPasswordThread;
 import com.dongfang.dicos.net.thread.LoginThread;
 import com.dongfang.dicos.net.thread.ValidateThread;
 import com.dongfang.dicos.util.ComParams;
@@ -28,10 +31,10 @@ import com.dongfang.dicos.util.Util;
  * */
 public class LoginActivity extends Activity implements OnClickListener {
 
-	public static final String	tag				= "android:maxLength";
+	public static final String	tag				= "LoginActivity";
 
 	/** 返回 */
-	private Button				bBack;
+	private Button				bBack, bSigne;
 
 	/** 获取验证码 */
 	private Button				bGetAuthCode;
@@ -43,6 +46,9 @@ public class LoginActivity extends Activity implements OnClickListener {
 	/** 验证码 */
 	private EditText			etAuthCode;
 
+	/** 忘记密码 */
+	private TextView			tvForgetPassword;
+
 	private int					lockSeconds		= -1;
 
 	private Handler				loginHandler	= new LoginHandler();
@@ -53,13 +59,19 @@ public class LoginActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.login);
 
 		bBack = (Button) findViewById(R.id.button_login_back);
+		bSigne = (Button) findViewById(R.id.button_login_signe);
 		bBack.setOnClickListener(this);
+		bSigne.setOnClickListener(this);
 
 		bGetAuthCode = (Button) findViewById(R.id.button_login_getauthcode);
 		bGetAuthCode.setOnClickListener(this);
 
 		bOK = (Button) findViewById(R.id.button_login_ok);
 		bOK.setOnClickListener(this);
+
+		tvForgetPassword = (TextView) findViewById(R.id.tv_forget_password);
+		tvForgetPassword.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+		tvForgetPassword.setOnClickListener(this);
 
 		etPhoneNumber = (EditText) findViewById(R.id.editview_login_phonenumber);
 		etAuthCode = (EditText) findViewById(R.id.editview_login_authcode);
@@ -95,7 +107,9 @@ public class LoginActivity extends Activity implements OnClickListener {
 		super.onStart();
 
 		// 初始化最近一次登录的手机号码
-		SharedPreferences setConfig = getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME, Activity.MODE_PRIVATE);
+		// SharedPreferences setConfig =
+		// getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
+		// Activity.MODE_PRIVATE);
 		etPhoneNumber.setText(Util.getPhoneNumber(this));
 
 	}
@@ -104,13 +118,20 @@ public class LoginActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		ULog.d(tag, "onClick v.getId() = " + v.getId());
 		switch (v.getId()) {
+		case R.id.tv_forget_password:
+			if (etPhoneNumber.getText().toString().length() != 11) {
+				Toast.makeText(LoginActivity.this, "请输入正确的手机号码...", Toast.LENGTH_LONG).show();
+			} else {
+				new GetPasswordThread(LoginActivity.this, loginHandler, etPhoneNumber.getText().toString()).start();
+			}
+			break;
 		case R.id.button_login_getauthcode:
 			/**
 			 * 1. 获取手机验证码，手机号码不允许为空； 2. 60s以内不允许重复获取，需要60秒倒计时；
 			 * */
 
 			if (etPhoneNumber.getText().toString().length() != 11) {
-				Toast.makeText(LoginActivity.this, "请输入正确的手机号码...", Toast.LENGTH_LONG);
+				Toast.makeText(LoginActivity.this, "请输入正确的手机号码...", Toast.LENGTH_LONG).show();
 			} else {
 				bGetAuthCode.setClickable(false);
 				lockSeconds = ComParams.BUTTON_GET_AUTH_CODE_LOCKED_SECOND;
@@ -138,6 +159,11 @@ public class LoginActivity extends Activity implements OnClickListener {
 						.getText().toString()).start();
 				savePhoneNumber();
 			}
+			break;
+		case R.id.button_login_signe: {
+			LoginActivity.this.startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+		}
+
 			break;
 		case R.id.button_login_back:
 			// /if (isLogin())
@@ -168,19 +194,24 @@ public class LoginActivity extends Activity implements OnClickListener {
 		public void handleMessage(Message msg) {
 			Bundle data;
 			switch (msg.what) {
+			case ComParams.HANDLER_RESULT_GET_PASSWORD:
+				Toast.makeText(LoginActivity.this, (String) msg.obj, Toast.LENGTH_LONG).show();
+				if (1 == msg.arg1) {
+					tvForgetPassword.setEnabled(false);
+				}
+				break;
 			case ComParams.HANDLER_RESULT_VALIDATE:
 				/**
 				 * 登录成功，保存登录成功标识；
 				 * 
 				 * */
 				data = msg.getData();
-				if (Actions.ACTIONS_TYPE_VALIDATE.equalsIgnoreCase(data.getString(Actions.ACTIONS_KEY_ACT))
-						&& "1".equals(data.getString(Actions.ACTIONS_KEY_RESULT))) {
+				if (1 == msg.arg1) {
 					saveLoginStatus();
 					Toast.makeText(LoginActivity.this, R.string.login_result_success, Toast.LENGTH_LONG).show();
 					finish();
 				} else {
-					Toast.makeText(LoginActivity.this, R.string.login_result_fail, Toast.LENGTH_LONG).show();
+					Toast.makeText(LoginActivity.this, (String) msg.obj, Toast.LENGTH_LONG).show();
 					etAuthCode.setText("");
 				}
 

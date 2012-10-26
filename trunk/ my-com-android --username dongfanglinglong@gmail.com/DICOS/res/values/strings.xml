@@ -11,6 +11,7 @@
 
     <!-- 顶部标题 -->
     <string name="top_title_login">登  录</string>
+    <string name="top_title_register">注  册</string>
     <string name="top_title_signein">签  到</string>
     <string name="top_title_dicos">德克士</string>
     <string name="top_title_mydicos">我的德克士</string>

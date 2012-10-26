@@ -45,24 +45,37 @@ public class HttpActions {
 		return https.post(list);
 	}
 
+	/** 忘记密码 */
+	public String getPassword(String phoneNumber) {
+		list.clear();
+		list.add(new BasicNameValuePair("uid", phoneNumber));
+		list.add(new BasicNameValuePair("from", "mobile"));
+		return https.post(list, "http://www.dicos.com.cn/event/120701/send_message_ajax.php");
+	}
+
 	/** 验证 */
 	public String validate(String phoneNumber, String authCode) {
 		ULog.d(tag, "phoneNumber = " + phoneNumber);
 		ULog.d(tag, "authCode = " + authCode);
 
-		JSONObject js = new JSONObject();
-		try {
-			js.put(Actions.ACTIONS_KEY_ACT, Actions.ACTIONS_TYPE_VALIDATE);
-			js.put(Actions.ACTIONS_KEY_MOBILE, phoneNumber);
-			js.put(Actions.ACTIONS_KEY_CODE, authCode);
-		} catch (JSONException e) {
-			ULog.e(tag, e.toString());
-		}
+		// JSONObject js = new JSONObject();
+		// try {
+		// js.put(Actions.ACTIONS_KEY_ACT, Actions.ACTIONS_TYPE_VALIDATE);
+		// js.put(Actions.ACTIONS_KEY_MOBILE, phoneNumber);
+		// js.put(Actions.ACTIONS_KEY_CODE, authCode);
+		// js.put("from", "mobile");
+		// } catch (JSONException e) {
+		// ULog.e(tag, e.toString());
+		// }
 
 		list.clear();
-		list.add(new BasicNameValuePair(KEY, js.toString()));
-		ULog.d(tag, js.toString());
-		return https.post(list);
+		// list.add(new BasicNameValuePair(Actions.ACTIONS_KEY_ACT,
+		// Actions.ACTIONS_TYPE_VALIDATE));
+		list.add(new BasicNameValuePair("uid", phoneNumber));
+		list.add(new BasicNameValuePair("upwd", authCode));
+		list.add(new BasicNameValuePair("from", "mobile"));
+		// ULog.d(tag, js.toString());
+		return https.post(list, "http://www.dicos.com.cn/login/login_ajax.php");
 	}
 
 	/** 登出 */
@@ -273,8 +286,8 @@ public class HttpActions {
 	 * 
 	 * @return 成功 <br>
 	 *         [
-	 *         "http:\/\/www.dicos.com.cn\/images\/app\/action\/8_1347870892.jpg","http:\/\/www.dicos.com.cn\/images\/app\/action\/7_1347
-	 *         605021.jpg" ] <br>
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/action\/8_1347870892.jpg","http:\/\/www.dicos.com.cn\/images\/app\/action\/7_
+	 *         1 3 4 7 605021.jpg" ] <br>
 	 *         无资料 <br>
 	 *         []
 	 */
@@ -292,12 +305,12 @@ public class HttpActions {
 	 *         例:<br>
 	 *         成功<br>
 	 *         {"cate": {"3":{"name":"\u4e3b\u9910","focus_img":
-	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/focus\/3_1349922212.jpg","blur_img":"http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/blur\/3_1349922212.jpg"}
-	 *         , "11":{"name":"\u5e38\u6001\u5957\u9910","focus_img":
-	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/focus\/11_1349920688.jpg","blur_img":"http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/blur\/11_1349920688.jpg"
-	 *         } }, "newest":
-	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal\/newest.jpg?1348647370
-	 *         " }
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/focus\/3_1349922212.jpg","blur_img":"http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/blur\/3_1349922212.j
+	 *         p g " } , "11":{"name":"\u5e38\u6001\u5957\u9910","focus_img":
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/focus\/11_1349920688.jpg","blur_img":"http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/blur\/11_1349920688.
+	 *         j p g " } }, "newest":
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal\/newest.jpg?1348647
+	 *         3 7 0 " }
 	 */
 	public String getKaZiMeiWeiInfo() {
 		return https.post(null, "http://www.dicos.com.cn/app/api/app_meal_category.php");
@@ -310,8 +323,8 @@ public class HttpActions {
 	 *         例:<br>
 	 *         成功<br>
 	 *         [
-	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal\/3_1347873388.jpg","http:\/\/www.dicos.com.cn\/images\/app\/meal\/5_1347892514.jp
-	 *         g " ] 无资料<br>
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal\/3_1347873388.jpg","http:\/\/www.dicos.com.cn\/images\/app\/meal\/5_134789251
+	 *         4 . j p g " ] 无资料<br>
 	 *         []<br>
 	 *         其他<br>
 	 *         -999:参数错误

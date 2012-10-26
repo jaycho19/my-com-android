@@ -91,6 +91,8 @@ public class ComParams {
 	public static final int		HANDLER_RESULT_SIGN							= 2011;
 	/** 意见反馈 结果反馈 */
 	public static final int		HANDLER_RESULT_ADVICE						= 2012;
+	/** 忘记密码，获取密码 */
+	public static final int		HANDLER_RESULT_GET_PASSWORD						= 2013;
 
 	// ----------------------------------------------------------------------------
 

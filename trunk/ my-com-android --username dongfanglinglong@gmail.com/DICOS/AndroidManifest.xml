@@ -65,6 +65,7 @@
         <activity android:name=".more.SinaWeiboAuthorization" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         <activity android:name=".more.KaixinWeiboAuthorization" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         
+        <activity android:name=".kzmw.RegisterActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         <activity android:name=".kzmw.LoginActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         <activity android:name=".kzmw.SigneInActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         <activity android:name=".kzmw.LotteryActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
