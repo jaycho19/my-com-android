@@ -14,6 +14,11 @@
             android:layout_centerVertical="true"
             android:background="@drawable/top_button_back" />
 
+        <Button
+            android:id="@+id/button_login_signe"
+            style="@style/top_menu_button_sign_style"
+            android:text="注 册" />
+
         <TextView
             android:id="@+id/textView1"
             style="@style/top_menu_textview_style"
@@ -50,13 +55,12 @@
         android:inputType="number"
         android:maxLength="6" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center" >
+        android:layout_marginTop="20dp" >
 
         <Button
             android:id="@+id/button_login_getauthcode"
@@ -64,15 +68,29 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:background="@drawable/button_short_orange_xml"
-            android:text="@string/button_get_auth_code" />
+            android:text="@string/button_get_auth_code"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/button_login_ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_centerInParent="true"
             android:background="@drawable/button_short_green_xml"
-            android:text="确认递交" />
-    </LinearLayout>
+            android:text="登录" />
+
+        <TextView
+            android:id="@+id/tv_forget_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/button_login_ok"
+            android:layout_gravity="bottom"
+            android:layout_toRightOf="@id/button_login_ok"
+            android:singleLine="true"
+            android:textColor="@xml/textview_forget_password"
+            android:text="忘记密码？"
+            android:textSize="16dp" >
+        </TextView>
+    </RelativeLayout>
 
 </LinearLayout>

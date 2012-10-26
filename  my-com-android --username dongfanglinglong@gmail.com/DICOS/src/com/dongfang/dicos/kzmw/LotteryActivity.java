@@ -10,8 +10,6 @@ import android.widget.Button;
 import com.dongfang.dicos.R;
 import com.dongfang.dicos.lottery.DetailActivity;
 import com.dongfang.dicos.lottery.InfoActivity;
-import com.dongfang.dicos.lottery.JoinInActivity;
-import com.dongfang.dicos.lottery.PrizeInfoActivity;
 import com.dongfang.dicos.lottery.PrizeInfoTempActivity;
 import com.dongfang.dicos.lottery.PrizeProvideActivity;
 import com.dongfang.dicos.util.ULog;
