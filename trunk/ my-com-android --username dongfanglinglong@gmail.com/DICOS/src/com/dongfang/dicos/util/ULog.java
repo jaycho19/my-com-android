@@ -2,7 +2,7 @@ package com.dongfang.dicos.util;
 
 public class ULog {
 
-	public static Boolean	isDug	= true;
+	public static Boolean	isDug	= false;
 
 	public static void i(String tag, String msg) {
 		if (isDug == true) {

@@ -1,5 +1,8 @@
 package com.dongfang.dicos.kzmw;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -119,8 +122,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 		ULog.d(tag, "onClick v.getId() = " + v.getId());
 		switch (v.getId()) {
 		case R.id.tv_forget_password:
-			if (etPhoneNumber.getText().toString().length() != 11) {
-				Toast.makeText(LoginActivity.this, "请输入正确的手机号码...", Toast.LENGTH_LONG).show();
+			if (!isEmail(etPhoneNumber.getText().toString())) {
+				Toast.makeText(LoginActivity.this, "请输入正确的邮箱地址...", Toast.LENGTH_LONG).show();
 			} else {
 				new GetPasswordThread(LoginActivity.this, loginHandler, etPhoneNumber.getText().toString()).start();
 			}
@@ -130,8 +133,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 			 * 1. 获取手机验证码，手机号码不允许为空； 2. 60s以内不允许重复获取，需要60秒倒计时；
 			 * */
 
-			if (etPhoneNumber.getText().toString().length() != 11) {
-				Toast.makeText(LoginActivity.this, "请输入正确的手机号码...", Toast.LENGTH_LONG).show();
+			if (!isEmail(etPhoneNumber.getText().toString())) {
+				Toast.makeText(LoginActivity.this, "请输入正确的邮箱地址...", Toast.LENGTH_LONG).show();
 			} else {
 				bGetAuthCode.setClickable(false);
 				lockSeconds = ComParams.BUTTON_GET_AUTH_CODE_LOCKED_SECOND;
@@ -147,7 +150,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 			 * 
 			 */
 
-			if (11 != etPhoneNumber.getText().toString().length() && 6 != etAuthCode.getText().toString().length()) {
+			if (6 > etAuthCode.getText().toString().length() || !isEmail(etPhoneNumber.getText().toString())) {
 				Toast.makeText(LoginActivity.this, R.string.login_input_error, Toast.LENGTH_LONG).show();
 			} else {
 				loginHandler.removeMessages(ComParams.HANDLER_LOGIN_GET_AUTH_CODE_LOCKED);
@@ -184,6 +187,15 @@ public class LoginActivity extends Activity implements OnClickListener {
 		Util.setLoginStatus(this, true);
 	}
 
+	private boolean isEmail(String email) {
+		if (!email.contains("@") || !email.contains("."))
+			return false;
+		String str = "[a-zA-Z0-9_-]+@\\w+\\.[a-z]+(\\.[a-z]+)?";
+		Pattern p = Pattern.compile(str);
+		Matcher m = p.matcher(email);
+		return m.matches();
+	}
+
 	class LoginHandler extends Handler {
 		/*
 		 * (non-Javadoc)
@@ -196,7 +208,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 			switch (msg.what) {
 			case ComParams.HANDLER_RESULT_GET_PASSWORD:
 				Toast.makeText(LoginActivity.this, (String) msg.obj, Toast.LENGTH_LONG).show();
-				if (1 == msg.arg1) {
+				if (0 < msg.arg1) {
 					tvForgetPassword.setEnabled(false);
 				}
 				break;

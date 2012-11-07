@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.dongfang.dicos.adapter.ImgAdapter;
 import com.dongfang.dicos.kzmw.LoginActivity;
+import com.dongfang.dicos.more.CityListActivity;
 import com.dongfang.dicos.util.ComParams;
 import com.dongfang.dicos.util.Util;
 
@@ -88,6 +89,10 @@ public class CurrentSeason extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
+		case R.id.textview_currentseason_top_title:
+			intent = new Intent(CurrentSeason.this, CityListActivity.class);
+			startActivity(intent);
+			break;
 		case R.id.button_currentseason_login:
 			if (!Util.isNetworkAvailable(CurrentSeason.this)) {
 				Util.showDialogSetNetWork(CurrentSeason.this);

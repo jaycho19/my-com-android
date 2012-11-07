@@ -1106,6 +1106,8 @@ com.dongfang.dicos.kzmw.LoginActivity
 com.dongfang.dicos.kzmw.LoginActivity: LoginActivity()
 com.dongfang.dicos.kzmw.LotteryActivity
 com.dongfang.dicos.kzmw.LotteryActivity: LotteryActivity()
+com.dongfang.dicos.kzmw.RegisterActivity
+com.dongfang.dicos.kzmw.RegisterActivity: RegisterActivity()
 com.dongfang.dicos.kzmw.SigneInActivity
 com.dongfang.dicos.kzmw.SigneInActivity: SigneInActivity()
 com.dongfang.dicos.lottery.DetailActivity

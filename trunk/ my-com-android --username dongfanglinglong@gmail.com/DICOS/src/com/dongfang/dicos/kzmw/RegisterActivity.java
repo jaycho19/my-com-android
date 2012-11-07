@@ -4,7 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,11 +15,12 @@ import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dongfang.dicos.R;
+import com.dongfang.dicos.net.thread.RegisterThread;
 import com.dongfang.dicos.util.ComParams;
 import com.dongfang.dicos.util.ULog;
-import com.dongfang.dicos.util.Util;
 
 /**
  * 注册
@@ -198,7 +198,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 	private boolean isEmail(String email) {
 		if (!email.contains("@") || !email.contains("."))
 			return false;
-		String str = "^([a-zA-Z0-9]*[-_]?[a-zA-Z0-9]+)*@([a-zA-Z0-9]*[-_]?[a-zA-Z0-9]+)+[\\.][A-Za-z]{2,3}([\\.][A-Za-z]{2})?$";
+		String str = "[a-zA-Z0-9_-]+@\\w+\\.[a-z]+(\\.[a-z]+)?";
 		Pattern p = Pattern.compile(str);
 		Matcher m = p.matcher(email);
 		return m.matches();
@@ -221,17 +221,30 @@ public class RegisterActivity extends Activity implements OnClickListener {
 	protected void onStart() {
 		super.onStart();
 		// 初始化最近一次登录的手机号码
-		etPhoneNumber.setText(Util.getPhoneNumber(this));
+		// etPhoneNumber.setText(Util.getPhoneNumber(this));
 	}
 
 	@Override
 	public void onClick(View v) {
-		ULog.d(tag, "onClick v.getId() = " + v.getId());
 		switch (v.getId()) {
 		case R.id.button_register_back:
 			finish();
 			break;
 		case R.id.button_register_ok:
+			if (!isbool[0]) {
+				Toast.makeText(RegisterActivity.this, "请输入正确的邮箱地址", Toast.LENGTH_SHORT).show();
+			} else if (!isbool[1]) {
+				Toast.makeText(RegisterActivity.this, "请输入昵称", Toast.LENGTH_SHORT).show();
+			} else if (!isbool[2]) {
+				Toast.makeText(RegisterActivity.this, "请输入密码6至12位密码", Toast.LENGTH_SHORT).show();
+			} else if (!isbool[3]) {
+				Toast.makeText(RegisterActivity.this, "两次密码输入不同，请重新输入", Toast.LENGTH_SHORT).show();
+			} else {
+				new RegisterThread(RegisterActivity.this, registerhandler, etPhoneNumber.getText().toString(),
+						etPassword.getText().toString(), etNickname.getText().toString()).start();
+
+			}
+
 			break;
 		}
 	}
@@ -247,7 +260,8 @@ public class RegisterActivity extends Activity implements OnClickListener {
 			switch (msg.what) {
 			case CHICK_PHONENUMBEREMAIL_IS_OK: {
 				String str = etPhoneNumber.getText().toString();
-				if (isMobileNO(str) || isEmail(str)) {
+				// if (isMobileNO(str) || isEmail(str)) {
+				if (isEmail(str)) {
 					tvPhoneNumber.setTextColor(0xFF5C9200);
 					isbool[0] = true;
 
@@ -258,7 +272,16 @@ public class RegisterActivity extends Activity implements OnClickListener {
 				initButtonOK();
 			}
 				break;
+			case ComParams.HANDLER_RESULT_REGISTER: {
+				if (0 > msg.arg1) {
+					Toast.makeText(RegisterActivity.this, (String) msg.obj, Toast.LENGTH_LONG).show();
+				} else {
+					Toast.makeText(RegisterActivity.this, (String) msg.obj, Toast.LENGTH_LONG).show();
+					finish();
+				}
 
+			}
+				break;
 			default:
 				break;
 			}

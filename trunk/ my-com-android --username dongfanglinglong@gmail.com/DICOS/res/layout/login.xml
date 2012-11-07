@@ -16,8 +16,7 @@
 
         <Button
             android:id="@+id/button_login_signe"
-            style="@style/top_menu_button_sign_style"
-            android:text="注 册" />
+            style="@style/top_menu_button_sign_register" />
 
         <TextView
             android:id="@+id/textView1"
@@ -32,7 +31,7 @@
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
-        android:text="请输入手机号码和手机验证码！"
+        android:text="请输入用户名和密码！"
         android:textColor="#FFB3B3B3" />
 
     <EditText
@@ -41,9 +40,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/editview_top_bg"
-        android:hint="输入手机号码"
-        android:inputType="phone"
-        android:maxLength="11" />
+        android:hint="输入邮箱地址"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/editview_login_authcode"
@@ -51,9 +49,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/editview_bottom_bg"
-        android:hint="输入手机验证码"
-        android:inputType="number"
-        android:maxLength="6" />
+        android:hint="输入密码"
+        android:inputType="textPassword"
+        android:maxLength="12" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -87,8 +85,8 @@
             android:layout_gravity="bottom"
             android:layout_toRightOf="@id/button_login_ok"
             android:singleLine="true"
-            android:textColor="@xml/textview_forget_password"
             android:text="忘记密码？"
+            android:textColor="@xml/textview_forget_password"
             android:textSize="16dp" >
         </TextView>
     </RelativeLayout>

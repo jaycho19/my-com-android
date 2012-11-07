@@ -12,10 +12,7 @@
 
         <Button
             android:id="@+id/button_kzmw_signe"
-            style="@style/top_menu_button_sign_style"
-            android:text="注 册"
-            
-             />
+            style="@style/top_menu_button_sign_style" />
 
         <TextView
             android:id="@+id/textview_kzmw_top_title"

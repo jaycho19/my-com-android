@@ -166,21 +166,21 @@ public class Https {
 	 * @return String
 	 * */
 	public String post(List<NameValuePair> list, String url) {
-		ULog.d(tag, url);
+		ULog.d(tag, "url = " + url);
 		try {
-			// 创建HttpPost对象
 			HttpPost request = new HttpPost(url);
-			if (null != list && list.size() > 0)
+			if (null != list && list.size() > 0) {
 				request.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));
+				for (int i = 0, length = list.size(); i < length; i++) {
+					ULog.v(tag, list.get(i).toString());
+				}
+			}
 
 			// 创建连接对象
 			HttpClient client = this.getNewHttpClient();
-			// ULog.d(tag,"null != client = " + (null != client));
-			// 执行连接
 			HttpResponse httpResponse = client.execute(request);
-			// ULog.d(tag,"null != httpResponse = " + (null != httpResponse));
-			// ULog.d(tag,"HttpStatus = " +
-			// httpResponse.getStatusLine().getStatusCode());
+			ULog.d(tag, "null != httpResponse = " + (null != httpResponse));
+			ULog.d(tag, "HttpStatus = " + httpResponse.getStatusLine().getStatusCode());
 
 			// for (Header h : httpResponse.getAllHeaders()) {
 			// ULog.d(tag, h.getName() + " ++ " + h.getValue());
