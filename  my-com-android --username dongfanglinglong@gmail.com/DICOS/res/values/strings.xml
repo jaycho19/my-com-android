@@ -27,10 +27,10 @@
     <string name="button_get_auth_code_locked">获取验证码(%1$d)</string>
     <!-- 登录 -->
     <string name="login_sending_code">验证码获取成功，发送中</string>
-    <string name="login_input_error">请输入正确的手机号码和验证码</string>
+    <string name="login_input_error">请输入正确的邮箱地址和密码</string>
     <string name="login_result_success">登录成功</string>
     <string name="login_result_fail">登录失败</string>
-
+    
     <!-- 菜单 -->
     <string-array name="sub_manu">
         <item>汉堡</item>

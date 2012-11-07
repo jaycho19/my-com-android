@@ -100,6 +100,10 @@ com.dongfang.dicos.kzmw.LoginActivity:
     public static final java.lang.String tag
 com.dongfang.dicos.kzmw.LotteryActivity:
     public static final java.lang.String tag
+com.dongfang.dicos.kzmw.RegisterActivity:
+    public static final java.lang.String tag
+    public static final int CHICK_PHONENUMBEREMAIL_IS_OK
+    208:212:private boolean isMobileNO(java.lang.String)
 com.dongfang.dicos.kzmw.SigneInActivity:
     public static final java.lang.String tag
     private static final java.lang.String TYPE_SINA
@@ -165,8 +169,8 @@ com.dongfang.dicos.net.Actions
 com.dongfang.dicos.net.HttpActions:
     public static final java.lang.String tag
     private static final java.lang.String KEY
-    120:131:public java.lang.String lotteryLegal(java.lang.String)
-    168:179:public java.lang.String lotteryDistributionInfo(java.lang.String)
+    152:163:public java.lang.String lotteryLegal(java.lang.String)
+    200:211:public java.lang.String lotteryDistributionInfo(java.lang.String)
 com.dongfang.dicos.net.Https:
     private static final java.lang.String tag
     private static final int SET_CONNECTION_TIMEOUT
@@ -177,6 +181,8 @@ com.dongfang.dicos.net.Https:
     77:90:public java.lang.String get(java.lang.String)
 com.dongfang.dicos.net.thread.AdviceThread:
     public static final java.lang.String tag
+com.dongfang.dicos.net.thread.GetPasswordThread:
+    public static final java.lang.String TAG
 com.dongfang.dicos.net.thread.IPArea:
     public static final java.lang.String tag
 com.dongfang.dicos.net.thread.LoginThread:
@@ -192,6 +198,8 @@ com.dongfang.dicos.net.thread.LotteryRateListThread:
 com.dongfang.dicos.net.thread.LotteryThread:
     public static final java.lang.String tag
 com.dongfang.dicos.net.thread.LotteryWinnerThread:
+    public static final java.lang.String tag
+com.dongfang.dicos.net.thread.RegisterThread:
     public static final java.lang.String tag
 com.dongfang.dicos.net.thread.RestaurentListThread:
     public static final java.lang.String tag
@@ -348,6 +356,8 @@ com.dongfang.dicos.util.ComParams:
     public static final int HANDLER_RESULT_SIGNHISTORY
     public static final int HANDLER_RESULT_SIGN
     public static final int HANDLER_RESULT_ADVICE
+    public static final int HANDLER_RESULT_GET_PASSWORD
+    public static final int HANDLER_RESULT_REGISTER
     public static final int HANDLER_INTENT_GOTO_STORE_DETAIL
     public static final int HANDLER_FINISH_CITYLIST_ACTIVITY
     public static final int HANDLER_CHANGE_TITLE_CITYLIST_ACTIVITY

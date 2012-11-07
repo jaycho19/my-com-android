@@ -42,8 +42,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:hint="手机号码/邮箱地址"
+            android:hint="邮箱地址"
             android:inputType="textEmailAddress"
+            android:singleLine="true"
             android:textSize="18dp" />
     </LinearLayout>
 
@@ -69,6 +70,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:maxLength="12"
+            android:singleLine="true"
             android:textSize="18dp" />
     </LinearLayout>
 
@@ -94,8 +97,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_"
-            android:password="true"
+            android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:inputType="textPassword"
+            android:maxLength="12"
+            android:singleLine="true"
             android:textSize="18dp" />
     </LinearLayout>
 
@@ -122,7 +127,9 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_"
-            android:password="true"
+            android:inputType="textPassword"
+            android:maxLength="12"
+            android:singleLine="true"
             android:textSize="18dp" />
     </LinearLayout>
 
@@ -134,6 +141,6 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_ok_xml"
-        android:text="登录" />
+        android:text="注    册" />
 
 </LinearLayout>

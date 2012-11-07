@@ -35,21 +35,26 @@ public class LogoutThread extends Thread {
 	@Override
 	public void run() {
 		String result = new HttpActions(context).logout(phoneNumber);
-		ULog.d(tag, result);
-		Bundle data = new Bundle();
+		handler.sendEmptyMessage(ComParams.HANDLER_RESULT_LOGOUT);
 
-		try {
-			JSONObject js = new JSONObject(result.substring(result.indexOf("=") + 1));
-			data.putString(Actions.ACTIONS_KEY_ACT, js.getString(Actions.ACTIONS_KEY_ACT));
-			data.putString(Actions.ACTIONS_KEY_RESULT, js.getString(Actions.ACTIONS_KEY_RESULT));
-		} catch (JSONException e) {
-			ULog.e(tag, e.toString());
-		}
-
-		Message msg = new Message();
-		msg.setData(data);
-		msg.what = ComParams.HANDLER_RESULT_LOGOUT;
-		handler.sendMessage(msg);
+		// ULog.d(tag, result);
+		// Bundle data = new Bundle();
+		//
+		// try {
+		// JSONObject js = new JSONObject(result.substring(result.indexOf("=") +
+		// 1));
+		// data.putString(Actions.ACTIONS_KEY_ACT,
+		// js.getString(Actions.ACTIONS_KEY_ACT));
+		// data.putString(Actions.ACTIONS_KEY_RESULT,
+		// js.getString(Actions.ACTIONS_KEY_RESULT));
+		// } catch (JSONException e) {
+		// ULog.e(tag, e.toString());
+		// }
+		//
+		// Message msg = new Message();
+		// msg.setData(data);
+		// msg.what = ComParams.HANDLER_RESULT_LOGOUT;
+		// handler.sendMessage(msg);
 	}
 
 }

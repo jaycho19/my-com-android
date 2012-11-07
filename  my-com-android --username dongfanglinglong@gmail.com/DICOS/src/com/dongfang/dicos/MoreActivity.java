@@ -99,8 +99,8 @@ public class MoreActivity extends Activity implements OnClickListener {
 	/** 退出对话框 */
 	public void showSystemExitDialog() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("德克士").setIcon(R.drawable.ic_menu_notifications).setMessage("退出之后需重新登录，是否仍要退出德克士？").setCancelable(false)
-				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+		builder.setTitle("德克士").setIcon(R.drawable.ic_menu_notifications).setMessage("退出之后需重新登录，是否仍要退出德克士？")
+				.setCancelable(false).setPositiveButton("确定", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						/** 保存登录状态 */
 						SharedPreferences setConfig = getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
@@ -165,16 +165,18 @@ public class MoreActivity extends Activity implements OnClickListener {
 			Bundle data;
 			switch (msg.what) {
 			case ComParams.HANDLER_RESULT_LOGOUT: {
-				data = msg.getData();
+				// data = msg.getData();
+				//
+				// if
+				// (data.getString(Actions.ACTIONS_KEY_ACT).equalsIgnoreCase(Actions.ACTIONS_TYPE_LOGOUT)
+				// && data.getString(Actions.ACTIONS_KEY_RESULT).equals("1")) {
+				Util.setLoginStatus(MoreActivity.this, false);
+				Toast.makeText(MoreActivity.this, "退出成功...", Toast.LENGTH_LONG).show();
 
-				if (data.getString(Actions.ACTIONS_KEY_ACT).equalsIgnoreCase(Actions.ACTIONS_TYPE_LOGOUT)
-						&& data.getString(Actions.ACTIONS_KEY_RESULT).equals("1")) {
-					Util.setLoginStatus(MoreActivity.this, false);
-					Toast.makeText(MoreActivity.this, "退出成功...", Toast.LENGTH_LONG).show();
-
-				} else {
-					Toast.makeText(MoreActivity.this, "退出失败...", Toast.LENGTH_LONG).show();
-				}
+				// } else {
+				// Toast.makeText(MoreActivity.this, "退出失败...",
+				// Toast.LENGTH_LONG).show();
+				// }
 
 				bExit.setClickable(true);
 
