@@ -21,6 +21,7 @@ import com.dongfang.dicos.R;
 import com.dongfang.dicos.net.thread.RegisterThread;
 import com.dongfang.dicos.util.ComParams;
 import com.dongfang.dicos.util.ULog;
+import com.dongfang.dicos.util.Util;
 
 /**
  * 注册
@@ -112,7 +113,8 @@ public class RegisterActivity extends Activity implements OnClickListener {
 				if (etNickname.getText().length() > 0) {
 					tvNickname.setTextColor(0xFF5C9200);
 					isbool[1] = true;
-				} else {
+				}
+				else {
 					isbool[1] = false;
 					tvNickname.setTextColor(0xFF000000);
 				}
@@ -140,7 +142,8 @@ public class RegisterActivity extends Activity implements OnClickListener {
 						tvPasswordAgain.setTextColor(0xFF5C9200);
 						isbool[3] = true;
 					}
-				} else {
+				}
+				else {
 					isbool[2] = false;
 					tvPassword.setTextColor(0xFF000000);
 				}
@@ -165,7 +168,8 @@ public class RegisterActivity extends Activity implements OnClickListener {
 				if (str.length() > 5 && str.equals(etPassword.getText().toString())) {
 					tvPasswordAgain.setTextColor(0xFF5C9200);
 					isbool[3] = true;
-				} else {
+				}
+				else {
 					isbool[3] = false;
 					tvPasswordAgain.setTextColor(0xFF000000);
 				}
@@ -185,14 +189,15 @@ public class RegisterActivity extends Activity implements OnClickListener {
 	}
 
 	private void initButtonOK() {
-		if (isbool[0] && isbool[1] && isbool[2] && isbool[3]) {
-			bOK.setClickable(true);
-			bOK.setTextColor(0xFF000000);
-
-		} else {
-			bOK.setClickable(false);
-			bOK.setTextColor(0xFF808080);
-		}
+		// if (isbool[0] && isbool[1] && isbool[2] && isbool[3]) {
+		// bOK.setClickable(true);
+		// bOK.setTextColor(0xFF000000);
+		//
+		// }
+		// else {
+		// bOK.setClickable(false);
+		// bOK.setTextColor(0xFF808080);
+		// }
 	}
 
 	private boolean isEmail(String email) {
@@ -233,13 +238,17 @@ public class RegisterActivity extends Activity implements OnClickListener {
 		case R.id.button_register_ok:
 			if (!isbool[0]) {
 				Toast.makeText(RegisterActivity.this, "请输入正确的邮箱地址", Toast.LENGTH_SHORT).show();
-			} else if (!isbool[1]) {
+			}
+			else if (!isbool[1]) {
 				Toast.makeText(RegisterActivity.this, "请输入昵称", Toast.LENGTH_SHORT).show();
-			} else if (!isbool[2]) {
-				Toast.makeText(RegisterActivity.this, "请输入密码6至12位密码", Toast.LENGTH_SHORT).show();
-			} else if (!isbool[3]) {
+			}
+			else if (!isbool[2]) {
+				Toast.makeText(RegisterActivity.this, "请输入密码6至15位密码", Toast.LENGTH_SHORT).show();
+			}
+			else if (!isbool[3]) {
 				Toast.makeText(RegisterActivity.this, "两次密码输入不同，请重新输入", Toast.LENGTH_SHORT).show();
-			} else {
+			}
+			else {
 				new RegisterThread(RegisterActivity.this, registerhandler, etPhoneNumber.getText().toString(),
 						etPassword.getText().toString(), etNickname.getText().toString()).start();
 
@@ -265,7 +274,8 @@ public class RegisterActivity extends Activity implements OnClickListener {
 					tvPhoneNumber.setTextColor(0xFF5C9200);
 					isbool[0] = true;
 
-				} else {
+				}
+				else {
 					isbool[0] = false;
 					tvPhoneNumber.setTextColor(0xFF000000);
 				}
@@ -275,7 +285,9 @@ public class RegisterActivity extends Activity implements OnClickListener {
 			case ComParams.HANDLER_RESULT_REGISTER: {
 				if (0 > msg.arg1) {
 					Toast.makeText(RegisterActivity.this, (String) msg.obj, Toast.LENGTH_LONG).show();
-				} else {
+				}
+				else {
+					Util.setNickName(RegisterActivity.this, etNickname.getText().toString());
 					Toast.makeText(RegisterActivity.this, (String) msg.obj, Toast.LENGTH_LONG).show();
 					finish();
 				}

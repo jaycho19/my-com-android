@@ -14,10 +14,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dongfang.dicos.kzmw.LoginActivity;
-import com.dongfang.dicos.kzmw.SigneInActivity;
 import com.dongfang.dicos.mydicos.SignHistoryAdapter;
 import com.dongfang.dicos.net.Actions;
 import com.dongfang.dicos.net.thread.SignHistoryThread;
@@ -33,6 +33,8 @@ import com.dongfang.dicos.util.Util;
 public class MyDicosActivity extends Activity implements OnClickListener {
 
 	public static final String	tag	= "MyDicosActivity";
+
+	private TextView			my_dicos_title;
 
 	/** 顶部菜单右侧进度条 */
 	private ProgressBar			progressBar;
@@ -55,6 +57,8 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mydicos);
 		handler = new MyDICOSHandler();
+
+		my_dicos_title = (TextView) findViewById(R.id.my_dicos_title);
 
 		progressBar = (ProgressBar) findViewById(R.id.progressbar_mydicos);
 
@@ -85,7 +89,9 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onStart() {
 		super.onStart();
-
+		if (!TextUtils.isEmpty(Util.getNickName(this))) {
+			my_dicos_title.setText(Util.getNickName(this));
+		}
 	}
 
 	/*
@@ -98,7 +104,8 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 		super.onResume();
 		if (Util.isLogin(this)) {
 			bLogin.setVisibility(View.GONE);
-		} else {
+		}
+		else {
 			bLogin.setVisibility(View.VISIBLE);
 		}
 
@@ -106,7 +113,8 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 			if (!progressBar.isShown())
 				progressBar.setVisibility(View.VISIBLE);
 			new SignHistoryThread(this, handler, Util.getPhoneNumber(this)).start();
-		} else {
+		}
+		else {
 			if (!dialog.isShowing())
 				dialog.show();
 		}
@@ -119,9 +127,11 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 		case R.id.button_mydicos_login:
 			if (!Util.isNetworkAvailable(this)) {
 				Util.showDialogSetNetWork(this);
-			} else if (Util.isLogin(this)) {
+			}
+			else if (Util.isLogin(this)) {
 				Toast.makeText(this, "您已登录", Toast.LENGTH_LONG).show();
-			} else {
+			}
+			else {
 				intent = new Intent(this, LoginActivity.class);
 				startActivity(intent);
 			}
@@ -129,7 +139,8 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 		case R.id.button_mydicos_signein:
 			if (!Util.isLogin(MyDicosActivity.this)) {
 				Util.showDialogLogin(MyDicosActivity.this);
-			} else {
+			}
+			else {
 				intent = new Intent(MyDicosActivity.this, StoreSearchActivity.class);
 				intent.putExtra("visibility", true);
 				startActivity(intent);
@@ -185,6 +196,7 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 			}
 		}
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -15,6 +15,7 @@
             style="@style/top_menu_button_sign_style" />
 
         <TextView
+            android:id="@+id/my_dicos_title"
             style="@style/top_menu_textview_style"
             android:text="@string/top_title_mydicos" />
 

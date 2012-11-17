@@ -1,6 +1,11 @@
 package com.dongfang.dicos;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,9 +16,10 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -29,7 +35,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher.ViewFactory;
 
+import com.dongfang.dicos.dl.DownloadIMG;
 import com.dongfang.dicos.kzmw.Category;
+import com.dongfang.dicos.kzmw.KeyValue;
 import com.dongfang.dicos.kzmw.LoginActivity;
 import com.dongfang.dicos.kzmw.LotteryActivity;
 import com.dongfang.dicos.more.CityListActivity;
@@ -82,6 +90,8 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 
 	private GetInfoAsyncTask		getInfoAsyncTask		= null;
 	private GetInfoTypeAsyncTask	getInfoTypeAsyncTask	= null;
+
+	private ProgressDialog			progressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -146,7 +156,8 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 		ULog.d(tag, "onResume = " + bLogin.isShown());
 		if (Util.isLogin(this)) {
 			bLogin.setVisibility(View.GONE);
-		} else {
+		}
+		else {
 			bLogin.setVisibility(View.VISIBLE);
 		}
 
@@ -173,9 +184,11 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 		case R.id.button_kzmw_login:
 			if (!Util.isNetworkAvailable(KaZiMeiWeiActivity.this)) {
 				Util.showDialogSetNetWork(KaZiMeiWeiActivity.this);
-			} else if (Util.isLogin(KaZiMeiWeiActivity.this)) {
+			}
+			else if (Util.isLogin(KaZiMeiWeiActivity.this)) {
 				Toast.makeText(KaZiMeiWeiActivity.this, "您已登录", Toast.LENGTH_LONG).show();
-			} else {
+			}
+			else {
 				intent = new Intent(KaZiMeiWeiActivity.this, LoginActivity.class);
 				startActivity(intent);
 			}
@@ -184,7 +197,8 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 		case R.id.button_kzmw_signe:
 			if (!Util.isLogin(KaZiMeiWeiActivity.this)) {
 				Util.showDialogLogin(KaZiMeiWeiActivity.this);
-			} else {
+			}
+			else {
 				intent = new Intent(KaZiMeiWeiActivity.this, StoreSearchActivity.class);
 				intent.putExtra("visibility", true);
 				startActivity(intent);
@@ -214,7 +228,7 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 		int size = category.getMenuList().size();
 		MyOnClickListener[] onClickList = new MyOnClickListener[size];
 		for (int i = 0; i < size; i++) {
-			onClickList[i] = new MyOnClickListener(category.getMenuList().get(i).key,i);
+			onClickList[i] = new MyOnClickListener(category.getMenuList().get(i).key, i);
 		}
 		subMenuLayout.setOnClickListener(onClickList);
 
@@ -222,9 +236,9 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 
 	class MyOnClickListener implements OnClickListener {
 		String	cateId;
-		int index;
+		int		index;
 
-		MyOnClickListener(String cateId,int index) {
+		MyOnClickListener(String cateId, int index) {
 			this.cateId = cateId;
 			this.index = index;
 		}
@@ -252,7 +266,8 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 			ll_fling_desc_image.addView(image, params);
 			if (i == 0) {
 				image.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.fling_point_focsed));
-			} else {
+			}
+			else {
 				image.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.fling_point_unfocsed));
 			}
 		}
@@ -260,7 +275,8 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 		if (mGallery != null) {
 			mGallery.setAdapter(new FlingAdapter(this, flingViewList));
 			mGallery.refreshDrawableState();
-		} else {
+		}
+		else {
 			mGallery = new FlingGallery(this, null, ll_fling_desc_image);
 			mGallery.setPaddingWidth(0);
 			mGallery.setAdapter(new FlingAdapter(this, flingViewList));
@@ -311,7 +327,6 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 
 	/** 初始化卡滋美味页面菜单数据 */
 	class GetInfoAsyncTask extends AsyncTask<String, String, Category> {
-		ProgressDialog	progressDialog;
 
 		@Override
 		protected void onPreExecute() {
@@ -343,13 +358,34 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 
 				if (null != category) {
 					setConfig.edit().putString(ComParams.SHAREDPREFERENCES_KZME_IFNO, kzmwInfo).commit();
-				} else {
+				}
+				else {
 					category = Analysis
 							.analysisKZMWInfo(setConfig.getString(ComParams.SHAREDPREFERENCES_KZME_IFNO, ""));
 				}
-			} else {
+			}
+			else {
 				category = Analysis.analysisKZMWInfo(setConfig.getString(ComParams.SHAREDPREFERENCES_KZME_IFNO, ""));
 			}
+
+			if (null != category && category.getMenuList().size() > 0) {
+				String url, furl;
+				String imageName, fimageName;
+				for (KeyValue kv : category.getMenuList()) {
+					url = kv.blur_img;
+					furl = kv.focus_img;
+					imageName = getCacheDir() + "/" + url.substring(url.lastIndexOf("/") + 1);
+					fimageName = getCacheDir() + "/" + furl.substring(furl.lastIndexOf("/") + 1);
+
+					if (!new File(imageName + "e").exists()) {
+						saveFile(getInputStreamFromURL(url, 0), imageName);
+					}
+					if (!new File(fimageName + "fe").exists()) {
+						saveFile(getInputStreamFromURL(furl, 0), fimageName + "f");
+					}
+				}
+			}
+
 			return category;
 		}
 
@@ -357,17 +393,21 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 		protected void onPostExecute(Category result) {
 			super.onPostExecute(result);
 
-			progressDialog.dismiss();
+			// progressDialog.dismiss();
 
 			if (null == result) {
 				Toast.makeText(KaZiMeiWeiActivity.this, "获取数据失败", Toast.LENGTH_LONG).show();
-			} else {
-				
+			}
+			else {
+
 				// ULog.v(tag, "result = " + result.toString());
-				
+
 				initSubMenuLayout(result);
 				myHorizontalScrollView.setVisibility(View.VISIBLE);
-				initFlingView(result.getImgUrls());
+				// initFlingView(result.getImgUrls());
+
+				subMenuLayout.chageClicked(0);
+				new GetInfoTypeAsyncTask().execute(result.getMenuList().get(0).key);
 
 			}
 		}
@@ -378,27 +418,93 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 			super.onCancelled();
 		}
 
+		private InputStream getInputStreamFromURL(String urlStr, int length) {
+			HttpURLConnection urlConn = null;
+			try {
+				urlConn = (HttpURLConnection) (new URL(urlStr)).openConnection(java.net.Proxy.NO_PROXY);
+				if (0 < length)
+					urlConn.setRequestProperty("RANGE", "bytes=" + length + "-");
+
+				urlConn.setReadTimeout(2000);
+				urlConn.setConnectTimeout(2000);
+				urlConn.setRequestMethod("GET");
+				urlConn.setDoInput(true);
+				urlConn.setDefaultUseCaches(false);
+				urlConn.setChunkedStreamingMode(0);
+				urlConn.connect();
+
+				int code = ((HttpURLConnection) urlConn).getResponseCode();
+				ULog.d(tag, "code = " + code);
+				if (code > 299 || code < HttpURLConnection.HTTP_OK || code == HttpURLConnection.HTTP_NO_CONTENT) {
+					return null;
+				}
+
+				return urlConn.getInputStream();
+			} catch (Exception e) {
+				ULog.d(tag, "Exception = " + e.getMessage());
+			}
+			return null;
+		}
+
+		/**
+		 * 
+		 * @param ins
+		 *            输入流
+		 * @param filename
+		 *            文件名称 需要绝对路径
+		 * @param handler
+		 * @param array_param
+		 * @return 返回文件名称 filename + "e"
+		 */
+		private String saveFile(InputStream ins, String filename) {
+			if (TextUtils.isEmpty(filename))
+				return filename;
+			try {
+				ULog.d(tag, "filename = " + filename);
+
+				FileOutputStream outs = new FileOutputStream(filename);
+				byte[] b = new byte[ComParams.BUF_SIZE];
+
+				int num = ins.read(b);
+				while (num != -1) {
+					outs.write(b, 0, num);
+					num = ins.read(b);
+				}
+
+				outs.flush();
+				ins.close();
+				outs.close();
+
+				// 重命名
+				(new File(filename)).renameTo(new File(filename + "e"));
+
+			} catch (Exception e) {
+				ULog.d(tag, "Exception = " + e.getMessage());
+			}
+			return filename + "e";
+		}
+
 	}
 
 	/** 卡滋美味二级菜单 */
 	class GetInfoTypeAsyncTask extends AsyncTask<String, String, Category> {
 
-		ProgressDialog	progressDialog;
-
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
 
-			progressDialog = ProgressDialog.show(KaZiMeiWeiActivity.this, "", "数据加载中...", true);
-			progressDialog.setCancelable(true);
-			progressDialog.setOnCancelListener(new OnCancelListener() {
-				@Override
-				public void onCancel(DialogInterface dialog) {
-					ULog.d(tag, "OnCancelListener + getInfoTypeAsyncTask");
-					getInfoTypeAsyncTask.cancel(true);
-					progressDialog.cancel();
-				}
-			});
+			if (null == progressDialog || !progressDialog.isShowing()) {
+				progressDialog = ProgressDialog.show(KaZiMeiWeiActivity.this, "", "数据加载中...", true);
+				progressDialog.setCancelable(true);
+				progressDialog.setOnCancelListener(new OnCancelListener() {
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						ULog.d(tag, "OnCancelListener + getInfoTypeAsyncTask");
+						getInfoTypeAsyncTask.cancel(true);
+						progressDialog.cancel();
+					}
+				});
+			}
 		}
 
 		@Override
@@ -420,7 +526,8 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 					setConfig.edit()
 							.putString(ComParams.SHAREDPREFERENCES_KZME_IFNO_TYPE_CATE + params[0], kzmwInfo_type)
 							.commit();
-				} else {
+				}
+				else {
 					imgUrls = Analysis.analysisKZMWInfo_type(setConfig.getString(
 							ComParams.SHAREDPREFERENCES_KZME_IFNO_TYPE_CATE + params[0], ""));
 					if (null != imgUrls && imgUrls.length > 0) {
@@ -428,7 +535,8 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 						category.setImageUrls(Arrays.asList(imgUrls));
 					}
 				}
-			} else {
+			}
+			else {
 				imgUrls = Analysis.analysisKZMWInfo_type(setConfig.getString(
 						ComParams.SHAREDPREFERENCES_KZME_IFNO_TYPE_CATE + params[0], ""));
 				if (null != imgUrls && imgUrls.length > 0) {
@@ -448,7 +556,8 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 
 			if (null == result) {
 				Toast.makeText(KaZiMeiWeiActivity.this, "获取数据失败", Toast.LENGTH_LONG).show();
-			} else {
+			}
+			else {
 				// initSubMenuLayout(result);
 				// myHorizontalScrollView.setVisibility(View.VISIBLE);
 				ULog.d(tag, result.getImgUrls().get(0));
