@@ -33,6 +33,8 @@ public class ComParams {
 	public static final String	SHAREDPREFERENCES_FILE_NAME					= "dicos";
 	/** ÊÖ»úºÅÂë */
 	public static final String	SHAREDPREFERENCES_PHONE_NUMBER				= "phoneNumber";
+	/** êÇ³Æ */
+	public static final String	SHAREDPREFERENCES_NICK_NAME					= "nickName";
 
 	/** µÇÂ¼×´Ì¬ */
 	public static final String	SHAREDPREFERENCES_LOGIN_STATUE				= "loginStatus";

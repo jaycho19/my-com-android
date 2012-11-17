@@ -86,8 +86,9 @@
             android:layout_toRightOf="@id/button_login_ok"
             android:singleLine="true"
             android:text="忘记密码？"
+            android:layout_marginLeft="4dp"
             android:textColor="@xml/textview_forget_password"
-            android:textSize="16dp" >
+            android:textSize="14dp" >
         </TextView>
     </RelativeLayout>
 

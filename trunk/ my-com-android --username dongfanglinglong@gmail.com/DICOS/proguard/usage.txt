@@ -103,7 +103,7 @@ com.dongfang.dicos.kzmw.LotteryActivity:
 com.dongfang.dicos.kzmw.RegisterActivity:
     public static final java.lang.String tag
     public static final int CHICK_PHONENUMBEREMAIL_IS_OK
-    208:212:private boolean isMobileNO(java.lang.String)
+    213:217:private boolean isMobileNO(java.lang.String)
 com.dongfang.dicos.kzmw.SigneInActivity:
     public static final java.lang.String tag
     private static final java.lang.String TYPE_SINA
@@ -332,6 +332,7 @@ com.dongfang.dicos.util.ComParams:
     public static final int BUF_SIZE
     public static final java.lang.String SHAREDPREFERENCES_FILE_NAME
     public static final java.lang.String SHAREDPREFERENCES_PHONE_NUMBER
+    public static final java.lang.String SHAREDPREFERENCES_NICK_NAME
     public static final java.lang.String SHAREDPREFERENCES_LOGIN_STATUE
     public static final java.lang.String SHAREDPREFERENCES_IP_AREA
     public static final java.lang.String SHAREDPREFERENCES_CRUUENTSEASON_IMG_URLS
@@ -373,8 +374,8 @@ com.dongfang.dicos.util.ULog:
 com.dongfang.dicos.util.Util:
     private static final java.lang.String tag
     19:19:public Util()
-    129:130:public static boolean chkFileExist(android.content.Context,java.lang.String)
-    152:154:public static int getWindowHeight(android.content.Context)
+    145:146:public static boolean chkFileExist(android.content.Context,java.lang.String)
+    168:170:public static int getWindowHeight(android.content.Context)
 com.dongfang.dicos.view.FlingAdapter$GalleryViewItem:
     47:46:public FlingAdapter$GalleryViewItem(com.dongfang.dicos.view.FlingAdapter,android.content.Context)
 com.dongfang.dicos.view.FlingGallery:

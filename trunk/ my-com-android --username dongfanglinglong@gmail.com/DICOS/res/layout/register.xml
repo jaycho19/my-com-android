@@ -42,7 +42,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:hint="邮箱地址"
+            android:hint="请填写正确的邮箱地址"
             android:inputType="textEmailAddress"
             android:singleLine="true"
             android:textSize="18dp" />
@@ -99,7 +99,8 @@
             android:background="@null"
             android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:inputType="textPassword"
-            android:maxLength="12"
+            android:maxLength="15"
+            android:hint="需在6-15个字符之间"
             android:singleLine="true"
             android:textSize="18dp" />
     </LinearLayout>
@@ -140,6 +141,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
+        android:textColor="@color/black"
         android:background="@drawable/button_ok_xml"
         android:text="注    册" />
 

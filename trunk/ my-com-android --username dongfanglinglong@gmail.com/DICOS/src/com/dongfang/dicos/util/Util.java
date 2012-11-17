@@ -19,6 +19,22 @@ import com.dongfang.dicos.R;
 public class Util {
 	private static final String	tag	= "Util";
 
+	/** 获取昵称 */
+	public static String getNickName(Context context) {
+		// 初始化最近一次登录的手机号码
+		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
+				Activity.MODE_PRIVATE);
+		return setConfig.getString(ComParams.SHAREDPREFERENCES_NICK_NAME, "");
+
+	}
+
+	/** 保存昵称 */
+	public static void setNickName(Context context, String nickName) {
+		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
+				Activity.MODE_PRIVATE);
+		setConfig.edit().putString(ComParams.SHAREDPREFERENCES_NICK_NAME, nickName).commit();
+	}
+
 	/** 获取手机号码 */
 	public static String getPhoneNumber(Context context) {
 		// 初始化最近一次登录的手机号码
