@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dongfang.dicos"
-    android:versionCode="21010016"
-    android:versionName="1.0.16" >
+    android:versionCode="21010017"
+    android:versionName="1.0.17" >
     
     <supports-screens
         android:anyDensity="true"
@@ -58,6 +58,7 @@
         
         <activity android:name=".CurrentSeasonDetail" android:theme="@android:style/Theme.Black" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         
+        <activity android:name=".more.ChgPwdActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         <activity android:name=".more.TongBuActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         <activity android:name=".more.TuiSongActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         <activity android:name=".more.CityListActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
@@ -67,6 +68,7 @@
         
         <activity android:name=".kzmw.RegisterActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         <activity android:name=".kzmw.LoginActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
+        <activity android:name=".kzmw.GetPasswordByEmail" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         <activity android:name=".kzmw.SigneInActivity" android:screenOrientation="portrait" android:launchMode="singleTask" android:configChanges="orientation|keyboardHidden"></activity>
         <activity android:name=".kzmw.LotteryActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         

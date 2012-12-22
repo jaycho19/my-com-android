@@ -7,7 +7,6 @@ import java.security.KeyStore;
 import java.util.List;
 
 import org.apache.http.Header;
-import org.apache.http.HeaderElement;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -179,8 +178,10 @@ public class Https {
 			// 创建连接对象
 			HttpClient client = this.getNewHttpClient();
 			HttpResponse httpResponse = client.execute(request);
-			ULog.d(tag, "null != httpResponse = " + (null != httpResponse));
-			ULog.d(tag, "HttpStatus = " + httpResponse.getStatusLine().getStatusCode());
+			ULog.d(tag, "null != httpResponse " + (null != httpResponse));
+			
+			int stateCode = httpResponse.getStatusLine().getStatusCode();
+			ULog.d(tag, "HttpStatus = " + stateCode);
 
 			// for (Header h : httpResponse.getAllHeaders()) {
 			// ULog.d(tag, h.getName() + " ++ " + h.getValue());
@@ -190,7 +191,7 @@ public class Https {
 			// }
 			// }
 
-			if (null != httpResponse && httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+			if (199 < stateCode && stateCode < 300) {
 				ULog.d(tag, "post 200");
 				return read(httpResponse);
 			}

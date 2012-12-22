@@ -11,7 +11,7 @@ import com.dongfang.dicos.CurrentSeasonDetail;
 import com.dongfang.dicos.view.MyImageView;
 
 public class ImgAdapter extends BaseAdapter {
-	public static final String	tag	= "TV189PlayListAdapter";
+	public static final String	tag	= "ImgAdapter";
 
 	private String[]			aImgUrl;
 	private Context				context;

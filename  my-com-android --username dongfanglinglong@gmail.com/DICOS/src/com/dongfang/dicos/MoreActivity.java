@@ -18,11 +18,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dongfang.dicos.more.ChgPwdActivity;
 import com.dongfang.dicos.more.CityListActivity;
 import com.dongfang.dicos.more.FeedBackActivity;
 import com.dongfang.dicos.more.TongBuActivity;
 import com.dongfang.dicos.more.TuiSongActivity;
-import com.dongfang.dicos.net.Actions;
 import com.dongfang.dicos.net.thread.LogoutThread;
 import com.dongfang.dicos.util.ComParams;
 import com.dongfang.dicos.util.ULog;
@@ -43,6 +43,9 @@ public class MoreActivity extends Activity implements OnClickListener {
 	/** 城市切换 */
 	private Button				bChengshi;
 
+	/** 更改密码 */
+	private Button				bChgPwd;
+	
 	/** 意见反馈 */
 	private Button				bFeedback;
 
@@ -70,6 +73,9 @@ public class MoreActivity extends Activity implements OnClickListener {
 
 		bChengshi = (Button) findViewById(R.id.button_setting_chengshi);
 		bChengshi.setOnClickListener(this);
+
+		bChgPwd = (Button) findViewById(R.id.button_setting_chgpwd);
+		bChgPwd.setOnClickListener(this);
 
 		bFeedback = (Button) findViewById(R.id.button_setting_feedback);
 		bFeedback.setOnClickListener(this);
@@ -132,6 +138,15 @@ public class MoreActivity extends Activity implements OnClickListener {
 			intent = new Intent(MoreActivity.this, CityListActivity.class);
 			startActivity(intent);
 			break;
+		case R.id.button_setting_chgpwd:
+			if (Util.isLogin(this)) {
+				intent = new Intent(MoreActivity.this, ChgPwdActivity.class);
+				startActivity(intent);
+			}
+			else {
+				Toast.makeText(MoreActivity.this, "您还未登录...", Toast.LENGTH_LONG).show();
+			}
+			break;
 		case R.id.button_setting_feedback:
 			intent = new Intent(MoreActivity.this, FeedBackActivity.class);
 			startActivity(intent);
@@ -139,12 +154,11 @@ public class MoreActivity extends Activity implements OnClickListener {
 		case R.id.button_setting_exit: {
 			if (Util.isLogin(this)) {
 				showSystemExitDialog();
-			} else {
+			}
+			else {
 				Toast.makeText(MoreActivity.this, "您还未登录...", Toast.LENGTH_LONG).show();
 			}
-
 			// bExit.setClickable(false);
-
 		}
 			break;
 		case R.id.button_setting_back:

@@ -38,6 +38,5 @@ public class GetPasswordThread extends Thread {
 		msg.arg1 = result;
 		msg.what = ComParams.HANDLER_RESULT_GET_PASSWORD;
 		handler.sendMessage(msg);
-
 	}
 }

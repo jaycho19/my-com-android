@@ -1,22 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical" >
 
     <RelativeLayout style="@style/top_menu_layout_style" >
 
         <Button
-            android:id="@+id/button_register_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/top_button_back" />
+            android:id="@+id/chgpwd_button_back"
+            style="@style/top_menu_button_back_style" />
 
         <TextView
             style="@style/top_menu_textview_style"
-            android:text="@string/top_title_register" />
+            android:text="密码修改" />
     </RelativeLayout>
 
     <LinearLayout
@@ -34,45 +30,17 @@
             android:id="@+id/textview_register_phonenumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="* 账        号 : "
-            android:textSize="18dp" />
+            android:text="原设定的密码:"
+            android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/editview_register_phonenumber"
+            android:id="@+id/chgpwd_edittext_oldpwd"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:hint="请填写正确的邮箱地址"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             android:singleLine="true"
-            android:textSize="18dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/editview_center_bg"
-        android:gravity="center_vertical"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp" >
-
-        <TextView
-            android:id="@+id/textview_register_nickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="* 昵        称 : "
-            android:textSize="18dp" />
-
-        <EditText
-            android:id="@+id/editview_register_nickname"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:maxLength="12"
-            android:singleLine="true"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -89,20 +57,20 @@
             android:id="@+id/textview_register_pwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="* 密        码 : "
-            android:textSize="18dp" />
+            android:text="新更变的密码:"
+            android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/editview_register_pwd"
+            android:id="@+id/chgpwd_edittext_newpwd"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@null"
             android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:hint="需在6-15个字符之间"
             android:inputType="textPassword"
             android:maxLength="15"
-            android:hint="需在6-15个字符之间"
             android:singleLine="true"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -119,11 +87,11 @@
             android:id="@+id/textview_register_pwd_again"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="* 确认密码 : "
-            android:textSize="18dp" />
+            android:text="再次确认密码:"
+            android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/editview_register_pwd_again"
+            android:id="@+id/chgpwd_edittext_confirmpwd"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -131,18 +99,13 @@
             android:inputType="textPassword"
             android:maxLength="15"
             android:singleLine="true"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/button_register_ok"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:id="@+id/chgpwd_button_ok"
+        style="@style/button_normal_ok"
         android:layout_marginTop="20dp"
-        android:textColor="@color/black"
-        android:background="@drawable/button_ok_xml"
-        android:text="注    册" />
+        android:text="确定" />
 
 </LinearLayout>

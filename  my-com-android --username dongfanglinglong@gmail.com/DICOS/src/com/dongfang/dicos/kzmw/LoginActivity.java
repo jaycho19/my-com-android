@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.dongfang.dicos.R;
 import com.dongfang.dicos.net.Actions;
-import com.dongfang.dicos.net.thread.GetPasswordThread;
 import com.dongfang.dicos.net.thread.LoginThread;
 import com.dongfang.dicos.net.thread.ValidateThread;
 import com.dongfang.dicos.util.ComParams;
@@ -122,11 +121,13 @@ public class LoginActivity extends Activity implements OnClickListener {
 		ULog.d(tag, "onClick v.getId() = " + v.getId());
 		switch (v.getId()) {
 		case R.id.tv_forget_password:
-			if (!isEmail(etPhoneNumber.getText().toString())) {
-				Toast.makeText(LoginActivity.this, "请输入正确的邮箱地址...", Toast.LENGTH_LONG).show();
-			} else {
-				new GetPasswordThread(LoginActivity.this, loginHandler, etPhoneNumber.getText().toString()).start();
-			}
+//			if (!isEmail(etPhoneNumber.getText().toString())) {
+//				Toast.makeText(LoginActivity.this, "请输入正确的邮箱地址...", Toast.LENGTH_LONG).show();
+//			} else {
+//				new GetPasswordThread(LoginActivity.this, loginHandler, etPhoneNumber.getText().toString()).start();
+//			}
+			
+			LoginActivity.this.startActivity(new Intent(LoginActivity.this, GetPasswordByEmail.class));
 			break;
 		case R.id.button_login_getauthcode:
 			/**
