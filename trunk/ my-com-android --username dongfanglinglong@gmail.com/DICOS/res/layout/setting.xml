@@ -58,6 +58,14 @@
             android:background="@drawable/setting_button_chengshi" />
 
         <Button
+            android:id="@+id/button_setting_chgpwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/setting_button_chgpassword" />
+        
+        
+        <Button
             android:id="@+id/button_setting_feedback"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

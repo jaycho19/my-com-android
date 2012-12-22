@@ -35,6 +35,12 @@ public class ComParams {
 	public static final String	SHAREDPREFERENCES_PHONE_NUMBER				= "phoneNumber";
 	/** êÇ³Æ */
 	public static final String	SHAREDPREFERENCES_NICK_NAME					= "nickName";
+	/** token */
+	public static final String	SHAREDPREFERENCES_TOKEN						= "token";
+	/** ts */
+	public static final String	SHAREDPREFERENCES_TS						= "ts";
+	/** ÓÃ»§ºÅÂë */
+	public static final String	SHAREDPREFERENCES_USER_NO					= "uno";
 
 	/** µÇÂ¼×´Ì¬ */
 	public static final String	SHAREDPREFERENCES_LOGIN_STATUE				= "loginStatus";

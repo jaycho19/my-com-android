@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import android.content.Context;
 
 import com.dongfang.dicos.util.ULog;
+import com.dongfang.dicos.util.Util;
 
 public class HttpActions {
 
@@ -18,10 +19,12 @@ public class HttpActions {
 
 	private Https				https;
 	private List<NameValuePair>	list;
+	private Context				context;
 
 	private static final String	KEY	= "key";
 
 	public HttpActions(Context context) {
+		this.context = context;
 		https = new Https(context);
 		list = new ArrayList<NameValuePair>();
 	}
@@ -45,11 +48,27 @@ public class HttpActions {
 		return https.post(list);
 	}
 
+	/** 修改密码 */
+	public String chgPassword(String uName, String oldPwd, String newPwd) {
+		list.clear();
+		list.add(new BasicNameValuePair("acc", uName));
+		list.add(new BasicNameValuePair("pwd", oldPwd));
+		list.add(new BasicNameValuePair("npwd", newPwd));
+		list.add(new BasicNameValuePair("nuo", Util.getUserNO(context)));
+		list.add(new BasicNameValuePair("ts", Util.getTS(context)));
+		list.add(new BasicNameValuePair("token", Util.getToken(context)));
+		list.add(new BasicNameValuePair("from", "mobile"));
+		return https.post(list, "http://www.dicos.com.cn/login/chg_pwd_ajax.php");
+	}
+
 	/** 忘记密码 */
 	public String getPassword(String uName) {
 		list.clear();
 		// list.add(new BasicNameValuePair("uid", phoneNumber));
 		list.add(new BasicNameValuePair("acc", uName));
+		list.add(new BasicNameValuePair("nuo", Util.getUserNO(context)));
+		list.add(new BasicNameValuePair("ts", Util.getTS(context)));
+		list.add(new BasicNameValuePair("token", Util.getToken(context)));
 		list.add(new BasicNameValuePair("from", "mobile"));
 		return https.post(list, "http://www.dicos.com.cn/login/reset_pwd_ajax.php");
 	}
@@ -305,8 +324,8 @@ public class HttpActions {
 	 * 
 	 * @return 成功 <br>
 	 *         [
-	 *         "http:\/\/www.dicos.com.cn\/images\/app\/action\/8_1347870892.jpg","http:\/\/www.dicos.com.cn\/images\/app\/ac
-	 *         t i o n \ / 7 _ 1 3 4 7 605021.jpg" ] <br>
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/action\/8_1347870892.jpg","http:\/\/www.dicos.com.cn\/images
+	 *         \ / a p p \ / a c t i o n \ / 7 _ 1 3 4 7 605021.jpg" ] <br>
 	 *         无资料 <br>
 	 *         []
 	 */
@@ -324,11 +343,11 @@ public class HttpActions {
 	 *         例:<br>
 	 *         成功<br>
 	 *         {"cate": {"3":{"name":"\u4e3b\u9910","focus_img":
-	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/focus\/3_1349922212.jpg","blur_img":"http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/blur\/3_1349
-	 *         9 2 2 2 1 2 . j p g
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/focus\/3_1349922212.jpg","blur_img":"http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/blu
+	 *         r \ / 3 _ 1 3 4 9 9 2 2 2 1 2 . j p g
 	 *         " } , "11":{"name":"\u5e38\u6001\u5957\u9910","focus_img":
-	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/focus\/11_1349920688.jpg","blur_img":"http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/blur\/11_134
-	 *         9 9 2 0 6 8 8 . j p g " } }, "newest":
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/focus\/11_1349920688.jpg","blur_img":"http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/blu
+	 *         r \ / 1 1 _ 1 3 4 9 9 2 0 6 8 8 . j p g " } }, "newest":
 	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal\/newest.jpg?1348647
 	 *         3 7 0 " }
 	 */
@@ -343,8 +362,8 @@ public class HttpActions {
 	 *         例:<br>
 	 *         成功<br>
 	 *         [
-	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal\/3_1347873388.jpg","http:\/\/www.dicos.com.cn\/images\/app\/meal\/5_1
-	 *         3 4 7 8 9 2 5 1 4 . j p g " ] 无资料<br>
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal\/3_1347873388.jpg","http:\/\/www.dicos.com.cn\/images\/app\/
+	 *         m e a l \ / 5 _ 1 3 4 7 8 9 2 5 1 4 . j p g " ] 无资料<br>
 	 *         []<br>
 	 *         其他<br>
 	 *         -999:参数错误

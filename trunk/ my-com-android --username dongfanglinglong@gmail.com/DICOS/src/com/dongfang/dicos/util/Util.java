@@ -1,6 +1,8 @@
 package com.dongfang.dicos.util;
 
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -19,7 +21,54 @@ import com.dongfang.dicos.R;
 public class Util {
 	private static final String	tag	= "Util";
 
-	/** 获取昵称 */
+	/** 获取USER_NO */
+	public static String getUserNO(Context context) {
+		// 初始化最近一次登录的手机号码
+		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
+				Activity.MODE_PRIVATE);
+		return setConfig.getString(ComParams.SHAREDPREFERENCES_USER_NO, "");
+
+	}
+
+	/** 保存USER_NO */
+	public static void saveUserNO(Context context, String user_no) {
+		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
+				Activity.MODE_PRIVATE);
+		setConfig.edit().putString(ComParams.SHAREDPREFERENCES_USER_NO, user_no).commit();
+	}
+
+	/** 获取TS */
+	public static String getTS(Context context) {
+		// 初始化最近一次登录的手机号码
+		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
+				Activity.MODE_PRIVATE);
+		return setConfig.getString(ComParams.SHAREDPREFERENCES_TS, "");
+
+	}
+
+	/** 保存TS */
+	public static void saveTS(Context context, String ts) {
+		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
+				Activity.MODE_PRIVATE);
+		setConfig.edit().putString(ComParams.SHAREDPREFERENCES_TS, ts).commit();
+	}
+
+	/** 获取Token */
+	public static String getToken(Context context) {
+		// 初始化最近一次登录的手机号码
+		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
+				Activity.MODE_PRIVATE);
+		return setConfig.getString(ComParams.SHAREDPREFERENCES_TOKEN, "");
+
+	}
+
+	/** 保存Token */
+	public static void saveToken(Context context, String token) {
+		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
+				Activity.MODE_PRIVATE);
+		setConfig.edit().putString(ComParams.SHAREDPREFERENCES_TOKEN, token).commit();
+	}
+
 	public static String getNickName(Context context) {
 		// 初始化最近一次登录的手机号码
 		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
@@ -168,6 +217,15 @@ public class Util {
 		DisplayMetrics dm = new android.util.DisplayMetrics();
 		((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(dm);
 		return dm.heightPixels;
+	}
+
+	public static boolean isEmail(String email) {
+		if (!email.contains("@") || !email.contains("."))
+			return false;
+		String str = "[a-zA-Z0-9_-]+@\\w+\\.[a-z]+(\\.[a-z]+)?";
+		Pattern p = Pattern.compile(str);
+		Matcher m = p.matcher(email);
+		return m.matches();
 	}
 
 }
