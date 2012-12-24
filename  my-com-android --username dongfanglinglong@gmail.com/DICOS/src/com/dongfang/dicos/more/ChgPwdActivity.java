@@ -1,5 +1,8 @@
 package com.dongfang.dicos.more;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -8,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -103,8 +107,23 @@ public class ChgPwdActivity extends Activity implements OnClickListener {
 		@Override
 		protected Bundle doInBackground(String... params) {
 			Bundle data = null;
+			String str = new HttpActions(ChgPwdActivity.this).chgPassword(params[0], params[1], params[2]);
+			ULog.i(TAG, str);
+			try {
+				JSONObject json = new JSONObject(str);
+				data = new Bundle();
 
-			ULog.i(TAG, new HttpActions(ChgPwdActivity.this).chgPassword(params[0], params[1], params[2]) + "");
+				int state = json.getInt("s");
+				data.putInt("statuscode", state);
+
+				if (state != 1) {
+					data.putString("msg", json.optString("msg"));
+				}
+
+				ULog.i(TAG, "state = " + json.getString("s"));
+				ULog.i(TAG, "msg = " + json.getString("msg"));
+			} catch (JSONException e) {}
+
 			return data;
 		}
 
@@ -115,11 +134,23 @@ public class ChgPwdActivity extends Activity implements OnClickListener {
 				progressDialog.dismiss();
 			}
 
-			if (null != result && result.containsKey("statuscode")) {
-				new AlertDialog.Builder(context).setTitle("密码修改失败！").setPositiveButton("确定", null)
+			if (null == result || result.getInt("statuscode", 0) != 1) {
+				new AlertDialog.Builder(context)
+						.setTitle(TextUtils.isEmpty(result.getString("msg")) ? "密码修改失败！" : result.getString("msg"))
+						.setPositiveButton("确定", null).setNegativeButton("取消", null).show();
+				return;
+			}
+			else {
+				
+				etOldPwd.setText("");
+				etNewPwd.setText("");
+				etConfirmPwd.setText("");
+
+				new AlertDialog.Builder(context).setTitle("密码修改成功！").setPositiveButton("确定",null)
 						.setNegativeButton("取消", null).show();
 				return;
 			}
+
 		}
 
 		@Override
