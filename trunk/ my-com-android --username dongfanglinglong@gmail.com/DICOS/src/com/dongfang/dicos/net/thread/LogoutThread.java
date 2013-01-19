@@ -1,14 +1,8 @@
 package com.dongfang.dicos.net.thread;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
-import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 
-import com.dongfang.dicos.net.Actions;
 import com.dongfang.dicos.net.HttpActions;
 import com.dongfang.dicos.util.ComParams;
 import com.dongfang.dicos.util.ULog;
@@ -37,7 +31,7 @@ public class LogoutThread extends Thread {
 		String result = new HttpActions(context).logout(phoneNumber);
 		handler.sendEmptyMessage(ComParams.HANDLER_RESULT_LOGOUT);
 
-		// ULog.d(tag, result);
+		ULog.d(tag, result);
 		// Bundle data = new Bundle();
 		//
 		// try {

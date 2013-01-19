@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.dongfang.dicos.MoreActivity;
 import com.dongfang.dicos.R;
 import com.dongfang.dicos.kzmw.SigneInActivity;
 import com.dongfang.dicos.net.Actions;
@@ -104,11 +106,10 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 			y = js.getDouble(Actions.ACTIONS_KEY_Y);
 
 			id = js.getInt(Actions.ACTIONS_KEY_ID) + "";
-			
+
 			provinec = js.getString(Actions.ACTIONS_KEY_PROVINCE).trim();
 			city = js.getString(Actions.ACTIONS_KEY_CITY).trim();
-			
-			
+
 			ULog.d(tag, "x = " + x + " ; y = " + y + " ; id = " + id);
 
 		} catch (JSONException e) {
@@ -124,17 +125,23 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 			finish();
 			break;
 		case R.id.button_store_detail_sign:
-			if (Util.isNetworkAvailable(StoreDetailActivity.this)) {
-				intent = new Intent(StoreDetailActivity.this, SigneInActivity.class);
-				intent.putExtra("store_name", tvName.getText().toString());
-				intent.putExtra("store_province", provinec);
-				intent.putExtra("store_city", city);
-				intent.putExtra("x", x + "");
-				intent.putExtra("y", y + "");
-				intent.putExtra("id", id);
-				startActivity(intent);
-			} else {
-				Util.showDialogSetNetWork(StoreDetailActivity.this);
+			if (Util.isLogin(this)) {
+				if (Util.isNetworkAvailable(StoreDetailActivity.this)) {
+					intent = new Intent(StoreDetailActivity.this, SigneInActivity.class);
+					intent.putExtra("store_name", tvName.getText().toString());
+					intent.putExtra("store_province", provinec);
+					intent.putExtra("store_city", city);
+					intent.putExtra("x", x + "");
+					intent.putExtra("y", y + "");
+					intent.putExtra("id", id);
+					startActivity(intent);
+				}
+				else {
+					Util.showDialogSetNetWork(StoreDetailActivity.this);
+				}
+			}
+			else {
+				Toast.makeText(this, "Äú»¹Î´µÇÂ¼...", Toast.LENGTH_LONG).show();
 			}
 
 			break;

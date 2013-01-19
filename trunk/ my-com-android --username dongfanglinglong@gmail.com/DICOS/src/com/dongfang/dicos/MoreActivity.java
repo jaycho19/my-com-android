@@ -18,12 +18,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dongfang.dicos.kaixin.Kaixin;
 import com.dongfang.dicos.more.ChgPwdActivity;
 import com.dongfang.dicos.more.CityListActivity;
 import com.dongfang.dicos.more.FeedBackActivity;
 import com.dongfang.dicos.more.TongBuActivity;
 import com.dongfang.dicos.more.TuiSongActivity;
 import com.dongfang.dicos.net.thread.LogoutThread;
+import com.dongfang.dicos.sina.Weibo;
 import com.dongfang.dicos.util.ComParams;
 import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.util.Util;
@@ -45,7 +47,7 @@ public class MoreActivity extends Activity implements OnClickListener {
 
 	/** 更改密码 */
 	private Button				bChgPwd;
-	
+
 	/** 意见反馈 */
 	private Button				bFeedback;
 
@@ -148,8 +150,13 @@ public class MoreActivity extends Activity implements OnClickListener {
 			}
 			break;
 		case R.id.button_setting_feedback:
-			intent = new Intent(MoreActivity.this, FeedBackActivity.class);
-			startActivity(intent);
+			if (Util.isLogin(this)) {
+				intent = new Intent(MoreActivity.this, FeedBackActivity.class);
+				startActivity(intent);
+			}
+			else {
+				Toast.makeText(MoreActivity.this, "您还未登录...", Toast.LENGTH_LONG).show();
+			}
 			break;
 		case R.id.button_setting_exit: {
 			if (Util.isLogin(this)) {
@@ -176,7 +183,7 @@ public class MoreActivity extends Activity implements OnClickListener {
 		 */
 		@Override
 		public void handleMessage(Message msg) {
-			Bundle data;
+			// Bundle data;
 			switch (msg.what) {
 			case ComParams.HANDLER_RESULT_LOGOUT: {
 				// data = msg.getData();
@@ -185,7 +192,11 @@ public class MoreActivity extends Activity implements OnClickListener {
 				// (data.getString(Actions.ACTIONS_KEY_ACT).equalsIgnoreCase(Actions.ACTIONS_TYPE_LOGOUT)
 				// && data.getString(Actions.ACTIONS_KEY_RESULT).equals("1")) {
 				Util.setLoginStatus(MoreActivity.this, false);
+				Util.setNickName(MoreActivity.this, "");
+				Weibo.getInstance().clearStorage(MoreActivity.this);
+				Kaixin.getInstance().clearStorage(MoreActivity.this);
 				Toast.makeText(MoreActivity.this, "退出成功...", Toast.LENGTH_LONG).show();
+
 
 				// } else {
 				// Toast.makeText(MoreActivity.this, "退出失败...",
