@@ -22,10 +22,34 @@
             android:text="@string/top_title_dicos" />
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/lv_current_season_list_img"
+    <!-- <ListView -->
+    <!-- android:id="@+id/lv_current_season_list_img" -->
+    <!-- android:layout_width="fill_parent" -->
+    <!-- android:layout_height="fill_parent" -->
+    <!-- > -->
+    <!-- </ListView> -->
+
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
-    </ListView>
+        android:layout_height="fill_parent"
+        android:layout_gravity="center" >
+
+        <LinearLayout
+            android:id="@+id/ll_fling_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:minHeight="100dp" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_fling_desc_image"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ll_fling_view"
+            android:gravity="center"
+            android:minHeight="20dp" >
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
