@@ -32,8 +32,8 @@ com.dongfang.dicos.R$style
 com.dongfang.dicos.R$xml
 com.dongfang.dicos.StoreSearchActivity:
     public static final java.lang.String tag
-com.dongfang.dicos.adapter.ImgAdapter:
-    public static final java.lang.String tag
+com.dongfang.dicos.adapter.ImgAdapter
+com.dongfang.dicos.adapter.ImgAdapter$1
 com.dongfang.dicos.dl.DownloadIMG:
     public static final java.lang.String tag
     private static final int READ_TIMEOUT
@@ -387,6 +387,7 @@ com.dongfang.dicos.view.MyHorizontalScrollView:
     private static final java.lang.String tag
 com.dongfang.dicos.view.MyImageView:
     public static final java.lang.String tag
+    62:62:public boolean isImgExsits()
 com.dongfang.dicos.view.MyProgressBar:
     49:49:public synchronized int getProgress()
     60:60:public synchronized int getSecondaryProgress()

@@ -110,9 +110,9 @@ public class FlingGallery extends FrameLayout {
 		for (int i = 0; i < size; i++) {
 			ImageView image = (ImageView) llFlingViews.getChildAt(i);
 			if (i == mCurrentPosition) {
-				image.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.fling_point_focsed));
+				image.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.fling_point_focsed_0));
 			} else {
-				image.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.fling_point_unfocsed));
+				image.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.fling_point_unfocsed_0));
 			}
 		}
 	}

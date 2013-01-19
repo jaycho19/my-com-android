@@ -265,10 +265,10 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 			params.setMargins(5, 0, 5, 0);
 			ll_fling_desc_image.addView(image, params);
 			if (i == 0) {
-				image.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.fling_point_focsed));
+				image.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.fling_point_focsed_0));
 			}
 			else {
-				image.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.fling_point_unfocsed));
+				image.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.fling_point_unfocsed_0));
 			}
 		}
 
