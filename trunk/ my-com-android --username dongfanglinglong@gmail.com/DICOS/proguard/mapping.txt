@@ -1110,11 +1110,12 @@ com.dongfang.dicos.MoreActivity -> com.dongfang.dicos.MoreActivity:
     android.widget.Button bTongbu -> a
     android.widget.Button bTuisong -> b
     android.widget.Button bChengshi -> c
-    android.widget.Button bFeedback -> d
-    android.widget.Button bExit -> e
-    android.widget.Button bBack -> f
-    com.dongfang.dicos.MoreActivity$MoreHandler handler -> g
-    android.widget.TextView tvBanben -> h
+    android.widget.Button bChgPwd -> d
+    android.widget.Button bFeedback -> e
+    android.widget.Button bExit -> f
+    android.widget.Button bBack -> g
+    com.dongfang.dicos.MoreActivity$MoreHandler handler -> h
+    android.widget.TextView tvBanben -> i
     void onCreate(android.os.Bundle) -> onCreate
     void onClick(android.view.View) -> onClick
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
@@ -1270,7 +1271,23 @@ com.dongfang.dicos.kzmw.Category -> com.dongfang.dicos.kzmw.a:
     void setImageUrls(java.util.List) -> a
     void add2ImgUrls(java.lang.String) -> a
     java.lang.String toString() -> toString
-com.dongfang.dicos.kzmw.KeyValue -> com.dongfang.dicos.kzmw.b:
+com.dongfang.dicos.kzmw.GetPasswordByEmail -> com.dongfang.dicos.kzmw.GetPasswordByEmail:
+    java.lang.String TAG -> a
+    android.widget.Button bBack -> b
+    android.widget.Button bSigne -> c
+    android.widget.Button bOK -> d
+    android.widget.Button bCancel -> e
+    android.widget.EditText etEmail -> f
+    long remainingTime -> g
+    android.os.Handler handler -> h
+    void onCreate(android.os.Bundle) -> onCreate
+    void onClick(android.view.View) -> onClick
+    android.widget.Button access$0(com.dongfang.dicos.kzmw.GetPasswordByEmail) -> a
+    long access$1(com.dongfang.dicos.kzmw.GetPasswordByEmail) -> b
+com.dongfang.dicos.kzmw.GetPasswordByEmail$1 -> com.dongfang.dicos.kzmw.b:
+    com.dongfang.dicos.kzmw.GetPasswordByEmail this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.dongfang.dicos.kzmw.KeyValue -> com.dongfang.dicos.kzmw.c:
     java.lang.String key -> a
     java.lang.String name -> b
     java.lang.String focus_img -> c
@@ -1297,12 +1314,12 @@ com.dongfang.dicos.kzmw.LoginActivity -> com.dongfang.dicos.kzmw.LoginActivity:
     android.widget.Button access$4(com.dongfang.dicos.kzmw.LoginActivity) -> e
     int access$5(com.dongfang.dicos.kzmw.LoginActivity) -> f
     void access$6(com.dongfang.dicos.kzmw.LoginActivity,int) -> a
-com.dongfang.dicos.kzmw.LoginActivity$1 -> com.dongfang.dicos.kzmw.c:
+com.dongfang.dicos.kzmw.LoginActivity$1 -> com.dongfang.dicos.kzmw.d:
     com.dongfang.dicos.kzmw.LoginActivity this$0 -> a
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
-com.dongfang.dicos.kzmw.LoginActivity$LoginHandler -> com.dongfang.dicos.kzmw.d:
+com.dongfang.dicos.kzmw.LoginActivity$LoginHandler -> com.dongfang.dicos.kzmw.e:
     com.dongfang.dicos.kzmw.LoginActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 com.dongfang.dicos.kzmw.LotteryActivity -> com.dongfang.dicos.kzmw.LotteryActivity:
@@ -1342,25 +1359,25 @@ com.dongfang.dicos.kzmw.RegisterActivity -> com.dongfang.dicos.kzmw.RegisterActi
     android.widget.TextView access$9(com.dongfang.dicos.kzmw.RegisterActivity) -> h
     android.widget.EditText access$10(com.dongfang.dicos.kzmw.RegisterActivity) -> i
     android.widget.TextView access$11(com.dongfang.dicos.kzmw.RegisterActivity) -> j
-com.dongfang.dicos.kzmw.RegisterActivity$1 -> com.dongfang.dicos.kzmw.e:
+com.dongfang.dicos.kzmw.RegisterActivity$1 -> com.dongfang.dicos.kzmw.f:
     com.dongfang.dicos.kzmw.RegisterActivity this$0 -> a
     void onFocusChange(android.view.View,boolean) -> onFocusChange
-com.dongfang.dicos.kzmw.RegisterActivity$2 -> com.dongfang.dicos.kzmw.f:
+com.dongfang.dicos.kzmw.RegisterActivity$2 -> com.dongfang.dicos.kzmw.g:
     com.dongfang.dicos.kzmw.RegisterActivity this$0 -> a
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
-com.dongfang.dicos.kzmw.RegisterActivity$3 -> com.dongfang.dicos.kzmw.g:
+com.dongfang.dicos.kzmw.RegisterActivity$3 -> com.dongfang.dicos.kzmw.h:
     com.dongfang.dicos.kzmw.RegisterActivity this$0 -> a
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
-com.dongfang.dicos.kzmw.RegisterActivity$4 -> com.dongfang.dicos.kzmw.h:
+com.dongfang.dicos.kzmw.RegisterActivity$4 -> com.dongfang.dicos.kzmw.i:
     com.dongfang.dicos.kzmw.RegisterActivity this$0 -> a
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
-com.dongfang.dicos.kzmw.RegisterActivity$RegisterHandler -> com.dongfang.dicos.kzmw.i:
+com.dongfang.dicos.kzmw.RegisterActivity$RegisterHandler -> com.dongfang.dicos.kzmw.j:
     com.dongfang.dicos.kzmw.RegisterActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 com.dongfang.dicos.kzmw.SigneInActivity -> com.dongfang.dicos.kzmw.SigneInActivity:
@@ -1396,13 +1413,13 @@ com.dongfang.dicos.kzmw.SigneInActivity -> com.dongfang.dicos.kzmw.SigneInActivi
     android.widget.CheckBox access$7(com.dongfang.dicos.kzmw.SigneInActivity) -> h
     com.dongfang.dicos.sina.Weibo access$8(com.dongfang.dicos.kzmw.SigneInActivity) -> i
     java.lang.String access$9(com.dongfang.dicos.kzmw.SigneInActivity,com.dongfang.dicos.sina.Weibo,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
-com.dongfang.dicos.kzmw.SigneInActivity$1 -> com.dongfang.dicos.kzmw.j:
+com.dongfang.dicos.kzmw.SigneInActivity$1 -> com.dongfang.dicos.kzmw.k:
     com.dongfang.dicos.kzmw.SigneInActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.dongfang.dicos.kzmw.SigneInActivity$2 -> com.dongfang.dicos.kzmw.k:
+com.dongfang.dicos.kzmw.SigneInActivity$2 -> com.dongfang.dicos.kzmw.l:
     com.dongfang.dicos.kzmw.SigneInActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.dongfang.dicos.kzmw.SigneInActivity$SigneInHandler -> com.dongfang.dicos.kzmw.l:
+com.dongfang.dicos.kzmw.SigneInActivity$SigneInHandler -> com.dongfang.dicos.kzmw.m:
     com.dongfang.dicos.kzmw.SigneInActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 com.dongfang.dicos.lottery.DetailActivity -> com.dongfang.dicos.lottery.DetailActivity:
@@ -1537,6 +1554,31 @@ com.dongfang.dicos.lottery.info.ProbabilityListActivity -> com.dongfang.dicos.lo
 com.dongfang.dicos.lottery.info.ProbabilityListActivity$MyHandler -> com.dongfang.dicos.lottery.info.f:
     com.dongfang.dicos.lottery.info.ProbabilityListActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
+com.dongfang.dicos.more.ChgPwdActivity -> com.dongfang.dicos.more.ChgPwdActivity:
+    java.lang.String TAG -> a
+    android.content.Context context -> b
+    android.widget.Button bOK -> c
+    android.widget.Button bBack -> d
+    android.widget.EditText etOldPwd -> e
+    android.widget.EditText etNewPwd -> f
+    android.widget.EditText etConfirmPwd -> g
+    void onCreate(android.os.Bundle) -> onCreate
+    void onClick(android.view.View) -> onClick
+    android.content.Context access$0(com.dongfang.dicos.more.ChgPwdActivity) -> a
+    android.widget.EditText access$1(com.dongfang.dicos.more.ChgPwdActivity) -> b
+    android.widget.EditText access$2(com.dongfang.dicos.more.ChgPwdActivity) -> c
+    android.widget.EditText access$3(com.dongfang.dicos.more.ChgPwdActivity) -> d
+com.dongfang.dicos.more.ChgPwdActivity$ChgPwdTask -> com.dongfang.dicos.more.a:
+    android.app.ProgressDialog progressDialog -> b
+    com.dongfang.dicos.more.ChgPwdActivity this$0 -> a
+    void onPreExecute() -> onPreExecute
+    android.os.Bundle doInBackground(java.lang.String[]) -> a
+    void onCancelled() -> onCancelled
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+com.dongfang.dicos.more.ChgPwdActivity$ChgPwdTask$1 -> com.dongfang.dicos.more.b:
+    com.dongfang.dicos.more.ChgPwdActivity$ChgPwdTask this$1 -> a
+    void onDismiss(android.content.DialogInterface) -> onDismiss
 com.dongfang.dicos.more.CityListActivity -> com.dongfang.dicos.more.CityListActivity:
     android.widget.Button bBack -> a
     android.widget.TextView tvTitle -> b
@@ -1549,16 +1591,16 @@ com.dongfang.dicos.more.CityListActivity -> com.dongfang.dicos.more.CityListActi
     com.dongfang.dicos.more.CityListAdapter access$1(com.dongfang.dicos.more.CityListActivity) -> b
     java.util.ArrayList access$2(com.dongfang.dicos.more.CityListActivity,java.lang.String) -> a
     java.util.ArrayList access$3(com.dongfang.dicos.more.CityListActivity) -> c
-com.dongfang.dicos.more.CityListActivity$1 -> com.dongfang.dicos.more.a:
+com.dongfang.dicos.more.CityListActivity$1 -> com.dongfang.dicos.more.c:
     com.dongfang.dicos.more.CityListActivity this$0 -> a
     android.widget.EditText val$editText -> b
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
-com.dongfang.dicos.more.CityListActivity$MyHandler -> com.dongfang.dicos.more.b:
+com.dongfang.dicos.more.CityListActivity$MyHandler -> com.dongfang.dicos.more.d:
     com.dongfang.dicos.more.CityListActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.dongfang.dicos.more.CityListAdapter -> com.dongfang.dicos.more.c:
+com.dongfang.dicos.more.CityListAdapter -> com.dongfang.dicos.more.e:
     java.util.ArrayList stringArray -> a
     android.content.Context context -> b
     android.os.Handler handler -> c
@@ -1572,11 +1614,11 @@ com.dongfang.dicos.more.CityListAdapter -> com.dongfang.dicos.more.c:
     java.lang.Object[] getSections() -> getSections
     android.content.Context access$0(com.dongfang.dicos.more.CityListAdapter) -> a
     android.os.Handler access$1(com.dongfang.dicos.more.CityListAdapter) -> b
-com.dongfang.dicos.more.CityListAdapter$MyOnClickListener -> com.dongfang.dicos.more.d:
+com.dongfang.dicos.more.CityListAdapter$MyOnClickListener -> com.dongfang.dicos.more.f:
     java.lang.String sIpArea -> b
     com.dongfang.dicos.more.CityListAdapter this$0 -> a
     void onClick(android.view.View) -> onClick
-com.dongfang.dicos.more.CityListElement -> com.dongfang.dicos.more.e:
+com.dongfang.dicos.more.CityListElement -> com.dongfang.dicos.more.g:
     android.widget.TextView header -> a
     android.widget.TextView cityName -> b
     android.widget.LinearLayout linearLayout -> c
@@ -1590,7 +1632,7 @@ com.dongfang.dicos.more.FeedBackActivity -> com.dongfang.dicos.more.FeedBackActi
     void onClick(android.view.View) -> onClick
     android.widget.EditText access$0(com.dongfang.dicos.more.FeedBackActivity) -> a
     android.widget.ProgressBar access$1(com.dongfang.dicos.more.FeedBackActivity) -> b
-com.dongfang.dicos.more.FeedBackActivity$MyHandler -> com.dongfang.dicos.more.f:
+com.dongfang.dicos.more.FeedBackActivity$MyHandler -> com.dongfang.dicos.more.h:
     com.dongfang.dicos.more.FeedBackActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 com.dongfang.dicos.more.KaixinWeiboAuthorization -> com.dongfang.dicos.more.KaixinWeiboAuthorization:
@@ -1602,13 +1644,13 @@ com.dongfang.dicos.more.KaixinWeiboAuthorization -> com.dongfang.dicos.more.Kaix
     void onClick(android.view.View) -> onClick
     com.dongfang.dicos.more.KaixinWeiboAuthorization$MyKaixinDialogListener access$0(com.dongfang.dicos.more.KaixinWeiboAuthorization) -> a
     android.widget.ProgressBar access$1(com.dongfang.dicos.more.KaixinWeiboAuthorization) -> b
-com.dongfang.dicos.more.KaixinWeiboAuthorization$KaixinWebViewClient -> com.dongfang.dicos.more.g:
+com.dongfang.dicos.more.KaixinWeiboAuthorization$KaixinWebViewClient -> com.dongfang.dicos.more.i:
     com.dongfang.dicos.more.KaixinWeiboAuthorization this$0 -> a
     boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> shouldOverrideUrlLoading
     void onPageStarted(android.webkit.WebView,java.lang.String,android.graphics.Bitmap) -> onPageStarted
     void onReceivedError(android.webkit.WebView,int,java.lang.String,java.lang.String) -> onReceivedError
     void onPageFinished(android.webkit.WebView,java.lang.String) -> onPageFinished
-com.dongfang.dicos.more.KaixinWeiboAuthorization$MyKaixinDialogListener -> com.dongfang.dicos.more.h:
+com.dongfang.dicos.more.KaixinWeiboAuthorization$MyKaixinDialogListener -> com.dongfang.dicos.more.j:
     com.dongfang.dicos.more.KaixinWeiboAuthorization this$0 -> a
     boolean onPageStart(java.lang.String) -> a
     void authComplete(android.os.Bundle,java.lang.String) -> a
@@ -1620,7 +1662,7 @@ com.dongfang.dicos.more.SinaWeiboAuthorization -> com.dongfang.dicos.more.SinaWe
     void onClick(android.view.View) -> onClick
     void access$0$22758613(java.lang.String) -> a
     android.widget.ProgressBar access$1(com.dongfang.dicos.more.SinaWeiboAuthorization) -> a
-com.dongfang.dicos.more.SinaWeiboAuthorization$WeiboWebViewClient -> com.dongfang.dicos.more.i:
+com.dongfang.dicos.more.SinaWeiboAuthorization$WeiboWebViewClient -> com.dongfang.dicos.more.k:
     com.dongfang.dicos.more.SinaWeiboAuthorization this$0 -> a
     boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> shouldOverrideUrlLoading
     void onReceivedError(android.webkit.WebView,int,java.lang.String,java.lang.String) -> onReceivedError
@@ -1645,33 +1687,33 @@ com.dongfang.dicos.more.TongBuActivity -> com.dongfang.dicos.more.TongBuActivity
     com.dongfang.dicos.view.SlipButton access$1(com.dongfang.dicos.more.TongBuActivity) -> b
     com.dongfang.dicos.sina.Weibo access$2(com.dongfang.dicos.more.TongBuActivity) -> c
     com.dongfang.dicos.kaixin.Kaixin access$3(com.dongfang.dicos.more.TongBuActivity) -> d
-com.dongfang.dicos.more.TongBuActivity$1 -> com.dongfang.dicos.more.j:
+com.dongfang.dicos.more.TongBuActivity$1 -> com.dongfang.dicos.more.l:
     com.dongfang.dicos.more.TongBuActivity this$0 -> a
     void OnChanged(boolean) -> a
-com.dongfang.dicos.more.TongBuActivity$2 -> com.dongfang.dicos.more.k:
+com.dongfang.dicos.more.TongBuActivity$2 -> com.dongfang.dicos.more.m:
     com.dongfang.dicos.more.TongBuActivity this$0 -> a
     void OnChanged(boolean) -> a
-com.dongfang.dicos.more.TongBuActivity$3 -> com.dongfang.dicos.more.l:
+com.dongfang.dicos.more.TongBuActivity$3 -> com.dongfang.dicos.more.n:
     com.dongfang.dicos.more.TongBuActivity this$0 -> a
     com.dongfang.dicos.sina.Weibo val$weibo -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-com.dongfang.dicos.more.TongBuActivity$4 -> com.dongfang.dicos.more.m:
+com.dongfang.dicos.more.TongBuActivity$4 -> com.dongfang.dicos.more.o:
     com.dongfang.dicos.more.TongBuActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.dongfang.dicos.more.TongBuActivity$5 -> com.dongfang.dicos.more.n:
+com.dongfang.dicos.more.TongBuActivity$5 -> com.dongfang.dicos.more.p:
     com.dongfang.dicos.more.TongBuActivity this$0 -> a
     com.dongfang.dicos.kaixin.Kaixin val$kaixin -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-com.dongfang.dicos.more.TongBuActivity$6 -> com.dongfang.dicos.more.o:
+com.dongfang.dicos.more.TongBuActivity$6 -> com.dongfang.dicos.more.q:
     com.dongfang.dicos.more.TongBuActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.dongfang.dicos.more.TongBuActivity$AuthDialogListener -> com.dongfang.dicos.more.p:
+com.dongfang.dicos.more.TongBuActivity$AuthDialogListener -> com.dongfang.dicos.more.r:
     com.dongfang.dicos.more.TongBuActivity this$0 -> a
     void onComplete(android.os.Bundle) -> a
     void onError(com.dongfang.dicos.sina.DialogError) -> a
     void onCancel() -> a
     void onWeiboException(com.dongfang.dicos.sina.WeiboException) -> a
-com.dongfang.dicos.more.TongBuActivity$MyKaixinAuthListener -> com.dongfang.dicos.more.q:
+com.dongfang.dicos.more.TongBuActivity$MyKaixinAuthListener -> com.dongfang.dicos.more.s:
     com.dongfang.dicos.more.TongBuActivity this$0 -> a
     void onAuthCancel$79e5e33f() -> b
     void onAuthCancelLogin() -> a
@@ -1699,16 +1741,18 @@ com.dongfang.dicos.mydicos.SignHistoryElement -> com.dongfang.dicos.d.b:
 com.dongfang.dicos.net.HttpActions -> com.dongfang.dicos.e.a:
     com.dongfang.dicos.net.Https https -> a
     java.util.List list -> b
+    android.content.Context context -> c
     java.lang.String login(java.lang.String) -> a
+    java.lang.String chgPassword(java.lang.String,java.lang.String,java.lang.String) -> a
     java.lang.String getPassword(java.lang.String) -> b
-    java.lang.String register(java.lang.String,java.lang.String,java.lang.String) -> a
+    java.lang.String register(java.lang.String,java.lang.String,java.lang.String) -> b
     java.lang.String validate(java.lang.String,java.lang.String) -> a
     java.lang.String logout(java.lang.String) -> c
-    java.lang.String lottery(java.lang.String,java.lang.String,java.lang.String) -> b
+    java.lang.String lottery(java.lang.String,java.lang.String,java.lang.String) -> c
     java.lang.String lotteryHistory(java.lang.String) -> d
     java.lang.String lotteryRateList(java.lang.String) -> e
     java.lang.String lotteryWinner(java.lang.String) -> f
-    java.lang.String restaurentList(java.lang.String,java.lang.String,java.lang.String) -> c
+    java.lang.String restaurentList(java.lang.String,java.lang.String,java.lang.String) -> d
     java.lang.String sign(java.lang.String,java.lang.String) -> b
     java.lang.String signHistory(java.lang.String) -> g
     java.lang.String advice(java.lang.String,java.lang.String) -> c
@@ -2013,18 +2057,22 @@ com.dongfang.dicos.util.ULog -> com.dongfang.dicos.g.c:
     void d(java.lang.String,java.lang.String) -> c
     void e(java.lang.String,java.lang.String) -> d
 com.dongfang.dicos.util.Util -> com.dongfang.dicos.g.d:
-    java.lang.String getNickName(android.content.Context) -> a
-    java.lang.String getPhoneNumber(android.content.Context) -> b
+    java.lang.String getUserNO(android.content.Context) -> a
+    java.lang.String getTS(android.content.Context) -> b
+    java.lang.String getToken(android.content.Context) -> c
+    java.lang.String getNickName(android.content.Context) -> d
+    void setNickName(android.content.Context,java.lang.String) -> a
+    java.lang.String getPhoneNumber(android.content.Context) -> e
     void setLoginStatus(android.content.Context,boolean) -> a
-    boolean isLogin(android.content.Context) -> c
-    boolean isNetworkAvailable(android.content.Context) -> d
-    void showDialogSetNetWork(android.content.Context) -> e
-    void showDialogLogin(android.content.Context) -> f
-    void saveIpArea(android.content.Context) -> g
-    void iniIPArea(android.content.Context) -> h
+    boolean isLogin(android.content.Context) -> f
+    boolean isNetworkAvailable(android.content.Context) -> g
+    void showDialogSetNetWork(android.content.Context) -> h
+    void showDialogLogin(android.content.Context) -> i
+    void saveIpArea(android.content.Context) -> j
+    void iniIPArea(android.content.Context) -> k
     void showExitDialog(android.app.Activity) -> a
     java.lang.String initNameDicos(java.lang.String) -> a
-    int getWindowWidth(android.content.Context) -> i
+    int getWindowWidth(android.content.Context) -> l
 com.dongfang.dicos.util.Util$1 -> com.dongfang.dicos.g.e:
     android.app.Activity val$activity -> a
     void onClick(android.content.DialogInterface,int) -> onClick

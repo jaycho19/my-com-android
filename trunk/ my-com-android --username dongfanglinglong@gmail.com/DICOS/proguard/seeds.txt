@@ -1102,6 +1102,8 @@ com.dongfang.dicos.MyDicosActivity
 com.dongfang.dicos.MyDicosActivity: MyDicosActivity()
 com.dongfang.dicos.StoreSearchActivity
 com.dongfang.dicos.StoreSearchActivity: StoreSearchActivity()
+com.dongfang.dicos.kzmw.GetPasswordByEmail
+com.dongfang.dicos.kzmw.GetPasswordByEmail: GetPasswordByEmail()
 com.dongfang.dicos.kzmw.LoginActivity
 com.dongfang.dicos.kzmw.LoginActivity: LoginActivity()
 com.dongfang.dicos.kzmw.LotteryActivity
@@ -1126,6 +1128,8 @@ com.dongfang.dicos.lottery.info.MyInfoActivity
 com.dongfang.dicos.lottery.info.MyInfoActivity: MyInfoActivity()
 com.dongfang.dicos.lottery.info.ProbabilityListActivity
 com.dongfang.dicos.lottery.info.ProbabilityListActivity: ProbabilityListActivity()
+com.dongfang.dicos.more.ChgPwdActivity
+com.dongfang.dicos.more.ChgPwdActivity: ChgPwdActivity()
 com.dongfang.dicos.more.CityListActivity
 com.dongfang.dicos.more.CityListActivity: CityListActivity()
 com.dongfang.dicos.more.FeedBackActivity
