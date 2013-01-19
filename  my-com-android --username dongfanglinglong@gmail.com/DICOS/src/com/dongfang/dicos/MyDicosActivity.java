@@ -89,8 +89,11 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		if (!TextUtils.isEmpty(Util.getNickName(this))) {
+		if (Util.isLogin(this) && !TextUtils.isEmpty(Util.getNickName(this))) {
 			my_dicos_title.setText(Util.getNickName(this));
+		}
+		else {
+			my_dicos_title.setText("");
 		}
 	}
 
@@ -104,20 +107,24 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 		super.onResume();
 		if (Util.isLogin(this)) {
 			bLogin.setVisibility(View.GONE);
-		}
-		else {
-			bLogin.setVisibility(View.VISIBLE);
-		}
-
-		if (Util.isLogin(this)) {
 			if (!progressBar.isShown())
 				progressBar.setVisibility(View.VISIBLE);
 			new SignHistoryThread(this, handler, Util.getPhoneNumber(this)).start();
 		}
 		else {
+			bLogin.setVisibility(View.VISIBLE);
+			my_dicos_title.setText("");
+			
+			if (lvSignHistory != null && adapter != null){
+				adapter.setArray(new String[]{});
+				adapter.notifyDataSetChanged();
+			}
+			
+			
 			if (!dialog.isShowing())
 				dialog.show();
 		}
+
 	}
 
 	@Override
