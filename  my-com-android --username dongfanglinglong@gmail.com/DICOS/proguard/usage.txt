@@ -404,23 +404,3 @@ com.dongfang.dicos.view.SubMenuItem:
     41:41:public java.lang.String getid()
 com.dongfang.dicos.view.SubMenuLayout:
     45:47:public static com.dongfang.dicos.view.SubMenuLayout getSubMenuLayout(android.content.Context)
-com.telecom.sdk_auth_ui.OnLoginListener
-com.telecom.sdk_auth_ui.OnModifyListener
-com.telecom.sdk_auth_ui.OnRegisterListener
-com.telecom.sdk_auth_ui.TysxOA
-com.telecom.sdk_auth_ui.a
-com.telecom.sdk_auth_ui.a$1
-com.telecom.sdk_auth_ui.a$2
-com.telecom.sdk_auth_ui.a$3
-com.telecom.sdk_auth_ui.a$4
-com.telecom.sdk_auth_ui.a$a
-com.telecom.sdk_auth_ui.a$b
-com.telecom.sdk_auth_ui.a$c
-com.telecom.sdk_auth_ui.a.a
-com.telecom.sdk_auth_ui.b.a
-com.telecom.sdk_auth_ui.b.a$a
-com.telecom.sdk_auth_ui.b.b
-com.telecom.sdk_auth_ui.b.b$1
-com.telecom.sdk_auth_ui.c.a
-com.telecom.sdk_auth_ui.c.b
-com.telecom.sdk_auth_ui.c.c

@@ -159,6 +159,8 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 			if (lvSignHistory != null && adapter != null) {
 				adapter.setArray(new String[] {});
 				adapter.notifyDataSetChanged();
+				dykadapter.setArray(new String[] {});
+				dykadapter.notifyDataSetChanged();
 			}
 
 			if (!dialog.isShowing())
@@ -202,17 +204,17 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 			btnQiandao.setSelected(false);
 			viewSwitcher_mydicos.showNext();
 			break;
-		case R.id.btn_mydicos_add_dyk:
-		{
-			String ss = etDykNum.getText().toString();
-			if (ss.length() == 16){
+		case R.id.btn_mydicos_add_dyk: {
+			if (dykadapter.getCount() > 4) {
+				new AlertDialog.Builder(this).setMessage("最多只能添加五张德意卡")// .setMessage("请先登录")
+						.setCancelable(false).setPositiveButton("确定", null).show();
+			}
+			else {
+				String ss = etDykNum.getText().toString();
 				new AddDykCardTask(MyDicosActivity.this, dykadapter).execute(ss);
 			}
-			else{
-				Toast.makeText(MyDicosActivity.this, "", Toast.LENGTH_LONG).show();
-			}
 		}
-			
+
 			break;
 		}
 	}
