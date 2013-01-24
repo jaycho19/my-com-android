@@ -1,32 +1,16 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- 已经选中，且被按下 -->
-    <item 
-        android:drawable="@drawable/button_chk_true_bg" 
-        android:state_checked="true" 
-        android:state_pressed="true"
-        />
+    <item android:drawable="@drawable/button_chk_true_bg" android:state_checked="true" android:state_pressed="true"/>
     <!-- 未被选中，且被按下 -->
-    <item android:drawable="@drawable/button_chk_false_bg" 
-        android:state_checked="false" 
-        android:state_pressed="true"/>
+    <item android:drawable="@drawable/button_chk_false_bg" android:state_checked="false" android:state_pressed="true"/>
     <!-- 已经选中，且被聚焦 -->
-    <item 
-        android:drawable="@drawable/button_chk_true_bg" 
-        android:state_checked="true" 
-        android:state_focused="true"/>
+    <item android:drawable="@drawable/button_chk_true_bg" android:state_checked="true" android:state_focused="true"/>
     <!-- 未被选中，且被聚焦 -->
-    <item 
-        android:drawable="@drawable/button_chk_false_bg" 
-        android:state_checked="false" 
-        android:state_focused="true"/>
+    <item android:drawable="@drawable/button_chk_false_bg" android:state_checked="false" android:state_focused="true"/>
     <!-- 未被选中 -->
-    <item 
-        android:drawable="@drawable/button_chk_false_bg" 
-        android:state_checked="false"/>
+    <item android:drawable="@drawable/button_chk_false_bg" android:state_checked="false"/>
     <!-- 已经选中 -->
-    <item 
-        android:drawable="@drawable/button_chk_true_bg" 
-        android:state_checked="true"/>
+    <item android:drawable="@drawable/button_chk_true_bg" android:state_checked="true"/>
 
 </selector>

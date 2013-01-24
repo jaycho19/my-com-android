@@ -25,7 +25,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/editview_top_bg"
+        android:background="@drawable/editview_top"
         android:gravity="center_vertical"
         android:paddingLeft="5dp"
         android:paddingRight="5dp" >
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/editview_center_bg"
+        android:background="@drawable/editview_center"
         android:gravity="center_vertical"
         android:paddingLeft="5dp"
         android:paddingRight="5dp" >
@@ -75,12 +75,106 @@
             android:textSize="18dp" />
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/editview_center"
+        android:gravity="center_vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" >
+
+        <TextView
+            android:id="@+id/textview_register_dyk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="德意卡卡号: "
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/editview_register_dyk_1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/textview_register_dyk"
+            android:background="@null"
+            android:hint="请输入16位德意卡卡号"
+            android:inputType="number"
+            android:maxLength="16"
+            android:singleLine="true"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/editview_register_dyk_2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/editview_register_dyk_1"
+            android:layout_below="@+id/editview_register_dyk_1"
+            android:background="@null"
+            android:hint="请输入16位德意卡卡号"
+            android:inputType="number"
+            android:maxLength="16"
+            android:singleLine="true"
+            android:textSize="18dp"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/editview_register_dyk_3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/editview_register_dyk_2"
+            android:layout_below="@+id/editview_register_dyk_2"
+            android:background="@null"
+            android:hint="请输入16位德意卡卡号"
+            android:inputType="number"
+            android:maxLength="16"
+            android:singleLine="true"
+            android:textSize="18dp"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/editview_register_dyk_4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/editview_register_dyk_3"
+            android:layout_below="@+id/editview_register_dyk_3"
+            android:background="@null"
+            android:hint="请输入16位德意卡卡号"
+            android:inputType="number"
+            android:maxLength="16"
+            android:singleLine="true"
+            android:textSize="18dp"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/editview_register_dyk_5"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/editview_register_dyk_4"
+            android:layout_below="@+id/editview_register_dyk_4"
+            android:background="@null"
+            android:hint="请输入16位德意卡卡号"
+            android:inputType="number"
+            android:maxLength="16"
+            android:singleLine="true"
+            android:textSize="18dp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/button_register_add_dyk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/add" />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/editview_center_bg"
+        android:background="@drawable/editview_center"
         android:gravity="center_vertical"
         android:paddingLeft="5dp"
         android:paddingRight="5dp" >
@@ -98,9 +192,9 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:hint="需在6-15个字符之间"
             android:inputType="textPassword"
             android:maxLength="15"
-            android:hint="需在6-15个字符之间"
             android:singleLine="true"
             android:textSize="18dp" />
     </LinearLayout>
@@ -110,7 +204,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/editview_bottom_bg"
+        android:background="@drawable/editview_bottom"
         android:gravity="center_vertical"
         android:paddingLeft="5dp"
         android:paddingRight="5dp" >
@@ -138,11 +232,13 @@
         android:id="@+id/button_register_ok"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
-        android:textColor="@color/black"
         android:background="@drawable/button_ok_xml"
-        android:text="注    册" />
+        android:gravity="center"
+        android:text="注    册"
+        android:textColor="@color/black" />
 
 </LinearLayout>
