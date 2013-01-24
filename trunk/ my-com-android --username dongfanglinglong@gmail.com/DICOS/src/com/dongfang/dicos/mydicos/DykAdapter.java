@@ -1,7 +1,6 @@
 package com.dongfang.dicos.mydicos;
 
 import android.content.Context;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
