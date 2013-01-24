@@ -1,0 +1,9 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/dyk_active" android:state_selected="true"/>
+    <item android:drawable="@drawable/dyk_active" android:state_pressed="true"/>
+    <item android:drawable="@drawable/dyk_active" android:state_focused="true"/>
+    <item android:drawable="@drawable/dyk" android:state_focused="false"/>
+    <item android:drawable="@drawable/dyk" android:state_selected="false"/>
+
+</selector>

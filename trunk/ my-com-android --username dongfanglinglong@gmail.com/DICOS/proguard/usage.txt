@@ -103,7 +103,7 @@ com.dongfang.dicos.kzmw.LotteryActivity:
 com.dongfang.dicos.kzmw.RegisterActivity:
     public static final java.lang.String tag
     public static final int CHICK_PHONENUMBEREMAIL_IS_OK
-    213:217:private boolean isMobileNO(java.lang.String)
+    231:235:private boolean isMobileNO(java.lang.String)
 com.dongfang.dicos.kzmw.SigneInActivity:
     public static final java.lang.String tag
     private static final java.lang.String TYPE_SINA
@@ -169,8 +169,8 @@ com.dongfang.dicos.net.Actions
 com.dongfang.dicos.net.HttpActions:
     public static final java.lang.String tag
     private static final java.lang.String KEY
-    173:184:public java.lang.String lotteryLegal(java.lang.String)
-    221:232:public java.lang.String lotteryDistributionInfo(java.lang.String)
+    175:186:public java.lang.String lotteryLegal(java.lang.String)
+    223:234:public java.lang.String lotteryDistributionInfo(java.lang.String)
 com.dongfang.dicos.net.Https:
     private static final java.lang.String tag
     private static final int SET_CONNECTION_TIMEOUT
@@ -179,14 +179,18 @@ com.dongfang.dicos.net.Https:
     public static final java.lang.String URL_ADVICE
     public static final java.lang.String URL_RESTAURENTLIST
     76:89:public java.lang.String get(java.lang.String)
+com.dongfang.dicos.net.thread.AddDykCardTask:
+    public static final java.lang.String LIVELIST
 com.dongfang.dicos.net.thread.AdviceThread:
     public static final java.lang.String tag
+com.dongfang.dicos.net.thread.GetDykCardTask:
+    public static final java.lang.String LIVELIST
 com.dongfang.dicos.net.thread.GetPasswordThread:
     public static final java.lang.String TAG
 com.dongfang.dicos.net.thread.IPArea:
     public static final java.lang.String tag
-com.dongfang.dicos.net.thread.LoginThread:
-    public static final java.lang.String tag
+com.dongfang.dicos.net.thread.LoginTask:
+    public static final java.lang.String TAG
 com.dongfang.dicos.net.thread.LogoutThread:
     public static final java.lang.String tag
 com.dongfang.dicos.net.thread.LotteryDistributionInfoThread
@@ -199,16 +203,16 @@ com.dongfang.dicos.net.thread.LotteryThread:
     public static final java.lang.String tag
 com.dongfang.dicos.net.thread.LotteryWinnerThread:
     public static final java.lang.String tag
-com.dongfang.dicos.net.thread.RegisterThread:
-    public static final java.lang.String tag
+com.dongfang.dicos.net.thread.RegisterTask:
+    public static final java.lang.String TAG
 com.dongfang.dicos.net.thread.RestaurentListThread:
     public static final java.lang.String tag
 com.dongfang.dicos.net.thread.SignHistoryThread:
     public static final java.lang.String tag
 com.dongfang.dicos.net.thread.SignThread:
     public static final java.lang.String tag
-com.dongfang.dicos.net.thread.ValidateThread:
-    private static final java.lang.String tag
+com.dongfang.dicos.net.thread.ValidateTask:
+    private static final java.lang.String TAG
 com.dongfang.dicos.sina.AccessToken
 com.dongfang.dicos.sina.AccessTokenHeader
 com.dongfang.dicos.sina.AsyncWeiboRunner:
@@ -400,3 +404,23 @@ com.dongfang.dicos.view.SubMenuItem:
     41:41:public java.lang.String getid()
 com.dongfang.dicos.view.SubMenuLayout:
     45:47:public static com.dongfang.dicos.view.SubMenuLayout getSubMenuLayout(android.content.Context)
+com.telecom.sdk_auth_ui.OnLoginListener
+com.telecom.sdk_auth_ui.OnModifyListener
+com.telecom.sdk_auth_ui.OnRegisterListener
+com.telecom.sdk_auth_ui.TysxOA
+com.telecom.sdk_auth_ui.a
+com.telecom.sdk_auth_ui.a$1
+com.telecom.sdk_auth_ui.a$2
+com.telecom.sdk_auth_ui.a$3
+com.telecom.sdk_auth_ui.a$4
+com.telecom.sdk_auth_ui.a$a
+com.telecom.sdk_auth_ui.a$b
+com.telecom.sdk_auth_ui.a$c
+com.telecom.sdk_auth_ui.a.a
+com.telecom.sdk_auth_ui.b.a
+com.telecom.sdk_auth_ui.b.a$a
+com.telecom.sdk_auth_ui.b.b
+com.telecom.sdk_auth_ui.b.b$1
+com.telecom.sdk_auth_ui.c.a
+com.telecom.sdk_auth_ui.c.b
+com.telecom.sdk_auth_ui.c.c

@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dongfang.dicos.R;
-import com.dongfang.dicos.net.thread.RegisterThread;
+import com.dongfang.dicos.net.thread.RegisterTask;
 import com.dongfang.dicos.util.ComParams;
 import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.util.Util;
@@ -50,6 +50,14 @@ public class RegisterActivity extends Activity implements OnClickListener {
 
 	private TextView			tvPhoneNumber, tvNickname, tvPassword, tvPasswordAgain;
 
+	private EditText[]			etDyk							= new EditText[5];					// etDyk1,
+																									// etDyk2,
+																									// etDyk3,
+																									// etDyk4,
+																									// etDyk5;
+
+	private Button				addDyk;
+
 	private boolean[]			isbool							= { false, false, false, false };
 
 	private Handler				registerhandler					= new RegisterHandler();
@@ -74,6 +82,16 @@ public class RegisterActivity extends Activity implements OnClickListener {
 		etNickname = (EditText) findViewById(R.id.editview_register_nickname);
 		etPassword = (EditText) findViewById(R.id.editview_register_pwd);
 		etPasswordAgian = (EditText) findViewById(R.id.editview_register_pwd_again);
+
+		etDyk[0] = (EditText) findViewById(R.id.editview_register_dyk_1);
+		etDyk[1] = (EditText) findViewById(R.id.editview_register_dyk_2);
+		etDyk[2] = (EditText) findViewById(R.id.editview_register_dyk_3);
+		etDyk[3] = (EditText) findViewById(R.id.editview_register_dyk_4);
+		etDyk[4] = (EditText) findViewById(R.id.editview_register_dyk_5);
+
+		addDyk = (Button) findViewById(R.id.button_register_add_dyk);
+		addDyk.setOnClickListener(this);
+
 		initEditText();
 
 	}
@@ -232,6 +250,15 @@ public class RegisterActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.button_register_add_dyk: {
+			for (int i = 0; i < etDyk.length; i++) {
+				if (!etDyk[i].isShown()) {
+					etDyk[i].setVisibility(View.VISIBLE);
+					return;
+				}
+			}
+		}
+			break;
 		case R.id.button_register_back:
 			finish();
 			break;
@@ -249,8 +276,13 @@ public class RegisterActivity extends Activity implements OnClickListener {
 				Toast.makeText(RegisterActivity.this, "两次密码输入不同，请重新输入", Toast.LENGTH_SHORT).show();
 			}
 			else {
-				new RegisterThread(RegisterActivity.this, registerhandler, etPhoneNumber.getText().toString(),
-						etPassword.getText().toString(), etNickname.getText().toString()).start();
+				String[] cno = new String[etDyk.length];
+				for (int i = 0; i < etDyk.length; i++) {
+					cno[i] = etDyk[i].getText().toString();
+				}
+
+				new RegisterTask(RegisterActivity.this, registerhandler, etPhoneNumber.getText().toString(), etPassword
+						.getText().toString(), etNickname.getText().toString(), cno).execute("");
 
 			}
 

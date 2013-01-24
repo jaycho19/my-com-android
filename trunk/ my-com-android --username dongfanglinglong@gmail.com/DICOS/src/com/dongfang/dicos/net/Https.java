@@ -179,7 +179,7 @@ public class Https {
 			HttpClient client = this.getNewHttpClient();
 			HttpResponse httpResponse = client.execute(request);
 			ULog.d(tag, "null != httpResponse " + (null != httpResponse));
-			
+
 			int stateCode = httpResponse.getStatusLine().getStatusCode();
 			ULog.d(tag, "HttpStatus = " + stateCode);
 

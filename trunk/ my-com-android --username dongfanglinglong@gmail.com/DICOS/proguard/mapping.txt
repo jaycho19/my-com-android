@@ -1138,10 +1138,17 @@ com.dongfang.dicos.MyDicosActivity -> com.dongfang.dicos.MyDicosActivity:
     android.widget.ProgressBar progressBar -> b
     android.widget.Button bSigne -> c
     android.widget.Button bLogin -> d
-    android.widget.ListView lvSignHistory -> e
-    com.dongfang.dicos.mydicos.SignHistoryAdapter adapter -> f
-    com.dongfang.dicos.MyDicosActivity$MyDICOSHandler handler -> g
-    android.app.AlertDialog dialog -> h
+    android.widget.Button btnQiandao -> e
+    android.widget.Button btnDYK -> f
+    android.widget.ListView lvSignHistory -> g
+    android.widget.ListView lvDyk -> h
+    com.dongfang.dicos.mydicos.SignHistoryAdapter adapter -> i
+    com.dongfang.dicos.mydicos.DykAdapter dykadapter -> j
+    com.dongfang.dicos.MyDicosActivity$MyDICOSHandler handler -> k
+    android.app.AlertDialog dialog -> l
+    android.widget.ViewSwitcher viewSwitcher_mydicos -> m
+    android.widget.Button btnAddDyk -> n
+    android.widget.EditText etDykNum -> o
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onResume() -> onResume
@@ -1331,8 +1338,10 @@ com.dongfang.dicos.kzmw.RegisterActivity -> com.dongfang.dicos.kzmw.RegisterActi
     android.widget.TextView tvNickname -> h
     android.widget.TextView tvPassword -> i
     android.widget.TextView tvPasswordAgain -> j
-    boolean[] isbool -> k
-    android.os.Handler registerhandler -> l
+    android.widget.EditText[] etDyk -> k
+    android.widget.Button addDyk -> l
+    boolean[] isbool -> m
+    android.os.Handler registerhandler -> n
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onClick(android.view.View) -> onClick
@@ -1713,7 +1722,16 @@ com.dongfang.dicos.more.TuiSongActivity -> com.dongfang.dicos.more.TuiSongActivi
     com.dongfang.dicos.view.SlipButton slipButton_KZMW -> a
     void onCreate(android.os.Bundle) -> onCreate
     void onClick(android.view.View) -> onClick
-com.dongfang.dicos.mydicos.SignHistoryAdapter -> com.dongfang.dicos.c.a:
+com.dongfang.dicos.mydicos.DykAdapter -> com.dongfang.dicos.c.a:
+    java.lang.String tag -> a
+    java.lang.String[] aDykArray -> b
+    android.content.Context context -> c
+    void setArray(java.lang.String[]) -> a
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+com.dongfang.dicos.mydicos.SignHistoryAdapter -> com.dongfang.dicos.c.b:
     java.lang.String[] aJSONSignHistoryArray -> a
     android.content.Context context -> b
     android.os.Handler handler -> c
@@ -1722,7 +1740,7 @@ com.dongfang.dicos.mydicos.SignHistoryAdapter -> com.dongfang.dicos.c.a:
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.dongfang.dicos.mydicos.SignHistoryElement -> com.dongfang.dicos.c.b:
+com.dongfang.dicos.mydicos.SignHistoryElement -> com.dongfang.dicos.c.c:
     android.widget.TextView tvStoreName -> a
     android.widget.TextView tvSignTime -> b
     java.lang.String infoJSON -> c
@@ -1734,14 +1752,14 @@ com.dongfang.dicos.net.HttpActions -> com.dongfang.dicos.d.a:
     java.lang.String login(java.lang.String) -> a
     java.lang.String chgPassword(java.lang.String,java.lang.String,java.lang.String) -> a
     java.lang.String getPassword(java.lang.String) -> b
-    java.lang.String register(java.lang.String,java.lang.String,java.lang.String) -> b
+    java.lang.String register(java.lang.String,java.lang.String,java.lang.String,java.lang.String[]) -> a
     java.lang.String validate(java.lang.String,java.lang.String) -> a
     java.lang.String logout(java.lang.String) -> c
-    java.lang.String lottery(java.lang.String,java.lang.String,java.lang.String) -> c
+    java.lang.String lottery(java.lang.String,java.lang.String,java.lang.String) -> b
     java.lang.String lotteryHistory(java.lang.String) -> d
     java.lang.String lotteryRateList(java.lang.String) -> e
     java.lang.String lotteryWinner(java.lang.String) -> f
-    java.lang.String restaurentList(java.lang.String,java.lang.String,java.lang.String) -> d
+    java.lang.String restaurentList(java.lang.String,java.lang.String,java.lang.String) -> c
     java.lang.String sign(java.lang.String,java.lang.String) -> b
     java.lang.String signHistory(java.lang.String) -> g
     java.lang.String advice(java.lang.String,java.lang.String) -> c
@@ -1749,6 +1767,8 @@ com.dongfang.dicos.net.HttpActions -> com.dongfang.dicos.d.a:
     java.lang.String getCurrentSeasonImgUrl() -> a
     java.lang.String getKaZiMeiWeiInfo() -> b
     java.lang.String getKaZiMeiWei_type(java.lang.String) -> i
+    java.lang.String getDykCards() -> c
+    java.lang.String addDykCards(java.lang.String) -> j
 com.dongfang.dicos.net.Https -> com.dongfang.dicos.d.b:
     android.content.Context context -> a
     java.lang.String get$1d591b0(java.lang.String) -> a
@@ -1756,84 +1776,135 @@ com.dongfang.dicos.net.Https -> com.dongfang.dicos.d.b:
     java.lang.String post(java.util.List,java.lang.String) -> a
     org.apache.http.client.HttpClient getNewHttpClient() -> a
     java.lang.String read(org.apache.http.HttpResponse) -> a
-com.dongfang.dicos.net.thread.AdviceThread -> com.dongfang.dicos.d.a.a:
+com.dongfang.dicos.net.thread.AddDykCardTask -> com.dongfang.dicos.d.a.a:
+    java.lang.String TAG -> a
+    android.content.Context context -> b
+    android.app.ProgressDialog progressDialog -> c
+    com.dongfang.dicos.mydicos.DykAdapter dykadapter -> d
+    void onPreExecute() -> onPreExecute
+    android.os.Bundle doInBackground(java.lang.String[]) -> a
+    void onCancelled() -> onCancelled
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+com.dongfang.dicos.net.thread.AddDykCardTask$1 -> com.dongfang.dicos.d.a.b:
+    com.dongfang.dicos.net.thread.AddDykCardTask this$0 -> a
+    void onDismiss(android.content.DialogInterface) -> onDismiss
+com.dongfang.dicos.net.thread.AdviceThread -> com.dongfang.dicos.d.a.c:
     android.os.Handler handler -> a
     android.content.Context context -> b
     java.lang.String msg -> c
     java.lang.String phoneNumber -> d
     void run() -> run
-com.dongfang.dicos.net.thread.GetPasswordThread -> com.dongfang.dicos.d.a.b:
+com.dongfang.dicos.net.thread.GetDykCardTask -> com.dongfang.dicos.d.a.d:
+    java.lang.String TAG -> a
+    android.content.Context context -> b
+    android.app.ProgressDialog progressDialog -> c
+    com.dongfang.dicos.mydicos.DykAdapter dykadapter -> d
+    void onPreExecute() -> onPreExecute
+    android.os.Bundle doInBackground$6f0211ce() -> a
+    void onCancelled() -> onCancelled
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+com.dongfang.dicos.net.thread.GetDykCardTask$1 -> com.dongfang.dicos.d.a.e:
+    com.dongfang.dicos.net.thread.GetDykCardTask this$0 -> a
+    void onDismiss(android.content.DialogInterface) -> onDismiss
+com.dongfang.dicos.net.thread.GetPasswordThread -> com.dongfang.dicos.d.a.f:
     android.os.Handler handler -> a
     android.content.Context context -> b
     java.lang.String phoneNumber -> c
     void run() -> run
-com.dongfang.dicos.net.thread.IPArea -> com.dongfang.dicos.d.a.c:
+com.dongfang.dicos.net.thread.IPArea -> com.dongfang.dicos.d.a.g:
     android.content.Context context -> a
     java.lang.String phoneNumber -> b
     void run() -> run
-com.dongfang.dicos.net.thread.LoginThread -> com.dongfang.dicos.d.a.d:
+com.dongfang.dicos.net.thread.LoginTask -> com.dongfang.dicos.d.a.h:
+    android.app.ProgressDialog progressDialog -> a
+    android.os.Handler handler -> b
+    android.content.Context context -> c
+    java.lang.String phoneNumber -> d
+    void onPreExecute() -> onPreExecute
+    android.os.Bundle doInBackground$6f0211ce() -> a
+    void onCancelled() -> onCancelled
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+com.dongfang.dicos.net.thread.LoginTask$1 -> com.dongfang.dicos.d.a.i:
+    com.dongfang.dicos.net.thread.LoginTask this$0 -> a
+    void onDismiss(android.content.DialogInterface) -> onDismiss
+com.dongfang.dicos.net.thread.LogoutThread -> com.dongfang.dicos.d.a.j:
     android.os.Handler handler -> a
     android.content.Context context -> b
     java.lang.String phoneNumber -> c
     void run() -> run
-com.dongfang.dicos.net.thread.LogoutThread -> com.dongfang.dicos.d.a.e:
+com.dongfang.dicos.net.thread.LotteryHistoryThread -> com.dongfang.dicos.d.a.k:
     android.os.Handler handler -> a
     android.content.Context context -> b
     java.lang.String phoneNumber -> c
     void run() -> run
-com.dongfang.dicos.net.thread.LotteryHistoryThread -> com.dongfang.dicos.d.a.f:
+com.dongfang.dicos.net.thread.LotteryRateListThread -> com.dongfang.dicos.d.a.l:
     android.os.Handler handler -> a
     android.content.Context context -> b
     java.lang.String phoneNumber -> c
     void run() -> run
-com.dongfang.dicos.net.thread.LotteryRateListThread -> com.dongfang.dicos.d.a.g:
-    android.os.Handler handler -> a
-    android.content.Context context -> b
-    java.lang.String phoneNumber -> c
-    void run() -> run
-com.dongfang.dicos.net.thread.LotteryThread -> com.dongfang.dicos.d.a.h:
+com.dongfang.dicos.net.thread.LotteryThread -> com.dongfang.dicos.d.a.m:
     android.os.Handler handler -> a
     android.content.Context context -> b
     java.lang.String code -> c
     java.lang.String amount -> d
     java.lang.String phoneNumber -> e
     void run() -> run
-com.dongfang.dicos.net.thread.LotteryWinnerThread -> com.dongfang.dicos.d.a.i:
+com.dongfang.dicos.net.thread.LotteryWinnerThread -> com.dongfang.dicos.d.a.n:
     android.os.Handler handler -> a
     android.content.Context context -> b
     java.lang.String phoneNumber -> c
     void run() -> run
-com.dongfang.dicos.net.thread.RegisterThread -> com.dongfang.dicos.d.a.j:
+com.dongfang.dicos.net.thread.RegisterTask -> com.dongfang.dicos.d.a.o:
     android.os.Handler handler -> a
     android.content.Context context -> b
     java.lang.String uName -> c
     java.lang.String uPassword -> d
     java.lang.String uNickName -> e
-    void run() -> run
-com.dongfang.dicos.net.thread.RestaurentListThread -> com.dongfang.dicos.d.a.k:
+    android.app.ProgressDialog progressDialog -> f
+    java.lang.String[] cno -> g
+    void onPreExecute() -> onPreExecute
+    android.os.Bundle doInBackground$6f0211ce() -> a
+    void onCancelled() -> onCancelled
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+com.dongfang.dicos.net.thread.RegisterTask$1 -> com.dongfang.dicos.d.a.p:
+    com.dongfang.dicos.net.thread.RegisterTask this$0 -> a
+    void onDismiss(android.content.DialogInterface) -> onDismiss
+com.dongfang.dicos.net.thread.RestaurentListThread -> com.dongfang.dicos.d.a.q:
     android.os.Handler handler -> a
     android.content.Context context -> b
     java.lang.String phoneNumber -> c
     java.lang.String province -> d
     java.lang.String city -> e
     void run() -> run
-com.dongfang.dicos.net.thread.SignHistoryThread -> com.dongfang.dicos.d.a.l:
+com.dongfang.dicos.net.thread.SignHistoryThread -> com.dongfang.dicos.d.a.r:
     android.os.Handler handler -> a
     android.content.Context context -> b
     java.lang.String phoneNumber -> c
     void run() -> run
-com.dongfang.dicos.net.thread.SignThread -> com.dongfang.dicos.d.a.m:
+com.dongfang.dicos.net.thread.SignThread -> com.dongfang.dicos.d.a.s:
     android.os.Handler handler -> a
     android.content.Context context -> b
     java.lang.String id -> c
     java.lang.String phoneNumber -> d
     void run() -> run
-com.dongfang.dicos.net.thread.ValidateThread -> com.dongfang.dicos.d.a.n:
-    android.os.Handler handler -> a
-    android.content.Context context -> b
-    java.lang.String uName -> c
-    java.lang.String uPassword -> d
-    void run() -> run
+com.dongfang.dicos.net.thread.ValidateTask -> com.dongfang.dicos.d.a.t:
+    android.app.ProgressDialog progressDialog -> a
+    android.os.Handler handler -> b
+    android.content.Context context -> c
+    java.lang.String uName -> d
+    java.lang.String uPassword -> e
+    void onPreExecute() -> onPreExecute
+    android.os.Bundle doInBackground$6f0211ce() -> a
+    void onCancelled() -> onCancelled
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+com.dongfang.dicos.net.thread.ValidateTask$1 -> com.dongfang.dicos.d.a.u:
+    com.dongfang.dicos.net.thread.ValidateTask this$0 -> a
+    void onDismiss(android.content.DialogInterface) -> onDismiss
 com.dongfang.dicos.sina.AsyncWeiboRunner -> com.dongfang.dicos.e.a:
     com.dongfang.dicos.sina.Weibo mWeibo -> a
     void request(android.content.Context,java.lang.String,com.dongfang.dicos.sina.WeiboParameters,java.lang.String,com.dongfang.dicos.sina.AsyncWeiboRunner$RequestListener) -> a

@@ -20,8 +20,8 @@ import android.widget.Toast;
 
 import com.dongfang.dicos.R;
 import com.dongfang.dicos.net.Actions;
-import com.dongfang.dicos.net.thread.LoginThread;
-import com.dongfang.dicos.net.thread.ValidateThread;
+import com.dongfang.dicos.net.thread.LoginTask;
+import com.dongfang.dicos.net.thread.ValidateTask;
 import com.dongfang.dicos.util.ComParams;
 import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.util.Util;
@@ -121,12 +121,14 @@ public class LoginActivity extends Activity implements OnClickListener {
 		ULog.d(tag, "onClick v.getId() = " + v.getId());
 		switch (v.getId()) {
 		case R.id.tv_forget_password:
-//			if (!isEmail(etPhoneNumber.getText().toString())) {
-//				Toast.makeText(LoginActivity.this, "请输入正确的邮箱地址...", Toast.LENGTH_LONG).show();
-//			} else {
-//				new GetPasswordThread(LoginActivity.this, loginHandler, etPhoneNumber.getText().toString()).start();
-//			}
-			
+			// if (!isEmail(etPhoneNumber.getText().toString())) {
+			// Toast.makeText(LoginActivity.this, "请输入正确的邮箱地址...",
+			// Toast.LENGTH_LONG).show();
+			// } else {
+			// new GetPasswordThread(LoginActivity.this, loginHandler,
+			// etPhoneNumber.getText().toString()).start();
+			// }
+
 			LoginActivity.this.startActivity(new Intent(LoginActivity.this, GetPasswordByEmail.class));
 			break;
 		case R.id.button_login_getauthcode:
@@ -136,13 +138,14 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 			if (!isEmail(etPhoneNumber.getText().toString())) {
 				Toast.makeText(LoginActivity.this, "请输入正确的邮箱地址...", Toast.LENGTH_LONG).show();
-			} else {
+			}
+			else {
 				bGetAuthCode.setClickable(false);
 				lockSeconds = ComParams.BUTTON_GET_AUTH_CODE_LOCKED_SECOND;
 				bGetAuthCode.setText(String.format(getResources().getString(R.string.button_get_auth_code_locked),
 						lockSeconds--));
 				loginHandler.sendEmptyMessage(ComParams.HANDLER_LOGIN_GET_AUTH_CODE_LOCKED);
-				new LoginThread(LoginActivity.this, loginHandler, etPhoneNumber.getText().toString()).start();
+				new LoginTask(LoginActivity.this, loginHandler, etPhoneNumber.getText().toString()).execute("");
 			}
 			break;
 		case R.id.button_login_ok:
@@ -153,14 +156,15 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 			if (6 > etAuthCode.getText().toString().length() || !isEmail(etPhoneNumber.getText().toString())) {
 				Toast.makeText(LoginActivity.this, R.string.login_input_error, Toast.LENGTH_LONG).show();
-			} else {
+			}
+			else {
 				loginHandler.removeMessages(ComParams.HANDLER_LOGIN_GET_AUTH_CODE_LOCKED);
 				lockSeconds = -1;
 				bGetAuthCode.setText(getResources().getString(R.string.button_get_auth_code));
 				bGetAuthCode.setClickable(false);
 				bOK.setClickable(false);
-				new ValidateThread(LoginActivity.this, loginHandler, etPhoneNumber.getText().toString(), etAuthCode
-						.getText().toString()).start();
+				new ValidateTask(LoginActivity.this, loginHandler, etPhoneNumber.getText().toString(), etAuthCode
+						.getText().toString()).execute();
 				savePhoneNumber();
 			}
 			break;
@@ -223,7 +227,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 					saveLoginStatus();
 					Toast.makeText(LoginActivity.this, R.string.login_result_success, Toast.LENGTH_LONG).show();
 					finish();
-				} else {
+				}
+				else {
 					Toast.makeText(LoginActivity.this, (String) msg.obj, Toast.LENGTH_LONG).show();
 					etAuthCode.setText("");
 				}
@@ -245,7 +250,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 					bGetAuthCode.setText(String.format(getResources().getString(R.string.button_get_auth_code_locked),
 							lockSeconds--));
 					this.sendEmptyMessageDelayed(ComParams.HANDLER_LOGIN_GET_AUTH_CODE_LOCKED, 1000);
-				} else {
+				}
+				else {
 					bGetAuthCode.setText(getResources().getString(R.string.button_get_auth_code));
 					bGetAuthCode.setClickable(true);
 				}
