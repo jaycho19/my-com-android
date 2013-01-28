@@ -56,7 +56,17 @@ public class RegisterTask extends AsyncTask<String, Integer, Bundle> {
 
 	@Override
 	protected Bundle doInBackground(String... params) {
-		String str = new HttpActions(context).register(uName, uPassword, uNickName, cno);
+		StringBuilder scno = new StringBuilder();
+		if (!TextUtils.isEmpty(cno[0])){
+			scno.append(cno[0]);
+			for(int i =1 ; i < cno.length && !TextUtils.isEmpty(cno[i]); i ++){
+				scno.append("|").append(cno[i]);
+			}
+		}
+		
+		
+		
+		String str = new HttpActions(context).register(uName, uPassword, uNickName, scno.toString());
 		ULog.d(TAG, "register result =" + str);
 
 		JSONObject json = new JSONObject();

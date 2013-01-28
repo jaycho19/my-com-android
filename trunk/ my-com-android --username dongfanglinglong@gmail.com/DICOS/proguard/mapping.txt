@@ -1752,7 +1752,7 @@ com.dongfang.dicos.net.HttpActions -> com.dongfang.dicos.d.a:
     java.lang.String login(java.lang.String) -> a
     java.lang.String chgPassword(java.lang.String,java.lang.String,java.lang.String) -> a
     java.lang.String getPassword(java.lang.String) -> b
-    java.lang.String register(java.lang.String,java.lang.String,java.lang.String,java.lang.String[]) -> a
+    java.lang.String register(java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
     java.lang.String validate(java.lang.String,java.lang.String) -> a
     java.lang.String logout(java.lang.String) -> c
     java.lang.String lottery(java.lang.String,java.lang.String,java.lang.String) -> b

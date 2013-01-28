@@ -76,13 +76,13 @@ public class HttpActions {
 	}
 
 	/** 注册 */
-	public String register(String uName, String uPassword, String uNikeName, String[] cno) {
+	public String register(String uName, String uPassword, String uNikeName, String cno) {
 		list.clear();
 		list.add(new BasicNameValuePair("acc", uName));
 		list.add(new BasicNameValuePair("pwd", uPassword));
 		list.add(new BasicNameValuePair("nick", uNikeName));
-		for (int i = 0; null != cno && i < cno.length && !TextUtils.isEmpty(cno[i]); i++)
-			list.add(new BasicNameValuePair("cno", cno[i]));
+		if (!TextUtils.isEmpty(cno))
+			list.add(new BasicNameValuePair("cno", cno));
 		list.add(new BasicNameValuePair("from", "mobile"));
 		return https.post(list, "http://www.dicos.com.cn/login/register_ajaxV2.php");
 	}
@@ -328,8 +328,8 @@ public class HttpActions {
 	 * 
 	 * @return 成功 <br>
 	 *         [
-	 *         "http:\/\/www.dicos.com.cn\/images\/app\/action\/8_1347870892.jpg","http:\/\/www.dicos.com.cn
-	 *         \ / i m a g e s \ / a p p \ / a c t i o n \ / 7 _ 1 3 4 7
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/action\/8_1347870892.jpg","http:\/\/www.dicos.com.c
+	 *         n \ / i m a g e s \ / a p p \ / a c t i o n \ / 7 _ 1 3 4 7
 	 *         605021.jpg" ] <br>
 	 *         无资料 <br>
 	 *         []
@@ -348,11 +348,11 @@ public class HttpActions {
 	 *         例:<br>
 	 *         成功<br>
 	 *         {"cate": {"3":{"name":"\u4e3b\u9910","focus_img":
-	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/focus\/3_1349922212.jpg","blur_img":"http:\/\/www.dicos.com.cn\/images\/app\/meal_categ
-	 *         o r y \ / b l u r \ / 3 _ 1 3 4 9 9 2 2 2 1 2 . j p g
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/focus\/3_1349922212.jpg","blur_img":"http:\/\/www.dicos.com.cn\/images\/app\/meal_cate
+	 *         g o r y \ / b l u r \ / 3 _ 1 3 4 9 9 2 2 2 1 2 . j p g
 	 *         " } , "11":{"name":"\u5e38\u6001\u5957\u9910","focus_img":
-	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/focus\/11_1349920688.jpg","blur_img":"http:\/\/www.dicos.com.cn\/images\/app\/meal_categ
-	 *         o r y \ / b l u r \ / 1 1 _ 1 3 4 9 9 2 0 6 8 8 . j p g
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/focus\/11_1349920688.jpg","blur_img":"http:\/\/www.dicos.com.cn\/images\/app\/meal_cate
+	 *         g o r y \ / b l u r \ / 1 1 _ 1 3 4 9 9 2 0 6 8 8 . j p g
 	 *         " } }, "newest":
 	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal\/newest.jpg?1348647
 	 *         3 7 0 " }
@@ -368,8 +368,8 @@ public class HttpActions {
 	 *         例:<br>
 	 *         成功<br>
 	 *         [
-	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal\/3_1347873388.jpg","http:\/\/www.dicos.com.cn\/image
-	 *         s \ / a p p \ / m e a l \ / 5 _ 1 3 4 7 8 9 2 5 1 4 . j p g " ]
+	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal\/3_1347873388.jpg","http:\/\/www.dicos.com.cn\/imag
+	 *         e s \ / a p p \ / m e a l \ / 5 _ 1 3 4 7 8 9 2 5 1 4 . j p g " ]
 	 *         无资料<br>
 	 *         []<br>
 	 *         其他<br>
