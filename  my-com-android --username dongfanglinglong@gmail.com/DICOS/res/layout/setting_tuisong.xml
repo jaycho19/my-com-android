@@ -57,7 +57,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:text="推送设置"
+            android:text="当季活动"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <com.dongfang.dicos.view.SlipButton
