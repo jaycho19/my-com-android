@@ -1781,6 +1781,7 @@ com.dongfang.dicos.net.thread.AddDykCardTask -> com.dongfang.dicos.d.a.a:
     android.content.Context context -> b
     android.app.ProgressDialog progressDialog -> c
     com.dongfang.dicos.mydicos.DykAdapter dykadapter -> d
+    android.widget.EditText etDykNum -> e
     void onPreExecute() -> onPreExecute
     android.os.Bundle doInBackground(java.lang.String[]) -> a
     void onCancelled() -> onCancelled

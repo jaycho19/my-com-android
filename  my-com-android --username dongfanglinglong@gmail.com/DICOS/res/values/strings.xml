@@ -31,7 +31,10 @@
     <string name="login_input_error">请输入正确的邮箱地址和密码</string>
     <string name="login_result_success">登录成功</string>
     <string name="login_result_fail">登录失败</string>
-    
+
+    <!--  -->
+    <string name="dyk_num_hint">请输入16位德意卡号</string>
+
     <!-- 菜单 -->
     <string-array name="sub_manu">
         <item>汉堡</item>

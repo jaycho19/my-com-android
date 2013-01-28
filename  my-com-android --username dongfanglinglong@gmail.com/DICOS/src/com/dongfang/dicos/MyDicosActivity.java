@@ -211,7 +211,7 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 			}
 			else {
 				String ss = etDykNum.getText().toString();
-				new AddDykCardTask(MyDicosActivity.this, dykadapter).execute(ss);
+				new AddDykCardTask(MyDicosActivity.this, dykadapter,etDykNum).execute(ss);
 			}
 		}
 

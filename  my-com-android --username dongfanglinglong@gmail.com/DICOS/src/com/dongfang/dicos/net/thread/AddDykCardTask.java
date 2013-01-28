@@ -10,6 +10,7 @@ import android.content.DialogInterface.OnDismissListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dongfang.dicos.mydicos.DykAdapter;
@@ -22,12 +23,14 @@ public class AddDykCardTask extends AsyncTask<String, Integer, Bundle> {
 	private Context				context;
 	private ProgressDialog		progressDialog;
 	private DykAdapter			dykadapter;
+	private EditText			etDykNum;
 
 	public static final String	LIVELIST	= "LiveList";
 
-	public AddDykCardTask(Context context, DykAdapter dykadapter) {
+	public AddDykCardTask(Context context, DykAdapter dykadapter,EditText etDykNum) {
 		this.context = context;
 		this.dykadapter = dykadapter;
+		this.etDykNum = etDykNum;
 	}
 
 	@Override
@@ -98,6 +101,7 @@ public class AddDykCardTask extends AsyncTask<String, Integer, Bundle> {
 		if (result.containsKey("cno")) {
 			dykadapter.setArray(result.getStringArray("cno"));
 			dykadapter.notifyDataSetChanged();
+			etDykNum.setText("");
 		}
 		
 		if (result.containsKey("msg") || result.containsKey("s")) {
