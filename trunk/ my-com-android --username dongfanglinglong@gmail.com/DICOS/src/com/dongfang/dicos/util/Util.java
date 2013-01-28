@@ -19,7 +19,7 @@ import com.dongfang.dicos.R;
 
 /** 工具类 */
 public class Util {
-	private static final String	tag	= "Util";
+	private static final String	tag	= "false";
 
 	/** 获取USER_NO */
 	public static String getUserNO(Context context) {

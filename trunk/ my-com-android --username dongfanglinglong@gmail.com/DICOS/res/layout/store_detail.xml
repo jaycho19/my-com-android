@@ -68,7 +68,7 @@
 
         <TextView
             android:id="@+id/textview_store_detail_tel"
-          android:layout_width="fill_parent"
+           android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:text="021-6355xxxx" />
@@ -83,6 +83,7 @@
         <Button
             android:id="@+id/button_store_detail_sign"
             style="@style/button_normal_ok"
+            android:singleLine="true"
             android:text="立即签到" />
     </LinearLayout>
 
