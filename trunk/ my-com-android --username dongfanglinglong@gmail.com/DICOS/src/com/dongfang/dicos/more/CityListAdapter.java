@@ -20,12 +20,12 @@ import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.util.Util;
 
 /**
- * ³ÇÊĞÁĞ±íÖĞ£¬ÁĞ±íµÄadapter
+ * åŸå¸‚åˆ—è¡¨ä¸­ï¼Œåˆ—è¡¨çš„adapter
  * 
  * @author dongfang
  * */
 public class CityListAdapter extends BaseAdapter implements SectionIndexer {
-	private static final String	tag	= "ComParams.IPAREA";
+	private static final String	tag	= "CityListAdapter";
 	private ArrayList<String>	stringArray;
 	private Context				context;
 
@@ -119,7 +119,7 @@ public class CityListAdapter extends BaseAdapter implements SectionIndexer {
 		public void onClick(View v) {
 			ComParams.IPAREA = sIpArea;
 			Util.saveIpArea(context);
-			Toast.makeText(context, "³ÇÊĞÇĞ»»³É:" + sIpArea, Toast.LENGTH_LONG).show();
+			Toast.makeText(context, "åŸå¸‚åˆ‡æ¢æˆ:" + sIpArea, Toast.LENGTH_LONG).show();
 			ULog.d(tag, "ComParams.IPAREA = " + ComParams.IPAREA);
 			if (null != handler) {
 				handler.sendEmptyMessage(ComParams.HANDLER_CHANGE_TITLE_CITYLIST_ACTIVITY);

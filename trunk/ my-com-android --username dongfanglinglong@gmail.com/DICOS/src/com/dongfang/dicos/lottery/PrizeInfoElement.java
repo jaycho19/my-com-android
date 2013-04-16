@@ -1,8 +1,8 @@
 package com.dongfang.dicos.lottery;
 
-import com.dongfang.dicos.util.ULog;
-
 import android.widget.TextView;
+
+import com.dongfang.dicos.util.ULog;
 
 public class PrizeInfoElement {
 

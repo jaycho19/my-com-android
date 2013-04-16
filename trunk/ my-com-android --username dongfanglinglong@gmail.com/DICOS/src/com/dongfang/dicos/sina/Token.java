@@ -28,7 +28,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class Token {
 
-	// mToken ¿ÉÄÜÊÇaccess token£¬ ¿ÉÄÜÊÇoauth_token
+	// mToken å¯èƒ½æ˜¯access tokenï¼Œ å¯èƒ½æ˜¯oauth_token
 	private String			mToken				= "";
 	private String			mRefreshToken		= "";
 	private long			mExpiresIn			= 0;

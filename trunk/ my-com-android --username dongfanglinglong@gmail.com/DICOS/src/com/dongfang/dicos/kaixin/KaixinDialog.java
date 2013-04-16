@@ -30,13 +30,13 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 /**
- * Îª¿ªĞÄ¶Ô»°¿òÊµÏÖWebViewµÄÀà¡£ ÇëÇóÖ¸¶¨URL£¬²¢ÏÔÊ¾ÔÚWebView¿Ø¼şÉÏ¡£ ¿ª·¢Õß²»»áÖ±½ÓÊ¹ÓÃ¸ÃÀà¡£
+ * ä¸ºå¼€å¿ƒå¯¹è¯æ¡†å®ç°WebViewçš„ç±»ã€‚ è¯·æ±‚æŒ‡å®šURLï¼Œå¹¶æ˜¾ç¤ºåœ¨WebViewæ§ä»¶ä¸Šã€‚ å¼€å‘è€…ä¸ä¼šç›´æ¥ä½¿ç”¨è¯¥ç±»ã€‚
  */
 public class KaixinDialog extends Dialog {
 
 	private static final float[]	DIMENSIONS_LANDSCAPE	= { 460, 260 };
 	private static final float[]	DIMENSIONS_PORTRAIT		= { 280, 420 };
-	private static final String		DIALOG_LOADING			= "ÕıÔÚÔØÈë...";
+	private static final String		DIALOG_LOADING			= "æ­£åœ¨è½½å…¥...";
 
 	private String					mUrl;
 	private KaixinDialogListener	mListener;

@@ -27,7 +27,7 @@ import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.util.Util;
 
 /**
- * µÇÂ¼
+ * ç™»å½•
  * 
  * @author dongfang
  * */
@@ -35,20 +35,20 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 	public static final String	tag				= "LoginActivity";
 
-	/** ·µ»Ø */
+	/** è¿”å› */
 	private Button				bBack, bSigne;
 
-	/** »ñÈ¡ÑéÖ¤Âë */
+	/** è·å–éªŒè¯ç  */
 	private Button				bGetAuthCode;
-	/** È·ÈÏµİ½» */
+	/** ç¡®è®¤é€’äº¤ */
 	private Button				bOK;
 
-	/** ÊÖ»úºÅÂë */
+	/** æ‰‹æœºå·ç  */
 	private EditText			etPhoneNumber;
-	/** ÑéÖ¤Âë */
+	/** éªŒè¯ç  */
 	private EditText			etAuthCode;
 
-	/** Íü¼ÇÃÜÂë */
+	/** å¿˜è®°å¯†ç  */
 	private TextView			tvForgetPassword;
 
 	private int					lockSeconds		= -1;
@@ -108,7 +108,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 	protected void onStart() {
 		super.onStart();
 
-		// ³õÊ¼»¯×î½üÒ»´ÎµÇÂ¼µÄÊÖ»úºÅÂë
+		// åˆå§‹åŒ–æœ€è¿‘ä¸€æ¬¡ç™»å½•çš„æ‰‹æœºå·ç 
 		// SharedPreferences setConfig =
 		// getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
 		// Activity.MODE_PRIVATE);
@@ -122,7 +122,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.tv_forget_password:
 			// if (!isEmail(etPhoneNumber.getText().toString())) {
-			// Toast.makeText(LoginActivity.this, "ÇëÊäÈëÕıÈ·µÄÓÊÏäµØÖ·...",
+			// Toast.makeText(LoginActivity.this, "è¯·è¾“å…¥æ­£ç¡®çš„é‚®ç®±åœ°å€...",
 			// Toast.LENGTH_LONG).show();
 			// } else {
 			// new GetPasswordThread(LoginActivity.this, loginHandler,
@@ -133,11 +133,11 @@ public class LoginActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.button_login_getauthcode:
 			/**
-			 * 1. »ñÈ¡ÊÖ»úÑéÖ¤Âë£¬ÊÖ»úºÅÂë²»ÔÊĞíÎª¿Õ£» 2. 60sÒÔÄÚ²»ÔÊĞíÖØ¸´»ñÈ¡£¬ĞèÒª60Ãëµ¹¼ÆÊ±£»
+			 * 1. è·å–æ‰‹æœºéªŒè¯ç ï¼Œæ‰‹æœºå·ç ä¸å…è®¸ä¸ºç©ºï¼› 2. 60sä»¥å†…ä¸å…è®¸é‡å¤è·å–ï¼Œéœ€è¦60ç§’å€’è®¡æ—¶ï¼›
 			 * */
 
 			if (!isEmail(etPhoneNumber.getText().toString())) {
-				Toast.makeText(LoginActivity.this, "ÇëÊäÈëÕıÈ·µÄÓÊÏäµØÖ·...", Toast.LENGTH_LONG).show();
+				Toast.makeText(LoginActivity.this, "è¯·è¾“å…¥æ­£ç¡®çš„é‚®ç®±åœ°å€...", Toast.LENGTH_LONG).show();
 			}
 			else {
 				bGetAuthCode.setClickable(false);
@@ -150,7 +150,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.button_login_ok:
 			/**
-			 * 1. »ñÈ¡ÑéÖ¤Âë°´Å¥µÈ´ıÊÂ¼ş½áÊø£¬lockSecondsÖÃÎª-1; 2. Ëø¶¨µÇÂ¼°´Å¥
+			 * 1. è·å–éªŒè¯ç æŒ‰é’®ç­‰å¾…äº‹ä»¶ç»“æŸï¼ŒlockSecondsç½®ä¸º-1; 2. é”å®šç™»å½•æŒ‰é’®
 			 * 
 			 */
 
@@ -182,12 +182,12 @@ public class LoginActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	/** ±£´æÊÖ»úºÅÂë */
+	/** ä¿å­˜æ‰‹æœºå·ç  */
 	private void savePhoneNumber() {
 		Util.setPhoneNumber(this, etPhoneNumber.getText().toString());
 	}
 
-	/** ±£´æµÇÂ¼×´Ì¬ */
+	/** ä¿å­˜ç™»å½•çŠ¶æ€ */
 	private void saveLoginStatus() {
 		Util.setLoginStatus(this, true);
 	}
@@ -219,7 +219,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 				break;
 			case ComParams.HANDLER_RESULT_VALIDATE:
 				/**
-				 * µÇÂ¼³É¹¦£¬±£´æµÇÂ¼³É¹¦±êÊ¶£»
+				 * ç™»å½•æˆåŠŸï¼Œä¿å­˜ç™»å½•æˆåŠŸæ ‡è¯†ï¼›
 				 * 
 				 * */
 				data = msg.getData();
@@ -238,7 +238,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 				break;
 			case ComParams.HANDLER_RESULT_LOGIN:
-				/** ÑéÖ¤Âë»ñÈ¡³É¹¦ */
+				/** éªŒè¯ç è·å–æˆåŠŸ */
 				data = msg.getData();
 				if (data.getString(Actions.ACTIONS_KEY_ACT).equalsIgnoreCase(Actions.ACTIONS_TYPE_LOGIN)
 						&& data.getString(Actions.ACTIONS_KEY_RESULT).equals("1")) {

@@ -3,6 +3,7 @@ package com.dongfang.dicos.view;
 import android.content.Context;
 import android.content.Intent;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -111,7 +112,8 @@ public class FlingGallery extends FrameLayout {
 			ImageView image = (ImageView) llFlingViews.getChildAt(i);
 			if (i == mCurrentPosition) {
 				image.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.fling_point_focsed_0));
-			} else {
+			}
+			else {
 				image.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.fling_point_unfocsed_0));
 			}
 		}
@@ -366,15 +368,17 @@ public class FlingGallery extends FrameLayout {
 			mViewNumber = viewNumber;
 			mParentLayout = parentLayout;
 
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT,
+					LayoutParams.FILL_PARENT);
+			layoutParams.gravity = Gravity.CENTER;
+
 			// Invalid layout is used when outside gallery
 			mInvalidLayout = new FrameLayout(mContext);
-			mInvalidLayout.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT,
-					LayoutParams.FILL_PARENT));
+			mInvalidLayout.setLayoutParams(layoutParams);
 
 			// Internal layout is permanent for duration
 			mInternalLayout = new LinearLayout(mContext);
-			mInternalLayout.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT,
-					LayoutParams.FILL_PARENT));
+			mInternalLayout.setLayoutParams(layoutParams);
 
 			mParentLayout.addView(mInternalLayout);
 		}
@@ -387,14 +391,18 @@ public class FlingGallery extends FrameLayout {
 			if (mAdapter != null) {
 				if (newPosition >= getFirstPosition() && newPosition <= getLastPosition()) {
 					mExternalView = mAdapter.getView(newPosition, mExternalView, mInternalLayout);
-				} else {
+				}
+				else {
 					mExternalView = mInvalidLayout;
 				}
 			}
 
 			if (mExternalView != null) {
-				mInternalLayout.addView(mExternalView, new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT,
-						LayoutParams.FILL_PARENT));
+				LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT,
+						LayoutParams.FILL_PARENT);
+				layoutParams.gravity = Gravity.CENTER;
+				
+				mInternalLayout.addView(mExternalView, layoutParams);
 			}
 		}
 
@@ -598,7 +606,7 @@ public class FlingGallery extends FrameLayout {
 			ULog.v(TAG, TAG + ": onShowPress: " + e.getAction());
 		}
 
-		/** µ¥»÷ÊÂ¼þ */
+		/** å•å‡»äº‹ä»¶ */
 		@Override
 		public boolean onSingleTapUp(MotionEvent e) {
 			ULog.v(TAG, TAG + ": onSingleTapUp: " + e.getAction());

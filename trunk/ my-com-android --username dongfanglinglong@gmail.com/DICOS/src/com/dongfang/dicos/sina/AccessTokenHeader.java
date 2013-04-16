@@ -28,7 +28,7 @@ import javax.crypto.spec.SecretKeySpec;
  * Encapsulation a http accessToken headers. the order of weiboParameters will
  * not be changed. Otherwise the signature should not be calculated right.
  * 
- * @author (luopeng@staff.sina.com.cn zhangjie2@staff.sina.com.cn ¹Ù·½Î¢²©£ºWBSDK
+ * @author (luopeng@staff.sina.com.cn zhangjie2@staff.sina.com.cn å®˜æ–¹å¾®åšï¼šWBSDK
  *         http://weibo.com/u/2791136085)
  */
 public class AccessTokenHeader extends HttpHeaderFactory {

@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,8 +17,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -35,7 +32,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher.ViewFactory;
 
-import com.dongfang.dicos.dl.DownloadIMG;
 import com.dongfang.dicos.kzmw.Category;
 import com.dongfang.dicos.kzmw.KeyValue;
 import com.dongfang.dicos.kzmw.LoginActivity;
@@ -53,7 +49,7 @@ import com.dongfang.dicos.view.SubMenuItem;
 import com.dongfang.dicos.view.SubMenuLayout;
 
 /**
- * ßÇ×ÌÃÀÎ¶Ò³Ãæ
+ * å’”æ»‹ç¾å‘³é¡µé¢
  * 
  * @author dongfang
  * */
@@ -63,19 +59,19 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 
 	private TextView				tvTitle;
 
-	/** µÇÂ¼°´Å¥ */
+	/** ç™»å½•æŒ‰é’® */
 	private Button					bLogin;
-	/** Ç©µ½°´Å¥ */
+	/** ç­¾åˆ°æŒ‰é’® */
 	private Button					bSigne;
-	/** Ipad ³é½± */
+	/** Ipad æŠ½å¥– */
 	private Button					bIpad3;
 
-	// /** Í¼Æ¬Flipper */
+	// /** å›¾ç‰‡Flipper */
 	// private ImageSwitcher vfInfo;
 	//
-	// /** Í¼Æ¬ÁĞ±í */
-	// private int[] array_img_name; // ËùÓĞÍ¼Æ¬µÄÎÄ¼şÃû³Æ
-	// private int array_param = 0; // µ±Ç°ÏÔÊ¾Í¼Æ¬ÏÂ±ê
+	// /** å›¾ç‰‡åˆ—è¡¨ */
+	// private int[] array_img_name; // æ‰€æœ‰å›¾ç‰‡çš„æ–‡ä»¶åç§°
+	// private int array_param = 0; // å½“å‰æ˜¾ç¤ºå›¾ç‰‡ä¸‹æ ‡
 
 	// private GestureDetector gestureDetector;
 
@@ -152,7 +148,7 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 	@Override
 	protected void onResume() {
 		super.onResume();
-		/** µÇÂ¼×´Ì¬£¬²»ÏÔÊ¾µÇÂ¼°´Å¥ */
+		/** ç™»å½•çŠ¶æ€ï¼Œä¸æ˜¾ç¤ºç™»å½•æŒ‰é’® */
 		ULog.d(tag, "onResume = " + bLogin.isShown());
 		if (Util.isLogin(this)) {
 			bLogin.setVisibility(View.GONE);
@@ -186,7 +182,7 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 				Util.showDialogSetNetWork(KaZiMeiWeiActivity.this);
 			}
 			else if (Util.isLogin(KaZiMeiWeiActivity.this)) {
-				Toast.makeText(KaZiMeiWeiActivity.this, "ÄúÒÑµÇÂ¼", Toast.LENGTH_LONG).show();
+				Toast.makeText(KaZiMeiWeiActivity.this, "æ‚¨å·²ç™»å½•", Toast.LENGTH_LONG).show();
 			}
 			else {
 				intent = new Intent(KaZiMeiWeiActivity.this, LoginActivity.class);
@@ -222,7 +218,7 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 		return i;
 	}
 
-	/** ³õÊ¼»¯×Ó²Ëµ¥ */
+	/** åˆå§‹åŒ–å­èœå• */
 	public void initSubMenuLayout(Category category) {
 		subMenuLayout.setTVListText(category.getMenuList());
 		int size = category.getMenuList().size();
@@ -325,14 +321,14 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 		return super.onTouchEvent(event);
 	}
 
-	/** ³õÊ¼»¯¿¨×ÌÃÀÎ¶Ò³Ãæ²Ëµ¥Êı¾İ */
+	/** åˆå§‹åŒ–å¡æ»‹ç¾å‘³é¡µé¢èœå•æ•°æ® */
 	class GetInfoAsyncTask extends AsyncTask<String, String, Category> {
 
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
 
-			progressDialog = ProgressDialog.show(KaZiMeiWeiActivity.this, "", "Êı¾İ¼ÓÔØÖĞ...", true);
+			progressDialog = ProgressDialog.show(KaZiMeiWeiActivity.this, "", "æ•°æ®åŠ è½½ä¸­...", true);
 			progressDialog.setCancelable(true);
 			progressDialog.setOnCancelListener(new OnCancelListener() {
 
@@ -396,7 +392,7 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 			// progressDialog.dismiss();
 
 			if (null == result) {
-				Toast.makeText(KaZiMeiWeiActivity.this, "»ñÈ¡Êı¾İÊ§°Ü", Toast.LENGTH_LONG).show();
+				Toast.makeText(KaZiMeiWeiActivity.this, "è·å–æ•°æ®å¤±è´¥", Toast.LENGTH_LONG).show();
 			}
 			else {
 
@@ -449,12 +445,12 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 		/**
 		 * 
 		 * @param ins
-		 *            ÊäÈëÁ÷
+		 *            è¾“å…¥æµ
 		 * @param filename
-		 *            ÎÄ¼şÃû³Æ ĞèÒª¾ø¶ÔÂ·¾¶
+		 *            æ–‡ä»¶åç§° éœ€è¦ç»å¯¹è·¯å¾„
 		 * @param handler
 		 * @param array_param
-		 * @return ·µ»ØÎÄ¼şÃû³Æ filename + "e"
+		 * @return è¿”å›æ–‡ä»¶åç§° filename + "e"
 		 */
 		private String saveFile(InputStream ins, String filename) {
 			if (TextUtils.isEmpty(filename))
@@ -475,7 +471,7 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 				ins.close();
 				outs.close();
 
-				// ÖØÃüÃû
+				// é‡å‘½å
 				(new File(filename)).renameTo(new File(filename + "e"));
 
 			} catch (Exception e) {
@@ -486,7 +482,7 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 
 	}
 
-	/** ¿¨×ÌÃÀÎ¶¶ş¼¶²Ëµ¥ */
+	/** å¡æ»‹ç¾å‘³äºŒçº§èœå• */
 	class GetInfoTypeAsyncTask extends AsyncTask<String, String, Category> {
 
 		@Override
@@ -494,7 +490,7 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 			super.onPreExecute();
 
 			if (null == progressDialog || !progressDialog.isShowing()) {
-				progressDialog = ProgressDialog.show(KaZiMeiWeiActivity.this, "", "Êı¾İ¼ÓÔØÖĞ...", true);
+				progressDialog = ProgressDialog.show(KaZiMeiWeiActivity.this, "", "æ•°æ®åŠ è½½ä¸­...", true);
 				progressDialog.setCancelable(true);
 				progressDialog.setOnCancelListener(new OnCancelListener() {
 					@Override
@@ -555,7 +551,7 @@ public class KaZiMeiWeiActivity extends Activity implements OnTouchListener, OnC
 			progressDialog.dismiss();
 
 			if (null == result) {
-				Toast.makeText(KaZiMeiWeiActivity.this, "»ñÈ¡Êı¾İÊ§°Ü", Toast.LENGTH_LONG).show();
+				Toast.makeText(KaZiMeiWeiActivity.this, "è·å–æ•°æ®å¤±è´¥", Toast.LENGTH_LONG).show();
 			}
 			else {
 				// initSubMenuLayout(result);

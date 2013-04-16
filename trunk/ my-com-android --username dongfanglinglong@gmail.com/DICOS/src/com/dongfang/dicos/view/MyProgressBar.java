@@ -1,7 +1,5 @@
 package com.dongfang.dicos.view;
 
-import com.dongfang.dicos.R;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -9,6 +7,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.dongfang.dicos.R;
 
 public class MyProgressBar extends LinearLayout {
 

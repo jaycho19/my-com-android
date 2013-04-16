@@ -13,7 +13,7 @@ public class PrizeInfoTempActivity extends Activity implements OnClickListener {
 
 	public static final String	tag	= "PrizeInfoActivity";
 
-	/** ·µ»Ø°´Å¥ */
+	/** è¿”å›žæŒ‰é’® */
 	private Button				bBack;
 
 	@Override

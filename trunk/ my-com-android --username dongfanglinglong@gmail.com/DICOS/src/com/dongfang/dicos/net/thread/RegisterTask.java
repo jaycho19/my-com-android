@@ -41,7 +41,7 @@ public class RegisterTask extends AsyncTask<String, Integer, Bundle> {
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-		progressDialog = ProgressDialog.show(context, "", "×¢²áÖĞ...");
+		progressDialog = ProgressDialog.show(context, "", "æ³¨å†Œä¸­...");
 		progressDialog.setIndeterminate(true);
 		progressDialog.setCancelable(true);
 		progressDialog.setOnDismissListener(new OnDismissListener() {
@@ -85,22 +85,22 @@ public class RegisterTask extends AsyncTask<String, Integer, Bundle> {
 
 		}
 		else if (-1000 == result) {
-			msg.obj = "ÓÃ»§ÃûÃÜÂë²»µÃÎª¿Õ";
+			msg.obj = "ç”¨æˆ·åå¯†ç ä¸å¾—ä¸ºç©º";
 		}
 		else if (-999 == result) {
-			msg.obj = "ÓÃ»§Ãû¸ñÊ½²»·û";
+			msg.obj = "ç”¨æˆ·åæ ¼å¼ä¸ç¬¦";
 		}
 		else if (-998 == result) {
-			msg.obj = "ÃÜÂë¸ñÊ½²»·û";
+			msg.obj = "å¯†ç æ ¼å¼ä¸ç¬¦";
 		}
 		else if (-997 == result) {
-			msg.obj = "êÇ³Æ³¬¹ı³¤¶È";
+			msg.obj = "æ˜µç§°è¶…è¿‡é•¿åº¦";
 		}
 		else if (-1 == result) {
-			msg.obj = "×¢²áÊ§°Ü";
+			msg.obj = "æ³¨å†Œå¤±è´¥";
 		}
 		else {
-			msg.obj = "×¢²á³É¹¦";
+			msg.obj = "æ³¨å†ŒæˆåŠŸ";
 		}
 
 		msg.arg1 = result;

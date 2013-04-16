@@ -29,11 +29,11 @@ public class GetPasswordThread extends Thread {
 		int result = Integer.valueOf(str);
 		Message msg = new Message();
 		if (-999 == result) {
-			msg.obj = "ÓÊÏäµØÖ·²»ÕıÈ·";
+			msg.obj = "é‚®ç®±åœ°å€ä¸æ­£ç¡®";
 		} else if (-1 == result) {
-			msg.obj = "ÃÜÂë»ñÈ¡Ê§°Ü";
+			msg.obj = "å¯†ç è·å–å¤±è´¥";
 		} else {
-			msg.obj = "ÃÜÂë»ñÈ¡³É¹¦£¬Çë²é¿´¶ÔÓ¦ÓÊÏä";
+			msg.obj = "å¯†ç è·å–æˆåŠŸï¼Œè¯·æŸ¥çœ‹å¯¹åº”é‚®ç®±";
 		}
 		msg.arg1 = result;
 		msg.what = ComParams.HANDLER_RESULT_GET_PASSWORD;

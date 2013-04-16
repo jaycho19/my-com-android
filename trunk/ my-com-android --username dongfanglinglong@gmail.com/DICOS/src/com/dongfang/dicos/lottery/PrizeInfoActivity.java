@@ -21,9 +21,9 @@ public class PrizeInfoActivity extends Activity implements OnClickListener {
 
 	public static final String	tag	= "PrizeInfoActivity";
 
-	/** 返回按钮 */
+	/** 杩斿洖鎸夐挳 */
 	private Button				bBack;
-	/** 返回按钮 */
+	/** 杩斿洖鎸夐挳 */
 	private Button				bShowMore;
 
 	private ListView			lvInfo;

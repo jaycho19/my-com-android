@@ -15,15 +15,15 @@ import android.view.View.OnTouchListener;
 import com.dongfang.dicos.R;
 
 public class SlipButton extends View implements OnTouchListener {
-	private boolean				NowChoose	= false;	// ¼ÇÂ¼µ±Ç°°´Å¥ÊÇ·ñ´ò¿ª,trueÎª´ò¿ª,flaseÎª¹Ø±Õ
+	private boolean				NowChoose	= false;	// è®°å½•å½“å‰æŒ‰é’®æ˜¯å¦æ‰“å¼€,trueä¸ºæ‰“å¼€,flaseä¸ºå…³é—­
 
 	private boolean				isChecked;
 
-	private boolean				OnSlip		= false;	// ¼ÇÂ¼ÓÃ»§ÊÇ·ñÔÚ»¬¶¯µÄ±äÁ¿
+	private boolean				OnSlip		= false;	// è®°å½•ç”¨æˆ·æ˜¯å¦åœ¨æ»‘åŠ¨çš„å˜é‡
 
-	private float				DownX, NowX;			// °´ÏÂÊ±µÄx,µ±Ç°µÄx
+	private float				DownX, NowX;			// æŒ‰ä¸‹æ—¶çš„x,å½“å‰çš„x
 
-	private Rect				Btn_On, Btn_Off;		// ´ò¿ªºÍ¹Ø±Õ×´Ì¬ÏÂ,ÓÎ±êµÄRect .
+	private Rect				Btn_On, Btn_Off;		// æ‰“å¼€å’Œå…³é—­çŠ¶æ€ä¸‹,æ¸¸æ ‡çš„Rect .
 
 	private boolean				isChgLsnOn	= false;
 
@@ -46,18 +46,18 @@ public class SlipButton extends View implements OnTouchListener {
 		init();
 	}
 
-	private void init() {// ³õÊ¼»¯
+	private void init() {// åˆå§‹åŒ–
 
 		bg_on = BitmapFactory.decodeResource(getResources(), R.drawable.split_left);
 		bg_off = BitmapFactory.decodeResource(getResources(), R.drawable.split_right);
 		slip_btn = BitmapFactory.decodeResource(getResources(), R.drawable.split);
 		Btn_On = new Rect(0, 0, slip_btn.getWidth(), slip_btn.getHeight());
 		Btn_Off = new Rect(bg_off.getWidth() - slip_btn.getWidth(), 0, bg_off.getWidth(), slip_btn.getHeight());
-		setOnTouchListener(this);// ÉèÖÃ¼àÌıÆ÷,Ò²¿ÉÒÔÖ±½Ó¸´Ğ´OnTouchEvent
+		setOnTouchListener(this);// è®¾ç½®ç›‘å¬å™¨,ä¹Ÿå¯ä»¥ç›´æ¥å¤å†™OnTouchEvent
 	}
 
 	@Override
-	protected void onDraw(Canvas canvas) {// »æÍ¼º¯Êı
+	protected void onDraw(Canvas canvas) {// ç»˜å›¾å‡½æ•°
 
 		super.onDraw(canvas);
 
@@ -65,38 +65,38 @@ public class SlipButton extends View implements OnTouchListener {
 		Paint paint = new Paint();
 		float x;
 
-		if (NowX < (bg_on.getWidth() / 2))// »¬¶¯µ½Ç°°ë¶ÎÓëºó°ë¶ÎµÄ±³¾°²»Í¬,ÔÚ´Ë×öÅĞ¶Ï
+		if (NowX < (bg_on.getWidth() / 2))// æ»‘åŠ¨åˆ°å‰åŠæ®µä¸ååŠæ®µçš„èƒŒæ™¯ä¸åŒ,åœ¨æ­¤åšåˆ¤æ–­
 		{
 			x = NowX - slip_btn.getWidth() / 2;
-			canvas.drawBitmap(bg_off, matrix, paint);// »­³ö¹Ø±ÕÊ±µÄ±³¾°
+			canvas.drawBitmap(bg_off, matrix, paint);// ç”»å‡ºå…³é—­æ—¶çš„èƒŒæ™¯
 		}
 
 		else {
 			x = bg_on.getWidth() - slip_btn.getWidth() / 2;
-			canvas.drawBitmap(bg_on, matrix, paint);// »­³ö´ò¿ªÊ±µÄ±³¾°
+			canvas.drawBitmap(bg_on, matrix, paint);// ç”»å‡ºæ‰“å¼€æ—¶çš„èƒŒæ™¯
 		}
 
-		if (OnSlip)// ÊÇ·ñÊÇÔÚ»¬¶¯×´Ì¬,
+		if (OnSlip)// æ˜¯å¦æ˜¯åœ¨æ»‘åŠ¨çŠ¶æ€,
 
 		{
-			if (NowX >= bg_on.getWidth())// ÊÇ·ñ»®³öÖ¸¶¨·¶Î§,²»ÄÜÈÃÓÎ±êÅÜµ½ÍâÍ·,±ØĞë×öÕâ¸öÅĞ¶Ï
+			if (NowX >= bg_on.getWidth())// æ˜¯å¦åˆ’å‡ºæŒ‡å®šèŒƒå›´,ä¸èƒ½è®©æ¸¸æ ‡è·‘åˆ°å¤–å¤´,å¿…é¡»åšè¿™ä¸ªåˆ¤æ–­
 
-				x = bg_on.getWidth() - slip_btn.getWidth() / 2;// ¼õÈ¥ÓÎ±ê1/2µÄ³¤¶È...
+				x = bg_on.getWidth() - slip_btn.getWidth() / 2;// å‡å»æ¸¸æ ‡1/2çš„é•¿åº¦...
 
 			else if (NowX < 0) {
 				x = 0;
 			} else {
 				x = NowX - slip_btn.getWidth() / 2;
 			}
-		} else {// ·Ç»¬¶¯×´Ì¬
+		} else {// éæ»‘åŠ¨çŠ¶æ€
 
-			if (NowChoose)// ¸ù¾İÏÖÔÚµÄ¿ª¹Ø×´Ì¬ÉèÖÃ»­ÓÎ±êµÄÎ»ÖÃ
+			if (NowChoose)// æ ¹æ®ç°åœ¨çš„å¼€å…³çŠ¶æ€è®¾ç½®ç”»æ¸¸æ ‡çš„ä½ç½®
 			{
 				x = Btn_Off.left;
-				canvas.drawBitmap(bg_on, matrix, paint);// ³õÊ¼×´Ì¬ÎªtrueÊ±Ó¦¸Ã»­³ö´ò¿ª×´Ì¬Í¼Æ¬
+				canvas.drawBitmap(bg_on, matrix, paint);// åˆå§‹çŠ¶æ€ä¸ºtrueæ—¶åº”è¯¥ç”»å‡ºæ‰“å¼€çŠ¶æ€å›¾ç‰‡
 			} else{
 				x = Btn_On.left;
-				canvas.drawBitmap(bg_off, matrix, paint);// ³õÊ¼×´Ì¬ÎªtrueÊ±Ó¦¸Ã»­³ö´ò¿ª×´Ì¬Í¼Æ¬
+				canvas.drawBitmap(bg_off, matrix, paint);// åˆå§‹çŠ¶æ€ä¸ºtrueæ—¶åº”è¯¥ç”»å‡ºæ‰“å¼€çŠ¶æ€å›¾ç‰‡
 			}
 		}
 //		if (isChecked) {
@@ -105,24 +105,24 @@ public class SlipButton extends View implements OnTouchListener {
 //			isChecked = !isChecked;
 //		}
 
-		if (x < 0)// ¶ÔÓÎ±êÎ»ÖÃ½øĞĞÒì³£ÅĞ¶Ï...
+		if (x < 0)// å¯¹æ¸¸æ ‡ä½ç½®è¿›è¡Œå¼‚å¸¸åˆ¤æ–­...
 			x = 0;
 		else if (x > bg_on.getWidth() - slip_btn.getWidth())
 			x = bg_on.getWidth() - slip_btn.getWidth();
-		canvas.drawBitmap(slip_btn, x, 0, paint);// »­³öÓÎ±ê.
+		canvas.drawBitmap(slip_btn, x, 0, paint);// ç”»å‡ºæ¸¸æ ‡.
 
 	}
 
 	public boolean onTouch(View v, MotionEvent event) {
 		switch (event.getAction())
-		// ¸ù¾İ¶¯×÷À´Ö´ĞĞ´úÂë
+		// æ ¹æ®åŠ¨ä½œæ¥æ‰§è¡Œä»£ç 
 
 		{
-		case MotionEvent.ACTION_MOVE:// »¬¶¯
+		case MotionEvent.ACTION_MOVE:// æ»‘åŠ¨
 			NowX = event.getX();
 			break;
 
-		case MotionEvent.ACTION_DOWN:// °´ÏÂ
+		case MotionEvent.ACTION_DOWN:// æŒ‰ä¸‹
 
 			if (event.getX() > bg_on.getWidth() || event.getY() > bg_on.getHeight())
 				return false;
@@ -131,7 +131,7 @@ public class SlipButton extends View implements OnTouchListener {
 			NowX = DownX;
 			break;
 
-		case MotionEvent.ACTION_CANCEL: // ÒÆµ½¿Ø¼şÍâ²¿
+		case MotionEvent.ACTION_CANCEL: // ç§»åˆ°æ§ä»¶å¤–éƒ¨
 
 			OnSlip = false;
 			boolean choose = NowChoose;
@@ -142,10 +142,10 @@ public class SlipButton extends View implements OnTouchListener {
 				NowX = NowX - slip_btn.getWidth() / 2;
 				NowChoose = false;
 			}
-			if (isChgLsnOn && (choose != NowChoose)) // Èç¹ûÉèÖÃÁË¼àÌıÆ÷,¾Íµ÷ÓÃÆä·½·¨..
+			if (isChgLsnOn && (choose != NowChoose)) // å¦‚æœè®¾ç½®äº†ç›‘å¬å™¨,å°±è°ƒç”¨å…¶æ–¹æ³•..
 				ChgLsn.OnChanged(NowChoose);
 			break;
-		case MotionEvent.ACTION_UP:// ËÉ¿ª
+		case MotionEvent.ACTION_UP:// æ¾å¼€
 
 			OnSlip = false;
 			boolean LastChoose = NowChoose;
@@ -160,17 +160,17 @@ public class SlipButton extends View implements OnTouchListener {
 				NowChoose = false;
 			}
 
-			if (isChgLsnOn && (LastChoose != NowChoose)) // Èç¹ûÉèÖÃÁË¼àÌıÆ÷,¾Íµ÷ÓÃÆä·½·¨..
+			if (isChgLsnOn && (LastChoose != NowChoose)) // å¦‚æœè®¾ç½®äº†ç›‘å¬å™¨,å°±è°ƒç”¨å…¶æ–¹æ³•..
 
 				ChgLsn.OnChanged(NowChoose);
 			break;
 		default:
 		}
-		invalidate();// ÖØ»­¿Ø¼ş
+		invalidate();// é‡ç”»æ§ä»¶
 		return true;
 	}
 
-	public void SetOnChangedListener(OnChangedListener l) {// ÉèÖÃ¼àÌıÆ÷,µ±×´Ì¬ĞŞ¸ÄµÄÊ±ºò
+	public void SetOnChangedListener(OnChangedListener l) {// è®¾ç½®ç›‘å¬å™¨,å½“çŠ¶æ€ä¿®æ”¹çš„æ—¶å€™
 		isChgLsnOn = true;
 		ChgLsn = l;
 	}

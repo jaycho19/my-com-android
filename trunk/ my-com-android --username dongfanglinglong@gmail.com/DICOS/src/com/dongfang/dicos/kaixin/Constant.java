@@ -14,11 +14,11 @@
 package com.dongfang.dicos.kaixin;
 
 /**
- * 此类定义了组件使用的常量、异步任务返回消息的类型、进度对话框ID
+ * 姝ょ被瀹氫箟浜嗙粍浠朵娇鐢ㄧ殑甯搁噺銆佸紓姝ヤ换鍔¤繑鍥炴秷鎭殑绫诲瀷銆佽繘搴﹀璇濇ID
  */
 public class Constant {
 	/**
-	 * 异步任务返回结果类型
+	 * 寮傛浠诲姟杩斿洖缁撴灉绫诲瀷
 	 */
 	public static final int		RESULT_FAILED_REQUEST_ERR		= -7;
 	public static final int		RESULT_FAILED_ENCODER_ERR		= -6;
@@ -37,7 +37,7 @@ public class Constant {
 	public static final String	packageName						= "com.kaixin.demo";
 
 	/**
-	 * 进度对话框ID
+	 * 杩涘害瀵硅瘽妗咺D
 	 */
 	public static final int		DIALOG_ID_DOWNLOADING			= 100;
 	public static final int		DIALOG_ID_UPLOADING				= 101;

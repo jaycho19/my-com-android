@@ -3,10 +3,10 @@ package com.dongfang.dicos.lottery.info;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.widget.TextView;
+
 import com.dongfang.dicos.net.Actions;
 import com.dongfang.dicos.util.ULog;
-
-import android.widget.TextView;
 
 public class MyInfoElement {
 	private static final String	tag	= "MyInfoElement";
@@ -18,20 +18,20 @@ public class MyInfoElement {
 
 	public void initElement(String json) {
 		// {"code":3747473272,"amount":20.5,"status":1,"date":"2012.7.1"},
-		// //code Ğ¡Æ±ºÅ£¬amount ½ğ¶î, status 0Î´ÉóºË 1ÒÑÉóºË£¬date Ìá½»Ê±¼ä
+		// //code å°ç¥¨å·ï¼Œamount é‡‘é¢, status 0æœªå®¡æ ¸ 1å·²å®¡æ ¸ï¼Œdate æäº¤æ—¶é—´
 
 		ULog.d(tag, "initElement " + json);
 
 		try {
 			JSONObject js = new JSONObject(json);
 
-			tvCode.setText("Ğ¡Æ±ºÅÂë £º" + js.getString(Actions.ACTIONS_KEY_CODE));
-			tvAmount.setText("Ğ¡Æ±½ğ¶î £º" + js.getString(Actions.ACTIONS_KEY_AMOUNT));
-			tvDate.setText("µİ½»Ê±¼ä £º" + js.getString(Actions.ACTIONS_KEY_DATE));
+			tvCode.setText("å°ç¥¨å·ç  ï¼š" + js.getString(Actions.ACTIONS_KEY_CODE));
+			tvAmount.setText("å°ç¥¨é‡‘é¢ ï¼š" + js.getString(Actions.ACTIONS_KEY_AMOUNT));
+			tvDate.setText("é€’äº¤æ—¶é—´ ï¼š" + js.getString(Actions.ACTIONS_KEY_DATE));
 			if ("1".equals(js.getString(Actions.ACTIONS_KEY_STATUS))) {
-				tvStatus.setText("ÉóºË×´Ì¬ £ºÒÑÉóºË");
+				tvStatus.setText("å®¡æ ¸çŠ¶æ€ ï¼šå·²å®¡æ ¸");
 			} else {
-				tvStatus.setText("ÉóºË×´Ì¬ £ºÒÑÉóºË");
+				tvStatus.setText("å®¡æ ¸çŠ¶æ€ ï¼šå·²å®¡æ ¸");
 			}
 
 		} catch (JSONException e) {

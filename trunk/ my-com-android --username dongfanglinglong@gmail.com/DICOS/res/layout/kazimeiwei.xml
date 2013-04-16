@@ -42,13 +42,17 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_gravity="center" >
+        android:layout_gravity="center" 
+        android:gravity="center"
+        >
 
         <LinearLayout
             android:id="@+id/ll_fling_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:gravity="center"
+            android:layout_centerVertical="true"
             android:minHeight="100dp" >
         </LinearLayout>
 

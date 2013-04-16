@@ -2,79 +2,79 @@ package com.dongfang.dicos.net;
 
 public class Actions {
 
-	/** ÇëÇó¶¯×÷ */
+	/** è¯·æ±‚åŠ¨ä½œ */
 	public static final String	ACTIONS_KEY_ACT							= "act";
-	/** ÊÖ»úºÅÂë */
+	/** æ‰‹æœºå·ç  */
 	public static final String	ACTIONS_KEY_MOBILE						= "mobile";
-	/** ·µ»Ø½á¹û */
+	/** è¿”å›ç»“æœ */
 	public static final String	ACTIONS_KEY_RESULT						= "result";
-	/** ÑéÖ¤Âë + Ğ¡Æ±ºÅÂë */
+	/** éªŒè¯ç  + å°ç¥¨å·ç  */
 	public static final String	ACTIONS_KEY_CODE						= "code";
-	/** Ğ¡Æ±½ğ¶î */
+	/** å°ç¥¨é‡‘é¢ */
 	public static final String	ACTIONS_KEY_AMOUNT						= "amount";
-	/** ³é½±×´Ì¬ */
+	/** æŠ½å¥–çŠ¶æ€ */
 	public static final String	ACTIONS_KEY_STATUS						= "status";
-	/** Êı¾İ */
+	/** æ•°æ® */
 	public static final String	ACTIONS_KEY_DATA						= "data";
-	/** ³é½±µİ½»Ê±¼ä */
+	/** æŠ½å¥–é€’äº¤æ—¶é—´ */
 	public static final String	ACTIONS_KEY_DATE						= "date";
-	/** ÃÅµêid */
+	/** é—¨åº—id */
 	public static final String	ACTIONS_KEY_ID							= "id";
-	/** Ê¡ */
+	/** çœ */
 	public static final String	ACTIONS_KEY_PROVINCE					= "province";
-	/** ÊĞÏØ */
+	/** å¸‚å¿ */
 	public static final String	ACTIONS_KEY_CITY						= "city";
-	/** ÊĞÏØ */
+	/** å¸‚å¿ */
 	public static final String	ACTIONS_KEY_ADDRESS						= "address";
-	/** µêÃû */
+	/** åº—å */
 	public static final String	ACTIONS_KEY_NAME						= "name";
-	/** µç»°ºÅÂë */
+	/** ç”µè¯å·ç  */
 	public static final String	ACTIONS_KEY_TEL							= "tel";
-	/** x×ø±ê */
+	/** xåæ ‡ */
 	public static final String	ACTIONS_KEY_X							= "x";
-	/** y×ø±ê */
+	/** yåæ ‡ */
 	public static final String	ACTIONS_KEY_Y							= "y";
-	/** ·µ»Ø½á¹û */
+	/** è¿”å›ç»“æœ */
 	public static final String	ACTIONS_KEY_TIME						= "time";
-	/** ·µ»Ø½á¹û */
+	/** è¿”å›ç»“æœ */
 	public static final String	ACTIONS_KEY_MSG							= "msg";
-	/** ´ÎÊı */
+	/** æ¬¡æ•° */
 	public static final String	ACTIONS_KEY_TIMES						= "times";
-	/** ¹«Ë¾Ãû³Æ */
+	/** å…¬å¸åç§° */
 	public static final String	ACTIONS_KEY_COMPANY						= "company";
-	/** ËùÔÚµØ */
+	/** æ‰€åœ¨åœ° */
 	public static final String	ACTIONS_KEY_AREA						= "area";
 
 	// -----------------------------------------------------------------------------------------------------------------------------
 	// -----------------------------------------------------------------------------------------------------------------------------
 	// -----------------------------------------------------------------------------------------------------------------------------
-	/** µÇÂ¼ */
+	/** ç™»å½• */
 	public static final String	ACTIONS_TYPE_LOGIN						= "login";
-	/** µÇ³ö */
+	/** ç™»å‡º */
 	public static final String	ACTIONS_TYPE_LOGOUT						= "logout";
-	/** ÑéÖ¤ */
+	/** éªŒè¯ */
 	public static final String	ACTIONS_TYPE_VALIDATE					= "validate";
-	/** ³é½± */
+	/** æŠ½å¥– */
 	public static final String	ACTIONS_TYPE_LOTTERY					= "lottery";
-	/** ³é½±ÀúÊ· */
+	/** æŠ½å¥–å†å² */
 	public static final String	ACTIONS_TYPE_LOTTERYHISTORY				= "lotteryHistory";
-	/** ³é½±ÊÇ·ñ½áÊø */
+	/** æŠ½å¥–æ˜¯å¦ç»“æŸ */
 	public static final String	ACTIONS_TYPE_LOTTERYLEGAL				= "lotteryLegal";
-	/** ·¹µêÁĞ±í */
+	/** é¥­åº—åˆ—è¡¨ */
 	public static final String	ACTIONS_TYPE_RESTAURENTLIST				= "restaurentListAndroid";
-	/** Ç©µ½ */
+	/** ç­¾åˆ° */
 	public static final String	ACTIONS_TYPE_SIGN						= "sign";
-	/** Ç©µ½ÀúÊ· */
+	/** ç­¾åˆ°å†å² */
 	public static final String	ACTIONS_TYPE_SIGNHISTORY				= "signHistory";
-	/** Òâ¼û·´À¡ */
+	/** æ„è§åé¦ˆ */
 	public static final String	ACTIONS_TYPE_ADVICE						= "adviceAndroid";
-	/** ³é½±´ÎÊıÅÅĞĞ */
+	/** æŠ½å¥–æ¬¡æ•°æ’è¡Œ */
 	public static final String	ACTIONS_TYPE_LOTTERYRATELIST			= "lotteryRateList";
-	/** ³é½±¹«²¼ */
+	/** æŠ½å¥–å…¬å¸ƒ */
 	public static final String	ACTIONS_TYPE_LOTTERYWINNER				= "lotteryWinner";
-	/** ½±Æ··¢·Å */
+	/** å¥–å“å‘æ”¾ */
 	public static final String	ACTIONS_TYPE_LOTTERYDISTRIBUTIONINFO	= "lotteryDistributionInfo";
-	/** »ñÈ¡ËùÔÚµØ */
+	/** è·å–æ‰€åœ¨åœ° */
 	public static final String	ACTIONS_TYPE_IPAREA						= "ipArea";
 
 }

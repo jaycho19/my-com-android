@@ -19,8 +19,8 @@ public class PrizeProvideElement {
 	public void initElement(String json) {
 		ULog.d(tag, "json = " + json);
 
-		// {"address":"xxÂ·xxºÅ","tel":"021-65475683","company":"XX×Ó¹«Ë¾"} //company
-		// ¹«Ë¾Ãû³Æ,tel ÁªÏµµç»°,address ÁªÏµµØÖ·
+		// {"address":"xxè·¯xxå·","tel":"021-65475683","company":"XXå­å…¬å¸"} //company
+		// å…¬å¸åç§°,tel è”ç³»ç”µè¯,address è”ç³»åœ°å€
 
 		try {
 			//json = new String(json.getBytes("GBK"), "UTF-8");

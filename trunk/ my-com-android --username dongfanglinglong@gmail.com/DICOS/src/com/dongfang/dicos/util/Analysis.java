@@ -2,7 +2,6 @@ package com.dongfang.dicos.util;
 
 import java.util.Iterator;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,7 +14,7 @@ public class Analysis {
 	public static final String	TAG	= "Analysis";
 
 	/**
-	 * Ìæ»» str ÖĞ ËùÓĞÖĞÀ¨ºÅ£¬Ã°ºÅ£¬·´Ğ±¸ÜºÍ¿Õ¸ñÖ®ºó£¬ÓÃ¶¼ºÃ·Ö¸î³ÉÊı×é
+	 * æ›¿æ¢ str ä¸­ æ‰€æœ‰ä¸­æ‹¬å·ï¼Œå†’å·ï¼Œåæ–œæ å’Œç©ºæ ¼ä¹‹åï¼Œç”¨éƒ½å¥½åˆ†å‰²æˆæ•°ç»„
 	 * 
 	 * @param str
 	 * @return
@@ -28,16 +27,16 @@ public class Analysis {
 		// "[\"http:\\/\\/www.dicos.com.cn\\/  images\\/  app\\/action\\/9_1348134247.jpg\"]";
 		// ULog.i(TAG, str);
 
-		/** Ìæ»»ËùÓĞÖĞÀ¨ºÅ£¬Ã°ºÅ£¬·´Ğ±¸ÜºÍ¿Õ¸ñ */
+		/** æ›¿æ¢æ‰€æœ‰ä¸­æ‹¬å·ï¼Œå†’å·ï¼Œåæ–œæ å’Œç©ºæ ¼ */
 		return str.replaceAll("\\[|\\]|\"|\\\\| ", "").split(",");
 	}
 
-	/** ½âÎö¿¨×ÌÃÀÎ¶¶ş¼¶²Ëµ¥ÏÔÊ¾Êı¾İ */
+	/** è§£æå¡æ»‹ç¾å‘³äºŒçº§èœå•æ˜¾ç¤ºæ•°æ® */
 	public static String[] analysisKZMWInfo_type(String str) {
 		return analysisCurrentSeasonImgUrl(str);
 	}
 
-	/** ½âÎö¿¨×ÌÃÀÎ¶Ê×Ò³Êı¾İ */
+	/** è§£æå¡æ»‹ç¾å‘³é¦–é¡µæ•°æ® */
 	public static Category analysisKZMWInfo(String str) {
 		ULog.i(TAG, str);
 

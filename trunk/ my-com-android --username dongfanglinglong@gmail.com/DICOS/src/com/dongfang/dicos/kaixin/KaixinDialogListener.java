@@ -15,35 +15,35 @@
 package com.dongfang.dicos.kaixin;
 
 /**
- * KaixinDialogÊÂ¼ş¼àÌıÆ÷
+ * KaixinDialogäº‹ä»¶ç›‘å¬å™¨
  */
 public interface KaixinDialogListener {
 
 	/**
-	 * Î´´¦Àí
+	 * æœªå¤„ç†
 	 */
 	public final static int	UNPROCCESS		= 0;
 
 	/**
-	 * ÒÑ´¦Àí
+	 * å·²å¤„ç†
 	 */
 	public final static int	PROCCESSED		= 1;
 
 	/**
-	 * ÓÉDialog´¦Àí
+	 * ç”±Dialogå¤„ç†
 	 */
 	public final static int	DIALOG_PROCCESS	= 2;
 
 	/**
-	 * Ò³Ãæ¼ÓÔØÖ®Ç°µ÷ÓÃ¡£
+	 * é¡µé¢åŠ è½½ä¹‹å‰è°ƒç”¨ã€‚
 	 * 
 	 * @param url
-	 * @return 0:Î´´¦Àí£¬1:ÒÑ¾­´¦Àí£¬2:ÓÉDialog´¦Àí
+	 * @return 0:æœªå¤„ç†ï¼Œ1:å·²ç»å¤„ç†ï¼Œ2:ç”±Dialogå¤„ç†
 	 */
 	public int onPageBegin(String url);
 
 	/**
-	 * Ò³Ãæ¿ªÊ¼¼ÓÔØÊ±µ÷ÓÃ
+	 * é¡µé¢å¼€å§‹åŠ è½½æ—¶è°ƒç”¨
 	 * 
 	 * @param url
 	 * @return
@@ -51,14 +51,14 @@ public interface KaixinDialogListener {
 	public boolean onPageStart(String url);
 
 	/**
-	 * Ò³Ãæ¼ÓÔØ½áÊøºóµ÷ÓÃ
+	 * é¡µé¢åŠ è½½ç»“æŸåè°ƒç”¨
 	 * 
 	 * @param url
 	 */
 	public void onPageFinished(String url);
 
 	/**
-	 * ³öÏÖ´íÎóµ÷ÓÃ
+	 * å‡ºç°é”™è¯¯è°ƒç”¨
 	 * 
 	 * @param errorCode
 	 * @param description

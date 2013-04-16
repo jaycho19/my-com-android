@@ -20,20 +20,20 @@ import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.util.Util;
 
 /**
- * Í¨¹ı×¢²áÓÊÏä»ñÈ¡ÃÜÂë
+ * é€šè¿‡æ³¨å†Œé‚®ç®±è·å–å¯†ç 
  * 
  * @author dongfang
  */
 public class GetPasswordByEmail extends Activity implements OnClickListener {
 	public static final String	TAG	= GetPasswordByEmail.class.getName();
 
-	/** ·µ»Ø ,×¢²á */
+	/** è¿”å› ,æ³¨å†Œ */
 	private Button				bBack, bSigne;
 
-	/** È·ÈÏµİ½»,È¡Ïû */
+	/** ç¡®è®¤é€’äº¤,å–æ¶ˆ */
 	private Button				bOK, bCancel;
 
-	/** ÓÊÏäµØÖ· */
+	/** é‚®ç®±åœ°å€ */
 	private EditText			etEmail;
 
 	
@@ -94,7 +94,7 @@ public class GetPasswordByEmail extends Activity implements OnClickListener {
 			break;
 		case R.id.getpwd_button_ok:
 			if (!Util.isEmail(etEmail.getText().toString())) {
-				Toast.makeText(this, "ÇëÊäÈëÕıÈ·µÄÓÊÏäµØÖ·...", Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "è¯·è¾“å…¥æ­£ç¡®çš„é‚®ç®±åœ°å€...", Toast.LENGTH_LONG).show();
 			} else {
 				bOK.setEnabled(false);
 				remainingTime = System.currentTimeMillis() + 5 * 60 * 1000;
@@ -124,9 +124,9 @@ public class GetPasswordByEmail extends Activity implements OnClickListener {
 			case ComParams.HANDLER_RESULT_GET_PASSWORD:
 				if (0 < msg.arg1){
 					new AlertDialog.Builder(GetPasswordByEmail.this)
-					.setTitle("ÃÜÂëÒÑ·¢ËÍÖÁ×¢²áÓÊÏä£¬Çë×¢Òâ²éÊÕ£¡")
-					.setPositiveButton("È·¶¨", null)
-					.setNegativeButton("È¡Ïû", null)
+					.setTitle("å¯†ç å·²å‘é€è‡³æ³¨å†Œé‚®ç®±ï¼Œè¯·æ³¨æ„æŸ¥æ”¶ï¼")
+					.setPositiveButton("ç¡®å®š", null)
+					.setNegativeButton("å–æ¶ˆ", null)
 					.show();
 					bOK.setEnabled(false);
 					this.sendEmptyMessage(100);
@@ -134,11 +134,11 @@ public class GetPasswordByEmail extends Activity implements OnClickListener {
 				else{
 					removeMessages(100);
 					bOK.setEnabled(true);
-					bOK.setText("È·¶¨ ");
+					bOK.setText("ç¡®å®š ");
 					new AlertDialog.Builder(GetPasswordByEmail.this)
-					.setTitle("¸ÃÓÊÏäµØÖ·´íÎó»òÎ´¾­×¢²á£¬ÇëÊäÈëÕıÈ·µÄÓÊÏäµØÖ·£¡")
-					.setPositiveButton("È·¶¨", null)
-					.setNegativeButton("È¡Ïû", null)
+					.setTitle("è¯¥é‚®ç®±åœ°å€é”™è¯¯æˆ–æœªç»æ³¨å†Œï¼Œè¯·è¾“å…¥æ­£ç¡®çš„é‚®ç®±åœ°å€ï¼")
+					.setPositiveButton("ç¡®å®š", null)
+					.setNegativeButton("å–æ¶ˆ", null)
 					.show();
 				}
 				// Toast.makeText(GetPasswordByEmail.this, (String) msg.obj, Toast.LENGTH_LONG).show();
@@ -152,12 +152,12 @@ public class GetPasswordByEmail extends Activity implements OnClickListener {
 					
 					String s = sec < 10 ? "0"+sec : ""+sec;
 					
-					bOK.setText("È·¶¨ "  +  ( min > 0 ? "(0"+ min +":"+ s +")" : "("+ s +")"));
+					bOK.setText("ç¡®å®š "  +  ( min > 0 ? "(0"+ min +":"+ s +")" : "("+ s +")"));
 					sendEmptyMessageDelayed(100, 1000);
 				}
 				else{
 					bOK.setEnabled(true);
-					bOK.setText("È·¶¨ ");
+					bOK.setText("ç¡®å®š ");
 				}
 			}
 				break;

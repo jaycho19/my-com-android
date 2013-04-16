@@ -9,8 +9,8 @@ import android.view.View;
 public class ImageShowView extends View implements Runnable {
 
 	Bitmap			mBitmap			= null;
-	int				mBitmapWidth	= 0;			// ¶¨ÒåÍ¼Æ¬µÄ¿í
-	int				mBitmapHeight	= 0;			// ¶¨ÒåÍ¼Æ¬µÄ¸ß
+	int				mBitmapWidth	= 0;			// å®šä¹‰å›¾ç‰‡çš„å®½
+	int				mBitmapHeight	= 0;			// å®šä¹‰å›¾ç‰‡çš„é«˜
 
 	private double	Scale			= 1.0;
 
@@ -24,7 +24,7 @@ public class ImageShowView extends View implements Runnable {
 		// mBitmapWidth = mBitmap.getWidth();
 		// mBitmapHeight = mBitmap.getHeight();
 
-		// ¿ªÆôÏß³Ì
+		// å¼€å¯çº¿ç¨‹
 		new Thread(this).start();
 	}
 
@@ -36,11 +36,11 @@ public class ImageShowView extends View implements Runnable {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		mMatrix.reset();
-		mMatrix.postScale((float) Scale, (float) Scale);// ÉèÖÃËõ·Å
+		mMatrix.postScale((float) Scale, (float) Scale);// è®¾ç½®ç¼©æ”¾
 
 		Bitmap mBitmap2 = Bitmap.createBitmap(mBitmap, 0, 0, mBitmapWidth, mBitmapHeight, mMatrix, true);
 
-		// »æÖÆĞı×ªÖ®ºóµÄÍ¼Ïñ
+		// ç»˜åˆ¶æ—‹è½¬ä¹‹åçš„å›¾åƒ
 		ImageShowView.drawImage(canvas, mBitmap2, (320 - mBitmapWidth) / 2, 10);
 		mBitmap2 = null;
 	}

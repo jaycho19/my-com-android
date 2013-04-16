@@ -55,7 +55,7 @@ public class RequestTokenHeader extends HttpHeaderFactory {
 		return pp;
 	}
 
-	// Éú³Éoauth_signature
+	// ç”Ÿæˆoauth_signature
 	public String generateSignature(String data, Token token) throws WeiboException {
 		byte[] byteHMAC = null;
 		try {

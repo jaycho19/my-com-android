@@ -13,12 +13,12 @@ import com.dongfang.dicos.util.ULog;
 public class DetailActivity extends Activity implements OnClickListener {
 	public static final String	tag	= "DetailActivity";
 
-	/** 返回按钮 */
+	/** 杩斿洖鎸夐挳 */
 	private Button				bBack;
-	/** 确认按钮 */
+	/** 纭鎸夐挳 */
 	private Button				bOK;
 
-	/** 抽奖详情 */
+	/** 鎶藉璇︽儏 */
 	// private TextView tvDetail;
 
 	@Override

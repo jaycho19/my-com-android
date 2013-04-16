@@ -131,7 +131,7 @@ public class WeiboDialog extends Dialog {
 		@Override
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
 			ULog.d(TAG, "Redirect URL: " + url);
-			// 待后台增加对默认重定向地址的支持后修改下面的逻辑
+			// 寰呭悗鍙板鍔犲榛樿閲嶅畾鍚戝湴鍧�鐨勬敮鎸佸悗淇敼涓嬮潰鐨勯�昏緫
 			if (url.startsWith(mWeibo.getRedirectUrl())) {
 				handleRedirectUrl(view, url);
 				WeiboDialog.this.dismiss();
@@ -190,7 +190,7 @@ public class WeiboDialog extends Dialog {
 		if (error == null && error_code == null) {
 			mListener.onComplete(values);
 		} else if (error.equals("access_denied")) {
-			// 用户或授权服务器拒绝授予数据访问权限
+			// 鐢ㄦ埛鎴栨巿鏉冩湇鍔″櫒鎷掔粷鎺堜簣鏁版嵁璁块棶鏉冮檺
 			mListener.onCancel();
 		} else {
 			mListener.onWeiboException(new WeiboException(error, Integer.parseInt(error_code)));

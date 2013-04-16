@@ -36,7 +36,7 @@ public class LoginTask extends AsyncTask<String, Integer, Bundle> {
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-		progressDialog = ProgressDialog.show(context, "", "µÇÂ¼ÖÐ...");
+		progressDialog = ProgressDialog.show(context, "", "ç™»å½•ä¸­...");
 		progressDialog.setIndeterminate(true);
 		progressDialog.setCancelable(true);
 		progressDialog.setOnDismissListener(new OnDismissListener() {

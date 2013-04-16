@@ -15,38 +15,38 @@
 package com.dongfang.dicos.kaixin;
 
 /**
- * Òì²½ÍøÂçÇëÇó¶¯×÷¼àÌıÆ÷
+ * å¼‚æ­¥ç½‘ç»œè¯·æ±‚åŠ¨ä½œç›‘å¬å™¨
  */
 public interface AsyncKaixinListener {
 	/**
-	 * ÇëÇóÍê³É
+	 * è¯·æ±‚å®Œæˆ
 	 * 
 	 * @param response
-	 *            ·şÎñÆ÷·µ»ØµÄJSON´®
+	 *            æœåŠ¡å™¨è¿”å›çš„JSONä¸²
 	 * @param obj
-	 *            µ÷ÓÃÒì²½ÇëÇóÊ±ÉèÖÃµÄ¹ØÁªµÄÊı¾İ
+	 *            è°ƒç”¨å¼‚æ­¥è¯·æ±‚æ—¶è®¾ç½®çš„å…³è”çš„æ•°æ®
 	 * @see AsyncKaixin
 	 */
 	public void onRequestComplete(String response, Object obj);
 
 	/**
-	 * ·şÎñÆ÷·µ»Ø´íÎóĞÅÏ¢
+	 * æœåŠ¡å™¨è¿”å›é”™è¯¯ä¿¡æ¯
 	 * 
 	 * @param kaixinError
-	 *            ·â×°·şÎñÆ÷»ØµÄ´íÎóĞÅÏ¢
+	 *            å°è£…æœåŠ¡å™¨å›çš„é”™è¯¯ä¿¡æ¯
 	 * @param obj
-	 *            µ÷ÓÃÒì²½ÇëÇóÊ±ÉèÖÃµÄ¹ØÁªµÄÊı¾İ
+	 *            è°ƒç”¨å¼‚æ­¥è¯·æ±‚æ—¶è®¾ç½®çš„å…³è”çš„æ•°æ®
 	 * @see AsyncKaixin
 	 */
 	public void onRequestError(KaixinError kaixinError, Object obj);
 
 	/**
-	 * ÇëÇó¹ı³ÌÖĞ·¢ÉúÁË´íÎó
+	 * è¯·æ±‚è¿‡ç¨‹ä¸­å‘ç”Ÿäº†é”™è¯¯
 	 * 
 	 * @param fault
-	 *            ÇëÇó¹ı³ÌÖĞÅ×³öµÄÒì³£
+	 *            è¯·æ±‚è¿‡ç¨‹ä¸­æŠ›å‡ºçš„å¼‚å¸¸
 	 * @param obj
-	 *            µ÷ÓÃÒì²½ÇëÇóÊ±ÉèÖÃµÄ¹ØÁªµÄÊı¾İ
+	 *            è°ƒç”¨å¼‚æ­¥è¯·æ±‚æ—¶è®¾ç½®çš„å…³è”çš„æ•°æ®
 	 * @see AsyncKaixin
 	 */
 	public void onRequestNetError(Throwable fault, Object obj);

@@ -19,7 +19,7 @@ import com.dongfang.dicos.util.Util;
 
 /**
  * 
- * 查看图片正式尺寸
+ * 鏌ョ湅鍥剧墖姝ｅ紡灏哄
  * 
  * @author dongfang
  * 

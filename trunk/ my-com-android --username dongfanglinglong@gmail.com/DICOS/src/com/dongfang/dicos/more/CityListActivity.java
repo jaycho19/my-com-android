@@ -10,8 +10,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -20,12 +22,13 @@ import android.widget.TextView;
 import com.dongfang.dicos.R;
 import com.dongfang.dicos.util.ComParams;
 import com.dongfang.dicos.util.ULog;
+import com.dongfang.dicos.util.Util;
 import com.dongfang.dicos.view.SideBar;
 
 public class CityListActivity extends Activity implements OnClickListener {
 	public static final String	tag	= "TuiSongActivity";
 
-	/** 返回按钮 */
+	/** 杩斿洖鎸夐挳 */
 	private Button				bBack;
 	private TextView			tvTitle;
 
@@ -48,11 +51,29 @@ public class CityListActivity extends Activity implements OnClickListener {
 		tvTitle.setText(ComParams.IPAREA);
 
 		ListView list = (ListView) findViewById(R.id.listview_setting_citylist);
+		list.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				ULog.d(tag, "setOnTouchListener  ing ");
+				Util.hideInput(v);
+				return false;
+			}
+		});
+		
 		stringList = InitListViewData();
 		adapter = new CityListAdapter(this, stringList, handler);
 		list.setAdapter(adapter);
 		SideBar indexBar = (SideBar) findViewById(R.id.sidebar_setting_citylist);
 		indexBar.setListView(list);
+		indexBar.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				ULog.d(tag, "setOnTouchListener  ing ");
+				Util.hideInput(v);
+				return false;
+			}
+		});
+
 		ULog.d(tag, "indexBar hight = " + indexBar.getHeight());
 
 		final EditText editText = (EditText) findViewById(R.id.edittext_setting_citylist_search);
@@ -65,7 +86,8 @@ public class CityListActivity extends Activity implements OnClickListener {
 				if (s.toString().trim().length() > 0) {
 					adapter.setList(getListViewDataBy(s.toString().trim()));
 					adapter.notifyDataSetChanged();
-				} else {
+				}
+				else {
 					adapter.setList(stringList);
 					adapter.notifyDataSetChanged();
 				}
@@ -96,7 +118,7 @@ public class CityListActivity extends Activity implements OnClickListener {
 		return stringList;
 	}
 
-	/** 根据输入情况进行数据更新 */
+	/** 鏍规嵁杈撳叆鎯呭喌杩涜鏁版嵁鏇存柊 */
 	private ArrayList<String> getListViewDataBy(String sInput) {
 		ArrayList<String> stringList = new ArrayList<String>();
 		String[] cityList = getResources().getStringArray(R.array.citylist);

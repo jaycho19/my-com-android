@@ -46,25 +46,25 @@ import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 
 /**
- * ·â×°Ò»Ğ©ÊµÓÃ·½·¨µÄ°ïÖúÆ÷Àà
+ * å°è£…ä¸€äº›å®ç”¨æ–¹æ³•çš„å¸®åŠ©å™¨ç±»
  */
 public class UtilKaiXin {
 	/**
-	 * log±êÇ©
+	 * logæ ‡ç­¾
 	 */
 	public static final String	LOG_TAG				= "KAIXIN_ANDROID_SDK";
 
 	/**
-	 * ¶ÔÓÚInputStreamÀàĞÍµÄÉÏ´«Êı¾İ£¬ÉÏ´«»º³åÇø´óĞ¡
+	 * å¯¹äºInputStreamç±»å‹çš„ä¸Šä¼ æ•°æ®ï¼Œä¸Šä¼ ç¼“å†²åŒºå¤§å°
 	 */
 	private static final int	UPLOAD_BUFFER_SIZE	= 1024;
 
 	/**
-	 * ½«ÓÃ&ºÅÁ´½ÓµÄURL²ÎÊı×ª»»³Ékey-valueĞÎÊ½µÄ²ÎÊı¼¯
+	 * å°†ç”¨&å·é“¾æ¥çš„URLå‚æ•°è½¬æ¢æˆkey-valueå½¢å¼çš„å‚æ•°é›†
 	 * 
 	 * @param s
-	 *            ½«ÓÃ&ºÅÁ´½ÓµÄURL²ÎÊı
-	 * @return key-valueĞÎÊ½µÄ²ÎÊı¼¯
+	 *            å°†ç”¨&å·é“¾æ¥çš„URLå‚æ•°
+	 * @return key-valueå½¢å¼çš„å‚æ•°é›†
 	 */
 	public static Bundle decodeUrl(String s) {
 		Bundle params = new Bundle();
@@ -81,11 +81,11 @@ public class UtilKaiXin {
 	}
 
 	/**
-	 * ½«URLÖĞµÄ²éÑ¯´®×ª»»³Ékey-valueĞÎÊ½µÄ²ÎÊı¼¯
+	 * å°†URLä¸­çš„æŸ¥è¯¢ä¸²è½¬æ¢æˆkey-valueå½¢å¼çš„å‚æ•°é›†
 	 * 
 	 * @param url
-	 *            ´ı½âÎöµÄurl
-	 * @return key-valueĞÎÊ½µÄ²ÎÊı¼¯
+	 *            å¾…è§£æçš„url
+	 * @return key-valueå½¢å¼çš„å‚æ•°é›†
 	 */
 	public static Bundle parseUrl(String url) {
 		url = url.replace("#", "?");
@@ -102,11 +102,11 @@ public class UtilKaiXin {
 	}
 
 	/**
-	 * ½«key-valueĞÎÊ½µÄ²ÎÊı¼¯×ª»»³ÉÓÃ&ºÅÁ´½ÓµÄURL²éÑ¯²ÎÊıĞÎÊ½¡£
+	 * å°†key-valueå½¢å¼çš„å‚æ•°é›†è½¬æ¢æˆç”¨&å·é“¾æ¥çš„URLæŸ¥è¯¢å‚æ•°å½¢å¼ã€‚
 	 * 
 	 * @param parameters
-	 *            key-valueĞÎÊ½µÄ²ÎÊı¼¯
-	 * @return ÓÃ&ºÅÁ´½ÓµÄURL²éÑ¯²ÎÊı
+	 *            key-valueå½¢å¼çš„å‚æ•°é›†
+	 * @return ç”¨&å·é“¾æ¥çš„URLæŸ¥è¯¢å‚æ•°
 	 */
 	public static String encodeUrl(Bundle parameters) {
 		if (parameters == null) {
@@ -126,21 +126,21 @@ public class UtilKaiXin {
 	}
 
 	/**
-	 * ·¢ËÍhttpÇëÇó
+	 * å‘é€httpè¯·æ±‚
 	 * 
 	 * @param context
-	 *            Ó¦ÓÃ»·¾³
+	 *            åº”ç”¨ç¯å¢ƒ
 	 * @param requestURL
-	 *            ½Ó¿ÚµØÖ·
+	 *            æ¥å£åœ°å€
 	 * @param httpMethod
-	 *            GET »ò POST
+	 *            GET æˆ– POST
 	 * @param params
-	 *            key-valueĞÎÊ½µÄ²ÎÊı¼¯£¬keyÎª²ÎÊıÃû£¬valueÎª²ÎÊıÖµ£¬Êı¾İÀàĞÍ¿ÉÒÔÊÇString»òbyte[]
+	 *            key-valueå½¢å¼çš„å‚æ•°é›†ï¼Œkeyä¸ºå‚æ•°åï¼Œvalueä¸ºå‚æ•°å€¼ï¼Œæ•°æ®ç±»å‹å¯ä»¥æ˜¯Stringæˆ–byte[]
 	 * @param photos
-	 *            key-valueĞÎÊ½µÄÍ¼ÏñÊı¾İ¼¯£¬ keyÎªfilename£¬
-	 *            valueÎªÍ¼ÏñÊı¾İ£¬²ÎÊıÀàĞÍ¿ÉÒÔÊÇInputStream»òbyte[]
-	 *            Èç¹û²ÎÊıÀàĞÍÎªInputStream£¬»áÔÚopenUrlº¯ÊıÖĞ½«´ËÁ÷¹Ø±Õ
-	 * @return ·şÎñÆ÷·µ»ØµÄJSON´®
+	 *            key-valueå½¢å¼çš„å›¾åƒæ•°æ®é›†ï¼Œ keyä¸ºfilenameï¼Œ
+	 *            valueä¸ºå›¾åƒæ•°æ®ï¼Œå‚æ•°ç±»å‹å¯ä»¥æ˜¯InputStreamæˆ–byte[]
+	 *            å¦‚æœå‚æ•°ç±»å‹ä¸ºInputStreamï¼Œä¼šåœ¨openUrlå‡½æ•°ä¸­å°†æ­¤æµå…³é—­
+	 * @return æœåŠ¡å™¨è¿”å›çš„JSONä¸²
 	 * @throws IOException
 	 */
 	public static String openUrl(Context context, String requestURL, String httpMethod, Bundle params,
@@ -170,7 +170,7 @@ public class UtilKaiXin {
 				}
 			}
 
-			String BOUNDARY = UtilKaiXin.md5(String.valueOf(System.currentTimeMillis())); // Êı¾İ·Ö¸ôÏß
+			String BOUNDARY = UtilKaiXin.md5(String.valueOf(System.currentTimeMillis())); // æ•°æ®åˆ†éš”çº¿
 			String endLine = "\r\n";
 
 			conn.setRequestMethod("POST");
@@ -231,7 +231,7 @@ public class UtilKaiXin {
 			// os.write(byteArray);
 			// os.write((endLine + "--" + BOUNDARY + endLine).getBytes());
 			// } else {
-			// ULog.e(LOG_TAG, "ÎŞĞ§µÄ²ÎÊıÀàĞÍ");
+			// ULog.e(LOG_TAG, "æ— æ•ˆçš„å‚æ•°ç±»å‹");
 			// }
 			// }
 			// }
@@ -249,13 +249,13 @@ public class UtilKaiXin {
 	}
 
 	/**
-	 * ·â×°multi-part·½Ê½ÉÏ´«µÄÊı¾İ¶Î
+	 * å°è£…multi-partæ–¹å¼ä¸Šä¼ çš„æ•°æ®æ®µ
 	 * 
 	 * @param parameters
-	 *            key-valueĞÎÊ½µÄ²ÎÊı¼¯
+	 *            key-valueå½¢å¼çš„å‚æ•°é›†
 	 * @param boundary
-	 *            Êı¾İ·Ö¸îÏß
-	 * @return ÓÃÓÚmulti-part·½Ê½ÉÏ´«µÄÊı¾İ
+	 *            æ•°æ®åˆ†å‰²çº¿
+	 * @return ç”¨äºmulti-partæ–¹å¼ä¸Šä¼ çš„æ•°æ®
 	 */
 	public static String encodePostBody(Bundle parameters, String boundary) {
 		if (parameters == null)
@@ -275,11 +275,11 @@ public class UtilKaiXin {
 	}
 
 	/**
-	 * ¶ÁÈ¡httpÇëÇóµÄÍøÂçÊı¾İÁ÷
+	 * è¯»å–httpè¯·æ±‚çš„ç½‘ç»œæ•°æ®æµ
 	 * 
 	 * @param in
-	 *            ÍøÂçÊı¾İÁ÷
-	 * @return ¶ÁÈ¡µÄÍøÂçÊı¾İÁ÷
+	 *            ç½‘ç»œæ•°æ®æµ
+	 * @return è¯»å–çš„ç½‘ç»œæ•°æ®æµ
 	 * @throws IOException
 	 */
 	public static String read(InputStream in) throws IOException {
@@ -293,7 +293,7 @@ public class UtilKaiXin {
 	}
 
 	/**
-	 * Çå³ıcookie
+	 * æ¸…é™¤cookie
 	 * 
 	 * @param context
 	 */
@@ -305,11 +305,11 @@ public class UtilKaiXin {
 	}
 
 	/**
-	 * ½«·şÎñÆ÷·µ»Ø´øÓĞ´íÎóĞÅÏ¢µÄJSON´®£¬×ª»¯³ÉKaixinError¶ÔÏó
+	 * å°†æœåŠ¡å™¨è¿”å›å¸¦æœ‰é”™è¯¯ä¿¡æ¯çš„JSONä¸²ï¼Œè½¬åŒ–æˆKaixinErrorå¯¹è±¡
 	 * 
 	 * @param response
-	 *            ·şÎñÆ÷·µ»Ø´øÓĞ´íÎóĞÅÏ¢µÄJSON´®
-	 * @return KaixinError¶ÔÏó
+	 *            æœåŠ¡å™¨è¿”å›å¸¦æœ‰é”™è¯¯ä¿¡æ¯çš„JSONä¸²
+	 * @return KaixinErrorå¯¹è±¡
 	 */
 	public static KaixinError parseRequestError(String response) {
 		if (response.indexOf("error_code") < 0)
@@ -328,7 +328,7 @@ public class UtilKaiXin {
 	}
 
 	/**
-	 * ÏÔÊ¾ĞÅÏ¢ÌáÊ¾¿ò
+	 * æ˜¾ç¤ºä¿¡æ¯æç¤ºæ¡†
 	 */
 	public static void showAlert(Context context, String title, String text) {
 		Builder alertBuilder = new Builder(context);
@@ -356,28 +356,28 @@ public class UtilKaiXin {
 	}
 
 	/**
-	 * ½¨Á¢HttpÁ¬½Ó£¬Èç¹ûapnµÄÉèÖÃÖĞÅäÖÃÁË´úÀí·şÎñÆ÷£¬ÄÇÃ´½¨Á¢Á¬½ÓÊ±Ò²ĞèÒª×öÏà¹ØµÄ´¦Àí
+	 * å»ºç«‹Httpè¿æ¥ï¼Œå¦‚æœapnçš„è®¾ç½®ä¸­é…ç½®äº†ä»£ç†æœåŠ¡å™¨ï¼Œé‚£ä¹ˆå»ºç«‹è¿æ¥æ—¶ä¹Ÿéœ€è¦åšç›¸å…³çš„å¤„ç†
 	 * 
 	 * @throws IOException
 	 */
 	public static HttpURLConnection getConnection(Context context, URL url) throws IOException {
 
-		// ËµÃ÷£ºÁªÍøÊ±ÓÅÏÈÑ¡ÔñWIFIÁªÍø£¬Èç¹ûWIFIÃ»¿ª»ò²»¿ÉÓÃ£¬ÔòÊ¹ÓÃÒÆ¶¯ÍøÂç
+		// è¯´æ˜ï¼šè”ç½‘æ—¶ä¼˜å…ˆé€‰æ‹©WIFIè”ç½‘ï¼Œå¦‚æœWIFIæ²¡å¼€æˆ–ä¸å¯ç”¨ï¼Œåˆ™ä½¿ç”¨ç§»åŠ¨ç½‘ç»œ
 		HttpsURLConnection httpsURLConn = null;
 
-		// »ñÈ¡µ±Ç°¿ÉÓÃÍøÂçĞÅÏ¢
+		// è·å–å½“å‰å¯ç”¨ç½‘ç»œä¿¡æ¯
 		ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netInfo = connMgr.getActiveNetworkInfo();
 
-		// Èç¹ûµ±Ç°ÊÇWIFIÁ¬½Ó
+		// å¦‚æœå½“å‰æ˜¯WIFIè¿æ¥
 		if (null != netInfo && ConnectivityManager.TYPE_WIFI == netInfo.getType()) {
 			httpsURLConn = (HttpsURLConnection) url.openConnection();
-		} else {// ·ÇWIFIÁªÍø
+		} else {// éWIFIè”ç½‘
 			String proxyHost = android.net.Proxy.getDefaultHost();
 
-			if (null == proxyHost) { // Ö±Á¬Ä£Ê½
+			if (null == proxyHost) { // ç›´è¿æ¨¡å¼
 				httpsURLConn = (HttpsURLConnection) url.openConnection();
-			} else { // ´úÀíÄ£Ê½
+			} else { // ä»£ç†æ¨¡å¼
 				java.net.Proxy p = new java.net.Proxy(java.net.Proxy.Type.HTTP, new InetSocketAddress(
 						android.net.Proxy.getDefaultHost(), android.net.Proxy.getDefaultPort()));
 				httpsURLConn = (HttpsURLConnection) url.openConnection(p);
@@ -387,10 +387,10 @@ public class UtilKaiXin {
 	}
 
 	/**
-	 * ÅĞ¶Ï×Ö·û´®ÖĞÊÇ·ñÓĞÖĞÎÄ×Ö·û
+	 * åˆ¤æ–­å­—ç¬¦ä¸²ä¸­æ˜¯å¦æœ‰ä¸­æ–‡å­—ç¬¦
 	 * 
 	 * @param str
-	 *            ×Ö·û´®
+	 *            å­—ç¬¦ä¸²
 	 * @return boolean
 	 */
 	public static boolean isContainChinese(String str) {

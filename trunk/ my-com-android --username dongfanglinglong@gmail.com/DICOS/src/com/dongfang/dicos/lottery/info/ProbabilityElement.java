@@ -3,10 +3,10 @@ package com.dongfang.dicos.lottery.info;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.widget.TextView;
+
 import com.dongfang.dicos.net.Actions;
 import com.dongfang.dicos.util.ULog;
-
-import android.widget.TextView;
 
 public class ProbabilityElement {
 	private static final String	tag	= "ProbabilityElement";
@@ -15,7 +15,7 @@ public class ProbabilityElement {
 	public TextView				tvTimes;
 
 	public void initElement(String json) {
-		// {"mobile":"134xxxx3492","times":10}£¨ //mobile  ÷ª˙∫≈£¨times ¥Œ ˝
+		// {"mobile":"134xxxx3492","times":10}Ôºå //mobile ÊâãÊú∫Âè∑Ôºåtimes Ê¨°Êï∞
 
 		ULog.d(tag, "initElement " + json);
 

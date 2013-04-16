@@ -18,7 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * 封装授权错误信息的类
+ * 灏佽鎺堟潈閿欒淇℃伅鐨勭被
  * 
  */
 public class KaixinAuthError extends RuntimeException {

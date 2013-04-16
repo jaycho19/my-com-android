@@ -110,13 +110,13 @@ public class DownloadIMG extends Thread {
 	}
 
 	/**
-	 * ÊÊÓÃÓÚandroid 3.0 ÒÔÏÂ°æ±¾
+	 * é€‚ç”¨äºandroid 3.0 ä»¥ä¸‹ç‰ˆæœ¬
 	 * 
 	 * @param handler
 	 * @param urlStr
-	 *            Ä¿±êURL
+	 *            ç›®æ ‡URL
 	 * @param length
-	 *            ĞèÒª¿ªÊ¼ÏÂÔØµÄ×Ö½Ú
+	 *            éœ€è¦å¼€å§‹ä¸‹è½½çš„å­—èŠ‚
 	 * @return
 	 */
 	private InputStream getInputStreamFromURLV2(Handler handler, String urlStr, long length) {
@@ -152,12 +152,12 @@ public class DownloadIMG extends Thread {
 	/**
 	 * 
 	 * @param ins
-	 *            ÊäÈëÁ÷
+	 *            è¾“å…¥æµ
 	 * @param filename
-	 *            ÎÄ¼şÃû³Æ ĞèÒª¾ø¶ÔÂ·¾¶
+	 *            æ–‡ä»¶åç§° éœ€è¦ç»å¯¹è·¯å¾„
 	 * @param handler
 	 * @param array_param
-	 * @return ·µ»ØÎÄ¼şÃû³Æ filename + "e"
+	 * @return è¿”å›æ–‡ä»¶åç§° filename + "e"
 	 */
 	private String saveFile(InputStream ins, String filename, Handler handler, int array_param) {
 		if (TextUtils.isEmpty(filename))
@@ -191,7 +191,7 @@ public class DownloadIMG extends Thread {
 			ins.close();
 			outs.close();
 
-			// ÖØÃüÃû
+			// é‡å‘½å
 			(new File(filename)).renameTo(new File(filename + "e"));
 
 			if (null != handler) {

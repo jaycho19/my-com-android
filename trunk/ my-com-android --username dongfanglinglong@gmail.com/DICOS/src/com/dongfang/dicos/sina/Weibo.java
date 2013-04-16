@@ -28,7 +28,6 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.webkit.CookieSyncManager;
 
 import com.dongfang.dicos.more.SinaWeiboAuthorization;
@@ -40,13 +39,13 @@ import com.dongfang.dicos.util.ULog;
  * getAccessToken, 3. url request. Used as a single instance class. Implements a
  * weibo api as a synchronized way.
  * 
- * @author (luopeng@staff.sina.com.cn zhangjie2@staff.sina.com.cn ¹Ù·½Î¢²©£ºWBSDK
+ * @author (luopeng@staff.sina.com.cn zhangjie2@staff.sina.com.cn å®˜æ–¹å¾®åšï¼šWBSDK
  *         http://weibo.com/u/2791136085)
  */
 public class Weibo {
 	private static final String tag = "Weibo";
 
-	// ÓÃÓÚ±£´æÊı¾İ
+	// ç”¨äºä¿å­˜æ•°æ®
 	private static final String		SINA_SDK_STORAGE				= "sina_sdk_storage";
 	private static final String		SINA_SDK_STORAGE_ACCESS_TOKEN	= "sina_sdk_storage_access_token";
 	private static final String		SINA_SDK_STORAGE_ACCESS_EXPIRES	= "sina_sdk_storage_access_expires";
@@ -79,8 +78,8 @@ public class Weibo {
 
 	public static final String		TOKEN							= "access_token";
 	public static final String		EXPIRES							= "expires_in";
-	public static final String		DEFAULT_REDIRECT_URI			= "wbconnect://success";							// Ôİ²»Ö§³Ö
-	public static final String		DEFAULT_CANCEL_URI				= "wbconnect://cancel";							// Ôİ²»Ö§³Ö
+	public static final String		DEFAULT_REDIRECT_URI			= "wbconnect://success";							// æš‚ä¸æ”¯æŒ
+	public static final String		DEFAULT_CANCEL_URI				= "wbconnect://cancel";							// æš‚ä¸æ”¯æŒ
 
 	private String					mRedirectUrl;
 
@@ -97,7 +96,7 @@ public class Weibo {
 		return mWeiboInstance;
 	}
 
-	// ÉèÖÃaccessToken
+	// è®¾ç½®accessToken
 	public void setAccessToken(AccessToken token) {
 		mAccessToken = token;
 	}
@@ -131,7 +130,7 @@ public class Weibo {
 		SERVER = sERVER;
 	}
 
-	// ÉèÖÃoauth_verifier
+	// è®¾ç½®oauth_verifier
 	public void addOauthverifier(String verifier) {
 		mRequestToken.setVerifier(verifier);
 	}
@@ -207,7 +206,7 @@ public class Weibo {
 	}
 
 	/**
-	 * »ñÈ¡Oauth2.0µÄaccesstoken
+	 * è·å–Oauth2.0çš„accesstoken
 	 * 
 	 * https://api.weibo.com/oauth2/access_token?client_id=YOUR_CLIENT_ID&
 	 * client_secret=YOUR_CLIENT_SECRET&grant_type=password&redirect_uri=
@@ -271,7 +270,7 @@ public class Weibo {
 	}
 
 	/**
-	 * ÔÚactivityÖĞ½øĞĞ½¨È¨
+	 * åœ¨activityä¸­è¿›è¡Œå»ºæƒ
 	 * 
 	 * @author dongfang
 	 * */
@@ -287,7 +286,7 @@ public class Weibo {
 
 	}
 
-	/** ÔÚdilaogÖĞ½øĞĞÊÚÈ¨ */
+	/** åœ¨dilaogä¸­è¿›è¡Œæˆæƒ */
 	private void startDialogAuth(Activity activity, String[] permissions) {
 		WeiboParameters params = new WeiboParameters();
 		if (permissions.length > 0) {
@@ -306,7 +305,7 @@ public class Weibo {
 	 * @param activity
 	 * 
 	 * @param listener
-	 *            ÊÚÈ¨½á¹û¼àÌıÆ÷
+	 *            æˆæƒç»“æœç›‘å¬å™¨
 	 */
 	public void authorize(Activity activity, final WeiboDialogListener listener) {
 		authorize(activity, new String[] {}, DEFAULT_AUTH_ACTIVITY_CODE, listener);
@@ -398,10 +397,10 @@ public class Weibo {
 	}
 
 	/**
-	 * ¶ÁÈ¡±¾µØ»º´æ
+	 * è¯»å–æœ¬åœ°ç¼“å­˜
 	 * 
 	 * @param context
-	 * @return ¶ÁÈ¡±¾µØ»º´æÊÇ·ñ³É¹¦
+	 * @return è¯»å–æœ¬åœ°ç¼“å­˜æ˜¯å¦æˆåŠŸ
 	 */
 	public boolean loadStorage(Context context) {
 		ULog.d(tag, "loadStorage");
@@ -422,10 +421,10 @@ public class Weibo {
 	}
 
 	/**
-	 * ¸üĞÂ±¾µØ»º´æ
+	 * æ›´æ–°æœ¬åœ°ç¼“å­˜
 	 * 
 	 * @param context
-	 * @return ¸üĞÂ±¾µØ»º´æÊÇ·ñ³É¹¦
+	 * @return æ›´æ–°æœ¬åœ°ç¼“å­˜æ˜¯å¦æˆåŠŸ
 	 */
 	public boolean updateStorage(Context context,String sToken, long lExpires) {
 		ULog.d(tag, "updateStorage");
@@ -444,7 +443,7 @@ public class Weibo {
 	}
 
 	/**
-	 * Çå³ı±¾µØ»º´æ
+	 * æ¸…é™¤æœ¬åœ°ç¼“å­˜
 	 * 
 	 * @param context
 	 */

@@ -38,7 +38,7 @@ import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.util.Util;
 
 /**
- * Ç©µ½
+ * ç­¾åˆ°
  * 
  * @author dongfang
  * */
@@ -49,15 +49,15 @@ public class SigneInActivity extends Activity implements OnClickListener, CheckB
 	private static final String	TYPE_SINA	= "sina";
 	private static final String	TYPE_KAIXIN	= "kaixin";
 
-	/** ·µ»Ø */
+	/** è¿”å› */
 	private Button				bBack;
 
-	/** È·ÈÏ°´Å¥ */
+	/** ç¡®è®¤æŒ‰é’® */
 	private Button				bOK;
 
-	/** Í¬²½µ½ĞÂÀË */
+	/** åŒæ­¥åˆ°æ–°æµª */
 	private CheckBox			cbSina;
-	/** Í¬²½µ½¿ªĞÄ */
+	/** åŒæ­¥åˆ°å¼€å¿ƒ */
 	private CheckBox			cbKaiXing;
 
 	private EditText			etMessage;
@@ -100,27 +100,27 @@ public class SigneInActivity extends Activity implements OnClickListener, CheckB
 
 		Intent intent = getIntent();
 		if (!TextUtils.isEmpty(intent.getStringExtra("store_name"))) {
-			// etMessage.setText("ÎÒÔÚ" + intent.getStringExtra("store_name"));
+			// etMessage.setText("æˆ‘åœ¨" + intent.getStringExtra("store_name"));
 
 			lon = intent.getStringExtra("x");
 			lat = intent.getStringExtra("y");
 			id = intent.getStringExtra("id");
 			name = Util.initNameDicos(intent.getStringExtra("store_name").trim());
-			// etMessage.setText("ÎÒÔÚ" + name);
+			// etMessage.setText("æˆ‘åœ¨" + name);
 			province = intent.getStringExtra("store_province").trim();
 			city = intent.getStringExtra("store_city").trim();
 
 			ULog.d(tag, "lon = " + lon + ",lat = " + lat + ",id = " + id + ",city = " + city + ",province = "
 					+ province);
 
-			// province = "ºÚÁú½­Ê¡";
+			// province = "é»‘é¾™æ±Ÿçœ";
 
 			if (!TextUtils.isEmpty(province)) {
-				province = (province.startsWith("ºÚÁú½­") || province.startsWith("ÄÚÃÉ¹Å")) ? province = province.substring(
+				province = (province.startsWith("é»‘é¾™æ±Ÿ") || province.startsWith("å†…è’™å¤")) ? province = province.substring(
 						0, 3) : province.substring(0, 2);
 			}
 
-			etMessage.setHint("ÎÒÔÚ" + province + " " + city + name);
+			etMessage.setHint("æˆ‘åœ¨" + province + " " + city + name);
 
 		}
 
@@ -173,8 +173,8 @@ public class SigneInActivity extends Activity implements OnClickListener, CheckB
 	}
 
 	/**
-	 * 1. ÅĞ¶ÏÊÚÈ¨ÊÇ·ñ³É¹¦ </br> 2. ÊÚÈ¨Î´³É¹¦Ìø×ªµ½ÊÚÈ¨Ò³Ãæ </br> 3. ÊÚÈ¨²Ù×÷Ö®ºó·µ»Ø£¬¼ì²âÊÚÈ¨ÊÇ·ñ³É¹¦</br> 4.
-	 * ÊÚÈ¨²»³É¹¦£¬²»ÔÊĞíchecked£»ÊÚÈ¨³É¹¦£¬ÔËĞĞÄ¬ÈÏ½øĞĞchecked£»</br>
+	 * 1. åˆ¤æ–­æˆæƒæ˜¯å¦æˆåŠŸ </br> 2. æˆæƒæœªæˆåŠŸè·³è½¬åˆ°æˆæƒé¡µé¢ </br> 3. æˆæƒæ“ä½œä¹‹åè¿”å›ï¼Œæ£€æµ‹æˆæƒæ˜¯å¦æˆåŠŸ</br> 4.
+	 * æˆæƒä¸æˆåŠŸï¼Œä¸å…è®¸checkedï¼›æˆæƒæˆåŠŸï¼Œè¿è¡Œé»˜è®¤è¿›è¡Œcheckedï¼›</br>
 	 * */
 
 	@Override
@@ -196,30 +196,30 @@ public class SigneInActivity extends Activity implements OnClickListener, CheckB
 		}
 	}
 
-	/** È¡ÏûĞÂÀËÍ¬²½¶Ô»°¿ò */
+	/** å–æ¶ˆæ–°æµªåŒæ­¥å¯¹è¯æ¡† */
 	public void showDialog(String type) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("µÂ¿ËÊ¿").setIcon(R.drawable.ic_menu_notifications).setCancelable(false);
+		builder.setTitle("å¾·å…‹å£«").setIcon(R.drawable.ic_menu_notifications).setCancelable(false);
 
 		if (TYPE_SINA.equals(type)) {
-			builder.setMessage("ÊÇ·ñÒªÍ¬²½µ½ĞÂÀËÎ¢²©£¿");
+			builder.setMessage("æ˜¯å¦è¦åŒæ­¥åˆ°æ–°æµªå¾®åšï¼Ÿ");
 		} else if (TYPE_KAIXIN.equals(type)) {
-			builder.setMessage("ÊÇ·ñÒªÍ¬²½µ½¿ªĞÄÍø£¿");
+			builder.setMessage("æ˜¯å¦è¦åŒæ­¥åˆ°å¼€å¿ƒç½‘ï¼Ÿ");
 		}
 
-		builder.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+		builder.setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				Intent intent = new Intent(SigneInActivity.this, TongBuActivity.class);
 				startActivity(intent);
 			}
-		}).setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+		}).setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				dialog.cancel();
 			}
 		}).show();
 	}
 
-	/** ·ÖÏíµ½ĞÂÀËÎ¢²© */
+	/** åˆ†äº«åˆ°æ–°æµªå¾®åš */
 	private void shareToSina(String msg) throws MalformedURLException, IOException, WeiboException {
 		WeiboParameters bundle = new WeiboParameters();
 		bundle.add("source", ComParams.SINA_APP_KEY);
@@ -286,10 +286,10 @@ public class SigneInActivity extends Activity implements OnClickListener, CheckB
 				Bundle data = msg.getData();
 				if (Actions.ACTIONS_TYPE_SIGN.equalsIgnoreCase(data.getString(Actions.ACTIONS_KEY_ACT))
 						&& "1".equals(data.get(Actions.ACTIONS_KEY_RESULT))) {
-					Toast.makeText(SigneInActivity.this, "Ç©µ½³É¹¦", Toast.LENGTH_LONG).show();
+					Toast.makeText(SigneInActivity.this, "ç­¾åˆ°æˆåŠŸ", Toast.LENGTH_LONG).show();
 					finish();
 				} else {
-					Toast.makeText(SigneInActivity.this, "Ç©µ½Ê§°Ü", Toast.LENGTH_LONG).show();
+					Toast.makeText(SigneInActivity.this, "ç­¾åˆ°å¤±è´¥", Toast.LENGTH_LONG).show();
 				}
 
 				progressbar.setVisibility(View.GONE);
@@ -329,7 +329,7 @@ public class SigneInActivity extends Activity implements OnClickListener, CheckB
 	@Override
 	public void onComplete(String response) {
 		ULog.d(tag, "onComplete " + response);
-		// Toast.makeText(this, "ĞÂÀËÎ¢²©·ÖÏí³É¹¦", Toast.LENGTH_LONG).show();
+		// Toast.makeText(this, "æ–°æµªå¾®åšåˆ†äº«æˆåŠŸ", Toast.LENGTH_LONG).show();
 		// progressbar.setVisibility(View.GONE);
 
 	}
@@ -344,7 +344,7 @@ public class SigneInActivity extends Activity implements OnClickListener, CheckB
 	@Override
 	public void onError(WeiboException e) {
 		ULog.d(tag, "onError " + e.toString());
-		// Toast.makeText(this, "ĞÂÀËÎ¢²©·ÖÏíÊ§°Ü", Toast.LENGTH_LONG).show();
+		// Toast.makeText(this, "æ–°æµªå¾®åšåˆ†äº«å¤±è´¥", Toast.LENGTH_LONG).show();
 		// progressbar.setVisibility(View.GONE);
 	}
 

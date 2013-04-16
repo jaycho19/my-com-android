@@ -31,30 +31,30 @@ import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.util.Util;
 
 /**
- * ÉèÖÃÒ³Ãæ
+ * è®¾ç½®é¡µé¢
  * 
  * @author dongfang
  * */
 public class MoreActivity extends Activity implements OnClickListener {
 
 	public static final String	tag	= "MoreActivity";
-	/** Í¬²½ÉèÖÃ */
+	/** åŒæ­¥è®¾ç½® */
 	private Button				bTongbu;
-	/** ÍÆËÍÉèÖÃ */
+	/** æ¨é€è®¾ç½® */
 	private Button				bTuisong;
-	/** ³ÇÊĞÇĞ»» */
+	/** åŸå¸‚åˆ‡æ¢ */
 	private Button				bChengshi;
 
-	/** ¸ü¸ÄÃÜÂë */
+	/** æ›´æ”¹å¯†ç  */
 	private Button				bChgPwd;
 
-	/** Òâ¼û·´À¡ */
+	/** æ„è§åé¦ˆ */
 	private Button				bFeedback;
 
-	/** ÍË³öÕËºÅ */
+	/** é€€å‡ºè´¦å· */
 	private Button				bExit;
 
-	/** ·µ»Ø */
+	/** è¿”å› */
 	private Button				bBack;
 
 	private MoreHandler			handler;
@@ -94,29 +94,39 @@ public class MoreActivity extends Activity implements OnClickListener {
 			PackageInfo pi = getPackageManager().getPackageInfo(getPackageName(), 0);
 			String versionName = pi.versionName;
 			if (!TextUtils.isEmpty(versionName))
-				tvBanben.setText("(°æ±¾ºÅ   " + versionName + "  )");
+				tvBanben.setText("(ç‰ˆæœ¬å·   " + versionName + "  )");
 		} catch (NameNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		handler = new MoreHandler();
-
 	}
 
-	/** ÍË³ö¶Ô»°¿ò */
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (Util.isLogin(this)) {
+			bExit.setVisibility(View.VISIBLE);
+		}
+		else {
+			bExit.setVisibility(View.GONE);
+		}
+	}
+
+	/** é€€å‡ºå¯¹è¯æ¡† */
 	public void showSystemExitDialog() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("µÂ¿ËÊ¿").setIcon(R.drawable.ic_menu_notifications).setMessage("ÍË³öÖ®ºóĞèÖØĞÂµÇÂ¼£¬ÊÇ·ñÈÔÒªÍË³öµÂ¿ËÊ¿£¿")
-				.setCancelable(false).setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+		builder.setTitle("å¾·å…‹å£«").setIcon(R.drawable.ic_menu_notifications).setMessage("é€€å‡ºä¹‹åéœ€é‡æ–°ç™»å½•ï¼Œæ˜¯å¦ä»è¦é€€å‡ºå¾·å…‹å£«ï¼Ÿ")
+				.setCancelable(false).setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						/** ±£´æµÇÂ¼×´Ì¬ */
+						/** ä¿å­˜ç™»å½•çŠ¶æ€ */
 						SharedPreferences setConfig = getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
 								Activity.MODE_PRIVATE);
 						new LogoutThread(MoreActivity.this, handler, setConfig.getString(
 								ComParams.SHAREDPREFERENCES_PHONE_NUMBER, "")).start();
 					}
-				}).setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+				}).setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						dialog.cancel();
 					}
@@ -129,8 +139,13 @@ public class MoreActivity extends Activity implements OnClickListener {
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.button_setting_tongbu:
-			intent = new Intent(MoreActivity.this, TongBuActivity.class);
-			startActivity(intent);
+			if (Util.isLogin(this)) {
+				intent = new Intent(MoreActivity.this, TongBuActivity.class);
+				startActivity(intent);
+			}
+			else {
+				Toast.makeText(MoreActivity.this, "æ‚¨è¿˜æœªç™»å½•...", Toast.LENGTH_LONG).show();
+			}
 			break;
 		case R.id.button_setting_tuisong:
 			intent = new Intent(MoreActivity.this, TuiSongActivity.class);
@@ -146,7 +161,7 @@ public class MoreActivity extends Activity implements OnClickListener {
 				startActivity(intent);
 			}
 			else {
-				Toast.makeText(MoreActivity.this, "Äú»¹Î´µÇÂ¼...", Toast.LENGTH_LONG).show();
+				Toast.makeText(MoreActivity.this, "æ‚¨è¿˜æœªç™»å½•...", Toast.LENGTH_LONG).show();
 			}
 			break;
 		case R.id.button_setting_feedback:
@@ -155,7 +170,7 @@ public class MoreActivity extends Activity implements OnClickListener {
 				startActivity(intent);
 			}
 			else {
-				Toast.makeText(MoreActivity.this, "Äú»¹Î´µÇÂ¼...", Toast.LENGTH_LONG).show();
+				Toast.makeText(MoreActivity.this, "æ‚¨è¿˜æœªç™»å½•...", Toast.LENGTH_LONG).show();
 			}
 			break;
 		case R.id.button_setting_exit: {
@@ -163,7 +178,7 @@ public class MoreActivity extends Activity implements OnClickListener {
 				showSystemExitDialog();
 			}
 			else {
-				Toast.makeText(MoreActivity.this, "Äú»¹Î´µÇÂ¼...", Toast.LENGTH_LONG).show();
+				Toast.makeText(MoreActivity.this, "æ‚¨è¿˜æœªç™»å½•...", Toast.LENGTH_LONG).show();
 			}
 			// bExit.setClickable(false);
 		}
@@ -195,11 +210,10 @@ public class MoreActivity extends Activity implements OnClickListener {
 				Util.setNickName(MoreActivity.this, "");
 				Weibo.getInstance().clearStorage(MoreActivity.this);
 				Kaixin.getInstance().clearStorage(MoreActivity.this);
-				Toast.makeText(MoreActivity.this, "ÍË³ö³É¹¦...", Toast.LENGTH_LONG).show();
-
+				Toast.makeText(MoreActivity.this, "é€€å‡ºæˆåŠŸ...", Toast.LENGTH_LONG).show();
 
 				// } else {
-				// Toast.makeText(MoreActivity.this, "ÍË³öÊ§°Ü...",
+				// Toast.makeText(MoreActivity.this, "é€€å‡ºå¤±è´¥...",
 				// Toast.LENGTH_LONG).show();
 				// }
 

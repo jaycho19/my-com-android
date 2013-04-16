@@ -1,7 +1,5 @@
 package com.dongfang.dicos.view;
 
-import com.dongfang.dicos.util.ULog;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -11,15 +9,17 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SectionIndexer;
 
+import com.dongfang.dicos.util.ULog;
+
 /**
- * 城市搜索列表右侧提示栏目
+ * 鍩庡競鎼滅储鍒楄〃鍙充晶鎻愮ず鏍忕洰
  * 
  * @author dongfang
  * */
 public class SideBar extends View {
 	private static final String	tag				= "SideBar";
 
-	/** 提示栏目中的字符 */
+	/** 鎻愮ず鏍忕洰涓殑瀛楃 */
 	private char[]				aCharacter;
 	private SectionIndexer		sectionIndexter	= null;
 	private ListView			list;
@@ -54,7 +54,7 @@ public class SideBar extends View {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		ULog.d(tag, "onTouchEvent");
+		// ULog.d(tag, "onTouchEvent");
 
 		int i = (int) event.getY();
 		int idx = i / m_nItemHeight;
@@ -79,7 +79,7 @@ public class SideBar extends View {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
-		ULog.d(tag, "onDraw h = " + this.getHeight() + " e = " + (this.getHeight() / aCharacter.length));
+		// ULog.d(tag, "onDraw h = " + this.getHeight() + " e = " + (this.getHeight() / aCharacter.length));
 
 		if (0 == m_nItemHeight) {
 			m_nItemHeight = this.getHeight() / aCharacter.length - 1;

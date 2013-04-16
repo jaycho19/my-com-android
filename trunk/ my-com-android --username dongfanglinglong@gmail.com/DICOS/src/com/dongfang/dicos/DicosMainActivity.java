@@ -9,9 +9,10 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
 import com.dongfang.dicos.util.ComParams;
+import com.dongfang.dicos.util.Util;
 
 /**
- * Ö÷ACTIVITY
+ * ä¸»ACTIVITY
  * 
  * @author dongfang
  * */
@@ -19,7 +20,7 @@ import com.dongfang.dicos.util.ComParams;
 public class DicosMainActivity extends TabActivity implements OnCheckedChangeListener {
 	public static final String	tag			= "DicosMainActivity";
 
-	/** µ×²¿²Íµ¥°´Å¥µÄgroup */
+	/** åº•éƒ¨é¤å•æŒ‰é’®çš„group */
 	private RadioGroup			radioGroup;
 	private TabHost				tabHost;
 	public static final String	TAB_ITEM_1	= "CurrentSeason";
@@ -77,8 +78,8 @@ public class DicosMainActivity extends TabActivity implements OnCheckedChangeLis
 		// new Thread() {
 		// @Override
 		// public void run() {
-		// // ÄãÒªÖ´ĞĞµÄ·½·¨
-		// // Ö´ĞĞÍê±Ïºó¸øhandler·¢ËÍÒ»¸ö¿ÕÏûÏ¢
+		// // ä½ è¦æ‰§è¡Œçš„æ–¹æ³•
+		// // æ‰§è¡Œå®Œæ¯•åç»™handlerå‘é€ä¸€ä¸ªç©ºæ¶ˆæ¯
 		// MyFunction();
 		// }
 		// }.start();
@@ -87,6 +88,8 @@ public class DicosMainActivity extends TabActivity implements OnCheckedChangeLis
 
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
+		Util.hideInput(group);
+		
 		switch (checkedId) {
 		case R.id.radio_button1:
 			tabHost.setCurrentTabByTag(TAB_ITEM_1);

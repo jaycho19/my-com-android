@@ -24,7 +24,7 @@ import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.util.Util;
 
 /**
- * ×¢²á
+ * æ³¨å†Œ
  * 
  * @author dongfang
  * */
@@ -33,19 +33,19 @@ public class RegisterActivity extends Activity implements OnClickListener {
 	public static final String	tag								= "RegisterActivity";
 	public static final int		CHICK_PHONENUMBEREMAIL_IS_OK	= 1000;
 
-	/** ·µ»Ø */
+	/** è¿”å› */
 	private Button				bBack;
 
-	/** È·ÈÏµİ½» */
+	/** ç¡®è®¤é€’äº¤ */
 	private Button				bOK;
 
-	/** ÊÖ»úºÅÂë */
+	/** æ‰‹æœºå·ç  */
 	private EditText			etPhoneNumber;
-	/** êÇ³Æ */
+	/** æ˜µç§° */
 	private EditText			etNickname;
-	/** ÃÜÂë */
+	/** å¯†ç  */
 	private EditText			etPassword;
-	/** È·ÈÏÃÜÂë */
+	/** ç¡®è®¤å¯†ç  */
 	private EditText			etPasswordAgian;
 
 	private TextView			tvPhoneNumber, tvNickname, tvPassword, tvPasswordAgain;
@@ -221,7 +221,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 	private boolean isEmail(String email) {
 		if (!email.contains("@") || !email.contains("."))
 			return false;
-		String str = "[a-zA-Z0-9_-]+@\\w+\\.[a-z]+(\\.[a-z]+)?";
+		String str = "[a-zA-Z0-9_-.]+@\\w+\\.[a-z]+(\\.[a-z]+)?";
 		Pattern p = Pattern.compile(str);
 		Matcher m = p.matcher(email);
 		return m.matches();
@@ -243,7 +243,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		// ³õÊ¼»¯×î½üÒ»´ÎµÇÂ¼µÄÊÖ»úºÅÂë
+		// åˆå§‹åŒ–æœ€è¿‘ä¸€æ¬¡ç™»å½•çš„æ‰‹æœºå·ç 
 		// etPhoneNumber.setText(Util.getPhoneNumber(this));
 	}
 
@@ -264,16 +264,16 @@ public class RegisterActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.button_register_ok:
 			if (!isbool[0]) {
-				Toast.makeText(RegisterActivity.this, "ÇëÊäÈëÕıÈ·µÄÓÊÏäµØÖ·", Toast.LENGTH_SHORT).show();
+				Toast.makeText(RegisterActivity.this, "è¯·è¾“å…¥æ­£ç¡®çš„é‚®ç®±åœ°å€", Toast.LENGTH_SHORT).show();
 			}
 			else if (!isbool[1]) {
-				Toast.makeText(RegisterActivity.this, "ÇëÊäÈëêÇ³Æ", Toast.LENGTH_SHORT).show();
+				Toast.makeText(RegisterActivity.this, "è¯·è¾“å…¥æ˜µç§°", Toast.LENGTH_SHORT).show();
 			}
 			else if (!isbool[2]) {
-				Toast.makeText(RegisterActivity.this, "ÇëÊäÈëÃÜÂë6ÖÁ15Î»ÃÜÂë", Toast.LENGTH_SHORT).show();
+				Toast.makeText(RegisterActivity.this, "è¯·è¾“å…¥å¯†ç 6è‡³15ä½å¯†ç ", Toast.LENGTH_SHORT).show();
 			}
 			else if (!isbool[3]) {
-				Toast.makeText(RegisterActivity.this, "Á½´ÎÃÜÂëÊäÈë²»Í¬£¬ÇëÖØĞÂÊäÈë", Toast.LENGTH_SHORT).show();
+				Toast.makeText(RegisterActivity.this, "ä¸¤æ¬¡å¯†ç è¾“å…¥ä¸åŒï¼Œè¯·é‡æ–°è¾“å…¥", Toast.LENGTH_SHORT).show();
 			}
 			else {
 				String[] cno = new String[etDyk.length];

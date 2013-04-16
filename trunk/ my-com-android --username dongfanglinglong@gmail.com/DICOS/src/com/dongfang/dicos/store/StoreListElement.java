@@ -3,15 +3,15 @@ package com.dongfang.dicos.store;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.dongfang.dicos.net.Actions;
 import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.util.Util;
 
-import android.widget.ImageView;
-import android.widget.TextView;
-
 /**
- * ÃÅµêËÑË÷ÖĞµÄÃ¿Ò»ĞĞ¶ÔÏó
+ * é—¨åº—æœç´¢ä¸­çš„æ¯ä¸€è¡Œå¯¹è±¡
  * 
  * @author dongfang
  * 
@@ -32,9 +32,9 @@ public class StoreListElement {
 	}
 
 	public void initElement(String json) {
-		// {"id":213213,province":"ÉÏº£","city":"Ğì»ãÇø","name":"Ô¥Ô°µê","address":"»ÆÆÖÇøXXÂ·","tel":"021-67823457","x":123.223323,"y":34.234234},
-		// //id ÃÅµêid,province Ê¡/Ö±Ï½ÊĞ ,city ÊĞ/Çø£¬name µêÃû ,address µØÖ·, tel µØÖ·, x
-		// ¾­¶È£¬y Î³¶È
+		// {"id":213213,province":"ä¸Šæµ·","city":"å¾æ±‡åŒº","name":"è±«å›­åº—","address":"é»„æµ¦åŒºXXè·¯","tel":"021-67823457","x":123.223323,"y":34.234234},
+		// //id é—¨åº—id,province çœ/ç›´è¾–å¸‚ ,city å¸‚/åŒºï¼Œname åº—å ,address åœ°å€, tel åœ°å€, x
+		// ç»åº¦ï¼Œy çº¬åº¦
 
 		ULog.d(tag, "initElement " + json);
 
