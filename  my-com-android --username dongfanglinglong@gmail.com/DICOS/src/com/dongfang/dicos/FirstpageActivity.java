@@ -15,7 +15,7 @@ import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.util.Util;
 
 /**
- * 开启应用前ACTIVITY
+ * 寮�鍚簲鐢ㄥ墠ACTIVITY
  * 
  * @author dongfang
  * */

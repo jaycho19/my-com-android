@@ -17,7 +17,7 @@ import com.dongfang.dicos.lottery.info.ProbabilityListActivity;
 import com.dongfang.dicos.util.ULog;
 
 /**
- * 抽奖信息
+ * 鎶藉淇℃伅
  * 
  * @author dongfang
  * */
@@ -25,13 +25,13 @@ public class InfoActivity extends TabActivity implements OnClickListener, OnChec
 
 	public static final String	tag			= "InfoActivity";
 
-	/** 顶部两个信息按钮的group */
+	/** 椤堕儴涓や釜淇℃伅鎸夐挳鐨刧roup */
 	private RadioGroup			radioGroup;
 	private TabHost				tabHost;
 	public static final String	TAB_ITEM_1	= "MyInfo";
 	public static final String	TAB_ITEM_2	= "probabilitylist";
 
-	/** 返回按钮 */
+	/** 杩斿洖鎸夐挳 */
 	private Button				bBack;
 
 	@Override

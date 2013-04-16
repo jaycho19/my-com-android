@@ -47,54 +47,54 @@ public class Kaixin {
 	private static final String	tag									= "Kaixin";
 
 	/**
-	 * ×é¼şÉêÇëÊ±»ñµÃµÄapi key£¬ÔÚµ÷ÓÃ½Ó¿ÚÊ±Ëü´ú±í¸Ã×é¼şµÄÎ¨Ò»Éí·İ¡£
+	 * ç»„ä»¶ç”³è¯·æ—¶è·å¾—çš„api keyï¼Œåœ¨è°ƒç”¨æ¥å£æ—¶å®ƒä»£è¡¨è¯¥ç»„ä»¶çš„å”¯ä¸€èº«ä»½ã€‚
 	 */
-	public static final String	API_KEY								= ComParams.KAIXIN_APP_KEY;						// Ìæ»»ÎªÉêÇëÊ±»ñµÃµÄapi
+	public static final String	API_KEY								= ComParams.KAIXIN_APP_KEY;						// æ›¿æ¢ä¸ºç”³è¯·æ—¶è·å¾—çš„api
 																														// key
 
 	/**
-	 * ×é¼şÉêÇëÊ±»ñµÃµÄsecret key
+	 * ç»„ä»¶ç”³è¯·æ—¶è·å¾—çš„secret key
 	 */
-	public static final String	SECRET_KEY							= ComParams.KAIXIN_APP_SECRET;						// Ìæ»»ÎªÉêÇëÊ±»ñµÃµÄsecret
+	public static final String	SECRET_KEY							= ComParams.KAIXIN_APP_SECRET;						// æ›¿æ¢ä¸ºç”³è¯·æ—¶è·å¾—çš„secret
 																														// key
 
 	/**
-	 * ×é¼şÉêÇëÊ±ÌîĞ´µÄÍøÕ¾µØÖ·
+	 * ç»„ä»¶ç”³è¯·æ—¶å¡«å†™çš„ç½‘ç«™åœ°å€
 	 */
-	private static String		KX_AUTHORIZE_CALLBACK_URL			= ComParams.KAIXIN_APP_URL;						// Ìæ»»ÎªÉêÇë×é¼şÊ±ÌîĞ´µÄÍøÕ¾µØÖ·
+	private static String		KX_AUTHORIZE_CALLBACK_URL			= ComParams.KAIXIN_APP_URL;						// æ›¿æ¢ä¸ºç”³è¯·ç»„ä»¶æ—¶å¡«å†™çš„ç½‘ç«™åœ°å€
 
 	/**
-	 * KaixinÊÚÈ¨µØÖ·
+	 * Kaixinæˆæƒåœ°å€
 	 */
 	private static final String	KX_AUTHORIZE_URL					= "http://api.kaixin001.com/oauth2/authorize";
 
 	/**
-	 * Ë¢ĞÂÁîÅÆµØÖ·
+	 * åˆ·æ–°ä»¤ç‰Œåœ°å€
 	 */
 	private static String		KX_REFRESHTOKEN_URL					= "http://api.kaixin001.com/oauth2/access_token";
 
 	/**
-	 * Ë¢ĞÂÁîÅÆµØÖ·
+	 * åˆ·æ–°ä»¤ç‰Œåœ°å€
 	 */
 	private static String		KX_REFRESHTOKEN_URL_S				= "https://api.kaixin001.com/oauth2/access_token";
 
 	/**
-	 * KaixinµÇÂ¼µØÖ·
+	 * Kaixinç™»å½•åœ°å€
 	 */
 	private static String		KX_LOGIN_URL						= "http://www.kaixin001.com/login/connect.php";
 
 	/**
-	 * oauth °æ±¾
+	 * oauth ç‰ˆæœ¬
 	 */
 	private static final String	OAUTH_VERSION						= "2.0";
 
 	/**
-	 * rest api½Ó¿ÚµØÖ·
+	 * rest apiæ¥å£åœ°å€
 	 */
 	private static String		KX_REST_URL							= "https://api.kaixin001.com";
 
 	/**
-	 * ³£Á¿×Ö·û´®
+	 * å¸¸é‡å­—ç¬¦ä¸²
 	 */
 	public static final String	SESSION_KEY							= "session_key";
 	public static final String	ACCESS_TOKEN						= "access_token";
@@ -104,14 +104,14 @@ public class Kaixin {
 	public static final String	LOGIN_DENIED						= "login_denied";
 
 	/**
-	 * ÊÚÈ¨·şÎñÆ÷·µ»ØµÄ²ÎÊıÖµ
+	 * æˆæƒæœåŠ¡å™¨è¿”å›çš„å‚æ•°å€¼
 	 */
 	private String				mAccessToken						= null;
 	private String				mRefreshToken						= null;
 	private long				mAccessExpires						= 0;
 
 	/**
-	 * ±¾µØ»º´æ×Ö¶Î
+	 * æœ¬åœ°ç¼“å­˜å­—æ®µ
 	 */
 	private static final String	KAIXIN_SDK_STORAGE					= "kaixin_sdk_storage";
 	private static final String	KAIXIN_SDK_STORAGE_ACCESS_TOKEN		= "kaixin_sdk_storage_access_token";
@@ -120,7 +120,7 @@ public class Kaixin {
 	private static final long	ONE_HOUR							= 1000 * 60 * 60;
 
 	/**
-	 * Kaixinµ¥ÊµÀı
+	 * Kaixinå•å®ä¾‹
 	 */
 	private static Kaixin		instance							= null;
 
@@ -173,7 +173,7 @@ public class Kaixin {
 	}
 
 	/**
-	 * Íê³ÉµÇÂ¼²¢»ñÈ¡access_token(User-Agent Flow·½Ê½)
+	 * å®Œæˆç™»å½•å¹¶è·å–access_token(User-Agent Flowæ–¹å¼)
 	 * 
 	 * @param context
 	 * @param listener
@@ -183,7 +183,7 @@ public class Kaixin {
 	}
 
 	/**
-	 * Íê³ÉµÇÂ¼²¢»ñÈ¡access_token(User-Agent Flow·½Ê½)
+	 * å®Œæˆç™»å½•å¹¶è·å–access_token(User-Agent Flowæ–¹å¼)
 	 * 
 	 * @param context
 	 * @param permissions
@@ -222,7 +222,7 @@ public class Kaixin {
 
 		String url = KX_AUTHORIZE_URL + "?" + UtilKaiXin.encodeUrl(params);
 		if (context.checkCallingOrSelfPermission(Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
-			UtilKaiXin.showAlert(context, "Ã»ÓĞÈ¨ÏŞ", "Ó¦ÓÃĞèÒª·ÃÎÊ»¥ÁªÍøµÄÈ¨ÏŞ");
+			UtilKaiXin.showAlert(context, "æ²¡æœ‰æƒé™", "åº”ç”¨éœ€è¦è®¿é—®äº’è”ç½‘çš„æƒé™");
 		} else {
 			Intent intent = new Intent(context, KaixinWeiboAuthorization.class);
 			intent.putExtra(ComParams.KAIXIN_AUTH_BY_ACTIVITY_INTENT_URL_NAME, url);
@@ -233,11 +233,11 @@ public class Kaixin {
 	}
 
 	/**
-	 * Íê³ÉµÇÂ¼²¢»ñÈ¡access_token(User-Agent Flow·½Ê½)
+	 * å®Œæˆç™»å½•å¹¶è·å–access_token(User-Agent Flowæ–¹å¼)
 	 * 
 	 * @param context
 	 * @param permissions
-	 *            È¨ÏŞÁĞ±í£¬²Î¼ûhttp://wiki.open.kaixin001.com/index.php?id=OAuth%E6%96
+	 *            æƒé™åˆ—è¡¨ï¼Œå‚è§http://wiki.open.kaixin001.com/index.php?id=OAuth%E6%96
 	 *            % 87%E6%A1%A3#REST%E6%
 	 *            8E%A5%E5%8F%A3%E5%92%8COAuth%E6%9D%83%E9%99%90%E5%AF%B9%E7%85%
 	 *            A 7%E8%A1%A8
@@ -265,7 +265,7 @@ public class Kaixin {
 
 		String url = KX_AUTHORIZE_URL + "?" + UtilKaiXin.encodeUrl(params);
 		if (context.checkCallingOrSelfPermission(Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
-			UtilKaiXin.showAlert(context, "Ã»ÓĞÈ¨ÏŞ", "Ó¦ÓÃĞèÒª·ÃÎÊ»¥ÁªÍøµÄÈ¨ÏŞ");
+			UtilKaiXin.showAlert(context, "æ²¡æœ‰æƒé™", "åº”ç”¨éœ€è¦è®¿é—®äº’è”ç½‘çš„æƒé™");
 		} else {
 			new KaixinDialog(context, url, new KaixinDialogListener() {
 				@Override
@@ -290,7 +290,7 @@ public class Kaixin {
 				private int parseUrl(String url) {
 					if (url.startsWith(KX_AUTHORIZE_CALLBACK_URL)) {
 						Bundle values = UtilKaiXin.parseUrl(url);
-						String error = values.getString("error");// ÊÚÈ¨·şÎñÆ÷·µ»ØµÄ´íÎó´úÂë
+						String error = values.getString("error");// æˆæƒæœåŠ¡å™¨è¿”å›çš„é”™è¯¯ä»£ç 
 						if (error != null) {
 							if (ACCESS_DENIED.equalsIgnoreCase(error)) {
 								listener.onAuthCancel(values);
@@ -330,7 +330,7 @@ public class Kaixin {
 									.toString()));
 						}
 					} else {
-						listener.onAuthError(new KaixinAuthError("´íÎó", "ÊÚÈ¨·şÎñÆ÷·µ»ØµÄĞÅÏ¢²»ÍêÕû", url));
+						listener.onAuthError(new KaixinAuthError("é”™è¯¯", "æˆæƒæœåŠ¡å™¨è¿”å›çš„ä¿¡æ¯ä¸å®Œæ•´", url));
 					}
 				}
 			}).show();
@@ -338,9 +338,9 @@ public class Kaixin {
 	}
 
 	/**
-	 * ÅĞ¶Ï»á»°ÊÇ·ñÓĞĞ§
+	 * åˆ¤æ–­ä¼šè¯æ˜¯å¦æœ‰æ•ˆ
 	 * 
-	 * @return »á»°ÊÇ·ñÓĞĞ§
+	 * @return ä¼šè¯æ˜¯å¦æœ‰æ•ˆ
 	 */
 	public boolean isSessionValid() {
 		return (getAccessToken() != null)
@@ -378,17 +378,17 @@ public class Kaixin {
 	}
 
 	/**
-	 * µ±accessToken¹ıÆÚÊ±£¬ÓÃË¢ĞÂÁîÅÆ»ñÈ¡ĞÂµÄaccessToken
+	 * å½“accessTokenè¿‡æœŸæ—¶ï¼Œç”¨åˆ·æ–°ä»¤ç‰Œè·å–æ–°çš„accessToken
 	 * 
 	 * @param context
 	 * 
 	 * @param permissions
-	 *            È¨ÏŞÁĞ±í£¬²Î¼ûhttp://wiki.open.kaixin001.com/index.php?id=OAuth%E6%96
+	 *            æƒé™åˆ—è¡¨ï¼Œå‚è§http://wiki.open.kaixin001.com/index.php?id=OAuth%E6%96
 	 *            % 87%E6%A1%A3#REST%E6%
 	 *            8E%A5%E5%8F%A3%E5%92%8COAuth%E6%9D%83%E9%99%90%E5%AF%B9%E7%85%
 	 *            A 7%E8%A1%A8
 	 * 
-	 * @return ·şÎñÆ÷·µ»ØµÄJSON´®
+	 * @return æœåŠ¡å™¨è¿”å›çš„JSONä¸²
 	 * @throws FileNotFoundException
 	 * @throws MalformedURLException
 	 * @throws IOException
@@ -415,15 +415,15 @@ public class Kaixin {
 	}
 
 	/**
-	 * ÉÏ´«ÄÚÈİ½Ó¿Ú£¬²ÉÓÃmulti-part post·½Ê½ÉÏ´«Êı¾İ
+	 * ä¸Šä¼ å†…å®¹æ¥å£ï¼Œé‡‡ç”¨multi-part postæ–¹å¼ä¸Šä¼ æ•°æ®
 	 * 
 	 * @param params
-	 *            ²ÎÊıÁĞ±í
+	 *            å‚æ•°åˆ—è¡¨
 	 * @param photos
-	 *            key-valueĞÎÊ½µÄÍ¼ÏñÊı¾İ¼¯£¬ keyÎªfilename£¬
-	 *            valueÎªÍ¼ÏñÊı¾İ£¬²ÎÊıÀàĞÍ¿ÉÒÔÊÇInputStream»òbyte[]
-	 *            Èç¹û²ÎÊıÀàĞÍÎªInputStream£¬»áÔÚopenUrlº¯ÊıÖĞ½«´ËÁ÷¹Ø±Õ
-	 * @return ·şÎñÆ÷·µ»ØµÄJSON´®
+	 *            key-valueå½¢å¼çš„å›¾åƒæ•°æ®é›†ï¼Œ keyä¸ºfilenameï¼Œ
+	 *            valueä¸ºå›¾åƒæ•°æ®ï¼Œå‚æ•°ç±»å‹å¯ä»¥æ˜¯InputStreamæˆ–byte[]
+	 *            å¦‚æœå‚æ•°ç±»å‹ä¸ºInputStreamï¼Œä¼šåœ¨openUrlå‡½æ•°ä¸­å°†æ­¤æµå…³é—­
+	 * @return æœåŠ¡å™¨è¿”å›çš„JSONä¸²
 	 * @throws FileNotFoundException
 	 * @throws MalformedURLException
 	 * @throws IOException
@@ -441,17 +441,17 @@ public class Kaixin {
 	}
 
 	/**
-	 * µ÷ÓÃkaixin rest apis
+	 * è°ƒç”¨kaixin rest apis
 	 * 
 	 * @param context
-	 *            Ó¦ÓÃ»·¾³
+	 *            åº”ç”¨ç¯å¢ƒ
 	 * @param restInterface
-	 *            rest api½Ó¿Ú
+	 *            rest apiæ¥å£
 	 * @param params
-	 *            key-valueĞÎÊ½µÄ²ÎÊı¼¯£¬keyÎª²ÎÊıÃû£¬valueÎª²ÎÊıÖµ£¬Êı¾İÀàĞÍ¿ÉÒÔÊÇString»òbyte[]
+	 *            key-valueå½¢å¼çš„å‚æ•°é›†ï¼Œkeyä¸ºå‚æ•°åï¼Œvalueä¸ºå‚æ•°å€¼ï¼Œæ•°æ®ç±»å‹å¯ä»¥æ˜¯Stringæˆ–byte[]
 	 * @param httpMethod
-	 *            GET »ò POST
-	 * @return ·şÎñÆ÷·µ»ØµÄJSON´®
+	 *            GET æˆ– POST
+	 * @return æœåŠ¡å™¨è¿”å›çš„JSONä¸²
 	 * @throws FileNotFoundException
 	 * @throws MalformedURLException
 	 * @throws IOException
@@ -484,7 +484,7 @@ public class Kaixin {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "ÊÚÈ¨·şÎñÍøÂçÒì³£, Çë¼ì²éÍøÂç";
+			return "æˆæƒæœåŠ¡ç½‘ç»œå¼‚å¸¸, è¯·æ£€æŸ¥ç½‘ç»œ";
 		}
 	}
 
@@ -506,23 +506,23 @@ public class Kaixin {
 						updateStorage(ctx);
 						return null;
 					} catch (Exception e) {
-						return "ÊÚÈ¨·şÎñÆ÷·µ»ØµÄ´íÎó";
+						return "æˆæƒæœåŠ¡å™¨è¿”å›çš„é”™è¯¯";
 					}
 				} else {
-					return "ÊÚÈ¨·şÎñÆ÷·µ»ØµÄ´íÎó";
+					return "æˆæƒæœåŠ¡å™¨è¿”å›çš„é”™è¯¯";
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "ÊÚÈ¨·şÎñÆ÷·µ»ØµÄ´íÎó";
+			return "æˆæƒæœåŠ¡å™¨è¿”å›çš„é”™è¯¯";
 		}
 	}
 
 	/**
-	 * ¶ÁÈ¡±¾µØ»º´æ
+	 * è¯»å–æœ¬åœ°ç¼“å­˜
 	 * 
 	 * @param context
-	 * @return ¶ÁÈ¡±¾µØ»º´æÊÇ·ñ³É¹¦
+	 * @return è¯»å–æœ¬åœ°ç¼“å­˜æ˜¯å¦æˆåŠŸ
 	 */
 	public boolean loadStorage(Context context) {
 		SharedPreferences sp = context.getSharedPreferences(KAIXIN_SDK_STORAGE, Context.MODE_PRIVATE);
@@ -555,10 +555,10 @@ public class Kaixin {
 	}
 
 	/**
-	 * ¸üĞÂ±¾µØ»º´æ
+	 * æ›´æ–°æœ¬åœ°ç¼“å­˜
 	 * 
 	 * @param context
-	 * @return ¸üĞÂ±¾µØ»º´æÊÇ·ñ³É¹¦
+	 * @return æ›´æ–°æœ¬åœ°ç¼“å­˜æ˜¯å¦æˆåŠŸ
 	 */
 	public boolean updateStorage(Context context) {
 		boolean bUpdate = false;
@@ -577,7 +577,7 @@ public class Kaixin {
 	}
 
 	/**
-	 * Çå³ı±¾µØ»º´æ
+	 * æ¸…é™¤æœ¬åœ°ç¼“å­˜
 	 * 
 	 * @param context
 	 */

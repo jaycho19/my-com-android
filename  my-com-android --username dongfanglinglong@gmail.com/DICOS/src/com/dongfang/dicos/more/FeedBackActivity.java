@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -19,9 +21,9 @@ import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.util.Util;
 
 public class FeedBackActivity extends Activity implements OnClickListener {
-	public static final String	tag	= "TuiSongActivity";
+	public static final String	tag	= "FeedBackActivity";
 
-	/** ·µ»Ø°´Å¥ */
+	/** è¿”å›æŒ‰é’® */
 	private Button				bBack;
 	private Button				bOk;
 	private EditText			etFeedback;
@@ -42,8 +44,15 @@ public class FeedBackActivity extends Activity implements OnClickListener {
 		bOk.setOnClickListener(this);
 
 		progressBar = (ProgressBar) findViewById(R.id.progressbar_setting_freeback_back);
-
 		etFeedback = (EditText) findViewById(R.id.edittext_setting_freeback);
+		 findViewById(R.id.scrollview_feedbackactivity).setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				Util.hideInput(v);
+				return false;
+			}
+		});
 	}
 
 	@Override
@@ -57,8 +66,9 @@ public class FeedBackActivity extends Activity implements OnClickListener {
 				progressBar.setVisibility(View.VISIBLE);
 				new AdviceThread(FeedBackActivity.this, handler, msg, Util.getPhoneNumber(FeedBackActivity.this))
 						.start();
-			} else {
-				Toast.makeText(FeedBackActivity.this, "ÇëÊäÈëÄúµÄÒâ¼û", Toast.LENGTH_LONG).show();
+			}
+			else {
+				Toast.makeText(FeedBackActivity.this, "è¯·è¾“å…¥æ‚¨çš„æ„è§", Toast.LENGTH_LONG).show();
 			}
 			break;
 		case R.id.button_setting_freeback_back:
@@ -82,12 +92,13 @@ public class FeedBackActivity extends Activity implements OnClickListener {
 				data = msg.getData();
 				if (Actions.ACTIONS_TYPE_ADVICE.equalsIgnoreCase(data.getString(Actions.ACTIONS_KEY_ACT))
 						&& "1".equals(data.get(Actions.ACTIONS_KEY_RESULT))) {
-					Toast.makeText(FeedBackActivity.this, "Òâ¼ûµİ½»³É¹¦", Toast.LENGTH_LONG).show();
-					
+					Toast.makeText(FeedBackActivity.this, "æ„è§é€’äº¤æˆåŠŸ", Toast.LENGTH_LONG).show();
+
 					etFeedback.setText("");
-					
-				} else {
-					Toast.makeText(FeedBackActivity.this, "Òâ¼ûµİ½»Ê§°Ü", Toast.LENGTH_LONG).show();
+
+				}
+				else {
+					Toast.makeText(FeedBackActivity.this, "æ„è§é€’äº¤å¤±è´¥", Toast.LENGTH_LONG).show();
 				}
 				progressBar.setVisibility(View.GONE);
 				break;

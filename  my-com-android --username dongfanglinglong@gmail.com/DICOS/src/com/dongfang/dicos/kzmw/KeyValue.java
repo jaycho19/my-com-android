@@ -1,7 +1,7 @@
 package com.dongfang.dicos.kzmw;
 
 /**
- * 没一个二级菜单元素的信息
+ * 娌′竴涓簩绾ц彍鍗曞厓绱犵殑淇℃伅
  * 
  * @author dongfang
  * 

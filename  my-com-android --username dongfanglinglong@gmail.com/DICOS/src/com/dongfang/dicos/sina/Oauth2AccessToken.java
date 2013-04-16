@@ -24,7 +24,7 @@ import org.json.JSONObject;
  * An AcessToken class contains accesstoken and tokensecret.Child class of
  * com.weibo.net.Token.
  * 
- * @author (luopeng@staff.sina.com.cn zhangjie2@staff.sina.com.cn ¹Ù·½Î¢²©£ºWBSDK
+ * @author (luopeng@staff.sina.com.cn zhangjie2@staff.sina.com.cn å®˜æ–¹å¾®åšï¼šWBSDK
  *         http://weibo.com/u/2791136085)
  */
 public class Oauth2AccessToken extends Token {
@@ -39,7 +39,7 @@ public class Oauth2AccessToken extends Token {
 					setExpiresIn(json.optInt("expires_in"));
 					setRefreshToken(json.optString("refresh_token"));
 				} catch (JSONException e) {
-					// ²»´¦Àí
+					// ä¸å¤„ç†
 				}
 			}
 		}

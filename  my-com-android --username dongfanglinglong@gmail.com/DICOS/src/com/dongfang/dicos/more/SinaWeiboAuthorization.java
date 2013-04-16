@@ -27,13 +27,13 @@ public class SinaWeiboAuthorization extends Activity implements OnClickListener 
 
 	public static final String	tag	= "SinaWeiboAuthorization";
 
-	/** 返回按钮 */
+	/** 杩斿洖鎸夐挳 */
 	private Button				bBack;
 
-	/** 授权页面 */
+	/** 鎺堟潈椤甸潰 */
 	private WebView				wvSina;
 
-	/** 授权页面载入进度 */
+	/** 鎺堟潈椤甸潰杞藉叆杩涘害 */
 
 	private ProgressBar			pbSina;
 
@@ -74,7 +74,7 @@ public class SinaWeiboAuthorization extends Activity implements OnClickListener 
 		}
 	}
 
-	/** 直接用访问用户设置url */
+	/** 鐩存帴鐢ㄨ闂敤鎴疯缃畊rl */
 	private void handleRedirectUrl(WebView view, String url) {
 		Bundle values = UtilSina.parseUrl(url);
 
@@ -84,7 +84,7 @@ public class SinaWeiboAuthorization extends Activity implements OnClickListener 
 		if (error == null && error_code == null) {
 			Weibo.getInstance().getAuthOwnDialogListener().onComplete(values);
 		} else if (error.equals("access_denied")) {
-			// 用户或授权服务器拒绝授予数据访问权限
+			// 鐢ㄦ埛鎴栨巿鏉冩湇鍔″櫒鎷掔粷鎺堜簣鏁版嵁璁块棶鏉冮檺
 			Weibo.getInstance().getAuthOwnDialogListener().onCancel();
 		} else {
 			Weibo.getInstance().getAuthOwnDialogListener()
@@ -97,7 +97,7 @@ public class SinaWeiboAuthorization extends Activity implements OnClickListener 
 		@Override
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
 			ULog.d(tag, "Redirect URL: " + url);
-			// 待后台增加对默认重定向地址的支持后修改下面的逻辑
+			// 寰呭悗鍙板鍔犲榛樿閲嶅畾鍚戝湴鍧�鐨勬敮鎸佸悗淇敼涓嬮潰鐨勯�昏緫
 			if (url.startsWith(ComParams.SINA_APP_URL)) {
 				handleRedirectUrl(view, url);
 				// WeiboDialog.this.dismiss();

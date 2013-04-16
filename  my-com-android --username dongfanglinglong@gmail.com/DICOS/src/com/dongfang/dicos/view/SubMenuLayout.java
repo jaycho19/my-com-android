@@ -26,13 +26,13 @@ public class SubMenuLayout extends LinearLayout {
 	private final String			TAG				= "SubMenuLayout";
 
 	private Context					context;
-	// /** TextView ¶ÔÏóÁĞ±í */
+	// /** TextView å¯¹è±¡åˆ—è¡¨ */
 	// private SubMenuItem[] tvList;
 
-	/** ¶ş¼¶²Ëµ¥£¬Í¼Æ¬²Ëµ¥ÁĞ±í */
+	/** äºŒçº§èœå•ï¼Œå›¾ç‰‡èœå•åˆ—è¡¨ */
 	private ImageView[]				ivList;
 
-	/** ÏÔÊ¾µÄÍ¼Æ¬ */
+	/** æ˜¾ç¤ºçš„å›¾ç‰‡ */
 	private List<KeyValue>			menulist;
 
 	private int						length			= 0;
@@ -148,7 +148,7 @@ public class SubMenuLayout extends LinearLayout {
 	}
 
 //	/**
-//	 * ³õÊ¼»¯Í¼Æ¬×Ó²Ëµ¥
+//	 * åˆå§‹åŒ–å›¾ç‰‡å­èœå•
 //	 * 
 //	 * @param i
 //	 */

@@ -16,7 +16,7 @@ import com.dongfang.dicos.util.ULog;
 
 public class PrizeInfoAdapter extends BaseAdapter {
 	private static final String	tag	= "PrizeInfoAdapter";
-	/** JSON ¸ñÊ½µÄÃÅµêĞÅÏ¢ÁĞ±í */
+	/** JSON æ ¼å¼çš„é—¨åº—ä¿¡æ¯åˆ—è¡¨ */
 	private String[]			aMobileArray;
 
 	private Context				context;

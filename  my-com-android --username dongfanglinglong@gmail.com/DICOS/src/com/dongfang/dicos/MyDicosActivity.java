@@ -32,7 +32,7 @@ import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.util.Util;
 
 /**
- * ÎÒµÄµÂ¿ËÊ¿
+ * æˆ‘çš„å¾·å…‹å£«
  * 
  * @author dongfang
  * */
@@ -42,10 +42,10 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 
 	private TextView			my_dicos_title;
 
-	/** ¶¥²¿²Ëµ¥ÓÒ²à½ø¶ÈÌõ */
+	/** é¡¶éƒ¨èœå•å³ä¾§è¿›åº¦æ¡ */
 	private ProgressBar			progressBar;
 
-	/** Ç©µ½°´Å¥ */
+	/** ç­¾åˆ°æŒ‰é’® */
 	private Button				bSigne;
 	private Button				bLogin;
 
@@ -111,13 +111,13 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 		dykadapter = new DykAdapter(this);
 		lvDyk.setAdapter(dykadapter);
 
-		dialog = new AlertDialog.Builder(this).setTitle("ÇëÏÈµÇÂ¼").setIcon(R.drawable.ic_menu_notifications)// .setMessage("ÇëÏÈµÇÂ¼")
-				.setCancelable(false).setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+		dialog = new AlertDialog.Builder(this).setTitle("è¯·å…ˆç™»å½•").setIcon(R.drawable.ic_menu_notifications)// .setMessage("è¯·å…ˆç™»å½•")
+				.setCancelable(false).setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						Intent intent = new Intent(MyDicosActivity.this, LoginActivity.class);
 						startActivity(intent);
 					}
-				}).setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+				}).setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						dialog.cancel();
 					}
@@ -177,7 +177,7 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 				Util.showDialogSetNetWork(this);
 			}
 			else if (Util.isLogin(this)) {
-				Toast.makeText(this, "ÄúÒÑµÇÂ¼", Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "æ‚¨å·²ç™»å½•", Toast.LENGTH_LONG).show();
 			}
 			else {
 				intent = new Intent(this, LoginActivity.class);
@@ -205,13 +205,18 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 			viewSwitcher_mydicos.showNext();
 			break;
 		case R.id.btn_mydicos_add_dyk: {
+			if (!Util.isLogin(this)) {
+				Toast.makeText(this, "æ‚¨è¿˜æœªç™»å½•...", Toast.LENGTH_LONG).show();
+				break;
+			}
+
 			if (dykadapter.getCount() > 4) {
-				new AlertDialog.Builder(this).setMessage("×î¶àÖ»ÄÜÌí¼ÓÎåÕÅµÂÒâ¿¨")// .setMessage("ÇëÏÈµÇÂ¼")
-						.setCancelable(false).setPositiveButton("È·¶¨", null).show();
+				new AlertDialog.Builder(this).setMessage("æœ€å¤šåªèƒ½æ·»åŠ äº”å¼ å¾·æ„å¡")// .setMessage("è¯·å…ˆç™»å½•")
+						.setCancelable(false).setPositiveButton("ç¡®å®š", null).show();
 			}
 			else {
 				String ss = etDykNum.getText().toString();
-				new AddDykCardTask(MyDicosActivity.this, dykadapter,etDykNum).execute(ss);
+				new AddDykCardTask(MyDicosActivity.this, dykadapter, etDykNum).execute(ss);
 			}
 		}
 
@@ -249,8 +254,8 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 
 				// JSONObject json = new JSONObject();
 				// try {
-				// json.put(Actions.ACTIONS_KEY_NAME, "Ô¥Ô°µê");
-				// json.put(Actions.ACTIONS_KEY_TIME, "2012Äê7ÔÂ16ÈÕ21:18:20");
+				// json.put(Actions.ACTIONS_KEY_NAME, "è±«å›­åº—");
+				// json.put(Actions.ACTIONS_KEY_TIME, "2012å¹´7æœˆ16æ—¥21:18:20");
 				// } catch (JSONException e) {
 				// ULog.d(tag, e.toString());
 				// }

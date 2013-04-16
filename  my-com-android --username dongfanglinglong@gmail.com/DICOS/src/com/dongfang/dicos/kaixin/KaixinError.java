@@ -15,7 +15,7 @@
 package com.dongfang.dicos.kaixin;
 
 /**
- * ·â×°·şÎñÆ÷·µ»Ø´íÎóĞÅÏ¢µÄÀà
+ * å°è£…æœåŠ¡å™¨è¿”å›é”™è¯¯ä¿¡æ¯çš„ç±»
  * 
  */
 public class KaixinError extends RuntimeException {
@@ -23,7 +23,7 @@ public class KaixinError extends RuntimeException {
 	private static final long	serialVersionUID	= -7614264285563089016L;
 
 	/**
-	 * ·şÎñÆ÷·µ»ØµÄ´íÎóĞÅÏ¢
+	 * æœåŠ¡å™¨è¿”å›çš„é”™è¯¯ä¿¡æ¯
 	 */
 	private int					mErrorCode;
 	private String				mRequest;

@@ -49,7 +49,7 @@ public class PostRecordTask extends AsyncTask<Object, Void, Integer> {
 		Context context = (Context) params[4];
 
 		try {
-			// д�¼�¼
+			// 写新记录
 			Bundle bundle = new Bundle();
 			bundle.putString("content", content);
 

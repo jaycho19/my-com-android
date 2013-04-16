@@ -14,7 +14,7 @@ import com.dongfang.dicos.util.ComParams;
 import com.dongfang.dicos.util.ULog;
 
 /**
- * Ç©µ½
+ * ç­¾åˆ°
  * 
  * @author dongfang
  * */

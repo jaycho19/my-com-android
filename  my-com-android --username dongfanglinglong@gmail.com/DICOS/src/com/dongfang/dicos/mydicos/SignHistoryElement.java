@@ -3,14 +3,14 @@ package com.dongfang.dicos.mydicos;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.widget.TextView;
+
 import com.dongfang.dicos.net.Actions;
 import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.util.Util;
 
-import android.widget.TextView;
-
 /**
- * ÀúÊ·Ç©µ½ÖĞµÄÇ©µ½ÁĞ±íÔªËØ
+ * å†å²ç­¾åˆ°ä¸­çš„ç­¾åˆ°åˆ—è¡¨å…ƒç´ 
  * 
  * @author dongfang
  * */
@@ -23,7 +23,7 @@ public class SignHistoryElement {
 	private String				infoJSON;
 
 	public void initElement(String json) {
-		// {"name":"Ô¥Ô°µê","time":"7ÔÂ1ºÅ 18:38"}, //address Ç©µ½µÄµØÖ·£¬time Ç©µ½µÄÊ±¼ä
+		// {"name":"è±«å›­åº—","time":"7æœˆ1å· 18:38"}, //address ç­¾åˆ°çš„åœ°å€ï¼Œtime ç­¾åˆ°çš„æ—¶é—´
 
 		ULog.d(tag, "initElement " + json);
 

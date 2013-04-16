@@ -17,10 +17,8 @@ package com.dongfang.dicos.kaixin;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.dongfang.dicos.util.Util;
-
 /**
- * ½«KaixinÖĞµÄÇëÇó·â×°³ÉÒì²½ÇëÇó¡£
+ * å°†Kaixinä¸­çš„è¯·æ±‚å°è£…æˆå¼‚æ­¥è¯·æ±‚ã€‚
  * 
  * @see Kaixin
  * @see AsyncKaixinListener
@@ -35,20 +33,20 @@ public class AsyncKaixin {
 	}
 
 	/**
-	 * Òì²½ÇëÇó
+	 * å¼‚æ­¥è¯·æ±‚
 	 * 
 	 * @param context
-	 *            Ó¦ÓÃ»·¾³
+	 *            åº”ç”¨ç¯å¢ƒ
 	 * @param restInterface
-	 *            rest api½Ó¿Ú
+	 *            rest apiæ¥å£
 	 * @param params
-	 *            key-valueĞÎÊ½µÄ²ÎÊı¼¯
+	 *            key-valueå½¢å¼çš„å‚æ•°é›†
 	 * @param httpMethod
-	 *            httpÇëÇóµÄ·½·¨£¬GET »ò POST
+	 *            httpè¯·æ±‚çš„æ–¹æ³•ï¼ŒGET æˆ– POST
 	 * @param obj
-	 *            Òì²½ÇëÇó¹ØÁªµÄÊı¾İ£¬ÇëÇó½áÊøºó£¬»áÍ¨¹ıAsyncKaixinListenerµÄ½Ó¿Ú´«µİ¸ø¼àÌıÕß
+	 *            å¼‚æ­¥è¯·æ±‚å…³è”çš„æ•°æ®ï¼Œè¯·æ±‚ç»“æŸåï¼Œä¼šé€šè¿‡AsyncKaixinListenerçš„æ¥å£ä¼ é€’ç»™ç›‘å¬è€…
 	 * @param listener
-	 *            Òì²½ÇëÇó¼àÌıÆ÷
+	 *            å¼‚æ­¥è¯·æ±‚ç›‘å¬å™¨
 	 */
 	public void request(final Context context, final String restInterface, final Bundle params,
 			final String httpMethod, final AsyncKaixinListener listener, final Object obj) {
@@ -72,20 +70,20 @@ public class AsyncKaixin {
 	}
 
 	/**
-	 * Òì²½ÇëÇó
+	 * å¼‚æ­¥è¯·æ±‚
 	 * 
 	 * @param context
-	 *            Ó¦ÓÃ»·¾³
+	 *            åº”ç”¨ç¯å¢ƒ
 	 * @param restInterface
-	 *            rest api½Ó¿Ú
+	 *            rest apiæ¥å£
 	 * @param params
-	 *            key-valueĞÎÊ½µÄ²ÎÊı¼¯
+	 *            key-valueå½¢å¼çš„å‚æ•°é›†
 	 * @param httpMethod
-	 *            httpÇëÇóµÄ·½·¨£¬GET »ò POST
+	 *            httpè¯·æ±‚çš„æ–¹æ³•ï¼ŒGET æˆ– POST
 	 * @param obj
-	 *            Òì²½ÇëÇó¹ØÁªµÄÊı¾İ£¬ÇëÇó½áÊøºó£¬»áÍ¨¹ıAsyncKaixinListenerµÄ½Ó¿Ú´«µİ¸ø¼àÌıÕß
+	 *            å¼‚æ­¥è¯·æ±‚å…³è”çš„æ•°æ®ï¼Œè¯·æ±‚ç»“æŸåï¼Œä¼šé€šè¿‡AsyncKaixinListenerçš„æ¥å£ä¼ é€’ç»™ç›‘å¬è€…
 	 * @param listener
-	 *            Òì²½ÇëÇó¼àÌıÆ÷
+	 *            å¼‚æ­¥è¯·æ±‚ç›‘å¬å™¨
 	 */
 	public void login(final Context context, final Bundle params, final AsyncKaixinListener listener, final Object obj) {
 		new Thread() {

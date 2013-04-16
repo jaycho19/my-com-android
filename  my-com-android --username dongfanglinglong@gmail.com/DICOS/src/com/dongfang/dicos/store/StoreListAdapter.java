@@ -16,14 +16,14 @@ import com.dongfang.dicos.util.ComParams;
 import com.dongfang.dicos.util.ULog;
 
 /**
- * ÃÅµê²éÑ¯ÏÔÊ¾ÁĞ±íĞÅÏ¢adapter
+ * é—¨åº—æŸ¥è¯¢æ˜¾ç¤ºåˆ—è¡¨ä¿¡æ¯adapter
  * 
  * @author dongfang
  */
 public class StoreListAdapter extends BaseAdapter {
 
 	private static final String	tag	= "StoreListAdapter";
-	/** JSON ¸ñÊ½µÄÃÅµêĞÅÏ¢ÁĞ±í */
+	/** JSON æ ¼å¼çš„é—¨åº—ä¿¡æ¯åˆ—è¡¨ */
 	private String[]			aJSONStoreArray;
 
 	private Context				context;

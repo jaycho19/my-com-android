@@ -15,25 +15,25 @@ import com.dongfang.dicos.lottery.PrizeProvideActivity;
 import com.dongfang.dicos.util.ULog;
 
 /**
- * 抽奖
+ * 鎶藉
  * 
  * @author dongfang
  * */
 public class LotteryActivity extends Activity implements OnClickListener {
 	public static final String	tag	= "LotteryActivity";
 
-	/** 返回 */
+	/** 杩斿洖 */
 	private Button				bBack;
 
-	/** 参加抽奖 */
+	/** 鍙傚姞鎶藉 */
 	private Button				bJoinIn;
-	/** 活动细则 */
+	/** 娲诲姩缁嗗垯 */
 	private Button				bDetail;
-	/** 抽奖信息 */
+	/** 鎶藉淇℃伅 */
 	private Button				bInfo;
-	/** 中奖信息 */
+	/** 涓淇℃伅 */
 	private Button				bPrizeInfo;
-	/** 奖品发放 */
+	/** 濂栧搧鍙戞斁 */
 	private Button				bPrizeProvide;
 
 	@Override

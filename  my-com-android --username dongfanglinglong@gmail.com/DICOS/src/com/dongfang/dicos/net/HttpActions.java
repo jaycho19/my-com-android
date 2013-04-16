@@ -31,7 +31,7 @@ public class HttpActions {
 	}
 
 	/**
-	 * µÇÂ¼»ñÈ¡ÑéÖ¤Âë
+	 * ç™»å½•è·å–éªŒè¯ç 
 	 */
 	public String login(String phoneNumber) {
 		ULog.d(tag, "phoneNumber = " + phoneNumber);
@@ -49,7 +49,7 @@ public class HttpActions {
 		return https.post(list);
 	}
 
-	/** ĞŞ¸ÄÃÜÂë */
+	/** ä¿®æ”¹å¯†ç  */
 	public String chgPassword(String uName, String oldPwd, String newPwd) {
 		list.clear();
 		list.add(new BasicNameValuePair("acc", uName));
@@ -63,7 +63,7 @@ public class HttpActions {
 				+ "&ts=" + Util.getTS(context) + "&token=" + Util.getToken(context));
 	}
 
-	/** Íü¼ÇÃÜÂë */
+	/** å¿˜è®°å¯†ç  */
 	public String getPassword(String uName) {
 		list.clear();
 		// list.add(new BasicNameValuePair("uid", phoneNumber));
@@ -75,7 +75,7 @@ public class HttpActions {
 		return https.post(list, "http://www.dicos.com.cn/login/reset_pwd_ajax.php");
 	}
 
-	/** ×¢²á */
+	/** æ³¨å†Œ */
 	public String register(String uName, String uPassword, String uNikeName, String cno) {
 		list.clear();
 		list.add(new BasicNameValuePair("acc", uName));
@@ -87,7 +87,7 @@ public class HttpActions {
 		return https.post(list, "http://www.dicos.com.cn/login/register_ajaxV2.php");
 	}
 
-	/** ÑéÖ¤ */
+	/** éªŒè¯ */
 	// public String validate(String phoneNumber, String authCode) {
 	// ULog.d(tag, "phoneNumber = " + phoneNumber);
 	// ULog.d(tag, "authCode = " + authCode);
@@ -120,7 +120,7 @@ public class HttpActions {
 		return https.post(list, "http://www.dicos.com.cn/login/login_ajaxV2.php");
 	}
 
-	/** µÇ³ö */
+	/** ç™»å‡º */
 	public String logout(String phoneNumber) {
 		JSONObject js = new JSONObject();
 		try {
@@ -136,7 +136,7 @@ public class HttpActions {
 		return https.post(list, "http://www.dicos.com.cn/login/logout_ajax.php");
 	}
 
-	/** ³é½±£¨ÊäĞ¡Æ±£©Òª´«ºÅÂë */
+	/** æŠ½å¥–ï¼ˆè¾“å°ç¥¨ï¼‰è¦ä¼ å·ç  */
 	public String lottery(String code, String amount, String phoneNumber) {
 		JSONObject js = new JSONObject();
 		try {
@@ -154,7 +154,7 @@ public class HttpActions {
 		return https.post(list);
 	}
 
-	/** ÁĞ³öÎÒµÄ³é½±ĞÅÏ¢ Òª´«ºÅÂë */
+	/** åˆ—å‡ºæˆ‘çš„æŠ½å¥–ä¿¡æ¯ è¦ä¼ å·ç  */
 	public String lotteryHistory(String phoneNumber) {
 		JSONObject js = new JSONObject();
 		try {
@@ -170,7 +170,7 @@ public class HttpActions {
 		return https.post(list);
 	}
 
-	/** ¼ì²âµ±Ç°³é½±»î¶¯ÊÇ·ñ½áÊø */
+	/** æ£€æµ‹å½“å‰æŠ½å¥–æ´»åŠ¨æ˜¯å¦ç»“æŸ */
 	public String lotteryLegal(String phoneNumber) {
 		JSONObject js = new JSONObject();
 		try {
@@ -186,7 +186,7 @@ public class HttpActions {
 		return https.post(list);
 	}
 
-	/** ³é½±´ÎÊıÅÅĞĞ°ñ */
+	/** æŠ½å¥–æ¬¡æ•°æ’è¡Œæ¦œ */
 	public String lotteryRateList(String phoneNumber) {
 		JSONObject js = new JSONObject();
 		try {
@@ -202,7 +202,7 @@ public class HttpActions {
 		return https.post(list);
 	}
 
-	/** »ñ½±¹«²¼ */
+	/** è·å¥–å…¬å¸ƒ */
 	public String lotteryWinner(String phoneNumber) {
 		JSONObject js = new JSONObject();
 		try {
@@ -218,7 +218,7 @@ public class HttpActions {
 		return https.post(list);
 	}
 
-	/** ½±Æ··¢·Å */
+	/** å¥–å“å‘æ”¾ */
 	public String lotteryDistributionInfo(String phoneNumber) {
 		JSONObject js = new JSONObject();
 		try {
@@ -234,7 +234,7 @@ public class HttpActions {
 		return https.post(list);
 	}
 
-	/** »ñÈ¡ÃÅµêÁĞ±í */
+	/** è·å–é—¨åº—åˆ—è¡¨ */
 	public String restaurentList(String phoneNumber, String province, String city) {
 		JSONObject js = new JSONObject();
 		try {
@@ -254,7 +254,7 @@ public class HttpActions {
 		return https.post(list, Https.URL_RESTAURENTLIST);
 	}
 
-	/** Ç©µ½ */
+	/** ç­¾åˆ° */
 	public String sign(String id, String phoneNumber) {
 		JSONObject js = new JSONObject();
 		try {
@@ -271,7 +271,7 @@ public class HttpActions {
 		return https.post(list);
 	}
 
-	/** Ç©µ½ÀúÊ· */
+	/** ç­¾åˆ°å†å² */
 	public String signHistory(String phoneNumber) {
 		JSONObject js = new JSONObject();
 		try {
@@ -287,7 +287,7 @@ public class HttpActions {
 		return https.post(list);
 	}
 
-	/** Òâ¼û·´À¡ Òª´«ºÅÂë */
+	/** æ„è§åé¦ˆ è¦ä¼ å·ç  */
 	public String advice(String msg, String phoneNumber) {
 		JSONObject js = new JSONObject();
 		try {
@@ -305,7 +305,7 @@ public class HttpActions {
 	}
 
 	/**
-	 * »ñÈ¡ipËùÔÚµØÖ·
+	 * è·å–ipæ‰€åœ¨åœ°å€
 	 */
 	public String ipArea(String phoneNumber) {
 		ULog.d(tag, "phoneNumber = " + phoneNumber);
@@ -324,14 +324,14 @@ public class HttpActions {
 	}
 
 	/**
-	 * 6£® µ±¼¾»î¶¯
+	 * 6ï¼ å½“å­£æ´»åŠ¨
 	 * 
-	 * @return ³É¹¦ <br>
+	 * @return æˆåŠŸ <br>
 	 *         [
 	 *         "http:\/\/www.dicos.com.cn\/images\/app\/action\/8_1347870892.jpg","http:\/\/www.dicos.com.c
 	 *         n \ / i m a g e s \ / a p p \ / a c t i o n \ / 7 _ 1 3 4 7
 	 *         605021.jpg" ] <br>
-	 *         ÎŞ×ÊÁÏ <br>
+	 *         æ— èµ„æ–™ <br>
 	 *         []
 	 */
 	public String getCurrentSeasonImgUrl() {
@@ -340,13 +340,13 @@ public class HttpActions {
 
 	/**
 	 * 
-	 * @return ·µ»Ø¸ñÊ½£ºjson »Ø´«Öµ:<br>
-	 *         cate:·ÖÀà<br>
-	 *         key(¼üÖµ):·ÖÀàºÅÂë<br>
-	 *         value(Öµ):·ÖÀàÃû³Æ<br>
-	 *         newest:×îĞÂÍ¼™nÂ·¾¶<br>
-	 *         Àı:<br>
-	 *         ³É¹¦<br>
+	 * @return è¿”å›æ ¼å¼ï¼šjson å›ä¼ å€¼:<br>
+	 *         cate:åˆ†ç±»<br>
+	 *         key(é”®å€¼):åˆ†ç±»å·ç <br>
+	 *         value(å€¼):åˆ†ç±»åç§°<br>
+	 *         newest:æœ€æ–°å›¾æª”è·¯å¾„<br>
+	 *         ä¾‹:<br>
+	 *         æˆåŠŸ<br>
 	 *         {"cate": {"3":{"name":"\u4e3b\u9910","focus_img":
 	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal_category\/focus\/3_1349922212.jpg","blur_img":"http:\/\/www.dicos.com.cn\/images\/app\/meal_cate
 	 *         g o r y \ / b l u r \ / 3 _ 1 3 4 9 9 2 2 2 1 2 . j p g
@@ -364,16 +364,16 @@ public class HttpActions {
 	/**
 	 * 
 	 * @param cateId
-	 * @return ·µ»Ø¸ñÊ½: json<br>
-	 *         Àı:<br>
-	 *         ³É¹¦<br>
+	 * @return è¿”å›æ ¼å¼: json<br>
+	 *         ä¾‹:<br>
+	 *         æˆåŠŸ<br>
 	 *         [
 	 *         "http:\/\/www.dicos.com.cn\/images\/app\/meal\/3_1347873388.jpg","http:\/\/www.dicos.com.cn\/imag
 	 *         e s \ / a p p \ / m e a l \ / 5 _ 1 3 4 7 8 9 2 5 1 4 . j p g " ]
-	 *         ÎŞ×ÊÁÏ<br>
+	 *         æ— èµ„æ–™<br>
 	 *         []<br>
-	 *         ÆäËû<br>
-	 *         -999:²ÎÊı´íÎó
+	 *         å…¶ä»–<br>
+	 *         -999:å‚æ•°é”™è¯¯
 	 */
 	public String getKaZiMeiWei_type(String cateId) {
 		return https.get("http://www.dicos.com.cn/app/api/app_meal.php?cate=" + cateId, null);

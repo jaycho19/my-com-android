@@ -23,7 +23,7 @@ public class MyHorizontalScrollView extends HorizontalScrollView {
 	private Rect				normal	= new Rect();
 	private Context				context;
 	private List<Float>			listX	= new ArrayList<Float>();
-	private int					state	= 0;						// ´Ó×óÏòÓÒ×´Ì¬0£¬´ÓÓÒÏò×ó×´Ì¬1
+	private int					state	= 0;						// ä»å·¦å‘å³çŠ¶æ€0ï¼Œä»å³å‘å·¦çŠ¶æ€1
 
 	public MyHorizontalScrollView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -87,11 +87,11 @@ public class MyHorizontalScrollView extends HorizontalScrollView {
 			ULog.d(tag, "ACTION_UP");
 
 			if (listX.size() > 2 && (listX.get(listX.size() - 1) > listX.get(listX.size() - 2))) {
-				// ´Ó×óÏòÓÒÒÆ
+				// ä»å·¦å‘å³ç§»
 				x = 0;
 				state = 0;
 			} else {
-				// ´ÓÓÒÏò×óÒÆ
+				// ä»å³å‘å·¦ç§»
 				state = 1;
 			}
 
@@ -104,25 +104,25 @@ public class MyHorizontalScrollView extends HorizontalScrollView {
 			int deltaX = (int) (preX - nowX);
 
 			if (state == 1 && deltaX < 0) {
-				// ´ÓÓÒÏò×óÒÆ
+				// ä»å³å‘å·¦ç§»
 				deltaX = 0;
 			}
 			ULog.d(tag, "commOnTouchEvent ACTION_MOVE deltaX: " + deltaX + ",preX:" + x);
-			// ¹ö¶¯
+			// æ»šåŠ¨
 			scrollBy(deltaX, 0);
 
 			x = nowX;
-			// µ±¹ö¶¯µ½×îÉÏ»òÕß×îÏÂÊ±¾Í²»»áÔÙ¹ö¶¯£¬ÕâÊ±ÒÆ¶¯²¼¾Ö
+			// å½“æ»šåŠ¨åˆ°æœ€ä¸Šæˆ–è€…æœ€ä¸‹æ—¶å°±ä¸ä¼šå†æ»šåŠ¨ï¼Œè¿™æ—¶ç§»åŠ¨å¸ƒå±€
 			if (isNeedMove()) {
 				if (normal.isEmpty()) {
-					// ±£´æÕı³£µÄ²¼¾ÖÎ»ÖÃ
+					// ä¿å­˜æ­£å¸¸çš„å¸ƒå±€ä½ç½®
 					normal.set(inner.getLeft(), inner.getTop(), inner.getRight(), inner.getBottom());
 				}
-				// ÒÆ¶¯²¼¾Ö
+				// ç§»åŠ¨å¸ƒå±€
 				inner.layout(inner.getLeft() - deltaX, inner.getTop(), inner.getRight() - deltaX, inner.getBottom());
 			}
 
-			// ÍÏ¶¯Ê±£¬ÉèÖÃ×ÓÀ¸Ä¿µÄ±³¾°Îª¿Õ
+			// æ‹–åŠ¨æ—¶ï¼Œè®¾ç½®å­æ ç›®çš„èƒŒæ™¯ä¸ºç©º
 //			ImageView[] images = LoginActivity.subMenuLayout.getSubMenuImageView();
 //			if (images != null) {
 //				for (int i = 0; i < images.length; i++) {
@@ -139,26 +139,26 @@ public class MyHorizontalScrollView extends HorizontalScrollView {
 		}
 	}
 
-	// ¿ªÆô¶¯»­ÒÆ¶¯
+	// å¼€å¯åŠ¨ç”»ç§»åŠ¨
 
 	public void animation() {
-		// ¿ªÆôÒÆ¶¯¶¯»­
+		// å¼€å¯ç§»åŠ¨åŠ¨ç”»
 		int[] a = { normal.left, normal.top, normal.right, normal.bottom };
 		normal.setEmpty();
 		TranslateAnimation ta = new TranslateAnimation(inner.getLeft(), getLeft(), 0, 0);
 		ta.setDuration(200);
 		inner.startAnimation(ta);
-		// ÉèÖÃ»Øµ½Õı³£µÄ²¼¾ÖÎ»ÖÃ
+		// è®¾ç½®å›åˆ°æ­£å¸¸çš„å¸ƒå±€ä½ç½®
 		inner.layout(a[0], a[1], a[2], a[3]);
 
 	}
 
-	// ÊÇ·ñĞèÒª¿ªÆô¶¯»­
+	// æ˜¯å¦éœ€è¦å¼€å¯åŠ¨ç”»
 	public boolean isNeedAnimation() {
 		return !normal.isEmpty();
 	}
 
-	// ÊÇ·ñĞèÒªÒÆ¶¯²¼¾Ö
+	// æ˜¯å¦éœ€è¦ç§»åŠ¨å¸ƒå±€
 	public boolean isNeedMove() {
 
 		int offset = inner.getMeasuredWidth() - getWidth();

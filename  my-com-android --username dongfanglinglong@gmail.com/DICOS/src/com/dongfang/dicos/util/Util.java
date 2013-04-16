@@ -13,56 +13,93 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.dongfang.dicos.R;
 
-/** ¹¤¾ßÀà */
+/** å·¥å…·ç±» */
 public class Util {
-	private static final String	tag	= "false";
+	private static final String	tag	= "Util";
 
-	/** »ñÈ¡USER_NO */
+	/** éšè—é”®ç›˜ */
+	public static void hideInput(View v) {
+		InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+		if (imm.isActive()) {
+			imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
+		}
+	}
+
+	/** æ¨é€è®¾ç½®ï¼šå¡æ»‹ç¾å‘³ */
+	public static boolean getPushKZMW(Context context) {
+		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
+				Activity.MODE_PRIVATE);
+		return setConfig.getBoolean(ComParams.SHAREDPREFERENCES_PUSH_KZMW, false);
+	}
+
+	/** æ¨é€è®¾ç½®ï¼šå¡æ»‹ç¾å‘³ */
+	public static boolean savePushKZMW(Context context, boolean b) {
+		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
+				Activity.MODE_PRIVATE);
+		return setConfig.edit().putBoolean(ComParams.SHAREDPREFERENCES_PUSH_KZMW, b).commit();
+	}
+
+	/** æ¨é€è®¾ç½®ï¼šå½“å­£æ´»åŠ¨ */
+	public static boolean getPushDJHD(Context context) {
+		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
+				Activity.MODE_PRIVATE);
+		return setConfig.getBoolean(ComParams.SHAREDPREFERENCES_PUSH_DJHD, false);
+	}
+
+	/** æ¨é€è®¾ç½®ï¼šå½“å­£æ´»åŠ¨ */
+	public static boolean savePushDJHD(Context context, boolean b) {
+		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
+				Activity.MODE_PRIVATE);
+		return setConfig.edit().putBoolean(ComParams.SHAREDPREFERENCES_PUSH_DJHD, b).commit();
+	}
+
+	/** è·å–USER_NO */
 	public static String getUserNO(Context context) {
-		// ³õÊ¼»¯×î½üÒ»´ÎµÇÂ¼µÄÊÖ»úºÅÂë
+		// åˆå§‹åŒ–æœ€è¿‘ä¸€æ¬¡ç™»å½•çš„æ‰‹æœºå·ç 
 		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
 				Activity.MODE_PRIVATE);
 		return setConfig.getString(ComParams.SHAREDPREFERENCES_USER_NO, "");
-
 	}
 
-	/** ±£´æUSER_NO */
+	/** ä¿å­˜USER_NO */
 	public static void saveUserNO(Context context, String user_no) {
 		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
 				Activity.MODE_PRIVATE);
 		setConfig.edit().putString(ComParams.SHAREDPREFERENCES_USER_NO, user_no).commit();
 	}
 
-	/** »ñÈ¡TS */
+	/** è·å–TS */
 	public static String getTS(Context context) {
-		// ³õÊ¼»¯×î½üÒ»´ÎµÇÂ¼µÄÊÖ»úºÅÂë
+		// åˆå§‹åŒ–æœ€è¿‘ä¸€æ¬¡ç™»å½•çš„æ‰‹æœºå·ç 
 		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
 				Activity.MODE_PRIVATE);
 		return setConfig.getString(ComParams.SHAREDPREFERENCES_TS, "");
 
 	}
 
-	/** ±£´æTS */
+	/** ä¿å­˜TS */
 	public static void saveTS(Context context, String ts) {
 		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
 				Activity.MODE_PRIVATE);
 		setConfig.edit().putString(ComParams.SHAREDPREFERENCES_TS, ts).commit();
 	}
 
-	/** »ñÈ¡Token */
+	/** è·å–Token */
 	public static String getToken(Context context) {
-		// ³õÊ¼»¯×î½üÒ»´ÎµÇÂ¼µÄÊÖ»úºÅÂë
+		// åˆå§‹åŒ–æœ€è¿‘ä¸€æ¬¡ç™»å½•çš„æ‰‹æœºå·ç 
 		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
 				Activity.MODE_PRIVATE);
 		return setConfig.getString(ComParams.SHAREDPREFERENCES_TOKEN, "");
 
 	}
 
-	/** ±£´æToken */
+	/** ä¿å­˜Token */
 	public static void saveToken(Context context, String token) {
 		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
 				Activity.MODE_PRIVATE);
@@ -70,44 +107,44 @@ public class Util {
 	}
 
 	public static String getNickName(Context context) {
-		// ³õÊ¼»¯×î½üÒ»´ÎµÇÂ¼µÄÊÖ»úºÅÂë
+		// åˆå§‹åŒ–æœ€è¿‘ä¸€æ¬¡ç™»å½•çš„æ‰‹æœºå·ç 
 		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
 				Activity.MODE_PRIVATE);
 		return setConfig.getString(ComParams.SHAREDPREFERENCES_NICK_NAME, "");
 
 	}
 
-	/** ±£´æêÇ³Æ */
+	/** ä¿å­˜æ˜µç§° */
 	public static void setNickName(Context context, String nickName) {
 		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
 				Activity.MODE_PRIVATE);
 		setConfig.edit().putString(ComParams.SHAREDPREFERENCES_NICK_NAME, nickName).commit();
 	}
 
-	/** »ñÈ¡ÊÖ»úºÅÂë */
+	/** è·å–æ‰‹æœºå·ç  */
 	public static String getPhoneNumber(Context context) {
-		// ³õÊ¼»¯×î½üÒ»´ÎµÇÂ¼µÄÊÖ»úºÅÂë
+		// åˆå§‹åŒ–æœ€è¿‘ä¸€æ¬¡ç™»å½•çš„æ‰‹æœºå·ç 
 		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
 				Activity.MODE_PRIVATE);
 		return setConfig.getString(ComParams.SHAREDPREFERENCES_PHONE_NUMBER, "");
 
 	}
 
-	/** ±£´æÊÖ»úºÅÂë */
+	/** ä¿å­˜æ‰‹æœºå·ç  */
 	public static void setPhoneNumber(Context context, String phoneNumber) {
 		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
 				Activity.MODE_PRIVATE);
 		setConfig.edit().putString(ComParams.SHAREDPREFERENCES_PHONE_NUMBER, phoneNumber).commit();
 	}
 
-	/** ÉèÖÃµÇÂ¼×´Ì¬ */
+	/** è®¾ç½®ç™»å½•çŠ¶æ€ */
 	public static void setLoginStatus(Context context, boolean b) {
 		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
 				Activity.MODE_PRIVATE);
 		setConfig.edit().putBoolean(ComParams.SHAREDPREFERENCES_LOGIN_STATUE, b).commit();
 	}
 
-	/** ÅĞ¶ÏÊÇ·ñµÇÂ¼³É¹¦ */
+	/** åˆ¤æ–­æ˜¯å¦ç™»å½•æˆåŠŸ */
 	public static boolean isLogin(Context context) {
 		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
 				Activity.MODE_PRIVATE);
@@ -117,7 +154,7 @@ public class Util {
 		return b;
 	}
 
-	/** ÅĞ¶ÏÊÇ·ñÓĞÍøÂç */
+	/** åˆ¤æ–­æ˜¯å¦æœ‰ç½‘ç»œ */
 	public static boolean isNetworkAvailable(Context context) {
 		ConnectivityManager connectivityManager = (ConnectivityManager) context
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -126,47 +163,45 @@ public class Util {
 
 	}
 
-	/** ÏÔÊ¾ÍøÂçÁ´½Ó¶Ô»°¿ò */
+	/** æ˜¾ç¤ºç½‘ç»œé“¾æ¥å¯¹è¯æ¡† */
 	public static void showDialogSetNetWork(Context context) {
-		Toast.makeText(context, "ÇëÏÈÁ´½ÓÍøÂç...", Toast.LENGTH_LONG).show();
+		Toast.makeText(context, "è¯·å…ˆé“¾æ¥ç½‘ç»œ...", Toast.LENGTH_LONG).show();
 
 	}
 
-	/** ÏÔÊ¾µÇÂ¼¶Ô»°¿ò */
+	/** æ˜¾ç¤ºç™»å½•å¯¹è¯æ¡† */
 	public static void showDialogLogin(Context context) {
-		Toast.makeText(context, "ÇëÏÈµÇÂ¼...", Toast.LENGTH_LONG).show();
+		Toast.makeText(context, "è¯·å…ˆç™»å½•...", Toast.LENGTH_LONG).show();
 	}
 
-	/** ±£´æµ±Ç°ipµØÖ· */
+	/** ä¿å­˜å½“å‰ipåœ°å€ */
 	public static void saveIpArea(Context context) {
 		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
 				Activity.MODE_PRIVATE);
-
 		setConfig.edit().putString(ComParams.SHAREDPREFERENCES_IP_AREA, ComParams.IPAREA).commit();
 
 		ULog.d(tag, "saveIpArea = " + ComParams.IPAREA);
 
 	}
 
-	/** ³õÊ¼»¯ ipµØÖ· */
+	/** åˆå§‹åŒ– ipåœ°å€ */
 	public static void iniIPArea(Context context) {
 		SharedPreferences setConfig = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_FILE_NAME,
 				Activity.MODE_PRIVATE);
 
 		ComParams.IPAREA = TextUtils.isEmpty(ComParams.IPAREA) ? setConfig.getString(
 				ComParams.SHAREDPREFERENCES_IP_AREA, "") : ComParams.IPAREA;
-
 	}
 
-	/** ÍË³ö¶Ô»°¿ò */
+	/** é€€å‡ºå¯¹è¯æ¡† */
 	public static void showExitDialog(final Activity activity) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		builder.setTitle("µÂ¿ËÊ¿").setIcon(R.drawable.ic_menu_notifications).setMessage("ÊÇ·ñÒªÍË³öµÂ¿ËÊ¿£¿")// .setCancelable(false)
-				.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+		builder.setTitle("å¾·å…‹å£«").setIcon(R.drawable.ic_menu_notifications).setMessage("æ˜¯å¦è¦é€€å‡ºå¾·å…‹å£«ï¼Ÿ")// .setCancelable(false)
+				.setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						activity.finish();
 					}
-				}).setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+				}).setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						dialog.cancel();
 					}
@@ -174,17 +209,17 @@ public class Util {
 	}
 
 	/**
-	 * ³õÊ¼»¯µÂ¿ËÊ¿µêÃû£¬Èç¹ûÃû³ÆÖĞÃ»ÓĞ°üº¬µÂ¿ËÊ¿£¬¾ÍÔÚÌí¼ÓÉÏµÂ¿ËÊ¿×Ö·û´®
+	 * åˆå§‹åŒ–å¾·å…‹å£«åº—åï¼Œå¦‚æœåç§°ä¸­æ²¡æœ‰åŒ…å«å¾·å…‹å£«ï¼Œå°±åœ¨æ·»åŠ ä¸Šå¾·å…‹å£«å­—ç¬¦ä¸²
 	 * 
 	 * @param name
 	 * @return
 	 */
 	public static String initNameDicos(String name) {
-		return name.contains("µÂ¿ËÊ¿") ? name : "µÂ¿ËÊ¿" + name;
+		return name.contains("å¾·å…‹å£«") ? name : "å¾·å…‹å£«" + name;
 	}
 
 	/**
-	 * ÅĞ¶ÏÎÄ¼şÊÇ·ñ´æÔÚ
+	 * åˆ¤æ–­æ–‡ä»¶æ˜¯å¦å­˜åœ¨
 	 * 
 	 * @param context
 	 * @param filename
@@ -196,7 +231,7 @@ public class Util {
 	}
 
 	/**
-	 * ·µ»ØÆÁÄ»¿í¶È
+	 * è¿”å›å±å¹•å®½åº¦
 	 * 
 	 * @param context
 	 * @return
@@ -208,7 +243,7 @@ public class Util {
 	}
 
 	/**
-	 * ·µ»ØÆÁÄ»¸ß¶È
+	 * è¿”å›å±å¹•é«˜åº¦
 	 * 
 	 * @param context
 	 * @return

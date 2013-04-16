@@ -22,14 +22,14 @@ public class JoinInActivity extends Activity implements OnClickListener {
 
 	public static final String	tag	= "JoinInActivity";
 
-	/** ·µ»Ø°´Å¥ */
+	/** è¿”å›æŒ‰é’® */
 	private Button				bBack;
-	/** È·ÈÏ°´Å¥ */
+	/** ç¡®è®¤æŒ‰é’® */
 	private Button				bOK;
 
-	/** Ğ¡Æ±ºÅÂë */
+	/** å°ç¥¨å·ç  */
 	private EditText			etTickerNumber;
-	/** Ğ¡Æ±½ğ¶î */
+	/** å°ç¥¨é‡‘é¢ */
 	private EditText			etTickerAmount;
 
 	private Context				context;
@@ -68,7 +68,7 @@ public class JoinInActivity extends Activity implements OnClickListener {
 			if (sTickerNumber.length() > 10 && sTickerAmount.length() > 0) {
 				new LotteryThread(context, handler, sTickerNumber, sTickerAmount, Util.getPhoneNumber(context)).start();
 			} else {
-				Toast.makeText(JoinInActivity.this, "ÇëÊäÈëÕıÈ·µÄĞ¡Æ±ºÅÂëºÍ¶ÔÓ¦½ğ¶î", Toast.LENGTH_LONG).show();
+				Toast.makeText(JoinInActivity.this, "è¯·è¾“å…¥æ­£ç¡®çš„å°ç¥¨å·ç å’Œå¯¹åº”é‡‘é¢", Toast.LENGTH_LONG).show();
 			}
 
 			break;
@@ -92,9 +92,9 @@ public class JoinInActivity extends Activity implements OnClickListener {
 				Bundle data = msg.getData();
 				if (Actions.ACTIONS_TYPE_LOTTERY.equalsIgnoreCase(data.getString(Actions.ACTIONS_KEY_ACT))
 						&& "1".equals(data.getString(Actions.ACTIONS_KEY_RESULT))) {
-					Toast.makeText(context, "³é½±³É¹¦", Toast.LENGTH_LONG).show();
+					Toast.makeText(context, "æŠ½å¥–æˆåŠŸ", Toast.LENGTH_LONG).show();
 				} else {
-					Toast.makeText(context, "³é½±Ê§°Ü", Toast.LENGTH_LONG).show();
+					Toast.makeText(context, "æŠ½å¥–å¤±è´¥", Toast.LENGTH_LONG).show();
 				}
 				break;
 			}

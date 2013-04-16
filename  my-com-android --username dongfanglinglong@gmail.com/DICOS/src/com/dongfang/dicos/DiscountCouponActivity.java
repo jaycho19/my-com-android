@@ -7,7 +7,7 @@ import android.view.KeyEvent;
 import com.dongfang.dicos.util.Util;
 
 /**
- * �Ż�ȯҳ��
+ * 优惠券页面
  * 
  * @author dongfang
  * */

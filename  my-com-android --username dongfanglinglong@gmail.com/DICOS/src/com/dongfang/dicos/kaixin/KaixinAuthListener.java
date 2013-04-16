@@ -17,35 +17,35 @@ package com.dongfang.dicos.kaixin;
 import android.os.Bundle;
 
 /**
- * ÈÏÖ¤ºÍÊÚÈ¨¶¯×÷¼àÌıÆ÷
+ * è®¤è¯å’ŒæˆæƒåŠ¨ä½œç›‘å¬å™¨
  */
 public interface KaixinAuthListener {
 	/**
-	 * ÊÚÈ¨Íê³É
+	 * æˆæƒå®Œæˆ
 	 * 
 	 * @param values
-	 *            ÊÚÈ¨·şÎñÆ÷·µ»ØµÄkey-valueĞÎÊ½µÄ²ÎÊı¼¯£¬keyÎª²ÎÊıÃû£¬valueÎª²ÎÊıÖµ
+	 *            æˆæƒæœåŠ¡å™¨è¿”å›çš„key-valueå½¢å¼çš„å‚æ•°é›†ï¼Œkeyä¸ºå‚æ•°åï¼Œvalueä¸ºå‚æ•°å€¼
 	 */
 	public void onAuthComplete(Bundle values);
 
 	/**
-	 * ÊÚÈ¨·şÎñÆ÷·µ»Ø´íÎó
+	 * æˆæƒæœåŠ¡å™¨è¿”å›é”™è¯¯
 	 * 
 	 * @param kaixinAuthError
-	 *            ·â×°·şÎñÆ÷·µ»ØµÄ´íÎóĞÅÏ¢
+	 *            å°è£…æœåŠ¡å™¨è¿”å›çš„é”™è¯¯ä¿¡æ¯
 	 */
 	public void onAuthError(KaixinAuthError kaixinAuthError);
 
 	/**
-	 * ÓÃ»§È¡ÏûµÇÂ¼
+	 * ç”¨æˆ·å–æ¶ˆç™»å½•
 	 */
 	public void onAuthCancelLogin();
 
 	/**
-	 * ÓÃ»§È¡ÏûÊÚÈ¨
+	 * ç”¨æˆ·å–æ¶ˆæˆæƒ
 	 * 
 	 * @param values
-	 *            ÊÚÈ¨·şÎñÆ÷·µ»ØµÄkey-valueĞÎÊ½µÄ²ÎÊı¼¯£¬keyÎª²ÎÊıÃû£¬valueÎª²ÎÊıÖµ
+	 *            æˆæƒæœåŠ¡å™¨è¿”å›çš„key-valueå½¢å¼çš„å‚æ•°é›†ï¼Œkeyä¸ºå‚æ•°åï¼Œvalueä¸ºå‚æ•°å€¼
 	 */
 	public void onAuthCancel(Bundle values);
 }

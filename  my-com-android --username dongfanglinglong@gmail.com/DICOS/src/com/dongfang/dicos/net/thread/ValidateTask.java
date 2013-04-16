@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import com.dongfang.dicos.kzmw.RegisterActivity;
 import com.dongfang.dicos.net.HttpActions;
 import com.dongfang.dicos.util.ComParams;
 import com.dongfang.dicos.util.ULog;
@@ -37,7 +36,7 @@ public class ValidateTask extends AsyncTask<String, Integer, Bundle> {
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-		progressDialog = ProgressDialog.show(context, "", "µÇÂ¼ÖĞ...");
+		progressDialog = ProgressDialog.show(context, "", "ç™»å½•ä¸­...");
 		progressDialog.setIndeterminate(true);
 		progressDialog.setCancelable(true);
 		progressDialog.setOnDismissListener(new OnDismissListener() {
@@ -69,23 +68,23 @@ public class ValidateTask extends AsyncTask<String, Integer, Bundle> {
 
 			int result = json.getInt("s");
 			if (-1000 == result) {
-				msg.obj = "ÓÃ»§ÃûÃÜÂë²»µÃÎª¿Õ";
+				msg.obj = "ç”¨æˆ·åå¯†ç ä¸å¾—ä¸ºç©º";
 			}
 			else if (-1001 == result) {
-				msg.obj = "ÒÑµÇÂ¼";
+				msg.obj = "å·²ç™»å½•";
 			}
 			else if (-1 == result) {
 				msg.arg1 = -1;
-				msg.obj = "ÓÃ»§Ãû»òÃÜÂë´íÎó";
+				msg.obj = "ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯";
 			}
 			else {
-				msg.obj = "µÇÂ¼³É¹¦";
+				msg.obj = "ç™»å½•æˆåŠŸ";
 			}
 			msg.arg1 = result;
 		} catch (JSONException e) {
 			ULog.e(TAG, e.toString());
 			msg.arg1 = -1;
-			msg.obj = "ÓÃ»§Ãû»òÃÜÂë´íÎó";
+			msg.obj = "ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯";
 		}
 
 		msg.what = ComParams.HANDLER_RESULT_VALIDATE;

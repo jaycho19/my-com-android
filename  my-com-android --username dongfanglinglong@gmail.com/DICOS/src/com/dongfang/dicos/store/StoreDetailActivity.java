@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dongfang.dicos.MoreActivity;
 import com.dongfang.dicos.R;
 import com.dongfang.dicos.kzmw.SigneInActivity;
 import com.dongfang.dicos.net.Actions;
@@ -21,7 +20,7 @@ import com.dongfang.dicos.util.ULog;
 import com.dongfang.dicos.util.Util;
 
 /**
- * ÃÅµêÏêÏ¸ĞÅÏ¢
+ * é—¨åº—è¯¦ç»†ä¿¡æ¯
  * 
  * @author dongfang
  * */
@@ -76,11 +75,11 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 		init(json);
 	}
 
-	/** ³õÊ¼»¯Ò³ÃæÔªËØ */
+	/** åˆå§‹åŒ–é¡µé¢å…ƒç´  */
 	public void init(String json) {
-		// {"id":213213,province":"ÉÏº£","city":"Ğì»ãÇø","name":"Ô¥Ô°µê","address":"»ÆÆÖÇøXXÂ·","tel":"021-67823457","x":123.223323,"y":34.234234},
-		// //id ÃÅµêid,province Ê¡/Ö±Ï½ÊĞ ,city ÊĞ/Çø£¬name µêÃû ,address µØÖ·, tel µØÖ·, x
-		// ¾­¶È£¬y Î³¶È
+		// {"id":213213,province":"ä¸Šæµ·","city":"å¾æ±‡åŒº","name":"è±«å›­åº—","address":"é»„æµ¦åŒºXXè·¯","tel":"021-67823457","x":123.223323,"y":34.234234},
+		// //id é—¨åº—id,province çœ/ç›´è¾–å¸‚ ,city å¸‚/åŒºï¼Œname åº—å ,address åœ°å€, tel åœ°å€, x
+		// ç»åº¦ï¼Œy çº¬åº¦
 
 		ULog.d(tag, "initElement " + json);
 
@@ -141,7 +140,7 @@ public class StoreDetailActivity extends Activity implements OnClickListener {
 				}
 			}
 			else {
-				Toast.makeText(this, "Äú»¹Î´µÇÂ¼...", Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "æ‚¨è¿˜æœªç™»å½•...", Toast.LENGTH_LONG).show();
 			}
 
 			break;

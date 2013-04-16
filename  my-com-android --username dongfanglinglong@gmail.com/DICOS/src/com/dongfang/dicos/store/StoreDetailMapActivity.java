@@ -3,8 +3,6 @@ package com.dongfang.dicos.store;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONObject;
-
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Point;
@@ -34,7 +32,7 @@ import com.dongfang.dicos.R;
 import com.dongfang.dicos.util.ULog;
 
 /**
- * ÃÅµêÏêÏ¸ĞÅÏ¢
+ * é—¨åº—è¯¦ç»†ä¿¡æ¯
  * 
  * @author dongfang
  * */
@@ -51,10 +49,10 @@ public class StoreDetailMapActivity extends MapActivity implements OnClickListen
 
 	private BMapManager			mBMapMan			= null;
 	private MapView				mMapView			= null;
-	private LocationListener	mLocationListener	= null;										// onResumeÊ±×¢²á´Ëlistener£¬onPauseÊ±ĞèÒªRemove
-	private MyLocationOverlay	mLocationOverlay	= null;										// ¶¨Î»Í¼²ã
+	private LocationListener	mLocationListener	= null;										// onResumeæ—¶æ³¨å†Œæ­¤listenerï¼ŒonPauseæ—¶éœ€è¦Remove
+	private MyLocationOverlay	mLocationOverlay	= null;										// å®šä½å›¾å±‚
 
-	static View					mPopView			= null;										// µã»÷markÊ±µ¯³öµÄÆøÅİView
+	static View					mPopView			= null;										// ç‚¹å‡»markæ—¶å¼¹å‡ºçš„æ°”æ³¡View
 	OverItemT					overitem			= null;
 
 	private String				mStrKey				= "1E8E5C6D90D947149E83C10ECA133911A9DE8ECC";
@@ -75,43 +73,43 @@ public class StoreDetailMapActivity extends MapActivity implements OnClickListen
 
 		mBMapMan = new BMapManager(this);
 		mBMapMan.init(this.mStrKey, new MyGeneralListener());
-		mBMapMan.getLocationManager().setNotifyInternal(10, 5);// ÉèÖÃÍ¨Öª¼ä¸ô
+		mBMapMan.getLocationManager().setNotifyInternal(10, 5);// è®¾ç½®é€šçŸ¥é—´éš”
 
 		mBMapMan.start();
-		// Èç¹ûÊ¹ÓÃµØÍ¼SDK£¬Çë³õÊ¼»¯µØÍ¼Activity
+		// å¦‚æœä½¿ç”¨åœ°å›¾SDKï¼Œè¯·åˆå§‹åŒ–åœ°å›¾Activity
 		long iTime = System.nanoTime();
 		super.initMapActivity(mBMapMan);
 		iTime = System.nanoTime() - iTime;
 		ULog.d(tag, "the init time is  " + iTime);
 
 		mMapView = (MapView) findViewById(R.id.mapview_store_detail_map);
-		mMapView.setBuiltInZoomControls(true); // ÉèÖÃÆôÓÃÄÚÖÃµÄËõ·Å¿Ø¼ş
-		mMapView.setDrawOverlayWhenZooming(true); // ÉèÖÃÔÚËõ·Å¶¯»­¹ı³ÌÖĞÒ²ÏÔÊ¾overlay,Ä¬ÈÏÎª²»»æÖÆ
+		mMapView.setBuiltInZoomControls(true); // è®¾ç½®å¯ç”¨å†…ç½®çš„ç¼©æ”¾æ§ä»¶
+		mMapView.setDrawOverlayWhenZooming(true); // è®¾ç½®åœ¨ç¼©æ”¾åŠ¨ç”»è¿‡ç¨‹ä¸­ä¹Ÿæ˜¾ç¤ºoverlay,é»˜è®¤ä¸ºä¸ç»˜åˆ¶
 		mMapView.setAlwaysDrawnWithCacheEnabled(true);
 
 		// MapController mMapController = mMapView.getController(); //
-		// µÃµ½mMapViewµÄ¿ØÖÆÈ¨,¿ÉÒÔÓÃËü¿ØÖÆºÍÇı¶¯Æ½ÒÆºÍËõ·Å
+		// å¾—åˆ°mMapViewçš„æ§åˆ¶æƒ,å¯ä»¥ç”¨å®ƒæ§åˆ¶å’Œé©±åŠ¨å¹³ç§»å’Œç¼©æ”¾
 		// GeoPoint point = new GeoPoint((int) (x * 1E6), (int) (y * 1E6)); //
-		// ÓÃ¸ø¶¨µÄ¾­Î³¶È¹¹ÔìÒ»¸öGeoPoint£¬µ¥Î»ÊÇÎ¢¶È
-		// // (¶È
+		// ç”¨ç»™å®šçš„ç»çº¬åº¦æ„é€ ä¸€ä¸ªGeoPointï¼Œå•ä½æ˜¯å¾®åº¦
+		// // (åº¦
 		// // *
 		// // 1E6)
 		//
-		// mMapController.setCenter(point); // ÉèÖÃµØÍ¼ÖĞĞÄµã
-		// mMapController.setZoom(12); // ÉèÖÃµØÍ¼zoom¼¶±ğ
+		// mMapController.setCenter(point); // è®¾ç½®åœ°å›¾ä¸­å¿ƒç‚¹
+		// mMapController.setZoom(12); // è®¾ç½®åœ°å›¾zoomçº§åˆ«
 		//
 		// mLocationOverlay = new MyLocationOverlay(this, mMapView);
 		// mMapView.getOverlays().add(mLocationOverlay);
 
 		final GeoPoint point = new GeoPoint((int) (y * 1e6), (int) (x * 1e6));
 
-		Drawable marker = getResources().getDrawable(R.drawable.iconmarka); // µÃµ½ĞèÒª±êÔÚµØÍ¼ÉÏµÄ×ÊÔ´
-		marker.setBounds(0, 0, marker.getIntrinsicWidth(), marker.getIntrinsicHeight()); // Îªmaker¶¨ÒåÎ»ÖÃºÍ±ß½ç
+		Drawable marker = getResources().getDrawable(R.drawable.iconmarka); // å¾—åˆ°éœ€è¦æ ‡åœ¨åœ°å›¾ä¸Šçš„èµ„æº
+		marker.setBounds(0, 0, marker.getIntrinsicWidth(), marker.getIntrinsicHeight()); // ä¸ºmakerå®šä¹‰ä½ç½®å’Œè¾¹ç•Œ
 
 		overitem = new OverItemT(marker, new OverlayItem(point, name, name));
-		mMapView.getOverlays().add(overitem); // Ìí¼ÓItemizedOverlayÊµÀıµ½mMapView
+		mMapView.getOverlays().add(overitem); // æ·»åŠ ItemizedOverlayå®ä¾‹åˆ°mMapView
 
-		// ´´½¨µã»÷markÊ±µÄµ¯³öÅİÅİ
+		// åˆ›å»ºç‚¹å‡»markæ—¶çš„å¼¹å‡ºæ³¡æ³¡
 		mPopView = super.getLayoutInflater().inflate(R.layout.popview, null);
 		((TextView) mPopView.findViewById(R.id.textview_popview_store_name)).setText(name);
 		if (!TextUtils.isEmpty(add)) {
@@ -136,7 +134,7 @@ public class StoreDetailMapActivity extends MapActivity implements OnClickListen
 		// GeoPoint point = new GeoPoint((int) (y * 1e6), (int) (x * 1e6));
 		// mMapView.getController().setCenter(point);
 
-		// ×¢²á¶¨Î»ÊÂ¼ş
+		// æ³¨å†Œå®šä½äº‹ä»¶
 		mLocationListener = new LocationListener() {
 
 			@Override
@@ -164,7 +162,7 @@ public class StoreDetailMapActivity extends MapActivity implements OnClickListen
 			ULog.d(tag, "onResume mBMapMan != null");
 			mBMapMan.getLocationManager().requestLocationUpdates(mLocationListener);
 			// mLocationOverlay.enableMyLocation();
-			// mLocationOverlay.enableCompass(); // ´ò¿ªÖ¸ÄÏÕë
+			// mLocationOverlay.enableCompass(); // æ‰“å¼€æŒ‡å—é’ˆ
 			mBMapMan.start();
 		}
 		super.onResume();
@@ -176,7 +174,7 @@ public class StoreDetailMapActivity extends MapActivity implements OnClickListen
 		if (mBMapMan != null) {
 			mBMapMan.getLocationManager().removeUpdates(mLocationListener);
 			// mLocationOverlay.disableMyLocation();
-			// mLocationOverlay.disableCompass(); // ¹Ø±ÕÖ¸ÄÏÕë
+			// mLocationOverlay.disableCompass(); // å…³é—­æŒ‡å—é’ˆ
 			mBMapMan.stop();
 		}
 		super.onPause();
@@ -210,15 +208,15 @@ public class StoreDetailMapActivity extends MapActivity implements OnClickListen
 		@Override
 		public void onGetNetworkState(int iError) {
 			ULog.d(tag, "onGetNetworkState error is " + iError);
-			Toast.makeText(StoreDetailMapActivity.this, "ÄúµÄÍøÂç³ö´íÀ²£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(StoreDetailMapActivity.this, "æ‚¨çš„ç½‘ç»œå‡ºé”™å•¦ï¼", Toast.LENGTH_LONG).show();
 		}
 
 		@Override
 		public void onGetPermissionState(int iError) {
 			ULog.d(tag, "onGetPermissionState error is " + iError);
 			if (iError == MKEvent.ERROR_PERMISSION_DENIED) {
-				// ÊÚÈ¨Key´íÎó£º
-				Toast.makeText(StoreDetailMapActivity.this, "ÇëÔÚBMapApiDemoApp.javaÎÄ¼şÊäÈëÕıÈ·µÄÊÚÈ¨Key£¡", Toast.LENGTH_LONG)
+				// æˆæƒKeyé”™è¯¯ï¼š
+				Toast.makeText(StoreDetailMapActivity.this, "è¯·åœ¨BMapApiDemoApp.javaæ–‡ä»¶è¾“å…¥æ­£ç¡®çš„æˆæƒKeyï¼", Toast.LENGTH_LONG)
 						.show();
 			}
 		}
@@ -234,9 +232,9 @@ public class StoreDetailMapActivity extends MapActivity implements OnClickListen
 
 			this.marker = marker;
 
-			// ¹¹ÔìOverlayItemµÄÈı¸ö²ÎÊıÒÀ´ÎÎª£ºitemµÄÎ»ÖÃ£¬±êÌâÎÄ±¾£¬ÎÄ×ÖÆ¬¶Î
+			// æ„é€ OverlayItemçš„ä¸‰ä¸ªå‚æ•°ä¾æ¬¡ä¸ºï¼šitemçš„ä½ç½®ï¼Œæ ‡é¢˜æ–‡æœ¬ï¼Œæ–‡å­—ç‰‡æ®µ
 			mGeoList.add(overlayitem);
-			populate(); // createItem(int)·½·¨¹¹Ôìitem¡£Ò»µ©ÓĞÁËÊı¾İ£¬ÔÚµ÷ÓÃÆäËü·½·¨Ç°£¬Ê×ÏÈµ÷ÓÃÕâ¸ö·½·¨
+			populate(); // createItem(int)æ–¹æ³•æ„é€ itemã€‚ä¸€æ—¦æœ‰äº†æ•°æ®ï¼Œåœ¨è°ƒç”¨å…¶å®ƒæ–¹æ³•å‰ï¼Œé¦–å…ˆè°ƒç”¨è¿™ä¸ªæ–¹æ³•
 		}
 
 		public void updateOverlay() {
@@ -246,25 +244,25 @@ public class StoreDetailMapActivity extends MapActivity implements OnClickListen
 		@Override
 		public void draw(Canvas canvas, MapView mapView, boolean shadow) {
 
-			// Projection½Ó¿ÚÓÃÓÚÆÁÄ»ÏñËØ×ø±êºÍ¾­Î³¶È×ø±êÖ®¼äµÄ±ä»»
+			// Projectionæ¥å£ç”¨äºå±å¹•åƒç´ åæ ‡å’Œç»çº¬åº¦åæ ‡ä¹‹é—´çš„å˜æ¢
 			Projection projection = mapView.getProjection();
-			for (int index = size() - 1; index >= 0; index--) { // ±éÀúmGeoList
-				OverlayItem overLayItem = getItem(index); // µÃµ½¸ø¶¨Ë÷ÒıµÄitem
+			for (int index = size() - 1; index >= 0; index--) { // éå†mGeoList
+				OverlayItem overLayItem = getItem(index); // å¾—åˆ°ç»™å®šç´¢å¼•çš„item
 
 				String title = overLayItem.getTitle();
-				// °Ñ¾­Î³¶È±ä»»µ½Ïà¶ÔÓÚMapView×óÉÏ½ÇµÄÆÁÄ»ÏñËØ×ø±ê
+				// æŠŠç»çº¬åº¦å˜æ¢åˆ°ç›¸å¯¹äºMapViewå·¦ä¸Šè§’çš„å±å¹•åƒç´ åæ ‡
 				Point point = projection.toPixels(overLayItem.getPoint(), null);
 
-				// ¿ÉÔÚ´Ë´¦Ìí¼ÓÄúµÄ»æÖÆ´úÂë
+				// å¯åœ¨æ­¤å¤„æ·»åŠ æ‚¨çš„ç»˜åˆ¶ä»£ç 
 				// Paint paintText = new Paint();
 				// paintText.setColor(Color.BLUE);
 				// paintText.setTextSize(15);
 				// canvas.drawText(title, point.x - 30, point.y, paintText); //
-				// »æÖÆÎÄ±¾
+				// ç»˜åˆ¶æ–‡æœ¬
 			}
 
 			super.draw(canvas, mapView, shadow);
-			// µ÷ÕûÒ»¸ödrawable±ß½ç£¬Ê¹µÃ£¨0£¬0£©ÊÇÕâ¸ödrawableµ×²¿×îºóÒ»ĞĞÖĞĞÄµÄÒ»¸öÏñËØ
+			// è°ƒæ•´ä¸€ä¸ªdrawableè¾¹ç•Œï¼Œä½¿å¾—ï¼ˆ0ï¼Œ0ï¼‰æ˜¯è¿™ä¸ªdrawableåº•éƒ¨æœ€åä¸€è¡Œä¸­å¿ƒçš„ä¸€ä¸ªåƒç´ 
 			boundCenterBottom(marker);
 		}
 
@@ -281,10 +279,10 @@ public class StoreDetailMapActivity extends MapActivity implements OnClickListen
 		}
 
 		@Override
-		// ´¦Àíµ±µã»÷ÊÂ¼ş
+		// å¤„ç†å½“ç‚¹å‡»äº‹ä»¶
 		protected boolean onTap(int i) {
 			setFocus(mGeoList.get(i));
-			// ¸üĞÂÆøÅİÎ»ÖÃ,²¢Ê¹Ö®ÏÔÊ¾
+			// æ›´æ–°æ°”æ³¡ä½ç½®,å¹¶ä½¿ä¹‹æ˜¾ç¤º
 			GeoPoint pt = mGeoList.get(i).getPoint();
 			mMapView.updateViewLayout(mPopView, new MapView.LayoutParams(LayoutParams.WRAP_CONTENT,
 					LayoutParams.WRAP_CONTENT, pt, MapView.LayoutParams.BOTTOM_CENTER));
@@ -297,7 +295,7 @@ public class StoreDetailMapActivity extends MapActivity implements OnClickListen
 		@Override
 		public boolean onTap(GeoPoint arg0, MapView arg1) {
 			// TODO Auto-generated method stub
-			// ÏûÈ¥µ¯³öµÄÆøÅİ
+			// æ¶ˆå»å¼¹å‡ºçš„æ°”æ³¡
 			mPopView.setVisibility(View.GONE);
 			return super.onTap(arg0, arg1);
 		}

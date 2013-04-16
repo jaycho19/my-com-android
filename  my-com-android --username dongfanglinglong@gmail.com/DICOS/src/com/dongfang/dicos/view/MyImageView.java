@@ -57,7 +57,7 @@ public class MyImageView extends RelativeLayout {
 		addView(convertView);
 	}
 
-	/** ÅĞ¶ÏÍ¼Æ¬ÊÇ·ñÏÂÔØÍê±Ï */
+	/** åˆ¤æ–­å›¾ç‰‡æ˜¯å¦ä¸‹è½½å®Œæ¯• */
 	public boolean isImgExsits() {
 		return new File(context.getCacheDir() + "/" + imageName + "e").exists();
 	}
@@ -69,7 +69,7 @@ public class MyImageView extends RelativeLayout {
 		if (new File(context.getCacheDir() + "/" + imageName + "e").exists()) {
 			setImageBy(context.getCacheDir() + "/" + imageName + "e");
 		} else {
-			// ÏÂÔØÂß¼­
+			// ä¸‹è½½é€»è¾‘
 			// ULog.d("MyImageView",
 			// "new DownloadIMG(context, handler, url, imageName, 0).start()");
 			new DownloadIMG(context, handler, url, imageName, 0).start();
@@ -78,7 +78,7 @@ public class MyImageView extends RelativeLayout {
 	}
 
 	/**
-	 * ÉèÖÃ {@linkplain this#imageView} ±³¾°Í¼Æ¬
+	 * è®¾ç½® {@linkplain this#imageView} èƒŒæ™¯å›¾ç‰‡
 	 * 
 	 * @param filePath
 	 */
@@ -86,10 +86,10 @@ public class MyImageView extends RelativeLayout {
 		// ULog.i(tag, filePath);
 
 		BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inJustDecodeBounds = true; // ÖµÉèÎªtrueÄÇÃ´½«²»·µ»ØÊµ¼ÊµÄbitmap£¬Ò²²»¸øÆä·ÖÅäÄÚ´æ¿Õ¼äÕâÑù¾Í±ÜÃâÄÚ´æÒç³öÁË¡£µ«ÊÇÔÊĞíÎÒÃÇ²éÑ¯Í¼Æ¬µÄĞÅÏ¢ÕâÆäÖĞ¾Í°üÀ¨Í¼Æ¬´óĞ¡ĞÅÏ¢
-		// Í¨¹ıÕâ¸öbitmap»ñÈ¡Í¼Æ¬µÄ¿íºÍ¸ß
+		options.inJustDecodeBounds = true; // å€¼è®¾ä¸ºtrueé‚£ä¹ˆå°†ä¸è¿”å›å®é™…çš„bitmapï¼Œä¹Ÿä¸ç»™å…¶åˆ†é…å†…å­˜ç©ºé—´è¿™æ ·å°±é¿å…å†…å­˜æº¢å‡ºäº†ã€‚ä½†æ˜¯å…è®¸æˆ‘ä»¬æŸ¥è¯¢å›¾ç‰‡çš„ä¿¡æ¯è¿™å…¶ä¸­å°±åŒ…æ‹¬å›¾ç‰‡å¤§å°ä¿¡æ¯
+		// é€šè¿‡è¿™ä¸ªbitmapè·å–å›¾ç‰‡çš„å®½å’Œé«˜
 		Bitmap bitmap = BitmapFactory.decodeFile(filePath, options);
-		// ÏÔÊ¾ÆÁÄ»¿í¶È
+		// æ˜¾ç¤ºå±å¹•å®½åº¦
 		int windowWidth = Util.getWindowWidth(context);
 
 		// ULog.d(tag, "windowWidth = " + windowWidth);
@@ -97,8 +97,8 @@ public class MyImageView extends RelativeLayout {
 		if (bitmap != null) {
 			// ULog.d(tag, "options.outWidth = " + options.outWidth);
 
-			options.inSampleSize = 1; // µÈÓÚ1Ê±£¬µÈÓÚÃ»ÓĞ½øĞĞËõ·Å
-			// Èç¹ûÍ¼Æ¬ÕæÊµ³ß´ç´óÓÚÁ½±¶ÆÁÄ»³ß´ç£¬¾Í½øĞĞµÈ±ÈËõ·Å£¬¼õÉÙÄÚ´æÏûºÄ
+			options.inSampleSize = 1; // ç­‰äº1æ—¶ï¼Œç­‰äºæ²¡æœ‰è¿›è¡Œç¼©æ”¾
+			// å¦‚æœå›¾ç‰‡çœŸå®å°ºå¯¸å¤§äºä¸¤å€å±å¹•å°ºå¯¸ï¼Œå°±è¿›è¡Œç­‰æ¯”ç¼©æ”¾ï¼Œå‡å°‘å†…å­˜æ¶ˆè€—
 			if (options.outWidth >= windowWidth * 2) {
 				options.inSampleSize = (int) Math.ceil(options.outWidth * 1.0 / windowWidth);
 			}
@@ -109,7 +109,7 @@ public class MyImageView extends RelativeLayout {
 			// ULog.d(tag, "options.outWidth = " + options.outWidth);
 			// ULog.d(tag, "imageView.getWidth() = " + imageView.getWidth());
 
-			// µÈ±ÈÀ­Éı»òÕßËõ·ÅÊÊÓ¦ÆÁÄ»´óĞ¡£¬µ«ÊÇÄÚ´æ²»»áËõĞ¡
+			// ç­‰æ¯”æ‹‰å‡æˆ–è€…ç¼©æ”¾é€‚åº”å±å¹•å¤§å°ï¼Œä½†æ˜¯å†…å­˜ä¸ä¼šç¼©å°
 			imageView.setLayoutParams(new RelativeLayout.LayoutParams(windowWidth, windowWidth * options.outHeight
 					/ options.outWidth));
 

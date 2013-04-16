@@ -22,10 +22,10 @@ public class ProbabilityListActivity extends Activity implements OnClickListener
 
 	public static final String	tag	= "ProbabilityListActivity";
 
-	/** ·µ»Ø°´Å¥ */
+	/** è¿”å›æŒ‰é’® */
 	private Button				bShowMore;
 
-	/** µ±Ç°³é½±»ú»á×ÜÊı */
+	/** å½“å‰æŠ½å¥–æœºä¼šæ€»æ•° */
 	private TextView			tvOpportunityNumber;
 
 	private ListView			lvInfo;
@@ -90,7 +90,7 @@ public class ProbabilityListActivity extends Activity implements OnClickListener
 					adapter.setArray(as);
 					adapter.notifyDataSetChanged();
 
-					tvOpportunityNumber.setText(String.format("Ä¿Ç°³é½±»ú»á×ÜÊı£º%1$d ´Î", as.length));
+					tvOpportunityNumber.setText(String.format("ç›®å‰æŠ½å¥–æœºä¼šæ€»æ•°ï¼š%1$d æ¬¡", as.length));
 				}
 
 				break;

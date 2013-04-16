@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,7 +27,7 @@ import com.dongfang.dicos.view.FlingAdapter;
 import com.dongfang.dicos.view.FlingGallery;
 
 /**
- * µ±¼¾»î¶¯
+ * å½“å­£æ´»åŠ¨
  * 
  * @author dongfang
  * 
@@ -39,9 +40,9 @@ public class CurrentSeason extends Activity implements OnClickListener, OnTouchL
 
 	private TextView		tvTitle;
 
-	/** µÇÂ¼°´Å¥ */
+	/** ç™»å½•æŒ‰é’® */
 	private Button			bLogin;
-	/** Ç©µ½°´Å¥ */
+	/** ç­¾åˆ°æŒ‰é’® */
 	private Button			bSigne;
 
 	private FlingGallery	mGallery			= null;
@@ -116,7 +117,7 @@ public class CurrentSeason extends Activity implements OnClickListener, OnTouchL
 				Util.showDialogSetNetWork(CurrentSeason.this);
 			}
 			else if (Util.isLogin(CurrentSeason.this)) {
-				Toast.makeText(CurrentSeason.this, "ÄúÒÑµÇÂ¼", Toast.LENGTH_LONG).show();
+				Toast.makeText(CurrentSeason.this, "æ‚¨å·²ç™»å½•", Toast.LENGTH_LONG).show();
 			}
 			else {
 				intent = new Intent(CurrentSeason.this, LoginActivity.class);
@@ -184,4 +185,21 @@ public class CurrentSeason extends Activity implements OnClickListener, OnTouchL
 		}
 		return super.onTouchEvent(event);
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			Util.showExitDialog(this);
+
+			return false;
+		}
+
+		return super.onKeyDown(keyCode, event);
+	}
+	
 }

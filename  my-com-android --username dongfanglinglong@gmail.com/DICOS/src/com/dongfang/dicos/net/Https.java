@@ -39,7 +39,7 @@ import android.text.TextUtils;
 import com.dongfang.dicos.util.ULog;
 
 /**
- * ¸÷ÖÖhttpÇëÇó
+ * å„ç§httpè¯·æ±‚
  * 
  * @author dongfang
  * */
@@ -66,7 +66,7 @@ public class Https {
 	}
 
 	/**
-	 * ¸ù¾İ²ÎÊıurl½øĞĞHTTP GET ÇëÇó£¬·µ»ØInputStream
+	 * æ ¹æ®å‚æ•°urlè¿›è¡ŒHTTP GET è¯·æ±‚ï¼Œè¿”å›InputStream
 	 * 
 	 * @param url
 	 * @return InputStream
@@ -75,7 +75,7 @@ public class Https {
 		try {
 			HttpGet request = new HttpGet(URL + "?key=" + jsToString);
 
-			// ´´½¨HttpClient¶ÔÏó
+			// åˆ›å»ºHttpClientå¯¹è±¡
 			HttpClient client = this.getNewHttpClient();
 			HttpResponse httpResponse = client.execute(request);
 
@@ -95,7 +95,7 @@ public class Https {
 		ULog.v(tag, "URL = " + url);
 		try {
 			HttpGet request = new HttpGet(url);
-			// ´´½¨HttpClient¶ÔÏó
+			// åˆ›å»ºHttpClientå¯¹è±¡
 			HttpClient client = this.getNewHttpClient();
 			HttpResponse httpResponse;
 			httpResponse = client.execute(request);
@@ -115,7 +115,7 @@ public class Https {
 	}
 
 	/**
-	 * ¸ù¾İ²ÎÊıurl½øĞĞHTTP POST ÇëÇó£¬·µ»ØInputStream
+	 * æ ¹æ®å‚æ•°urlè¿›è¡ŒHTTP POST è¯·æ±‚ï¼Œè¿”å›InputStream
 	 * 
 	 * @param url
 	 * @return String
@@ -123,7 +123,7 @@ public class Https {
 	public String post(List<NameValuePair> list) {
 		ULog.d(tag, URL);
 		try {
-			// ´´½¨HttpPost¶ÔÏó
+			// åˆ›å»ºHttpPostå¯¹è±¡
 			HttpPost request = new HttpPost(URL);
 			// ULog.d(tag,"null != request = " + (null != request));
 			request.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));
@@ -131,10 +131,10 @@ public class Https {
 			// HTTP_HEADER_CONTENT_TYPE_VALUE);
 			// request.setHeader(header);
 
-			// ´´½¨Á¬½Ó¶ÔÏó
+			// åˆ›å»ºè¿æ¥å¯¹è±¡
 			HttpClient client = this.getNewHttpClient();
 			// ULog.d(tag,"null != client = " + (null != client));
-			// Ö´ĞĞÁ¬½Ó
+			// æ‰§è¡Œè¿æ¥
 			HttpResponse httpResponse = client.execute(request);
 			// ULog.d(tag,"null != httpResponse = " + (null != httpResponse));
 			// ULog.d(tag,"HttpStatus = " +
@@ -159,7 +159,7 @@ public class Https {
 	}
 
 	/**
-	 * ¸ù¾İ²ÎÊıurl½øĞĞHTTP POST ÇëÇó£¬·µ»ØInputStream
+	 * æ ¹æ®å‚æ•°urlè¿›è¡ŒHTTP POST è¯·æ±‚ï¼Œè¿”å›InputStream
 	 * 
 	 * @param url
 	 * @return String
@@ -175,7 +175,7 @@ public class Https {
 				}
 			}
 
-			// ´´½¨Á¬½Ó¶ÔÏó
+			// åˆ›å»ºè¿æ¥å¯¹è±¡
 			HttpClient client = this.getNewHttpClient();
 			HttpResponse httpResponse = client.execute(request);
 			ULog.d(tag, "null != httpResponse " + (null != httpResponse));
@@ -224,11 +224,11 @@ public class Https {
 			HttpClient client = new DefaultHttpClient(ccm, params);
 			WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 			if (!wifiManager.isWifiEnabled()) {
-				// »ñÈ¡µ±Ç°ÕıÔÚÊ¹ÓÃµÄAPN½ÓÈëµã
+				// è·å–å½“å‰æ­£åœ¨ä½¿ç”¨çš„APNæ¥å…¥ç‚¹
 				Uri uri = Uri.parse("content://telephony/carriers/preferapn");
 				Cursor mCursor = context.getContentResolver().query(uri, null, null, null, null);
 				if (mCursor != null && mCursor.moveToFirst()) {
-					// ÓÎ±êÒÆÖÁµÚÒ»Ìõ¼ÇÂ¼£¬µ±È»Ò²Ö»ÓĞÒ»Ìõ
+					// æ¸¸æ ‡ç§»è‡³ç¬¬ä¸€æ¡è®°å½•ï¼Œå½“ç„¶ä¹Ÿåªæœ‰ä¸€æ¡
 					String proxyStr = mCursor.getString(mCursor.getColumnIndex("proxy"));
 					if (proxyStr != null && proxyStr.trim().length() > 0) {
 						HttpHost proxy = new HttpHost(proxyStr, 80);

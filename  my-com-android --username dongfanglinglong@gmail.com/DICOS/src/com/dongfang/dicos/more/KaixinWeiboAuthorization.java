@@ -1,6 +1,5 @@
 package com.dongfang.dicos.more;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -27,13 +26,13 @@ public class KaixinWeiboAuthorization extends Activity implements OnClickListene
 
 	public static final String		tag	= "KaixinWeiboAuthorization";
 
-	/** ·µ»Ø°´Å¥ */
+	/** è¿”å›æŒ‰é’® */
 	private Button					bBack;
 
-	/** ÊÚÈ¨Ò³Ãæ */
+	/** æˆæƒé¡µé¢ */
 	private WebView					wvKaiXin;
 
-	/** ÊÚÈ¨Ò³ÃæÔØÈë½ø¶È */
+	/** æˆæƒé¡µé¢è½½å…¥è¿›åº¦ */
 
 	private ProgressBar				pbKaiXin;
 
@@ -149,7 +148,7 @@ public class KaixinWeiboAuthorization extends Activity implements OnClickListene
 		private int parseUrl(String url) {
 			if (url.startsWith(ComParams.KAIXIN_APP_URL)) {
 				Bundle values = UtilKaiXin.parseUrl(url);
-				String error = values.getString("error");// ÊÚÈ¨·şÎñÆ÷·µ»ØµÄ´íÎó´úÂë
+				String error = values.getString("error");// æˆæƒæœåŠ¡å™¨è¿”å›çš„é”™è¯¯ä»£ç 
 				if (error != null) {
 					if (Kaixin.ACCESS_DENIED.equalsIgnoreCase(error)) {
 						Kaixin.getInstance().getKaixinAuthListener().onAuthCancel(values);
@@ -193,7 +192,7 @@ public class KaixinWeiboAuthorization extends Activity implements OnClickListene
 				}
 			} else {
 				Kaixin.getInstance().getKaixinAuthListener()
-						.onAuthError(new KaixinAuthError("´íÎó", "ÊÚÈ¨·şÎñÆ÷·µ»ØµÄĞÅÏ¢²»ÍêÕû", url));
+						.onAuthError(new KaixinAuthError("é”™è¯¯", "æˆæƒæœåŠ¡å™¨è¿”å›çš„ä¿¡æ¯ä¸å®Œæ•´", url));
 			}
 		}
 	}

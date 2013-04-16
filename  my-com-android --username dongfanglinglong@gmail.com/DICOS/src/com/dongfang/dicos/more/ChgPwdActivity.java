@@ -59,12 +59,12 @@ public class ChgPwdActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.chgpwd_button_ok:
 			if (etOldPwd.getText().length() < 6 || etNewPwd.getText().length() < 6) {
-				new AlertDialog.Builder(this).setTitle("ÃÜÂëÊäÈë´íÎó£¬ÇëÈ·±£ÃÜÂë³¤¶È²»ÉÙÓÚ6¸ö×Ö·û£¡").setPositiveButton("È·¶¨", null)
-						.setNegativeButton("È¡Ïû", null).show();
+				new AlertDialog.Builder(this).setTitle("å¯†ç è¾“å…¥é”™è¯¯ï¼Œè¯·ç¡®ä¿å¯†ç é•¿åº¦ä¸å°‘äºŽ6ä¸ªå­—ç¬¦ï¼").setPositiveButton("ç¡®å®š", null)
+						.setNegativeButton("å–æ¶ˆ", null).show();
 			}
 			else if (!etNewPwd.getText().toString().equals(etConfirmPwd.getText().toString())) {
-				new AlertDialog.Builder(this).setTitle("ÃÜÂëÊäÈë´íÎó£¬ÐÂÃÜÂëºÍÈ·ÈÏÃÜÂë²»Ò»ÖÂ£¡").setPositiveButton("È·¶¨", null)
-						.setNegativeButton("È¡Ïû", null).show();
+				new AlertDialog.Builder(this).setTitle("å¯†ç è¾“å…¥é”™è¯¯ï¼Œæ–°å¯†ç å’Œç¡®è®¤å¯†ç ä¸ä¸€è‡´ï¼").setPositiveButton("ç¡®å®š", null)
+						.setNegativeButton("å–æ¶ˆ", null).show();
 			}
 			else {
 				new ChgPwdTask().execute(Util.getPhoneNumber(context), etOldPwd.getText().toString(), etNewPwd
@@ -90,7 +90,7 @@ public class ChgPwdActivity extends Activity implements OnClickListener {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			progressDialog = ProgressDialog.show(context, "", "ÃÜÂëÐÞ¸ÄÖÐ");
+			progressDialog = ProgressDialog.show(context, "", "å¯†ç ä¿®æ”¹ä¸­");
 			progressDialog.setIndeterminate(true);
 			progressDialog.setCancelable(true);
 			progressDialog.setOnDismissListener(new OnDismissListener() {
@@ -136,8 +136,8 @@ public class ChgPwdActivity extends Activity implements OnClickListener {
 
 			if (null == result || result.getInt("statuscode", 0) != 1) {
 				new AlertDialog.Builder(context)
-						.setTitle(TextUtils.isEmpty(result.getString("msg")) ? "ÃÜÂëÐÞ¸ÄÊ§°Ü£¡" : result.getString("msg"))
-						.setPositiveButton("È·¶¨", null).setNegativeButton("È¡Ïû", null).show();
+						.setTitle(TextUtils.isEmpty(result.getString("msg")) ? "å¯†ç ä¿®æ”¹å¤±è´¥ï¼" : result.getString("msg"))
+						.setPositiveButton("ç¡®å®š", null).setNegativeButton("å–æ¶ˆ", null).show();
 				return;
 			}
 			else {
@@ -146,8 +146,8 @@ public class ChgPwdActivity extends Activity implements OnClickListener {
 				etNewPwd.setText("");
 				etConfirmPwd.setText("");
 
-				new AlertDialog.Builder(context).setTitle("ÃÜÂëÐÞ¸Ä³É¹¦£¡").setPositiveButton("È·¶¨",null)
-						.setNegativeButton("È¡Ïû", null).show();
+				new AlertDialog.Builder(context).setTitle("å¯†ç ä¿®æ”¹æˆåŠŸï¼").setPositiveButton("ç¡®å®š",null)
+						.setNegativeButton("å–æ¶ˆ", null).show();
 				return;
 			}
 

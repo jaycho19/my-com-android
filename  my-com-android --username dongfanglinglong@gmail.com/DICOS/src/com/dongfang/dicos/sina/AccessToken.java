@@ -21,7 +21,7 @@ package com.dongfang.dicos.sina;
  * An AcessToken class contains accesstoken and tokensecret.Child class of
  * com.weibo.net.Token.
  * 
- * @author (luopeng@staff.sina.com.cn zhangjie2@staff.sina.com.cn ¹Ù·½Î¢²©£ºWBSDK
+ * @author (luopeng@staff.sina.com.cn zhangjie2@staff.sina.com.cn å®˜æ–¹å¾®åšï¼šWBSDK
  *         http://weibo.com/u/2791136085)
  */
 public class AccessToken extends Token {

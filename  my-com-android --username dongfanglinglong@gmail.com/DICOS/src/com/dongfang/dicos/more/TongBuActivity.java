@@ -14,7 +14,6 @@ import com.dongfang.dicos.R;
 import com.dongfang.dicos.kaixin.Kaixin;
 import com.dongfang.dicos.kaixin.KaixinAuthError;
 import com.dongfang.dicos.kaixin.KaixinAuthListener;
-import com.dongfang.dicos.sina.AccessToken;
 import com.dongfang.dicos.sina.DialogError;
 import com.dongfang.dicos.sina.Weibo;
 import com.dongfang.dicos.sina.WeiboDialogListener;
@@ -25,14 +24,14 @@ import com.dongfang.dicos.view.SlipButton;
 import com.dongfang.dicos.view.SlipButton.OnChangedListener;
 
 /**
- * Í¬²½ÉèÖÃ
+ * åŒæ­¥è®¾ç½®
  * 
  * @author dongfang
  */
 public class TongBuActivity extends Activity implements OnClickListener {
 	public static final String	tag	= "TongBuActivity";
 
-	/** ·µ»Ø°´Å¥ */
+	/** è¿”å›æŒ‰é’® */
 	private Button				bBack;
 
 	private RelativeLayout		rlSina;
@@ -44,9 +43,9 @@ public class TongBuActivity extends Activity implements OnClickListener {
 	private Kaixin				kaixin;
 	private Weibo				weibo;
 
-	/** sina »¬¶¯°´Å¥ */
+	/** sina æ»‘åŠ¨æŒ‰é’® */
 	private SlipButton			slipButton_Sina;
-	/** kaixin »¬¶¯°´Å¥ */
+	/** kaixin æ»‘åŠ¨æŒ‰é’® */
 	private SlipButton			slipButton_Kaixin;
 
 	@Override
@@ -142,7 +141,7 @@ public class TongBuActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	/** ĞÂÀËÎ¢²©½¨È¨ */
+	/** æ–°æµªå¾®åšå»ºæƒ */
 	public void tongbuToSina() {
 		Weibo weibo = Weibo.getInstance();
 		weibo.loadStorage(this);
@@ -152,18 +151,18 @@ public class TongBuActivity extends Activity implements OnClickListener {
 			weibo.setupConsumerConfig(ComParams.SINA_APP_KEY, ComParams.SINA_APP_SECRET);
 
 			// Oauth2.0
-			// ÒşÊ½ÊÚÈ¨ÈÏÖ¤·½Ê½
+			// éšå¼æˆæƒè®¤è¯æ–¹å¼
 			weibo.setRedirectUrl(ComParams.SINA_APP_URL);
-			// ´Ë´¦»Øµ÷Ò³ÄÚÈİÓ¦¸ÃÌæ»»ÎªÓëappkey¶ÔÓ¦µÄÓ¦ÓÃ»Øµ÷Ò³
-			// ¶ÔÓ¦µÄÓ¦ÓÃ»Øµ÷Ò³¿ÉÔÚ¿ª·¢ÕßµÇÂ½ĞÂÀËÎ¢²©¿ª·¢Æ½Ì¨Ö®ºó£¬
-			// ½øÈëÎÒµÄÓ¦ÓÃ--Ó¦ÓÃÏêÇé--Ó¦ÓÃĞÅÏ¢--¸ß¼¶ĞÅÏ¢--ÊÚÈ¨ÉèÖÃ--Ó¦ÓÃ»Øµ÷Ò³½øĞĞÉèÖÃºÍ²é¿´£¬
-			// Ó¦ÓÃ»Øµ÷Ò³²»¿ÉÎª¿Õ
+			// æ­¤å¤„å›è°ƒé¡µå†…å®¹åº”è¯¥æ›¿æ¢ä¸ºä¸appkeyå¯¹åº”çš„åº”ç”¨å›è°ƒé¡µ
+			// å¯¹åº”çš„åº”ç”¨å›è°ƒé¡µå¯åœ¨å¼€å‘è€…ç™»é™†æ–°æµªå¾®åšå¼€å‘å¹³å°ä¹‹åï¼Œ
+			// è¿›å…¥æˆ‘çš„åº”ç”¨--åº”ç”¨è¯¦æƒ…--åº”ç”¨ä¿¡æ¯--é«˜çº§ä¿¡æ¯--æˆæƒè®¾ç½®--åº”ç”¨å›è°ƒé¡µè¿›è¡Œè®¾ç½®å’ŒæŸ¥çœ‹ï¼Œ
+			// åº”ç”¨å›è°ƒé¡µä¸å¯ä¸ºç©º
 
 			weibo.authorizeByActivity(TongBuActivity.this, new AuthDialogListener());
 		}
 	}
 
-	/** ¿ªĞÄ½¨È¨ */
+	/** å¼€å¿ƒå»ºæƒ */
 	public void tongbuToKaiXin() {
 		if (kaixin.isSessionValid()) {
 			// Intent intent = new Intent(TongBuActivity.this,
@@ -177,43 +176,43 @@ public class TongBuActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	/** È¡ÏûĞÂÀËÍ¬²½¶Ô»°¿ò */
+	/** å–æ¶ˆæ–°æµªåŒæ­¥å¯¹è¯æ¡† */
 	public void showSinaChkDialog(final Weibo weibo) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("µÂ¿ËÊ¿").setIcon(R.drawable.ic_menu_notifications).setMessage("ÊÇ·ñÒªÍ£Ö¹Í¬²½µ½ĞÂÀËÎ¢²©£¿")
-				.setCancelable(false).setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+		builder.setTitle("å¾·å…‹å£«").setIcon(R.drawable.ic_menu_notifications).setMessage("æ˜¯å¦è¦åœæ­¢åŒæ­¥åˆ°æ–°æµªå¾®åšï¼Ÿ")
+				.setCancelable(false).setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						weibo.clearStorage(TongBuActivity.this);
 						slipButton_Sina.setCheck(false);
 						slipButton_Sina.invalidate();
 						slipButton_Sina.destroyDrawingCache();
 					}
-				}).setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+				}).setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						dialog.cancel();
 					}
 				}).show();
 	}
 
-	/** È¡ÏûĞÂÀËÍ¬²½¶Ô»°¿ò */
+	/** å–æ¶ˆæ–°æµªåŒæ­¥å¯¹è¯æ¡† */
 	public void showKaixinChkDialog(final Kaixin kaixin) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("µÂ¿ËÊ¿").setIcon(R.drawable.ic_menu_notifications).setMessage("ÊÇ·ñÒªÍ£Ö¹Í¬²½µ½¿ªĞÄÍø£¿")
-				.setCancelable(false).setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+		builder.setTitle("å¾·å…‹å£«").setIcon(R.drawable.ic_menu_notifications).setMessage("æ˜¯å¦è¦åœæ­¢åŒæ­¥åˆ°å¼€å¿ƒç½‘ï¼Ÿ")
+				.setCancelable(false).setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						kaixin.clearStorage(TongBuActivity.this);
 						slipButton_Kaixin.setCheck(false);
 						slipButton_Kaixin.invalidate();
 						slipButton_Kaixin.destroyDrawingCache();
 					}
-				}).setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+				}).setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						dialog.cancel();
 					}
 				}).show();
 	}
 
-	/** ĞÂÀË½¨È¨×´Ì¬½Ó¿Ú */
+	/** æ–°æµªå»ºæƒçŠ¶æ€æ¥å£ */
 	class AuthDialogListener implements WeiboDialogListener {
 
 		@Override
@@ -254,7 +253,7 @@ public class TongBuActivity extends Activity implements OnClickListener {
 
 	}
 
-	/** ¿ªĞÄ½¨È¨×´Ì¬½Ó¿Ú */
+	/** å¼€å¿ƒå»ºæƒçŠ¶æ€æ¥å£ */
 	class MyKaixinAuthListener implements KaixinAuthListener {
 		@Override
 		public void onAuthCancel(Bundle values) {

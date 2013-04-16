@@ -2,128 +2,132 @@ package com.dongfang.dicos.util;
 
 public class ComParams {
 
-	/** ¿ª·¢ÕßµÄApp Key */
+	/** å¼€å‘è€…çš„App Key */
 	public static final String	SINA_APP_KEY								= "1938380460";
-	/** ¿ª·¢ÕßµÄApp Secret */
+	/** å¼€å‘è€…çš„App Secret */
 	public static final String	SINA_APP_SECRET								= "ac2200609e4dea39f5d55864f035c5f2";
-	/** ¿ª·¢ÕßµÄÓ¦ÓÃµØÖ· */
+	/** å¼€å‘è€…çš„åº”ç”¨åœ°å€ */
 	public static final String	SINA_APP_URL								= "http://www.dicos.com.cn/";
 
-	/** ĞÂÀËÎ¢²©ÓÃactivity½øĞĞ½¨È¨Ê±£¬ÔÚintentÖĞ´«urlÊ±µÄ¼ü */
+	/** æ–°æµªå¾®åšç”¨activityè¿›è¡Œå»ºæƒæ—¶ï¼Œåœ¨intentä¸­ä¼ urlæ—¶çš„é”® */
 	public static final String	SINA_AUTH_BY_ACTIVITY_INTENT_URL_NAME		= "URL";
 
-	/** ¿ª·¢ÕßµÄApp Key */
+	/** å¼€å‘è€…çš„App Key */
 	public static final String	KAIXIN_APP_KEY								= "82490134807554cd3c38f8d54ac5306e";
-	/** ¿ª·¢ÕßµÄApp Secret */
+	/** å¼€å‘è€…çš„App Secret */
 	public static final String	KAIXIN_APP_SECRET							= "ca94b8c5e86b6e8eaaa6b7c73e794df5";
 
-	/** ¿ª·¢ÕßµÄÓ¦ÓÃµØÖ· */
+	/** å¼€å‘è€…çš„åº”ç”¨åœ°å€ */
 	public static final String	KAIXIN_APP_URL								= "http://www.dicos.com.cn/";
 
-	/** ¿ªĞÄÓÃactivity½øĞĞ½¨È¨Ê±£¬ÔÚintentÖĞ´«urlÊ±µÄ¼ü */
+	/** å¼€å¿ƒç”¨activityè¿›è¡Œå»ºæƒæ—¶ï¼Œåœ¨intentä¸­ä¼ urlæ—¶çš„é”® */
 	public static final String	KAIXIN_AUTH_BY_ACTIVITY_INTENT_URL_NAME		= "URL";
 
 	public static final String	CURRENT_SEASON_IMG_ARRARY					= "img_list";
 
-	/** ÏÂÔØ»º´æµ¥Ôª´óĞ¡ */
+	/** ä¸‹è½½ç¼“å­˜å•å…ƒå¤§å° */
 	public static final int		BUF_SIZE									= 2 * 1024;
 
 	// ----------------------------------------------------------------------------
-	/** ÏîÄ¿ÖĞ£¬SharedPreferences µÄÎÄ¼şÄ¿Â¼ */
+	/** é¡¹ç›®ä¸­ï¼ŒSharedPreferences çš„æ–‡ä»¶ç›®å½• */
 	public static final String	SHAREDPREFERENCES_FILE_NAME					= "dicos";
-	/** ÊÖ»úºÅÂë */
+	/** æ‰‹æœºå·ç  */
 	public static final String	SHAREDPREFERENCES_PHONE_NUMBER				= "phoneNumber";
-	/** êÇ³Æ */
+	/** æ˜µç§° */
 	public static final String	SHAREDPREFERENCES_NICK_NAME					= "nickName";
 	/** token */
 	public static final String	SHAREDPREFERENCES_TOKEN						= "token";
 	/** ts */
 	public static final String	SHAREDPREFERENCES_TS						= "ts";
-	/** ÓÃ»§ºÅÂë */
+	/** ç”¨æˆ·å·ç  */
 	public static final String	SHAREDPREFERENCES_USER_NO					= "uno";
 
-	/** µÇÂ¼×´Ì¬ */
+	/** ç™»å½•çŠ¶æ€ */
 	public static final String	SHAREDPREFERENCES_LOGIN_STATUE				= "loginStatus";
 
-	/** ipµØÖ· */
+	/** ipåœ°å€ */
 	public static final String	SHAREDPREFERENCES_IP_AREA					= "iparea";
+	/** æ¨é€è®¾ç½®ï¼šå¡æ»‹ç¾å‘³ */
+	public static final String	SHAREDPREFERENCES_PUSH_KZMW					= "push_kzmw";
+	/** æ¨é€è®¾ç½®ï¼šå½“å­£æ´»åŠ¨ */
+	public static final String	SHAREDPREFERENCES_PUSH_DJHD					= "push_djhd";
 
-	/** µ±¼¾»î¶¯Í¼Æ¬µØÖ· */
+	/** å½“å­£æ´»åŠ¨å›¾ç‰‡åœ°å€ */
 	public static final String	SHAREDPREFERENCES_CRUUENTSEASON_IMG_URLS	= "cruuentSeasonImgUrls";
-	/** ¿¨×ÌÃÀÎ¶Ê×Ò³Êı¾İ */
+	/** å¡æ»‹ç¾å‘³é¦–é¡µæ•°æ® */
 	public static final String	SHAREDPREFERENCES_KZME_IFNO					= "kzme_ifno";
-	/** ¿¨×ÌÃÀÎ¶¶ş¼¶²Íµ¥µã»÷Êı¾İ */
+	/** å¡æ»‹ç¾å‘³äºŒçº§é¤å•ç‚¹å‡»æ•°æ® */
 	public static final String	SHAREDPREFERENCES_KZME_IFNO_TYPE_CATE		= "kzme_ifno_type_cate";
 
 	// ----------------------------------------------------------------------------
-	/** »ñÈ¡ÑéÖ¤ÂëÊ±£¬Ëø¶¨»ñÈ¡ÑéÖ¤Âë°´Å¥ÊÂ¼ş£¨Ãë£© */
+	/** è·å–éªŒè¯ç æ—¶ï¼Œé”å®šè·å–éªŒè¯ç æŒ‰é’®äº‹ä»¶ï¼ˆç§’ï¼‰ */
 	public static final int		BUTTON_GET_AUTH_CODE_LOCKED_SECOND			= 60;
-	/** ¿ªĞÄ½¨È¨Ê§°Ü */
+	/** å¼€å¿ƒå»ºæƒå¤±è´¥ */
 	public static final int		HANDLER_KAIXIN_LOGIN_ERROR					= 400;
 
 	// ----------------------------------------------------------------------------
 
-	/** »ñÈ¡¶ÌĞÅÑéÖ¤Âë */
+	/** è·å–çŸ­ä¿¡éªŒè¯ç  */
 	public static final int		HANDLER_LOGIN_GET_AUTH_CODE					= 1000;
-	/** ¶ÌĞÅÑéÖ¤ÂëÆÚ¼ä£¬²»ÔÊĞíÔÙ´Îµã»÷»ñÈ¡ÑéÖ¤Âë°´Å¥ */
+	/** çŸ­ä¿¡éªŒè¯ç æœŸé—´ï¼Œä¸å…è®¸å†æ¬¡ç‚¹å‡»è·å–éªŒè¯ç æŒ‰é’® */
 	public static final int		HANDLER_LOGIN_GET_AUTH_CODE_LOCKED			= 1001;
-	/** µÇÂ¼ÊÂ¼ş */
+	/** ç™»å½•äº‹ä»¶ */
 	public static final int		HANDLER_LOGIN_LOGIN							= 1002;
-	/** Ç©µ½ÊÂ¼ş */
+	/** ç­¾åˆ°äº‹ä»¶ */
 	public static final int		HANDLER_SIGNE_IN							= 1003;
 
 	// ----------------------------------------------------------------------------
-	/** »ñÈ¡ÑéÖ¤£¬·´À¡Ö®Ç°Ëø¶¨µÇÂ¼°´Å¥ */
+	/** è·å–éªŒè¯ï¼Œåé¦ˆä¹‹å‰é”å®šç™»å½•æŒ‰é’® */
 	public static final int		HANDLER_RESULT_LOGIN						= 2000;
-	/** µÇÂ¼½á¹û·´À¡£¬·´À¡Ö®Ç°Ëø¶¨µÇÂ¼°´Å¥ */
+	/** ç™»å½•ç»“æœåé¦ˆï¼Œåé¦ˆä¹‹å‰é”å®šç™»å½•æŒ‰é’® */
 	public static final int		HANDLER_RESULT_VALIDATE						= 2001;
-	/** µÇ³ö½á¹û·´À¡ */
+	/** ç™»å‡ºç»“æœåé¦ˆ */
 	public static final int		HANDLER_RESULT_LOGOUT						= 2002;
-	/** ³é½±½á¹û·´À¡ */
+	/** æŠ½å¥–ç»“æœåé¦ˆ */
 	public static final int		HANDLER_RESULT_LOTTERY						= 2003;
-	/** ³é½±ÀúÊ·½á¹û·´À¡ */
+	/** æŠ½å¥–å†å²ç»“æœåé¦ˆ */
 	public static final int		HANDLER_RESULT_LOTTERYHISTORY				= 2004;
-	/** µ±Ç°³é½±»î¶¯ÊÇ·ñ½áÊø ½á¹û·´À¡ */
+	/** å½“å‰æŠ½å¥–æ´»åŠ¨æ˜¯å¦ç»“æŸ ç»“æœåé¦ˆ */
 	public static final int		HANDLER_RESULT_LOTTERYLEGAL					= 2005;
-	/** »ñ½±¹«²¼ ½á¹û·´À¡ */
+	/** è·å¥–å…¬å¸ƒ ç»“æœåé¦ˆ */
 	public static final int		HANDLER_RESULT_LOTTERYWINNER				= 2006;
-	/** ½±Æ··¢·Å ½á¹û·´À¡ */
+	/** å¥–å“å‘æ”¾ ç»“æœåé¦ˆ */
 	public static final int		HANDLER_RESULT_LOTTERYDISTRIBUTIONINFO		= 2007;
-	/** ³é½±´ÎÊıÅÅĞĞ°ñ ½á¹û·´À¡ */
+	/** æŠ½å¥–æ¬¡æ•°æ’è¡Œæ¦œ ç»“æœåé¦ˆ */
 	public static final int		HANDLER_RESULT_LOTTERYRATELIST				= 2008;
-	/** »ñÈ¡ÃÅµêÁĞ±í ½á¹û·´À¡ */
+	/** è·å–é—¨åº—åˆ—è¡¨ ç»“æœåé¦ˆ */
 	public static final int		HANDLER_RESULT_RESTAURENTLIST				= 2009;
-	/** ÀúÊ·Ç©µ½ ½á¹û·´À¡ */
+	/** å†å²ç­¾åˆ° ç»“æœåé¦ˆ */
 	public static final int		HANDLER_RESULT_SIGNHISTORY					= 2010;
-	/** Ç©µ½ ½á¹û·´À¡ */
+	/** ç­¾åˆ° ç»“æœåé¦ˆ */
 	public static final int		HANDLER_RESULT_SIGN							= 2011;
-	/** Òâ¼û·´À¡ ½á¹û·´À¡ */
+	/** æ„è§åé¦ˆ ç»“æœåé¦ˆ */
 	public static final int		HANDLER_RESULT_ADVICE						= 2012;
-	/** Íü¼ÇÃÜÂë£¬»ñÈ¡ÃÜÂë */
+	/** å¿˜è®°å¯†ç ï¼Œè·å–å¯†ç  */
 	public static final int		HANDLER_RESULT_GET_PASSWORD					= 2013;
-	/** ÓÃ»§×¢²á */
+	/** ç”¨æˆ·æ³¨å†Œ */
 	public static final int		HANDLER_RESULT_REGISTER						= 2014;
 
 	// ----------------------------------------------------------------------------
 
-	/** Ìø×ªµ½ÃÅµêÏêÇéÒ³ */
+	/** è·³è½¬åˆ°é—¨åº—è¯¦æƒ…é¡µ */
 	public static final int		HANDLER_INTENT_GOTO_STORE_DETAIL			= 3000;
-	/** finish ³ÇÊĞÇĞ»»Ò³Ãæ */
+	/** finish åŸå¸‚åˆ‡æ¢é¡µé¢ */
 	public static final int		HANDLER_FINISH_CITYLIST_ACTIVITY			= 3001;
-	/** ĞŞ¸Ä³ÇÊĞÇĞ»»Ò³Ãætitle */
+	/** ä¿®æ”¹åŸå¸‚åˆ‡æ¢é¡µé¢title */
 	public static final int		HANDLER_CHANGE_TITLE_CITYLIST_ACTIVITY		= 3002;
 
 	// ----------------------------------------------------------------------------
 
-	/** Í¼Æ¬ÏÂÔØÍê³É */
+	/** å›¾ç‰‡ä¸‹è½½å®Œæˆ */
 	public static final int		HANDLER_IMAGE_DOWNLOAD_END					= 4000;
-	/** Í¼Æ¬ÏÂÔØ¿ªÊ¼ */
+	/** å›¾ç‰‡ä¸‹è½½å¼€å§‹ */
 	public static final int		HANDLER_IMAGE_DOWNLOAD_START				= 4001;
-	/** Í¼Æ¬ÏÂÔØING */
+	/** å›¾ç‰‡ä¸‹è½½ING */
 	public static final int		HANDLER_IMAGE_DOWNLOAD_ING					= 4002;
-	/** Í¼Æ¬ÏÂÔØ³ö´í */
+	/** å›¾ç‰‡ä¸‹è½½å‡ºé”™ */
 	public static final int		HANDLER_IMAGE_DOWNLOAD_ERROR				= 4003;
-	/** Í¼Æ¬ÏÂÔØÃ»ÓĞÍøÂç */
+	/** å›¾ç‰‡ä¸‹è½½æ²¡æœ‰ç½‘ç»œ */
 	public static final int		HANDLER_IMAGE_DOWNLOAD_NONET				= 4004;
 
 	// ----------------------------------------------------------------------------

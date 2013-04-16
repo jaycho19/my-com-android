@@ -29,7 +29,7 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 
 	public static final String		tag	= "StoreSearchActivity";
 
-	/** ¶¥²¿²Ëµ¥ÓÒ²à½ø¶ÈÌõ */
+	/** é¡¶éƒ¨èœå•å³ä¾§è¿›åº¦æ¡ */
 	private ProgressBar				progressBar;
 
 	private AutoCompleteTextView	etProvince;
@@ -133,65 +133,65 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 	private String[] getCityArray(String province) {
 		ULog.d(tag, "getCityArray province = " + province);
 		String[] aCity = null;
-		if (province.startsWith("°²»Õ")) {
+		if (province.startsWith("å®‰å¾½")) {
 			aCity = getResources().getStringArray(R.array.city_anhui);
-		} else if (province.startsWith("±±¾©")) {
+		} else if (province.startsWith("åŒ—äº¬")) {
 			aCity = getResources().getStringArray(R.array.city_beijing);
-		} else if (province.startsWith("¸£½¨")) {
+		} else if (province.startsWith("ç¦å»º")) {
 			aCity = getResources().getStringArray(R.array.city_fujian);
-		} else if (province.startsWith("¸ÊËà")) {
+		} else if (province.startsWith("ç”˜è‚ƒ")) {
 			aCity = getResources().getStringArray(R.array.city_gansu);
-		} else if (province.startsWith("¹ã¶«")) {
+		} else if (province.startsWith("å¹¿ä¸œ")) {
 			aCity = getResources().getStringArray(R.array.city_guangdong);
-		} else if (province.startsWith("¹ãÎ÷")) {
+		} else if (province.startsWith("å¹¿è¥¿")) {
 			aCity = getResources().getStringArray(R.array.city_guangxi);
-		} else if (province.startsWith("¹óÖİ")) {
+		} else if (province.startsWith("è´µå·")) {
 			aCity = getResources().getStringArray(R.array.city_guizhou);
-		} else if (province.startsWith("ºÓ±±")) {
+		} else if (province.startsWith("æ²³åŒ—")) {
 			aCity = getResources().getStringArray(R.array.city_hebei);
-		} else if (province.startsWith("ºÓÄÏ")) {
+		} else if (province.startsWith("æ²³å—")) {
 			aCity = getResources().getStringArray(R.array.city_henan);
-		} else if (province.startsWith("ºÚÁú")) {
+		} else if (province.startsWith("é»‘é¾™")) {
 			aCity = getResources().getStringArray(R.array.city_heilongjiang);
-		} else if (province.startsWith("ºş±±")) {
+		} else if (province.startsWith("æ¹–åŒ—")) {
 			aCity = getResources().getStringArray(R.array.city_hubei);
-		} else if (province.startsWith("ºşÄÏ")) {
+		} else if (province.startsWith("æ¹–å—")) {
 			aCity = getResources().getStringArray(R.array.city_hunan);
-		} else if (province.startsWith("¼ªÁÖ")) {
+		} else if (province.startsWith("å‰æ—")) {
 			aCity = getResources().getStringArray(R.array.city_jilin);
-		} else if (province.startsWith("½­ËÕ")) {
+		} else if (province.startsWith("æ±Ÿè‹")) {
 			aCity = getResources().getStringArray(R.array.city_jiangsu);
-		} else if (province.startsWith("½­Î÷")) {
+		} else if (province.startsWith("æ±Ÿè¥¿")) {
 			aCity = getResources().getStringArray(R.array.city_jiangxi);
-		} else if (province.startsWith("ÁÉÄş")) {
+		} else if (province.startsWith("è¾½å®")) {
 			aCity = getResources().getStringArray(R.array.city_liaoning);
-		} else if (province.startsWith("ÄÚÃÉ")) {
+		} else if (province.startsWith("å†…è’™")) {
 			aCity = getResources().getStringArray(R.array.city_neimenggu);
-		} else if (province.startsWith("ÄşÏÄ")) {
+		} else if (province.startsWith("å®å¤")) {
 			aCity = getResources().getStringArray(R.array.city_ningxia);
-		} else if (province.startsWith("Çàº£")) {
+		} else if (province.startsWith("é’æµ·")) {
 			aCity = getResources().getStringArray(R.array.city_qinghai);
-		} else if (province.startsWith("É½¶«")) {
+		} else if (province.startsWith("å±±ä¸œ")) {
 			aCity = getResources().getStringArray(R.array.city_shandong);
-		} else if (province.startsWith("É½Î÷")) {
+		} else if (province.startsWith("å±±è¥¿")) {
 			aCity = getResources().getStringArray(R.array.city_shanxi_1);
-		} else if (province.startsWith("ÉÂÎ÷")) {
+		} else if (province.startsWith("é™•è¥¿")) {
 			aCity = getResources().getStringArray(R.array.city_shanxi_3);
-		} else if (province.startsWith("ÉÏº£")) {
+		} else if (province.startsWith("ä¸Šæµ·")) {
 			aCity = getResources().getStringArray(R.array.city_shanghai);
-		} else if (province.startsWith("ËÄ´¨")) {
+		} else if (province.startsWith("å››å·")) {
 			aCity = getResources().getStringArray(R.array.city_sichuan);
-		} else if (province.startsWith("Î÷²Ø")) {
+		} else if (province.startsWith("è¥¿è—")) {
 			aCity = getResources().getStringArray(R.array.city_xizang);
-		} else if (province.startsWith("ĞÂ½®")) {
+		} else if (province.startsWith("æ–°ç–†")) {
 			aCity = getResources().getStringArray(R.array.city_xinjiang);
-		} else if (province.startsWith("ÔÆÄÏ")) {
+		} else if (province.startsWith("äº‘å—")) {
 			aCity = getResources().getStringArray(R.array.city_yunnan);
-		} else if (province.startsWith("Õã½­")) {
+		} else if (province.startsWith("æµ™æ±Ÿ")) {
 			aCity = getResources().getStringArray(R.array.city_zhejiang);
-		} else if (province.startsWith("ÖØÇì")) {
+		} else if (province.startsWith("é‡åº†")) {
 			aCity = getResources().getStringArray(R.array.city_chongqing);
-		} else if (province.startsWith("Ìì½ò")) {
+		} else if (province.startsWith("å¤©æ´¥")) {
 			aCity = getResources().getStringArray(R.array.city_tianjin);
 		}
 
@@ -244,7 +244,7 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 					new RestaurentListThread(StoreSearchActivity.this, handler, phoneNumber, province, city).start();
 					bSeach.setClickable(false);
 				} else {
-					Toast.makeText(StoreSearchActivity.this, "ÇëÊäÈëÊ¡ÊĞºÍÏØÇø...", Toast.LENGTH_LONG).show();
+					Toast.makeText(StoreSearchActivity.this, "è¯·è¾“å…¥çœå¸‚å’Œå¿åŒº...", Toast.LENGTH_LONG).show();
 				}
 			} else {
 				Util.showDialogSetNetWork(this);
@@ -291,10 +291,10 @@ public class StoreSearchActivity extends Activity implements OnClickListener {
 				// try {
 				// json.put(Actions.ACTIONS_KEY_ID, "213213");
 				//
-				// json.put(Actions.ACTIONS_KEY_PROVINCE, "ÉÏº£");
-				// json.put(Actions.ACTIONS_KEY_CITY, "Ğì»ãÇø");
-				// json.put(Actions.ACTIONS_KEY_NAME, "Ô¥Ô°µê");
-				// json.put(Actions.ACTIONS_KEY_ADDRESS, "»ÆÆÖÇøXXÂ·");
+				// json.put(Actions.ACTIONS_KEY_PROVINCE, "ä¸Šæµ·");
+				// json.put(Actions.ACTIONS_KEY_CITY, "å¾æ±‡åŒº");
+				// json.put(Actions.ACTIONS_KEY_NAME, "è±«å›­åº—");
+				// json.put(Actions.ACTIONS_KEY_ADDRESS, "é»„æµ¦åŒºXXè·¯");
 				// json.put(Actions.ACTIONS_KEY_TEL, "021-67823457");
 				// json.put(Actions.ACTIONS_KEY_X, 121.624156);
 				// json.put(Actions.ACTIONS_KEY_Y, 31.259928);
