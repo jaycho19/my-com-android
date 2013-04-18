@@ -207,7 +207,7 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 		case R.id.btn_mydicos_add_dyk: {
 			if (!Util.isLogin(this)) {
 				Toast.makeText(this, "您还未登录...", Toast.LENGTH_LONG).show();
-				break;
+				return;
 			}
 
 			if (dykadapter.getCount() > 4) {

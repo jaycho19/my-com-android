@@ -219,12 +219,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 	}
 
 	private boolean isEmail(String email) {
-		if (!email.contains("@") || !email.contains("."))
-			return false;
-		String str = "[a-zA-Z0-9_-.]+@\\w+\\.[a-z]+(\\.[a-z]+)?";
-		Pattern p = Pattern.compile(str);
-		Matcher m = p.matcher(email);
-		return m.matches();
+		return Util.isEmail(email);
 	}
 
 	private boolean isMobileNO(String mobiles) {

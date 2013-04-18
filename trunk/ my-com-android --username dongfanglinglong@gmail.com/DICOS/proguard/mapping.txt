@@ -1304,7 +1304,6 @@ com.dongfang.dicos.kzmw.LoginActivity -> com.dongfang.dicos.kzmw.LoginActivity:
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onClick(android.view.View) -> onClick
-    boolean isEmail(java.lang.String) -> a
     android.widget.TextView access$0(com.dongfang.dicos.kzmw.LoginActivity) -> a
     void access$1(com.dongfang.dicos.kzmw.LoginActivity) -> b
     android.widget.EditText access$2(com.dongfang.dicos.kzmw.LoginActivity) -> c
@@ -2155,6 +2154,7 @@ com.dongfang.dicos.util.Util -> com.dongfang.dicos.f.d:
     void showExitDialog(android.app.Activity) -> a
     java.lang.String initNameDicos(java.lang.String) -> a
     int getWindowWidth(android.content.Context) -> l
+    boolean isEmail(java.lang.String) -> b
 com.dongfang.dicos.util.Util$1 -> com.dongfang.dicos.f.e:
     android.app.Activity val$activity -> a
     void onClick(android.content.DialogInterface,int) -> onClick
