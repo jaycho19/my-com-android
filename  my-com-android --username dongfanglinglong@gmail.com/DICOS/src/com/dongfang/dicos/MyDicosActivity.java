@@ -195,14 +195,18 @@ public class MyDicosActivity extends Activity implements OnClickListener {
 			}
 			break;
 		case R.id.btn_mydicos_qiandao:
-			btnDYK.setSelected(false);
-			btnQiandao.setSelected(true);
-			viewSwitcher_mydicos.showNext();
+			if (!btnQiandao.isSelected()) {
+				btnDYK.setSelected(false);
+				btnQiandao.setSelected(true);
+				viewSwitcher_mydicos.showNext();
+			}
 			break;
 		case R.id.btn_mydicos_dyk:
-			btnDYK.setSelected(true);
-			btnQiandao.setSelected(false);
-			viewSwitcher_mydicos.showNext();
+			if (!btnDYK.isSelected()) {
+				btnDYK.setSelected(true);
+				btnQiandao.setSelected(false);
+				viewSwitcher_mydicos.showNext();
+			}
 			break;
 		case R.id.btn_mydicos_add_dyk: {
 			if (!Util.isLogin(this)) {
