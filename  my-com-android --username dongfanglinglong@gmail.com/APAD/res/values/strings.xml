@@ -16,4 +16,16 @@
     <!-- myProgressDialog -->
     <string name="loading_data">稍待片刻，精彩马上呈现…</string>
 
+    <!-- pageName  & title -->
+    <string name="pageName001">身高体重测试</string>
+    <string name="pageName002">肺活量测试</string>
+    <string name="pageName003">台阶指数测试</string>
+    <string name="pageName004">握力测试</string>
+    <string name="pageName005">纵跳测试</string>
+    <string name="pageName006">俯卧撑测试</string>
+    <string name="pageName007">仰卧起坐测试</string>
+    <string name="pageName008">单眼单脚站立测试</string>
+    <string name="pageName009">坐位体前屈测试</string>
+    <string name="pageName010">选择反应时测试</string>
+
 </resources>

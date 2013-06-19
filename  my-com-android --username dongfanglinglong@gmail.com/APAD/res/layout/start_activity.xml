@@ -22,20 +22,21 @@
         android:layout_height="match_parent" >
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/bg_style006" />
+            android:src="@drawable/card_notice" />
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/imageView1"
-            android:layout_alignRight="@+id/imageView1"
-            android:layout_alignTop="@+id/imageView1"
+            android:layout_alignLeft="@+id/imageView"
+            android:layout_alignRight="@+id/imageView"
+            android:layout_alignTop="@+id/imageView"
             android:gravity="center"
-            android:text="握力测试"
+            android:text="请放置体测卡"
             android:textColor="#FFFFFF"
             android:textSize="26sp"
             android:textStyle="bold" />
