@@ -1,5 +1,6 @@
 package com.dongfang.apad;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -7,8 +8,14 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ViewFlipper;
 
+import com.dongfang.apad.param.ComParams;
 import com.dongfang.apad.util.ULog;
 
+/***
+ * 
+ * @author dongfang
+ * 
+ */
 public class MainActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void setBaseValues() {
@@ -39,6 +46,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	private Button		btn010;
 
 	private ViewFlipper	viewFlipper;
+
+	private Intent		intent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +81,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		btn010.setOnClickListener(this);
 
 		viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper1);
+		
+		intent = getIntent();
+		
 	}
 
 	private void showNexts(int id) {
@@ -79,10 +91,10 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_rtol_exit));
 			viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_rtol_enter));
 			viewFlipper.showPrevious();
-			if (viewFlipper.getCurrentView().equals(viewFlipper.getChildAt(0))){
+			if (viewFlipper.getCurrentView().equals(viewFlipper.getChildAt(0))) {
 				btnLeft.setEnabled(false);
 			}
-			else{
+			else {
 				btnLeft.setEnabled(true);
 			}
 			btnRight.setEnabled(true);
@@ -91,10 +103,10 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_ltor_enter));
 			viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_ltor_exit));
 			viewFlipper.showNext();
-			if (viewFlipper.getCurrentView().equals(viewFlipper.getChildAt(viewFlipper.getChildCount() - 1))){
+			if (viewFlipper.getCurrentView().equals(viewFlipper.getChildAt(viewFlipper.getChildCount() - 1))) {
 				btnRight.setEnabled(false);
 			}
-			else{
+			else {
 				btnRight.setEnabled(true);
 			}
 			btnLeft.setEnabled(true);
@@ -109,16 +121,66 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		case R.id.btn_right:
 			showNexts(v.getId());
 			break;
-		case R.id.btn_001:break;
-		case R.id.btn_002:break;
-		case R.id.btn_003:break;
-		case R.id.btn_004:break;
-		case R.id.btn_005:break;
-		case R.id.btn_006:break;
-		case R.id.btn_007:break;
-		case R.id.btn_008:break;
-		case R.id.btn_009:break;
-		case R.id.btn_010:break;
+		case R.id.btn_001:
+			intent.setClass(this, EndActivity.class);
+			intent.putExtra(ComParams.ACTIVITY_IMAGE_SRC_ID, R.drawable.bg_style001);
+			intent.putExtra(ComParams.ACTIVITY_PAGENAME, R.string.pageName001);
+			startActivity(intent);
+			break;
+		case R.id.btn_002:
+			intent.setClass(this, StartActivity.class);
+			intent.putExtra(ComParams.ACTIVITY_IMAGE_SRC_ID, R.drawable.bg_style002);
+			intent.putExtra(ComParams.ACTIVITY_PAGENAME, R.string.pageName002);
+			startActivity(intent);
+			break;
+		case R.id.btn_003:
+			intent.setClass(this, StartActivity.class);
+			intent.putExtra(ComParams.ACTIVITY_IMAGE_SRC_ID, R.drawable.bg_style003);
+			intent.putExtra(ComParams.ACTIVITY_PAGENAME, R.string.pageName003);
+			startActivity(intent);
+			break;
+		case R.id.btn_004:
+			intent.setClass(this, StartActivity.class);
+			intent.putExtra(ComParams.ACTIVITY_IMAGE_SRC_ID, R.drawable.bg_style004);
+			intent.putExtra(ComParams.ACTIVITY_PAGENAME, R.string.pageName004);
+			startActivity(intent);
+			break;
+		case R.id.btn_005:
+			intent.setClass(this, StartActivity.class);
+			intent.putExtra(ComParams.ACTIVITY_IMAGE_SRC_ID, R.drawable.bg_style005);
+			intent.putExtra(ComParams.ACTIVITY_PAGENAME, R.string.pageName005);
+			startActivity(intent);
+			break;
+		case R.id.btn_006:
+			intent.setClass(this, StartActivity.class);
+			intent.putExtra(ComParams.ACTIVITY_IMAGE_SRC_ID, R.drawable.bg_style006);
+			intent.putExtra(ComParams.ACTIVITY_PAGENAME, R.string.pageName006);
+			startActivity(intent);
+			break;
+		case R.id.btn_007:
+			intent.setClass(this, StartActivity.class);
+			intent.putExtra(ComParams.ACTIVITY_IMAGE_SRC_ID, R.drawable.bg_style007);
+			intent.putExtra(ComParams.ACTIVITY_PAGENAME, R.string.pageName007);
+			startActivity(intent);
+			break;
+		case R.id.btn_008:
+			intent.setClass(this, StartActivity.class);
+			intent.putExtra(ComParams.ACTIVITY_IMAGE_SRC_ID, R.drawable.bg_style008);
+			intent.putExtra(ComParams.ACTIVITY_PAGENAME, R.string.pageName008);
+			startActivity(intent);
+			break;
+		case R.id.btn_009:
+			intent.setClass(this, StartActivity.class);
+			intent.putExtra(ComParams.ACTIVITY_IMAGE_SRC_ID, R.drawable.bg_style009);
+			intent.putExtra(ComParams.ACTIVITY_PAGENAME, R.string.pageName009);
+			startActivity(intent);
+			break;
+		case R.id.btn_010:
+			intent.setClass(this, StartActivity.class);
+			intent.putExtra(ComParams.ACTIVITY_IMAGE_SRC_ID, R.drawable.bg_style010);
+			intent.putExtra(ComParams.ACTIVITY_PAGENAME, R.string.pageName010);
+			startActivity(intent);
+			break;
 		default:
 			break;
 		}

@@ -1,7 +1,5 @@
 package com.dongfang.apad;
 
-import java.util.Date;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,12 +10,8 @@ import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.dongfang.apad.param.ComParams;
 import com.dongfang.apad.util.ULog;
-import com.dongfang.apad.util.Util;
-import com.dongfang.apad.view.DialogFactory;
 import com.telecom.video.broadcast.CloseAppReceiver;
 
 /**

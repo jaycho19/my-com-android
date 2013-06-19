@@ -62,5 +62,8 @@ public class ComParams {
 	public static final String	WIFI									= "WIFI";
 
 	// ------------------------------------------------------------------------------------------
+	public static final String	ACTIVITY_IMAGE_SRC_ID					= "imageId";
+	public static final String	ACTIVITY_TITLE							= "title";
+	public static final String	ACTIVITY_PAGENAME						= "pageName";
 
 }
