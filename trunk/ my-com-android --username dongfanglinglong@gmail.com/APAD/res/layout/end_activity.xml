@@ -7,16 +7,6 @@
 
     <include layout="@layout/top_bg" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_title_line"
-        android:gravity="center_vertical"
-        android:paddingLeft="40dp"
-        android:text="会员号：00001000001      姓名：刘德华      性别：男      年龄：28 岁      工作单位：上海邦文电子科技有限公司"
-        android:textSize="16sp" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
@@ -91,6 +81,7 @@
                 android:gravity="center" >
 
                 <TextView
+                    android:id="@+id/tv_classify"
                     android:layout_width="69dp"
                     android:layout_marginRight="3dip"
                     android:background="@drawable/bg_line03"
@@ -100,6 +91,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tv_testitem"
                     android:layout_width="186dp"
                     android:layout_marginRight="3dip"
                     android:background="@drawable/bg_line03"
@@ -109,6 +101,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tv_testresult"
                     android:layout_width="102dp"
                     android:layout_marginRight="3dip"
                     android:background="@drawable/bg_line03"
@@ -119,6 +112,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tv_testtimes"
                     android:layout_width="96dp"
                     android:layout_marginRight="3dip"
                     android:background="@drawable/bg_line03"
@@ -128,6 +122,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tv_testdate"
                     android:layout_width="116dp"
                     android:layout_marginRight="3dip"
                     android:background="@drawable/bg_line03"
@@ -137,6 +132,7 @@
                     android:textSize="16sp" />
 
                 <ImageView
+                    android:id="@+id/iv_testgrade"
                     android:layout_width="322dp"
                     android:background="@drawable/bg_line03"
                     android:gravity="center"
@@ -146,7 +142,7 @@
         </TableLayout>
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/btn_testagain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tableLayout1"
@@ -159,7 +155,7 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/tableLayout1"
             android:layout_alignRight="@+id/tableLayout1"
-            android:layout_below="@+id/button1"
+            android:layout_below="@+id/btn_testagain"
             android:layout_marginTop="60dp"
             android:background="@drawable/center001"
             android:gravity="center_vertical"
@@ -174,7 +170,7 @@
                 android:src="@drawable/notice_level02" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tv_testresult_des"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"

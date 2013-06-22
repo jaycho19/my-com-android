@@ -2,6 +2,7 @@ package com.dongfang.apad;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AnimationUtils;
@@ -186,4 +187,17 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.dongfang.apad.BaseActivity#onKeyDown(int, android.view.KeyEvent)
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK){
+			appExit();
+		}
+		
+		return super.onKeyDown(keyCode, event);
+	}
+
+	
 }

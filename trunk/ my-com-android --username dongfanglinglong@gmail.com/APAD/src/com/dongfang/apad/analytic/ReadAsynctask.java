@@ -75,11 +75,11 @@ public class ReadAsynctask extends AsyncTask<String, String, String> {
 			Socket socket = new Socket();
 			socket.connect(new InetSocketAddress(ComParams.IP, ComParams.PORT), 5000);
 			OutputStream out = socket.getOutputStream();
-			out.write(ComParams.READ);
+			out.write(ComParams.READ_USERINFO);
 			byte[] input = new byte[16];
 			socket.getInputStream().read(input);
 
-			ULog.d(TAG, "OUTPUT" + Util.bytesToHexString(ComParams.READ).toUpperCase());
+			ULog.d(TAG, "OUTPUT" + Util.bytesToHexString(ComParams.READ_USERINFO).toUpperCase());
 			result = Util.bytesToHexString(input).toUpperCase();
 			ULog.d(TAG, "INPUT" + result);
 

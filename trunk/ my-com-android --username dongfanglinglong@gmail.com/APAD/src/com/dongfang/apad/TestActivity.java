@@ -10,7 +10,7 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.dongfang.apad.analytic.GetIdAsynctask;
+import com.dongfang.apad.analytic.GetCardInfo;
 import com.dongfang.apad.analytic.ReadAsynctask;
 import com.dongfang.apad.param.ComParams;
 import com.dongfang.apad.util.SystemUiHider;
@@ -42,7 +42,7 @@ public class TestActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				ComParams.IP = ip.getText().toString();
-				new GetIdAsynctask(TestActivity.this, mHideHandler).execute();
+				new GetCardInfo(TestActivity.this, mHideHandler).execute();
 			}
 		});
 		findViewById(R.id.read_button).setOnClickListener(new OnClickListener() {
