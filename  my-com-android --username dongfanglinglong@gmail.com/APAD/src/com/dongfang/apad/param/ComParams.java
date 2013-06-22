@@ -12,11 +12,13 @@ public class ComParams {
 
 	// ------------------------------------------------------------------------------------------
 	public static String		IP										= "192.168.1.106";
+	public static String		IP_TEST									= "192.168.1.105";
 	public static final int		PORT									= 8899;
 	public static final byte[]	READ_ID									= { 0x40, (byte) 0x96, 0x00, 0x00, 0x00, 0x00,
 			0x00, (byte) 0xD6											};
-	public static final byte[]	READ									= { 0x40, (byte) 0x98, 0x00, 0x01, 0x00, 0x00,
-			0x02, (byte) 0xDb, 0x07, 0x04, 0x00, 0x00					};
+	/** 从第30(0x1E)位开始读取数据,长度为41(0x29),可能一次只能读12位数据，那需要拆分读取数据 */
+	public static final byte[]	READ_USERINFO							= { 0x40, (byte) 0x98, 0x00, 0x01, 0x00, 0x00,
+			0x02, (byte) 0xDb, 0x1E, 0x29, 0x00, 0x00					};
 
 	public static final byte[]	WRITE									= {};
 
@@ -56,6 +58,15 @@ public class ComParams {
 	/** 图片下载没有网络 */
 	public static final int		HANDLER_IMAGE_DOWNLOAD_NONET			= 4004;
 
+	/** SOCKET 获取到卡号 */
+	public static final int		HANDLER_SOCKET_GET_CARD_ID				= 3000;
+	/** SOCKET 获取到卡内信息 */
+	public static final int		HANDLER_SOCKET_GET_CARD_INFO			= 3001;
+	/** socket 获取到正在测试的数据 */
+	public static final int		HANDLER_SOCKET_GET_TESTING_RESULT		= 3100;
+	/** socket 获取到测试完成的数据 */
+	public static final int		HANDLER_SOCKET_GET_TESTED_RESULT		= 3101;
+
 	// ------------------------------------------------------------------------------------------
 	public static final String	CTWAP									= "CTWAP";
 	public static final String	CTNET									= "CTNET";
@@ -65,5 +76,7 @@ public class ComParams {
 	public static final String	ACTIVITY_IMAGE_SRC_ID					= "imageId";
 	public static final String	ACTIVITY_TITLE							= "title";
 	public static final String	ACTIVITY_PAGENAME						= "pageName";
+	public static final String	ACTIVITY_USERINFO						= "userInfo";
+	public static final String	ACTIVITY_TESTRESULT						= "testResult";
 
 }

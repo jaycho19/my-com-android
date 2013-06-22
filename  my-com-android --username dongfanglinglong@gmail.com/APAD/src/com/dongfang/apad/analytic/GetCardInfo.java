@@ -1,10 +1,7 @@
 package com.dongfang.apad.analytic;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,19 +19,19 @@ import com.dongfang.apad.util.Util;
 import com.dongfang.apad.view.MyProgressDialog;
 
 /**
- * 获取卡id
+ * 获取卡内信息
  * 
  * @author dongfang
  * 
  * 
  */
-public class GetIdAsynctask extends AsyncTask<String, String, String> {
-	public static final String	TAG	= GetIdAsynctask.class.getSimpleName();
+public class GetCardInfo extends AsyncTask<String, String, String> {
+	public static final String	TAG	= GetCardInfo.class.getSimpleName();
 	private MyProgressDialog	progressDialog;
 	private Context				context;
 	private Handler				handler;
 
-	public GetIdAsynctask(Context context, Handler handler) {
+	public GetCardInfo(Context context, Handler handler) {
 		this.handler = handler;
 		this.context = context;
 	}
@@ -49,7 +46,7 @@ public class GetIdAsynctask extends AsyncTask<String, String, String> {
 				if (keyCode == KeyEvent.KEYCODE_BACK) {
 					if (progressDialog != null && progressDialog.isShowing()) {
 						progressDialog.dismiss();
-						GetIdAsynctask.this.cancel(true);
+						GetCardInfo.this.cancel(true);
 					}
 					return true;
 				}
@@ -61,38 +58,50 @@ public class GetIdAsynctask extends AsyncTask<String, String, String> {
 
 			@Override
 			public void onDismiss(DialogInterface dialog) {
-				if (GetIdAsynctask.this.getStatus().compareTo(AsyncTask.Status.FINISHED) != 0)
-					GetIdAsynctask.this.cancel(true);
+				if (GetCardInfo.this.getStatus().compareTo(AsyncTask.Status.FINISHED) != 0)
+					GetCardInfo.this.cancel(true);
 			}
 		});
+	}
+
+	/**
+	 * 往socket写入output数据，返回的内容输入到input中
+	 * 
+	 * @param socket
+	 * @param output
+	 * @param input
+	 * @throws IOException
+	 */
+	private void getInputBytes(Socket socket, byte[] output, byte[] input) throws IOException {
+		ULog.d(TAG, "OUTPUT" + Util.bytesToHexString(ComParams.READ_ID).toUpperCase());
+		socket.getOutputStream().write(ComParams.READ_ID);
+		socket.getInputStream().read(input);
+		ULog.d(TAG, "INPUT" + Util.bytesToHexString(input).toUpperCase());
 	}
 
 	@Override
 	protected String doInBackground(String... params) {
 		String result = null;
-
+		Socket socket = null;
 		try {
-			Socket socket = new Socket();
-			socket.connect(new InetSocketAddress(ComParams.IP, ComParams.PORT), 5000);
-			OutputStream out = socket.getOutputStream();
-			out.write(ComParams.READ_ID);
+			socket = new Socket(ComParams.IP, ComParams.PORT);
+			socket.setSoTimeout(5000);
+
 			byte[] input = new byte[16];
-			socket.getInputStream().read(input);
+			getInputBytes(socket, ComParams.READ_ID, input);
 
-			ULog.d(TAG, "OUTPUT" + Util.bytesToHexString(ComParams.READ_ID).toUpperCase());
-			result = Util.bytesToHexString(input).toUpperCase();
-			ULog.d(TAG, "INPUT" + result);
-
-			System.out.println(socket.getInputStream().toString());
-
-			socket.close();
-
-		} catch (UnknownHostException e) {
-			ULog.d(TAG, "UnknownHostException = " + e.toString());
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			ULog.d(TAG, "IOException = " + e.toString());
 			e.printStackTrace();
+		} finally {
+			if (null != socket) {
+				try {
+					socket.close();
+				} catch (IOException e) {
+					ULog.d(TAG, e.getMessage());
+				}
+				socket = null;
+			}
 		}
 
 		return result;

@@ -144,6 +144,7 @@ public abstract class BaseActivity extends FragmentActivity {
 		return super.onKeyDown(keyCode, event);
 	}
 
+	/** 关闭所有activity接口 */
 	protected void appExit() {
 		sendBroadcast(new Intent(getPackageName().toString() + "." + CloseAppReceiver.TAG));
 

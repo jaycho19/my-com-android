@@ -7,16 +7,6 @@
 
     <include layout="@layout/top_bg" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_title_line"
-        android:gravity="center_vertical"
-        android:paddingLeft="40dp"
-        android:text="会员号：00001000001      姓名：刘德华      性别：男      年龄：28 岁      工作单位：上海邦文电子科技有限公司"
-        android:textSize="16sp" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
@@ -40,6 +30,32 @@
             android:textColor="#FFFFFF"
             android:textSize="26sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_testing_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tv_cardSocketInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tv_testZKTSocketInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_cardSocketInfo"
+            android:layout_alignParentRight="true"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
     </RelativeLayout>
 
 </LinearLayout>
