@@ -1,4 +1,4 @@
-package com.telecom.video.broadcast;
+package com.dongfang.apad.broadcast;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;

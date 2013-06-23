@@ -11,8 +11,8 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.dongfang.apad.broadcast.CloseAppReceiver;
 import com.dongfang.apad.util.ULog;
-import com.telecom.video.broadcast.CloseAppReceiver;
 
 /**
  * 1. 所有该项目activity都需要继承该类；<br>
@@ -34,6 +34,7 @@ public abstract class BaseActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		ULog.i(TAG, "-- BaseActivity onCreate ");
 		closeApp = new CloseAppReceiver(this);
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(getPackageName().toString() + "." + CloseAppReceiver.TAG);
@@ -50,8 +51,9 @@ public abstract class BaseActivity extends FragmentActivity {
 	 */
 	@Override
 	protected void onStart() {
-		// TODO Auto-generated method stub
 		super.onStart();
+		ULog.i(TAG, "-- BaseActivity onStart ");
+
 	}
 
 	/*
@@ -62,6 +64,9 @@ public abstract class BaseActivity extends FragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		ULog.i(TAG, "-- BaseActivity onResume ");
+
+		
 		IntentFilter connectFilter = new IntentFilter();
 		connectFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
 		registerReceiver(connectReciver, connectFilter);
@@ -75,8 +80,10 @@ public abstract class BaseActivity extends FragmentActivity {
 	 */
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
-		// TODO Auto-generated method stub
 		super.onWindowFocusChanged(hasFocus);
+		
+		ULog.i(TAG, "-- BaseActivity onWindowFocusChanged " + hasFocus);
+
 	}
 
 	/*
@@ -87,6 +94,8 @@ public abstract class BaseActivity extends FragmentActivity {
 	@Override
 	protected void onPause() {
 		super.onPause();
+		ULog.i(TAG, "-- BaseActivity onPause ");
+
 		unregisterReceiver(connectReciver);
 	}
 
@@ -98,6 +107,9 @@ public abstract class BaseActivity extends FragmentActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		ULog.i(TAG, "-- BaseActivity onDestroy ");
+
+		
 		unregisterReceiver(closeApp);
 		connectReciver = null;
 		closeApp = null;

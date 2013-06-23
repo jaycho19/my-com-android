@@ -1,22 +1,19 @@
 package com.dongfang.apad;
 
-import java.io.IOException;
-import java.net.Socket;
-
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dongfang.apad.analytic.GetCardInfo;
 import com.dongfang.apad.bean.UserInfo;
+import com.dongfang.apad.broadcast.CloseAppReceiver;
+import com.dongfang.apad.broadcast.UpdateDataReceiver;
 import com.dongfang.apad.param.ComParams;
+import com.dongfang.apad.service.DFService;
 import com.dongfang.apad.util.ULog;
-import com.dongfang.apad.util.Util;
 
 /**
  * 测试开始页面
@@ -30,18 +27,6 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 	protected void setBaseValues() {
 		TAG = StartActivity.class.getSimpleName();
 	}
-
-	/** 连接socket网络card */
-	private static final int	HANDLER_SOCKET_CONNECT_CARD			= 100;
-	private static final int	HANDLER_SOCKET_GET_CARD_ID			= 101;
-	private static final int	HANDLER_SOCKET_GET_USER_INFO		= 102;
-
-	/** 连接socket网络testZKT */
-	private static final int	HANDLER_SOCKET_CONNECT_TEST_ZKT		= 200;
-	/** 初始化中控的测试数据 */
-	private static final int	HANDLER_SOCKET_GET_TEST_ZKT_RESTART	= 201;
-	/** 获取测试数据 */
-	private static final int	HANDLER_SOCKET_GET_TEST_ZKT_RESULT	= 202;
 
 	/** 返回按钮 */
 	private TextView			btnBack;
@@ -60,12 +45,9 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 	/** 中控板连接状态 */
 	private TextView			tvTestZKTSocketInfo;
 
-	private Handler				handler;
 	private Intent				intent;
-	private Socket				socketCard;
-	private Socket				socketTestZKT;
 
-	private GetCardInfo			getIdAsynctask;
+	private UpdateDataReceiver	updateDataReceiver;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +64,10 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		tvCardSocketInfo = (TextView) findViewById(R.id.tv_cardSocketInfo);
 		tvTestZKTSocketInfo = (TextView) findViewById(R.id.tv_testZKTSocketInfo);
 
+		updateDataReceiver = new UpdateDataReceiver();
+		updateDataReceiver.setOnUpdateDataListener(new MyOnUpdateDataListener());
+
 		intent = getIntent();
-		handler = new MyHandler();
 
 	}
 
@@ -95,7 +79,15 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		handler.sendEmptyMessage(HANDLER_SOCKET_CONNECT_CARD);
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(getPackageName().toString() + "." + UpdateDataReceiver.TAG);
+		registerReceiver(updateDataReceiver, filter);
+		
+		Intent intentService = new Intent(this, DFService.class);
+		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] {
+				ComParams.HANDLER_SOCKET_CONNECT_CARD,
+				ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
+		startService(intentService);
 	}
 
 	/*
@@ -106,9 +98,6 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		getIdAsynctask = null;
-		getIdAsynctask = new GetCardInfo(this, handler);
-		getIdAsynctask.execute();
 	}
 
 	/*
@@ -119,7 +108,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		getIdAsynctask.cancel(true);
+		unregisterReceiver(updateDataReceiver);
 	}
 
 	/*
@@ -145,7 +134,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 	 * 初始化用户信息；<br>
 	 * 尝试获取测试数据；
 	 */
-	private void initTestState(UserInfo userInfo) {
+	private void initData(UserInfo userInfo) {
 		btnPageName.setText(intent.getIntExtra(ComParams.ACTIVITY_PAGENAME, R.string.app_name));
 		tvTitle.setText(intent.getIntExtra(ComParams.ACTIVITY_PAGENAME, R.string.app_name));
 		imageView.setImageResource(intent.getIntExtra(ComParams.ACTIVITY_IMAGE_SRC_ID, R.drawable.card_notice));
@@ -155,186 +144,38 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 
 	}
 
-	/** 连接失败次数 */
-	private int	cardFaileTimes	= 0;
+	class MyOnUpdateDataListener implements OnUpdateDataListener {
 
-	/**
-	 * 连接socket card
-	 */
-	private void connectCardSocket(String ip, int port) {
-		tvCardSocketInfo.setText("card connecting ..." + cardFaileTimes);
-		if (cardFaileTimes < 5) {
-			try {
-				socketCard = new Socket(ip, port);
-				if (socketCard.isConnected()) {
-					cardFaileTimes = 0;
-					tvCardSocketInfo.setText("card connect successed! " + ip + ":" + port);
-
-					handler.sendEmptyMessage(HANDLER_SOCKET_GET_CARD_ID);
-					handler.sendEmptyMessage(HANDLER_SOCKET_CONNECT_TEST_ZKT);
-				}
-			} catch (Exception e) {
-				ULog.e(TAG, "faileTimes = " + cardFaileTimes + " -- " + e.getMessage());
-				cardFaileTimes++;
-				handler.sendEmptyMessageDelayed(HANDLER_SOCKET_CONNECT_CARD, 1000);
-			}
-		}
-		else {
-			cardFaileTimes = 0;
-			tvCardSocketInfo.setText("card connect failed! " + ip + ":" + port);
-		}
-	}
-
-	/**
-	 * 往socket写入output数据，返回的内容输入到input中
-	 * 
-	 * @param socket
-	 * @param output
-	 * @param input
-	 * @throws IOException
-	 */
-	private void getInputBytes(Socket socket, byte[] output, byte[] input) throws IOException {
-		ULog.d(TAG, "OUTPUT" + Util.bytesToHexString(ComParams.READ_ID).toUpperCase());
-		socket.getOutputStream().write(ComParams.READ_ID);
-		socket.getInputStream().read(input);
-		ULog.d(TAG, "INPUT" + Util.bytesToHexString(input).toUpperCase());
-	}
-
-	/** 获取卡号 */
-	private void getCardId() {
-		byte[] input = new byte[16];
-		try {
-			getInputBytes(socketCard, ComParams.READ_ID, input);
-			if (input[6] > 0x00) {
-				byte[] cardId = new byte[input[6]];
-				for (int i = 0; i < input[6]; i++) {
-					cardId[i] = input[7 + input[6] - i];
-				}
-				// TODO: 需要使用卡号的地方
-				ULog.d(TAG, "cardId = " + Util.bytesToHexString(cardId).toUpperCase());
-				cardFaileTimes = 0;
-				handler.sendEmptyMessageDelayed(HANDLER_SOCKET_GET_USER_INFO, 1000);
-
-			}
-			else {
-				handler.sendEmptyMessageDelayed(HANDLER_SOCKET_GET_CARD_ID, 1000);
-			}
-
-		} catch (IOException e) {
-			ULog.e(TAG, "faileTimes = " + cardFaileTimes + " -- " + e.getMessage());
-			cardFaileTimes++;
-			handler.sendEmptyMessageDelayed(HANDLER_SOCKET_GET_CARD_ID, 1000);
-
-			e.printStackTrace();
-		}
-	}
-
-	/** 获取用户信息 */
-	private void getUserInfo() {
-		byte[] input = new byte[70 - 30 + 1];
-		try {
-			getInputBytes(socketCard, ComParams.READ_USERINFO, input);
-			if (input[6] > 0x00) {
-				byte[] userInfo = new byte[input[6]];
-				for (int i = 0; i < input[6]; i++) {
-					userInfo[i] = input[7 + i];
-				}
-				// TODO: 初始化用户信息
-				ULog.d(TAG, "userInfo = " + Util.bytesToHexString(userInfo).toUpperCase());
-				cardFaileTimes = 0;
-				handler.sendEmptyMessageDelayed(HANDLER_SOCKET_GET_USER_INFO, 1000);
-			}
-			else {
-				handler.sendEmptyMessageDelayed(HANDLER_SOCKET_GET_USER_INFO, 1000);
-			}
-
-		} catch (IOException e) {
-			ULog.e(TAG, "faileTimes = " + cardFaileTimes + " -- " + e.getMessage());
-			cardFaileTimes++;
-			handler.sendEmptyMessageDelayed(HANDLER_SOCKET_GET_USER_INFO, 1000);
-
-			e.printStackTrace();
-		}
-		initTestState(null);
-	}
-
-	private int	testZKTFaileTimes	= 0;
-
-	/**
-	 * 连接socket testZKT
-	 */
-	private void connectTestZKTSocket(String ip, int port) {
-		tvCardSocketInfo.setText("testZKT connecting ..." + testZKTFaileTimes);
-
-		if (testZKTFaileTimes < 5) {
-			try {
-				socketCard = new Socket(ip, port);
-				if (socketCard.isConnected()) {
-					testZKTFaileTimes = 0;
-					tvCardSocketInfo.setText("testZKT connect successed! " + ip + ":" + port);
-				}
-			} catch (Exception e) {
-				ULog.e(TAG, "faileTimes = " + testZKTFaileTimes + " -- " + e.getMessage());
-				testZKTFaileTimes++;
-				handler.sendEmptyMessageDelayed(HANDLER_SOCKET_CONNECT_TEST_ZKT, 1000);
-			}
-		}
-		else {
-			testZKTFaileTimes = 0;
-			tvTestZKTSocketInfo.setText("testZKT connect failed! " + ip + ":" + port);
-		}
-	}
-
-	/**重新初始化中控板连接设备*/
-	private void restartTestZKT(){
-		
-	}
-	/** 获取测试结果 */
-	private void getTestResult() {
-		// TODO: 获取测试数据流程，每一秒获取一次
-	}
-
-	private class MyHandler extends Handler {
 		@Override
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-			case HANDLER_SOCKET_CONNECT_CARD:
-				connectCardSocket(ComParams.IP, ComParams.PORT);
-				break;
-			case HANDLER_SOCKET_GET_CARD_ID:
-				getCardId();
-				break;
-			case HANDLER_SOCKET_GET_USER_INFO:
-				getUserInfo();
-				break;
-			case HANDLER_SOCKET_CONNECT_TEST_ZKT:
-				connectTestZKTSocket(ComParams.IP_TEST, ComParams.PORT);
-				break;
-			case HANDLER_SOCKET_GET_TEST_ZKT_RESULT:
-				getUserInfo();
-				break;
-			case HANDLER_SOCKET_GET_TEST_ZKT_RESTART:
-				if (null != socketTestZKT && socketTestZKT.isConnected()){
-					
-				}
-				else{
-					
-				}
-				break;
-			case ComParams.HANDLER_SOCKET_GET_TESTING_RESULT:
-				ULog.d(TAG, msg.getData().getParcelable(ComParams.ACTIVITY_TESTRESULT).toString());
-				tvTestingResult.setText(msg.obj.toString());
-				break;
-			case ComParams.HANDLER_SOCKET_GET_TESTED_RESULT:
-				Intent intent = new Intent(StartActivity.this, EndActivity.class);
-				intent.putExtra(ComParams.ACTIVITY_TESTRESULT,
-						msg.getData().getParcelable(ComParams.ACTIVITY_TESTRESULT));
-				startActivity(intent);
-				break;
-			default:
-				break;
-			}
+		public void onSocketConnectCard(String des, Bundle data) {
+			tvCardSocketInfo.setText(des);
 		}
+
+		@Override
+		public void onGetCardId(String des, Bundle data) {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
+		public void onGetUserInfo(String des, Bundle data) {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
+		public void onSocketConnectTestZKT(String des, Bundle data) {
+			tvTestZKTSocketInfo.setText(des);
+		}
+
+		@Override
+		public void onTestZKTRestarted(String des, Bundle data) {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
+		public void onGetTestZKTResult(String des, Bundle data) {
+			// TODO Auto-generated method stub
+		}
+
 	}
 
 }

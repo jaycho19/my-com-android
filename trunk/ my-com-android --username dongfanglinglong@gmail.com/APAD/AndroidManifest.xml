@@ -8,9 +8,7 @@
         android:minSdkVersion="11"
         android:targetSdkVersion="16" />
 
-    <!-- 访问网络权限 QAS需求 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 访问网络状态权限 QAS需求 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -51,6 +49,10 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme" >
         </activity>
+
+        <service
+            android:name=".service.DFService">
+        </service>
     </application>
 
 </manifest>
