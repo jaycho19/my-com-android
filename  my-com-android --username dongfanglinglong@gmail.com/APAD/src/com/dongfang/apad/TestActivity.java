@@ -41,14 +41,14 @@ public class TestActivity extends Activity {
 		findViewById(R.id.connect_button).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ComParams.IP = ip.getText().toString();
+				ComParams.IP_CARD = ip.getText().toString();
 				new GetCardInfo(TestActivity.this, mHideHandler).execute();
 			}
 		});
 		findViewById(R.id.read_button).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ComParams.IP = ip.getText().toString();
+				ComParams.IP_CARD = ip.getText().toString();
 				new ReadAsynctask(TestActivity.this, mHideHandler).execute();
 			}
 		});

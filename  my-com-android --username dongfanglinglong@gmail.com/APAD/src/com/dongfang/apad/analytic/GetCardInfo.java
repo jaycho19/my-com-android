@@ -84,7 +84,7 @@ public class GetCardInfo extends AsyncTask<String, String, String> {
 		String result = null;
 		Socket socket = null;
 		try {
-			socket = new Socket(ComParams.IP, ComParams.PORT);
+			socket = new Socket(ComParams.IP_CARD, ComParams.PORT_CARD);
 			socket.setSoTimeout(5000);
 
 			byte[] input = new byte[16];

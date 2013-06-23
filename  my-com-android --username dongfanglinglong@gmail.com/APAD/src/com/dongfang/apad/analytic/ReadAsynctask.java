@@ -73,7 +73,7 @@ public class ReadAsynctask extends AsyncTask<String, String, String> {
 
 		try {
 			Socket socket = new Socket();
-			socket.connect(new InetSocketAddress(ComParams.IP, ComParams.PORT), 5000);
+			socket.connect(new InetSocketAddress(ComParams.IP_CARD, ComParams.PORT_CARD), 5000);
 			OutputStream out = socket.getOutputStream();
 			out.write(ComParams.READ_USERINFO);
 			byte[] input = new byte[16];

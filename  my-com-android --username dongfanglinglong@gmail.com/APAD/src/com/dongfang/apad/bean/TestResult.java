@@ -11,14 +11,26 @@ import android.os.Parcelable;
  */
 public class TestResult implements Parcelable {
 
+	/** 分类 */
 	private String	classify;
+	/** 项目描述 */
+	private String	itemDes;
+	/** 项目名称 */
 	private String	item;
-	private String	times;
-	private String	date;
+	/** 第二个项目名称 */
+	private String	item1;
+	/** 测试结果 */
 	private String	result;
-	private String	resultDes;
+	/** 第二项测试结果 */
+	private String	result1;
+	/** 测试次数 */
+	private String	times;
+	/** 测试日期 */
+	private String	date;
+	/** 测试成绩 */
 	private int		resultGray;
-	
+	/** 测试结果描述 */
+	private String	resultDes;
 
 	/**
 	 * @return the resultDes
@@ -28,7 +40,8 @@ public class TestResult implements Parcelable {
 	}
 
 	/**
-	 * @param resultDes the resultDes to set
+	 * @param resultDes
+	 *            the resultDes to set
 	 */
 	public void setResultDes(String resultDes) {
 		this.resultDes = resultDes;
@@ -124,6 +137,50 @@ public class TestResult implements Parcelable {
 		this.resultGray = resultGray;
 	}
 
+	
+	
+	/**
+	 * @return the item1
+	 */
+	public String getItem1() {
+		return item1;
+	}
+
+	/**
+	 * @param item1 the item1 to set
+	 */
+	public void setItem1(String item1) {
+		this.item1 = item1;
+	}
+
+	/**
+	 * @return the itemDes
+	 */
+	public String getItemDes() {
+		return itemDes;
+	}
+
+	/**
+	 * @param itemDes the itemDes to set
+	 */
+	public void setItemDes(String itemDes) {
+		this.itemDes = itemDes;
+	}
+
+	/**
+	 * @return the result1
+	 */
+	public String getResult1() {
+		return result1;
+	}
+
+	/**
+	 * @param result1 the result1 to set
+	 */
+	public void setResult1(String result1) {
+		this.result1 = result1;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -133,11 +190,15 @@ public class TestResult implements Parcelable {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("classify   = ").append(classify).append("\n");
+		sb.append("itemDes    = ").append(itemDes).append("\n");
 		sb.append("item       = ").append(item).append("\n");
+		sb.append("item1      = ").append(item1).append("\n");
+		sb.append("result     = ").append(result).append("\n");
+		sb.append("result1    = ").append(result1).append("\n");
 		sb.append("times      = ").append(times).append("\n");
 		sb.append("date       = ").append(date).append("\n");
-		sb.append("result     = ").append(result).append("\n");
 		sb.append("resultGray = ").append(resultGray).append("\n");
+		sb.append("resultDes  = ").append(resultDes).append("\n");
 		return sb.toString();
 	}
 
@@ -160,36 +221,42 @@ public class TestResult implements Parcelable {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(classify);
+		dest.writeString(itemDes);
 		dest.writeString(item);
+		dest.writeString(item1);
+		dest.writeString(result);
+		dest.writeString(result1);
 		dest.writeString(times);
 		dest.writeString(date);
-		dest.writeString(result);
-		dest.writeString(resultDes);
 		dest.writeInt(resultGray);
+		dest.writeString(resultDes);
 
 	}
 
 	public static final Parcelable.Creator<TestResult>	CREATOR	= new Parcelable.Creator<TestResult>() {
 
-			@Override
-			public TestResult createFromParcel(Parcel source) {
-				TestResult data = new TestResult();
-				data.setClassify(source.readString());
-				data.setItem(source.readString());
-				data.setTimes(source.readString());
-				data.setDate(source.readString());
-				data.setResult(source.readString());
-				data.setResultDes(source.readString());
-				data.setResultGray(source.readInt());
-				return data;
-			}
+		@Override
+		public TestResult createFromParcel(Parcel source) {
+			TestResult data = new TestResult();
+			data.setClassify(source.readString());
+			data.setItemDes(source.readString());
+			data.setItem(source.readString());
+			data.setItem1(source.readString());
+			data.setResult(source.readString());
+			data.setResult1(source.readString());
+			data.setTimes(source.readString());
+			data.setDate(source.readString());
+			data.setResultGray(source.readInt());
+			data.setResultDes(source.readString());
+			return data;
+		}
 
-			@Override
-			public TestResult[] newArray(int size) {
+		@Override
+		public TestResult[] newArray(int size) {
 
-				return new TestResult[size];
-			}
+			return new TestResult[size];
+		}
 
-		};
+	};
 
 }

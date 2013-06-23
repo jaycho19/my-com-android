@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ViewFlipper;
 
 import com.dongfang.apad.param.ComParams;
+import com.dongfang.apad.service.DFService;
 import com.dongfang.apad.util.ULog;
 
 /***
@@ -49,6 +50,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	private ViewFlipper	viewFlipper;
 
 	private Intent		intent;
+	private Intent		intentService;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,9 +84,17 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		btn010.setOnClickListener(this);
 
 		viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper1);
-		
+
 		intent = getIntent();
-		
+
+		intentService = new Intent(this, DFService.class);
+		startService(intentService);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		stopService(intentService);
 	}
 
 	private void showNexts(int id) {
@@ -126,6 +136,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			intent.setClass(this, EndActivity.class);
 			intent.putExtra(ComParams.ACTIVITY_IMAGE_SRC_ID, R.drawable.bg_style001);
 			intent.putExtra(ComParams.ACTIVITY_PAGENAME, R.string.pageName001);
+			// intent.putExtra(ComParams.ACTIVITY_TESTRESULT, new TestResult());
 			startActivity(intent);
 			break;
 		case R.id.btn_002:
@@ -187,17 +198,13 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.dongfang.apad.BaseActivity#onKeyDown(int, android.view.KeyEvent)
-	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK){
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			appExit();
 		}
-		
+
 		return super.onKeyDown(keyCode, event);
 	}
 
-	
 }

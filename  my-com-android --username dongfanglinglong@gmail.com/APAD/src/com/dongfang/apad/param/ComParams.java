@@ -11,9 +11,12 @@ import android.os.Environment;
 public class ComParams {
 
 	// ------------------------------------------------------------------------------------------
-	public static String		IP										= "192.168.1.106";
-	public static String		IP_TEST									= "192.168.1.105";
-	public static final int		PORT									= 8899;
+	public static String		IP_CARD									= "192.168.100.191";
+	public static String		IP_TEST									= "192.168.100.1";
+	public static final int		PORT_CARD								= 80;
+	public static final int		PORT_TEST								= 8080;
+	public static final int		SOCKET_TIMEOUT							= 2000;
+
 	public static final byte[]	READ_ID									= { 0x40, (byte) 0x96, 0x00, 0x00, 0x00, 0x00,
 			0x00, (byte) 0xD6											};
 	/** 从第30(0x1E)位开始读取数据,长度为41(0x29),可能一次只能读12位数据，那需要拆分读取数据 */
@@ -58,20 +61,34 @@ public class ComParams {
 	/** 图片下载没有网络 */
 	public static final int		HANDLER_IMAGE_DOWNLOAD_NONET			= 4004;
 
+	// ------------------------------------------------------------------------------------------
+	/** 连接socket网络card */
+	public static final int		HANDLER_SOCKET_CONNECT_CARD				= 3000;
 	/** SOCKET 获取到卡号 */
-	public static final int		HANDLER_SOCKET_GET_CARD_ID				= 3000;
+	public static final int		HANDLER_SOCKET_GET_CARD_ID				= 3001;
 	/** SOCKET 获取到卡内信息 */
-	public static final int		HANDLER_SOCKET_GET_CARD_INFO			= 3001;
-	/** socket 获取到正在测试的数据 */
-	public static final int		HANDLER_SOCKET_GET_TESTING_RESULT		= 3100;
-	/** socket 获取到测试完成的数据 */
-	public static final int		HANDLER_SOCKET_GET_TESTED_RESULT		= 3101;
+	public static final int		HANDLER_SOCKET_GET_USER_INFO			= 3002;
+
+	/** 连接socket网络testZKT */
+	public static final int		HANDLER_SOCKET_CONNECT_TEST_ZKT			= 3100;
+	/** 初始化中控的测试数据 */
+	public static final int		HANDLER_SOCKET_GET_TEST_ZKT_RESTART		= 3101;
+	/** 获取测试数据 */
+	public static final int		HANDLER_SOCKET_GET_TEST_ZKT_RESULT		= 3102;
 
 	// ------------------------------------------------------------------------------------------
 	public static final String	CTWAP									= "CTWAP";
 	public static final String	CTNET									= "CTNET";
 	public static final String	WIFI									= "WIFI";
 
+	// ------------------------------------------------------------------------------------------
+	/** 启动服务中的命令 */
+	public static final String	BROADCAST_HANDLER_ACTION_ID				= "bcHandler_id";
+	/** 启动服务中的命令 */
+	public static final String	BROADCAST_HANDLER_DES					= "bcHandler_des";
+	// ------------------------------------------------------------------------------------------
+	/** 启动服务中的命令 */
+	public static final String	SERVICE_HANDLER_ACTION_ID				= "handler_action_id";
 	// ------------------------------------------------------------------------------------------
 	public static final String	ACTIVITY_IMAGE_SRC_ID					= "imageId";
 	public static final String	ACTIVITY_TITLE							= "title";
