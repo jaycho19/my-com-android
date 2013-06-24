@@ -17,6 +17,7 @@ import android.view.KeyEvent;
 
 import com.dongfang.apad.R;
 import com.dongfang.apad.param.ComParams;
+import com.dongfang.apad.param.UserCommand;
 import com.dongfang.apad.util.ULog;
 import com.dongfang.apad.util.Util;
 import com.dongfang.apad.view.MyProgressDialog;
@@ -75,11 +76,11 @@ public class ReadAsynctask extends AsyncTask<String, String, String> {
 			Socket socket = new Socket();
 			socket.connect(new InetSocketAddress(ComParams.IP_CARD, ComParams.PORT_CARD), 5000);
 			OutputStream out = socket.getOutputStream();
-			out.write(ComParams.READ_USERINFO);
+			out.write(UserCommand.RNAME);
 			byte[] input = new byte[16];
 			socket.getInputStream().read(input);
 
-			ULog.d(TAG, "OUTPUT" + Util.bytesToHexString(ComParams.READ_USERINFO).toUpperCase());
+			ULog.d(TAG, "OUTPUT" + Util.bytesToHexString(UserCommand.RNAME).toUpperCase());
 			result = Util.bytesToHexString(input).toUpperCase();
 			ULog.d(TAG, "INPUT" + result);
 

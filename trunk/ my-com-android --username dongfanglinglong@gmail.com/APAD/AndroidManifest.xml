@@ -50,8 +50,7 @@
             android:theme="@style/AppTheme" >
         </activity>
 
-        <service
-            android:name=".service.DFService">
+        <service android:name=".service.DFService" >
         </service>
     </application>
 

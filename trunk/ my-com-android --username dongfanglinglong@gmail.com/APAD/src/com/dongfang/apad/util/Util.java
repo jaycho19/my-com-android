@@ -1208,5 +1208,15 @@ public class Util {
 		return stringBuilder.toString();
 	}
 	
+	public static int bytesToInt(byte[] src){
+		int v = 0;
+		
+		
+		
+		for(int i =0 ; i < Math.min(src.length, 4);i++ ){
+			v += (0xFF & (src[i]<< (8*i)));
+		}
+		return v;
+	}
 
 }
