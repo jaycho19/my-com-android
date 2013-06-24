@@ -5,6 +5,8 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -82,11 +84,12 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(getPackageName().toString() + "." + UpdateDataReceiver.TAG);
 		registerReceiver(updateDataReceiver, filter);
-		
+
 		Intent intentService = new Intent(this, DFService.class);
-		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] {
-				ComParams.HANDLER_SOCKET_CONNECT_CARD,
-				ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
+		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD
+		// , ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT
+
+				});
 		startService(intentService);
 	}
 
@@ -137,6 +140,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 	private void initData(UserInfo userInfo) {
 		btnPageName.setText(intent.getIntExtra(ComParams.ACTIVITY_PAGENAME, R.string.app_name));
 		tvTitle.setText(intent.getIntExtra(ComParams.ACTIVITY_PAGENAME, R.string.app_name));
+		imageView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.change_image));
 		imageView.setImageResource(intent.getIntExtra(ComParams.ACTIVITY_IMAGE_SRC_ID, R.drawable.card_notice));
 
 		ULog.d(TAG, userInfo.toString());
@@ -149,16 +153,22 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		@Override
 		public void onSocketConnectCard(String des, Bundle data) {
 			tvCardSocketInfo.setText(des);
+
+			Intent intentService = new Intent(StartActivity.this, DFService.class);
+			intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_CARD_ID });
+			startService(intentService);
 		}
 
 		@Override
 		public void onGetCardId(String des, Bundle data) {
-			// TODO Auto-generated method stub
+			ULog.d(TAG, "cardId = " + des);
 		}
 
 		@Override
 		public void onGetUserInfo(String des, Bundle data) {
-			// TODO Auto-generated method stub
+			ULog.d(TAG, des);
+			if (null != data && null != data.getParcelable(ComParams.ACTIVITY_USERINFO))
+				initData((UserInfo) data.getParcelable(ComParams.ACTIVITY_USERINFO));
 		}
 
 		@Override
@@ -175,7 +185,6 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		public void onGetTestZKTResult(String des, Bundle data) {
 			// TODO Auto-generated method stub
 		}
-
 	}
 
 }

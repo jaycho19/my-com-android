@@ -23,7 +23,7 @@ public class UpdateDataReceiver extends BroadcastReceiver {
 		if (null != onUpdateDataListener && intent.getAction().equals(context.getPackageName() + "." + TAG)
 				&& 0 != intent.getIntExtra(ComParams.BROADCAST_HANDLER_ACTION_ID, 0)) {
 
-			ULog.d(TAG, "id = " + intent.getIntExtra(ComParams.BROADCAST_HANDLER_ACTION_ID, 0));
+//			ULog.d(TAG, "id = " + intent.getIntExtra(ComParams.BROADCAST_HANDLER_ACTION_ID, 0));
 
 			String des = intent.getStringExtra(ComParams.BROADCAST_HANDLER_DES);
 			Bundle data = intent.getExtras();
@@ -36,7 +36,7 @@ public class UpdateDataReceiver extends BroadcastReceiver {
 				onUpdateDataListener.onGetCardId(des, data);
 				break;
 			case ComParams.HANDLER_SOCKET_GET_USER_INFO:
-				onUpdateDataListener.onGetCardId(des, data);
+				onUpdateDataListener.onGetUserInfo(des, data);
 				break;
 			case ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT:
 				onUpdateDataListener.onSocketConnectTestZKT(des, data);

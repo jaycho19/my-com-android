@@ -11,19 +11,11 @@ import android.os.Environment;
 public class ComParams {
 
 	// ------------------------------------------------------------------------------------------
-	public static String		IP_CARD									= "192.168.100.191";
-	public static String		IP_TEST									= "192.168.100.1";
-	public static final int		PORT_CARD								= 80;
-	public static final int		PORT_TEST								= 8080;
-	public static final int		SOCKET_TIMEOUT							= 2000;
-
-	public static final byte[]	READ_ID									= { 0x40, (byte) 0x96, 0x00, 0x00, 0x00, 0x00,
-			0x00, (byte) 0xD6											};
-	/** 从第30(0x1E)位开始读取数据,长度为41(0x29),可能一次只能读12位数据，那需要拆分读取数据 */
-	public static final byte[]	READ_USERINFO							= { 0x40, (byte) 0x98, 0x00, 0x01, 0x00, 0x00,
-			0x02, (byte) 0xDb, 0x1E, 0x29, 0x00, 0x00					};
-
-	public static final byte[]	WRITE									= {};
+	public static String		IP_CARD									= "192.168.1.100";
+	public static String		IP_TEST									= "192.168.1.102";
+	public static final int		PORT_CARD								= 8899;
+	public static final int		PORT_TEST								= 8899;
+	public static final int		SOCKET_TIMEOUT							= 3000 ;
 
 	// ------------------------------------------------------------------------------------------
 	public static final String	URL_BASE								= "http://api.tv189.com";

@@ -14,6 +14,7 @@ import android.view.KeyEvent;
 
 import com.dongfang.apad.R;
 import com.dongfang.apad.param.ComParams;
+import com.dongfang.apad.param.UserCommand;
 import com.dongfang.apad.util.ULog;
 import com.dongfang.apad.util.Util;
 import com.dongfang.apad.view.MyProgressDialog;
@@ -36,33 +37,33 @@ public class GetCardInfo extends AsyncTask<String, String, String> {
 		this.context = context;
 	}
 
-	@Override
-	protected void onPreExecute() {
-		super.onPreExecute();
-		progressDialog = MyProgressDialog.show(context, context.getString(R.string.loading_data));
-		progressDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-			@Override
-			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-				if (keyCode == KeyEvent.KEYCODE_BACK) {
-					if (progressDialog != null && progressDialog.isShowing()) {
-						progressDialog.dismiss();
-						GetCardInfo.this.cancel(true);
-					}
-					return true;
-				}
-				return false;
-			}
-		});
-		progressDialog.show();
-		progressDialog.setOnDismissListener(new OnDismissListener() {
-
-			@Override
-			public void onDismiss(DialogInterface dialog) {
-				if (GetCardInfo.this.getStatus().compareTo(AsyncTask.Status.FINISHED) != 0)
-					GetCardInfo.this.cancel(true);
-			}
-		});
-	}
+//	@Override
+//	protected void onPreExecute() {
+//		super.onPreExecute();
+//		progressDialog = MyProgressDialog.show(context, context.getString(R.string.loading_data));
+//		progressDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+//			@Override
+//			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+//				if (keyCode == KeyEvent.KEYCODE_BACK) {
+//					if (progressDialog != null && progressDialog.isShowing()) {
+//						progressDialog.dismiss();
+//						GetCardInfo.this.cancel(true);
+//					}
+//					return true;
+//				}
+//				return false;
+//			}
+//		});
+//		progressDialog.show();
+//		progressDialog.setOnDismissListener(new OnDismissListener() {
+//
+//			@Override
+//			public void onDismiss(DialogInterface dialog) {
+//				if (GetCardInfo.this.getStatus().compareTo(AsyncTask.Status.FINISHED) != 0)
+//					GetCardInfo.this.cancel(true);
+//			}
+//		});
+//	}
 
 	/**
 	 * 往socket写入output数据，返回的内容输入到input中
@@ -73,8 +74,8 @@ public class GetCardInfo extends AsyncTask<String, String, String> {
 	 * @throws IOException
 	 */
 	private void getInputBytes(Socket socket, byte[] output, byte[] input) throws IOException {
-		ULog.d(TAG, "OUTPUT" + Util.bytesToHexString(ComParams.READ_ID).toUpperCase());
-		socket.getOutputStream().write(ComParams.READ_ID);
+		ULog.d(TAG, "OUTPUT" + Util.bytesToHexString(UserCommand.RCARDID).toUpperCase());
+		socket.getOutputStream().write(UserCommand.RCARDID);
 		socket.getInputStream().read(input);
 		ULog.d(TAG, "INPUT" + Util.bytesToHexString(input).toUpperCase());
 	}
@@ -84,11 +85,14 @@ public class GetCardInfo extends AsyncTask<String, String, String> {
 		String result = null;
 		Socket socket = null;
 		try {
+			ULog.d(TAG, "-----");
 			socket = new Socket(ComParams.IP_CARD, ComParams.PORT_CARD);
 			socket.setSoTimeout(5000);
+			ULog.d(TAG, "-----");
 
 			byte[] input = new byte[16];
-			getInputBytes(socket, ComParams.READ_ID, input);
+			getInputBytes(socket, UserCommand.RCARDID, input);
+			ULog.d(TAG, "-----");
 
 		} catch (Exception e) {
 			ULog.d(TAG, "IOException = " + e.toString());
