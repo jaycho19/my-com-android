@@ -25,27 +25,27 @@ public class UpdateDataReceiver extends BroadcastReceiver {
 
 //			ULog.d(TAG, "id = " + intent.getIntExtra(ComParams.BROADCAST_HANDLER_ACTION_ID, 0));
 
-			String des = intent.getStringExtra(ComParams.BROADCAST_HANDLER_DES);
+			boolean isConnected = intent.getBooleanExtra(ComParams.BROADCAST_HANDLER_IS_CONNECTED,false);
 			Bundle data = intent.getExtras();
 
 			switch (intent.getIntExtra(ComParams.BROADCAST_HANDLER_ACTION_ID, 0)) {
 			case ComParams.HANDLER_SOCKET_CONNECT_CARD:
-				onUpdateDataListener.onSocketConnectCard(des, data);
+				onUpdateDataListener.onSocketConnectCard(isConnected, data);
 				break;
 			case ComParams.HANDLER_SOCKET_GET_CARD_ID:
-				onUpdateDataListener.onGetCardId(des, data);
+				onUpdateDataListener.onGetCardId(isConnected, data);
 				break;
 			case ComParams.HANDLER_SOCKET_GET_USER_INFO:
-				onUpdateDataListener.onGetUserInfo(des, data);
+				onUpdateDataListener.onGetUserInfo(isConnected, data);
 				break;
 			case ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT:
-				onUpdateDataListener.onSocketConnectTestZKT(des, data);
+				onUpdateDataListener.onSocketConnectTestZKT(isConnected, data);
 				break;
-			case ComParams.HANDLER_SOCKET_GET_TEST_ZKT_RESTART:
-				onUpdateDataListener.onTestZKTRestarted(des, data);
+			case ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START:
+				onUpdateDataListener.onTestZKTRestarted(isConnected, data);
 				break;
 			case ComParams.HANDLER_SOCKET_GET_TEST_ZKT_RESULT:
-				onUpdateDataListener.onGetTestZKTResult(des, data);
+				onUpdateDataListener.onGetTestZKTResult(isConnected, data);
 				break;
 			default:
 				break;

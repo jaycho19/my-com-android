@@ -2,6 +2,7 @@ package com.dongfang.apad.bean;
 
 import java.io.UnsupportedEncodingException;
 
+import com.dongfang.apad.util.ULog;
 import com.dongfang.apad.util.Util;
 
 import android.os.Parcel;
@@ -51,18 +52,41 @@ public class UserInfo implements Parcelable {
 		day = 0;
 	}
 
+	private String Byte2Unicode(byte abyte[], int st, int bEnd) { // 不包含bEnd
+		StringBuffer sb = new StringBuffer("");
+		for (int j = st; j < bEnd;) {
+			int lw = abyte[j++];
+			if (lw < 0)
+				lw += 256;
+			int hi = abyte[j++];
+			if (hi < 0)
+				hi += 256;
+			char c = (char) (lw + (hi << 8));
+			sb.append(c);
+		}
+
+		return sb.toString();
+	}
+
 	public void setValue(byte[] input) {
-		byte[] nameArr = new byte[10];
-		for (int i = 29; i < 38; i++) {
-			if (input[i] != 0)
-				nameArr[i - 29] = input[i];
-		}
-		try {
-			name = new String(nameArr, "UTF-16");
-		} catch (UnsupportedEncodingException e) {
-			name = "error";
-			e.printStackTrace();
-		}
+		// byte[] nameArr = new byte[10];
+		// for (int i = 29; i < 38; i++) {
+		// if (input[i] != 0)
+		// nameArr[i - 29] = input[i];
+		// }
+		//
+		// try {
+		// name = new String(nameArr, "utf-8");
+		// } catch (UnsupportedEncodingException e) {
+		// name = "error";
+		// e.printStackTrace();
+		// }
+
+		// ULog.d(TAG, "name = " + name);
+		name = Byte2Unicode(input, 29, 38);
+		ULog.d(TAG, "name = " + name);
+		ULog.d(TAG, "name = " + Byte2Unicode(input, 29, 39));
+		ULog.d(TAG, "name = " + Byte2Unicode(input, 29, 40));
 
 		gender = input[40];
 

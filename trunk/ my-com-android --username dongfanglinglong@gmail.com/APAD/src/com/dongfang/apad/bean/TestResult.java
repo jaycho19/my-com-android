@@ -1,5 +1,7 @@
 package com.dongfang.apad.bean;
 
+import com.dongfang.apad.util.Util;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -10,6 +12,8 @@ import android.os.Parcelable;
  * 
  */
 public class TestResult implements Parcelable {
+
+	private byte	id	= 0x00;
 
 	/** 分类 */
 	private String	classify;
@@ -23,14 +27,78 @@ public class TestResult implements Parcelable {
 	private String	result;
 	/** 第二项测试结果 */
 	private String	result1;
-	/** 测试次数 */
-	private String	times;
-	/** 测试日期 */
+	/** @deprecated 测试次数 */
+
+	private int		times;
+	/** @deprecated 测试日期 */
 	private String	date;
 	/** 测试成绩 */
 	private int		resultGray;
 	/** 测试结果描述 */
 	private String	resultDes;
+
+	public TestResult() {
+		init();
+
+	}
+
+	private void init() {
+		id = (byte) 0xFF;
+		classify = "";
+		itemDes = "";
+		item = "";
+		item1 = "";
+		result = "";
+		result1 = "";
+		times = 0;
+		date = Util.getDate();
+		resultGray = 0;
+		resultDes = "";
+	}
+
+	public void setValue(byte[] input) {
+		switch (id) {
+		case 0x02:
+			classify = "素质";
+			item = "握力（千克）";
+			int kg = (input[5] & 0xFF);
+			kg |= (input[4] << 8) & 0xFF00;
+			result = kg + "." + ((int) input[6] & 0xFF);
+			if (0x01 == input[4])
+				times++;
+			date = Util.getDate();
+			double g = Double.valueOf(result);
+			if (g < 32.6) {
+				resultGray = 1;
+			}
+			else if (g < 38.4) {
+				resultGray = 2;
+			}
+			else if (g < 44.9) {
+				resultGray = 4;
+			}
+			else if (g < 50.5) {
+				resultGray = 5;
+			}
+			else {
+				resultGray = 5;
+			}
+			resultDes = "";
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	public byte getId() {
+		return id;
+	}
+
+	public void setId(byte id) {
+		init();
+		this.id = id;
+	}
 
 	/**
 	 * @return the resultDes
@@ -80,7 +148,7 @@ public class TestResult implements Parcelable {
 	/**
 	 * @return the times
 	 */
-	public String getTimes() {
+	public int getTimes() {
 		return times;
 	}
 
@@ -88,7 +156,7 @@ public class TestResult implements Parcelable {
 	 * @param times
 	 *            the times to set
 	 */
-	public void setTimes(String times) {
+	public void setTimes(int times) {
 		this.times = times;
 	}
 
@@ -137,8 +205,6 @@ public class TestResult implements Parcelable {
 		this.resultGray = resultGray;
 	}
 
-	
-	
 	/**
 	 * @return the item1
 	 */
@@ -147,7 +213,8 @@ public class TestResult implements Parcelable {
 	}
 
 	/**
-	 * @param item1 the item1 to set
+	 * @param item1
+	 *            the item1 to set
 	 */
 	public void setItem1(String item1) {
 		this.item1 = item1;
@@ -161,7 +228,8 @@ public class TestResult implements Parcelable {
 	}
 
 	/**
-	 * @param itemDes the itemDes to set
+	 * @param itemDes
+	 *            the itemDes to set
 	 */
 	public void setItemDes(String itemDes) {
 		this.itemDes = itemDes;
@@ -175,7 +243,8 @@ public class TestResult implements Parcelable {
 	}
 
 	/**
-	 * @param result1 the result1 to set
+	 * @param result1
+	 *            the result1 to set
 	 */
 	public void setResult1(String result1) {
 		this.result1 = result1;
@@ -189,6 +258,7 @@ public class TestResult implements Parcelable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append("id         = ").append(id).append("\n");
 		sb.append("classify   = ").append(classify).append("\n");
 		sb.append("itemDes    = ").append(itemDes).append("\n");
 		sb.append("item       = ").append(item).append("\n");
@@ -220,13 +290,14 @@ public class TestResult implements Parcelable {
 	 */
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeByte(id);
 		dest.writeString(classify);
 		dest.writeString(itemDes);
 		dest.writeString(item);
 		dest.writeString(item1);
 		dest.writeString(result);
 		dest.writeString(result1);
-		dest.writeString(times);
+		dest.writeInt(times);
 		dest.writeString(date);
 		dest.writeInt(resultGray);
 		dest.writeString(resultDes);
@@ -235,28 +306,29 @@ public class TestResult implements Parcelable {
 
 	public static final Parcelable.Creator<TestResult>	CREATOR	= new Parcelable.Creator<TestResult>() {
 
-		@Override
-		public TestResult createFromParcel(Parcel source) {
-			TestResult data = new TestResult();
-			data.setClassify(source.readString());
-			data.setItemDes(source.readString());
-			data.setItem(source.readString());
-			data.setItem1(source.readString());
-			data.setResult(source.readString());
-			data.setResult1(source.readString());
-			data.setTimes(source.readString());
-			data.setDate(source.readString());
-			data.setResultGray(source.readInt());
-			data.setResultDes(source.readString());
-			return data;
-		}
+																	@Override
+																	public TestResult createFromParcel(Parcel source) {
+																		TestResult data = new TestResult();
+																		data.setId(source.readByte());
+																		data.setClassify(source.readString());
+																		data.setItemDes(source.readString());
+																		data.setItem(source.readString());
+																		data.setItem1(source.readString());
+																		data.setResult(source.readString());
+																		data.setResult1(source.readString());
+																		data.setTimes(source.readInt());
+																		data.setDate(source.readString());
+																		data.setResultGray(source.readInt());
+																		data.setResultDes(source.readString());
+																		return data;
+																	}
 
-		@Override
-		public TestResult[] newArray(int size) {
+																	@Override
+																	public TestResult[] newArray(int size) {
 
-			return new TestResult[size];
-		}
+																		return new TestResult[size];
+																	}
 
-	};
+																};
 
 }
