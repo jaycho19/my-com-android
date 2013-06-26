@@ -130,7 +130,6 @@
                             android:background="@drawable/bg_line03"
                             android:gravity="center"
                             android:padding="3dip"
-                            
                             android:text="体重（千克）"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -233,6 +232,24 @@
                 android:text="握力评分为2分，说明您手臂的力量较差，容易导致手臂的骨骼（桡骨）骨质少空孔，并增加手臂肌肉劳损和 骨折的风险。科学的力量练习能有效降低风险。"
                 android:textSize="16sp" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_cardSocketInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tv_testZKTSocketInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_cardSocketInfo"
+            android:layout_alignParentRight="true"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
     </RelativeLayout>
 
 </LinearLayout>

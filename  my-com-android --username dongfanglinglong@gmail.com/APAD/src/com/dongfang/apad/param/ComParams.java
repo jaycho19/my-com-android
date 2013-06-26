@@ -12,10 +12,10 @@ public class ComParams {
 
 	// ------------------------------------------------------------------------------------------
 	public static String		IP_CARD									= "192.168.1.100";
-	public static String		IP_TEST									= "192.168.1.102";
+	public static String		IP_TEST									= "192.168.1.105";
 	public static final int		PORT_CARD								= 8899;
 	public static final int		PORT_TEST								= 8899;
-	public static final int		SOCKET_TIMEOUT							= 3000 ;
+	public static final int		SOCKET_TIMEOUT							= 5000;
 
 	// ------------------------------------------------------------------------------------------
 	public static final String	URL_BASE								= "http://api.tv189.com";
@@ -64,7 +64,7 @@ public class ComParams {
 	/** 连接socket网络testZKT */
 	public static final int		HANDLER_SOCKET_CONNECT_TEST_ZKT			= 3100;
 	/** 初始化中控的测试数据 */
-	public static final int		HANDLER_SOCKET_GET_TEST_ZKT_RESTART		= 3101;
+	public static final int		HANDLER_SOCKET_GET_TEST_ZKT_START		= 3101;
 	/** 获取测试数据 */
 	public static final int		HANDLER_SOCKET_GET_TEST_ZKT_RESULT		= 3102;
 
@@ -78,6 +78,10 @@ public class ComParams {
 	public static final String	BROADCAST_HANDLER_ACTION_ID				= "bcHandler_id";
 	/** 启动服务中的命令 */
 	public static final String	BROADCAST_HANDLER_DES					= "bcHandler_des";
+	/** 启动服务中的命令 */
+	public static final String	BROADCAST_HANDLER_CARD_ID				= "card_id";
+	/** 启动服务中的命令 */
+	public static final String	BROADCAST_HANDLER_IS_CONNECTED			= "is_connected";
 	// ------------------------------------------------------------------------------------------
 	/** 启动服务中的命令 */
 	public static final String	SERVICE_HANDLER_ACTION_ID				= "handler_action_id";

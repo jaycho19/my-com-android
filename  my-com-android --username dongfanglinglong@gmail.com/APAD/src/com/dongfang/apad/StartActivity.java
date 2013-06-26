@@ -3,15 +3,15 @@ package com.dongfang.apad;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dongfang.apad.bean.TestResult;
 import com.dongfang.apad.bean.UserInfo;
-import com.dongfang.apad.broadcast.CloseAppReceiver;
 import com.dongfang.apad.broadcast.UpdateDataReceiver;
 import com.dongfang.apad.param.ComParams;
 import com.dongfang.apad.service.DFService;
@@ -86,39 +86,36 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		registerReceiver(updateDataReceiver, filter);
 
 		Intent intentService = new Intent(this, DFService.class);
-		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD
-		// , ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT
+		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD,
+				ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT
 
-				});
+		});
 		startService(intentService);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.dongfang.apad.BaseActivity#onResume()
-	 */
 	@Override
 	protected void onResume() {
+		// TODO Auto-generated method stub
 		super.onResume();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.dongfang.apad.BaseActivity#onPause()
-	 */
 	@Override
 	protected void onPause() {
+		// TODO Auto-generated method stub
 		super.onPause();
-		unregisterReceiver(updateDataReceiver);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.view.View.OnClickListener#onClick(android.view.View)
-	 */
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(updateDataReceiver);
+
+		Intent intentService = new Intent(this, DFService.class);
+		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] {});
+		startService(intentService);
+
+	}
+
 	@Override
 	public void onClick(View v) {
 		ULog.d(TAG, v.toString());
@@ -151,39 +148,109 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 	class MyOnUpdateDataListener implements OnUpdateDataListener {
 
 		@Override
-		public void onSocketConnectCard(String des, Bundle data) {
-			tvCardSocketInfo.setText(des);
+		public void onSocketConnectCard(boolean isConnect, Bundle data) {
+			if (null != data && !TextUtils.isEmpty(data.getString(ComParams.BROADCAST_HANDLER_DES))) {
+				tvCardSocketInfo.setText(data.getString(ComParams.BROADCAST_HANDLER_DES));
+			}
 
-			Intent intentService = new Intent(StartActivity.this, DFService.class);
-			intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_CARD_ID });
-			startService(intentService);
+			if (isConnect) {
+				Intent intentService = new Intent(StartActivity.this, DFService.class);
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
+						new int[] { ComParams.HANDLER_SOCKET_GET_CARD_ID });
+				startService(intentService);
+			}
 		}
 
 		@Override
-		public void onGetCardId(String des, Bundle data) {
-			ULog.d(TAG, "cardId = " + des);
+		public void onGetCardId(boolean isConnect, Bundle data) {
+			/** 有可能存在死循环错误： 与onSocketConnectCard */
+			if (!isConnect) {
+				Intent intentService = new Intent(StartActivity.this, DFService.class);
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
+						new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD });
+				startService(intentService);
+			}
+
+			if (null != data && null != data.getParcelable(ComParams.ACTIVITY_USERINFO)) {
+				ULog.d(TAG, ((UserInfo) data.getParcelable(ComParams.ACTIVITY_USERINFO)).toString());
+			}
 		}
 
 		@Override
-		public void onGetUserInfo(String des, Bundle data) {
-			ULog.d(TAG, des);
+		public void onGetUserInfo(boolean isConnect, Bundle data) {
+			/** 有可能存在死循环错误： 与onSocketConnectCard */
+			if (!isConnect) {
+				Intent intentService = new Intent(StartActivity.this, DFService.class);
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
+						new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD });
+				startService(intentService);
+			}
+			else {
+				Intent intentService = new Intent(StartActivity.this, DFService.class);
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
+						new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
+				startService(intentService);
+			}
 			if (null != data && null != data.getParcelable(ComParams.ACTIVITY_USERINFO))
 				initData((UserInfo) data.getParcelable(ComParams.ACTIVITY_USERINFO));
 		}
 
 		@Override
-		public void onSocketConnectTestZKT(String des, Bundle data) {
-			tvTestZKTSocketInfo.setText(des);
+		public void onSocketConnectTestZKT(boolean isConnect, Bundle data) {
+			if (null != data && !TextUtils.isEmpty(data.getString(ComParams.BROADCAST_HANDLER_DES))) {
+				tvTestZKTSocketInfo.setText(data.getString(ComParams.BROADCAST_HANDLER_DES));
+			}
+
+			if (isConnect) {
+				Intent intentService = new Intent(StartActivity.this, DFService.class);
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
+						new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
+				startService(intentService);
+			}
+
 		}
 
 		@Override
-		public void onTestZKTRestarted(String des, Bundle data) {
-			// TODO Auto-generated method stub
+		public void onTestZKTRestarted(boolean isConnect, Bundle data) {
+			/** 有可能存在死循环错误： 与onSocketConnectCard */
+			if (!isConnect) {
+				Intent intentService = new Intent(StartActivity.this, DFService.class);
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
+						new int[] { ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
+				startService(intentService);
+			}
+
+			if (null != data && !TextUtils.isEmpty(data.getString(ComParams.BROADCAST_HANDLER_DES))) {
+				ULog.d(TAG, data.getString(ComParams.BROADCAST_HANDLER_DES));
+			}
+
+			if (null != data && null != data.getParcelable(ComParams.ACTIVITY_TESTRESULT)) {
+				ULog.d(TAG, ((TestResult) data.getParcelable(ComParams.ACTIVITY_TESTRESULT)).toString());
+				tvTitle.setText("请按钮");
+
+				Intent intentService = new Intent(StartActivity.this, DFService.class);
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
+						new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_RESULT });
+				startService(intentService);
+			}
 		}
 
 		@Override
-		public void onGetTestZKTResult(String des, Bundle data) {
-			// TODO Auto-generated method stub
+		public void onGetTestZKTResult(boolean isConnect, Bundle data) {
+			if (!isConnect) {
+				Intent intentService = new Intent(StartActivity.this, DFService.class);
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
+						new int[] { ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
+				startService(intentService);
+			}
+
+			if (null != data && null != data.getParcelable(ComParams.ACTIVITY_TESTRESULT)) {
+				ULog.d(TAG, ((TestResult) data.getParcelable(ComParams.ACTIVITY_TESTRESULT)).toString());
+				Intent intent = new Intent(StartActivity.this, EndActivity.class);
+				intent.putExtras(data);
+				startActivity(intent);
+				finish();
+			}
 		}
 	}
 
