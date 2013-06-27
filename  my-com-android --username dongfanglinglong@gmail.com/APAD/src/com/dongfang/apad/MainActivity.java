@@ -3,6 +3,8 @@ package com.dongfang.apad;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AnimationUtils;
@@ -12,6 +14,7 @@ import android.widget.ViewFlipper;
 import com.dongfang.apad.param.ComParams;
 import com.dongfang.apad.service.DFService;
 import com.dongfang.apad.util.ULog;
+import com.dongfang.apad.util.Util;
 
 /***
  * 
@@ -84,11 +87,20 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		btn010.setOnClickListener(this);
 
 		viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper1);
+		findViewById(R.id.imageView1).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainActivity.this, SetActivity.class));
+			}
+		});
+
+		Util.getIPandPort(this);
 
 		intent = getIntent();
-
 		intentService = new Intent(this, DFService.class);
 		startService(intentService);
+
 	}
 
 	@Override
@@ -133,7 +145,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			showNexts(v.getId());
 			break;
 		case R.id.btn_001:
-			intent.setClass(this, EndActivity.class);
+			intent.setClass(this, StartActivity.class);
 			intent.putExtra(ComParams.ACTIVITY_IMAGE_SRC_ID, R.drawable.bg_style001);
 			intent.putExtra(ComParams.ACTIVITY_PAGENAME, R.string.pageName001);
 			// intent.putExtra(ComParams.ACTIVITY_TESTRESULT, new TestResult());
@@ -203,8 +215,26 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			appExit();
 		}
-
 		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		ULog.d(TAG, "onCreateOptionsMenu");
+		// getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.base_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.menu_item_set:
+			startActivity(new Intent(this, SetActivity.class));
+			return true;
+
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 }

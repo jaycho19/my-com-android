@@ -48,6 +48,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 	private TextView			tvTestZKTSocketInfo;
 
 	private Intent				intent;
+	private UserInfo			userInfo;
 
 	private UpdateDataReceiver	updateDataReceiver;
 
@@ -111,7 +112,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		unregisterReceiver(updateDataReceiver);
 
 		Intent intentService = new Intent(this, DFService.class);
-		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] {});
+		intentService.putExtra(ComParams.SERVICE_HANDLER_REMOVE_ALL, ComParams.SERVICE_HANDLER_REMOVE_ALL);
 		startService(intentService);
 
 	}
@@ -135,6 +136,9 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 	 * 尝试获取测试数据；
 	 */
 	private void initData(UserInfo userInfo) {
+		this.userInfo = null;
+		this.userInfo = userInfo;
+
 		btnPageName.setText(intent.getIntExtra(ComParams.ACTIVITY_PAGENAME, R.string.app_name));
 		tvTitle.setText(intent.getIntExtra(ComParams.ACTIVITY_PAGENAME, R.string.app_name));
 		imageView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.change_image));
@@ -197,6 +201,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		public void onSocketConnectTestZKT(boolean isConnect, Bundle data) {
+			ULog.d(TAG, "onSocketConnectTestZKT");
 			if (null != data && !TextUtils.isEmpty(data.getString(ComParams.BROADCAST_HANDLER_DES))) {
 				tvTestZKTSocketInfo.setText(data.getString(ComParams.BROADCAST_HANDLER_DES));
 			}
@@ -212,6 +217,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		public void onTestZKTRestarted(boolean isConnect, Bundle data) {
+			ULog.d(TAG, "onTestZKTRestarted");
 			/** 有可能存在死循环错误： 与onSocketConnectCard */
 			if (!isConnect) {
 				Intent intentService = new Intent(StartActivity.this, DFService.class);
@@ -237,6 +243,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		public void onGetTestZKTResult(boolean isConnect, Bundle data) {
+			ULog.d(TAG, "onGetTestZKTResult");
 			if (!isConnect) {
 				Intent intentService = new Intent(StartActivity.this, DFService.class);
 				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
@@ -248,6 +255,8 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 				ULog.d(TAG, ((TestResult) data.getParcelable(ComParams.ACTIVITY_TESTRESULT)).toString());
 				Intent intent = new Intent(StartActivity.this, EndActivity.class);
 				intent.putExtras(data);
+
+				// data.putParcelable(ComParams.ACTIVITY_USERINFO, userInfo);
 				startActivity(intent);
 				finish();
 			}
