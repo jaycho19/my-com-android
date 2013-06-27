@@ -11,11 +11,20 @@ import android.os.Environment;
 public class ComParams {
 
 	// ------------------------------------------------------------------------------------------
-	public static String		IP_CARD									= "192.168.1.100";
-	public static String		IP_TEST									= "192.168.1.105";
-	public static final int		PORT_CARD								= 8899;
-	public static final int		PORT_TEST								= 8899;
-	public static final int		SOCKET_TIMEOUT							= 5000;
+	public static String		IP_CARD									= "192.168.1.101";
+	public static String		IP_TEST									= "192.168.1.103";
+	public static int			PORT_CARD								= 8899;
+	public static int			PORT_TEST								= 8899;
+	public static int			SOCKET_TIMEOUT							= 5000;
+
+	// ------------------------------------------------------------------------------------------
+	// ------------------------------------------------------------------------------------------
+
+	public static final String	SHAREDPREFERENCES_IPANDPROT				= "IPANDPROT";
+	public static final String	SHAREDPREFERENCES_IPANDPROT_CARD_IP		= "card_ip";
+	public static final String	SHAREDPREFERENCES_IPANDPROT_CARD_PORT	= "card_port";
+	public static final String	SHAREDPREFERENCES_IPANDPROT_ZKT_IP		= "zkt_ip";
+	public static final String	SHAREDPREFERENCES_IPANDPROT_ZKT_PORT	= "zkt_port";
 
 	// ------------------------------------------------------------------------------------------
 	public static final String	URL_BASE								= "http://api.tv189.com";
@@ -85,6 +94,8 @@ public class ComParams {
 	// ------------------------------------------------------------------------------------------
 	/** 启动服务中的命令 */
 	public static final String	SERVICE_HANDLER_ACTION_ID				= "handler_action_id";
+	public static final String	SERVICE_HANDLER_REMOVE_ALL				= "handler_remove_all";
+	public static final String	SERVICE_CLEAR_TESTINFO					= "clear_testinfo";
 	// ------------------------------------------------------------------------------------------
 	public static final String	ACTIVITY_IMAGE_SRC_ID					= "imageId";
 	public static final String	ACTIVITY_TITLE							= "title";

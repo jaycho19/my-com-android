@@ -1,10 +1,7 @@
 package com.dongfang.apad;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
@@ -16,7 +13,6 @@ import com.dongfang.apad.util.ULog;
 
 /**
  * 1. 所有该项目activity都需要继承该类；<br>
- * 2. 该类集成了QAS功能
  * 
  * @author dongfang
  * 
@@ -34,7 +30,7 @@ public abstract class BaseActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		ULog.i(TAG, "-- BaseActivity onCreate ");
+		// ULog.i(TAG, "-- BaseActivity onCreate ");
 		closeApp = new CloseAppReceiver(this);
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(getPackageName().toString() + "." + CloseAppReceiver.TAG);
@@ -52,7 +48,7 @@ public abstract class BaseActivity extends FragmentActivity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-//		ULog.i(TAG, "-- BaseActivity onStart ");
+		// ULog.i(TAG, "-- BaseActivity onStart ");
 
 	}
 
@@ -64,11 +60,11 @@ public abstract class BaseActivity extends FragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-//		ULog.i(TAG, "-- BaseActivity onResume ");
-		
-		IntentFilter connectFilter = new IntentFilter();
-		connectFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-		registerReceiver(connectReciver, connectFilter);
+		// ULog.i(TAG, "-- BaseActivity onResume ");
+
+		// IntentFilter connectFilter = new IntentFilter();
+		// connectFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+		// registerReceiver(connectReciver, connectFilter);
 
 	}
 
@@ -80,8 +76,8 @@ public abstract class BaseActivity extends FragmentActivity {
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-		
-//		ULog.i(TAG, "-- BaseActivity onWindowFocusChanged " + hasFocus);
+
+		// ULog.i(TAG, "-- BaseActivity onWindowFocusChanged " + hasFocus);
 
 	}
 
@@ -93,9 +89,7 @@ public abstract class BaseActivity extends FragmentActivity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-//		ULog.i(TAG, "-- BaseActivity onPause ");
-
-		unregisterReceiver(connectReciver);
+		// ULog.i(TAG, "-- BaseActivity onPause ");
 	}
 
 	/*
@@ -106,11 +100,9 @@ public abstract class BaseActivity extends FragmentActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-//		ULog.i(TAG, "-- BaseActivity onDestroy ");
+		// ULog.i(TAG, "-- BaseActivity onDestroy ");
 
-		
 		unregisterReceiver(closeApp);
-		connectReciver = null;
 		closeApp = null;
 	}
 
@@ -161,15 +153,13 @@ public abstract class BaseActivity extends FragmentActivity {
 
 	}
 
-	private BroadcastReceiver	connectReciver	= new BroadcastReceiver() {
-
-													@Override
-													public void onReceive(Context context, Intent intent) {
-														// TODO Auto-generated
-														// method stub
-														if (ConnectivityManager.CONNECTIVITY_ACTION.equals(intent
-																.getAction())) {}
-													}
-												};
+//	private BroadcastReceiver	connectReciver	= new BroadcastReceiver() {
+//
+//	@Override
+//	public void onReceive(Context context, Intent intent) {
+//		// TODO Auto-generated method stub
+//		if (ConnectivityManager.CONNECTIVITY_ACTION.equals(intent.getAction())) {}
+//	}
+//};
 
 }

@@ -23,6 +23,7 @@ import org.apache.http.NameValuePair;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -60,6 +61,26 @@ public class Util {
 	private static final int	ERROR				= -1;
 	public static boolean		isPlayWarning		= false;						// 视频播放的网络提醒
 	public static boolean		isDownloadWarning	= false;						// 下载的网络提醒
+
+	public static boolean saveIPandPort(Context context, String cardIP, int cardPort, String zktIP, int zktPort) {
+		Editor editor = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_IPANDPROT, Context.MODE_PRIVATE)
+				.edit();
+		editor.putString(ComParams.SHAREDPREFERENCES_IPANDPROT_CARD_IP, cardIP);
+		editor.putInt(ComParams.SHAREDPREFERENCES_IPANDPROT_CARD_PORT, cardPort);
+		editor.putString(ComParams.SHAREDPREFERENCES_IPANDPROT_ZKT_IP, zktIP);
+		editor.putInt(ComParams.SHAREDPREFERENCES_IPANDPROT_ZKT_PORT, zktPort);
+		return editor.commit();
+	}
+
+	public static void getIPandPort(Context context) {
+		SharedPreferences sp = context
+				.getSharedPreferences(ComParams.SHAREDPREFERENCES_IPANDPROT, Context.MODE_PRIVATE);
+
+		ComParams.IP_CARD = sp.getString(ComParams.SHAREDPREFERENCES_IPANDPROT_CARD_IP, ComParams.IP_CARD);
+		ComParams.IP_TEST = sp.getString(ComParams.SHAREDPREFERENCES_IPANDPROT_ZKT_IP, ComParams.IP_TEST);
+		ComParams.PORT_CARD = sp.getInt(ComParams.SHAREDPREFERENCES_IPANDPROT_CARD_PORT, ComParams.PORT_CARD);
+		ComParams.PORT_TEST = sp.getInt(ComParams.SHAREDPREFERENCES_IPANDPROT_ZKT_PORT, ComParams.PORT_TEST);
+	}
 
 	/**
 	 * 更新视频下载路径值
@@ -256,12 +277,11 @@ public class Util {
 	/**
 	 * 获取 IMSI id
 	 * <p>
-	 * Requires Permission: {@link android.Manifest.permission#READ_PHONE_STATE
-	 * READ_PHONE_STATE}
+	 * Requires Permission: {@link android.Manifest.permission#READ_PHONE_STATE READ_PHONE_STATE}
 	 * 
 	 * @param context
-	 * @return Returns the unique subscriber ID, for example, the IMSI for a GSM
-	 *         phone. Return null if it is unavailable.
+	 * @return Returns the unique subscriber ID, for example, the IMSI for a GSM phone. Return null if it is
+	 *         unavailable.
 	 * */
 	public static String getIMSI(Context context) {
 		String imsi = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getSubscriberId();
@@ -271,12 +291,11 @@ public class Util {
 	/**
 	 * 获取终端号
 	 * 
-	 * Returns the unique device ID, for example, the IMEI for GSM and the MEID
-	 * for CDMA phones. Return null if device ID is not available.
+	 * Returns the unique device ID, for example, the IMEI for GSM and the MEID for CDMA phones. Return null if device
+	 * ID is not available.
 	 * 
 	 * <p>
-	 * Requires Permission: {@link android.Manifest.permission#READ_PHONE_STATE
-	 * READ_PHONE_STATE}
+	 * Requires Permission: {@link android.Manifest.permission#READ_PHONE_STATE READ_PHONE_STATE}
 	 */
 	public static String getIMEI(Context context) {
 		String imei = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
@@ -346,10 +365,9 @@ public class Util {
 
 	/** 毫秒转成： 年-月-日 */
 	/*
-	 * public static final String stringToDate(String string) { Date date =
-	 * null; try { long dt = Long.parseLong(string); date = new Date();
-	 * date.setTime(dt); } catch (Exception e) { e.printStackTrace(); } return
-	 * new SimpleDateFormat("yyyy-MM-dd").format(date); }
+	 * public static final String stringToDate(String string) { Date date = null; try { long dt =
+	 * Long.parseLong(string); date = new Date(); date.setTime(dt); } catch (Exception e) { e.printStackTrace(); }
+	 * return new SimpleDateFormat("yyyy-MM-dd").format(date); }
 	 */
 	/**
 	 * 返回一个有逗号(,)隔开的字符串
@@ -484,9 +502,8 @@ public class Util {
 	 * Get the date
 	 * 
 	 * @param distance
-	 *            The number of days from today, Positive value represents the
-	 *            days after today, Negative value represents the days before
-	 *            today, Zero represents today.
+	 *            The number of days from today, Positive value represents the days after today, Negative value
+	 *            represents the days before today, Zero represents today.
 	 * @return
 	 */
 	public static String getDate(int distance, boolean stripe) {
@@ -709,8 +726,7 @@ public class Util {
 	/**
 	 * 缩小图片
 	 * <p>
-	 * if width willing be zoom is bigger than default draw width, then return
-	 * default draw immediately;
+	 * if width willing be zoom is bigger than default draw width, then return default draw immediately;
 	 * </P>
 	 * 
 	 * @param drawable
@@ -779,8 +795,7 @@ public class Util {
 
 	/**
 	 * 设置listview的高度为所有item的和，不显示滑动进度条 <br>
-	 * 注意：listview的item布局的最外层layout必须是Linearlayout,
-	 * 如是其它在measure时会爆NullPointerException,因为其他layout无onmeasure()方法
+	 * 注意：listview的item布局的最外层layout必须是Linearlayout, 如是其它在measure时会爆NullPointerException,因为其他layout无onmeasure()方法
 	 * 
 	 * @param listView
 	 */
@@ -1207,6 +1222,5 @@ public class Util {
 		}
 		return stringBuilder.toString();
 	}
-	
 
 }

@@ -5,11 +5,9 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dongfang.apad.StartActivity.MyOnUpdateDataListener;
 import com.dongfang.apad.bean.TestResult;
 import com.dongfang.apad.bean.UserInfo;
 import com.dongfang.apad.broadcast.UpdateDataReceiver;
@@ -203,7 +201,10 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 		unregisterReceiver(updateDataReceiver);
 		
 		Intent intentService = new Intent(this, DFService.class);
-		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] {});
+//		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
+//				new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
+		intentService.putExtra(ComParams.SERVICE_HANDLER_REMOVE_ALL, ComParams.SERVICE_HANDLER_REMOVE_ALL);
+		intentService.putExtra(ComParams.SERVICE_CLEAR_TESTINFO, ComParams.SERVICE_CLEAR_TESTINFO);
 		startService(intentService);
 	}
 

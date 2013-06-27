@@ -57,23 +57,28 @@ public class DFService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if (null != intent && null != intent.getIntArrayExtra(ComParams.SERVICE_HANDLER_ACTION_ID)) {
-
 			if (intent.getIntArrayExtra(ComParams.SERVICE_HANDLER_ACTION_ID).length > 0) {
 				for (int i : intent.getIntArrayExtra(ComParams.SERVICE_HANDLER_ACTION_ID)) {
 					ULog.d(TAG, "HandlerID = " + i);
 					handler.sendEmptyMessage(i);
 				}
 			}
-			else {
-				handler.removeMessages(ComParams.HANDLER_SOCKET_CONNECT_CARD);
-				handler.removeMessages(ComParams.HANDLER_SOCKET_GET_CARD_ID);
-				handler.removeMessages(ComParams.HANDLER_SOCKET_GET_USER_INFO);
 
-				handler.removeMessages(ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT);
-				handler.removeMessages(ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START);
-				handler.removeMessages(ComParams.HANDLER_SOCKET_GET_TEST_ZKT_RESULT);
-			}
 		}
+
+		if (null != intent && !TextUtils.isEmpty(intent.getStringExtra(ComParams.SERVICE_HANDLER_REMOVE_ALL))) {
+			handler.removeMessages(ComParams.HANDLER_SOCKET_CONNECT_CARD);
+			handler.removeMessages(ComParams.HANDLER_SOCKET_GET_CARD_ID);
+			handler.removeMessages(ComParams.HANDLER_SOCKET_GET_USER_INFO);
+
+			handler.removeMessages(ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT);
+			handler.removeMessages(ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START);
+			handler.removeMessages(ComParams.HANDLER_SOCKET_GET_TEST_ZKT_RESULT);
+		}
+		if (null != intent && !TextUtils.isEmpty(intent.getStringExtra(ComParams.SERVICE_CLEAR_TESTINFO))) {
+			testResult = null;
+		}
+
 		return super.onStartCommand(intent, flags, startId);
 
 	}
@@ -547,6 +552,7 @@ public class DFService extends Service {
 							testResult.setValue(input);
 							Bundle data = new Bundle();
 							data.putParcelable(ComParams.ACTIVITY_TESTRESULT, testResult);
+							data.putParcelable(ComParams.ACTIVITY_USERINFO, userInfo);
 							sendBroadcaset(what, true, data);
 							return;
 						}
