@@ -23,9 +23,9 @@ import com.dongfang.apad.util.Util;
 import com.dongfang.apad.view.MyProgressDialog;
 
 /**
- * 获取卡id
  * 
  * @author dongfang
+ * @deprecated
  * 
  * 
  */

@@ -66,11 +66,9 @@ public class UserCommand {
 	public static final byte[]	RSTEP			= { 0x40, (byte) 0x98, 0x00, 0x01, 0x00, 0x00, 0x02, (byte) 0xDB, 0x5A,
 			0x06, 0x00, 0x00					};
 
-	/** @deprecated */
 	public static byte[] check(byte[] array) {
-		if (array.length > 7) {
-			array[7] = (byte) (array[0] + array[1] + array[2] + array[3] + array[4] + array[5] + array[6]);
-		}
+		for (int i = 0; i < 7; i++)
+			array[7] ^= array[i];
 		return array;
 	}
 
@@ -104,17 +102,21 @@ public class UserCommand {
 		if (input.length < 8)
 			return false;
 
+		byte Check = 0;
+		for (int i = 0; i < 7; i++)
+			Check ^= input[i];
+		return input[7] == Check;
+
 		// byte v1 = (byte) (input[0]^input[1]^ input[2]^ input[3]^ input[4]^ input[5] ^ input[6]&0x0f);
 		//
 		// v1 = (byte) (v1 % 10);
 		// byte v2 = (byte) (input[0]/16 + input[1]/16 +0x0f + input[2]/10 +input[3]/10 + input[4]/10 + input[5]/10 +
 		// input[6]/10);
 		// v2 = (byte) (0xF0 & v2);
-		return true;
 	}
 
 	public static final byte[]	RCARDID			= { 0x40, (byte) 0x96, 0x00, 0x00, 0x00, 0x00, 0x00, (byte) 0xD6 };
-	
+
 	public static final byte[]	RUSER_0			= { 0x40, (byte) 0x98, 0x00, 0x01, 0x00, 0x00, 0x02, (byte) 0xDB, 0x00,
 			0x0c, 0x00, 0x00					};
 	public static final byte[]	RUSER_1			= { 0x40, (byte) 0x98, 0x00, 0x01, 0x00, 0x00, 0x02, (byte) 0xDB, 0x0c,

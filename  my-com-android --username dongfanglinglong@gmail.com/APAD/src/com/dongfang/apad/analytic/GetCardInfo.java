@@ -4,15 +4,11 @@ import java.io.IOException;
 import java.net.Socket;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 
-import com.dongfang.apad.R;
 import com.dongfang.apad.param.ComParams;
 import com.dongfang.apad.param.UserCommand;
 import com.dongfang.apad.util.ULog;
@@ -23,7 +19,7 @@ import com.dongfang.apad.view.MyProgressDialog;
  * 获取卡内信息
  * 
  * @author dongfang
- * 
+ * @deprecated
  * 
  */
 public class GetCardInfo extends AsyncTask<String, String, String> {

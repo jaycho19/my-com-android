@@ -59,9 +59,8 @@ public class Http {
 	}
 
 	/**
-	 * Prior to Android 2.2 (Froyo), this class had some frustrating bugs. In
-	 * particular, calling close() on a readable InputStream could poison the
-	 * connection pool. Work around this by disabling connection pooling:
+	 * Prior to Android 2.2 (Froyo), this class had some frustrating bugs. In particular, calling close() on a readable
+	 * InputStream could poison the connection pool. Work around this by disabling connection pooling:
 	 */
 	private void disableConnectionReuseIfNecessary() {
 		// Work around pre-Froyo bugs in HTTP connection reuse.
@@ -85,6 +84,15 @@ public class Http {
 		}
 		else {
 			return url + "?" + Util.encodeUrl(list, true);
+		}
+	}
+
+	private String initGetUrl(String url, String entity) {
+		if (url.contains("?")) {
+			return url + "&" + entity;
+		}
+		else {
+			return url + "?" + entity;
 		}
 	}
 
@@ -169,7 +177,7 @@ public class Http {
 	 * @return
 	 * @throws DFException
 	 */
-	private HttpsURLConnection getHttpsURLConnection(String type, String url, List<NameValuePair> list,
+	private HttpsURLConnection getHttpsURLConnection(String type, String url, String entity,
 			List<NameValuePair> addHeader, int conTimeOut, int socTimeOut) throws DFException {
 
 		ULog.i(TAG, "getHttpsURLConnection type        = " + type);
@@ -179,10 +187,9 @@ public class Http {
 
 		disableConnectionReuseIfNecessary();
 
-		if (null != list && "GET".equalsIgnoreCase(type)) {
-			url = initGetUrl(url, list);
+		if ("GET".equalsIgnoreCase(type) && !TextUtils.isEmpty(entity)) {
+			url = initGetUrl(url, entity);
 			ULog.i(TAG, "getHttpsURLConnection url         = " + url);
-			list = null;
 		}
 
 		try {
@@ -191,24 +198,9 @@ public class Http {
 			if ("POST".equalsIgnoreCase(type)) {
 				connection.setDoInput(true);
 				connection.setDoOutput(true);
-				if (null != list) {
-					StringBuilder bf = new StringBuilder();
-					NameValuePair nvp = null;
-					for (int i = 0, length = list.size(); i < length; i++) {
-						nvp = list.get(i);
-						bf.append(nvp.getName()).append("=").append(nvp.getValue());
-						if (length > (1 + i)) {
-							bf.append("&");
-						}
-						ULog.i(TAG,
-								"getHttpsURLConnection AddHeaderList        = " + nvp.getName() + " : "
-										+ nvp.getValue());
-					}
-
-					nvp = null;
-					ULog.i(TAG, bf.toString());
+				if (!TextUtils.isEmpty(entity)) {
 					connection.setRequestProperty(HTTP_HEADER_CONTENT_TYPE_KEY, HTTP_HEADER_CONTENT_TYPE_VALUE);
-					connection.getOutputStream().write(bf.toString().getBytes());
+					connection.getOutputStream().write(entity.getBytes());
 					connection.getOutputStream().flush();
 					connection.getOutputStream().close();
 				}
@@ -263,7 +255,7 @@ public class Http {
 
 			/** 手动重定向操作 */
 			if (HttpURLConnection.HTTP_MOVED_TEMP == statusCode || HttpURLConnection.HTTP_MOVED_PERM == statusCode) {
-				return getHttpsURLConnection(connection.getHeaderField("Location"), list, addHeader);
+				return getHttpsURLConnection(connection.getHeaderField("Location"), entity, addHeader);
 			}
 
 			// if (200 > statusCode || statusCode > 300) {
@@ -300,7 +292,7 @@ public class Http {
 	 * @return
 	 * @throws DFException
 	 */
-	private HttpURLConnection getHttpURLConnection(String type, String url, List<NameValuePair> list,
+	private HttpURLConnection getHttpURLConnection(String type, String url, String entity,
 			List<NameValuePair> addHeader, int conTimeOut, int socTimeOut) throws DFException {
 		ULog.i(TAG, "getHttpURLConnection type        = " + type);
 		ULog.i(TAG, "getHttpURLConnection url         = " + url);
@@ -308,10 +300,9 @@ public class Http {
 		ULog.i(TAG, "getHttpURLConnection socTimeOut  = " + socTimeOut);
 
 		disableConnectionReuseIfNecessary();
-		if (null != list && "GET".equalsIgnoreCase(type)) {
-			url = initGetUrl(url, list);
+		if ("GET".equalsIgnoreCase(type) && !TextUtils.isEmpty(entity)) {
+			url = initGetUrl(url, entity);
 			ULog.i(TAG, "getHttpsURLConnection url         = " + url);
-			list = null;
 		}
 		try {
 			HttpURLConnection connection = (HttpURLConnection) (new URL(url)).openConnection(java.net.Proxy.NO_PROXY);
@@ -319,23 +310,9 @@ public class Http {
 			if ("POST".equalsIgnoreCase(type)) {
 				connection.setDoInput(true);
 				connection.setDoOutput(true);
-				if (null != list) {
-					StringBuilder bf = new StringBuilder();
-					NameValuePair nvp = null;
-					for (int i = 0, length = list.size(); i < length; i++) {
-						nvp = list.get(i);
-						bf.append(nvp.getName()).append("=").append(nvp.getValue());
-						if (length > (1 + i)) {
-							bf.append("&");
-						}
-						ULog.i(TAG, "getHttpsURLConnection AddHeaderList  = " + nvp.getName() + " : " + nvp.getValue());
-					}
-
-					nvp = null;
-					ULog.i(TAG, bf.toString());
-
+				if (!TextUtils.isEmpty(entity)) {
 					connection.setRequestProperty(HTTP_HEADER_CONTENT_TYPE_KEY, HTTP_HEADER_CONTENT_TYPE_VALUE);
-					connection.getOutputStream().write(bf.toString().getBytes());
+					connection.getOutputStream().write(entity.getBytes());
 					connection.getOutputStream().flush();
 					connection.getOutputStream().close();
 				}
@@ -364,7 +341,7 @@ public class Http {
 
 			/** 手动重定向操作 */
 			if (HttpURLConnection.HTTP_MOVED_TEMP == statusCode || HttpURLConnection.HTTP_MOVED_PERM == statusCode) {
-				return getHttpURLConnection(connection.getHeaderField("Location"), list, addHeader);
+				return getHttpURLConnection(connection.getHeaderField("Location"), entity, addHeader);
 			}
 
 			// if (200 > statusCode || statusCode > 300) {
@@ -395,9 +372,9 @@ public class Http {
 	 * @return
 	 * @throws DFException
 	 */
-	public HttpsURLConnection getHttpsURLConnection(String url, List<NameValuePair> list,
-			List<NameValuePair> addHheader, int conTimeOut, int socTimeOut) throws DFException {
-		return getHttpsURLConnection("GET", url, list, addHheader, conTimeOut, socTimeOut);
+	public HttpsURLConnection getHttpsURLConnection(String url, String entity, List<NameValuePair> addHheader,
+			int conTimeOut, int socTimeOut) throws DFException {
+		return getHttpsURLConnection("GET", url, entity, addHheader, conTimeOut, socTimeOut);
 	}
 
 	/**
@@ -411,9 +388,9 @@ public class Http {
 	 * @return
 	 * @throws DFException
 	 */
-	public HttpsURLConnection getHttpsURLConnection(String url, List<NameValuePair> list, List<NameValuePair> addHheader)
+	public HttpsURLConnection getHttpsURLConnection(String url, String entity, List<NameValuePair> addHheader)
 			throws DFException {
-		return getHttpsURLConnection(url, list, addHheader, SET_CONNECTION_TIMEOUT, SET_SOCKET_TIMEOUT);
+		return getHttpsURLConnection(url, entity, addHheader, SET_CONNECTION_TIMEOUT, SET_SOCKET_TIMEOUT);
 	}
 
 	/**
@@ -431,9 +408,9 @@ public class Http {
 	 * @return
 	 * @throws DFException
 	 */
-	public HttpURLConnection getHttpURLConnection(String url, List<NameValuePair> list, List<NameValuePair> addHheader,
+	public HttpURLConnection getHttpURLConnection(String url, String entity, List<NameValuePair> addHheader,
 			int conTimeOut, int socTimeOut) throws DFException {
-		return getHttpURLConnection("GET", url, list, addHheader, conTimeOut, socTimeOut);
+		return getHttpURLConnection("GET", url, entity, addHheader, conTimeOut, socTimeOut);
 	}
 
 	/**
@@ -447,9 +424,9 @@ public class Http {
 	 * @return
 	 * @throws DFException
 	 */
-	public HttpURLConnection getHttpURLConnection(String url, List<NameValuePair> list, List<NameValuePair> addHheader)
+	public HttpURLConnection getHttpURLConnection(String url, String entity, List<NameValuePair> addHheader)
 			throws DFException {
-		return getHttpURLConnection(url, list, addHheader, SET_CONNECTION_TIMEOUT, SET_SOCKET_TIMEOUT);
+		return getHttpURLConnection(url, entity, addHheader, SET_CONNECTION_TIMEOUT, SET_SOCKET_TIMEOUT);
 	}
 
 	/**
@@ -458,15 +435,14 @@ public class Http {
 	 * @param url
 	 * @param param
 	 * @param timeout
-	 *            为true链接超时时间为5s，否则为2s;可参照get(List<NameValuePair>
-	 *            list)默认链接超时时间为5s
+	 *            为true链接超时时间为5s，否则为2s;可参照get(List<NameValuePair> list)默认链接超时时间为5s
 	 * @return String
 	 * @throws DFException
 	 * */
-	public String get(String url, List<NameValuePair> list, int conTimeOut, int soketTimeout) throws DFException {
+	public String get(String url, String entity, int conTimeOut, int soketTimeout) throws DFException {
 		if (url.startsWith("https"))
-			return read(getHttpsURLConnection(url, list, null, conTimeOut, soketTimeout));
-		return read(getHttpURLConnection(url, list, null, conTimeOut, soketTimeout));
+			return read(getHttpsURLConnection(url, entity, null, conTimeOut, soketTimeout));
+		return read(getHttpURLConnection(url, entity, null, conTimeOut, soketTimeout));
 	}
 
 	/**
@@ -475,28 +451,27 @@ public class Http {
 	 * @param url
 	 * @param param
 	 * @param timeout
-	 *            为true链接超时时间为5s，否则为2s;可参照get(List<NameValuePair>
-	 *            list)默认链接超时时间为5s
+	 *            为true链接超时时间为5s，否则为2s;可参照get(List<NameValuePair> list)默认链接超时时间为5s
 	 * @return String
 	 * @throws DFException
 	 * */
-	public String get(String url, List<NameValuePair> list, List<NameValuePair> addHeaders, int conTimeOut,
-			int soketTimeout) throws DFException {
+	public String get(String url, String entity, List<NameValuePair> addHeaders, int conTimeOut, int soketTimeout)
+			throws DFException {
 		if (url.startsWith("https"))
-			return read(getHttpsURLConnection(url, list, addHeaders, conTimeOut, soketTimeout));
-		return read(getHttpURLConnection(url, list, addHeaders, conTimeOut, soketTimeout));
+			return read(getHttpsURLConnection(url, entity, addHeaders, conTimeOut, soketTimeout));
+		return read(getHttpURLConnection(url, entity, addHeaders, conTimeOut, soketTimeout));
 	}
 
-	public String get(String url, List<NameValuePair> list) throws DFException {
-		return get(url, list, SET_CONNECTION_TIMEOUT, SET_SOCKET_TIMEOUT);
+	public String get(String url, String entity) throws DFException {
+		return get(url, entity, SET_CONNECTION_TIMEOUT, SET_SOCKET_TIMEOUT);
 	}
 
-	public String get(String url, List<NameValuePair> list, List<NameValuePair> addheaders) throws DFException {
-		return get(url, list, addheaders, SET_CONNECTION_TIMEOUT, SET_SOCKET_TIMEOUT);
+	public String get(String url, String entity, List<NameValuePair> addheaders) throws DFException {
+		return get(url, entity, addheaders, SET_CONNECTION_TIMEOUT, SET_SOCKET_TIMEOUT);
 	}
 
-	public String get(List<NameValuePair> list) throws DFException {
-		return get(ComParams.URL_GET, list, SET_CONNECTION_TIMEOUT, SET_SOCKET_TIMEOUT);
+	public String get(String entity) throws DFException {
+		return get(ComParams.URL_GET, entity, SET_CONNECTION_TIMEOUT, SET_SOCKET_TIMEOUT);
 	}
 
 	/**
@@ -510,33 +485,31 @@ public class Http {
 	 * @return String
 	 * @throws DFException
 	 * */
-	public String post(String url, List<NameValuePair> list, int conTimeOut, int soketTimeout) throws DFException {
+	public String post(String url, String entity, int conTimeOut, int soketTimeout) throws DFException {
 		ULog.d(TAG, url);
 		if (url.startsWith("https"))
-			return read(getHttpsURLConnection("POST", url, list, null, conTimeOut, soketTimeout));
-		return read(getHttpURLConnection("POST", url, list, null, conTimeOut, soketTimeout));
+			return read(getHttpsURLConnection("POST", url, entity, null, conTimeOut, soketTimeout));
+		return read(getHttpURLConnection("POST", url, entity, null, conTimeOut, soketTimeout));
 	}
 
-	public String post(String url, List<NameValuePair> list, List<NameValuePair> addHheader) throws DFException {
+	public String post(String url, String entity, List<NameValuePair> addHheader) throws DFException {
 		if (url.startsWith("https"))
-			return read(getHttpsURLConnection("POST", url, list, addHheader, SET_CONNECTION_TIMEOUT, SET_SOCKET_TIMEOUT));
-		return read(getHttpURLConnection("POST", url, list, addHheader, SET_CONNECTION_TIMEOUT, SET_SOCKET_TIMEOUT));
-
-	}
-
-	public InputStream post(String url, List<NameValuePair> list) throws DFException {
-		if (url.startsWith("https"))
-			return getInputStream(getHttpsURLConnection("POST", url, list, null, SET_CONNECTION_TIMEOUT,
+			return read(getHttpsURLConnection("POST", url, entity, addHheader, SET_CONNECTION_TIMEOUT,
 					SET_SOCKET_TIMEOUT));
-		return getInputStream(getHttpURLConnection("POST", url, list, null, SET_CONNECTION_TIMEOUT, SET_SOCKET_TIMEOUT));
+		return read(getHttpURLConnection("POST", url, entity, addHheader, SET_CONNECTION_TIMEOUT, SET_SOCKET_TIMEOUT));
+
 	}
 
-	public String post(String url) throws DFException {
-		return post(url, null, SET_CONNECTION_TIMEOUT, SET_SOCKET_TIMEOUT);
+	public InputStream post(String url, String entity) throws DFException {
+		if (url.startsWith("https"))
+			return getInputStream(getHttpsURLConnection("POST", url, entity, null, SET_CONNECTION_TIMEOUT,
+					SET_SOCKET_TIMEOUT));
+		return getInputStream(getHttpURLConnection("POST", url, entity, null, SET_CONNECTION_TIMEOUT,
+				SET_SOCKET_TIMEOUT));
 	}
 
-	public String post(List<NameValuePair> list) throws DFException {
-		return post(ComParams.URL_POST, list, SET_CONNECTION_TIMEOUT, SET_SOCKET_TIMEOUT);
+	public String post(String entity) throws DFException {
+		return post(ComParams.URL_POST, entity, SET_CONNECTION_TIMEOUT, SET_SOCKET_TIMEOUT);
 	}
 
 	// public HttpClient getNewHttpClient(Context context) {
