@@ -12,7 +12,7 @@ public class ComParams {
 
 	// ------------------------------------------------------------------------------------------
 	public static String		IP_CARD									= "192.168.1.101";
-	public static String		IP_TEST									= "192.168.1.103";
+	public static String		IP_TEST									= "192.168.1.100";
 	public static int			PORT_CARD								= 8899;
 	public static int			PORT_TEST								= 8899;
 	public static int			SOCKET_TIMEOUT							= 5000;
@@ -27,11 +27,15 @@ public class ComParams {
 	public static final String	SHAREDPREFERENCES_IPANDPROT_ZKT_PORT	= "zkt_port";
 
 	// ------------------------------------------------------------------------------------------
-	public static final String	URL_BASE								= "http://api.tv189.com";
-	public static final String	URL_BASE_IMGAGE							= "http://img3.tv189.cn";
-	// public static final String URL_BASE = "http://180.168.69.121:8089";
+	
+	public static final String	NAME_SPACE								= "http://tempuri.org/";
+	public static final String	URL_BASE								= "http://service.jklaile.com/TiWeiService.asmx";
 	public static final String	URL_GET									= URL_BASE + "/Internet";
-	public static final String	URL_POST								= URL_BASE + "/Internet";
+	public static final String	URL_POST								= "http://service.jklaile.com/TiWeiService.asmx";
+	public static final int		HTTP_TIMEOUT							= 5000;
+	
+	
+	public static final String	URL_BASE_IMGAGE							= "http://img3.tv189.cn";
 
 	// ------------------------------------------------------------------------------------------
 	/** 用户的设置相关信息 */
@@ -103,4 +107,8 @@ public class ComParams {
 	public static final String	ACTIVITY_USERINFO						= "userInfo";
 	public static final String	ACTIVITY_TESTRESULT						= "testResult";
 
+	
+	
+//	1	none	AC-CF-23-20-68-8B	ZKT
+//	2	none	AC-CF-23-20-68-88	CARD
 }

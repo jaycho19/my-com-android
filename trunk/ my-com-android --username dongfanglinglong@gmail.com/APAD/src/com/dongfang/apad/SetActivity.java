@@ -1,12 +1,15 @@
 package com.dongfang.apad;
 
-import com.dongfang.apad.param.ComParams;
-import com.dongfang.apad.util.Util;
-
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+
+import com.dongfang.apad.asynctask.AdminLogon;
+import com.dongfang.apad.asynctask.QueryUser;
+import com.dongfang.apad.asynctask.SaveTestResult;
+import com.dongfang.apad.param.ComParams;
+import com.dongfang.apad.util.Util;
 
 public class SetActivity extends BaseActivity implements android.view.View.OnClickListener {
 
@@ -50,6 +53,10 @@ public class SetActivity extends BaseActivity implements android.view.View.OnCli
 		case R.id.btn_ok:
 			Util.saveIPandPort(this, etCardIP.getText().toString(), Integer.valueOf(etCartPort.getText().toString()),
 					etZKTIP.getText().toString(), Integer.valueOf(etZKTPort.getText().toString()));
+
+			new AdminLogon(SetActivity.this).execute();
+			new QueryUser(SetActivity.this).execute();
+			new SaveTestResult(SetActivity.this).execute();
 			break;
 
 		}
@@ -57,12 +64,11 @@ public class SetActivity extends BaseActivity implements android.view.View.OnCli
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK){
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			finish();
 		}
 
 		return super.onKeyDown(keyCode, event);
 	}
-	
-	
+
 }

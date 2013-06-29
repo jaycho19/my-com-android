@@ -11,7 +11,6 @@ import android.os.Message;
 import android.text.TextUtils;
 
 import com.dongfang.apad.param.ComParams;
-import com.dongfang.apad.service.DFService;
 import com.dongfang.apad.util.ULog;
 import com.dongfang.apad.view.MyProgressDialog;
 
