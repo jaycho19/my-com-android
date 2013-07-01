@@ -12,6 +12,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.text.TextUtils;
 
+import com.dongfang.apad.asynctask.SaveTestResult;
 import com.dongfang.apad.bean.TestResult;
 import com.dongfang.apad.bean.UserInfo;
 import com.dongfang.apad.broadcast.UpdateDataReceiver;
@@ -87,6 +88,7 @@ public class DFService extends Service {
 	public void onDestroy() {
 		super.onDestroy();
 		ULog.d(TAG, "onDestroy");
+		handler = null;
 		try {
 			if (null != socketCard)
 				socketCard.close();
@@ -101,9 +103,6 @@ public class DFService extends Service {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		handler = null;
-
 	}
 
 	public void setSocketCard(Socket socket) {
@@ -133,10 +132,10 @@ public class DFService extends Service {
 	 */
 	private void getInputBytes(Socket socket, byte[] output, byte[] input) throws IOException {
 		ULog.d(TAG, "OUTPUT : " + Util.bytesToHexString(output).toUpperCase());
-		socket.getOutputStream().flush();
 		socket.getOutputStream().write(output);
 		socket.getInputStream().read(input);
 		ULog.d(TAG, "INPUT  : " + Util.bytesToHexString(input).toUpperCase());
+		socket.getOutputStream().flush();
 	}
 
 	/** @deprecated */
@@ -204,8 +203,7 @@ public class DFService extends Service {
 				if (cardFaileTimes < 5) {
 					try {
 						socketCard = new Socket();
-						socketCard.connect(new InetSocketAddress(ComParams.IP_CARD, ComParams.PORT_CARD),
-								ComParams.SOCKET_TIMEOUT);
+						socketCard.connect(new InetSocketAddress(ComParams.IP_CARD, ComParams.PORT_CARD), ComParams.SOCKET_TIMEOUT);
 						// socketCard = new Socket(ip, port);
 						// socketCard.setSoTimeout(ComParams.SOCKET_TIMEOUT);
 
@@ -213,8 +211,7 @@ public class DFService extends Service {
 							cardFaileTimes = 0;
 							ULog.d(TAG, "card connect successed! " + ip + ":" + port);
 							data.clear();
-							data.putString(ComParams.BROADCAST_HANDLER_DES, "card connect successed! " + ip + ":"
-									+ port);
+							data.putString(ComParams.BROADCAST_HANDLER_DES, "card connect successed! " + ip + ":" + port);
 							sendBroadcaset(what, socketCard.isConnected(), data);
 							// handler.sendEmptyMessage(ComParams.HANDLER_SOCKET_GET_CARD_ID);
 						}
@@ -243,7 +240,7 @@ public class DFService extends Service {
 			@Override
 			public void run() {
 				super.run();
-				byte[] input = new byte[16];
+				byte[] input = new byte[20];
 				try {
 					if (cardFaileTimes < 10) {
 						getInputBytes(socketCard, UserCommand.RCARDID, input);
@@ -256,9 +253,11 @@ public class DFService extends Service {
 							// TODO: 需要使用卡号的地方
 							ULog.d(TAG, "cardId = " + cardId);
 							if (!userInfo.getId().equals(cardId)) {
-								userInfo.init();
+								userInfo = null;
+								userInfo = new UserInfo();
 								userInfo.setId(cardId);
-								handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCKET_GET_USER_INFO, 500);
+								handler.sendEmptyMessage(ComParams.HANDLER_SOCKET_GET_USER_INFO);
+								// handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCKET_GET_USER_INFO, 500);
 								data.clear();
 								data.putString(ComParams.BROADCAST_HANDLER_CARD_ID, cardId);
 								sendBroadcaset(ComParams.HANDLER_SOCKET_GET_CARD_ID, true, data);
@@ -310,58 +309,44 @@ public class DFService extends Service {
 
 					if (cardFaileTimes < 5) {
 						int failTimes = 10;
+						byte[] inputTemp = new byte[60];// 不能小于 UserCommand.Rlist_INFO[i][9] * 4 + 8 + 1
 						for (int i = 0, length = UserCommand.Rlist_INFO.length; i < length; i++) {
-							byte[] inputTemp = new byte[60];
-							// byte[] inputTemp = new byte[UserCommand.Rlist_INFO[i][9] * 4 + 8];
+							inputTemp = null;
+							inputTemp = new byte[60];
+
+							ULog.d(TAG, "获取第" + i + "组数据！");
 							getInputBytes(socketCard, UserCommand.Rlist_INFO[i], inputTemp);
-							if (failTimes > 0 && !UserCommand.checkReadInput(inputTemp, UserCommand.Rlist_INFO[i][9])) {
-								i--;
-								failTimes--;
-								ULog.d(TAG, "数据检查未通过 " + failTimes);
-							}
-							else {
-								failTimes = 10;
-								// TODO: 拼装化用户信息
-
-								for (int j = 0; j < inputTemp[6]; j++) {
-									// ULog.d(TAG, "size = " +size + " , j = " + j);
-									input[size + j] = inputTemp[8 + j];
+							if (failTimes > 0) {
+								if (!UserCommand.checkReadInput(inputTemp, UserCommand.Rlist_INFO[i][9])) {
+									ULog.d(TAG, "第" + i + "组数据检查未通过 " + failTimes);
+									i--;
+									failTimes--;
 								}
-								size += inputTemp[6];
-								inputTemp = null;
-							}
+								else {
+									failTimes = 10;
+									// TODO: 拼装化用户信息
+									for (int j = 0; j < inputTemp[6]; j++) {
+										// ULog.d(TAG, "inputTemp[6] =" + inputTemp[6] + " , size = " + size + " , j = "
+										// + j
+										// + ", [size + j] = " + (size + j));
+										input[size + j] = inputTemp[8 + j];
+									}
+									size += inputTemp[6];
+									ULog.d(TAG, "inputTemp[6] =" + inputTemp[6] + " , size = " + size);
 
-							try {
-								this.sleep(500);
-								ULog.d(TAG, "InterruptedException");
-							} catch (InterruptedException e) {
-								ULog.e(TAG, "InterruptedException");
-								e.printStackTrace();
+									inputTemp = null;
+								}
 							}
 						}
 
 						userInfo.setValue(input);
-						ULog.e(TAG, userInfo.toString());
+						// ULog.e(TAG, userInfo.toString());
 						Bundle data = new Bundle();
 						data.putParcelable(ComParams.ACTIVITY_USERINFO, userInfo);
 						sendBroadcaset(ComParams.HANDLER_SOCKET_GET_USER_INFO, true, data);
 
-						socketCard.close();
-						socketCard = null;
-
-						// for (int i = 0, length = UserCommand.Rlist_RESULT.length; i < length; i++) {
-						// byte[] input = new byte[UserCommand.Rlist_RESULT[i][9] * 4 + 8];
-						// getReadCardInfo(socketCard, UserCommand.Rlist_RESULT[i], input);
-						// if (input[6] < 0x01 && failTimes > 0) {
-						// i--;
-						// failTimes--;
-						// }
-						// else {
-						// failTimes = 5;
-						// // TODO: 初始化用户信息
-						// userInfo.setValue(UserCommand.Rlist_RESULT[i][8], input);
-						// }
-						// }
+						// socketCard.close();
+						// socketCard = null;
 					}
 					else {
 						cardFaileTimes = 0;
@@ -389,8 +374,7 @@ public class DFService extends Service {
 		if (null != socketTestZKT && socketTestZKT.isConnected()) {
 			ULog.d(TAG, "testZKT connect has alreadly successed! " + ip + ":" + port);
 			data.clear();
-			data.putString(ComParams.BROADCAST_HANDLER_DES, "testZKT connect has alreadly successed! " + ip + ":"
-					+ port);
+			data.putString(ComParams.BROADCAST_HANDLER_DES, "testZKT connect has alreadly successed! " + ip + ":" + port);
 			sendBroadcaset(what, socketTestZKT.isConnected(), data);
 			return;
 		}
@@ -415,8 +399,7 @@ public class DFService extends Service {
 							testZKTFaileTimes = 0;
 							ULog.d(TAG, "testZKT connect successed! " + ip + ":" + port);
 							data.clear();
-							data.putString(ComParams.BROADCAST_HANDLER_DES, "testZKT connect successed! " + ip + ":"
-									+ port);
+							data.putString(ComParams.BROADCAST_HANDLER_DES, "testZKT connect successed! " + ip + ":" + port);
 							sendBroadcaset(what, socketCard.isConnected(), data);
 						}
 						else {
@@ -550,10 +533,15 @@ public class DFService extends Service {
 					if (ZKTCommand.checkReadInput(input)) {
 						if (input[2] == output[2] && input[3] == 0x01) {
 							testResult.setValue(input);
+							updateUserInfoFromTestResult();// 顺序必需在testResult.setValue(input) 之后；
+
 							Bundle data = new Bundle();
 							data.putParcelable(ComParams.ACTIVITY_TESTRESULT, testResult);
 							data.putParcelable(ComParams.ACTIVITY_USERINFO, userInfo);
 							sendBroadcaset(what, true, data);
+
+							handler.sendEmptyMessage(ComParams.HANDLER_SOCKET_WRITE_CARD_INFO);
+							handler.sendEmptyMessage(ComParams.HANDLER_SOCKET_SAVE_TO_CLOUD);
 							return;
 						}
 						else if (testResult.getResultGray() > 0) {
@@ -573,6 +561,61 @@ public class DFService extends Service {
 			}
 		}.start();
 
+	}
+
+	/** 根据测算结果，修改用户信息 */
+	private void updateUserInfoFromTestResult() {
+		switch (testResult.getId()) {
+		case 0x02:
+			double grip = Double.valueOf(testResult.getResult());
+			if (grip > userInfo.getGrip()) {
+				userInfo.setGrip(grip);
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	/** 修改卡内容 */
+	private void writeToCard() {
+		byte[] output = null;
+		byte[] input = new byte[20];
+		switch (testResult.getId()) {
+		case 0x02:
+			try {
+				output = new byte[8 + 2 + 4 + 2];
+
+				output[0] = 0x40;
+				output[1] = (byte) 0x97;
+				output[3] = 0x01;
+				output[6] = 0x06;
+				for (int i = 0; i < 7; i++)
+					output[7] ^= output[i];
+				// ------整数部分--------
+				output[8] = 0x13;
+				output[9] = 0x01;
+				output[10] = userInfo.getReadbyte()[76];
+				output[11] = userInfo.getReadbyte()[77];
+				output[12] = userInfo.getReadbyte()[78];
+				output[13] = userInfo.getReadbyte()[79];
+				getInputBytes(socketCard, output, input);
+				// ------小数位部分--------
+				output[8] = 0x17;
+				output[9] = 0x01;
+				output[10] = userInfo.getReadbyte()[92];
+				output[11] = userInfo.getReadbyte()[93];
+				output[12] = userInfo.getReadbyte()[94];
+				output[13] = userInfo.getReadbyte()[95];
+				getInputBytes(socketCard, output, input);
+			} catch (IOException e) {
+				ULog.d(TAG, "握力计写入数据失败 = " + e.getMessage());
+				e.printStackTrace();
+			}
+			break;
+		default:
+			break;
+		}
 	}
 
 	private class MyHandler extends Handler {
@@ -596,6 +639,12 @@ public class DFService extends Service {
 				break;
 			case ComParams.HANDLER_SOCKET_GET_TEST_ZKT_RESULT:
 				getTestResult(msg.what);
+				break;
+			case ComParams.HANDLER_SOCKET_WRITE_CARD_INFO:
+				//writeToCard();
+				break;
+			case ComParams.HANDLER_SOCKET_SAVE_TO_CLOUD:
+				// new SaveTestResult(DFService.this).execute(userInfo.getId(), Integer.toString(testResult.getResultGray()));
 				break;
 			}
 		}

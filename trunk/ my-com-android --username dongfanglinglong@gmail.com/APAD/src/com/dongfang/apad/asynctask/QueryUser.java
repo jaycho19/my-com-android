@@ -12,6 +12,7 @@ import com.dongfang.apad.net.HttpActions;
 import com.dongfang.apad.util.DFException;
 import com.dongfang.apad.util.ULog;
 import com.dongfang.apad.view.MyProgressDialog;
+import com.google.gson.JsonObject;
 
 /**
  * 上报测试结果
@@ -68,22 +69,19 @@ public class QueryUser extends AsyncTask<String, String, String> {
 	protected String doInBackground(String... params) {
 		HttpActions httpActions = new HttpActions(context);
 		String result = null;
+		
+		JsonObject entity = new JsonObject();
+		entity.addProperty("TYPE", "QueryUser");
+		JsonObject detail = new JsonObject();
+		detail.addProperty("CARDID", "test");
+		detail.addProperty("IDCARDNUM", "test");
+		entity.add("DETAIL", detail);
+
 		try {
-			JSONObject entity = new JSONObject();
-			try {
-				entity.put("TYPE", "QueryUser");
-				JSONObject detail = new JSONObject();
-				detail.put("CARDID", "项目编号");
-				detail.put("IDCARDNUM", "用户编号");
-				entity.put("DETAIL", detail.toString());
-			} catch (JSONException e) {
-
-			}
-
 			result = httpActions.getResponse(null, "QueryUser", entity.toString());
 		} catch (DFException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			ULog.e(TAG, e.getMessage());
 		}
 		return result;
 	}

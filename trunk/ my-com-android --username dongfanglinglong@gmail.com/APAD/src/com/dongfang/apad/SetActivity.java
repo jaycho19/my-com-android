@@ -53,10 +53,6 @@ public class SetActivity extends BaseActivity implements android.view.View.OnCli
 		case R.id.btn_ok:
 			Util.saveIPandPort(this, etCardIP.getText().toString(), Integer.valueOf(etCartPort.getText().toString()),
 					etZKTIP.getText().toString(), Integer.valueOf(etZKTPort.getText().toString()));
-
-			new AdminLogon(SetActivity.this).execute();
-			new QueryUser(SetActivity.this).execute();
-			new SaveTestResult(SetActivity.this).execute();
 			break;
 
 		}
