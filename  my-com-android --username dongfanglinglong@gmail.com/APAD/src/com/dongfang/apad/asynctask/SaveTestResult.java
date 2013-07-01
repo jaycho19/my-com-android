@@ -1,8 +1,5 @@
 package com.dongfang.apad.asynctask;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -11,7 +8,9 @@ import android.text.TextUtils;
 import com.dongfang.apad.net.HttpActions;
 import com.dongfang.apad.util.DFException;
 import com.dongfang.apad.util.ULog;
+import com.dongfang.apad.util.Util;
 import com.dongfang.apad.view.MyProgressDialog;
+import com.google.gson.JsonObject;
 
 /**
  * 上报测试结果
@@ -68,20 +67,21 @@ public class SaveTestResult extends AsyncTask<String, String, String> {
 	protected String doInBackground(String... params) {
 		HttpActions httpActions = new HttpActions(context);
 		String result = null;
-		try {
-			JSONObject entity = new JSONObject();
-			try {
-				entity.put("TYPE", "SaveProjectTestResult");
-				JSONObject detail = new JSONObject();
-				detail.put("PROJECTNUM", "项目编号");
-				detail.put("USERID", "用户编号");
-				detail.put("MACHINEID", "机器编号");
-				detail.put("PROJECTRESULT", "测试结果");
-				detail.put("REMARK", "备注");
-				entity.put("DETAIL", detail.toString());
-			} catch (JSONException e) {
 
-			}
+		JsonObject entity = new JsonObject();
+		entity.addProperty("TYPE", "SaveProjectTestResult");
+		JsonObject detail = new JsonObject();
+		entity.add("DETAIL", detail);
+
+		detail.addProperty("PROJECTNUM", "12");
+		detail.addProperty("USERID", "101001");
+		detail.addProperty("PROJECTRESULT", "2");
+//		detail.addProperty("USERID", params[0]);
+//		detail.addProperty("PROJECTRESULT", params[1]);
+		detail.addProperty("MACHINEID", Util.getMacAddress(context));
+		detail.addProperty("REMARK", "");
+
+		try {
 
 			result = httpActions.getResponse(null, "SaveProjectTestResult", entity.toString());
 		} catch (DFException e) {

@@ -11,6 +11,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ViewFlipper;
 
+import com.dongfang.apad.asynctask.AdminLogon;
+import com.dongfang.apad.asynctask.QueryUser;
+import com.dongfang.apad.asynctask.SaveTestResult;
 import com.dongfang.apad.param.ComParams;
 import com.dongfang.apad.service.DFService;
 import com.dongfang.apad.util.ULog;
@@ -88,18 +91,20 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 		viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper1);
 		findViewById(R.id.imageView1).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				startActivity(new Intent(MainActivity.this, SetActivity.class));
 			}
 		});
 
-		Util.getIPandPort(this);
-
 		intent = getIntent();
 		intentService = new Intent(this, DFService.class);
 		startService(intentService);
+
+//		new AdminLogon(this).execute();
+//		new QueryUser(this).execute();
+		new SaveTestResult(this).execute();
 
 	}
 

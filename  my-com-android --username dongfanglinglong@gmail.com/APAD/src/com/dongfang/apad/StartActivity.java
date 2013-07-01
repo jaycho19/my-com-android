@@ -16,6 +16,7 @@ import com.dongfang.apad.broadcast.UpdateDataReceiver;
 import com.dongfang.apad.param.ComParams;
 import com.dongfang.apad.service.DFService;
 import com.dongfang.apad.util.ULog;
+import com.dongfang.apad.util.Util;
 
 /**
  * 测试开始页面
@@ -60,6 +61,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		btnBack = (TextView) findViewById(R.id.tv_back);
 		btnBack.setOnClickListener(this);
 		tvUserInfo = (TextView) findViewById(R.id.tv_userinfo);
+		tvUserInfo.setVisibility(View.GONE);
 		btnPageName = (TextView) findViewById(R.id.tv_page_name);
 		tvTitle = (TextView) findViewById(R.id.tv_title);
 		imageView = (ImageView) findViewById(R.id.imageView);
@@ -71,6 +73,8 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		updateDataReceiver.setOnUpdateDataListener(new MyOnUpdateDataListener());
 
 		intent = getIntent();
+
+		Util.getIPandPort(this);
 
 	}
 
@@ -87,8 +91,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		registerReceiver(updateDataReceiver, filter);
 
 		Intent intentService = new Intent(this, DFService.class);
-		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD,
-				ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT
+		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD, ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT
 
 		});
 		startService(intentService);
@@ -146,6 +149,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 
 		ULog.d(TAG, userInfo.toString());
 		tvUserInfo.setText(userInfo.getUserShowInfo());
+		tvUserInfo.setVisibility(View.VISIBLE);
 
 	}
 
@@ -159,8 +163,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 
 			if (isConnect) {
 				Intent intentService = new Intent(StartActivity.this, DFService.class);
-				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
-						new int[] { ComParams.HANDLER_SOCKET_GET_CARD_ID });
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_CARD_ID });
 				startService(intentService);
 			}
 		}
@@ -170,8 +173,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 			/** 有可能存在死循环错误： 与onSocketConnectCard */
 			if (!isConnect) {
 				Intent intentService = new Intent(StartActivity.this, DFService.class);
-				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
-						new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD });
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD });
 				startService(intentService);
 			}
 
@@ -185,14 +187,12 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 			/** 有可能存在死循环错误： 与onSocketConnectCard */
 			if (!isConnect) {
 				Intent intentService = new Intent(StartActivity.this, DFService.class);
-				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
-						new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD });
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD });
 				startService(intentService);
 			}
 			else {
 				Intent intentService = new Intent(StartActivity.this, DFService.class);
-				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
-						new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
 				startService(intentService);
 			}
 			if (null != data && null != data.getParcelable(ComParams.ACTIVITY_USERINFO))
@@ -208,8 +208,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 
 			if (isConnect) {
 				Intent intentService = new Intent(StartActivity.this, DFService.class);
-				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
-						new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
 				startService(intentService);
 			}
 
@@ -221,8 +220,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 			/** 有可能存在死循环错误： 与onSocketConnectCard */
 			if (!isConnect) {
 				Intent intentService = new Intent(StartActivity.this, DFService.class);
-				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
-						new int[] { ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
 				startService(intentService);
 			}
 
@@ -235,8 +233,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 				tvTitle.setText("请按钮");
 
 				Intent intentService = new Intent(StartActivity.this, DFService.class);
-				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
-						new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_RESULT });
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_RESULT });
 				startService(intentService);
 			}
 		}
@@ -246,8 +243,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 			ULog.d(TAG, "onGetTestZKTResult");
 			if (!isConnect) {
 				Intent intentService = new Intent(StartActivity.this, DFService.class);
-				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
-						new int[] { ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
 				startService(intentService);
 			}
 

@@ -11,31 +11,30 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dongfang.apad.analytic.GetCardInfo;
-import com.dongfang.apad.analytic.ReadAsynctask;
 import com.dongfang.apad.param.ComParams;
 import com.dongfang.apad.util.SystemUiHider;
 import com.dongfang.apad.util.Util;
 import com.dongfang.apad.view.MyProgressDialog;
 
 /**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
+ * An example full-screen activity that shows and hides the system UI (i.e. status bar and navigation/system bar) with
+ * user interaction.
  * 
  * @see SystemUiHider
  */
 public class TestActivity extends Activity {
 
-	private TextView	content;
-	private EditText	ip;
-	private MyProgressDialog progressDialog;
+	private TextView			content;
+	private EditText			ip;
+	private MyProgressDialog	progressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_test);
-		
+
 		progressDialog = MyProgressDialog.show(this, "数据上传中");
-		
+
 		content = (TextView) findViewById(R.id.fullscreen_content);
 		ip = (EditText) findViewById(R.id.editText_addr);
 		findViewById(R.id.connect_button).setOnClickListener(new OnClickListener() {
@@ -49,7 +48,7 @@ public class TestActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				ComParams.IP_CARD = ip.getText().toString();
-				new ReadAsynctask(TestActivity.this, mHideHandler).execute();
+				// new ReadAsynctask(TestActivity.this, mHideHandler).execute();
 			}
 		});
 		findViewById(R.id.upload_button).setOnClickListener(new OnClickListener() {

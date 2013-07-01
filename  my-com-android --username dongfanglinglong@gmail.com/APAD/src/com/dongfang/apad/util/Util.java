@@ -34,6 +34,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
@@ -63,8 +65,7 @@ public class Util {
 	public static boolean		isDownloadWarning	= false;						// 下载的网络提醒
 
 	public static boolean saveIPandPort(Context context, String cardIP, int cardPort, String zktIP, int zktPort) {
-		Editor editor = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_IPANDPROT, Context.MODE_PRIVATE)
-				.edit();
+		Editor editor = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_IPANDPROT, Context.MODE_PRIVATE).edit();
 		editor.putString(ComParams.SHAREDPREFERENCES_IPANDPROT_CARD_IP, cardIP);
 		editor.putInt(ComParams.SHAREDPREFERENCES_IPANDPROT_CARD_PORT, cardPort);
 		editor.putString(ComParams.SHAREDPREFERENCES_IPANDPROT_ZKT_IP, zktIP);
@@ -73,8 +74,7 @@ public class Util {
 	}
 
 	public static void getIPandPort(Context context) {
-		SharedPreferences sp = context
-				.getSharedPreferences(ComParams.SHAREDPREFERENCES_IPANDPROT, Context.MODE_PRIVATE);
+		SharedPreferences sp = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_IPANDPROT, Context.MODE_PRIVATE);
 
 		ComParams.IP_CARD = sp.getString(ComParams.SHAREDPREFERENCES_IPANDPROT_CARD_IP, ComParams.IP_CARD);
 		ComParams.IP_TEST = sp.getString(ComParams.SHAREDPREFERENCES_IPANDPROT_ZKT_IP, ComParams.IP_TEST);
@@ -91,8 +91,7 @@ public class Util {
 	 */
 	public static boolean saveDownloadPath(Context context, String path) {
 		ULog.d(TAG, "DownloadPath change to : " + path);
-		return context.getSharedPreferences(ComParams.SHAREDPREFERENCES_USER_SETTINGS, Context.MODE_PRIVATE).edit()
-				.putString(ComParams.SHAREDPREFERENCES_USER_DOWNLOAD_PATH, path).commit();
+		return context.getSharedPreferences(ComParams.SHAREDPREFERENCES_USER_SETTINGS, Context.MODE_PRIVATE).edit().putString(ComParams.SHAREDPREFERENCES_USER_DOWNLOAD_PATH, path).commit();
 	}
 
 	/**
@@ -102,15 +101,13 @@ public class Util {
 	 * @return 视频下载路径，默认返回 {@link ComParams#DOWNLOAD_DEFAULT_SDCARD_PATH}
 	 */
 	public static String getDownloadPath(Context context) {
-		SharedPreferences sp = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_USER_SETTINGS,
-				Context.MODE_PRIVATE);
+		SharedPreferences sp = context.getSharedPreferences(ComParams.SHAREDPREFERENCES_USER_SETTINGS, Context.MODE_PRIVATE);
 		return sp.getString(ComParams.SHAREDPREFERENCES_USER_DOWNLOAD_PATH, ComParams.DOWNLOAD_DEFAULT_SDCARD_PATH);
 	}
 
 	/** 判断是否有网络 */
 	public static boolean isNetworkAvailable(Context context) {
-		ConnectivityManager connectivityManager = (ConnectivityManager) context
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 		return (networkInfo != null && networkInfo.isAvailable());
 
@@ -119,8 +116,7 @@ public class Util {
 	public static String getNetType(Context context) {
 		String netType = "";
 
-		ConnectivityManager connectivityManager = (ConnectivityManager) context
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo info = connectivityManager.getActiveNetworkInfo();
 
 		if (info != null && info.isAvailable()) {
@@ -574,22 +570,15 @@ public class Util {
 		return ipAddr;
 	}
 
-	public static final String[]	COUNTRY_SUFFIX	= { "aero", "asia", "biz", "cat", "com", "coop", "edu", "eu",
-			"gov", "info", "int", "jobs", "mil", "mobi", "museum", "name", "net", "org", "pro", "tel", "travel", "xxx",
-			"ac", "ae", "af", "ag", "ai", "al", "am", "an", "ao", "aq", "ar", "as", "at", "aw", "ax", "az", "ba", "bb",
-			"bd", "be", "bf", "bg", "bh", "bi", "bj", "bm", "bn", "bo", "br", "bs", "bt", "bv", "bw", "by", "bz", "ca",
-			"cc", "cd", "cf", "cg", "ch", "ck", "cl", "cm", "cn", "co", "cr", "cs", "cu", "cv", "cx", "cy", "cz", "de",
-			"dj", "dk", "dm", "do", "dz", "ec", "ee", "eg", "er", "es", "et", "eu", "fi", "fj", "fk", "fm", "fo", "fr",
-			"ga", "gb", "gd", "ge", "gf", "gg", "gh", "gi", "gl", "gm", "gn", "gp", "gq", "gr", "gs", "gt", "gu", "gw",
-			"gy", "hk", "hm", "hn", "ht", "hu", "id", "ie", "il", "in", "io", "iq", "ir", "je", "jm", "jo", "jp", "kg",
-			"ki", "km", "kn", "kp", "kr", "kw", "ky", "kz", "la", "lb", "lc", "li", "lk", "lr", "ls", "lt", "lu", "lv",
-			"ly", "ma", "mc", "md", "me", "mg", "mh", "mk", "ml", "mm", "mn", "mo", "mp", "mq", "mr", "ms", "mt", "mu",
-			"mv", "mw", "mx", "my", "na", "nc", "ne", "nf", "ng", "ni", "nl", "no", "np", "nr", "nu", "nz", "om", "pa",
-			"pe", "pf", "pg", "ph", "pk", "pl", "pm", "pn", "pr", "ps", "pt", "pw", "py", "qa", "re", "ro", "rs", "ru",
-			"rw", "sa", "sb", "sc", "sd", "se", "sg", "sh", "si", "sj", "sk", "sl", "sm", "sn", "so", "sr", "st", "su",
-			"sv", "sy", "sz", "tc", "td", "tf", "tg", "th", "tj", "tk", "tl", "tm", "tn", "to", "tp", "tr", "tt", "tv",
-			"tw", "tz", "ua", "ug", "uk", "us", "uy", "uz", "va", "vc", "ve", "vg", "vi", "vn", "vu", "wf", "ws", "ye",
-			"yt", "za", "zm", "zw"					};
+	public static final String[]	COUNTRY_SUFFIX	= { "aero", "asia", "biz", "cat", "com", "coop", "edu", "eu", "gov", "info", "int", "jobs", "mil", "mobi", "museum", "name", "net", "org", "pro",
+			"tel", "travel", "xxx", "ac", "ae", "af", "ag", "ai", "al", "am", "an", "ao", "aq", "ar", "as", "at", "aw", "ax", "az", "ba", "bb", "bd", "be", "bf", "bg", "bh", "bi", "bj", "bm", "bn",
+			"bo", "br", "bs", "bt", "bv", "bw", "by", "bz", "ca", "cc", "cd", "cf", "cg", "ch", "ck", "cl", "cm", "cn", "co", "cr", "cs", "cu", "cv", "cx", "cy", "cz", "de", "dj", "dk", "dm", "do",
+			"dz", "ec", "ee", "eg", "er", "es", "et", "eu", "fi", "fj", "fk", "fm", "fo", "fr", "ga", "gb", "gd", "ge", "gf", "gg", "gh", "gi", "gl", "gm", "gn", "gp", "gq", "gr", "gs", "gt", "gu",
+			"gw", "gy", "hk", "hm", "hn", "ht", "hu", "id", "ie", "il", "in", "io", "iq", "ir", "je", "jm", "jo", "jp", "kg", "ki", "km", "kn", "kp", "kr", "kw", "ky", "kz", "la", "lb", "lc", "li",
+			"lk", "lr", "ls", "lt", "lu", "lv", "ly", "ma", "mc", "md", "me", "mg", "mh", "mk", "ml", "mm", "mn", "mo", "mp", "mq", "mr", "ms", "mt", "mu", "mv", "mw", "mx", "my", "na", "nc", "ne",
+			"nf", "ng", "ni", "nl", "no", "np", "nr", "nu", "nz", "om", "pa", "pe", "pf", "pg", "ph", "pk", "pl", "pm", "pn", "pr", "ps", "pt", "pw", "py", "qa", "re", "ro", "rs", "ru", "rw", "sa",
+			"sb", "sc", "sd", "se", "sg", "sh", "si", "sj", "sk", "sl", "sm", "sn", "so", "sr", "st", "su", "sv", "sy", "sz", "tc", "td", "tf", "tg", "th", "tj", "tk", "tl", "tm", "tn", "to", "tp",
+			"tr", "tt", "tv", "tw", "tz", "ua", "ug", "uk", "us", "uy", "uz", "va", "vc", "ve", "vg", "vi", "vn", "vu", "wf", "ws", "ye", "yt", "za", "zm", "zw" };
 
 	/** 隐藏键盘 */
 	public static void hideInput(View v) {
@@ -761,8 +750,7 @@ public class Util {
 	public static Bitmap drawableToBitmap(Drawable drawable) {
 		int width = drawable.getIntrinsicWidth();
 		int height = drawable.getIntrinsicHeight();
-		Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
-				: Bitmap.Config.RGB_565;
+		Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
 		Bitmap bitmap = Bitmap.createBitmap(width, height, config);
 		Canvas canvas = new Canvas(bitmap);
 		drawable.setBounds(0, 0, width, height);
@@ -952,8 +940,7 @@ public class Util {
 				if (TextUtils.isEmpty(list.get(loc).getValue()) || TextUtils.isEmpty(list.get(loc).getValue().trim()))
 					sb.append(URLEncoder.encode(list.get(loc).getName()) + "=null");
 				else
-					sb.append(URLEncoder.encode(list.get(loc).getName()) + "="
-							+ URLEncoder.encode(list.get(loc).getValue().trim().replace("+", "plus")));
+					sb.append(URLEncoder.encode(list.get(loc).getName()) + "=" + URLEncoder.encode(list.get(loc).getValue().trim().replace("+", "plus")));
 			}
 			else {
 				if (TextUtils.isEmpty(list.get(loc).getValue()) || TextUtils.isEmpty(list.get(loc).getValue().trim()))
@@ -1221,6 +1208,16 @@ public class Util {
 			stringBuilder.append(hv).append(" ");
 		}
 		return stringBuilder.toString();
+	}
+
+	/** 获取wifi网络地址 */
+	public static String getMacAddress(Context context) {
+		WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+		WifiInfo info = wifi.getConnectionInfo();
+		if (null == info) {
+			return "00:00:00:00:00:00";
+		}
+		return info.getMacAddress();
 	}
 
 }

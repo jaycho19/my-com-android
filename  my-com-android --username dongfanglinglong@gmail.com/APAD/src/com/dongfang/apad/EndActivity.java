@@ -5,7 +5,11 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.dongfang.apad.bean.TestResult;
@@ -27,33 +31,42 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 		TAG = EndActivity.class.getSimpleName();
 	}
 
+	public static final int		TESTTIME_TOTAL		= 2;
+	private int					times				= 0;
+	private Button				btnTestagain;
+
 	/** 测试页面名称 */
 	private TextView			tvPageName;
 	/** 用户信息 */
 	private TextView			tvUserInfo;
 
+	/** 行数据 */
+	private TableLayout[]		tableLayout			= new TableLayout[2];
 	/** 分类 */
-	private TextView			tvClassify;
+	private TextView[]			tvClassify			= new TextView[2];
 	/** 项目描述 */
-	private TextView			tvTestItemDes;
+	private TextView[]			tvTestItemDes		= new TextView[2];
 	/** 项目名称 */
-	private TextView			tvTestItem;
+	private TextView[]			tvTestItem			= new TextView[2];
 	/** 第二项目名称 */
-	private TextView			tvTestItem1;
+	private TextView[]			tvTestItem1			= new TextView[2];
 	/** 测试结果 */
-	private TextView			tvTestResult;
+	private TextView[]			tvTestResult		= new TextView[2];
 	/** 第二项测试结果 */
-	private TextView			tvTestResult1;
+	private TextView[]			tvTestResult1		= new TextView[2];
 	/** 测试次数 */
-	private TextView			tvTestTimes;
+	private TextView[]			tvTestTimes			= new TextView[2];
 	/** 测试日期 */
-	private TextView			tvTestDate;
+	private TextView[]			tvTestDate			= new TextView[2];
 	/** 测试成绩 */
-	private ImageView			ivTestGrade;
+	private ImageView[]			ivTestGrade			= new ImageView[2];
 	/** 成绩描述 */
-	private TextView			tvTestResultDes;
+	private TextView[]			tvTestResultDes		= new TextView[2];
 	/** 成绩描述图片 */
-	private ImageView			iv_testresult_des;
+	private ImageView[]			iv_testresult_des	= new ImageView[2];
+
+	/** 成绩描述布局 */
+	private LinearLayout		ll_1_testresult_des;
 
 	/** 读卡器连接状态 */
 	private TextView			tvCardSocketInfo;
@@ -63,8 +76,8 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 	private UpdateDataReceiver	updateDataReceiver;
 
 	/** 测试结果类 */
-	private TestResult			testResult	= null;
-	private UserInfo			userInfo	= null;
+	private TestResult			testResult			= null;
+	private UserInfo			userInfo			= null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -96,24 +109,45 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 
 	/** 初始化view */
 	private void initView() {
-		tvPageName = (TextView) findViewById(R.id.tv_page_name);
-		tvUserInfo = (TextView) findViewById(R.id.tv_userinfo);
-		tvClassify = (TextView) findViewById(R.id.tv_classify);
-		tvTestItemDes = (TextView) findViewById(R.id.tv_testitemDes);
-		tvTestItem = (TextView) findViewById(R.id.tv_testitem);
-		tvTestItem1 = (TextView) findViewById(R.id.tv_testitem1);
-		tvTestResult = (TextView) findViewById(R.id.tv_testresult);
-		tvTestResult1 = (TextView) findViewById(R.id.tv_testresult1);
-		tvTestTimes = (TextView) findViewById(R.id.tv_testtimes);
-		tvTestDate = (TextView) findViewById(R.id.tv_testdate);
-		ivTestGrade = (ImageView) findViewById(R.id.iv_testgrade);
-		tvTestResultDes = (TextView) findViewById(R.id.tv_testresult_des);
-		iv_testresult_des = (ImageView) findViewById(R.id.iv_testresult_des);
+		btnTestagain = (Button) findViewById(R.id.btn_testagain);
+		btnTestagain.setOnClickListener(this);
+		findViewById(R.id.tv_back).setOnClickListener(this);
+		// findViewById(R.id.btn_write_to_card).setOnClickListener(this);
+		// findViewById(R.id.btn_save_to_cloud).setOnClickListener(this);
+
 		tvCardSocketInfo = (TextView) findViewById(R.id.tv_cardSocketInfo);
 		tvTestZKTSocketInfo = (TextView) findViewById(R.id.tv_testZKTSocketInfo);
+		tvPageName = (TextView) findViewById(R.id.tv_page_name);
+		tvUserInfo = (TextView) findViewById(R.id.tv_userinfo);
+		tableLayout[0] = (TableLayout) findViewById(R.id.tableLayout0);
+		tableLayout[1] = (TableLayout) findViewById(R.id.tableLayout1);
+		tvClassify[0] = (TextView) findViewById(R.id.tv_0_classify);
+		tvClassify[1] = (TextView) findViewById(R.id.tv_1_classify);
+		tvTestItemDes[0] = (TextView) findViewById(R.id.tv_0_testitemDes);
+		tvTestItemDes[1] = (TextView) findViewById(R.id.tv_1_testitemDes);
+		tvTestItem[0] = (TextView) findViewById(R.id.tv_0_testitem);
+		tvTestItem[1] = (TextView) findViewById(R.id.tv_1_testitem);
+		tvTestItem1[0] = (TextView) findViewById(R.id.tv_0_testitem1);
+		tvTestItem1[1] = (TextView) findViewById(R.id.tv_1_testitem1);
+		tvTestResult[0] = (TextView) findViewById(R.id.tv_0_testresult);
+		tvTestResult[1] = (TextView) findViewById(R.id.tv_1_testresult);
+		tvTestResult1[0] = (TextView) findViewById(R.id.tv_0_testresult1);
+		tvTestResult1[1] = (TextView) findViewById(R.id.tv_1_testresult1);
+		tvTestTimes[0] = (TextView) findViewById(R.id.tv_0_testtimes);
+		tvTestTimes[1] = (TextView) findViewById(R.id.tv_1_testtimes);
+		tvTestDate[0] = (TextView) findViewById(R.id.tv_0_testdate);
+		tvTestDate[1] = (TextView) findViewById(R.id.tv_1_testdate);
+		ivTestGrade[0] = (ImageView) findViewById(R.id.iv_0_testgrade);
+		ivTestGrade[1] = (ImageView) findViewById(R.id.iv_1_testgrade);
+		tvTestResultDes[0] = (TextView) findViewById(R.id.tv_0_testresult_des);
+		tvTestResultDes[1] = (TextView) findViewById(R.id.tv_1_testresult_des);
+		iv_testresult_des[0] = (ImageView) findViewById(R.id.iv_0_testresult_des);
+		iv_testresult_des[1] = (ImageView) findViewById(R.id.iv_1_testresult_des);
+		ll_1_testresult_des = (LinearLayout) findViewById(R.id.ll_1_testresult_des);
 
-		findViewById(R.id.tv_back).setOnClickListener(this);
-		findViewById(R.id.btn_testagain).setOnClickListener(this);
+		tableLayout[1].setVisibility(View.GONE);
+		ll_1_testresult_des.setVisibility(View.GONE);
+
 	}
 
 	/** 初始化数据 */
@@ -123,36 +157,36 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 		}
 
 		if (null != testResult) {
-			tvClassify.setText(testResult.getClassify());
+			tvClassify[times].setText(testResult.getClassify());
 			// --------------------------------------------------------
 			if (TextUtils.isEmpty(testResult.getItemDes())) {
-				tvTestItemDes.setVisibility(View.GONE);
+				tvTestItemDes[times].setVisibility(View.GONE);
 			}
 			else {
-				tvTestItemDes.setVisibility(View.VISIBLE);
-				tvTestItemDes.setText(testResult.getItemDes());
+				tvTestItemDes[times].setVisibility(View.VISIBLE);
+				tvTestItemDes[times].setText(testResult.getItemDes());
 			}
-			tvTestItem.setText(testResult.getItem());
+			tvTestItem[times].setText(testResult.getItem());
 			if (TextUtils.isEmpty(testResult.getItem1())) {
-				tvTestItem1.setVisibility(View.GONE);
+				tvTestItem1[times].setVisibility(View.GONE);
 			}
 			else {
-				tvTestItem1.setVisibility(View.VISIBLE);
-				tvTestItem1.setText(testResult.getItem1());
+				tvTestItem1[times].setVisibility(View.VISIBLE);
+				tvTestItem1[times].setText(testResult.getItem1());
 			}
 			// --------------------------------------------------------
-			tvTestResult.setText(testResult.getResult());
+			tvTestResult[times].setText(testResult.getResult());
 			if (TextUtils.isEmpty(testResult.getResult1())) {
-				tvTestResult1.setVisibility(View.GONE);
+				tvTestResult1[times].setVisibility(View.GONE);
 			}
 			else {
-				tvTestResult1.setVisibility(View.VISIBLE);
-				tvTestResult1.setText(testResult.getResult1());
+				tvTestResult1[times].setVisibility(View.VISIBLE);
+				tvTestResult1[times].setText(testResult.getResult1());
 			}
 			// --------------------------------------------------------
-			tvTestTimes.setText(testResult.getTimes() + "/3");
+			tvTestTimes[times].setText(testResult.getTimes() + "/3");
 			// --------------------------------------------------------
-			tvTestDate.setText(testResult.getDate());
+			tvTestDate[times].setText(testResult.getDate());
 			// --------------------------------------------------------
 			int iImageId = R.drawable.level_03;
 			switch (testResult.getResultGray()) {
@@ -169,19 +203,23 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 				iImageId = R.drawable.level_05;
 				break;
 			}
-			ivTestGrade.setImageResource(iImageId);
+			ivTestGrade[times].setImageResource(iImageId);
 			// --------------------------------------------------------
-			tvTestResultDes.setText(testResult.getResultDes());
+			tvTestResultDes[times].setText(testResult.getResultDes());
 			if (1 == testResult.getResultGray()) {
-				iv_testresult_des.setImageResource(R.drawable.notice_level01);
+				iv_testresult_des[times].setImageResource(R.drawable.notice_level01);
 			}
 			else if (2 == testResult.getResultGray()) {
-				iv_testresult_des.setImageResource(R.drawable.notice_level02);
+				iv_testresult_des[times].setImageResource(R.drawable.notice_level02);
 			}
 			else {
-				iv_testresult_des.setImageResource(R.drawable.notice_level03);
+				iv_testresult_des[times].setImageResource(R.drawable.notice_level03);
 			}
 
+			if (times == 1) {
+				tableLayout[1].setVisibility(View.VISIBLE);
+				ll_1_testresult_des.setVisibility(View.VISIBLE);
+			}
 		}
 	}
 
@@ -199,10 +237,10 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 	protected void onDestroy() {
 		super.onDestroy();
 		unregisterReceiver(updateDataReceiver);
-		
+
 		Intent intentService = new Intent(this, DFService.class);
-//		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
-//				new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
+		// intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
+		// new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
 		intentService.putExtra(ComParams.SERVICE_HANDLER_REMOVE_ALL, ComParams.SERVICE_HANDLER_REMOVE_ALL);
 		intentService.putExtra(ComParams.SERVICE_CLEAR_TESTINFO, ComParams.SERVICE_CLEAR_TESTINFO);
 		startService(intentService);
@@ -220,14 +258,36 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 		case R.id.tv_back:
 			finish();
 			break;
+		// case R.id.btn_write_to_card: {
+		// Intent intentService = new Intent(EndActivity.this, DFService.class);
+		// intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] {
+		// ComParams.HANDLER_SOCKET_WRITE_CARD_INFO });
+		// startService(intentService);
+		// }
+		// break;
+		// case R.id.btn_save_to_cloud: {
+		// Intent intentService = new Intent(EndActivity.this, DFService.class);
+		// intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] {
+		// ComParams.HANDLER_SOCKET_SAVE_TO_CLOUD });
+		// startService(intentService);
+		// btnTestagain.setClickable(false);
+
+		// }
+		// break;
 		case R.id.btn_testagain: {
-			Intent intentService = new Intent(EndActivity.this, DFService.class);
-			intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
-					new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
-			startService(intentService);
+			if ((times + 1) < TESTTIME_TOTAL) {
+				times++;
+				Intent intentService = new Intent(EndActivity.this, DFService.class);
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
+				startService(intentService);
+				btnTestagain.setClickable(false);
+			}
+
+			if (TESTTIME_TOTAL == (times + 1)) {
+				btnTestagain.setVisibility(View.GONE);
+			}
 		}
 			break;
-
 		default:
 			break;
 		}
@@ -262,8 +322,7 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 
 			if (isConnect) {
 				Intent intentService = new Intent(EndActivity.this, DFService.class);
-				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
-						new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
 				startService(intentService);
 			}
 
@@ -274,8 +333,7 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 			/** 有可能存在死循环错误： 与onSocketConnectCard */
 			if (!isConnect) {
 				Intent intentService = new Intent(EndActivity.this, DFService.class);
-				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
-						new int[] { ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
 				startService(intentService);
 			}
 
@@ -288,18 +346,18 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 				tvCardSocketInfo.setText("请按钮");
 
 				Intent intentService = new Intent(EndActivity.this, DFService.class);
-				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
-						new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_RESULT });
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_RESULT });
 				startService(intentService);
 			}
 		}
 
 		@Override
 		public void onGetTestZKTResult(boolean isConnect, Bundle data) {
+			if ((times + 1) < TESTTIME_TOTAL)
+				btnTestagain.setClickable(true);
 			if (!isConnect) {
 				Intent intentService = new Intent(EndActivity.this, DFService.class);
-				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID,
-						new int[] { ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
 				startService(intentService);
 			}
 
@@ -308,6 +366,5 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 				initData();
 			}
 		}
-
 	}
 }

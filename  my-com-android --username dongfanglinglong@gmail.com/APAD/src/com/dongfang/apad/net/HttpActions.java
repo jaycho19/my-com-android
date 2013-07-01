@@ -61,11 +61,11 @@ public class HttpActions {
 		soapReq.addProperty("json", jsonParam);
 
 		soapEnvelope.setOutputSoapObject(soapReq);
-//		HttpTransportSE httpTransport = new HttpTransportSE(ComParams.URL_BASE, ComParams.HTTP_TIMEOUT);
+		HttpTransportSE httpTransport = new HttpTransportSE(ComParams.URL_BASE, ComParams.HTTP_TIMEOUT);
 		// HttpTransportSE httpTransport = new HttpTransportSE("http://service.jklaile.com/TiWeiService.asmx",
 		// ComParams.HTTP_TIMEOUT);
-		 HttpTransportSE httpTransport = new HttpTransportSE("http://192.168.0.110/TiWei/TiWeiService.asmx",
-		 ComParams.HTTP_TIMEOUT);
+		// HttpTransportSE httpTransport = new HttpTransportSE("http://192.168.0.110/TiWei/TiWeiService.asmx",
+		// ComParams.HTTP_TIMEOUT);
 		try {
 			if (headers != null) {
 				httpTransport.call(ComParams.NAME_SPACE + functonName, soapEnvelope, headers);

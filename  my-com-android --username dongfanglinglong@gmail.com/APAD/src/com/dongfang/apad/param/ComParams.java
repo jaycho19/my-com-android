@@ -27,14 +27,13 @@ public class ComParams {
 	public static final String	SHAREDPREFERENCES_IPANDPROT_ZKT_PORT	= "zkt_port";
 
 	// ------------------------------------------------------------------------------------------
-	
+
 	public static final String	NAME_SPACE								= "http://tempuri.org/";
 	public static final String	URL_BASE								= "http://service.jklaile.com/TiWeiService.asmx";
 	public static final String	URL_GET									= URL_BASE + "/Internet";
 	public static final String	URL_POST								= "http://service.jklaile.com/TiWeiService.asmx";
 	public static final int		HTTP_TIMEOUT							= 5000;
-	
-	
+
 	public static final String	URL_BASE_IMGAGE							= "http://img3.tv189.cn";
 
 	// ------------------------------------------------------------------------------------------
@@ -46,8 +45,7 @@ public class ComParams {
 	/** 视频默认下载路径 */
 	// public static final String DOWNLOAD_DEFAULT_SDCARD_PATH =
 	// "sdcard/APAD/dl";
-	public static final String	DOWNLOAD_DEFAULT_SDCARD_PATH			= Environment.getExternalStorageDirectory()
-																				+ "/APAD/dl";
+	public static final String	DOWNLOAD_DEFAULT_SDCARD_PATH			= Environment.getExternalStorageDirectory() + "/APAD/dl";
 	/** 下载缓存单元大小 */
 	public static final int		BUF_SIZE								= 2 * 1024;
 	/** 图片缓存URL */
@@ -73,6 +71,8 @@ public class ComParams {
 	public static final int		HANDLER_SOCKET_GET_CARD_ID				= 3001;
 	/** SOCKET 获取到卡内信息 */
 	public static final int		HANDLER_SOCKET_GET_USER_INFO			= 3002;
+	/** SOCKET 写输入到卡内 */
+	public static final int		HANDLER_SOCKET_WRITE_CARD_INFO			= 3050;
 
 	/** 连接socket网络testZKT */
 	public static final int		HANDLER_SOCKET_CONNECT_TEST_ZKT			= 3100;
@@ -80,6 +80,9 @@ public class ComParams {
 	public static final int		HANDLER_SOCKET_GET_TEST_ZKT_START		= 3101;
 	/** 获取测试数据 */
 	public static final int		HANDLER_SOCKET_GET_TEST_ZKT_RESULT		= 3102;
+
+	/** 数据保存到云端 */
+	public static final int		HANDLER_SOCKET_SAVE_TO_CLOUD			= 3200;
 
 	// ------------------------------------------------------------------------------------------
 	public static final String	CTWAP									= "CTWAP";
@@ -107,8 +110,6 @@ public class ComParams {
 	public static final String	ACTIVITY_USERINFO						= "userInfo";
 	public static final String	ACTIVITY_TESTRESULT						= "testResult";
 
-	
-	
-//	1	none	AC-CF-23-20-68-8B	ZKT
-//	2	none	AC-CF-23-20-68-88	CARD
+	// 1 none AC-CF-23-20-68-8B ZKT
+	// 2 none AC-CF-23-20-68-88 CARD
 }
