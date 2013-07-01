@@ -1,5 +1,6 @@
 package com.dongfang.apad.bean;
 
+import com.dongfang.apad.util.ULog;
 import com.dongfang.apad.util.Util;
 
 import android.os.Parcel;
@@ -12,30 +13,31 @@ import android.os.Parcelable;
  * 
  */
 public class TestResult implements Parcelable {
+	public static final String	TAG	= TestResult.class.getSimpleName();
 
-	private byte	id	= 0x00;
+	private byte				id	= 0x00;
 
 	/** 分类 */
-	private String	classify;
+	private String				classify;
 	/** 项目描述 */
-	private String	itemDes;
+	private String				itemDes;
 	/** 项目名称 */
-	private String	item;
+	private String				item;
 	/** 第二个项目名称 */
-	private String	item1;
+	private String				item1;
 	/** 测试结果 */
-	private String	result;
+	private String				result;
 	/** 第二项测试结果 */
-	private String	result1;
+	private String				result1;
 	/** @deprecated 测试次数 */
 
-	private int		times;
+	private int					times;
 	/** @deprecated 测试日期 */
-	private String	date;
+	private String				date;
 	/** 测试成绩 */
-	private int		resultGray;
+	private int					resultGray;
 	/** 测试结果描述 */
-	private String	resultDes;
+	private String				resultDes;
 
 	public TestResult() {
 		init();
@@ -57,6 +59,8 @@ public class TestResult implements Parcelable {
 	}
 
 	public void setValue(byte[] input) {
+		ULog.d(TAG, "setValue = " + Util.bytesToHexString(input));
+		ULog.d(TAG, "id = " + id);
 		switch (id) {
 		case 0x02:
 			classify = "素质";

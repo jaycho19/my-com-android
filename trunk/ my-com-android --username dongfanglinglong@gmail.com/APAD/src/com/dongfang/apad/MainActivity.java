@@ -104,7 +104,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 //		new AdminLogon(this).execute();
 //		new QueryUser(this).execute();
-		new SaveTestResult(this).execute();
+//		new SaveTestResult(this).execute();
 
 	}
 

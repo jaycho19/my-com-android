@@ -175,7 +175,7 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 				tvTestItem1[times].setText(testResult.getItem1());
 			}
 			// --------------------------------------------------------
-			tvTestResult[times].setText(testResult.getResult());
+			tvTestResult[times].setText(TextUtils.isEmpty(testResult.getResult()) ? "0" : testResult.getResult());
 			if (TextUtils.isEmpty(testResult.getResult1())) {
 				tvTestResult1[times].setVisibility(View.GONE);
 			}
@@ -184,7 +184,7 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 				tvTestResult1[times].setText(testResult.getResult1());
 			}
 			// --------------------------------------------------------
-			tvTestTimes[times].setText(testResult.getTimes() + "/3");
+			tvTestTimes[times].setText(Integer.toString(times));
 			// --------------------------------------------------------
 			tvTestDate[times].setText(testResult.getDate());
 			// --------------------------------------------------------
