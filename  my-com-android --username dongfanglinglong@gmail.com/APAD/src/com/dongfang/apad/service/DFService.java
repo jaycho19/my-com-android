@@ -134,6 +134,7 @@ public class DFService extends Service {
 		ULog.d(TAG, "OUTPUT : " + Util.bytesToHexString(output).toUpperCase());
 		socket.getOutputStream().write(output);
 		socket.getInputStream().read(input);
+		socket.getOutputStream().flush();
 		ULog.d(TAG, "INPUT  : " + Util.bytesToHexString(input).toUpperCase());
 		socket.getOutputStream().flush();
 	}
@@ -568,9 +569,9 @@ public class DFService extends Service {
 		switch (testResult.getId()) {
 		case 0x02:
 			double grip = Double.valueOf(testResult.getResult());
-			if (grip > userInfo.getGrip()) {
-				userInfo.setGrip(grip);
-			}
+			// if (grip > userInfo.getGrip()) {
+			userInfo.setGrip(grip);
+			// }
 			break;
 		default:
 			break;
@@ -579,43 +580,57 @@ public class DFService extends Service {
 
 	/** 修改卡内容 */
 	private void writeToCard() {
-		byte[] output = null;
-		byte[] input = new byte[20];
-		switch (testResult.getId()) {
-		case 0x02:
-			try {
-				output = new byte[8 + 2 + 4 + 2];
+		new Thread() {
+			@Override
+			public void run() {
+				super.run();
+				byte[] output = null;
+				byte[] input = new byte[20];
+				switch (testResult.getId()) {
+				case 0x02:
+					try {
+						output = new byte[16];
 
-				output[0] = 0x40;
-				output[1] = (byte) 0x97;
-				output[3] = 0x01;
-				output[6] = 0x06;
-				for (int i = 0; i < 7; i++)
-					output[7] ^= output[i];
-				// ------整数部分--------
-				output[8] = 0x13;
-				output[9] = 0x01;
-				output[10] = userInfo.getReadbyte()[76];
-				output[11] = userInfo.getReadbyte()[77];
-				output[12] = userInfo.getReadbyte()[78];
-				output[13] = userInfo.getReadbyte()[79];
-				getInputBytes(socketCard, output, input);
-				// ------小数位部分--------
-				output[8] = 0x17;
-				output[9] = 0x01;
-				output[10] = userInfo.getReadbyte()[92];
-				output[11] = userInfo.getReadbyte()[93];
-				output[12] = userInfo.getReadbyte()[94];
-				output[13] = userInfo.getReadbyte()[95];
-				getInputBytes(socketCard, output, input);
-			} catch (IOException e) {
-				ULog.d(TAG, "握力计写入数据失败 = " + e.getMessage());
-				e.printStackTrace();
+						output[0] = 0x40;
+						output[1] = (byte) 0x97;
+						output[3] = 0x01;
+						output[6] = 0x06;
+						for (int i = 0; i < 7; i++)
+							output[7] ^= output[i];
+						// ------整数部分--------
+						output[8] = 0x13;
+						output[9] = 0x01;
+						output[10] = userInfo.getReadbyte()[76];
+						output[11] = userInfo.getReadbyte()[77];
+						output[12] = userInfo.getReadbyte()[78];
+						output[13] = userInfo.getReadbyte()[79];
+						ULog.d(TAG, "----------0------------------");
+						getInputBytes(socketCard, output, input);
+						ULog.d(TAG, "----------0------------------");
+						
+						
+						// ------小数位部分--------
+						output[8] = 0x17;
+						output[9] = 0x01;
+						output[10] = userInfo.getReadbyte()[92];
+						output[11] = userInfo.getReadbyte()[93];
+						output[12] = userInfo.getReadbyte()[94];
+						output[13] = userInfo.getReadbyte()[95];
+						ULog.d(TAG, "----------1------------------");
+						getInputBytes(socketCard, output, input);
+						ULog.d(TAG, "----------1------------------");
+					} catch (Exception e) {
+						ULog.d(TAG, "握力计写入数据失败 = " + e.getMessage());
+						e.printStackTrace();
+					}
+					break;
+				default:
+					break;
+				}
 			}
-			break;
-		default:
-			break;
-		}
+
+		}.start();
+
 	}
 
 	private class MyHandler extends Handler {
@@ -641,10 +656,11 @@ public class DFService extends Service {
 				getTestResult(msg.what);
 				break;
 			case ComParams.HANDLER_SOCKET_WRITE_CARD_INFO:
-				//writeToCard();
+				writeToCard();
 				break;
 			case ComParams.HANDLER_SOCKET_SAVE_TO_CLOUD:
-				// new SaveTestResult(DFService.this).execute(userInfo.getId(), Integer.toString(testResult.getResultGray()));
+				// new SaveTestResult(DFService.this).execute(userInfo.getId(),
+				// Integer.toString(testResult.getResultGray()));
 				break;
 			}
 		}

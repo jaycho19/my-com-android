@@ -121,7 +121,7 @@ public class UserInfo implements Parcelable {
 		weight = Double.valueOf((0xFF & readbyte[70]) + "." + (0xFF & readbyte[71]));
 		height = Double.valueOf((0xFF & readbyte[72]) + "." + (readbyte[73] & 0xFF));
 		vitalcapacity = Integer.valueOf((0xFF & readbyte[74]) + "" + (0xFF & readbyte[75]));
-		grip = Double.valueOf(readbyte[76] + "." + readbyte[95]);
+		grip = Double.valueOf((0xFF & readbyte[76]) + "." + (0xFF & readbyte[95]));
 		firstReactiontime = Double.valueOf((0xFF & readbyte[77]) + "." + (0xFF & readbyte[78]));
 		secondReactiontime = Double.valueOf((0xFF & readbyte[79]) + "." + (0xFF & readbyte[80]));
 
@@ -291,7 +291,7 @@ public class UserInfo implements Parcelable {
 	public void setGrip(double grip) {
 		this.grip = grip;
 		readbyte[76] = (byte) ((int) grip);
-		readbyte[95] = (byte) ((int) (grip - (int) grip) * 10);;
+		readbyte[95] = (byte) ((int) ((grip - (int) grip) * 10));;
 	}
 
 	public double getFirstReactiontime() {
@@ -559,7 +559,7 @@ public class UserInfo implements Parcelable {
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(id);
 		dest.writeByteArray(readbyte);
-		ULog.d(TAG, "writeToParcel " + Util.bytesToHexString(readbyte).toUpperCase());
+		// ULog.d(TAG, "writeToParcel " + Util.bytesToHexString(readbyte).toUpperCase());
 	}
 
 	public static final Parcelable.Creator<UserInfo>	CREATOR	= new Parcelable.Creator<UserInfo>() {
@@ -571,7 +571,8 @@ public class UserInfo implements Parcelable {
 																		byte[] input = new byte[256];
 																		source.readByteArray(input);
 
-																		ULog.d(TAG, "createFromParcel " + Util.bytesToHexString(input).toUpperCase());
+																		// ULog.d(TAG, "createFromParcel " +
+																		// Util.bytesToHexString(input).toUpperCase());
 
 																		ui.setValue(input);
 																		return ui;
