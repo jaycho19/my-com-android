@@ -21,6 +21,9 @@ public class UserInfo implements Parcelable {
 	private byte[]				readbyte;
 	/** 卡号 */
 	private String				id;
+	/** 用户号 */
+	private int					userId;
+
 	/** 姓名 */
 	private String				name;
 	/** 性别：1男0女 */
@@ -103,6 +106,8 @@ public class UserInfo implements Parcelable {
 		for (int i = 0; i < Math.min(input.length, readbyte.length); i++) {
 			readbyte[i] = input[i];
 		}
+
+		this.userId = (0xFF & input[26]) * 10000 + (0xFF & input[27]) * 100 + (0xFF & input[28]);
 		this.name = Byte2Unicode(input, 29, 38);
 		ULog.d(TAG, "name = " + name);
 
@@ -157,6 +162,17 @@ public class UserInfo implements Parcelable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+		readbyte[26] = (byte) (userId / 10000);
+		readbyte[27] = (byte) ((userId % 100) / 100);
+		readbyte[28] = (byte) (userId % 10000);
 	}
 
 	public String getName() {
@@ -503,7 +519,7 @@ public class UserInfo implements Parcelable {
 	/** 获取显示在测试页面的用户信息 */
 	public String getUserShowInfo() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("\t会员号：" + id);
+		sb.append("\t会员号：" + userId);
 		sb.append("\t\t姓名：" + name);
 		sb.append("\t\t性别：" + getGender());
 		sb.append("\t\t年龄：" + age);
@@ -516,6 +532,7 @@ public class UserInfo implements Parcelable {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("id ：").append(id).append("\n");
+		sb.append("用户id ：").append(userId).append("\n");
 		sb.append("姓    名    ：").append(name).append("\n");
 		sb.append("性    别    ：").append(getGender()).append("\n");
 		sb.append("生    日    ：").append(getDateOfBirth()).append("\n");
@@ -564,24 +581,24 @@ public class UserInfo implements Parcelable {
 
 	public static final Parcelable.Creator<UserInfo>	CREATOR	= new Parcelable.Creator<UserInfo>() {
 
-																	@Override
-																	public UserInfo createFromParcel(Parcel source) {
-																		UserInfo ui = new UserInfo();
-																		ui.id = source.readString();
-																		byte[] input = new byte[256];
-																		source.readByteArray(input);
-
-																		// ULog.d(TAG, "createFromParcel " +
-																		// Util.bytesToHexString(input).toUpperCase());
-
-																		ui.setValue(input);
-																		return ui;
-																	}
-
-																	@Override
-																	public UserInfo[] newArray(int size) {
-																		return new UserInfo[size];
-																	}
-																};
+		@Override
+		public UserInfo createFromParcel(Parcel source) {
+			UserInfo ui = new UserInfo();
+			ui.id = source.readString();
+			byte[] input = new byte[256];
+			source.readByteArray(input);
+	
+			// ULog.d(TAG, "createFromParcel " +
+			// Util.bytesToHexString(input).toUpperCase());
+	
+			ui.setValue(input);
+			return ui;
+		}
+	
+		@Override
+		public UserInfo[] newArray(int size) {
+			return new UserInfo[size];
+		}
+	};
 
 }

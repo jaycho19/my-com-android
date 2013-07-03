@@ -569,9 +569,9 @@ public class DFService extends Service {
 		switch (testResult.getId()) {
 		case 0x02:
 			double grip = Double.valueOf(testResult.getResult());
-			// if (grip > userInfo.getGrip()) {
-			userInfo.setGrip(grip);
-			// }
+			if (grip > userInfo.getGrip()) {
+				userInfo.setGrip(grip);
+			}
 			break;
 		default:
 			break;
@@ -607,8 +607,7 @@ public class DFService extends Service {
 						ULog.d(TAG, "----------0------------------");
 						getInputBytes(socketCard, output, input);
 						ULog.d(TAG, "----------0------------------");
-						
-						
+
 						// ------小数位部分--------
 						output[8] = 0x17;
 						output[9] = 0x01;
@@ -659,8 +658,7 @@ public class DFService extends Service {
 				writeToCard();
 				break;
 			case ComParams.HANDLER_SOCKET_SAVE_TO_CLOUD:
-				// new SaveTestResult(DFService.this).execute(userInfo.getId(),
-				// Integer.toString(testResult.getResultGray()));
+				new SaveTestResult(DFService.this).execute(Integer.toString(userInfo.getUserId()), Integer.toString(testResult.getResultGray()));
 				break;
 			}
 		}
