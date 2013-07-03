@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.dongfang.apad.net.HttpActions;
 import com.dongfang.apad.util.DFException;
@@ -73,11 +74,11 @@ public class SaveTestResult extends AsyncTask<String, String, String> {
 		JsonObject detail = new JsonObject();
 		entity.add("DETAIL", detail);
 
-		detail.addProperty("PROJECTNUM", "12");
-		detail.addProperty("USERID", "101001");
-		detail.addProperty("PROJECTRESULT", "2");
-//		detail.addProperty("USERID", params[0]);
-//		detail.addProperty("PROJECTRESULT", params[1]);
+		detail.addProperty("PROJECTNUM", "04");
+		// detail.addProperty("USERID", "11");
+		// detail.addProperty("PROJECTRESULT", "2");
+		detail.addProperty("USERID", params[0]);
+		detail.addProperty("PROJECTRESULT", params[1]);
 		detail.addProperty("MACHINEID", Util.getMacAddress(context));
 		detail.addProperty("REMARK", "");
 
@@ -87,6 +88,7 @@ public class SaveTestResult extends AsyncTask<String, String, String> {
 		} catch (DFException e) {
 			e.printStackTrace();
 			ULog.e(TAG, e.getMessage());
+			Toast.makeText(context, "数据上传失败！", Toast.LENGTH_LONG).show();
 		}
 		return result;
 	}

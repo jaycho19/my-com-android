@@ -11,13 +11,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ViewFlipper;
 
-import com.dongfang.apad.asynctask.AdminLogon;
-import com.dongfang.apad.asynctask.QueryUser;
 import com.dongfang.apad.asynctask.SaveTestResult;
 import com.dongfang.apad.param.ComParams;
 import com.dongfang.apad.service.DFService;
 import com.dongfang.apad.util.ULog;
-import com.dongfang.apad.util.Util;
 
 /***
  * 
