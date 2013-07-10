@@ -332,7 +332,7 @@ public class UserInfo implements Parcelable {
 	public void setGrip(double grip) {
 		this.grip = grip;
 		readbyte[76] = (byte) ((int) grip);
-		readbyte[95] = (byte) ((int) ((grip - (int) grip) * 10));;
+		readbyte[95] = (byte) ((int) (((grip * 10) - ((int) grip) * 10)));
 	}
 
 	public double getFirstReactiontime() {

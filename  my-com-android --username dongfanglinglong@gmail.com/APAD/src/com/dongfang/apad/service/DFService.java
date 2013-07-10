@@ -13,7 +13,6 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.dongfang.apad.asynctask.SaveTestResult;
 import com.dongfang.apad.bean.TestResult;
 import com.dongfang.apad.bean.UserInfo;
 import com.dongfang.apad.broadcast.UpdateDataReceiver;
@@ -368,8 +367,8 @@ public class DFService extends Service {
 							cardFaileTimes = 0;
 						}
 
-						// socketCard.close();
-						// socketCard = null;
+						socketCard.close();
+						socketCard = null;
 					}
 					else {
 						cardFaileTimes = 0;
@@ -432,8 +431,7 @@ public class DFService extends Service {
 					} catch (Exception e) {
 						ULog.e(TAG, "faileTimes = " + testZKTFaileTimes + " -- " + e.getMessage());
 						testZKTFaileTimes++;
-						handler = (null == handler) ? (new MyHandler()) : handler;
-						handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT, 1000);
+if (null != handler)						handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT, 1000);
 					}
 				}
 
@@ -470,8 +468,8 @@ public class DFService extends Service {
 						int failtime = 0;
 						while (failtime < 10) {
 							getInputBytes(socketTestZKT, ZKTCommand.RCARDID, input);
-							if (ZKTCommand.checkReadInput(input)) {
-								if (testResult.getId() != input[3])
+							if (ZKTCommand.checkReadInput(input) && 0x02 == input[3] ) {
+//								if (testResult.getId() != input[3])
 									testResult.setId(input[3]);
 								break;
 							}
@@ -555,6 +553,8 @@ public class DFService extends Service {
 				output[3] = (byte) (0x01 + (0xFF - ((output[0] + output[1] + output[2]) & 0xFF)));
 				try {
 					getInputBytes(socketTestZKT, output, input);
+					ULog.d(TAG, "checkReadInput(input) = " + ZKTCommand.checkReadInput(input));
+
 					if (ZKTCommand.checkReadInput(input)) {
 
 						if (input[2] == output[2]) {
@@ -607,7 +607,11 @@ public class DFService extends Service {
 		}
 	}
 
-	/** 修改卡内容 */
+	/**
+	 * 修改卡内容
+	 * 
+	 * @deprecated
+	 */
 	private void writeToCard() {
 		new Thread() {
 			@Override
@@ -708,6 +712,14 @@ public class DFService extends Service {
 					socketCard = null;
 				} catch (Exception e) {
 					socketCard = null;
+				}
+				break;
+			case ComParams.HANDLER_SOCKET_CLOSE_TEST_ZKT:
+				try {
+					socketTestZKT.close();
+					socketTestZKT = null;
+				} catch (Exception e) {
+					socketTestZKT = null;
 				}
 				break;
 			}

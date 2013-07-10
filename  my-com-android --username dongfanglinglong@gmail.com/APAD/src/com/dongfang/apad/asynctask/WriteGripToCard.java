@@ -6,26 +6,21 @@ import java.net.Socket;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.dongfang.apad.EndActivity;
 import com.dongfang.apad.bean.UserInfo;
-import com.dongfang.apad.net.HttpActions;
 import com.dongfang.apad.param.ComParams;
-import com.dongfang.apad.util.DFException;
 import com.dongfang.apad.util.ULog;
 import com.dongfang.apad.util.Util;
 import com.dongfang.apad.view.MyProgressDialog;
-import com.google.gson.JsonObject;
 
 /**
  * 写握力计数据
  * 
  * @author dongfang
  */
-public class WriteGripToCard extends AsyncTask<String, String, String> {
+public class WriteGripToCard extends AsyncTask<Double, String, Double> {
 	public static final String	TAG	= WriteGripToCard.class.getSimpleName();
 	private MyProgressDialog	progressDialog;
 	private Context				context;
@@ -68,7 +63,9 @@ public class WriteGripToCard extends AsyncTask<String, String, String> {
 	// }
 
 	@Override
-	protected String doInBackground(String... params) {
+	protected Double doInBackground(Double... params) {
+
+		ULog.d(TAG, params.toString());
 
 		byte[] output = null;
 		byte[] input = new byte[20];
@@ -84,10 +81,12 @@ public class WriteGripToCard extends AsyncTask<String, String, String> {
 			// ------整数部分--------
 			output[8] = 0x13;
 			output[9] = 0x01;
-			output[10] = userInfo.getReadbyte()[76];
+			output[10] = (byte) params[0].intValue();
 			output[11] = userInfo.getReadbyte()[77];
 			output[12] = userInfo.getReadbyte()[78];
 			output[13] = userInfo.getReadbyte()[79];
+
+			ULog.d(TAG, "output[10] = " + output[10]);
 
 			if (null == socketCard || !socketCard.isConnected()) {
 				socketCard = new Socket();
@@ -104,13 +103,16 @@ public class WriteGripToCard extends AsyncTask<String, String, String> {
 			output[10] = userInfo.getReadbyte()[92];
 			output[11] = userInfo.getReadbyte()[93];
 			output[12] = userInfo.getReadbyte()[94];
-			output[13] = userInfo.getReadbyte()[95];
+			output[13] = (byte) ((int) ((params[0].doubleValue() * 10 - params[0].intValue() * 10)));
+
+			ULog.d(TAG, "output[13] = " + output[13]);
+
 			ULog.d(TAG, "----------1------------------");
 
 			getInputBytes(socketCard, output, input);
 			ULog.d(TAG, "----------1------------------");
 
-			return null;
+			return 0.0;
 
 		} catch (Exception e) {
 			ULog.d(TAG, "握力计写入数据失败 = " + e.getMessage());
@@ -125,7 +127,7 @@ public class WriteGripToCard extends AsyncTask<String, String, String> {
 			}
 		}
 
-		return params[0];
+		return params[1];
 	}
 
 	/*
@@ -134,20 +136,25 @@ public class WriteGripToCard extends AsyncTask<String, String, String> {
 	 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
 	 */
 	@Override
-	protected void onPostExecute(String result) {
-
+	protected void onPostExecute(Double result) {
 		if (progressDialog != null)
 			progressDialog.dismiss();
 
-		if ("1".equals(result)) {
-			Toast.makeText(context, "写卡失败！", Toast.LENGTH_LONG).show();
-			((EndActivity)context).reWriteToCard();
-		}
-		else if ("2".equals(result)) {
-			Toast.makeText(context, "写卡失败！", Toast.LENGTH_LONG).show();
-		}
-		else {
-			Toast.makeText(context, "写卡成功！", Toast.LENGTH_LONG).show();
+		// 注意： 写卡时，如果卡片离开读卡器，返回数据为写卡成功数据
+		try {
+			if (1 == result.intValue()) {
+				Toast.makeText(context, "写卡失败！", Toast.LENGTH_LONG).show();
+				((EndActivity) context).reWriteToCard();
+			}
+			else if (2 == result.intValue()) {
+				Toast.makeText(context, "写卡失败！", Toast.LENGTH_LONG).show();
+			}
+			else {
+				Toast.makeText(context, "写卡成功！", Toast.LENGTH_LONG).show();
+			}
+		} catch (Exception e) {
+			// TODO
+			e.printStackTrace();
 		}
 
 	}
