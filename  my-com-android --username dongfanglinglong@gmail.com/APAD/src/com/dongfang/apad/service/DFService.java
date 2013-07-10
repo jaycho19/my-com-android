@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.dongfang.apad.asynctask.SaveTestResult;
 import com.dongfang.apad.bean.TestResult;
@@ -35,6 +36,7 @@ public class DFService extends Service {
 	private Socket				socketTestZKT;
 	private Bundle				data;
 
+	/** 第几次测试 */
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
@@ -64,7 +66,6 @@ public class DFService extends Service {
 					handler.sendEmptyMessage(i);
 				}
 			}
-
 		}
 
 		if (null != intent && !TextUtils.isEmpty(intent.getStringExtra(ComParams.SERVICE_HANDLER_REMOVE_ALL))) {
@@ -75,6 +76,8 @@ public class DFService extends Service {
 			handler.removeMessages(ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT);
 			handler.removeMessages(ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START);
 			handler.removeMessages(ComParams.HANDLER_SOCKET_GET_TEST_ZKT_RESULT);
+
+			// socketClose();
 		}
 		if (null != intent && !TextUtils.isEmpty(intent.getStringExtra(ComParams.SERVICE_CLEAR_TESTINFO))) {
 			testResult = null;
@@ -89,18 +92,27 @@ public class DFService extends Service {
 		super.onDestroy();
 		ULog.d(TAG, "onDestroy");
 		handler = null;
+		socketClose();
+	}
+
+	/** 关闭socket */
+	private void socketClose() {
 		try {
-			if (null != socketCard)
+			if (null != socketCard) {
 				socketCard.close();
+				socketCard = null;
+			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			socketCard = null;
 			e.printStackTrace();
 		}
 		try {
-			if (null != socketTestZKT)
+			if (null != socketTestZKT) {
 				socketTestZKT.close();
+				socketTestZKT = null;
+			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			socketTestZKT = null;
 			e.printStackTrace();
 		}
 	}
@@ -130,7 +142,7 @@ public class DFService extends Service {
 	 * @param input
 	 * @throws IOException
 	 */
-	private void getInputBytes(Socket socket, byte[] output, byte[] input) throws IOException {
+	private void getInputBytes(Socket socket, byte[] output, byte[] input) throws Exception {
 		ULog.d(TAG, "OUTPUT : " + Util.bytesToHexString(output).toUpperCase());
 		socket.getOutputStream().write(output);
 		socket.getInputStream().read(input);
@@ -149,7 +161,7 @@ public class DFService extends Service {
 
 				ULog.d(TAG, "length  = " + output[9]);
 				byte[] inputTemp = new byte[output[9] * 4 + 8];
-				getInputBytes(socket, output, inputTemp);
+				// getInputBytes(socket, output, inputTemp);
 
 				if (inputTemp[4] != 0x00) {
 					failTimes = 5;
@@ -173,7 +185,7 @@ public class DFService extends Service {
 			ULog.d(TAG, "INPUT 0 : " + Util.bytesToHexString(input).toUpperCase());
 		}
 		else {
-			getInputBytes(socket, output, input);
+			// getInputBytes(socket, output, input);
 		}
 	}
 
@@ -229,7 +241,11 @@ public class DFService extends Service {
 		}.start();
 	}
 
-	/** 获取卡号 */
+	/**
+	 * 获取卡号
+	 * 
+	 * @deprecated
+	 */
 	private void getCardId(int what) {
 		if (null == socketCard || !socketCard.isConnected()) {
 			sendBroadcaset(ComParams.HANDLER_SOCKET_GET_CARD_ID, false, null);
@@ -279,7 +295,7 @@ public class DFService extends Service {
 						cardFaileTimes = 0;
 					}
 
-				} catch (IOException e) {
+				} catch (Exception e) {
 					ULog.e(TAG, "faileTimes = " + cardFaileTimes + " -- " + e.getMessage());
 					cardFaileTimes++;
 					handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCKET_GET_CARD_ID, 1000);
@@ -296,7 +312,7 @@ public class DFService extends Service {
 	private UserInfo	userInfo;
 
 	/** 获取用户信息 */
-	private void getUserInfo(int what) {
+	private void getUserInfo(final int what) {
 		if (null == userInfo)
 			userInfo = new UserInfo();
 
@@ -341,10 +357,16 @@ public class DFService extends Service {
 						}
 
 						userInfo.setValue(input);
-						// ULog.e(TAG, userInfo.toString());
-						Bundle data = new Bundle();
-						data.putParcelable(ComParams.ACTIVITY_USERINFO, userInfo);
-						sendBroadcaset(ComParams.HANDLER_SOCKET_GET_USER_INFO, true, data);
+						if (userInfo.getUserId() > 0) {
+							// ULog.e(TAG, userInfo.toString());
+							Bundle data = new Bundle();
+							data.putParcelable(ComParams.ACTIVITY_USERINFO, userInfo);
+							sendBroadcaset(ComParams.HANDLER_SOCKET_GET_USER_INFO, true, data);
+						}
+						else {
+							handler.sendEmptyMessageDelayed(what, 1000);
+							cardFaileTimes = 0;
+						}
 
 						// socketCard.close();
 						// socketCard = null;
@@ -353,7 +375,7 @@ public class DFService extends Service {
 						cardFaileTimes = 0;
 					}
 
-				} catch (IOException e) {
+				} catch (Exception e) {
 					ULog.e(TAG, "faileTimes = " + cardFaileTimes + " -- " + e.getMessage());
 					cardFaileTimes++;
 					handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCKET_GET_CARD_ID, 1000);
@@ -410,6 +432,7 @@ public class DFService extends Service {
 					} catch (Exception e) {
 						ULog.e(TAG, "faileTimes = " + testZKTFaileTimes + " -- " + e.getMessage());
 						testZKTFaileTimes++;
+						handler = (null == handler) ? (new MyHandler()) : handler;
 						handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT, 1000);
 					}
 				}
@@ -434,7 +457,8 @@ public class DFService extends Service {
 			return;
 		}
 
-		testResult = (null == testResult) ? new TestResult() : testResult;
+		testResult = null;
+		testResult = new TestResult();
 		// ULog.d(TAG, testResult.toString());
 		if (testZKTFaileTimes < 10) {
 			new Thread() {
@@ -497,7 +521,7 @@ public class DFService extends Service {
 						sendBroadcaset(ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START, true, data);
 						input = null;
 
-					} catch (IOException e) {
+					} catch (Exception e) {
 						ULog.e(TAG, "IOException " + e.getMessage());
 						testZKTFaileTimes++;
 						handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START, 1000);
@@ -532,31 +556,36 @@ public class DFService extends Service {
 				try {
 					getInputBytes(socketTestZKT, output, input);
 					if (ZKTCommand.checkReadInput(input)) {
-						if (input[2] == output[2] && input[3] == 0x01) {
+
+						if (input[2] == output[2]) {
 							testResult.setValue(input);
 							updateUserInfoFromTestResult();// 顺序必需在testResult.setValue(input) 之后；
-
+							// 记录两次测试成绩
 							Bundle data = new Bundle();
 							data.putParcelable(ComParams.ACTIVITY_TESTRESULT, testResult);
 							data.putParcelable(ComParams.ACTIVITY_USERINFO, userInfo);
 							sendBroadcaset(what, true, data);
 
-							handler.sendEmptyMessage(ComParams.HANDLER_SOCKET_WRITE_CARD_INFO);
-							handler.sendEmptyMessage(ComParams.HANDLER_SOCKET_SAVE_TO_CLOUD);
-							return;
+							if (input[3] == 0x01) {
+								handler.removeMessages(what);
+								// handler.sendEmptyMessage(ComParams.HANDLER_SOCKET_WRITE_CARD_INFO);
+								// handler.sendEmptyMessage(ComParams.HANDLER_SOCKET_SAVE_TO_CLOUD);
+								return;
+							}
+
 						}
-						else if (testResult.getResultGray() > 0) {
-							testResult.setValue(input);
-							Bundle data = new Bundle();
-							data.putParcelable(ComParams.ACTIVITY_TESTRESULT, testResult);
-							sendBroadcaset(what, true, data);
-						}
-						handler.sendEmptyMessageDelayed(what, 1000);
-						return;
+						// // else if (testResult.getResultGray()= 0 ) {
+						// // testResult.setValue(input);
+						// // Bundle data = new Bundle();
+						// // data.putParcelable(ComParams.ACTIVITY_TESTRESULT, testResult);
+						// // sendBroadcaset(what, true, data);
+						// // }
+						// handler.sendEmptyMessageDelayed(what, 500);
+						// return;
 					}
 					handler.sendEmptyMessageDelayed(what, 500);
-				} catch (IOException e) {
-					ULog.e(TAG, "IOException " + e.getMessage());
+				} catch (Exception e) {
+					// ULog.e(TAG, "Exception " + e.getMessage());
 					handler.sendEmptyMessageDelayed(what, 500);
 				}
 			}
@@ -586,9 +615,9 @@ public class DFService extends Service {
 				super.run();
 				byte[] output = null;
 				byte[] input = new byte[20];
-				switch (testResult.getId()) {
-				case 0x02:
-					try {
+				try {
+					switch (testResult.getId()) {
+					case 0x02:
 						output = new byte[16];
 
 						output[0] = 0x40;
@@ -616,15 +645,24 @@ public class DFService extends Service {
 						output[12] = userInfo.getReadbyte()[94];
 						output[13] = userInfo.getReadbyte()[95];
 						ULog.d(TAG, "----------1------------------");
+
+						if (null == socketCard || !socketCard.isConnected()) {
+							socketCard = new Socket();
+							socketCard.connect(new InetSocketAddress(ComParams.IP_CARD, ComParams.PORT_CARD), ComParams.SOCKET_TIMEOUT);
+						}
+
 						getInputBytes(socketCard, output, input);
 						ULog.d(TAG, "----------1------------------");
-					} catch (Exception e) {
-						ULog.d(TAG, "握力计写入数据失败 = " + e.getMessage());
-						e.printStackTrace();
+						break;
+					default:
+						break;
 					}
-					break;
-				default:
-					break;
+				} catch (Exception e) {
+					ULog.d(TAG, "握力计写入数据失败 = " + e.getMessage());
+					handler.sendEmptyMessage(ComParams.HANDLER_SOCKET_WRITE_CARD_FAILED);
+					e.printStackTrace();
+				} finally {
+					socketClose();
 				}
 			}
 
@@ -657,8 +695,20 @@ public class DFService extends Service {
 			case ComParams.HANDLER_SOCKET_WRITE_CARD_INFO:
 				writeToCard();
 				break;
+			case ComParams.HANDLER_SOCKET_WRITE_CARD_FAILED:
+				Toast.makeText(DFService.this, "握力计数据写入失败", Toast.LENGTH_LONG).show();
+				break;
 			case ComParams.HANDLER_SOCKET_SAVE_TO_CLOUD:
-				new SaveTestResult(DFService.this).execute(Integer.toString(userInfo.getUserId()), Integer.toString(testResult.getResultGray()));
+				// new SaveTestResult(DFService.this).execute(Integer.toString(userInfo.getUserId()),
+				// Double.toString(Math.max(result[0], result[1])));
+				break;
+			case ComParams.HANDLER_SOCKET_CLOSE_CARD:
+				try {
+					socketCard.close();
+					socketCard = null;
+				} catch (Exception e) {
+					socketCard = null;
+				}
 				break;
 			}
 		}

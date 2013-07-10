@@ -13,9 +13,12 @@ import android.os.Parcelable;
  * 
  */
 public class TestResult implements Parcelable {
-	public static final String	TAG	= TestResult.class.getSimpleName();
+	public static final String	TAG			= TestResult.class.getSimpleName();
 
-	private byte				id	= 0x00;
+	/** 测试类型 */
+	private byte				id			= 0x00;
+	/** 测试是否结束 ，00表示未结束， 01 表示结束 */
+	private byte				isFinish	= 0x00;
 
 	/** 分类 */
 	private String				classify;
@@ -26,11 +29,10 @@ public class TestResult implements Parcelable {
 	/** 第二个项目名称 */
 	private String				item1;
 	/** 测试结果 */
-	private String				result;
+	private double				result;
 	/** 第二项测试结果 */
-	private String				result1;
+	private double				result1;
 	/** @deprecated 测试次数 */
-
 	private int					times;
 	/** @deprecated 测试日期 */
 	private String				date;
@@ -46,12 +48,13 @@ public class TestResult implements Parcelable {
 
 	private void init() {
 		id = (byte) 0xFF;
+		isFinish = 0x00;
 		classify = "";
 		itemDes = "";
 		item = "";
 		item1 = "";
-		result = "";
-		result1 = "";
+		result = 0.0;
+		result1 = 0.0;
 		times = 0;
 		date = Util.getDate();
 		resultGray = 0;
@@ -65,9 +68,12 @@ public class TestResult implements Parcelable {
 		case 0x02:
 			classify = "素质";
 			item = "握力（千克）";
+
+			isFinish = input[3];
+
 			int kg = (input[5] & 0xFF);
 			kg |= (input[4] << 8) & 0xFF00;
-			result = kg + "." + ((int) input[6] & 0xFF);
+			result = Double.valueOf(kg + "." + ((int) input[6] & 0xFF));
 			if (0x01 == input[4])
 				times++;
 			date = Util.getDate();
@@ -104,165 +110,99 @@ public class TestResult implements Parcelable {
 		this.id = id;
 	}
 
-	/**
-	 * @return the resultDes
-	 */
+	public byte getIsFinish() {
+		return isFinish;
+	}
+
+	public void setIsFinish(byte isFinish) {
+		this.isFinish = isFinish;
+	}
+
 	public String getResultDes() {
 		return resultDes;
 	}
 
-	/**
-	 * @param resultDes
-	 *            the resultDes to set
-	 */
 	public void setResultDes(String resultDes) {
 		this.resultDes = resultDes;
 	}
 
-	/**
-	 * @return the classify
-	 */
 	public String getClassify() {
 		return classify;
 	}
 
-	/**
-	 * @param classify
-	 *            the classify to set
-	 */
 	public void setClassify(String classify) {
 		this.classify = classify;
 	}
 
-	/**
-	 * @return the item
-	 */
 	public String getItem() {
 		return item;
 	}
 
-	/**
-	 * @param item
-	 *            the item to set
-	 */
 	public void setItem(String item) {
 		this.item = item;
 	}
 
-	/**
-	 * @return the times
-	 */
 	public int getTimes() {
 		return times;
 	}
 
-	/**
-	 * @param times
-	 *            the times to set
-	 */
 	public void setTimes(int times) {
 		this.times = times;
 	}
 
-	/**
-	 * @return the date
-	 */
 	public String getDate() {
 		return date;
 	}
 
-	/**
-	 * @param date
-	 *            the date to set
-	 */
 	public void setDate(String date) {
 		this.date = date;
 	}
 
-	/**
-	 * @return the result
-	 */
-	public String getResult() {
+	public double getResult() {
 		return result;
 	}
 
-	/**
-	 * @param result
-	 *            the result to set
-	 */
-	public void setResult(String result) {
+	public void setResult(double result) {
 		this.result = result;
 	}
 
-	/**
-	 * @return the resultGray
-	 */
 	public int getResultGray() {
 		return resultGray;
 	}
 
-	/**
-	 * @param resultGray
-	 *            the resultGray to set
-	 */
 	public void setResultGray(int resultGray) {
 		this.resultGray = resultGray;
 	}
 
-	/**
-	 * @return the item1
-	 */
 	public String getItem1() {
 		return item1;
 	}
 
-	/**
-	 * @param item1
-	 *            the item1 to set
-	 */
 	public void setItem1(String item1) {
 		this.item1 = item1;
 	}
 
-	/**
-	 * @return the itemDes
-	 */
 	public String getItemDes() {
 		return itemDes;
 	}
 
-	/**
-	 * @param itemDes
-	 *            the itemDes to set
-	 */
 	public void setItemDes(String itemDes) {
 		this.itemDes = itemDes;
 	}
 
-	/**
-	 * @return the result1
-	 */
-	public String getResult1() {
+	public double getResult1() {
 		return result1;
 	}
 
-	/**
-	 * @param result1
-	 *            the result1 to set
-	 */
-	public void setResult1(String result1) {
+	public void setResult1(double result1) {
 		this.result1 = result1;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("id         = ").append(id).append("\n");
+		sb.append("isFinish   = ").append(isFinish).append("\n");
 		sb.append("classify   = ").append(classify).append("\n");
 		sb.append("itemDes    = ").append(itemDes).append("\n");
 		sb.append("item       = ").append(item).append("\n");
@@ -295,12 +235,13 @@ public class TestResult implements Parcelable {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeByte(id);
+		dest.writeByte(isFinish);
 		dest.writeString(classify);
 		dest.writeString(itemDes);
 		dest.writeString(item);
 		dest.writeString(item1);
-		dest.writeString(result);
-		dest.writeString(result1);
+		dest.writeDouble(result);
+		dest.writeDouble(result1);
 		dest.writeInt(times);
 		dest.writeString(date);
 		dest.writeInt(resultGray);
@@ -314,12 +255,13 @@ public class TestResult implements Parcelable {
 																	public TestResult createFromParcel(Parcel source) {
 																		TestResult data = new TestResult();
 																		data.setId(source.readByte());
+																		data.setIsFinish(source.readByte());
 																		data.setClassify(source.readString());
 																		data.setItemDes(source.readString());
 																		data.setItem(source.readString());
 																		data.setItem1(source.readString());
-																		data.setResult(source.readString());
-																		data.setResult1(source.readString());
+																		data.setResult(source.readDouble());
+																		data.setResult1(source.readDouble());
 																		data.setTimes(source.readInt());
 																		data.setDate(source.readString());
 																		data.setResultGray(source.readInt());

@@ -51,6 +51,8 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 	private Intent				intent;
 	private UserInfo			userInfo;
 
+	private int					pageNameStringid	= R.string.app_name;
+
 	private UpdateDataReceiver	updateDataReceiver;
 
 	@Override
@@ -65,7 +67,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		btnPageName = (TextView) findViewById(R.id.tv_page_name);
 		tvTitle = (TextView) findViewById(R.id.tv_title);
 		imageView = (ImageView) findViewById(R.id.imageView);
-		tvTestingResult = (TextView) findViewById(R.id.tv_testing_result);
+		tvTestingResult = (TextView) findViewById(R.id.test_result);
 		tvCardSocketInfo = (TextView) findViewById(R.id.tv_cardSocketInfo);
 		tvTestZKTSocketInfo = (TextView) findViewById(R.id.tv_testZKTSocketInfo);
 
@@ -91,9 +93,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		registerReceiver(updateDataReceiver, filter);
 
 		Intent intentService = new Intent(this, DFService.class);
-		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD, ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT
-
-		});
+		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD, ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
 		startService(intentService);
 	}
 
@@ -142,10 +142,14 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		this.userInfo = null;
 		this.userInfo = userInfo;
 
-		btnPageName.setText(intent.getIntExtra(ComParams.ACTIVITY_PAGENAME, R.string.app_name));
-		tvTitle.setText(intent.getIntExtra(ComParams.ACTIVITY_PAGENAME, R.string.app_name));
+		pageNameStringid = intent.getIntExtra(ComParams.ACTIVITY_PAGENAME, R.string.app_name);
+
+		btnPageName.setText(pageNameStringid);
+		tvTitle.setText(pageNameStringid);
 		imageView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.change_image));
 		imageView.setImageResource(intent.getIntExtra(ComParams.ACTIVITY_IMAGE_SRC_ID, R.drawable.card_notice));
+
+		tvTestingResult.setVisibility(View.VISIBLE);
 
 		ULog.d(TAG, userInfo.toString());
 		tvUserInfo.setText(userInfo.getUserShowInfo());
@@ -163,7 +167,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 
 			if (isConnect) {
 				Intent intentService = new Intent(StartActivity.this, DFService.class);
-				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_CARD_ID });
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_USER_INFO });
 				startService(intentService);
 			}
 		}
@@ -230,7 +234,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 
 			if (null != data && null != data.getParcelable(ComParams.ACTIVITY_TESTRESULT)) {
 				ULog.d(TAG, ((TestResult) data.getParcelable(ComParams.ACTIVITY_TESTRESULT)).toString());
-				tvTitle.setText("请按钮");
+				// tvTitle.setText("请按钮");
 
 				Intent intentService = new Intent(StartActivity.this, DFService.class);
 				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_RESULT });
@@ -248,13 +252,18 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 			}
 
 			if (null != data && null != data.getParcelable(ComParams.ACTIVITY_TESTRESULT)) {
-				ULog.d(TAG, ((TestResult) data.getParcelable(ComParams.ACTIVITY_TESTRESULT)).toString());
-				Intent intent = new Intent(StartActivity.this, EndActivity.class);
-				intent.putExtras(data);
+				TestResult testResult = (TestResult) data.getParcelable(ComParams.ACTIVITY_TESTRESULT);
+				ULog.d(TAG, testResult.toString());
+				tvTestingResult.setText(Double.toString(testResult.getResult()));
 
-				// data.putParcelable(ComParams.ACTIVITY_USERINFO, userInfo);
-				startActivity(intent);
-				finish();
+				if (0x01 == testResult.getIsFinish()) {
+					Intent intent = new Intent(StartActivity.this, EndActivity.class);
+					// data.putParcelable(ComParams.ACTIVITY_USERINFO, userInfo);
+					intent.putExtra(ComParams.ACTIVITY_PAGENAME, pageNameStringid);
+					intent.putExtras(data);
+					startActivity(intent);
+					finish();
+				}
 			}
 		}
 	}

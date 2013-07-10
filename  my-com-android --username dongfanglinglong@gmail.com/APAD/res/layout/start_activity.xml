@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="677dp"
+            android:layout_height="442dp"
             android:layout_centerInParent="true"
             android:src="@drawable/card_notice" />
 
@@ -28,15 +28,8 @@
             android:gravity="center"
             android:text="请放置体测卡"
             android:textColor="#FFFFFF"
-            android:textSize="26sp"
+            android:textSize="40sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_testing_result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/tv_cardSocketInfo"
@@ -56,6 +49,76 @@
             android:text="Large Text"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
+        <TextView
+            android:id="@+id/test_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/imageView"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="80dp"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/red"
+            android:textSize="150sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <include layout="@layout/top_bg" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="677dp"
+            android:layout_height="442dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/bg_style004" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imageView"
+            android:layout_alignRight="@+id/imageView"
+            android:layout_alignTop="@+id/imageView"
+            android:gravity="center"
+            android:text="请放置体测卡"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_cardSocketInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tv_testZKTSocketInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_cardSocketInfo"
+            android:layout_alignParentRight="true"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/test_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/imageView"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="40dp"
+            android:text="41.6"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/red"
+            android:textSize="150sp" />
     </RelativeLayout>
 
 </LinearLayout>

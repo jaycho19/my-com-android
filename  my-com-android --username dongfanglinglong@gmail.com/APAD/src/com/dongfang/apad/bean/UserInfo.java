@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 
 import com.dongfang.apad.util.ULog;
-import com.dongfang.apad.util.Util;
 
 /**
  * 持卡人卡片人物信息
@@ -19,10 +18,17 @@ public class UserInfo implements Parcelable {
 	public static final String	TAG	= UserInfo.class.getSimpleName();
 
 	private byte[]				readbyte;
-	/** 卡号 */
+
+	/**
+	 * 卡号
+	 * 
+	 * @deprecated
+	 * */
 	private String				id;
 	/** 用户号 */
 	private int					userId;
+	/** 发卡单位 */
+	private String				fkdw;
 
 	/** 姓名 */
 	private String				name;
@@ -112,11 +118,19 @@ public class UserInfo implements Parcelable {
 		ULog.d(TAG, "name = " + name);
 
 		sex = 0xFF & input[40];
+		age = 0xFF & input[39];
 
 		year = (0xFF & input[41]) * 100 + (0xFF & input[42]);
 		month = 0xFF & input[43];
 		day = 0xFF & input[44];
-		age = 0xFF & input[48];
+
+		fkdw = "";
+		for (int i = 48; i < 52; i++) {
+			if (31 < (0xFF & input[i]) && (0xFF & input[i]) < 127) {
+				fkdw = fkdw + (char) input[i];
+			}
+		}
+
 		nativePlace = Integer.toString(0xFF & input[45]) + Integer.toString(0xFF & input[46]) + Integer.toString(0xFF & input[47]);
 		IDCardNO = "";
 		for (int i = 52; i < 69; i++) {
@@ -146,6 +160,17 @@ public class UserInfo implements Parcelable {
 		heartRate2 = 0xFF & readbyte[91];
 		heartRate3 = 0xFF & readbyte[92];
 		stepTestExp = Double.valueOf((0xFF & readbyte[93]) + "." + (0xFF & readbyte[94]));
+	}
+
+	public String getFkdw() {
+		return fkdw;
+	}
+
+	public void setFkdw(String fkdw) {
+		this.fkdw = fkdw;
+		for (int i = 0, length = fkdw.length(); i < length; i++) {
+			readbyte[48 + i] = (byte) fkdw.charAt(i);
+		}
 	}
 
 	public byte[] getReadbyte() {
@@ -201,7 +226,7 @@ public class UserInfo implements Parcelable {
 
 	public void setAge(int age) {
 		this.age = age;
-		readbyte[48] = (byte) age;
+		readbyte[39] = (byte) age;
 
 	}
 
@@ -522,8 +547,8 @@ public class UserInfo implements Parcelable {
 		sb.append("\t会员号：" + userId);
 		sb.append("\t\t姓名：" + name);
 		sb.append("\t\t性别：" + getGender());
-		sb.append("\t\t年龄：" + age);
-		sb.append("\t\t工作单位：闲扯淡");
+		// sb.append("\t\t年龄：" + age);
+		// sb.append("\t\t工作单位：闲扯淡");
 
 		return sb.toString();
 	}
@@ -581,24 +606,24 @@ public class UserInfo implements Parcelable {
 
 	public static final Parcelable.Creator<UserInfo>	CREATOR	= new Parcelable.Creator<UserInfo>() {
 
-		@Override
-		public UserInfo createFromParcel(Parcel source) {
-			UserInfo ui = new UserInfo();
-			ui.id = source.readString();
-			byte[] input = new byte[256];
-			source.readByteArray(input);
-	
-			// ULog.d(TAG, "createFromParcel " +
-			// Util.bytesToHexString(input).toUpperCase());
-	
-			ui.setValue(input);
-			return ui;
-		}
-	
-		@Override
-		public UserInfo[] newArray(int size) {
-			return new UserInfo[size];
-		}
-	};
+																	@Override
+																	public UserInfo createFromParcel(Parcel source) {
+																		UserInfo ui = new UserInfo();
+																		ui.id = source.readString();
+																		byte[] input = new byte[256];
+																		source.readByteArray(input);
+
+																		// ULog.d(TAG, "createFromParcel " +
+																		// Util.bytesToHexString(input).toUpperCase());
+
+																		ui.setValue(input);
+																		return ui;
+																	}
+
+																	@Override
+																	public UserInfo[] newArray(int size) {
+																		return new UserInfo[size];
+																	}
+																};
 
 }

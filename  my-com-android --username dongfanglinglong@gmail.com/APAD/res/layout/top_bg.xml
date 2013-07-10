@@ -29,7 +29,7 @@
             android:gravity="center"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="取消"
+            android:text="返回"
             android:textColor="#FFFFFFFF"
             android:textSize="26sp"
             android:textStyle="bold" />
@@ -74,7 +74,7 @@
         android:background="@drawable/bg_title_line"
         android:gravity="center_vertical"
         android:paddingLeft="40dp"
-        android:text="会员号：00001000001      姓名：刘德华      性别：男      年龄：28 岁      工作单位：上海邦文电子科技有限公司"
-        android:textSize="16sp" />
+        android:text="姓名：刘德华      性别：男      年龄：28 岁"
+        android:textSize="26sp" />
 
 </RelativeLayout>
