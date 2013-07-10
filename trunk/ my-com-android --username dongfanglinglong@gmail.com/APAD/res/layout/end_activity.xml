@@ -200,41 +200,12 @@
             </TableRow>
         </TableLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_0_testresult_des"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tableLayout0"
-            android:layout_alignRight="@+id/tableLayout0"
-            android:layout_below="@+id/tableLayout0"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/center001"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:visibility="gone" >
-
-            <ImageView
-                android:id="@+id/iv_0_testresult_des"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:src="@drawable/notice_level02" />
-
-            <TextView
-                android:id="@+id/tv_0_testresult_des"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="握力评分为2分，说明您手臂的力量较差，容易导致手臂的骨骼（桡骨）骨质少空孔，并增加手臂肌肉劳损和 骨折的风险。科学的力量练习能有效降低风险。"
-                android:textSize="24sp" />
-        </LinearLayout>
 
         <TableLayout
             android:id="@+id/tableLayout1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ll_0_testresult_des"
+            android:layout_below="@+id/tableLayout0"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp" >
 

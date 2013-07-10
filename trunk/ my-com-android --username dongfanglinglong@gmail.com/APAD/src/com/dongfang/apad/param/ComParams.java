@@ -85,10 +85,10 @@ public class ComParams {
 
 	/** 数据保存到云端 */
 	public static final int		HANDLER_SOCKET_SAVE_TO_CLOUD			= 3200;
-	
-	/** 数据保存到云端 */
-	public static final int		HANDLER_SOCKET_CLOSE_CARD			= 3300;
-	public static final int		HANDLER_SOCKET_close_TEST_ZKT			= 3301;
+
+	/** 关闭连接*/
+	public static final int		HANDLER_SOCKET_CLOSE_CARD				= 3300;
+	public static final int		HANDLER_SOCKET_CLOSE_TEST_ZKT			= 3301;
 
 	// ------------------------------------------------------------------------------------------
 	public static final String	CTWAP									= "CTWAP";

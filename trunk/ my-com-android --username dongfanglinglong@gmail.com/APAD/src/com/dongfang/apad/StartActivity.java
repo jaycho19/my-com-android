@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dongfang.apad.asynctask.WriteGripToCard;
 import com.dongfang.apad.bean.TestResult;
 import com.dongfang.apad.bean.UserInfo;
 import com.dongfang.apad.broadcast.UpdateDataReceiver;
@@ -88,34 +89,34 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		IntentFilter filter = new IntentFilter();
-		filter.addAction(getPackageName().toString() + "." + UpdateDataReceiver.TAG);
-		registerReceiver(updateDataReceiver, filter);
 
 		Intent intentService = new Intent(this, DFService.class);
-		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD, ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
+		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD
+		 , ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT
+				});
 		startService(intentService);
 	}
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(getPackageName().toString() + "." + UpdateDataReceiver.TAG);
+		registerReceiver(updateDataReceiver, filter);
 		super.onResume();
 	}
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
+		unregisterReceiver(updateDataReceiver);
 		super.onPause();
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		unregisterReceiver(updateDataReceiver);
-
 		Intent intentService = new Intent(this, DFService.class);
 		intentService.putExtra(ComParams.SERVICE_HANDLER_REMOVE_ALL, ComParams.SERVICE_HANDLER_REMOVE_ALL);
+		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CLOSE_CARD, ComParams.HANDLER_SOCKET_CLOSE_TEST_ZKT });
 		startService(intentService);
 
 	}
@@ -154,6 +155,8 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		ULog.d(TAG, userInfo.toString());
 		tvUserInfo.setText(userInfo.getUserShowInfo());
 		tvUserInfo.setVisibility(View.VISIBLE);
+
+		// new WriteGripToCard(this, userInfo).execute(11.1, 2.0);
 
 	}
 
@@ -251,6 +254,9 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 				startService(intentService);
 			}
 
+			if (null != data && null != data.getParcelable(ComParams.ACTIVITY_USERINFO) && !tvUserInfo.isShown())
+				initData((UserInfo) data.getParcelable(ComParams.ACTIVITY_USERINFO));
+			
 			if (null != data && null != data.getParcelable(ComParams.ACTIVITY_TESTRESULT)) {
 				TestResult testResult = (TestResult) data.getParcelable(ComParams.ACTIVITY_TESTRESULT);
 				ULog.d(TAG, testResult.toString());

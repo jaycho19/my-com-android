@@ -70,30 +70,36 @@ public class TestResult implements Parcelable {
 			item = "握力（千克）";
 
 			isFinish = input[3];
+			ULog.d(TAG, "isFinish = " + isFinish);
 
 			int kg = (input[5] & 0xFF);
 			kg |= (input[4] << 8) & 0xFF00;
 			result = Double.valueOf(kg + "." + ((int) input[6] & 0xFF));
+			result = result > 99 ? 0.0 : result;
 			if (0x01 == input[4])
 				times++;
 			date = Util.getDate();
 			double g = Double.valueOf(result);
 			if (g < 32.6) {
 				resultGray = 1;
+				resultDes = "您的握力最好成绩评分为1分，说明您手臂的力量较差，容易导致手臂的骨骼（桡骨）骨质少空孔，并增加手臂肌肉劳损和 骨折的风险。科学的力量练习能有效降低风险。";
 			}
 			else if (g < 38.4) {
 				resultGray = 2;
+				resultDes = "您的握力最好成绩评分为2分，说明您手臂的力量较差，容易导致手臂的骨骼（桡骨）骨质少空孔，并增加手臂肌肉劳损和 骨折的风险。科学的力量练习能有效降低风险。";
 			}
 			else if (g < 44.9) {
 				resultGray = 4;
+				resultDes = "您的握力最好成绩评分为 4 分，说明您手臂的力量较好，请保持。";
 			}
 			else if (g < 50.5) {
 				resultGray = 5;
+				resultDes = "您的握力最好成绩评分为 5 分，说明您手臂的力量非常好，请保持。";
 			}
 			else {
-				resultGray = 5;
+				resultGray = 3;
+				resultDes = "您的握力最好成绩评分为 3 分，说明您手臂的力量较差，容易导致手臂的骨骼（桡骨）骨质少空孔，并增加手臂肌肉劳损和 骨折的风险。科学的力量练习能有效降低风险。";
 			}
-			resultDes = "";
 			break;
 		default:
 			break;
