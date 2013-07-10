@@ -9,15 +9,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.dongfang.apad.asynctask.SaveTestResult;
+import com.dongfang.apad.asynctask.WriteGripToCard;
 import com.dongfang.apad.bean.TestResult;
 import com.dongfang.apad.bean.UserInfo;
 import com.dongfang.apad.broadcast.UpdateDataReceiver;
 import com.dongfang.apad.param.ComParams;
 import com.dongfang.apad.service.DFService;
 import com.dongfang.apad.util.ULog;
+import com.dongfang.apad.view.DialogFactory;
+import com.dongfang.apad.view.DialogFactory.onBtnClickListener;
 
 /**
  * 测试结果
@@ -31,6 +34,7 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 		TAG = EndActivity.class.getSimpleName();
 	}
 
+	/** @deprecated */
 	public static final int		TESTTIME_TOTAL		= 2;
 	private int					times				= 0;
 	private Button				btnTestagain;
@@ -78,12 +82,14 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 	/** 测试结果类 */
 	private TestResult			testResult			= null;
 	private UserInfo			userInfo			= null;
+	private DialogFactory		dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.end_activity);
 		initView();
+		dialog = new DialogFactory(this);
 
 		if (0 != getIntent().getIntExtra(ComParams.ACTIVITY_PAGENAME, 0)) {
 			tvPageName.setText(getIntent().getIntExtra(ComParams.ACTIVITY_PAGENAME, 0));
@@ -160,7 +166,8 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 			tvClassify[times].setText(testResult.getClassify());
 			// --------------------------------------------------------
 			if (TextUtils.isEmpty(testResult.getItemDes())) {
-				tvTestItemDes[times].setVisibility(View.GONE);
+				tvTestItemDes[0].setVisibility(View.GONE);
+				tvTestItemDes[1].setVisibility(View.GONE);
 			}
 			else {
 				tvTestItemDes[times].setVisibility(View.VISIBLE);
@@ -168,23 +175,25 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 			}
 			tvTestItem[times].setText(testResult.getItem());
 			if (TextUtils.isEmpty(testResult.getItem1())) {
-				tvTestItem1[times].setVisibility(View.GONE);
+				tvTestItem1[0].setVisibility(View.GONE);
+				tvTestItem1[1].setVisibility(View.GONE);
 			}
 			else {
 				tvTestItem1[times].setVisibility(View.VISIBLE);
 				tvTestItem1[times].setText(testResult.getItem1());
 			}
 			// --------------------------------------------------------
-			tvTestResult[times].setText(TextUtils.isEmpty(testResult.getResult()) ? "0" : testResult.getResult());
-			if (TextUtils.isEmpty(testResult.getResult1())) {
-				tvTestResult1[times].setVisibility(View.GONE);
+			tvTestResult[times].setText(Double.toString(testResult.getResult()));
+			if (testResult.getResult1() < 0.1) {
+				tvTestResult1[0].setVisibility(View.GONE);
+				tvTestResult1[1].setVisibility(View.GONE);
 			}
 			else {
 				tvTestResult1[times].setVisibility(View.VISIBLE);
-				tvTestResult1[times].setText(testResult.getResult1());
+				tvTestResult1[times].setText(Double.toString(testResult.getResult1()));
 			}
-			// --------------------------------------------------------
-			tvTestTimes[times].setText(Integer.toString(times));
+			// ------次数不填写--------------------------------------------------
+			// tvTestTimes[times].setText(Integer.toString(times));
 			// --------------------------------------------------------
 			tvTestDate[times].setText(testResult.getDate());
 			// --------------------------------------------------------
@@ -218,7 +227,7 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 
 			if (times == 1) {
 				tableLayout[1].setVisibility(View.VISIBLE);
-				ll_1_testresult_des.setVisibility(View.VISIBLE);
+				// ll_1_testresult_des.setVisibility(View.VISIBLE);
 			}
 		}
 	}
@@ -227,10 +236,13 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 	protected void onStart() {
 		super.onStart();
 		initData();
-
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(getPackageName().toString() + "." + UpdateDataReceiver.TAG);
 		registerReceiver(updateDataReceiver, filter);
+
+//		Intent intentService = new Intent(this, DFService.class);
+//		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
+//		startService(intentService);
 	}
 
 	@Override
@@ -275,22 +287,41 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 		// }
 		// break;
 		case R.id.btn_testagain: {
-			if ((times + 1) < TESTTIME_TOTAL) {
-				times++;
+			if (times < 1) {
+				times = 1;
 				Intent intentService = new Intent(EndActivity.this, DFService.class);
 				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
 				startService(intentService);
 				btnTestagain.setClickable(false);
 			}
 
-			if (TESTTIME_TOTAL == (times + 1)) {
+			if (1 == times) {
 				btnTestagain.setVisibility(View.GONE);
+				tableLayout[1].setVisibility(1);
 			}
+
 		}
 			break;
 		default:
 			break;
 		}
+	}
+
+	public void reWriteToCard() {
+		dialog.showDialogAboutCard(new onBtnClickListener() {
+
+			@Override
+			public void btnOkClickListener(View v) {
+				new WriteGripToCard(EndActivity.this, userInfo).execute("2");
+			}
+
+			@Override
+			public void btnCancleClickListener(View v) {
+				// TODO Auto-generated method stub
+			}
+
+		}, true);
+
 	}
 
 	class MyOnUpdateDataListener implements OnUpdateDataListener {
@@ -316,20 +347,24 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 
 		@Override
 		public void onSocketConnectTestZKT(boolean isConnect, Bundle data) {
+			ULog.d(TAG, "onSocketConnectTestZKT isConnect = " + isConnect);
+
 			if (null != data && !TextUtils.isEmpty(data.getString(ComParams.BROADCAST_HANDLER_DES))) {
 				tvTestZKTSocketInfo.setText(data.getString(ComParams.BROADCAST_HANDLER_DES));
 			}
 
-			if (isConnect) {
-				Intent intentService = new Intent(EndActivity.this, DFService.class);
-				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
-				startService(intentService);
-			}
+			// if (isConnect) {
+			// Intent intentService = new Intent(EndActivity.this, DFService.class);
+			// intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] {
+			// ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
+			// startService(intentService);
+			// }
 
 		}
 
 		@Override
 		public void onTestZKTRestarted(boolean isConnect, Bundle data) {
+			ULog.d(TAG, "onTestZKTRestarted isConnect = " + isConnect);
 			/** 有可能存在死循环错误： 与onSocketConnectCard */
 			if (!isConnect) {
 				Intent intentService = new Intent(EndActivity.this, DFService.class);
@@ -353,7 +388,8 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 
 		@Override
 		public void onGetTestZKTResult(boolean isConnect, Bundle data) {
-			if ((times + 1) < TESTTIME_TOTAL)
+			ULog.d(TAG, "onGetTestZKTResult isConnect = " + isConnect);
+			if (times < 1)
 				btnTestagain.setClickable(true);
 			if (!isConnect) {
 				Intent intentService = new Intent(EndActivity.this, DFService.class);
@@ -362,8 +398,25 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 			}
 
 			if (null != data && null != data.getParcelable(ComParams.ACTIVITY_TESTRESULT)) {
+				ULog.d(TAG, ((TestResult) data.getParcelable(ComParams.ACTIVITY_TESTRESULT)).toString());
 				testResult = (TestResult) data.getParcelable(ComParams.ACTIVITY_TESTRESULT);
 				initData();
+
+				userInfo = (UserInfo) data.getParcelable(ComParams.ACTIVITY_USERINFO);
+
+				if (0x01 == testResult.getIsFinish() && times == 1) {
+					ll_1_testresult_des.setVisibility(View.VISIBLE);
+
+					Intent intentService = new Intent(EndActivity.this, DFService.class);
+					intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CLOSE_CARD });
+					startService(intentService);
+					
+					
+					double max = Math.max(testResult.getResult(), Double.valueOf(tvTestResult[0].getText().toString()));
+					// new SaveTestResult(EndActivity.this).execute(Integer.toString(userInfo.getUserId()), Double.toString(max));
+					new WriteGripToCard(EndActivity.this, userInfo).execute("1");
+				}
+
 			}
 		}
 	}

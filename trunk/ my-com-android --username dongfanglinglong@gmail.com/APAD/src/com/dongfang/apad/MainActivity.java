@@ -15,6 +15,7 @@ import com.dongfang.apad.asynctask.SaveTestResult;
 import com.dongfang.apad.param.ComParams;
 import com.dongfang.apad.service.DFService;
 import com.dongfang.apad.util.ULog;
+import com.dongfang.apad.view.DialogFactory;
 
 /***
  * 
@@ -101,7 +102,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 //		new AdminLogon(this).execute();
 //		new QueryUser(this).execute();
-//		new SaveTestResult(this).execute();
+//		new SaveTestResult(this).execute("2","33.9");
 
 	}
 
@@ -152,6 +153,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			intent.putExtra(ComParams.ACTIVITY_PAGENAME, R.string.pageName001);
 			// intent.putExtra(ComParams.ACTIVITY_TESTRESULT, new TestResult());
 			startActivity(intent);
+			
+//			new DialogFactory(this).showDialogAboutCard(null, true);
+			
 			break;
 		case R.id.btn_002:
 			intent.setClass(this, StartActivity.class);

@@ -9,7 +9,6 @@ import android.widget.Toast;
 import com.dongfang.apad.net.HttpActions;
 import com.dongfang.apad.util.DFException;
 import com.dongfang.apad.util.ULog;
-import com.dongfang.apad.util.Util;
 import com.dongfang.apad.view.MyProgressDialog;
 import com.google.gson.JsonObject;
 
@@ -66,29 +65,30 @@ public class SaveTestResult extends AsyncTask<String, String, String> {
 
 	@Override
 	protected String doInBackground(String... params) {
-		HttpActions httpActions = new HttpActions(context);
 		String result = null;
-
-		JsonObject entity = new JsonObject();
-		entity.addProperty("TYPE", "SaveProjectTestResult");
-		JsonObject detail = new JsonObject();
-		entity.add("DETAIL", detail);
-
-		detail.addProperty("PROJECTNUM", "04");
-		// detail.addProperty("USERID", "11");
-		// detail.addProperty("PROJECTRESULT", "2");
-		detail.addProperty("USERID", params[0]);
-		detail.addProperty("PROJECTRESULT", params[1]);
-		detail.addProperty("MACHINEID", Util.getMacAddress(context));
-		detail.addProperty("REMARK", "");
-
 		try {
+			HttpActions httpActions = new HttpActions(context);
+
+			JsonObject entity = new JsonObject();
+			entity.addProperty("TYPE", "SaveProjectTestResult");
+			JsonObject detail = new JsonObject();
+			entity.add("DETAIL", detail);
+
+			detail.addProperty("PROJECTNUM", "04");
+			detail.addProperty("USERID", params[0]);
+			detail.addProperty("PROJECTRESULT", params[1]);
+			detail.addProperty("MACHINEID", "01");
+			// detail.addProperty("USERID", "11");
+			// detail.addProperty("PROJECTRESULT", "2");
+			// detail.addProperty("MACHINEID", Util.getMacAddress(context));
+			detail.addProperty("REMARK", "");
 
 			result = httpActions.getResponse(null, "SaveProjectTestResult", entity.toString());
 		} catch (DFException e) {
 			e.printStackTrace();
 			ULog.e(TAG, e.getMessage());
-			Toast.makeText(context, "数据上传失败！", Toast.LENGTH_LONG).show();
+			result = "error";
+
 		}
 		return result;
 	}
@@ -107,6 +107,14 @@ public class SaveTestResult extends AsyncTask<String, String, String> {
 		if (!TextUtils.isEmpty(result)) {
 			ULog.d(TAG, result);
 		}
+
+		if (result.equals("error")) {
+			Toast.makeText(context, "数据上传失败！", Toast.LENGTH_LONG).show();
+		}
+		else if (!TextUtils.isEmpty(result)) {
+			Toast.makeText(context, "数据上传成功！", Toast.LENGTH_LONG).show();
+		}
+
 	}
 
 	/*

@@ -11,8 +11,8 @@ import android.os.Environment;
 public class ComParams {
 
 	// ------------------------------------------------------------------------------------------
-	public static String		IP_CARD									= "192.168.1.101";
-	public static String		IP_TEST									= "192.168.1.100";
+	public static String		IP_CARD									= "192.168.1.102";
+	public static String		IP_TEST									= "192.168.1.104";
 	public static int			PORT_CARD								= 8899;
 	public static int			PORT_TEST								= 8899;
 	public static int			SOCKET_TIMEOUT							= 5000;
@@ -73,6 +73,8 @@ public class ComParams {
 	public static final int		HANDLER_SOCKET_GET_USER_INFO			= 3002;
 	/** SOCKET 写输入到卡内 */
 	public static final int		HANDLER_SOCKET_WRITE_CARD_INFO			= 3050;
+	/** SOCKET 写输入到卡内失败 */
+	public static final int		HANDLER_SOCKET_WRITE_CARD_FAILED		= 3051;
 
 	/** 连接socket网络testZKT */
 	public static final int		HANDLER_SOCKET_CONNECT_TEST_ZKT			= 3100;
@@ -83,6 +85,10 @@ public class ComParams {
 
 	/** 数据保存到云端 */
 	public static final int		HANDLER_SOCKET_SAVE_TO_CLOUD			= 3200;
+	
+	/** 数据保存到云端 */
+	public static final int		HANDLER_SOCKET_CLOSE_CARD			= 3300;
+	public static final int		HANDLER_SOCKET_close_TEST_ZKT			= 3301;
 
 	// ------------------------------------------------------------------------------------------
 	public static final String	CTWAP									= "CTWAP";
