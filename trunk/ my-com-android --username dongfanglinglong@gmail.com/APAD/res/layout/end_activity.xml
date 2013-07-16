@@ -431,6 +431,7 @@
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
             android:text="再测一次"
+            android:visibility="invisible"
             android:textColor="#FFFFFFFF"
             android:textSize="26sp" />
 

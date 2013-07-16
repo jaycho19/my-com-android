@@ -109,7 +109,7 @@ public class SaveTestResult extends AsyncTask<String, String, String> {
 		}
 
 		if (result.equals("error")) {
-			Toast.makeText(context, "数据上传失败！", Toast.LENGTH_LONG).show();
+//			Toast.makeText(context, "数据上传失败！", Toast.LENGTH_LONG).show();
 		}
 		else if (!TextUtils.isEmpty(result)) {
 			Toast.makeText(context, "数据上传成功！", Toast.LENGTH_LONG).show();
