@@ -29,9 +29,9 @@ public class ComParams {
 	// ------------------------------------------------------------------------------------------
 
 	public static final String	NAME_SPACE								= "http://tempuri.org/";
-	public static final String	URL_BASE								= "http://service.jklaile.com/TiWeiService.asmx";
+	public static final String	URL_BASE								= "http://192.168.0.150:8081/TiWeiService.asmx";
 	public static final String	URL_GET									= URL_BASE + "/Internet";
-	public static final String	URL_POST								= "http://service.jklaile.com/TiWeiService.asmx";
+	public static final String	URL_POST								= "http://192.168.0.150:8081/TiWeiService.asmx";
 	public static final int		HTTP_TIMEOUT							= 5000;
 
 	public static final String	URL_BASE_IMGAGE							= "http://img3.tv189.cn";
@@ -86,7 +86,7 @@ public class ComParams {
 	/** 数据保存到云端 */
 	public static final int		HANDLER_SOCKET_SAVE_TO_CLOUD			= 3200;
 
-	/** 关闭连接*/
+	/** 关闭连接 */
 	public static final int		HANDLER_SOCKET_CLOSE_CARD				= 3300;
 	public static final int		HANDLER_SOCKET_CLOSE_TEST_ZKT			= 3301;
 

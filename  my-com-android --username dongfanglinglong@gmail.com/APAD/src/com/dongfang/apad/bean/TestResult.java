@@ -38,7 +38,9 @@ public class TestResult implements Parcelable {
 	private String				date;
 	/** 测试成绩 */
 	private int					resultGray;
-	/** 测试结果描述 */
+	/** 测试结果描述 
+	 * @deprecated
+	 * */
 	private String				resultDes;
 
 	public TestResult() {

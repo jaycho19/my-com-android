@@ -143,11 +143,11 @@ public class WriteGripToCard extends AsyncTask<Double, String, Double> {
 		// 注意： 写卡时，如果卡片离开读卡器，返回数据为写卡成功数据
 		try {
 			if (1 == result.intValue()) {
-				Toast.makeText(context, "写卡失败！", Toast.LENGTH_LONG).show();
+//				Toast.makeText(context, "写卡失败！", Toast.LENGTH_LONG).show();
 				((EndActivity) context).reWriteToCard();
 			}
 			else if (2 == result.intValue()) {
-				Toast.makeText(context, "写卡失败！", Toast.LENGTH_LONG).show();
+//				Toast.makeText(context, "写卡失败！", Toast.LENGTH_LONG).show();
 			}
 			else {
 				Toast.makeText(context, "写卡成功！", Toast.LENGTH_LONG).show();

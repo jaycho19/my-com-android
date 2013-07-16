@@ -37,6 +37,7 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 	/** @deprecated */
 	public static final int		TESTTIME_TOTAL		= 2;
 	private int					times				= 0;
+	private int					gray				= 0;
 	private Button				btnTestagain;
 
 	/** 测试页面名称 */
@@ -65,9 +66,9 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 	/** 测试成绩 */
 	private ImageView[]			ivTestGrade			= new ImageView[2];
 	/** 成绩描述 */
-	private TextView[]			tvTestResultDes		= new TextView[2];
+	private TextView			tvTestResultDes		= null;
 	/** 成绩描述图片 */
-	private ImageView[]			iv_testresult_des	= new ImageView[2];
+	private ImageView			iv_testresult_des	= null;
 
 	/** 成绩描述布局 */
 	private LinearLayout		ll_1_testresult_des;
@@ -146,10 +147,12 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 		tvTestDate[1] = (TextView) findViewById(R.id.tv_1_testdate);
 		ivTestGrade[0] = (ImageView) findViewById(R.id.iv_0_testgrade);
 		ivTestGrade[1] = (ImageView) findViewById(R.id.iv_1_testgrade);
-		tvTestResultDes[0] = (TextView) findViewById(R.id.tv_1_testresult_des);
-		tvTestResultDes[1] = (TextView) findViewById(R.id.tv_1_testresult_des);
-		iv_testresult_des[0] = (ImageView) findViewById(R.id.iv_1_testresult_des);
-		iv_testresult_des[1] = (ImageView) findViewById(R.id.iv_1_testresult_des);
+		// tvTestResultDes[0] = (TextView) findViewById(R.id.tv_1_testresult_des);
+		// tvTestResultDes[1] = (TextView) findViewById(R.id.tv_1_testresult_des);
+		// iv_testresult_des[0] = (ImageView) findViewById(R.id.iv_1_testresult_des);
+		// iv_testresult_des[1] = (ImageView) findViewById(R.id.iv_1_testresult_des);
+		tvTestResultDes = (TextView) findViewById(R.id.tv_1_testresult_des);
+		iv_testresult_des = (ImageView) findViewById(R.id.iv_1_testresult_des);
 		ll_1_testresult_des = (LinearLayout) findViewById(R.id.ll_1_testresult_des);
 
 		tableLayout[1].setVisibility(View.GONE);
@@ -218,15 +221,35 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 			}
 			ivTestGrade[times].setImageResource(iImageId);
 			// --------------------------------------------------------
-			tvTestResultDes[times].setText(testResult.getResultDes());
-			if (1 == testResult.getResultGray()) {
-				iv_testresult_des[times].setImageResource(R.drawable.notice_level01);
+			if (1 == times) {
+				gray = Math.max(testResult.getResultGray(), gray);
+				switch (gray) {
+				case 2:
+					iv_testresult_des.setImageResource(R.drawable.notice_level02);
+					tvTestResultDes.setText("您的握力最好成绩评分为2分，说明您手臂的力量较差，容易导致手臂的骨骼（桡骨）骨质少空孔，并增加手臂肌肉劳损和 骨折的风险。科学的力量练习能有效降低风险。");
+					break;
+				case 3:
+					iv_testresult_des.setImageResource(R.drawable.notice_level03);
+					tvTestResultDes.setText("您的握力最好成绩评分为 3 分，说明您手臂的力量较差，容易导致手臂的骨骼（桡骨）骨质少空孔，并增加手臂肌肉劳损和 骨折的风险。科学的力量练习能有效降低风险。");
+					break;
+				case 4:
+					iv_testresult_des.setImageResource(R.drawable.notice_level03);
+					tvTestResultDes.setText("您的握力最好成绩评分为 4 分，说明您手臂的力量较好，请保持。");
+					break;
+				case 5:
+					iv_testresult_des.setImageResource(R.drawable.notice_level03);
+					tvTestResultDes.setText("您的握力最好成绩评分为 5 分，说明您手臂的力量非常好，请保持。");
+					break;
+				case 1:
+				default:
+					iv_testresult_des.setImageResource(R.drawable.notice_level01);
+					tvTestResultDes.setText("您的握力最好成绩评分为1分，说明您手臂的力量较差，容易导致手臂的骨骼（桡骨）骨质少空孔，并增加手臂肌肉劳损和 骨折的风险。科学的力量练习能有效降低风险。");
+					break;
+				}
+
 			}
-			else if (2 == testResult.getResultGray()) {
-				iv_testresult_des[times].setImageResource(R.drawable.notice_level02);
-			}
-			else {
-				iv_testresult_des[times].setImageResource(R.drawable.notice_level03);
+			else if (0 == times) {
+				gray = testResult.getResultGray();
 			}
 
 			if (times == 1) {
@@ -300,7 +323,7 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 			}
 
 			if (1 == times) {
-				btnTestagain.setVisibility(View.GONE);
+				btnTestagain.setVisibility(View.INVISIBLE);
 				tableLayout[1].setVisibility(1);
 			}
 
@@ -360,6 +383,7 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 
 			if (isConnect) {
 				btnTestagain.setClickable(true);
+				btnTestagain.setVisibility(1);
 
 				Intent intentService = new Intent(EndActivity.this, DFService.class);
 				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
@@ -367,6 +391,8 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 			}
 			else {
 				btnTestagain.setClickable(false);
+				btnTestagain.setVisibility(4);
+
 			}
 
 		}
