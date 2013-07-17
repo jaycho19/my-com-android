@@ -11,8 +11,8 @@ import android.os.Environment;
 public class ComParams {
 
 	// ------------------------------------------------------------------------------------------
-	public static String		IP_CARD									= "192.168.1.102";
-	public static String		IP_TEST									= "192.168.1.104";
+	public static String		IP_CARD									= "192.168.0.102";
+	public static String		IP_TEST									= "192.168.0.103";
 	public static int			PORT_CARD								= 8899;
 	public static int			PORT_TEST								= 8899;
 	public static int			SOCKET_TIMEOUT							= 5000;
@@ -89,6 +89,8 @@ public class ComParams {
 	/** 关闭连接 */
 	public static final int		HANDLER_SOCKET_CLOSE_CARD				= 3300;
 	public static final int		HANDLER_SOCKET_CLOSE_TEST_ZKT			= 3301;
+	/** 出现错误 */
+	public static final int		HANDLER_ERROR							= 3500;
 
 	// ------------------------------------------------------------------------------------------
 	public static final String	CTWAP									= "CTWAP";
@@ -115,6 +117,8 @@ public class ComParams {
 	public static final String	ACTIVITY_PAGENAME						= "pageName";
 	public static final String	ACTIVITY_USERINFO						= "userInfo";
 	public static final String	ACTIVITY_TESTRESULT						= "testResult";
+	public static final String	ACTIVITY_ERRORINFO						= "errorinfo";
+	public static final String	ACTIVITY_ERRORID						= "errorid";
 
 	// 1 none AC-CF-23-20-68-8B ZKT
 	// 2 none AC-CF-23-20-68-88 CARD

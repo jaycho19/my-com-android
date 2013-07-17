@@ -217,10 +217,10 @@ public class TestResult implements Parcelable {
 		sb.append("item1      = ").append(item1).append("\n");
 		sb.append("result     = ").append(result).append("\n");
 		sb.append("result1    = ").append(result1).append("\n");
-		sb.append("times      = ").append(times).append("\n");
-		sb.append("date       = ").append(date).append("\n");
+		// sb.append("times      = ").append(times).append("\n");
+		// sb.append("date       = ").append(date).append("\n");
 		sb.append("resultGray = ").append(resultGray).append("\n");
-		sb.append("resultDes  = ").append(resultDes).append("\n");
+		// sb.append("resultDes  = ").append(resultDes).append("\n");
 		return sb.toString();
 	}
 

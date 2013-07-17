@@ -47,6 +47,9 @@ public class UpdateDataReceiver extends BroadcastReceiver {
 			case ComParams.HANDLER_SOCKET_GET_TEST_ZKT_RESULT:
 				onUpdateDataListener.onGetTestZKTResult(isConnected, data);
 				break;
+			case ComParams.HANDLER_ERROR:
+				onUpdateDataListener.onError(isConnected, data);
+				break;
 			default:
 				break;
 			}
