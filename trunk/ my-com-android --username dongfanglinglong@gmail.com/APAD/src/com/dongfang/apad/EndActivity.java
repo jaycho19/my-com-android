@@ -3,6 +3,7 @@ package com.dongfang.apad;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dongfang.apad.asynctask.SaveTestResult;
 import com.dongfang.apad.asynctask.WriteGripToCard;
@@ -267,9 +269,15 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 		filter.addAction(getPackageName().toString() + "." + UpdateDataReceiver.TAG);
 		registerReceiver(updateDataReceiver, filter);
 
-		Intent intentService = new Intent(this, DFService.class);
-		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
-		startService(intentService);
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				Intent intentService = new Intent(EndActivity.this, DFService.class);
+				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
+				startService(intentService);
+			}
+		}, 500);
+
 	}
 
 	@Override
@@ -316,13 +324,13 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 			if (times < 1) {
 				times = 1;
 				btnTestagain.setClickable(false);
-				// Intent intentService = new Intent(EndActivity.this, DFService.class);
-				// intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] {
-				// ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
-				// startService(intentService);
+				 Intent intentService = new Intent(EndActivity.this, DFService.class);
+				 intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] {
+				 ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
+				 startService(intentService);
 			}
 
-			if (1 == times) {
+			if (1 <= times) {
 				btnTestagain.setVisibility(View.INVISIBLE);
 				tableLayout[1].setVisibility(1);
 			}
@@ -381,9 +389,13 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 				tvTestZKTSocketInfo.setText(data.getString(ComParams.BROADCAST_HANDLER_DES));
 			}
 
+			ULog.e(TAG, "df  = " + isConnect + " , btnTestagain isvisibility = " + btnTestagain.isShown());
+
 			if (isConnect) {
-				btnTestagain.setClickable(true);
-				btnTestagain.setVisibility(1);
+				if (times < 1) {
+					btnTestagain.setClickable(true);
+					btnTestagain.setVisibility(1);
+				}
 
 				Intent intentService = new Intent(EndActivity.this, DFService.class);
 				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
@@ -442,9 +454,10 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 				if (0x01 == testResult.getIsFinish() && times == 1) {
 					ll_1_testresult_des.setVisibility(View.VISIBLE);
 
-					Intent intentService = new Intent(EndActivity.this, DFService.class);
-					intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CLOSE_CARD, ComParams.HANDLER_SOCKET_CLOSE_TEST_ZKT });
-					startService(intentService);
+					// Intent intentService = new Intent(EndActivity.this, DFService.class);
+					// intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] {
+					// ComParams.HANDLER_SOCKET_CLOSE_CARD, ComParams.HANDLER_SOCKET_CLOSE_TEST_ZKT });
+					// startService(intentService);
 
 					double max = Math.max(testResult.getResult(), Double.valueOf(tvTestResult[0].getText().toString()));
 					new SaveTestResult(EndActivity.this).execute(Integer.toString(userInfo.getUserId()), Double.toString(max));
@@ -452,6 +465,13 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 				}
 
 			}
+		}
+
+		@Override
+		public void onError(boolean isConnect, Bundle data) {
+			if (data.getInt(ComParams.ACTIVITY_ERRORID) > 4)
+				Toast.makeText(EndActivity.this, data.getString(ComParams.ACTIVITY_ERRORINFO), Toast.LENGTH_SHORT).show();
+				//finish();
 		}
 	}
 }

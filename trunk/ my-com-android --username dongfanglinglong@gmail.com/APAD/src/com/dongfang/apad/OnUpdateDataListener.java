@@ -14,4 +14,6 @@ public interface OnUpdateDataListener {
 	public void onTestZKTRestarted(boolean isConnect, Bundle data);
 
 	public void onGetTestZKTResult(boolean isConnect, Bundle data);
+	
+	public void onError(boolean isConnect, Bundle data);
 }

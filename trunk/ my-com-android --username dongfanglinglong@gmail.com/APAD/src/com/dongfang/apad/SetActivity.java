@@ -5,9 +5,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 
-import com.dongfang.apad.asynctask.AdminLogon;
-import com.dongfang.apad.asynctask.QueryUser;
-import com.dongfang.apad.asynctask.SaveTestResult;
 import com.dongfang.apad.param.ComParams;
 import com.dongfang.apad.util.Util;
 

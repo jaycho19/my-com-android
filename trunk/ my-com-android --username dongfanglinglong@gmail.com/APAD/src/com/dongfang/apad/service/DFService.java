@@ -58,13 +58,9 @@ public class DFService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		if (null != intent && null != intent.getIntArrayExtra(ComParams.SERVICE_HANDLER_ACTION_ID)) {
-			if (intent.getIntArrayExtra(ComParams.SERVICE_HANDLER_ACTION_ID).length > 0) {
-				for (int i : intent.getIntArrayExtra(ComParams.SERVICE_HANDLER_ACTION_ID)) {
-					ULog.d(TAG, "HandlerID = " + i);
-					handler.sendEmptyMessage(i);
-				}
-			}
+		if (null != intent && !TextUtils.isEmpty(intent.getStringExtra(ComParams.SERVICE_CLEAR_TESTINFO))) {
+			testResult = null;
+			startTestZKT(-1);
 		}
 
 		if (null != intent && !TextUtils.isEmpty(intent.getStringExtra(ComParams.SERVICE_HANDLER_REMOVE_ALL))) {
@@ -76,10 +72,18 @@ public class DFService extends Service {
 			handler.removeMessages(ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START);
 			handler.removeMessages(ComParams.HANDLER_SOCKET_GET_TEST_ZKT_RESULT);
 
+			testZKTFaileTimes = 0;
+			cardFaileTimes = 0;
 			// socketClose();
 		}
-		if (null != intent && !TextUtils.isEmpty(intent.getStringExtra(ComParams.SERVICE_CLEAR_TESTINFO))) {
-			testResult = null;
+
+		if (null != intent && null != intent.getIntArrayExtra(ComParams.SERVICE_HANDLER_ACTION_ID)) {
+			if (intent.getIntArrayExtra(ComParams.SERVICE_HANDLER_ACTION_ID).length > 0) {
+				for (int i : intent.getIntArrayExtra(ComParams.SERVICE_HANDLER_ACTION_ID)) {
+					ULog.d(TAG, "HandlerID = " + i);
+					handler.sendEmptyMessage(i);
+				}
+			}
 		}
 
 		return super.onStartCommand(intent, flags, startId);
@@ -353,6 +357,11 @@ public class DFService extends Service {
 									inputTemp = null;
 								}
 							}
+
+							try {
+								this.sleep(100);
+							} catch (Exception e) {}
+
 						}
 
 						userInfo.setValue(input);
@@ -379,6 +388,10 @@ public class DFService extends Service {
 					cardFaileTimes++;
 					handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCKET_GET_CARD_ID, 1000);
 					e.printStackTrace();
+					Bundle data = new Bundle();
+					data.putInt(ComParams.ACTIVITY_ERRORID, cardFaileTimes);
+					data.putString(ComParams.ACTIVITY_ERRORINFO, "读卡器设备错误,请重新进行测试");
+					sendBroadcaset(ComParams.HANDLER_ERROR, true, data);
 				}
 			}
 
@@ -431,7 +444,8 @@ public class DFService extends Service {
 					} catch (Exception e) {
 						ULog.e(TAG, "faileTimes = " + testZKTFaileTimes + " -- " + e.getMessage());
 						testZKTFaileTimes++;
-if (null != handler)						handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT, 1000);
+						if (null != handler)
+							handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT, 1000);
 					}
 				}
 
@@ -467,16 +481,22 @@ if (null != handler)						handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCK
 					try {
 						int failtime = 0;
 						while (failtime < 10) {
+							// if (failtime < 10) {
 							getInputBytes(socketTestZKT, ZKTCommand.RCARDID, input);
-							if (ZKTCommand.checkReadInput(input) && 0x02 == input[3] ) {
-//								if (testResult.getId() != input[3])
-									testResult.setId(input[3]);
+							if (ZKTCommand.checkReadInput(input) && 0x02 == input[3]) {
+								// if (testResult.getId() != input[3])
+								testResult.setId(input[3]);
 								break;
 							}
 							failtime++;
 							ULog.d(TAG, "获取设备类型id错误  " + failtime);
+							// Toast.makeText(DFService.this, "获取设备类型错误 "+ failtime, Toast.LENGTH_SHORT).show();
+							Bundle data = new Bundle();
+							data.putInt(ComParams.ACTIVITY_ERRORID, failtime);
+							data.putString(ComParams.ACTIVITY_ERRORINFO, "读卡器设备错误,请重新进行测试");
+							sendBroadcaset(ComParams.HANDLER_ERROR, true, data);
 							try {
-								this.sleep(300);
+								this.sleep(500);
 								ULog.d(TAG, "InterruptedException");
 							} catch (InterruptedException e) {
 								ULog.e(TAG, "InterruptedException");
@@ -486,6 +506,7 @@ if (null != handler)						handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCK
 
 						failtime = 0;
 						while (failtime < 10 && testResult.getId() == input[3]) {
+							// if (failtime < 10 && testResult.getId() == input[3]) {
 
 							input = null;
 							input = new byte[10];
@@ -504,8 +525,14 @@ if (null != handler)						handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCK
 
 							failtime++;
 							ULog.d(TAG, "初始化设备错误  " + failtime);
+							// Toast.makeText(DFService.this, "初始化设备错误 "+ failtime, Toast.LENGTH_SHORT).show();
+							Bundle data = new Bundle();
+							data.putInt(ComParams.ACTIVITY_ERRORID, failtime);
+							data.putString(ComParams.ACTIVITY_ERRORINFO, "初始化设备错误,请重新进行测试");
+							sendBroadcaset(ComParams.HANDLER_ERROR, true, data);
+
 							try {
-								this.sleep(300);
+								this.sleep(500);
 								ULog.d(TAG, "InterruptedException");
 							} catch (InterruptedException e) {
 								ULog.e(TAG, "InterruptedException");

@@ -9,8 +9,8 @@ import android.view.View.OnClickListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.dongfang.apad.asynctask.WriteGripToCard;
 import com.dongfang.apad.bean.TestResult;
 import com.dongfang.apad.bean.UserInfo;
 import com.dongfang.apad.broadcast.UpdateDataReceiver;
@@ -91,9 +91,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		super.onStart();
 
 		Intent intentService = new Intent(this, DFService.class);
-		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD
-		 , ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT
-				});
+		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD, ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
 		startService(intentService);
 	}
 
@@ -116,7 +114,9 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		super.onDestroy();
 		Intent intentService = new Intent(this, DFService.class);
 		intentService.putExtra(ComParams.SERVICE_HANDLER_REMOVE_ALL, ComParams.SERVICE_HANDLER_REMOVE_ALL);
-		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CLOSE_CARD, ComParams.HANDLER_SOCKET_CLOSE_TEST_ZKT });
+		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CLOSE_CARD
+		, ComParams.HANDLER_SOCKET_CLOSE_TEST_ZKT
+				});
 		startService(intentService);
 
 	}
@@ -150,11 +150,15 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		imageView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.change_image));
 		imageView.setImageResource(intent.getIntExtra(ComParams.ACTIVITY_IMAGE_SRC_ID, R.drawable.card_notice));
 
-		tvTestingResult.setVisibility(View.VISIBLE);
+		// tvTestingResult.setVisibility(View.VISIBLE);
 
 		ULog.d(TAG, userInfo.toString());
 		tvUserInfo.setText(userInfo.getUserShowInfo());
 		tvUserInfo.setVisibility(View.VISIBLE);
+
+		Intent intentService = new Intent(this, DFService.class);
+		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
+		startService(intentService);
 
 		// new WriteGripToCard(this, userInfo).execute(11.1, 2.0);
 
@@ -256,11 +260,18 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 
 			if (null != data && null != data.getParcelable(ComParams.ACTIVITY_USERINFO) && !tvUserInfo.isShown())
 				initData((UserInfo) data.getParcelable(ComParams.ACTIVITY_USERINFO));
-			
+
 			if (null != data && null != data.getParcelable(ComParams.ACTIVITY_TESTRESULT)) {
 				TestResult testResult = (TestResult) data.getParcelable(ComParams.ACTIVITY_TESTRESULT);
 				ULog.d(TAG, testResult.toString());
-				tvTestingResult.setText(Double.toString(testResult.getResult()));
+
+				if (testResult.getResult() > 0 && tvUserInfo.isShown()) {
+					tvTestingResult.setText(Double.toString(testResult.getResult()));
+					tvTestingResult.setVisibility(1);
+				}
+				else {
+					tvTestingResult.setVisibility(4);
+				}
 
 				if (0x01 == testResult.getIsFinish()) {
 					Intent intent = new Intent(StartActivity.this, EndActivity.class);
@@ -271,6 +282,15 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 					finish();
 				}
 			}
+		}
+
+		@Override
+		public void onError(boolean isConnect, Bundle data) {
+
+			if (data.getInt(ComParams.ACTIVITY_ERRORID) > 4)
+				Toast.makeText(StartActivity.this, data.getString(ComParams.ACTIVITY_ERRORINFO), Toast.LENGTH_SHORT).show();
+				//finish();
+
 		}
 	}
 

@@ -61,7 +61,7 @@
             android:textColor="@color/red"
             android:textSize="150sp"
             android:textStyle="bold"
-            android:visibility="gone" />
+            android:visibility="invisible" />
     </RelativeLayout>
 
     <include layout="@layout/top_bg" />
