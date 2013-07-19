@@ -1,8 +1,5 @@
 package com.dongfang.apad.param;
 
-import com.dongfang.apad.util.ULog;
-import com.dongfang.apad.util.Util;
-
 public class ZKTCommand {
 
 	public static final byte	CMD_0		= 0x00;
@@ -42,6 +39,38 @@ public class ZKTCommand {
 			v += input[i];
 		}
 		return (byte) (0x01 + (0xFF - v & 0xFF));
+	}
+
+	/** 显示数据错误信息 */
+	public static String getErrorInfo(byte[] input) {
+		String result = " OK ";
+		if (input.length > 4 && input[1] == 0x04) {
+			byte rtncode = (byte) input[2];
+			switch (rtncode) {
+			case (byte) 0xF1:
+				result = "FAIL_UNKNOWN";
+				break;
+			case (byte) 0xF2:
+				result = "FAIL_INVALIDCMD";
+				break;
+			case (byte) 0xF3:
+				result = "FAIL_DATASIZE";
+				break;
+			case (byte) 0xF4:
+				result = "FAIL_INVALIDVALUE";
+				break;
+			case (byte) 0xF8:
+				result = "FAIL_NODATA";
+				break;
+			case (byte) 0xFE:
+				result = "FAIL_ TIMEOUT";
+				break;
+			case (byte) 0xFF:
+				result = "FAIL_OPERATION";
+				break;
+			}
+		}
+		return result;
 	}
 
 }

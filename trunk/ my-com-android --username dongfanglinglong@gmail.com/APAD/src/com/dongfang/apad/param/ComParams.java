@@ -71,9 +71,9 @@ public class ComParams {
 	public static final int		HANDLER_SOCKET_GET_CARD_ID				= 3001;
 	/** SOCKET 获取到卡内信息 */
 	public static final int		HANDLER_SOCKET_GET_USER_INFO			= 3002;
-	/** SOCKET 写输入到卡内 */
+	/**@deprecated  SOCKET 写输入到卡内 */
 	public static final int		HANDLER_SOCKET_WRITE_CARD_INFO			= 3050;
-	/** SOCKET 写输入到卡内失败 */
+	/** @deprecated SOCKET 写输入到卡内失败 */
 	public static final int		HANDLER_SOCKET_WRITE_CARD_FAILED		= 3051;
 
 	/** 连接socket网络testZKT */
@@ -83,7 +83,7 @@ public class ComParams {
 	/** 获取测试数据 */
 	public static final int		HANDLER_SOCKET_GET_TEST_ZKT_RESULT		= 3102;
 
-	/** 数据保存到云端 */
+	/** @deprecated 数据保存到云端 */
 	public static final int		HANDLER_SOCKET_SAVE_TO_CLOUD			= 3200;
 
 	/** 关闭连接 */
@@ -109,7 +109,9 @@ public class ComParams {
 	// ------------------------------------------------------------------------------------------
 	/** 启动服务中的命令 */
 	public static final String	SERVICE_HANDLER_ACTION_ID				= "handler_action_id";
+	/** 移除所有动作 */
 	public static final String	SERVICE_HANDLER_REMOVE_ALL				= "handler_remove_all";
+	/** 清楚测试结果 */
 	public static final String	SERVICE_CLEAR_TESTINFO					= "clear_testinfo";
 	// ------------------------------------------------------------------------------------------
 	public static final String	ACTIVITY_IMAGE_SRC_ID					= "imageId";
