@@ -1,10 +1,10 @@
 package com.dongfang.apad.bean;
 
-import com.dongfang.apad.util.ULog;
-import com.dongfang.apad.util.Util;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.dongfang.apad.util.ULog;
+import com.dongfang.apad.util.Util;
 
 /***
  * 测试结果
@@ -16,7 +16,7 @@ public class TestResult implements Parcelable {
 	public static final String	TAG			= TestResult.class.getSimpleName();
 
 	/** 测试类型 */
-	private byte				id			= 0x00;
+	private byte				id			= (byte) 0xFF;
 	/** 测试是否结束 ，00表示未结束， 01 表示结束 */
 	private byte				isFinish	= 0x00;
 
@@ -38,7 +38,9 @@ public class TestResult implements Parcelable {
 	private String				date;
 	/** 测试成绩 */
 	private int					resultGray;
-	/** 测试结果描述 
+	/**
+	 * 测试结果描述
+	 * 
 	 * @deprecated
 	 * */
 	private String				resultDes;

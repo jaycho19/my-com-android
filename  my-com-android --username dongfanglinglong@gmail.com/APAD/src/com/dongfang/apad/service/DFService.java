@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +12,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.dongfang.apad.bean.TestResult;
 import com.dongfang.apad.bean.UserInfo;
@@ -28,29 +28,36 @@ import com.dongfang.apad.util.Util;
  * 
  */
 public class DFService extends Service {
-	public static final String	TAG	= DFService.class.getSimpleName();
+	public static final String	TAG							= DFService.class.getSimpleName();
+	/** 连接失败上限次数 */
+	public static final int		SOCKET_CONNECT_FAILED_TIMES	= 5;
 
 	private Handler				handler;
+	/** 连接读卡器 */
 	private Socket				socketCard;
+	/** 连接中控板 */
 	private Socket				socketTestZKT;
+	/** 广播发送数据 */
 	private Bundle				data;
 
-	/** 第几次测试 */
+	/** 连接失败次数 */
+	private int					cardFaileTimes				= 0;
+	/** 中控板连接失败次数 */
+	private int					testZKTFaileTimes			= 0;
+	/** 测试结果 */
+	private TestResult			testResult;
+	/** 用户信息 */
+	private UserInfo			userInfo;
+
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Service#onCreate()
-	 */
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		ULog.i(TAG, "onCreate");
-
 		handler = new MyHandler();
 		data = new Bundle();
 
@@ -58,11 +65,13 @@ public class DFService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
+		/** 清除测试结果 */
 		if (null != intent && !TextUtils.isEmpty(intent.getStringExtra(ComParams.SERVICE_CLEAR_TESTINFO))) {
 			testResult = null;
 			startTestZKT(-1);
 		}
 
+		/** 清除全部动作 */
 		if (null != intent && !TextUtils.isEmpty(intent.getStringExtra(ComParams.SERVICE_HANDLER_REMOVE_ALL))) {
 			handler.removeMessages(ComParams.HANDLER_SOCKET_CONNECT_CARD);
 			handler.removeMessages(ComParams.HANDLER_SOCKET_GET_CARD_ID);
@@ -76,7 +85,7 @@ public class DFService extends Service {
 			cardFaileTimes = 0;
 			// socketClose();
 		}
-
+		/** 运行命令 */
 		if (null != intent && null != intent.getIntArrayExtra(ComParams.SERVICE_HANDLER_ACTION_ID)) {
 			if (intent.getIntArrayExtra(ComParams.SERVICE_HANDLER_ACTION_ID).length > 0) {
 				for (int i : intent.getIntArrayExtra(ComParams.SERVICE_HANDLER_ACTION_ID)) {
@@ -87,7 +96,6 @@ public class DFService extends Service {
 		}
 
 		return super.onStartCommand(intent, flags, startId);
-
 	}
 
 	@Override
@@ -98,8 +106,8 @@ public class DFService extends Service {
 		socketClose();
 	}
 
-	/** 关闭socket */
-	private void socketClose() {
+	/** 关闭读卡器 */
+	private void sokectCloseCard() {
 		try {
 			if (null != socketCard) {
 				socketCard.close();
@@ -109,6 +117,10 @@ public class DFService extends Service {
 			socketCard = null;
 			e.printStackTrace();
 		}
+	}
+
+	/** 关闭中控 */
+	private void sokectCloseZTK() {
 		try {
 			if (null != socketTestZKT) {
 				socketTestZKT.close();
@@ -120,6 +132,12 @@ public class DFService extends Service {
 		}
 	}
 
+	/** 关闭全部socket */
+	private void socketClose() {
+		sokectCloseCard();
+		sokectCloseZTK();
+	}
+
 	public void setSocketCard(Socket socket) {
 		socketCard = socket;
 	}
@@ -127,15 +145,12 @@ public class DFService extends Service {
 	/** 发送广播 */
 	private void sendBroadcaset(int what, boolean isConnected, Bundle data) {
 		Intent intent = new Intent(getPackageName() + "." + UpdateDataReceiver.TAG);
-		if (null != data)
+		if (null != data && !data.isEmpty())
 			intent.putExtras(data);
 		intent.putExtra(ComParams.BROADCAST_HANDLER_IS_CONNECTED, isConnected);
 		intent.putExtra(ComParams.BROADCAST_HANDLER_ACTION_ID, what);
 		sendBroadcast(intent);
 	}
-
-	/** 连接失败次数 */
-	private int	cardFaileTimes	= 0;
 
 	/**
 	 * 往socket写入output数据，返回的内容输入到input中
@@ -145,51 +160,13 @@ public class DFService extends Service {
 	 * @param input
 	 * @throws IOException
 	 */
+	@SuppressLint("DefaultLocale")
 	private void getInputBytes(Socket socket, byte[] output, byte[] input) throws Exception {
 		ULog.d(TAG, "OUTPUT : " + Util.bytesToHexString(output).toUpperCase());
 		socket.getOutputStream().write(output);
 		socket.getInputStream().read(input);
 		socket.getOutputStream().flush();
 		ULog.d(TAG, "INPUT  : " + Util.bytesToHexString(input).toUpperCase());
-		socket.getOutputStream().flush();
-	}
-
-	/** @deprecated */
-	private void getReadCardInfo(Socket socket, byte[] output, byte[] input) throws IOException {
-		if (output.length > 10 && output[9] > 0x0C) {
-			ULog.d(TAG, "OUTPUT 0 : " + Util.bytesToHexString(output).toUpperCase());
-			int failTimes = 5;
-			for (int i = 0, length = output[9]; i < length / 0x0C + (length % 0x0C > 0 ? 1 : 0); i++) {
-				output[9] = (byte) (((length - i * 0x0C) > 0x0C) ? 0x0C : (length - i * 0x0C));
-
-				ULog.d(TAG, "length  = " + output[9]);
-				byte[] inputTemp = new byte[output[9] * 4 + 8];
-				// getInputBytes(socket, output, inputTemp);
-
-				if (inputTemp[4] != 0x00) {
-					failTimes = 5;
-					output[8] += 0x0C;
-					continue;
-				}
-				else if (inputTemp[6] < 0x01 && failTimes > 0) {
-					failTimes--;
-					i--;
-				}
-				else {
-					failTimes = 5;
-					for (int j = 0; j < inputTemp[6]; j++) {
-						input[i * 0x0C + j] = inputTemp[j + 8];
-					}
-
-					output[8] += 0x0C;
-				}
-			}
-
-			ULog.d(TAG, "INPUT 0 : " + Util.bytesToHexString(input).toUpperCase());
-		}
-		else {
-			// getInputBytes(socket, output, input);
-		}
 	}
 
 	/**
@@ -199,7 +176,7 @@ public class DFService extends Service {
 		if (null != socketCard && socketCard.isConnected()) {
 			ULog.d(TAG, "card connect has alreadly successed! " + ip + ":" + port);
 			data.clear();
-			data.putString(ComParams.BROADCAST_HANDLER_DES, "card connect successed! " + ip + ":" + port);
+			data.putString(ComParams.BROADCAST_HANDLER_DES, "Already successed connect card! " + ip + ":" + port);
 			sendBroadcaset(what, socketCard.isConnected(), data);
 			return;
 		}
@@ -207,40 +184,47 @@ public class DFService extends Service {
 			socketCard = null;
 		}
 
-		ULog.d(TAG, "card connecting ..." + cardFaileTimes);
-		data.clear();
-		data.putString(ComParams.BROADCAST_HANDLER_DES, "card connecting ..." + cardFaileTimes);
-		sendBroadcaset(what, false, data);
+		if (cardFaileTimes > SOCKET_CONNECT_FAILED_TIMES) {
+			ULog.e(TAG, "Faild connect card! " + ip + ":" + port);
+			data.clear();
+			data.putString(ComParams.BROADCAST_HANDLER_DES, "Faild connect card! " + ip + ":" + port);
+			sendBroadcaset(what, false, data);
+			handler.removeMessages(what);
+			cardFaileTimes = 0;
+			return;
+		}
+		else {
+			ULog.i(TAG, "card connecting ..." + cardFaileTimes);
+			data.clear();
+			data.putString(ComParams.BROADCAST_HANDLER_DES, "card connecting ..." + cardFaileTimes);
+			sendBroadcaset(what, false, data);
+		}
 
 		new Thread() {
 			@Override
 			public void run() {
 				super.run();
-				if (cardFaileTimes < 5) {
-					try {
-						socketCard = new Socket();
-						socketCard.connect(new InetSocketAddress(ComParams.IP_CARD, ComParams.PORT_CARD), ComParams.SOCKET_TIMEOUT);
-						// socketCard = new Socket(ip, port);
-						// socketCard.setSoTimeout(ComParams.SOCKET_TIMEOUT);
+				cardFaileTimes++;
+				try {
+					socketCard = null;
+					socketCard = new Socket();
+					socketCard.connect(new InetSocketAddress(ip, port), ComParams.SOCKET_TIMEOUT);
 
-						if (socketCard.isConnected()) {
-							cardFaileTimes = 0;
-							ULog.d(TAG, "card connect successed! " + ip + ":" + port);
-							data.clear();
-							data.putString(ComParams.BROADCAST_HANDLER_DES, "card connect successed! " + ip + ":" + port);
-							sendBroadcaset(what, socketCard.isConnected(), data);
-							// handler.sendEmptyMessage(ComParams.HANDLER_SOCKET_GET_CARD_ID);
-						}
-					} catch (Exception e) {
-						// e.printStackTrace();
-						ULog.e(TAG, "card connect faileTimes = " + cardFaileTimes + " -- " + e.getMessage());
-						cardFaileTimes++;
-						handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCKET_CONNECT_CARD, ComParams.SOCKET_TIMEOUT);
+					if (socketCard.isConnected()) {
+						ULog.i(TAG, "card connect successed! " + ip + ":" + port);
+						data.clear();
+						data.putString(ComParams.BROADCAST_HANDLER_DES, "card connect successed! " + ip + ":" + port);
+						sendBroadcaset(what, true, data);
+						handler.removeMessages(what);
+						cardFaileTimes = 0;
+						return;
 					}
+				} catch (Exception e) {
+					// e.printStackTrace();
+					ULog.e(TAG, "card connect faileTimes = " + cardFaileTimes + " -- " + e.getMessage());
 				}
-
+				handler.sendEmptyMessageDelayed(what, 1000);
 			}
-
 		}.start();
 	}
 
@@ -283,7 +267,7 @@ public class DFService extends Service {
 								sendBroadcaset(ComParams.HANDLER_SOCKET_GET_CARD_ID, true, data);
 							}
 							else {
-								Bundle data = new Bundle();
+								data.clear();
 								data.putParcelable(ComParams.ACTIVITY_USERINFO, userInfo);
 								sendBroadcaset(ComParams.HANDLER_SOCKET_GET_USER_INFO, true, data);
 							}
@@ -312,86 +296,89 @@ public class DFService extends Service {
 
 	}
 
-	private UserInfo	userInfo;
-
 	/** 获取用户信息 */
 	private void getUserInfo(final int what) {
-		if (null == userInfo)
-			userInfo = new UserInfo();
+		if (null == socketCard || !socketCard.isConnected()) {
+			sendBroadcaset(what, false, null);
+			return;
+		}
+
+		userInfo = (null == userInfo) ? new UserInfo() : userInfo;
+
+		if (cardFaileTimes > SOCKET_CONNECT_FAILED_TIMES) {
+			data.clear();
+			data.putString(ComParams.ACTIVITY_ERRORINFO, "获取用户信息失败");
+			data.putInt(ComParams.ACTIVITY_ERRORID, what);
+			sendBroadcaset(ComParams.HANDLER_ERROR, true, data);
+			handler.removeMessages(what);
+			cardFaileTimes = 0;
+			return;
+		}
 
 		new Thread() {
 			@Override
 			public void run() {
 				super.run();
+				cardFaileTimes++;
 				try {
 					byte[] input = new byte[256];
 					int size = 0;
 
-					if (cardFaileTimes < 5) {
-						int failTimes = 10;
-						byte[] inputTemp = new byte[60];// 不能小于 UserCommand.Rlist_INFO[i][9] * 4 + 8 + 1
-						for (int i = 0, length = UserCommand.Rlist_INFO.length; i < length; i++) {
-							inputTemp = null;
-							inputTemp = new byte[60];
+					int failTimes = 10; // for循环中的每一条数据都有10次失败机会；
+					byte[] inputTemp = null;// 不能小于 UserCommand.Rlist_INFO[i][9] * 4 + 8 + 1
+					for (int i = 0, length = UserCommand.Rlist_INFO.length; i < length; i++) {
+						inputTemp = null;
+						inputTemp = new byte[60];
+						ULog.d(TAG, "获取第" + i + "组数据！");
+						getInputBytes(socketCard, UserCommand.Rlist_INFO[i], inputTemp);
 
-							ULog.d(TAG, "获取第" + i + "组数据！");
-							getInputBytes(socketCard, UserCommand.Rlist_INFO[i], inputTemp);
-							if (failTimes > 0) {
-								if (!UserCommand.checkReadInput(inputTemp, UserCommand.Rlist_INFO[i][9])) {
-									ULog.d(TAG, "第" + i + "组数据检查未通过 " + failTimes);
-									i--;
-									failTimes--;
-								}
-								else {
-									failTimes = 10;
-									// TODO: 拼装化用户信息
-									for (int j = 0; j < inputTemp[6]; j++) {
-										// ULog.d(TAG, "inputTemp[6] =" + inputTemp[6] + " , size = " + size + " , j = "
-										// + j
-										// + ", [size + j] = " + (size + j));
-										input[size + j] = inputTemp[8 + j];
-									}
-									size += inputTemp[6];
-									ULog.d(TAG, "inputTemp[6] =" + inputTemp[6] + " , size = " + size);
-
-									inputTemp = null;
-								}
+						if (failTimes > 0) {
+							if (!UserCommand.checkReadInput(inputTemp, UserCommand.Rlist_INFO[i][9])) {
+								ULog.i(TAG, "第" + i + "组数据检查未通过 " + failTimes);
+								i--; // 下次重新获取第i组数据，和for循环中的i++抵消；
+								failTimes--;
 							}
-
-							try {
-								this.sleep(100);
-							} catch (Exception e) {}
-
-						}
-
-						userInfo.setValue(input);
-						if (userInfo.getUserId() > 0) {
-							// ULog.e(TAG, userInfo.toString());
-							Bundle data = new Bundle();
-							data.putParcelable(ComParams.ACTIVITY_USERINFO, userInfo);
-							sendBroadcaset(ComParams.HANDLER_SOCKET_GET_USER_INFO, true, data);
+							else {
+								failTimes = 10;
+								for (int j = 0; j < inputTemp[6]; j++) {
+									// ULog.d(TAG, "inputTemp[6] =" + inputTemp[6] + " , size = " + size +
+									// " , j = "+ j+ ", [size + j] = " + (size + j));
+									input[size + j] = inputTemp[8 + j];
+								}
+								size += inputTemp[6];
+								ULog.i(TAG, "第" + i + "组数据获取成功 ");
+								ULog.d(TAG, "inputTemp[6] =" + inputTemp[6] + " , size = " + size);
+							}
 						}
 						else {
-							handler.sendEmptyMessageDelayed(what, 1000);
-							cardFaileTimes = 0;
+							ULog.w(TAG, "第" + i + "组数据获取失败 ");
 						}
 
-						socketCard.close();
-						socketCard = null;
+						try {
+							this.sleep(100);
+						} catch (Exception e) {
+							ULog.i(TAG, "获取用户信息sleep(100)失败 ");
+						}
+
+					}
+
+					userInfo.setValue(input);
+					if (userInfo.getUserId() > 0) { // 根据用户id来进行判断用户是否有效
+						// ULog.e(TAG, userInfo.toString());
+						data.clear();
+						data.putParcelable(ComParams.ACTIVITY_USERINFO, userInfo);
+						sendBroadcaset(what, true, data);
+						socketClose(); // 获取到用户数据之后，关闭socket连接；
+						return;
 					}
 					else {
-						cardFaileTimes = 0;
+						handler.sendEmptyMessageDelayed(what, 100);
 					}
 
 				} catch (Exception e) {
 					ULog.e(TAG, "faileTimes = " + cardFaileTimes + " -- " + e.getMessage());
-					cardFaileTimes++;
-					handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCKET_GET_CARD_ID, 1000);
+					handler.sendEmptyMessageDelayed(what, 100);
 					e.printStackTrace();
-					Bundle data = new Bundle();
-					data.putInt(ComParams.ACTIVITY_ERRORID, cardFaileTimes);
-					data.putString(ComParams.ACTIVITY_ERRORINFO, "读卡器设备错误,请重新进行测试");
-					sendBroadcaset(ComParams.HANDLER_ERROR, true, data);
 				}
 			}
 
@@ -401,65 +388,58 @@ public class DFService extends Service {
 		// TODO:
 	}
 
-	private int			testZKTFaileTimes	= 0;
-	private TestResult	testResult;
-
 	/** 连接socket testZKT */
 	private void connectTestZKTSocket(final String ip, final int port, final int what) {
 		if (null != socketTestZKT && socketTestZKT.isConnected()) {
-			ULog.d(TAG, "testZKT connect has alreadly successed! " + ip + ":" + port);
+			ULog.d(TAG, "Alreadly connected TESTZKT! " + ip + ":" + port);
 			data.clear();
-			data.putString(ComParams.BROADCAST_HANDLER_DES, "testZKT connect has alreadly successed! " + ip + ":" + port);
+			data.putString(ComParams.BROADCAST_HANDLER_DES, "Alreadly connected TESTZKT! " + ip + ":" + port);
 			sendBroadcaset(what, socketTestZKT.isConnected(), data);
 			return;
 		}
-		else {
-			socketTestZKT = null;
-		}
 
-		ULog.d(TAG, "testZKT connecting ..." + testZKTFaileTimes);
-		data.clear();
-		data.putString(ComParams.BROADCAST_HANDLER_DES, "testZKT connecting ..." + testZKTFaileTimes);
-		sendBroadcaset(what, false, data);
-		if (testZKTFaileTimes < 10) {
-			new Thread() {
-				@Override
-				public void run() {
-					super.run();
-					try {
-						socketTestZKT = new Socket(ip, port);
-						socketCard.setSoTimeout(ComParams.SOCKET_TIMEOUT);
-
-						if (socketTestZKT.isConnected()) {
-							testZKTFaileTimes = 0;
-							ULog.d(TAG, "testZKT connect successed! " + ip + ":" + port);
-							data.clear();
-							data.putString(ComParams.BROADCAST_HANDLER_DES, "testZKT connect successed! " + ip + ":" + port);
-							sendBroadcaset(what, socketCard.isConnected(), data);
-						}
-						else {
-							testZKTFaileTimes++;
-							handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT, 1000);
-						}
-					} catch (Exception e) {
-						ULog.e(TAG, "faileTimes = " + testZKTFaileTimes + " -- " + e.getMessage());
-						testZKTFaileTimes++;
-						if (null != handler)
-							handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT, 1000);
-					}
-				}
-
-			}.start();
-
-		}
-		else {
-			testZKTFaileTimes = 0;
+		if (testZKTFaileTimes > SOCKET_CONNECT_FAILED_TIMES) {
+			ULog.i(TAG, "Failed connect TESTZKT ... " + testZKTFaileTimes);
 			data.clear();
-			data.putString(ComParams.BROADCAST_HANDLER_DES, "testZKT connect failed! " + ip + ":" + port);
+			data.putString(ComParams.BROADCAST_HANDLER_DES, "Failed connect TESTZKT ... " + ip + ":" + port);
 			sendBroadcaset(what, false, data);
-			ULog.d(TAG, "testZKT connect failed! " + ip + ":" + port);
-
+			handler.removeMessages(what);
+			testZKTFaileTimes = 0;
+			return;
 		}
+		else {
+			ULog.i(TAG, "Connecting testZKT..." + testZKTFaileTimes);
+			data.clear();
+			data.putString(ComParams.BROADCAST_HANDLER_DES, "Connecting TESTZKT..." + testZKTFaileTimes);
+			sendBroadcaset(what, false, data);
+		}
+
+		new Thread() {
+			@Override
+			public void run() {
+				super.run();
+				testZKTFaileTimes++;
+				try {
+					socketTestZKT = null;
+					socketTestZKT = new Socket();
+					socketTestZKT.connect(new InetSocketAddress(ip, port), ComParams.SOCKET_TIMEOUT);
+
+					if (socketTestZKT.isConnected()) {
+						ULog.i(TAG, "Successed connect testZKT! " + ip + ":" + port);
+						data.clear();
+						data.putString(ComParams.BROADCAST_HANDLER_DES, "testZKT connect successed! " + ip + ":" + port);
+						sendBroadcaset(what, true, data);
+						handler.removeMessages(what);
+						testZKTFaileTimes = 0;
+						return;
+					}
+				} catch (Exception e) {
+					ULog.e(TAG, "connectTestZKTSocket exception" + " -- " + e.getMessage());
+				}
+				handler.sendEmptyMessageDelayed(what, 1000);
+			}
+		}.start();
+
 	}
 
 	/** 重新初始化中控板连接设备 */
@@ -471,96 +451,89 @@ public class DFService extends Service {
 
 		testResult = null;
 		testResult = new TestResult();
-		// ULog.d(TAG, testResult.toString());
-		if (testZKTFaileTimes < 10) {
-			new Thread() {
-				@Override
-				public void run() {
-					super.run();
-					byte[] input = new byte[10];
-					try {
-						int failtime = 0;
-						while (failtime < 10) {
-							// if (failtime < 10) {
-							getInputBytes(socketTestZKT, ZKTCommand.RCARDID, input);
-							if (ZKTCommand.checkReadInput(input) && 0x02 == input[3]) {
-								// if (testResult.getId() != input[3])
-								testResult.setId(input[3]);
-								break;
-							}
-							failtime++;
-							ULog.d(TAG, "获取设备类型id错误  " + failtime);
-							// Toast.makeText(DFService.this, "获取设备类型错误 "+ failtime, Toast.LENGTH_SHORT).show();
-							Bundle data = new Bundle();
-							data.putInt(ComParams.ACTIVITY_ERRORID, failtime);
-							data.putString(ComParams.ACTIVITY_ERRORINFO, "读卡器设备错误,请重新进行测试");
-							sendBroadcaset(ComParams.HANDLER_ERROR, true, data);
-							try {
-								this.sleep(500);
-								ULog.d(TAG, "InterruptedException");
-							} catch (InterruptedException e) {
-								ULog.e(TAG, "InterruptedException");
-								e.printStackTrace();
-							}
-						};
 
-						failtime = 0;
-						while (failtime < 10 && testResult.getId() == input[3]) {
-							// if (failtime < 10 && testResult.getId() == input[3]) {
+		if (testZKTFaileTimes > SOCKET_CONNECT_FAILED_TIMES) {
+			data.clear();
+			data.putString(ComParams.ACTIVITY_ERRORINFO, "初始化中控板失败，无法获取测试类型");
+			data.putInt(ComParams.ACTIVITY_ERRORID, what);
+			sendBroadcaset(ComParams.HANDLER_ERROR, true, data);
+			handler.removeMessages(what);
+			cardFaileTimes = 0;
+			return;
+		}
+		
+		
+		/**
+		 * 1： 获取中控测试设备id；<br>
+		 * 2： 初始化该设备
+		 */
+		new Thread() {
+			@Override
+			public void run() {
+				super.run();
+				testZKTFaileTimes++;
 
-							input = null;
-							input = new byte[10];
-							// if (testResult.getResultGray() > 0)
-							getInputBytes(socketTestZKT, ZKTCommand.RRESTART, input);
-							// else {
-							// getInputBytes(socketTestZKT, ZKTCommand.RSTART, input);
-							// }
+				byte[] input = new byte[10];
+				try {
+					int failtime = 0;
+					// 获取测试设备类型id ---> 是否可以省略
+					while (failtime < 5) {
+						getInputBytes(socketTestZKT, ZKTCommand.RCARDID, input);
+						ULog.i(TAG, "ZKT ERROR = " + ZKTCommand.getErrorInfo(input));
+						
+						if (ZKTCommand.checkReadInput(input) && 0x02 == input[3]) {
+							testResult.setId(input[3]);
+							break;
+						}
 
-							if (ZKTCommand.checkReadInput(input) && ZKTCommand.RSTART[2] == input[2]) {
-								Bundle data = new Bundle();
-								data.putParcelable(ComParams.ACTIVITY_TESTRESULT, testResult);
-								sendBroadcaset(what, true, data);
-								return;
-							}
+						failtime++;
+						ULog.d(TAG, "获取中控测试设备类型id错误  " + failtime);
 
-							failtime++;
-							ULog.d(TAG, "初始化设备错误  " + failtime);
-							// Toast.makeText(DFService.this, "初始化设备错误 "+ failtime, Toast.LENGTH_SHORT).show();
-							Bundle data = new Bundle();
-							data.putInt(ComParams.ACTIVITY_ERRORID, failtime);
-							data.putString(ComParams.ACTIVITY_ERRORINFO, "初始化设备错误,请重新进行测试");
-							sendBroadcaset(ComParams.HANDLER_ERROR, true, data);
+						
+						try {
+							this.sleep(500);
+						} catch (InterruptedException e) {
+							ULog.e(TAG, "获取中控测试设备类型id sleep(500)失败 ");
+						}
+					};
 
-							try {
-								this.sleep(500);
-								ULog.d(TAG, "InterruptedException");
-							} catch (InterruptedException e) {
-								ULog.e(TAG, "InterruptedException");
-								e.printStackTrace();
-							}
-						};
-
-						testZKTFaileTimes = 0;
-						data.clear();
-						data.putString(ComParams.BROADCAST_HANDLER_DES, "无法获取中控板连接设id");
-						sendBroadcaset(ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START, true, data);
+					// 初始化设备
+					failtime = 0;
+					while (failtime < 5 && testResult.getId() == input[3]) {
 						input = null;
+						input = new byte[10];
+						getInputBytes(socketTestZKT, ZKTCommand.RRESTART, input);
+						ULog.i(TAG, "ZKT ERROR = " + ZKTCommand.getErrorInfo(input));
 
-					} catch (Exception e) {
-						ULog.e(TAG, "IOException " + e.getMessage());
-						testZKTFaileTimes++;
-						handler.sendEmptyMessageDelayed(ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START, 1000);
+						if (ZKTCommand.checkReadInput(input) && ZKTCommand.RSTART[2] == input[2]) {
+							data.clear();
+							data.putParcelable(ComParams.ACTIVITY_TESTRESULT, testResult);
+							sendBroadcaset(what, true, data);
+							return;
+						}
+
+						failtime++;
+						ULog.d(TAG, "初始化设备错误  " + failtime);
+
+						try {
+							this.sleep(500);
+						} catch (InterruptedException e) {
+							ULog.e(TAG, "初始化设备类型 sleep(500)失败 ");
+						}
 					}
+				} catch (Exception e) {
+					ULog.e(TAG, "IOException " + e.getMessage());
+					handler.sendEmptyMessageDelayed(what, 100);
 				}
-			}.start();
-		}
-		else {
-			ULog.d(TAG, "获取中控板控制器类型失败");
-		}
+			}
+		}.start();
 
 	}
 
-	/** 获取测试结果 */
+	/**
+	 * 获取测试结果<br>
+	 * 每500毫秒获取测试结果数据，知道数据获取状态为终结状态
+	 * */
 	private void getTestResult(final int what) {
 		if (null == socketTestZKT || !socketTestZKT.isConnected()) {
 			sendBroadcaset(what, false, null);
@@ -576,19 +549,17 @@ public class DFService extends Service {
 				output[0] = 0x5B;
 				output[1] = 0x03;
 				output[2] = 0x31;
-				output[4] = 0x5D;
 				output[3] = (byte) (0x01 + (0xFF - ((output[0] + output[1] + output[2]) & 0xFF)));
+				output[4] = 0x5D;
 				try {
 					getInputBytes(socketTestZKT, output, input);
-					ULog.d(TAG, "checkReadInput(input) = " + ZKTCommand.checkReadInput(input));
+					ULog.i(TAG, "ZKT ERROR = " + ZKTCommand.getErrorInfo(input));
+					ULog.i(TAG, "checkReadInput(input) = " + ZKTCommand.checkReadInput(input));
 
 					if (ZKTCommand.checkReadInput(input)) {
-
 						if (input[2] == output[2]) {
 							testResult.setValue(input);
-							updateUserInfoFromTestResult();// 顺序必需在testResult.setValue(input) 之后；
-							// 记录两次测试成绩
-							Bundle data = new Bundle();
+							data.clear();
 							data.putParcelable(ComParams.ACTIVITY_TESTRESULT, testResult);
 							data.putParcelable(ComParams.ACTIVITY_USERINFO, userInfo);
 							sendBroadcaset(what, true, data);
@@ -597,9 +568,9 @@ public class DFService extends Service {
 								handler.removeMessages(what);
 								// handler.sendEmptyMessage(ComParams.HANDLER_SOCKET_WRITE_CARD_INFO);
 								// handler.sendEmptyMessage(ComParams.HANDLER_SOCKET_SAVE_TO_CLOUD);
+								input = output = null;
 								return;
 							}
-
 						}
 						// // else if (testResult.getResultGray()= 0 ) {
 						// // testResult.setValue(input);
@@ -610,93 +581,13 @@ public class DFService extends Service {
 						// handler.sendEmptyMessageDelayed(what, 500);
 						// return;
 					}
-					handler.sendEmptyMessageDelayed(what, 500);
 				} catch (Exception e) {
 					// ULog.e(TAG, "Exception " + e.getMessage());
-					handler.sendEmptyMessageDelayed(what, 500);
 				}
+
+				handler.sendEmptyMessageDelayed(what, 500);
+				input = output = null;
 			}
-		}.start();
-
-	}
-
-	/** 根据测算结果，修改用户信息 */
-	private void updateUserInfoFromTestResult() {
-		switch (testResult.getId()) {
-		case 0x02:
-			double grip = Double.valueOf(testResult.getResult());
-			if (grip > userInfo.getGrip()) {
-				userInfo.setGrip(grip);
-			}
-			break;
-		default:
-			break;
-		}
-	}
-
-	/**
-	 * 修改卡内容
-	 * 
-	 * @deprecated
-	 */
-	private void writeToCard() {
-		new Thread() {
-			@Override
-			public void run() {
-				super.run();
-				byte[] output = null;
-				byte[] input = new byte[20];
-				try {
-					switch (testResult.getId()) {
-					case 0x02:
-						output = new byte[16];
-
-						output[0] = 0x40;
-						output[1] = (byte) 0x97;
-						output[3] = 0x01;
-						output[6] = 0x06;
-						for (int i = 0; i < 7; i++)
-							output[7] ^= output[i];
-						// ------整数部分--------
-						output[8] = 0x13;
-						output[9] = 0x01;
-						output[10] = userInfo.getReadbyte()[76];
-						output[11] = userInfo.getReadbyte()[77];
-						output[12] = userInfo.getReadbyte()[78];
-						output[13] = userInfo.getReadbyte()[79];
-						ULog.d(TAG, "----------0------------------");
-						getInputBytes(socketCard, output, input);
-						ULog.d(TAG, "----------0------------------");
-
-						// ------小数位部分--------
-						output[8] = 0x17;
-						output[9] = 0x01;
-						output[10] = userInfo.getReadbyte()[92];
-						output[11] = userInfo.getReadbyte()[93];
-						output[12] = userInfo.getReadbyte()[94];
-						output[13] = userInfo.getReadbyte()[95];
-						ULog.d(TAG, "----------1------------------");
-
-						if (null == socketCard || !socketCard.isConnected()) {
-							socketCard = new Socket();
-							socketCard.connect(new InetSocketAddress(ComParams.IP_CARD, ComParams.PORT_CARD), ComParams.SOCKET_TIMEOUT);
-						}
-
-						getInputBytes(socketCard, output, input);
-						ULog.d(TAG, "----------1------------------");
-						break;
-					default:
-						break;
-					}
-				} catch (Exception e) {
-					ULog.d(TAG, "握力计写入数据失败 = " + e.getMessage());
-					handler.sendEmptyMessage(ComParams.HANDLER_SOCKET_WRITE_CARD_FAILED);
-					e.printStackTrace();
-				} finally {
-					socketClose();
-				}
-			}
-
 		}.start();
 
 	}
@@ -724,30 +615,20 @@ public class DFService extends Service {
 				getTestResult(msg.what);
 				break;
 			case ComParams.HANDLER_SOCKET_WRITE_CARD_INFO:
-				writeToCard();
+				// writeToCard();
 				break;
 			case ComParams.HANDLER_SOCKET_WRITE_CARD_FAILED:
-				Toast.makeText(DFService.this, "握力计数据写入失败", Toast.LENGTH_LONG).show();
+				// Toast.makeText(DFService.this, "握力计数据写入失败", Toast.LENGTH_LONG).show();
 				break;
 			case ComParams.HANDLER_SOCKET_SAVE_TO_CLOUD:
 				// new SaveTestResult(DFService.this).execute(Integer.toString(userInfo.getUserId()),
 				// Double.toString(Math.max(result[0], result[1])));
 				break;
 			case ComParams.HANDLER_SOCKET_CLOSE_CARD:
-				try {
-					socketCard.close();
-					socketCard = null;
-				} catch (Exception e) {
-					socketCard = null;
-				}
+				sokectCloseCard();
 				break;
 			case ComParams.HANDLER_SOCKET_CLOSE_TEST_ZKT:
-				try {
-					socketTestZKT.close();
-					socketTestZKT = null;
-				} catch (Exception e) {
-					socketTestZKT = null;
-				}
+				sokectCloseZTK();
 				break;
 			}
 		}

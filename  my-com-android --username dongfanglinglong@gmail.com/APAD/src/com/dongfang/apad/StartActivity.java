@@ -9,7 +9,6 @@ import android.view.View.OnClickListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dongfang.apad.bean.TestResult;
 import com.dongfang.apad.bean.UserInfo;
@@ -114,9 +113,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		super.onDestroy();
 		Intent intentService = new Intent(this, DFService.class);
 		intentService.putExtra(ComParams.SERVICE_HANDLER_REMOVE_ALL, ComParams.SERVICE_HANDLER_REMOVE_ALL);
-		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CLOSE_CARD
-		, ComParams.HANDLER_SOCKET_CLOSE_TEST_ZKT
-				});
+		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CLOSE_CARD, ComParams.HANDLER_SOCKET_CLOSE_TEST_ZKT });
 		startService(intentService);
 
 	}
@@ -286,11 +283,18 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		public void onError(boolean isConnect, Bundle data) {
-
-			if (data.getInt(ComParams.ACTIVITY_ERRORID) > 4)
-				Toast.makeText(StartActivity.this, data.getString(ComParams.ACTIVITY_ERRORINFO), Toast.LENGTH_SHORT).show();
-				//finish();
-
+			int id = data.getInt(ComParams.ACTIVITY_ERRORID, 0);
+			StringBuffer sb = new StringBuffer();
+			if (2999 < id && id < 3100) {
+				sb.append(tvCardSocketInfo.getText());
+				sb.append("\n").append(data.getString(ComParams.ACTIVITY_ERRORINFO));
+				tvCardSocketInfo.setText(sb.toString());
+			}
+			else if (3099 < id && id < 3200) {
+				sb.append(tvTestZKTSocketInfo.getText());
+				sb.append("\n").append(data.getString(ComParams.ACTIVITY_ERRORINFO));
+				tvTestZKTSocketInfo.setText(sb.toString());
+			}
 		}
 	}
 
