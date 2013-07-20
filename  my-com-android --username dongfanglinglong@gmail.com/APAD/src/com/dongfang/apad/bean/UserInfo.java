@@ -181,10 +181,12 @@ public class UserInfo implements Parcelable {
 		this.readbyte = readbyte;
 	}
 
+	/** @deprecated */
 	public String getId() {
 		return id;
 	}
 
+	/** @deprecated */
 	public void setId(String id) {
 		this.id = id;
 	}

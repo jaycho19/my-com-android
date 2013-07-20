@@ -96,7 +96,10 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 		intent = getIntent();
 		intentService = new Intent(this, DFService.class);
+		// 用户连接读卡器
+		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD });
 		startService(intentService);
+		
 
 //		new AdminLogon(this).execute();
 //		new QueryUser(this).execute();
@@ -218,6 +221,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			appExit();
+			System.exit(1);
 		}
 		return super.onKeyDown(keyCode, event);
 	}

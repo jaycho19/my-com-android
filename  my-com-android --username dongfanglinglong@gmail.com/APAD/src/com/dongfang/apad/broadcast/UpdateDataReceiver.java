@@ -33,7 +33,7 @@ public class UpdateDataReceiver extends BroadcastReceiver {
 				onUpdateDataListener.onSocketConnectCard(isConnected, data);
 				break;
 			case ComParams.HANDLER_SOCKET_GET_CARD_ID:
-				onUpdateDataListener.onGetCardId(isConnected, data);
+//				onUpdateDataListener.onGetCardId(isConnected, data);
 				break;
 			case ComParams.HANDLER_SOCKET_GET_USER_INFO:
 				onUpdateDataListener.onGetUserInfo(isConnected, data);
