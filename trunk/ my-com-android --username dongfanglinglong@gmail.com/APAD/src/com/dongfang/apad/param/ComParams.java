@@ -11,8 +11,8 @@ import android.os.Environment;
 public class ComParams {
 
 	// ------------------------------------------------------------------------------------------
-	public static String		IP_CARD									= "192.168.0.102";
-	public static String		IP_TEST									= "192.168.0.103";
+	public static String		IP_CARD									= "192.168.0.201";
+	public static String		IP_TEST									= "192.168.0.102";
 	public static int			PORT_CARD								= 8899;
 	public static int			PORT_TEST								= 8899;
 	public static int			SOCKET_TIMEOUT							= 5000;
@@ -71,7 +71,7 @@ public class ComParams {
 	public static final int		HANDLER_SOCKET_GET_CARD_ID				= 3001;
 	/** SOCKET 获取到卡内信息 */
 	public static final int		HANDLER_SOCKET_GET_USER_INFO			= 3002;
-	/**@deprecated  SOCKET 写输入到卡内 */
+	/** SOCKET 写输入到卡内 */
 	public static final int		HANDLER_SOCKET_WRITE_CARD_INFO			= 3050;
 	/** @deprecated SOCKET 写输入到卡内失败 */
 	public static final int		HANDLER_SOCKET_WRITE_CARD_FAILED		= 3051;

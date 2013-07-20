@@ -90,7 +90,9 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		super.onStart();
 
 		Intent intentService = new Intent(this, DFService.class);
-		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD, ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
+		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD
+				, ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT
+				});
 		startService(intentService);
 	}
 
@@ -113,7 +115,9 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		super.onDestroy();
 		Intent intentService = new Intent(this, DFService.class);
 		intentService.putExtra(ComParams.SERVICE_HANDLER_REMOVE_ALL, ComParams.SERVICE_HANDLER_REMOVE_ALL);
-		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CLOSE_CARD, ComParams.HANDLER_SOCKET_CLOSE_TEST_ZKT });
+//		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CLOSE_CARD
+//		// , ComParams.HANDLER_SOCKET_CLOSE_TEST_ZKT
+//				});
 		startService(intentService);
 
 	}
@@ -125,7 +129,6 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		case R.id.tv_back:
 			finish();
 			break;
-
 		default:
 			break;
 		}
@@ -137,6 +140,11 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 	 * 尝试获取测试数据；
 	 */
 	private void initData(UserInfo userInfo) {
+		if (null == userInfo || userInfo.getUserId() < 1) {
+			ULog.w(TAG, "用户信息错误");
+			return;
+		}
+
 		this.userInfo = null;
 		this.userInfo = userInfo;
 
@@ -153,9 +161,9 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 		tvUserInfo.setText(userInfo.getUserShowInfo());
 		tvUserInfo.setVisibility(View.VISIBLE);
 
-		Intent intentService = new Intent(this, DFService.class);
-		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
-		startService(intentService);
+//		Intent intentService = new Intent(this, DFService.class);
+//		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
+//		startService(intentService);
 
 		// new WriteGripToCard(this, userInfo).execute(11.1, 2.0);
 
@@ -176,19 +184,20 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 			}
 		}
 
-		@Override
-		public void onGetCardId(boolean isConnect, Bundle data) {
-			/** 有可能存在死循环错误： 与onSocketConnectCard */
-			if (!isConnect) {
-				Intent intentService = new Intent(StartActivity.this, DFService.class);
-				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD });
-				startService(intentService);
-			}
-
-			if (null != data && null != data.getParcelable(ComParams.ACTIVITY_USERINFO)) {
-				ULog.d(TAG, ((UserInfo) data.getParcelable(ComParams.ACTIVITY_USERINFO)).toString());
-			}
-		}
+		// @Override
+		// public void onGetCardId(boolean isConnect, Bundle data) {
+		// /** 有可能存在死循环错误： 与onSocketConnectCard */
+		// if (!isConnect) {
+		// Intent intentService = new Intent(StartActivity.this, DFService.class);
+		// intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD
+		// });
+		// startService(intentService);
+		// }
+		//
+		// if (null != data && null != data.getParcelable(ComParams.ACTIVITY_USERINFO)) {
+		// ULog.d(TAG, ((UserInfo) data.getParcelable(ComParams.ACTIVITY_USERINFO)).toString());
+		// }
+		// }
 
 		@Override
 		public void onGetUserInfo(boolean isConnect, Bundle data) {
@@ -198,18 +207,18 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_CARD });
 				startService(intentService);
 			}
-			else {
-				Intent intentService = new Intent(StartActivity.this, DFService.class);
-				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
-				startService(intentService);
-			}
+//			else {
+//				Intent intentService = new Intent(StartActivity.this, DFService.class);
+//				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_GET_TEST_ZKT_START });
+//				startService(intentService);
+//			}
 			if (null != data && null != data.getParcelable(ComParams.ACTIVITY_USERINFO))
 				initData((UserInfo) data.getParcelable(ComParams.ACTIVITY_USERINFO));
 		}
 
 		@Override
 		public void onSocketConnectTestZKT(boolean isConnect, Bundle data) {
-			ULog.d(TAG, "onSocketConnectTestZKT");
+			ULog.d(TAG, "onSocketConnectTestZKT isConnect = " + isConnect);
 			if (null != data && !TextUtils.isEmpty(data.getString(ComParams.BROADCAST_HANDLER_DES))) {
 				tvTestZKTSocketInfo.setText(data.getString(ComParams.BROADCAST_HANDLER_DES));
 			}
@@ -224,7 +233,7 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		public void onTestZKTRestarted(boolean isConnect, Bundle data) {
-			ULog.d(TAG, "onTestZKTRestarted");
+			ULog.d(TAG, "onTestZKTRestarted isConnect = " + isConnect);
 			/** 有可能存在死循环错误： 与onSocketConnectCard */
 			if (!isConnect) {
 				Intent intentService = new Intent(StartActivity.this, DFService.class);
@@ -248,15 +257,15 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		public void onGetTestZKTResult(boolean isConnect, Bundle data) {
-			ULog.d(TAG, "onGetTestZKTResult");
+			ULog.d(TAG, "onGetTestZKTResult isConnect = " + isConnect);
 			if (!isConnect) {
 				Intent intentService = new Intent(StartActivity.this, DFService.class);
 				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
 				startService(intentService);
 			}
 
-			if (null != data && null != data.getParcelable(ComParams.ACTIVITY_USERINFO) && !tvUserInfo.isShown())
-				initData((UserInfo) data.getParcelable(ComParams.ACTIVITY_USERINFO));
+//			if (null != data && null != data.getParcelable(ComParams.ACTIVITY_USERINFO) && !tvUserInfo.isShown())
+//				initData((UserInfo) data.getParcelable(ComParams.ACTIVITY_USERINFO));
 
 			if (null != data && null != data.getParcelable(ComParams.ACTIVITY_TESTRESULT)) {
 				TestResult testResult = (TestResult) data.getParcelable(ComParams.ACTIVITY_TESTRESULT);

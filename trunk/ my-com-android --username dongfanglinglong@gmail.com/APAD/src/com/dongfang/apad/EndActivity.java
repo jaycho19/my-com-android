@@ -3,7 +3,6 @@ package com.dongfang.apad;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +12,6 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.dongfang.apad.asynctask.SaveTestResult;
-import com.dongfang.apad.asynctask.WriteGripToCard;
 import com.dongfang.apad.bean.TestResult;
 import com.dongfang.apad.bean.UserInfo;
 import com.dongfang.apad.broadcast.UpdateDataReceiver;
@@ -163,8 +161,11 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 
 	/** 初始化数据 */
 	private void initData() {
-		if (null != userInfo) {
+		if (null != userInfo && userInfo.getUserId() > 0) {
 			tvUserInfo.setText(userInfo.getUserShowInfo());
+		}
+		else {
+			tvUserInfo.setVisibility(View.GONE);
 		}
 
 		if (null != testResult) {
@@ -268,14 +269,18 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 		filter.addAction(getPackageName().toString() + "." + UpdateDataReceiver.TAG);
 		registerReceiver(updateDataReceiver, filter);
 
-		new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				Intent intentService = new Intent(EndActivity.this, DFService.class);
-				intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
-				startService(intentService);
-			}
-		}, 500);
+		// new Handler().postDelayed(new Runnable() {
+		// @Override
+		// public void run() {
+		// Intent intentService = new Intent(EndActivity.this, DFService.class);
+		// intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] {
+		// ComParams.HANDLER_SOCKET_CONNECT_TEST_ZKT });
+		// startService(intentService);
+		// }
+		// }, 500);
+
+		btnTestagain.setVisibility(1);
+		btnTestagain.setClickable(true);
 
 	}
 
@@ -287,7 +292,9 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 		Intent intentService = new Intent(this, DFService.class);
 		intentService.putExtra(ComParams.SERVICE_CLEAR_TESTINFO, ComParams.SERVICE_CLEAR_TESTINFO);
 		intentService.putExtra(ComParams.SERVICE_HANDLER_REMOVE_ALL, ComParams.SERVICE_HANDLER_REMOVE_ALL);
-		intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CLOSE_CARD, ComParams.HANDLER_SOCKET_CLOSE_TEST_ZKT });
+		// intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_CLOSE_CARD
+		// // , ComParams.HANDLER_SOCKET_CLOSE_TEST_ZKT
+		// });
 		startService(intentService);
 	}
 
@@ -346,7 +353,7 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 			@Override
 			public void btnOkClickListener(View v) {
 				double max = Math.max(testResult.getResult(), Double.valueOf(tvTestResult[0].getText().toString()));
-				new WriteGripToCard(EndActivity.this, userInfo).execute(max, 2.0);
+				// new WriteGripToCard(EndActivity.this, userInfo).execute(max, 2.0);
 			}
 
 			@Override
@@ -367,11 +374,11 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 			}
 		}
 
-		@Override
-		public void onGetCardId(boolean isConnect, Bundle data) {
-			// TODO Auto-generated method stub
-
-		}
+		// @Override
+		// public void onGetCardId(boolean isConnect, Bundle data) {
+		// // TODO Auto-generated method stub
+		//
+		// }
 
 		@Override
 		public void onGetUserInfo(boolean isConnect, Bundle data) {
@@ -402,9 +409,7 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 			else {
 				btnTestagain.setClickable(false);
 				btnTestagain.setVisibility(4);
-
 			}
-
 		}
 
 		@Override
@@ -452,14 +457,18 @@ public class EndActivity extends BaseActivity implements android.view.View.OnCli
 				if (0x01 == testResult.getIsFinish() && times == 1) {
 					ll_1_testresult_des.setVisibility(View.VISIBLE);
 
-					// Intent intentService = new Intent(EndActivity.this, DFService.class);
-					// intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] {
-					// ComParams.HANDLER_SOCKET_CLOSE_CARD, ComParams.HANDLER_SOCKET_CLOSE_TEST_ZKT });
-					// startService(intentService);
 
 					double max = Math.max(testResult.getResult(), Double.valueOf(tvTestResult[0].getText().toString()));
-					new SaveTestResult(EndActivity.this).execute(Integer.toString(userInfo.getUserId()), Double.toString(max));
-					new WriteGripToCard(EndActivity.this, userInfo).execute(max, 1.0);
+					DFService.max = max;
+					
+					Intent intentService = new Intent(EndActivity.this, DFService.class);
+					intentService.putExtra(ComParams.SERVICE_HANDLER_ACTION_ID, new int[] { ComParams.HANDLER_SOCKET_WRITE_CARD_INFO });
+					startService(intentService);
+					
+					if (null != userInfo) {
+						new SaveTestResult(EndActivity.this).execute(Integer.toString(userInfo.getUserId()), Double.toString(max));
+						// new WriteGripToCard(EndActivity.this, userInfo).execute(max, 1.0);
+					}
 				}
 
 			}
