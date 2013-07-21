@@ -22,15 +22,9 @@ public abstract class BaseActivity extends FragmentActivity {
 
 	private CloseAppReceiver	closeApp;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
-	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// ULog.i(TAG, "-- BaseActivity onCreate ");
 		closeApp = new CloseAppReceiver(this);
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(getPackageName().toString() + "." + CloseAppReceiver.TAG);
@@ -40,126 +34,54 @@ public abstract class BaseActivity extends FragmentActivity {
 
 	protected abstract void setBaseValues();
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Activity#onStart()
-	 */
 	@Override
 	protected void onStart() {
 		super.onStart();
-		// ULog.i(TAG, "-- BaseActivity onStart ");
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Activity#onResume()
-	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
-		// ULog.i(TAG, "-- BaseActivity onResume ");
-
-		// IntentFilter connectFilter = new IntentFilter();
-		// connectFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-		// registerReceiver(connectReciver, connectFilter);
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Activity#onWindowFocusChanged(boolean)
-	 */
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-
-		// ULog.i(TAG, "-- BaseActivity onWindowFocusChanged " + hasFocus);
-
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Activity#onPause()
-	 */
 	@Override
 	protected void onPause() {
 		super.onPause();
-		// ULog.i(TAG, "-- BaseActivity onPause ");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Activity#onDestroy()
-	 */
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		// ULog.i(TAG, "-- BaseActivity onDestroy ");
-
 		unregisterReceiver(closeApp);
 		closeApp = null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Activity#oonCreateOptionsMenu(android.view.Menu)
-	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		ULog.d(TAG, "onCreateOptionsMenu");
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
-	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		return super.onOptionsItemSelected(item);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Activity#onStop()
-	 */
 	@Override
 	protected void onStop() {
 		super.onStop();
 	}
 
-	/**
-	 * 原先五个Activity均有复写该退出口<br>
-	 * 现改为只有推荐页面有，其余页面跳转至该页面
-	 * 
-	 * @author wwei
-	 */
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		return super.onKeyDown(keyCode, event);
-	}
-
 	/** 关闭所有activity接口 */
 	protected void appExit() {
 		sendBroadcast(new Intent(getPackageName().toString() + "." + CloseAppReceiver.TAG));
-
 	}
-
-//	private BroadcastReceiver	connectReciver	= new BroadcastReceiver() {
-//
-//	@Override
-//	public void onReceive(Context context, Intent intent) {
-//		// TODO Auto-generated method stub
-//		if (ConnectivityManager.CONNECTIVITY_ACTION.equals(intent.getAction())) {}
-//	}
-//};
 
 }

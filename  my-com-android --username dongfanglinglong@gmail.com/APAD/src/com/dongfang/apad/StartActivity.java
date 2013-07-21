@@ -80,11 +80,6 @@ public class StartActivity extends BaseActivity implements OnClickListener {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.dongfang.apad.BaseActivity#onStart()
-	 */
 	@Override
 	protected void onStart() {
 		super.onStart();

@@ -395,9 +395,6 @@ public class DFService extends Service {
 			}
 
 		}.start();
-
-		// initData(null);
-		// TODO:
 	}
 
 	/** 连接socket testZKT */

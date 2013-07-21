@@ -8,6 +8,12 @@ import android.widget.EditText;
 import com.dongfang.apad.param.ComParams;
 import com.dongfang.apad.util.Util;
 
+/**
+ * ip设置页面
+ * 
+ * @author dongfang
+ * 
+ */
 public class SetActivity extends BaseActivity implements android.view.View.OnClickListener {
 
 	private EditText	etCardIP, etCartPort, etZKTIP, etZKTPort;
@@ -48,8 +54,7 @@ public class SetActivity extends BaseActivity implements android.view.View.OnCli
 			finish();
 			break;
 		case R.id.btn_ok:
-			Util.saveIPandPort(this, etCardIP.getText().toString(), Integer.valueOf(etCartPort.getText().toString()),
-					etZKTIP.getText().toString(), Integer.valueOf(etZKTPort.getText().toString()));
+			Util.saveIPandPort(this, etCardIP.getText().toString(), Integer.valueOf(etCartPort.getText().toString()), etZKTIP.getText().toString(), Integer.valueOf(etZKTPort.getText().toString()));
 			break;
 
 		}
