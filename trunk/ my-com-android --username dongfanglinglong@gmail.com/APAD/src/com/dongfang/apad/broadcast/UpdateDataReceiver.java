@@ -10,7 +10,7 @@ import com.dongfang.apad.param.ComParams;
 import com.dongfang.apad.util.ULog;
 
 /**
- * 
+ * 状态反馈广播
  * @author dongfang
  * 
  */

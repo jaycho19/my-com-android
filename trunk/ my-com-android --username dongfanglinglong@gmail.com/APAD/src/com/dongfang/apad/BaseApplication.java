@@ -19,9 +19,8 @@ public class BaseApplication extends Application {
 
 	public void onCreate() {
 		super.onCreate();
-		ULog.i("BLABLA", "BASE APP-->" + Thread.currentThread().getId());
+		ULog.i(TAG, "BASE APP-->" + Thread.currentThread().getId());
 
-		// Thread.setDefaultUncaughtExceptionHandler(MyUnCaughtExceptionHandler.getInstance(getApplicationContext()));
 	}
 
 }

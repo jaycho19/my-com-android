@@ -17,6 +17,7 @@ import com.dongfang.apad.view.MyProgressDialog;
 
 /**
  * 写握力计数据
+ * @deprecated
  * 
  * @author dongfang
  */
