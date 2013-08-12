@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/type_pupw_change_bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/type_tv_change_type_dianying"
+            style="@style/ChangeTypeTV"
+            android:background="@drawable/type_pupw_change_dianying" />
+
+        <TextView
+            android:id="@+id/type_tv_change_type_dianshiju"
+            style="@style/ChangeTypeTV"
+            android:background="@drawable/type_pupw_change_dianshiju" />
+
+        <TextView
+            android:id="@+id/type_tv_change_type_xinwen"
+            style="@style/ChangeTypeTV"
+            android:background="@drawable/type_pupw_change_xinwen" />
+
+        <TextView
+            android:id="@+id/type_tv_change_type_tiyu"
+            style="@style/ChangeTypeTV"
+            android:background="@drawable/type_pupw_change_tiyu" />
+
+        <TextView
+            android:id="@+id/type_tv_change_type_yule"
+            style="@style/ChangeTypeTV"
+            android:background="@drawable/type_pupw_change_yule" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/type_tv_change_type_minglanmu"
+            style="@style/ChangeTypeTV"
+            android:background="@drawable/type_pupw_change_minglanmu" />
+
+        <TextView
+            android:id="@+id/type_tv_change_type_jishi"
+            style="@style/ChangeTypeTV"
+            android:background="@drawable/type_pupw_change_jishi" />
+
+        <TextView
+            android:id="@+id/type_tv_change_type_yinyue"
+            style="@style/ChangeTypeTV"
+            android:background="@drawable/type_pupw_change_yinyue" />
+
+        <TextView
+            android:id="@+id/type_tv_change_type_fengshang"
+            style="@style/ChangeTypeTV"
+            android:background="@drawable/type_pupw_change_fengshang" />
+
+        <TextView
+            android:id="@+id/type_tv_change_type_jiaoyu"
+            style="@style/ChangeTypeTV"
+            android:background="@drawable/type_pupw_change_jiaoyu" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/type_tv_change_type_zhuanti"
+            style="@style/ChangeTypeTV"
+            android:background="@drawable/type_pupw_change_zhuanti" />
+
+        <TextView
+            android:id="@+id/type_tv_change_type_huashu"
+            style="@style/ChangeTypeTV"
+            android:background="@drawable/type_pupw_change_huashu" />
+
+        <TextView
+            android:id="@+id/type_tv_change_type_youpeng"
+            style="@style/ChangeTypeTV"
+            android:background="@drawable/type_pupw_change_youpeng" />
+
+        <TextView
+            android:id="@+id/type_tv_change_type_baishitong"
+            style="@style/ChangeTypeTV"
+            android:background="@drawable/type_pupw_change_baishitong" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp" >
+
+    <TextView
+        android:id="@+id/favorite_tv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/user_fragment_btn_bg"
+        android:clickable="true"
+        android:text="取消关注" />
+
+    <ImageView
+        android:id="@+id/favorite_imageView_placard"
+        android:layout_width="105dp"
+        android:layout_height="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/favorit_placard_temp" />
+
+    <TextView
+        android:id="@+id/favorite_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/favorite_imageView_placard"
+        android:layout_toLeftOf="@+id/favorite_tv_cancel"
+        android:layout_toRightOf="@+id/favorite_imageView_placard"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/favorite_tv_actor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/favorite_tv_title"
+        android:layout_below="@+id/favorite_tv_title"
+        android:layout_toLeftOf="@+id/favorite_tv_cancel"
+        android:layout_toRightOf="@+id/favorite_imageView_placard"
+        android:ellipsize="end"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:text="TextView"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/favorite_tv_des"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/favorite_imageView_placard"
+        android:layout_below="@+id/favorite_tv_actor"
+        android:layout_toLeftOf="@+id/favorite_tv_cancel"
+        android:layout_toRightOf="@+id/favorite_imageView_placard"
+        android:ellipsize="end"
+        android:lines="5"
+        android:padding="5dp"
+        android:text="TextView"
+        android:textColor="@color/white" />
+
+</RelativeLayout>
