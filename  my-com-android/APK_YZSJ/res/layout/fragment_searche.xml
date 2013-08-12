@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_bar_bg"
+        android:gravity="center" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_type_search" 
+            android:contentDescription="@string/app_name"
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_bar_bg"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" >
+
+        <TextView
+            android:id="@+id/search_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/search_btn" />
+
+        <EditText
+            android:id="@+id/autoCompleteTextView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/search_btn"
+            android:background="@drawable/search_input_bg"
+            android:drawableLeft="@drawable/search_icon"
+            android:singleLine="true" >
+
+            <requestFocus />
+        </EditText>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <com.dongfang.view.CheckTextView
+            android:id="@+id/search_type_ctv_quanbu"
+            style="@style/SearchTypeCTV"
+            android:layout_weight="1"
+            android:text="全部" />
+
+        <com.dongfang.view.CheckTextView
+            android:id="@+id/search_type_ctv_dianying"
+            style="@style/SearchTypeCTV"
+            android:layout_weight="1"
+            android:text="电影" />
+
+        <com.dongfang.view.CheckTextView
+            android:id="@+id/search_type_ctv_dianshiju"
+            style="@style/SearchTypeCTV"
+            android:layout_weight="1"
+            android:text="电视剧" />
+
+        <com.dongfang.view.CheckTextView
+            android:id="@+id/search_type_ctv_xinwen"
+            style="@style/SearchTypeCTV"
+            android:layout_weight="1"
+            android:text="新闻" />
+
+        <com.dongfang.view.CheckTextView
+            android:id="@+id/search_type_ctv_tiyu"
+            style="@style/SearchTypeCTV"
+            android:layout_weight="1"
+            android:text="体育" />
+
+        <com.dongfang.view.CheckTextView
+            android:id="@+id/search_type_ctv_yule"
+            style="@style/SearchTypeCTV"
+            android:layout_weight="1"
+            android:text="娱乐" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <com.dongfang.view.CheckTextView
+            style="@style/SearchTypeCTV"
+            android:layout_weight="1"
+            android:clickable="false" />
+
+        <com.dongfang.view.CheckTextView
+            android:id="@+id/search_type_ctv_jishi"
+            style="@style/SearchTypeCTV"
+            android:layout_weight="1"
+            android:text="纪实" />
+
+        <com.dongfang.view.CheckTextView
+            android:id="@+id/search_type_ctv_minglanmu"
+            style="@style/SearchTypeCTV"
+            android:layout_weight="1"
+            android:text="名栏目" />
+
+        <com.dongfang.view.CheckTextView
+            android:id="@+id/search_type_ctv_yinyue"
+            style="@style/SearchTypeCTV"
+            android:layout_weight="1"
+            android:text="音乐" />
+
+        <com.dongfang.view.CheckTextView
+            android:id="@+id/search_type_ctv_fengshang"
+            style="@style/SearchTypeCTV"
+            android:layout_weight="1"
+            android:text="风尚" />
+
+        <com.dongfang.view.CheckTextView
+            android:id="@+id/search_type_ctv_jiaoyu"
+            style="@style/SearchTypeCTV"
+            android:layout_weight="1"
+            android:text="教育" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <com.dongfang.view.CheckTextView
+            style="@style/SearchTypeCTV"
+            android:layout_weight="120"
+            android:clickable="false" />
+
+        <com.dongfang.view.CheckTextView
+            android:id="@+id/search_type_ctv_专区"
+            style="@style/SearchTypeCTV"
+            android:layout_weight="120"
+            android:text="专区" />
+
+        <com.dongfang.view.CheckTextView
+            android:id="@+id/search_type_ctv_huashuVIP"
+            style="@style/SearchTypeCTV"
+            android:layout_weight="135"
+            android:text="华数VIP" />
+
+        <com.dongfang.view.CheckTextView
+            android:id="@+id/search_type_ctv_youpengpuyueVIP"
+            style="@style/SearchTypeCTV"
+            android:layout_weight="185"
+            android:text="优朋普乐VIP" />
+
+        <com.dongfang.view.CheckTextView
+            android:id="@+id/search_type_ctv_baishitongVIP"
+            style="@style/SearchTypeCTV"
+            android:layout_weight="155"
+            android:text="百视通VIP" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_bar_type_bg"
+        android:drawableLeft="@drawable/search_result"
+        android:gravity="center_vertical"
+        android:paddingLeft="5dp"
+        android:text=" 搜索结果"
+        android:textColor="@color/text_orange" />
+
+    <!-- 下拉更新逻辑 -->
+
+    <com.dongfang.view.PullToRefreshView
+        android:id="@+id/ptrv_search_result"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/black"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ListView
+            android:id="@+id/lv_search_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+    </com.dongfang.view.PullToRefreshView>
+
+</LinearLayout>
