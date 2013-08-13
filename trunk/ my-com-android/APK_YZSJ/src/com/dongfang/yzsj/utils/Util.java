@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -46,7 +45,6 @@ import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -58,17 +56,9 @@ import com.df.mediaplayer.constants.Constants;
 import com.df.util.ULog;
 import com.dongfang.yzsj.params.ComParams;
 
-/**
- * 
- * @author dongfang, Emerson,zhangjiao
- * 
- */
-@SuppressLint("SimpleDateFormat")
+/** @author dongfang */
 public class Util {
-	private static final String	TAG					= Util.class.getSimpleName();
-	private static final int	ERROR				= -1;
-	public static boolean		isPlayWarning		= false;						// 视频播放的网络提醒
-	public static boolean		isDownloadWarning	= false;						// 下载的网络提醒
+	public static final String TAG = "Util";
 
 	/**
 	 * 返回屏幕宽度
@@ -152,13 +142,13 @@ public class Util {
 	 * @return
 	 */
 	public static int getTerminalSDKVersion() {
-		// TODO Auto-generated method stub
 		return Build.VERSION.SDK_INT;
 	}
 
 	/** 判断是否有网络 */
 	public static boolean isNetworkAvailable(Context context) {
-		ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		ConnectivityManager connectivityManager = (ConnectivityManager) context
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 		return (networkInfo != null && networkInfo.isAvailable());
 
@@ -223,7 +213,7 @@ public class Util {
 			return availableBlocks * blockSize;
 		}
 		else {
-			return ERROR;
+			return -1;
 		}
 	}
 
@@ -241,7 +231,7 @@ public class Util {
 			return totalBlocks * blockSize;
 		}
 		else {
-			return ERROR;
+			return -1;
 		}
 	}
 
@@ -653,123 +643,29 @@ public class Util {
 		return ipAddr;
 	}
 
-	public static final String[]	COUNTRY_SUFFIX	= { "aero", "asia", "biz", "cat", "com", "coop", "edu", "eu", "gov", "info", "int", "jobs", "mil", "mobi", "museum", "name", "net", "org", "pro",
-			"tel", "travel", "xxx", "ac", "ae", "af", "ag", "ai", "al", "am", "an", "ao", "aq", "ar", "as", "at", "aw", "ax", "az", "ba", "bb", "bd", "be", "bf", "bg", "bh", "bi", "bj", "bm", "bn",
-			"bo", "br", "bs", "bt", "bv", "bw", "by", "bz", "ca", "cc", "cd", "cf", "cg", "ch", "ck", "cl", "cm", "cn", "co", "cr", "cs", "cu", "cv", "cx", "cy", "cz", "de", "dj", "dk", "dm", "do",
-			"dz", "ec", "ee", "eg", "er", "es", "et", "eu", "fi", "fj", "fk", "fm", "fo", "fr", "ga", "gb", "gd", "ge", "gf", "gg", "gh", "gi", "gl", "gm", "gn", "gp", "gq", "gr", "gs", "gt", "gu",
-			"gw", "gy", "hk", "hm", "hn", "ht", "hu", "id", "ie", "il", "in", "io", "iq", "ir", "je", "jm", "jo", "jp", "kg", "ki", "km", "kn", "kp", "kr", "kw", "ky", "kz", "la", "lb", "lc", "li",
-			"lk", "lr", "ls", "lt", "lu", "lv", "ly", "ma", "mc", "md", "me", "mg", "mh", "mk", "ml", "mm", "mn", "mo", "mp", "mq", "mr", "ms", "mt", "mu", "mv", "mw", "mx", "my", "na", "nc", "ne",
-			"nf", "ng", "ni", "nl", "no", "np", "nr", "nu", "nz", "om", "pa", "pe", "pf", "pg", "ph", "pk", "pl", "pm", "pn", "pr", "ps", "pt", "pw", "py", "qa", "re", "ro", "rs", "ru", "rw", "sa",
-			"sb", "sc", "sd", "se", "sg", "sh", "si", "sj", "sk", "sl", "sm", "sn", "so", "sr", "st", "su", "sv", "sy", "sz", "tc", "td", "tf", "tg", "th", "tj", "tk", "tl", "tm", "tn", "to", "tp",
-			"tr", "tt", "tv", "tw", "tz", "ua", "ug", "uk", "us", "uy", "uz", "va", "vc", "ve", "vg", "vi", "vn", "vu", "wf", "ws", "ye", "yt", "za", "zm", "zw" };
+	public static final String[] COUNTRY_SUFFIX = { "aero", "asia", "biz", "cat", "com", "coop", "edu", "eu", "gov",
+			"info", "int", "jobs", "mil", "mobi", "museum", "name", "net", "org", "pro", "tel", "travel", "xxx", "ac",
+			"ae", "af", "ag", "ai", "al", "am", "an", "ao", "aq", "ar", "as", "at", "aw", "ax", "az", "ba", "bb", "bd",
+			"be", "bf", "bg", "bh", "bi", "bj", "bm", "bn", "bo", "br", "bs", "bt", "bv", "bw", "by", "bz", "ca", "cc",
+			"cd", "cf", "cg", "ch", "ck", "cl", "cm", "cn", "co", "cr", "cs", "cu", "cv", "cx", "cy", "cz", "de", "dj",
+			"dk", "dm", "do", "dz", "ec", "ee", "eg", "er", "es", "et", "eu", "fi", "fj", "fk", "fm", "fo", "fr", "ga",
+			"gb", "gd", "ge", "gf", "gg", "gh", "gi", "gl", "gm", "gn", "gp", "gq", "gr", "gs", "gt", "gu", "gw", "gy",
+			"hk", "hm", "hn", "ht", "hu", "id", "ie", "il", "in", "io", "iq", "ir", "je", "jm", "jo", "jp", "kg", "ki",
+			"km", "kn", "kp", "kr", "kw", "ky", "kz", "la", "lb", "lc", "li", "lk", "lr", "ls", "lt", "lu", "lv", "ly",
+			"ma", "mc", "md", "me", "mg", "mh", "mk", "ml", "mm", "mn", "mo", "mp", "mq", "mr", "ms", "mt", "mu", "mv",
+			"mw", "mx", "my", "na", "nc", "ne", "nf", "ng", "ni", "nl", "no", "np", "nr", "nu", "nz", "om", "pa", "pe",
+			"pf", "pg", "ph", "pk", "pl", "pm", "pn", "pr", "ps", "pt", "pw", "py", "qa", "re", "ro", "rs", "ru", "rw",
+			"sa", "sb", "sc", "sd", "se", "sg", "sh", "si", "sj", "sk", "sl", "sm", "sn", "so", "sr", "st", "su", "sv",
+			"sy", "sz", "tc", "td", "tf", "tg", "th", "tj", "tk", "tl", "tm", "tn", "to", "tp", "tr", "tt", "tv", "tw",
+			"tz", "ua", "ug", "uk", "us", "uy", "uz", "va", "vc", "ve", "vg", "vi", "vn", "vu", "wf", "ws", "ye", "yt",
+			"za", "zm", "zw" };
 
+	/** 键盘隐藏 */
 	public static void hideInput(View v) {
 		InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 		if (imm.isActive()) {
 			imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
 		}
-	}
-
-	/** 毫秒转成年-月-日 */
-	public static String stringToDate(String string) {
-		if (TextUtils.isEmpty(string))
-			return "";
-		Date date = null;
-		try {
-			long dt = Long.parseLong(string);
-			date = new Date();
-			date.setTime(dt);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "";
-		}
-		return new SimpleDateFormat("yyyy-MM-dd").format(date);
-	}
-
-	/** 毫秒转成年-月-日 小时-分 */
-	public static String stringToDateWithHourMin(String string) {
-		if (TextUtils.isEmpty(string))
-			return "";
-		Date date = null;
-		try {
-			long dt = Long.parseLong(string);
-			date = new Date();
-			date.setTime(dt);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "";
-		}
-		return new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date);
-	}
-
-	/** 日期比较(日期为毫秒形式) */
-	public static boolean isValidTime(String string) {
-		if (TextUtils.isEmpty(string))
-			return false;
-		Date dateNow = new Date();
-		Date date = null;
-		try {
-			long dt = Long.parseLong(string);
-			date = new Date();
-			date.setTime(dt);
-			if (dateNow.before(date)) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-
-	/** 秒转成 时：分：秒 (00:00:00) */
-	public static String secondToTime(int num) {
-		String str = null;
-		int hour = 0;
-		int minute = 0;
-		int second = 0;
-		if (num >= 3600) {
-			hour = num / 3600;
-			if (num % 3600 > 60) {
-				minute = (num % 3600) / 60;
-				second = (num % 3600) % 60;
-			}
-			else {
-				minute = 0;
-				second = num % 3600;
-			}
-
-		}
-		else if (num < 60) {
-			hour = 0;
-			minute = 0;
-			second = num;
-		}
-		else {
-			hour = 0;
-			minute = num / 60;
-			second = num % 60;
-		}
-
-		str = "0" + hour + ":";
-
-		if (minute < 10) {
-			str = str + "0" + minute + ":";
-		}
-		else {
-			str = str + minute + ":";
-		}
-
-		if (second < 10) {
-			str = str + "0" + second;
-		}
-		else {
-			str = str + second;
-		}
-
-		return str;
 	}
 
 	/** 判断是否需要升级 */
@@ -835,7 +731,8 @@ public class Util {
 	public static Bitmap drawableToBitmap(Drawable drawable) {
 		int width = drawable.getIntrinsicWidth();
 		int height = drawable.getIntrinsicHeight();
-		Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
+		Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
+				: Bitmap.Config.RGB_565;
 		Bitmap bitmap = Bitmap.createBitmap(width, height, config);
 		Canvas canvas = new Canvas(bitmap);
 		drawable.setBounds(0, 0, width, height);
@@ -917,43 +814,6 @@ public class Util {
 		return Html.fromHtml(ss);
 	}
 
-	/**
-	 * 将long值转换成HH:MM:SS的形式
-	 * 
-	 * @param longTime
-	 * @return
-	 */
-	public static String changeLongValueToTimeStyle(long longTime) {
-		String ss = null;
-		if (longTime < 10L) {
-			ss = "00:0" + longTime;
-		}
-		else if (longTime < 60L) {
-			ss = "00:" + longTime;
-		}
-		else if (longTime < 3600L) {
-			int minutes = (int) (longTime / 60);
-			ss = minutes + ":";
-			int seconds = (int) (longTime % 60);
-			if (seconds < 10)
-				ss += "0";
-			ss += seconds;
-		}
-		else {
-			int hours = (int) (longTime / 3600);
-			ss = hours + ":";
-			int minutes = (int) (longTime % 3600) / 60;
-			if (minutes < 10)
-				ss += "0";
-			ss += minutes + ":";
-			int seconds = (int) (longTime % 3600) % 60;
-			if (seconds < 10)
-				ss += "0";
-			ss += seconds;
-		}
-		return ss;
-	}
-
 	public static String getImageName(String imgUrl) {
 		if (TextUtils.isEmpty(imgUrl))
 			return "";
@@ -987,7 +847,8 @@ public class Util {
 					sb.append(URLEncoder.encode(list.get(loc).getName()) + "=null");
 				}
 				else
-					sb.append(URLEncoder.encode(list.get(loc).getName()) + "=" + URLEncoder.encode(list.get(loc).getValue().trim().replace("+", "%2B")));
+					sb.append(URLEncoder.encode(list.get(loc).getName()) + "="
+							+ URLEncoder.encode(list.get(loc).getValue().trim().replace("+", "%2B")));
 			}
 			else {
 				if (TextUtils.isEmpty(list.get(loc).getValue()) || TextUtils.isEmpty(list.get(loc).getValue().trim())) {
@@ -1024,112 +885,6 @@ public class Util {
 		return flag;
 	}
 
-	public static String strDataDuration(String str_star, String str_end) {
-		SimpleDateFormat sdfFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String start_H = "";
-		String start_M = "";
-		String end_H = "";
-		String end_M = "";
-		try {
-			start_H = sdfFormat.parse(str_star).getHours() + "";
-			start_M = sdfFormat.parse(str_star).getMinutes() + "";
-			end_H = sdfFormat.parse(str_end).getHours() + "";
-			end_M = sdfFormat.parse(str_end).getMinutes() + "";
-			ULog.e("time ", returnAPM(start_H, start_M) + "-" + returnAPM(end_H, end_M));
-			return returnAPM(start_H, start_M) + "-" + returnAPM(end_H, end_M);
-		} catch (Throwable e) {
-			e.printStackTrace();
-			return "** -  **";
-		}
-	}
-
-	public static String returnAPM(String str_H, String str_M) {
-		String returnValue = "";
-		if (Integer.parseInt(str_H) < 13) {
-			returnValue = formatData(str_H) + ":" + formatData(str_M) + "am";
-		}
-		else {
-			returnValue = formatData((Integer.parseInt(str_H) - 12) + "") + ":" + formatData(str_M) + "pm";
-		}
-		return returnValue;
-	}
-
-	public static String formatData(String data) {
-		if (data.length() < 2) {
-			return ("0" + data);
-		}
-		else {
-			return data;
-		}
-	}
-
-	/**
-	 * 获取当天的时间，单位为秒(也就是今天已经过了多少秒)
-	 * 
-	 * @param time
-	 */
-	public static int getDaySeconds() {
-		String time = new SimpleDateFormat("HH:mm:ss").format(System.currentTimeMillis());
-		// System.out.println("当前时间为：" + time);
-		int totalsec = formatTime2Seconds(time);
-		return totalsec;
-	}
-
-	/**
-	 * 将HH:mm:ss转换成秒数
-	 * 
-	 * @param time
-	 * @return
-	 */
-	public static int formatTime2Seconds(String time) {
-		// String[] my = time.split(" ");
-		String[] mytime = time.split(":");
-		int hour = Integer.parseInt(mytime[0]);
-		int min = Integer.parseInt(mytime[1]);
-		int sec = Integer.parseInt(mytime[2]);
-		int totalsec = hour * 3600 + min * 60 + sec;
-		return totalsec;
-	}
-
-	/**
-	 * 将YYYY-MM-DD HH:mm:ss转换成秒数
-	 * 
-	 * @param time
-	 * @return
-	 */
-	public static int formatDayTime2Seconds(String time) {
-		String[] my = time.split((" +"));
-		String[] mytime = my[1].split(":");
-		int hour = Integer.parseInt(mytime[0]);
-		int min = Integer.parseInt(mytime[1]);
-		int sec = Integer.parseInt(mytime[2]);
-		int totalsec = hour * 3600 + min * 60 + sec;
-		return totalsec;
-	}
-
-	/**
-	 * String 类中获取Mouth
-	 * 
-	 * @param time
-	 * @return
-	 */
-	public static int getMonthFromString(String time) {
-		String mouth = time.substring(8, 10);
-		return Integer.parseInt(mouth);
-	}
-
-	/**
-	 * 获取YYYY-MM-DD HH:mm:ss中的DD
-	 * 
-	 * @param time
-	 * @return
-	 */
-	public static int getDayOfTime(String time) {
-		String[] my = time.split((" +"));
-		String[] ymd = my[0].split("-");
-		return Integer.parseInt(ymd[2]);
-	}
-
 	/**
 	 * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
 	 */
@@ -1164,87 +919,6 @@ public class Util {
 		BigDecimal b1 = new BigDecimal(Double.toString(v1));
 		BigDecimal b2 = new BigDecimal(Double.toString(v2));
 		return b1.divide(b2, scale, BigDecimal.ROUND_HALF_UP).doubleValue();
-	}
-
-	/**
-	 * 根据开始时间，结束时间，判断当前播放类型
-	 * 
-	 * @param v1
-	 *            开始时间
-	 * @param v2
-	 *            结束时间
-	 * @return 播放类型 0 bacesee 1 live 2 forcast
-	 */
-	public static int getLiveTypeByTime(String startTime, String endTime) {
-
-		// 开始时间后于当前时间
-		if (!beforeCurrentTime(startTime)) {
-			return 2;
-		}
-		// 结束时间先于当前时间 backseee
-		else if (beforeCurrentTime(endTime)) {
-			return 0;
-		}
-		// 当前时间位于开始和结束时间之中 live
-		else {
-			return 1;
-		}
-	}
-
-	private static boolean beforeCurrentTime(String timeStr) {
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			long time = sdf.parse(timeStr).getTime();
-			long currentTime = new Date().getTime();
-			Log.i(TAG, "compare date: " + timeStr + "  compare time: " + time + "=========>  current time: " + currentTime);
-			return time < currentTime;
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-
-	public static String getDataStr(String str) {
-		String b = "";
-		for (int i = 0; i < str.length(); i++) {
-			if (str.charAt(i) != '-' && str.charAt(i) != ':' && str.charAt(i) != ' ') {
-				b = b + String.valueOf(str.charAt(i));
-			}
-
-		}
-
-		return b;
-	}
-
-	/**
-	 * 获取时间，格式yyyyMMdd
-	 * 
-	 * @return
-	 */
-	@SuppressLint("SimpleDateFormat")
-	public static String getDateWithHMD() {
-		// 最后的aa表示“上午”或“下午” HH表示24小时制 如果换成hh表示12小时制
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		return sdf.format(new Date());
-	}
-
-	@SuppressLint("SimpleDateFormat")
-	public static String getTimeStampSSS() {
-		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").format(System.currentTimeMillis());
-	}
-
-	/**
-	 * 王牌栏目中最新更新时间转换为需要格式
-	 * 
-	 * @author wwei
-	 * @param updatetime
-	 * @return
-	 * @throws ParseException
-	 */
-	public static String parseUpdatetime(String updatetime) throws ParseException {
-		// TODO Auto-generated method stub
-		SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
-		return mFormat.format(mFormat.parse(updatetime));
 	}
 
 	/**
@@ -1300,44 +974,6 @@ public class Util {
 		return (int) (dip * (Constants.DENSITYDPI / 160));
 
 	}
-
-	/**
-	 * 按格式输出抽奖剩余时间（hh:mm:ss）
-	 * 
-	 * @author wwei
-	 * @param leftTime
-	 * @return
-	 */
-	public static String calculateRemainningTime(long leftTime) {
-		// TODO Auto-generated method stub
-		String hour = String.valueOf(leftTime / 3600);
-		String minute = String.valueOf(leftTime % 3600 / 60);
-		String second = String.valueOf(leftTime % 3600 % 60);
-		String remainingTime = (hour.length() < 2 ? "0" + hour : hour) + ":" + (minute.length() < 2 ? "0" + minute : minute) + ":" + (second.length() < 2 ? "0" + second : second);
-		return remainingTime;
-	}
-
-	// /**
-	// * 获取抽奖数据
-	// *
-	// * @author wwei
-	// * @return
-	// */
-	// public static List<PrizeBeans> getLotteryDate() {
-	// // TODO Auto-generated method stub
-	// int[] picSource = new int[3];
-	// picSource[2] = R.drawable.btn_lottery_up;
-	// picSource[1] = R.drawable.bg_lottery;
-	// picSource[0] = R.drawable.iv_current_gift_position;
-	//
-	// List<PrizeBeans> list_prizeBeans = new ArrayList<PrizeBeans>();
-	// PrizeBeans prizeBeans;
-	// for (int i = 0; i < picSource.length; i++) {
-	// // prizeBeans = new PrizeBeans(picSource[i], null, null, 0);
-	// // list_prizeBeans.add(prizeBeans);
-	// }
-	// return list_prizeBeans;
-	// }
 
 	/**
 	 * 从本地Assets中读取json
