@@ -9,11 +9,25 @@
     <include layout="@layout/action_main_top_bar" />
 
     <FrameLayout
-        android:id="@+id/realtabcontent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/background" />
+        android:background="@color/background" >
+
+        <fragment
+            android:id="@+id/fragment_login"
+            android:name="com.dongfang.yzsj.fragment.LoginFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <FrameLayout
+            android:id="@+id/realtabcontent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
+            android:animationCache="true"
+            android:background="@color/background" />
+    </FrameLayout>
 
     <android.support.v4.app.FragmentTabHost
         android:id="@android:id/tabhost"

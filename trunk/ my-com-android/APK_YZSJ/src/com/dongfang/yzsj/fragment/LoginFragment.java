@@ -6,13 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
-import com.df.util.ULog;
 import com.dongfang.yzsj.R;
-import com.dongfang.yzsj.bean.HomeBean;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.http.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
+import com.dongfang.yzsj.utils.Util;
 
 /**
  * 登陆
@@ -25,6 +22,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
 	private View btnLogin; // 登陆按钮
 	private View tvGetAuthCode; // 获取验证码
+
+	private EditText etUserName;// 用户名称
+	private EditText etAuthCode;// 验证码
 
 	private ProgressDialog progDialog;
 
@@ -44,41 +44,56 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 		tvGetAuthCode = view.findViewById(R.id.login_tv_get_authcode);
 		tvGetAuthCode.setOnClickListener(this);
 
+		etUserName = (EditText) view.findViewById(R.id.login_et_userName);
+		etAuthCode = (EditText) view.findViewById(R.id.login_et_authCode);
+
+		btnLogin.requestFocus();
+
+	}
+	
+	
+	
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		btnLogin.requestFocus();
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.login_btn_login:
-			new HttpUtils().send(HttpRequest.HttpMethod.GET, "http://m.fortune-net.cn/page/hbMobile/?jsonFormat=true", new RequestCallBack<String>() {
-				@Override
-				public void onLoading(long total, long current) {
-					ULog.d(TAG, "total = " + total + "; current = " + current);
-				}
-
-				@Override
-				public void onSuccess(String result) {
-					ULog.d(TAG, "onSuccess  --" + result);
-					HomeBean bean = new com.google.gson.Gson().fromJson(result, HomeBean.class);
-					bean.toLog();
-					progDialog.dismiss();
-				}
-
-				@Override
-				public void onStart() {
-					ULog.i(TAG, "onStart");
-
-					progDialog.show();
-
-				}
-
-				@Override
-				public void onFailure(Throwable error, String msg) {
-					ULog.i(TAG, "onFailure");
-
-					progDialog.dismiss();
-				}
-			});
+			// new HttpUtils().send(HttpRequest.HttpMethod.GET,
+			// "http://m.fortune-net.cn/page/hbMobile/?jsonFormat=true", new RequestCallBack<String>() {
+			// @Override
+			// public void onLoading(long total, long current) {
+			// ULog.d(TAG, "total = " + total + "; current = " + current);
+			// }
+			//
+			// @Override
+			// public void onSuccess(String result) {
+			// ULog.d(TAG, "onSuccess  --" + result);
+			// HomeBean bean = new com.google.gson.Gson().fromJson(result, HomeBean.class);
+			// bean.toLog();
+			// progDialog.dismiss();
+			// }
+			//
+			// @Override
+			// public void onStart() {
+			// ULog.i(TAG, "onStart");
+			//
+			// progDialog.show();
+			//
+			// }
+			//
+			// @Override
+			// public void onFailure(Throwable error, String msg) {
+			// ULog.i(TAG, "onFailure");
+			//
+			// progDialog.dismiss();
+			// }
+			// });
 
 			break;
 		case R.id.login_tv_get_authcode:
