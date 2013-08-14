@@ -1,5 +1,11 @@
 package com.dongfang.yzsj.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.df.util.ULog;
 
 /**
@@ -7,13 +13,20 @@ import com.df.util.ULog;
  * 
  * @author dongfang
  */
-public class HomeBean {
+public class HomeBean implements Parcelable {
 	public static final String TAG = "HomeBean";
 
 	private String marquee; // 公告
-	private SliderItem[] slider; // kv图
-	private LivesItem[] lives; // 直播
-	private ChannelItem[] channelContents; // 频道数据
+	private List<SliderItem> slider; // kv图
+	private List<LivesItem> lives; // 直播
+	private List<ChannelItem> channelContents; // 频道数据
+
+	public HomeBean() {
+		marquee = "";
+		slider = new ArrayList<SliderItem>();
+		lives = new ArrayList<LivesItem>();
+		channelContents = new ArrayList<ChannelItem>();
+	}
 
 	public String getMarquee() {
 		return marquee;
@@ -23,27 +36,27 @@ public class HomeBean {
 		this.marquee = marquee;
 	}
 
-	public SliderItem[] getSlider() {
+	public List<SliderItem> getSlider() {
 		return slider;
 	}
 
-	public void setSlider(SliderItem[] slider) {
+	public void setSlider(List<SliderItem> slider) {
 		this.slider = slider;
 	}
 
-	public LivesItem[] getLives() {
+	public List<LivesItem> getLives() {
 		return lives;
 	}
 
-	public void setLives(LivesItem[] lives) {
+	public void setLives(List<LivesItem> lives) {
 		this.lives = lives;
 	}
 
-	public ChannelItem[] getChannelContents() {
+	public List<ChannelItem> getChannelContents() {
 		return channelContents;
 	}
 
-	public void setChannelContents(ChannelItem[] channelContents) {
+	public void setChannelContents(List<ChannelItem> channelContents) {
 		this.channelContents = channelContents;
 	}
 
@@ -51,115 +64,47 @@ public class HomeBean {
 	public void toLog() {
 		ULog.d(TAG, "marquee = " + marquee);
 
-		for (int i = 0; i < slider.length; i++) {
-			ULog.d(TAG, "slider SliderItem = " + i + "\n" + slider[i].toString());
+		for (int i = 0, length = slider.size(); i < length; i++) {
+			ULog.d(TAG, "slider SliderItem = " + i + "\n" + slider.get(i).toString());
 		}
 
-		for (int i = 0; i < lives.length; i++) {
-			ULog.d(TAG, "lives LivesItem = " + i + "\n" + lives[i].toString());
+		for (int i = 0, length = lives.size(); i < length; i++) {
+			ULog.d(TAG, "lives LivesItem = " + i + "\n" + lives.get(i).toString());
 		}
-		for (int i = 0; i < channelContents.length; i++) {
-			ULog.d(TAG, "channelContents ChannelItem = " + i + "\n" + channelContents[i].toString());
+		for (int i = 0, length = channelContents.size(); i < length; i++) {
+			//ULog.d(TAG, "channelContents ChannelItem = " + i + "\n" + channelContents.get(i).toString());
 		}
 	}
 
-	/** kv图 */
-	private class SliderItem {
-		public String MEDIA_ACTORS;
-		public String MEDIA_LENGTH;
-		public String MEDIA_NAME;
-		public String MEDIA_PIC_RECOM2;
-		// public String PAD_MEDIA_POSTER_BIG;
-		// public String PC_MEDIA_POSTER_BIG;
-		public String id;
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(marquee);
+		dest.writeList(slider);
+		dest.writeList(lives);
+		dest.writeList(channelContents);
+	}
+
+	public static final Parcelable.Creator<HomeBean> CREATOR = new Parcelable.Creator<HomeBean>() {
 
 		@Override
-		public String toString() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(" -- MEDIA_ACTORS = " + MEDIA_ACTORS).append("\n");
-			sb.append(" -- MEDIA_LENGTH = " + MEDIA_LENGTH).append("\n");
-			sb.append(" -- MEDIA_NAME = " + MEDIA_NAME).append("\n");
-			sb.append(" -- MEDIA_PIC_RECOM2 = " + MEDIA_PIC_RECOM2).append("\n");
-			// sb.append(" -- PAD_MEDIA_POSTER_BIG = " + PAD_MEDIA_POSTER_BIG).append("\n");
-			// sb.append(" -- PC_MEDIA_POSTER_BIG = " + PC_MEDIA_POSTER_BIG).append("\n");
-			sb.append(" -- id = " + id).append("\n");
-			return sb.toString();
+		public HomeBean createFromParcel(Parcel in) {
+			HomeBean data = new HomeBean();
+			data.setMarquee(in.readString());
+			in.readList(data.getSlider(), SliderItem.class.getClassLoader());
+			in.readList(data.getLives(), LivesItem.class.getClassLoader());
+			in.readList(data.getChannelContents(), ChannelItem.class.getClassLoader());
+			return data;
 		}
-
-	}
-
-	/** 直播 */
-	private class LivesItem {
-		public String MEDIA_NAME;
-		// public String PC_MEDIA_POSTER_HORIZONTAL_BIG;
-		public String PHONE_MEDIA_POSTER_SMALL;
-		public String id;
 
 		@Override
-		public String toString() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(" -- MEDIA_NAME = " + MEDIA_NAME).append("\n");
-			sb.append(" -- PHONE_MEDIA_POSTER_SMALL = " + PHONE_MEDIA_POSTER_SMALL).append("\n");
-			sb.append(" -- id = " + id).append("\n");
-			return sb.toString();
+		public HomeBean[] newArray(int size) {
+			return new HomeBean[size];
 		}
-	}
-
-	/** 平道内容 */
-	private class ChannelItem {
-		public Movie[] movies;
-		public Channel channel;
-
-		@Override
-		public String toString() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(" --  ChannelItem channel = " + channel).append("\n");
-			for (Movie m : movies)
-				sb.append(" -- ChannelItem movies = \n" + m.toString()).append("\n");
-			return sb.toString();
-		}
-
-	}
-
-	private class Movie {
-		public String MEDIA_ACTORS; // 演员
-		public String MEDIA_LENGTH; // 视频长度
-		public String MEDIA_NAME; // 视频名称
-		public String MEDIA_PIC_RECOM2;
-		// public String PAD_MEDIA_POSTER_BIG;
-		public String PC_MEDIA_POSTER_BIG;
-		// public String PC_MEDIA_POSTER_HORIZONTAL_BIG;
-		public String id;
-
-		@Override
-		public String toString() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(" -- -- MEDIA_ACTORS = " + MEDIA_ACTORS).append("\n");
-			sb.append(" -- -- MEDIA_LENGTH = " + MEDIA_LENGTH).append("\n");
-			sb.append(" -- -- MEDIA_NAME = " + MEDIA_NAME).append("\n");
-			sb.append(" -- -- MEDIA_PIC_RECOM2 = " + MEDIA_PIC_RECOM2).append("\n");
-			sb.append(" -- -- PC_MEDIA_POSTER_BIG = " + PC_MEDIA_POSTER_BIG).append("\n");
-			sb.append(" -- -- id = " + id).append("\n");
-			return sb.toString();
-		}
-
-	}
-
-	private class Channel {
-		public String channelId;
-		// public String code;
-		public String name;
-		public String poster;
-
-		@Override
-		public String toString() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(" -- -- channelId = " + channelId).append("\n");
-			sb.append(" -- -- name = " + name).append("\n");
-			sb.append(" -- -- poster = " + poster).append("\n");
-			return sb.toString();
-		}
-
-	}
+	};
 
 }

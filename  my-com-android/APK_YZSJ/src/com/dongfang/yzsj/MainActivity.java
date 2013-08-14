@@ -1,18 +1,22 @@
 package com.dongfang.yzsj;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.FrameLayout;
+import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.df.util.ULog;
+import com.dongfang.yzsj.bean.HomeBean;
 import com.dongfang.yzsj.fragment.HomeFragment;
 import com.dongfang.yzsj.fragment.LiveFragment;
 import com.dongfang.yzsj.fragment.LoginFragment;
 import com.dongfang.yzsj.fragment.SearchFragment;
-import com.dongfang.yzsj.fragment.TypeFragment;
 import com.dongfang.yzsj.fragment.UserFragment;
 import com.dongfang.yzsj.fragment.VODFragment;
 
@@ -26,6 +30,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 	private FragmentTabHost fgtHost;
 	private FragmentManager mFragmentManager;
 
+	private LoginFragment loginFragment;// 登陆Fragment
+	private FrameLayout frameLayout;// tab选择之后内容显示区域
+
 	private View tvLogin;// 登陆
 	private View tvhistory;// 播放信息
 	private TextView tvLoginDesc;// 登陆信息
@@ -37,6 +44,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		mFragmentManager = getSupportFragmentManager();
 		initTabhostItems();
 		initView();
+		initData(getIntent());
+	}
+
+	/** 初始化 */
+	private void initData(Intent intent) {
+		ULog.d(TAG, "initData");
+		if (null == intent || null == intent.getParcelableExtra("homebean")) {
+			ULog.d(TAG, " ---  -- --- ---- -- null");
+			return;
+		}
+
+		((HomeBean) intent.getParcelableExtra("homebean")).toLog();
 
 	}
 
@@ -55,27 +74,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		tab4.setBackgroundResource(R.drawable.mian_activity_tab_search_bg);
 		tab5.setBackgroundResource(R.drawable.mian_activity_tab_user_bg);
 
-		fgtHost.addTab(fgtHost.newTabSpec("6").setIndicator("66"), TypeFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), HomeFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), LiveFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab3), VODFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab4), SearchFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator(tab5), UserFragment.class, null);
+		// fgtHost.addTab(fgtHost.newTabSpec("6").setIndicator("66"), TypeFragment.class, null);
 
 		// fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator("1"), HomeFragment.class, null);
 		// fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator("2"), LiveFragment.class, null);
 		// fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator("3"), VODFragment.class, null);
 		// fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator("4"), SearchFragment.class, null);
 		// fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator("5"), UserFragment.class, null);
-		
-		fgtHost.setOnClickListener(new View.OnClickListener() {
-			
+
+		fgtHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 			@Override
-			public void onClick(View v) {
-				ULog.d(TAG, v.getTag().toString());
+			public void onTabChanged(String tabId) {
+				ULog.d(TAG, "OnTabChangeListener = " + tabId);
+				if ("5".equals(tabId) && !loginFragment.isVisible()) {
+					frameLayout.setVisibility(View.GONE);
+				}
+				else if (!frameLayout.isShown()) {
+					frameLayout.setVisibility(0);
+				}
 			}
 		});
-		
+
 	}
 
 	/** 初始化view */
@@ -85,6 +109,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		tvhistory = findViewById(R.id.tv_topbar_playhistory);
 		tvhistory.setOnClickListener(this);
 		tvLoginDesc = (TextView) findViewById(R.id.tv_topbar_login_decs);
+		frameLayout = (FrameLayout) findViewById(R.id.realtabcontent);
+		loginFragment = (LoginFragment) mFragmentManager.findFragmentById(R.id.fragment_login);
+		
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		frameLayout.requestFocus();
+		((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
+				fgtHost.getApplicationWindowToken(), 2); // (WidgetSearchActivity是当前的Activity)
 	}
 
 	@Override
@@ -96,19 +131,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 			// // 注销
 			// }
 			// else {
-			
-			
-			mFragmentManager.beginTransaction().add(R.id.realtabcontent, new LoginFragment(), "LoginFragment");
-			mFragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-			mFragmentManager.beginTransaction().addToBackStack(null);
-			mFragmentManager.beginTransaction().commit();
+			frameLayout.setVisibility(View.GONE);
 			// }
-			fgtHost.getCurrentView().setVisibility(View.GONE);
-			ULog.d(TAG, "登陆");
-
 			break;
 		case R.id.tv_topbar_playhistory:
-			mFragmentManager.beginTransaction().detach(mFragmentManager.findFragmentByTag("LoginFragment"));
+			frameLayout.setVisibility(0);
+
 			break;
 
 		default:

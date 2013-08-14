@@ -13,7 +13,6 @@ import android.view.MenuItem;
 
 import com.df.util.ULog;
 import com.dongfang.yzsj.broadcast.CloseAppReceiver;
-import com.dongfang.yzsj.exception.MyUnCaughtExceptionHandler;
 
 /**
  * 1. 所有该项目activity都需要继承该类；<br>
