@@ -14,34 +14,31 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.df.util.ULog;
+import com.dongfang.view.imagegallery.ImageGalleyAdapter1;
 import com.dongfang.yzsj.R;
+import com.dongfang.yzsj.bean.SliderItem;
 import com.dongfang.yzsj.utils.Util;
 
-/**
- * 图片滑动
- * 
- * @author dongfang
- * 
- */
+/** kv图片滑动 @author dongfang */
 public class ImageGallery extends LinearLayout {
-	public static final String	TAG					= ImageGallery.class.getSimpleName();
+	public static final String TAG = ImageGallery.class.getSimpleName();
 
 	/** 一次显示一张图片 */
-	public static final int		IMAGE_VIEW_TYPE_1	= 1;
+	public static final int IMAGE_VIEW_TYPE_1 = 1;
 	/** 一次显示二张图片 */
-	public static final int		IMAGE_VIEW_TYPE_2	= 2;
+	public static final int IMAGE_VIEW_TYPE_2 = 2;
 	/** 一次显示三张图片 */
-	public static final int		IMAGE_VIEW_TYPE_3	= 3;
+	public static final int IMAGE_VIEW_TYPE_3 = 3;
 
-	private ViewPager			viewPager;
-	private LinearLayout		ll_fling_desc_image;
-	private TextView			tv_fling_desc;
+	private ViewPager viewPager;
+	private LinearLayout ll_fling_desc_image;
+	private TextView tv_fling_desc;
 
-	private List<Object>		list;
+	private List<SliderItem> list;
 
-	private Context				context;
+	private Context context;
 	/** 需要显示的图片的类型 */
-	private int					imageViewType		= -1;
+	private int imageViewType = -1;
 
 	public ImageGallery(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -49,7 +46,7 @@ public class ImageGallery extends LinearLayout {
 		init();
 	}
 
-	public ImageGallery(Context context, List<Object> list, int imageViewType) {
+	public ImageGallery(Context context, List<SliderItem> list, int imageViewType) {
 		super(context);
 		this.imageViewType = imageViewType;
 		this.context = context;
@@ -61,51 +58,49 @@ public class ImageGallery extends LinearLayout {
 	public void init() {
 		View view = LayoutInflater.from(context).inflate(R.layout.image_gallery, null);
 		viewPager = (ViewPager) view.findViewById(R.id.imageGallery_viewpage);
-		RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (int) (Util.getWindowWidth(context) * 290 / 480));
-		viewPager.setLayoutParams(layoutParams);
+		 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+		 RelativeLayout.LayoutParams.MATCH_PARENT, (int) (Util.getWindowWidth(context) * 200 / 600));
+		 viewPager.setLayoutParams(layoutParams);
 		ll_fling_desc_image = (LinearLayout) view.findViewById(R.id.imageGallery_ll_fling_desc_image);
 		tv_fling_desc = (TextView) view.findViewById(R.id.imageGallery_tv_fling_desc);
 		addView(view);
 		// viewPager.setCurrentItem(1);
 	}
 
-	public void setList(int imageViewType, List<Object> list) {
+	public void setList(int imageViewType, List<SliderItem> list) {
 		this.imageViewType = imageViewType;
+		this.list = list;
 		setList();
 	}
 
 	public void setList() {
 		if (null == list || null == list.get(0))
 			return;
-
-		int num = -1;
-		if (IMAGE_VIEW_TYPE_1 == imageViewType)
-			num = 1;
-		else if (IMAGE_VIEW_TYPE_2 == imageViewType)
+		int num = 1;
+		if (IMAGE_VIEW_TYPE_2 == imageViewType)
 			num = 2;
 		else if (IMAGE_VIEW_TYPE_3 == imageViewType)
 			num = 3;
 
 		final int size = list.size() / num;
 
-		if (0 < size) {
+		if (size > 0) {
 			ll_fling_desc_image.removeAllViews();
-			if (1 == size) {
+			tv_fling_desc.setText(list.get(0).MEDIA_NAME);
+			if (size < 2) {
 				ll_fling_desc_image.setVisibility(View.GONE);
-				// tv_fling_desc.setText(list.get(0).getTitle());
 			}
-			else if (1 < size) {
+			else {
 				ll_fling_desc_image.setVisibility(View.VISIBLE);
+
 				for (int i = 0; i < size; i++) {
 					// ULog.i(TAG, "--- " + list.get(i).toString());
 					ImageView image = new ImageView(context);
-					LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(10, 10);
+					LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(-2, -2);
 					params.setMargins(3, 0, 3, 0);
 					ll_fling_desc_image.addView(image, params);
 					if (i == 0) {
 						image.setBackgroundResource(R.drawable.image_gralley_dot01);
-						/* 用于显示文字 */
-						// tv_fling_desc.setText(list.get(0).getTitle());
 					}
 					else {
 						image.setBackgroundResource(R.drawable.image_gralley_dot02);
@@ -120,15 +115,15 @@ public class ImageGallery extends LinearLayout {
 				 * if (context instanceof RecommendedActivity || context instanceof ComplexActivity) {
 				 * viewPager.setAdapter(new ImageAdapter1(context, list, this)); } else {
 				 */
-				// viewPager.setAdapter(new ImageAdapter1(context, list));
+				viewPager.setAdapter(new ImageGalleyAdapter1(context, list));
 				// }
-				// viewPager.setCurrentItem(list.size() * 100);
+				viewPager.setCurrentItem(list.size() * 100);
 			}
 			// else if (IMAGE_VIEW_TYPE_2 == imageViewType) {
-			// viewPager.setAdapter(new ImageAdapter2(context, list));
+			// viewPager.setAdapter(new ImageGalleyAdapter2(context, list));
 			// }
 			// else if (IMAGE_VIEW_TYPE_3 == imageViewType) {
-			// viewPager.setAdapter(new ImageAdapter3(context, list));
+			// viewPager.setAdapter(new ImageGalleyAdapter3(context, list));
 			// }
 
 			viewPager.setOnPageChangeListener(new OnPageChangeListener() {
@@ -166,9 +161,7 @@ public class ImageGallery extends LinearLayout {
 			ll_fling_desc_image.getChildAt(i).setBackgroundResource(R.drawable.image_gralley_dot02);
 		}
 		ll_fling_desc_image.getChildAt(position).setBackgroundResource(R.drawable.image_gralley_dot01);
-		// tv_fling_desc.setText(list.get(position * imageViewType).getTitle());
-		// Util.flipStats(StatsDef.ID_FLIP_KV, position, null == list.get(position) ? "" :
-		// list.get(position).getTitle());
+		tv_fling_desc.setText(list.get(position).MEDIA_NAME);
 	}
 
 	public int getCurrentIndex() {
