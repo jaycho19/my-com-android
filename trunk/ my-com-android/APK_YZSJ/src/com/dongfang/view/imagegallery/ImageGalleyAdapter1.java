@@ -12,18 +12,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.df.util.ULog;
+import com.dongfang.yzsj.bean.SliderItem;
+import com.dongfang.yzsj.utils.Util;
 import com.lidroid.xutils.BitmapUtils;
 
 public class ImageGalleyAdapter1 extends PagerAdapter {
-	public static final String	TAG	= ImageGalleyAdapter1.class.getSimpleName();
-	protected Context			context;
-	protected List<Object>		list;
-	private int					mCount;
+	public static final String TAG = ImageGalleyAdapter1.class.getSimpleName();
+	protected Context context;
+	protected List<SliderItem> list;
+	private int mCount;
 
 	// private int mPosition;
 	// private ImageGallery imageGallery;
 
-	public ImageGalleyAdapter1(Context context, List<Object> list) {
+	public ImageGalleyAdapter1(Context context, List<SliderItem> list) {
 		this.context = context;
 		this.list = list;
 		mCount = list.size();
@@ -94,14 +96,17 @@ public class ImageGalleyAdapter1 extends PagerAdapter {
 		linearLayout.setPadding(1, 1, 1, 1);
 		ULog.d(TAG, "instantiateItem --> position = " + position + "; mCount = " + mCount);
 		ImageView fling_image = new ImageView(context);
-		fling_image.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-		BitmapUtils.create(context).display(fling_image, "http://img3.douban.com/view/photo/photo/public/p1784571177.jpg");
+
+		BitmapUtils.create(context).display(fling_image, list.get(position).MEDIA_PIC_RECOM2);
+		fling_image.setLayoutParams(new LayoutParams(-1, -1));
+
 		fling_image.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
 			}
 		});
+
 		fling_image.setId(position);
 		linearLayout.addView(fling_image);
 		linearLayout.setFocusable(true);

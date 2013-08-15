@@ -6,21 +6,21 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/imageGallery_viewpage"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:background="@drawable/home_kv_temp" />
+        android:layout_height="100dp"
+        android:minHeight="100dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageGallery_viewpage"
-        android:background="#59E88500" >
+        android:background="#55E88500" >
 
         <LinearLayout
             android:id="@+id/imageGallery_ll_fling_desc_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:background="@color/beige"
+            android:layout_centerVertical="true"
             android:gravity="center"
             android:minWidth="40dp"
             android:orientation="horizontal" >
@@ -31,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/imageGallery_ll_fling_desc_image"
             android:ellipsize="end"
             android:paddingLeft="10dip"

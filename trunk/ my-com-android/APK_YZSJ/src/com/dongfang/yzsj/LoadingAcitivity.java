@@ -2,6 +2,7 @@ package com.dongfang.yzsj;
 
 import com.df.util.ULog;
 import com.dongfang.yzsj.bean.HomeBean;
+import com.dongfang.yzsj.param.ComParams;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
@@ -37,12 +38,12 @@ public class LoadingAcitivity extends BaseActivity {
 
 					@Override
 					public void onSuccess(String result) {
-						ULog.d(TAG, "onSuccess  --" + result);
+					//	ULog.d(TAG, "onSuccess  --" + result);
 						HomeBean bean = new com.google.gson.Gson().fromJson(result, HomeBean.class);
 						bean.toLog();
 
 						Intent intent = new Intent(LoadingAcitivity.this, MainActivity.class);
-						intent.putExtra("homebean", bean);
+						intent.putExtra(ComParams.INTENT_HOMEBEAN, bean);
 						startActivity(intent);
 
 						finish();

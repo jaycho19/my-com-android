@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.dongfang.view.ScrollViewExtend xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,21 +20,33 @@
             android:gravity="center_vertical" >
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/home_tv_marquee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:drawableLeft="@drawable/home_top_descs_icon"
                 android:ellipsize="marquee"
+                android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="您好，欢迎来访燕赵视界！"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp" >
+
+                <requestFocus />
+            </TextView>
         </LinearLayout>
 
-        <include layout="@layout/image_gallery" />
+        <com.dongfang.view.ImageGallery
+            android:id="@+id/home_ig_slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="100dp" />
+
+        <!-- <include -->
+        <!-- android:id="@+id/home_ig_slider" -->
+        <!-- layout="@layout/image_gallery" /> -->
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -562,4 +574,4 @@
             android:contentDescription="@string/app_name" />
     </LinearLayout>
 
-</ScrollView>
+</com.dongfang.view.ScrollViewExtend>

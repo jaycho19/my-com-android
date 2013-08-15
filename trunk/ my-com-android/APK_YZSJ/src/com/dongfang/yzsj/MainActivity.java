@@ -19,6 +19,7 @@ import com.dongfang.yzsj.fragment.LoginFragment;
 import com.dongfang.yzsj.fragment.SearchFragment;
 import com.dongfang.yzsj.fragment.UserFragment;
 import com.dongfang.yzsj.fragment.VODFragment;
+import com.dongfang.yzsj.param.ComParams;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -29,6 +30,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 	private FragmentTabHost fgtHost;
 	private FragmentManager mFragmentManager;
+	private HomeBean homeBean;
 
 	private LoginFragment loginFragment;// 登陆Fragment
 	private FrameLayout frameLayout;// tab选择之后内容显示区域
@@ -40,23 +42,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		initData(getIntent());
+
 		setContentView(R.layout.activity_main);
 		mFragmentManager = getSupportFragmentManager();
 		initTabhostItems();
 		initView();
-		initData(getIntent());
 	}
 
-	/** 初始化 */
+	/** 获取首页数据 */
 	private void initData(Intent intent) {
 		ULog.d(TAG, "initData");
-		if (null == intent || null == intent.getParcelableExtra("homebean")) {
+		if (null == intent || null == intent.getParcelableExtra(ComParams.INTENT_HOMEBEAN)) {
 			ULog.d(TAG, " ---  -- --- ---- -- null");
 			return;
 		}
 
-		((HomeBean) intent.getParcelableExtra("homebean")).toLog();
-
+		homeBean = (HomeBean) intent.getParcelableExtra(ComParams.INTENT_HOMEBEAN);
 	}
 
 	/** 初始化底部菜单 */
@@ -74,7 +76,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		tab4.setBackgroundResource(R.drawable.mian_activity_tab_search_bg);
 		tab5.setBackgroundResource(R.drawable.mian_activity_tab_user_bg);
 
-		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), HomeFragment.class, null);
+		Bundle data = new Bundle();
+		data.putParcelable("homebean", homeBean);
+
+		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), HomeFragment.class, data);
 		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), LiveFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab3), VODFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab4), SearchFragment.class, null);
@@ -97,6 +102,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 				else if (!frameLayout.isShown()) {
 					frameLayout.setVisibility(0);
 				}
+
+				if ("1".equals(tabId) && !loginFragment.isVisible()) {
+				}
+
 			}
 		});
 
@@ -111,7 +120,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		tvLoginDesc = (TextView) findViewById(R.id.tv_topbar_login_decs);
 		frameLayout = (FrameLayout) findViewById(R.id.realtabcontent);
 		loginFragment = (LoginFragment) mFragmentManager.findFragmentById(R.id.fragment_login);
-		
+
 	}
 
 	@Override
@@ -120,6 +129,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		frameLayout.requestFocus();
 		((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
 				fgtHost.getApplicationWindowToken(), 2); // (WidgetSearchActivity是当前的Activity)
+	}
+	
+	
+	public HomeBean getHomeBean(){
+		return homeBean;
 	}
 
 	@Override
