@@ -17,15 +17,15 @@ public class HomeBean implements Parcelable {
 	public static final String TAG = "HomeBean";
 
 	private String marquee; // 公告
-	private List<SliderItem> slider; // kv图
-	private List<LivesItem> lives; // 直播
-	private List<ChannelItem> channelContents; // 频道数据
+	private List<HomeSliderItem> slider; // kv图
+	private List<HomeLivesItem> lives; // 直播
+	private List<HomeChannelItem> channelContents; // 频道数据
 
 	public HomeBean() {
 		marquee = "";
-		slider = new ArrayList<SliderItem>();
-		lives = new ArrayList<LivesItem>();
-		channelContents = new ArrayList<ChannelItem>();
+		slider = new ArrayList<HomeSliderItem>();
+		lives = new ArrayList<HomeLivesItem>();
+		channelContents = new ArrayList<HomeChannelItem>();
 	}
 
 	public String getMarquee() {
@@ -36,27 +36,27 @@ public class HomeBean implements Parcelable {
 		this.marquee = marquee;
 	}
 
-	public List<SliderItem> getSlider() {
+	public List<HomeSliderItem> getSlider() {
 		return slider;
 	}
 
-	public void setSlider(List<SliderItem> slider) {
+	public void setSlider(List<HomeSliderItem> slider) {
 		this.slider = slider;
 	}
 
-	public List<LivesItem> getLives() {
+	public List<HomeLivesItem> getLives() {
 		return lives;
 	}
 
-	public void setLives(List<LivesItem> lives) {
+	public void setLives(List<HomeLivesItem> lives) {
 		this.lives = lives;
 	}
 
-	public List<ChannelItem> getChannelContents() {
+	public List<HomeChannelItem> getChannelContents() {
 		return channelContents;
 	}
 
-	public void setChannelContents(List<ChannelItem> channelContents) {
+	public void setChannelContents(List<HomeChannelItem> channelContents) {
 		this.channelContents = channelContents;
 	}
 
@@ -95,9 +95,9 @@ public class HomeBean implements Parcelable {
 		public HomeBean createFromParcel(Parcel in) {
 			HomeBean data = new HomeBean();
 			data.setMarquee(in.readString());
-			in.readList(data.getSlider(), SliderItem.class.getClassLoader());
-			in.readList(data.getLives(), LivesItem.class.getClassLoader());
-			in.readList(data.getChannelContents(), ChannelItem.class.getClassLoader());
+			in.readList(data.getSlider(), HomeSliderItem.class.getClassLoader());
+			in.readList(data.getLives(), HomeLivesItem.class.getClassLoader());
+			in.readList(data.getChannelContents(), HomeChannelItem.class.getClassLoader());
 			return data;
 		}
 

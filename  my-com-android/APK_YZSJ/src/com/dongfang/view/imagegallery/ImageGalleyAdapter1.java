@@ -12,20 +12,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.df.util.ULog;
-import com.dongfang.yzsj.bean.SliderItem;
+import com.dongfang.yzsj.bean.HomeSliderItem;
 import com.dongfang.yzsj.utils.Util;
 import com.lidroid.xutils.BitmapUtils;
 
 public class ImageGalleyAdapter1 extends PagerAdapter {
 	public static final String TAG = ImageGalleyAdapter1.class.getSimpleName();
 	protected Context context;
-	protected List<SliderItem> list;
+	protected List<HomeSliderItem> list;
 	private int mCount;
 
 	// private int mPosition;
 	// private ImageGallery imageGallery;
 
-	public ImageGalleyAdapter1(Context context, List<SliderItem> list) {
+	public ImageGalleyAdapter1(Context context, List<HomeSliderItem> list) {
 		this.context = context;
 		this.list = list;
 		mCount = list.size();
@@ -53,7 +53,7 @@ public class ImageGalleyAdapter1 extends PagerAdapter {
 
 	@Override
 	public void destroyItem(ViewGroup container, int position, Object object) {
-		ULog.d(TAG, "destroyItem --> position = " + position);
+//		ULog.d(TAG, "destroyItem --> position = " + position);
 		ULog.d(TAG, " object ? = null " + (null == object));
 		if (null != object)
 			container.removeView((View) object);
@@ -74,7 +74,7 @@ public class ImageGalleyAdapter1 extends PagerAdapter {
 
 	@Override
 	public Object instantiateItem(ViewGroup container, int position) {
-		ULog.d(TAG, "instantiateItem --> position = " + position + "; mCount = " + mCount);
+//		ULog.d(TAG, "instantiateItem --> position = " + position + "; mCount = " + mCount);
 
 		if (position >= list.size()) {
 			position = position % list.size();

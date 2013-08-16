@@ -1,12 +1,11 @@
 package com.dongfang.yzsj;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
+import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -103,8 +102,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 					frameLayout.setVisibility(0);
 				}
 
-				if ("1".equals(tabId) && !loginFragment.isVisible()) {
-				}
+				if ("1".equals(tabId) && !loginFragment.isVisible()) {}
 
 			}
 		});
@@ -126,14 +124,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		frameLayout.requestFocus();
-		((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
-				fgtHost.getApplicationWindowToken(), 2); // (WidgetSearchActivity是当前的Activity)
+		// frameLayout.requestFocus();
+		// ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
+		// fgtHost.getApplicationWindowToken(), 2); // (WidgetSearchActivity是当前的Activity)
 	}
-	
-	
-	public HomeBean getHomeBean(){
+
+	public HomeBean getHomeBean() {
 		return homeBean;
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK && !frameLayout.isShown()) {
+			frameLayout.setVisibility(0);
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 
 	@Override

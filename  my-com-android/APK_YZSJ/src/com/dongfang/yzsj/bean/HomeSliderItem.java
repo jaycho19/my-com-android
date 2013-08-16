@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /** kv图 */
-public class SliderItem implements Parcelable {
+public class HomeSliderItem implements Parcelable {
 	public String MEDIA_ACTORS;
 	public String MEDIA_LENGTH;
 	public String MEDIA_NAME;
@@ -30,10 +30,10 @@ public class SliderItem implements Parcelable {
 		dest.writeString(id);
 	}
 
-	public static final Parcelable.Creator<SliderItem> CREATOR = new Parcelable.Creator<SliderItem>() {
+	public static final Parcelable.Creator<HomeSliderItem> CREATOR = new Parcelable.Creator<HomeSliderItem>() {
 		@Override
-		public SliderItem createFromParcel(Parcel in) {
-			SliderItem data = new SliderItem();
+		public HomeSliderItem createFromParcel(Parcel in) {
+			HomeSliderItem data = new HomeSliderItem();
 			data.MEDIA_ACTORS = in.readString();
 			data.MEDIA_LENGTH = in.readString();
 			data.MEDIA_NAME = in.readString();
@@ -45,8 +45,8 @@ public class SliderItem implements Parcelable {
 		}
 
 		@Override
-		public SliderItem[] newArray(int size) {
-			return new SliderItem[size];
+		public HomeSliderItem[] newArray(int size) {
+			return new HomeSliderItem[size];
 		}
 	};
 

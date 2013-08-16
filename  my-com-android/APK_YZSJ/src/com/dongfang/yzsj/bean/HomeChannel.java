@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /** 频道信息 @author dongfang */
-public class Channel implements Parcelable {
+public class HomeChannel implements Parcelable {
 
 	public String channelId;
 	// public String code;
@@ -23,11 +23,11 @@ public class Channel implements Parcelable {
 		dest.writeString(poster);
 	}
 
-	public static final Parcelable.Creator<Channel> CREATOR = new Parcelable.Creator<Channel>() {
+	public static final Parcelable.Creator<HomeChannel> CREATOR = new Parcelable.Creator<HomeChannel>() {
 
 		@Override
-		public Channel createFromParcel(Parcel in) {
-			Channel data = new Channel();
+		public HomeChannel createFromParcel(Parcel in) {
+			HomeChannel data = new HomeChannel();
 			data.channelId = in.readString();
 			data.name = in.readString();
 			data.poster = in.readString();
@@ -35,8 +35,8 @@ public class Channel implements Parcelable {
 		}
 
 		@Override
-		public Channel[] newArray(int size) {
-			return new Channel[size];
+		public HomeChannel[] newArray(int size) {
+			return new HomeChannel[size];
 		}
 	};
 
