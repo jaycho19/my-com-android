@@ -100,7 +100,6 @@ public abstract class BaseActivity extends FragmentActivity {
 	 * @author wwei
 	 */
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {}
 		return super.onKeyDown(keyCode, event);
 	}
 

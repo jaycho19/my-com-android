@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.df.util.ULog;
 import com.dongfang.view.imagegallery.ImageGalleyAdapter1;
 import com.dongfang.yzsj.R;
-import com.dongfang.yzsj.bean.SliderItem;
+import com.dongfang.yzsj.bean.HomeSliderItem;
 import com.dongfang.yzsj.utils.Util;
 
 /** kv图片滑动 @author dongfang */
@@ -34,7 +34,7 @@ public class ImageGallery extends LinearLayout {
 	private LinearLayout ll_fling_desc_image;
 	private TextView tv_fling_desc;
 
-	private List<SliderItem> list;
+	private List<HomeSliderItem> list;
 
 	private Context context;
 	/** 需要显示的图片的类型 */
@@ -46,7 +46,7 @@ public class ImageGallery extends LinearLayout {
 		init();
 	}
 
-	public ImageGallery(Context context, List<SliderItem> list, int imageViewType) {
+	public ImageGallery(Context context, List<HomeSliderItem> list, int imageViewType) {
 		super(context);
 		this.imageViewType = imageViewType;
 		this.context = context;
@@ -58,16 +58,16 @@ public class ImageGallery extends LinearLayout {
 	public void init() {
 		View view = LayoutInflater.from(context).inflate(R.layout.image_gallery, null);
 		viewPager = (ViewPager) view.findViewById(R.id.imageGallery_viewpage);
-		 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-		 RelativeLayout.LayoutParams.MATCH_PARENT, (int) (Util.getWindowWidth(context) * 200 / 600));
-		 viewPager.setLayoutParams(layoutParams);
+		RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.MATCH_PARENT, (int) (Util.getWindowWidth(context) * 200 / 600));
+		viewPager.setLayoutParams(layoutParams);
 		ll_fling_desc_image = (LinearLayout) view.findViewById(R.id.imageGallery_ll_fling_desc_image);
 		tv_fling_desc = (TextView) view.findViewById(R.id.imageGallery_tv_fling_desc);
 		addView(view);
 		// viewPager.setCurrentItem(1);
 	}
 
-	public void setList(int imageViewType, List<SliderItem> list) {
+	public void setList(int imageViewType, List<HomeSliderItem> list) {
 		this.imageViewType = imageViewType;
 		this.list = list;
 		setList();

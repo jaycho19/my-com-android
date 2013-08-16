@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /** 直播 @author dongfang */
-public class LivesItem implements Parcelable {
+public class HomeLivesItem implements Parcelable {
 	public String MEDIA_NAME;
 	// public String PC_MEDIA_POSTER_HORIZONTAL_BIG;
 	public String PHONE_MEDIA_POSTER_SMALL;
@@ -22,10 +22,10 @@ public class LivesItem implements Parcelable {
 		dest.writeString(id);
 	}
 
-	public static final Parcelable.Creator<LivesItem> CREATOR = new Parcelable.Creator<LivesItem>() {
+	public static final Parcelable.Creator<HomeLivesItem> CREATOR = new Parcelable.Creator<HomeLivesItem>() {
 		@Override
-		public LivesItem createFromParcel(Parcel in) {
-			LivesItem data = new LivesItem();
+		public HomeLivesItem createFromParcel(Parcel in) {
+			HomeLivesItem data = new HomeLivesItem();
 			data.MEDIA_NAME = in.readString();
 			data.PHONE_MEDIA_POSTER_SMALL = in.readString();
 			data.id = in.readString();
@@ -33,8 +33,8 @@ public class LivesItem implements Parcelable {
 		}
 
 		@Override
-		public LivesItem[] newArray(int size) {
-			return new LivesItem[size];
+		public HomeLivesItem[] newArray(int size) {
+			return new HomeLivesItem[size];
 		}
 	};
 

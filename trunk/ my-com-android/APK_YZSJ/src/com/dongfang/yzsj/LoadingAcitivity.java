@@ -1,14 +1,16 @@
 package com.dongfang.yzsj;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+
 import com.df.util.ULog;
+import com.dongfang.utils.ACache;
 import com.dongfang.yzsj.bean.HomeBean;
 import com.dongfang.yzsj.param.ComParams;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
-
-import android.content.Intent;
-import android.os.Bundle;
 
 /**
  * 启动页面
@@ -29,37 +31,64 @@ public class LoadingAcitivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_loading);
 
-		new HttpUtils().send(HttpRequest.HttpMethod.GET, "http://m.fortune-net.cn/page/hbMobile/?jsonFormat=true",
-				new RequestCallBack<String>() {
-					@Override
-					public void onLoading(long total, long current) {
-						ULog.d(TAG, "total = " + total + "; current = " + current);
-					}
+		if (!TextUtils.isEmpty(ACache.get(this).getAsString(ComParams.INTENT_HOMEBEAN))) {
+			HomeBean bean = new com.google.gson.Gson().fromJson(
+					ACache.get(this).getAsString(ComParams.INTENT_HOMEBEAN), HomeBean.class);
 
-					@Override
-					public void onSuccess(String result) {
-					//	ULog.d(TAG, "onSuccess  --" + result);
-						HomeBean bean = new com.google.gson.Gson().fromJson(result, HomeBean.class);
-						bean.toLog();
+			intent(bean);
+		}
+		else {
+			new HttpUtils().send(HttpRequest.HttpMethod.GET, "http://m.fortune-net.cn/page/hbMobile/?jsonFormat=true",
+					new RequestCallBack<String>() {
+						@Override
+						public void onLoading(long total, long current) {
+							ULog.d(TAG, "total = " + total + "; current = " + current);
+						}
 
-						Intent intent = new Intent(LoadingAcitivity.this, MainActivity.class);
-						intent.putExtra(ComParams.INTENT_HOMEBEAN, bean);
-						startActivity(intent);
+						@Override
+						public void onSuccess(String result) {
+							// ULog.d(TAG, "onSuccess  --" + result);
+							HomeBean bean = new com.google.gson.Gson().fromJson(result, HomeBean.class);
+							bean.toLog();
+							// 缓存数据
+							ACache.get(LoadingAcitivity.this).put(ComParams.INTENT_HOMEBEAN, result, 60 * 5);
 
-						finish();
+							intent(bean);
 
-					}
+						}
 
-					@Override
-					public void onStart() {
-						ULog.i(TAG, "onStart");
-					}
+						@Override
+						public void onStart() {
+							ULog.i(TAG, "onStart");
+						}
 
-					@Override
-					public void onFailure(Throwable error, String msg) {
-						ULog.i(TAG, "onFailure");
-					}
-				});
+						@Override
+						public void onFailure(Throwable error, String msg) {
+							ULog.i(TAG, "onFailure");
+						}
+					});
+		}
+	}
+
+	/** 跳转到MainActivity */
+	private void intent(HomeBean bean) {
+		Intent intent = new Intent(LoadingAcitivity.this, MainActivity.class);
+		intent.putExtra(ComParams.INTENT_HOMEBEAN, bean);
+		startActivity(intent);
+
+		finish();
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		// 需要判断网络
 
 	}
 
