@@ -18,7 +18,7 @@ import com.dongfang.yzsj.fragment.LoginFragment;
 import com.dongfang.yzsj.fragment.SearchFragment;
 import com.dongfang.yzsj.fragment.UserFragment;
 import com.dongfang.yzsj.fragment.VODFragment;
-import com.dongfang.yzsj.param.ComParams;
+import com.dongfang.yzsj.params.ComParams;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
