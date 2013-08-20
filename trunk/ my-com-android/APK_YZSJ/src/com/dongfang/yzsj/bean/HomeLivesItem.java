@@ -3,7 +3,7 @@ package com.dongfang.yzsj.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/** 直播 @author dongfang */
+/** 直播,在首页和直播页面使用 @author dongfang */
 public class HomeLivesItem implements Parcelable {
 	public String MEDIA_NAME;
 	// public String PC_MEDIA_POSTER_HORIZONTAL_BIG;

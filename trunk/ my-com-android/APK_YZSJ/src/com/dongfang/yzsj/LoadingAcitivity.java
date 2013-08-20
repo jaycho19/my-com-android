@@ -7,7 +7,7 @@ import android.text.TextUtils;
 import com.df.util.ULog;
 import com.dongfang.utils.ACache;
 import com.dongfang.yzsj.bean.HomeBean;
-import com.dongfang.yzsj.param.ComParams;
+import com.dongfang.yzsj.params.ComParams;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
@@ -30,43 +30,40 @@ public class LoadingAcitivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_loading);
-
-		if (!TextUtils.isEmpty(ACache.get(this).getAsString(ComParams.INTENT_HOMEBEAN))) {
-			HomeBean bean = new com.google.gson.Gson().fromJson(
-					ACache.get(this).getAsString(ComParams.INTENT_HOMEBEAN), HomeBean.class);
-
+		HomeBean bean = new com.google.gson.Gson().fromJson(ACache.get(this).getAsString(ComParams.INTENT_HOMEBEAN),
+				HomeBean.class);
+		if (null != bean && !TextUtils.isEmpty(bean.getMarquee()) && bean.getSlider().size() > 0) {
 			intent(bean);
 		}
 		else {
-			new HttpUtils().send(HttpRequest.HttpMethod.GET, "http://m.fortune-net.cn/page/hbMobile/?jsonFormat=true",
-					new RequestCallBack<String>() {
-						@Override
-						public void onLoading(long total, long current) {
-							ULog.d(TAG, "total = " + total + "; current = " + current);
-						}
+			new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_HOME, new RequestCallBack<String>() {
+				@Override
+				public void onLoading(long total, long current) {
+					ULog.d(TAG, "total = " + total + "; current = " + current);
+				}
 
-						@Override
-						public void onSuccess(String result) {
-							// ULog.d(TAG, "onSuccess  --" + result);
-							HomeBean bean = new com.google.gson.Gson().fromJson(result, HomeBean.class);
-							bean.toLog();
-							// 缓存数据
-							ACache.get(LoadingAcitivity.this).put(ComParams.INTENT_HOMEBEAN, result, 60 * 5);
+				@Override
+				public void onSuccess(String result) {
+					// ULog.d(TAG, "onSuccess  --" + result);
+					HomeBean bean = new com.google.gson.Gson().fromJson(result, HomeBean.class);
+					bean.toLog();
+					// 缓存数据
+					ACache.get(LoadingAcitivity.this).put(ComParams.INTENT_HOMEBEAN, result, 60 * 5);
 
-							intent(bean);
+					intent(bean);
 
-						}
+				}
 
-						@Override
-						public void onStart() {
-							ULog.i(TAG, "onStart");
-						}
+				@Override
+				public void onStart() {
+					ULog.i(TAG, "onStart");
+				}
 
-						@Override
-						public void onFailure(Throwable error, String msg) {
-							ULog.i(TAG, "onFailure");
-						}
-					});
+				@Override
+				public void onFailure(Throwable error, String msg) {
+					ULog.i(TAG, "onFailure");
+				}
+			});
 		}
 	}
 
