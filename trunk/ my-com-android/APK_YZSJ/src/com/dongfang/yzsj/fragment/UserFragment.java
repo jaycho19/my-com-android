@@ -1,5 +1,6 @@
 package com.dongfang.yzsj.fragment;
 
+import android.R.menu;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
@@ -10,7 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
 
+import com.dongfang.yzsj.MainActivity;
 import com.dongfang.yzsj.R;
+import com.dongfang.yzsj.utils.User;
 
 /**
  * 个人中心
@@ -23,7 +26,12 @@ public class UserFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_user, container, false);
-		initTabhostItems(view, inflater);
+		if (User.isLogined(getActivity())) {
+			initTabhostItems(view, inflater);
+		}
+		else {
+			((MainActivity) getActivity()).showLoginFragment();
+		}
 		return view;
 	}
 
@@ -40,7 +48,7 @@ public class UserFragment extends Fragment {
 
 		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), FavoriteFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), LoginFragment.class, null);
-//		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), SubscibeFragment.class, null);
+		// fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), SubscibeFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab3), HistoryFragment.class, null);
 
 		final LinearLayout.LayoutParams lp = new LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);

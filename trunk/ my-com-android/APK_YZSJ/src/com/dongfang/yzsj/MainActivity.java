@@ -1,7 +1,9 @@
 package com.dongfang.yzsj;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
 import android.view.KeyEvent;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.df.util.ULog;
 import com.dongfang.yzsj.bean.HomeBean;
@@ -19,6 +22,7 @@ import com.dongfang.yzsj.fragment.SearchFragment;
 import com.dongfang.yzsj.fragment.UserFragment;
 import com.dongfang.yzsj.fragment.VODFragment;
 import com.dongfang.yzsj.params.ComParams;
+import com.dongfang.yzsj.utils.User;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -61,6 +65,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 	}
 
 	/** 初始化底部菜单 */
+	@SuppressLint("NewApi")
 	private void initTabhostItems() {
 		fgtHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
 		fgtHost.setup(this, mFragmentManager, R.id.realtabcontent);
@@ -75,10 +80,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		tab4.setBackgroundResource(R.drawable.mian_activity_tab_search_bg);
 		tab5.setBackgroundResource(R.drawable.mian_activity_tab_user_bg);
 
-		Bundle data = new Bundle();
-		data.putParcelable("homebean", homeBean);
+		// Bundle data = new Bundle();
+		// data.putParcelable("homebean", homeBean);
 
-		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), HomeFragment.class, data);
+		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), HomeFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), LiveFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab3), VODFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab4), SearchFragment.class, null);
@@ -95,17 +100,36 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 			@Override
 			public void onTabChanged(String tabId) {
 				ULog.d(TAG, "OnTabChangeListener = " + tabId);
-				if ("5".equals(tabId) && !loginFragment.isVisible()) {
+				if ("5".equals(tabId) && frameLayout.isShown()) {
 					frameLayout.setVisibility(View.GONE);
+					ULog.d(TAG, "frameLayout.setVisibility(View.GONE)");
 				}
 				else if (!frameLayout.isShown()) {
 					frameLayout.setVisibility(0);
+					ULog.d(TAG, "frameLayout.setVisibility(0) ");
 				}
 
 				if ("1".equals(tabId) && !loginFragment.isVisible()) {}
-
 			}
 		});
+
+		for (Fragment fg : mFragmentManager.getFragments()) {
+			ULog.w(TAG, "tag = " + fg.getTag() + ", id = " + fg.getId());
+			ULog.w(TAG, fg.toString());
+		}
+
+		// ULog.w(TAG, fgtHost.getChildCount() + "");
+		// for(int i = 0 ; i < fgtHost.getChildCount();i++){
+		// ULog.w(TAG, fgtHost.getChildAt(i).getClass().getName());
+		// }
+
+		// if (null != getFragmentManager()..getFragment(null, "1")) {
+		// ULog.w(TAG, getFragmentManager().getFragment(null, "1").getClass().getName());
+		// }
+		// else {
+		// ULog.w(TAG, "null");
+		//
+		// }
 
 	}
 
@@ -118,7 +142,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		tvLoginDesc = (TextView) findViewById(R.id.tv_topbar_login_decs);
 		frameLayout = (FrameLayout) findViewById(R.id.realtabcontent);
 		loginFragment = (LoginFragment) mFragmentManager.findFragmentById(R.id.fragment_login);
+		loginFragment.setOnLoginAndVerify(new LoginFragment.OnLoginAndVerify() {
 
+			@Override
+			public void verify(boolean verify, String phoneNumber) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void login(boolean login, String phoneNumber) {
+				if (login) {
+					tvLogin.setBackgroundResource(R.drawable.top_bar_btn_logout);
+					frameLayout.setVisibility(0);
+				}
+				else {
+					tvLogin.setBackgroundResource(R.drawable.top_bar_btn_login);
+				}
+			}
+		});
 	}
 
 	@Override
@@ -127,10 +168,48 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		// frameLayout.requestFocus();
 		// ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
 		// fgtHost.getApplicationWindowToken(), 2); // (WidgetSearchActivity是当前的Activity)
+
+		// ULog.w(TAG, frameLayout.getChildCount() + "");
+		// for(int i = 0 ; i < frameLayout.getChildCount();i++){
+		// ULog.w(TAG, frameLayout.getChildAt(i).getClass().getName());
+		// }
+
+		ULog.w(TAG, fgtHost.getCurrentTabTag());
+		ULog.w(TAG, fgtHost.getCurrentTab() + "");
+//		ULog.w(TAG, mFragmentManager.findFragmentById(fgtHost.getCurrentTab()) == null ? "null" : "!null");
+//
+//		mFragmentManager.getFragments()
+//		
+		// ULog.w(TAG, mFragmentManager.findFragmentById(fgtHost.getCurrentTab()).getClass().getName());
+
 	}
 
 	public HomeBean getHomeBean() {
 		return homeBean;
+	}
+
+	/** 显示登陆界面 */
+	public void showLoginFragment() {
+		frameLayout.setVisibility(View.GONE);
+	}
+
+	/** 隐藏登陆界面 */
+	public void hideLoginFragment() {
+		frameLayout.setVisibility(View.GONE);
+	}
+
+	public FragmentTabHost getFgtHost() {
+		return fgtHost;
+	}
+
+	public void changeTab(int i) {
+		fgtHost.bringChildToFront(fgtHost.getChildAt(i));
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		fgtHost = null;
 	}
 
 	@Override
@@ -147,16 +226,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		ULog.d(TAG, "onClick = " + v.getId());
 		switch (v.getId()) {
 		case R.id.tv_topbar_login:
-			// if (User.isLogined(this)) {
-			// // 注销
-			// }
-			// else {
-			frameLayout.setVisibility(View.GONE);
-			// }
+			if (User.isLogined(this)) {
+				// 注销
+				User.saveUserLoginStatu(this, false);
+				tvLogin.setBackgroundResource(R.drawable.top_bar_btn_login);
+				Toast.makeText(this, "注销成功", Toast.LENGTH_LONG).show();
+			}
+			else {
+				frameLayout.setVisibility(View.GONE);
+			}
 			break;
 		case R.id.tv_topbar_playhistory:
 			frameLayout.setVisibility(0);
-
 			break;
 
 		default:

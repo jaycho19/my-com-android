@@ -65,6 +65,7 @@
                 android:contentDescription="@string/app_name" />
 
             <TextView
+                android:id="@+id/tv_fragment_home_live_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

@@ -32,7 +32,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/tv_topbar_playhistory"
-        android:text="账号栏"
+        android:text="您好，欢迎回到燕赵视界"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold" />
