@@ -39,7 +39,7 @@ public class LoadingAcitivity extends BaseActivity {
 			new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_HOME, new RequestCallBack<String>() {
 				@Override
 				public void onLoading(long total, long current) {
-					ULog.d(TAG, "total = " + total + "; current = " + current);
+					ULog.d(TAG, "RequestCallBack.onLoading total = " + total + "; current = " + current);
 				}
 
 				@Override
@@ -48,7 +48,8 @@ public class LoadingAcitivity extends BaseActivity {
 					HomeBean bean = new com.google.gson.Gson().fromJson(result, HomeBean.class);
 					bean.toLog();
 					// 缓存数据
-					ACache.get(LoadingAcitivity.this).put(ComParams.INTENT_HOMEBEAN, result, 60 * 5);
+					ACache.get(LoadingAcitivity.this).put(ComParams.INTENT_HOMEBEAN, result, ACache.TIME_DAY * 7);
+//					ACache.get(LoadingAcitivity.this).put(ComParams.INTENT_HOMEBEAN, result, 60 * 5);
 
 					intent(bean);
 
@@ -56,12 +57,12 @@ public class LoadingAcitivity extends BaseActivity {
 
 				@Override
 				public void onStart() {
-					ULog.i(TAG, "onStart");
+					ULog.i(TAG, "RequestCallBack.onStart");
 				}
 
 				@Override
 				public void onFailure(Throwable error, String msg) {
-					ULog.i(TAG, "onFailure");
+					ULog.i(TAG, "RequestCallBack.onFailure");
 				}
 			});
 		}

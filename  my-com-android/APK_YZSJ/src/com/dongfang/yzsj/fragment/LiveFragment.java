@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.bean.HomeLivesItem;
 import com.dongfang.yzsj.bean.LiveBean;
 import com.dongfang.yzsj.params.ComParams;
+import com.dongfang.yzsj.utils.Util;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestCallBack;
@@ -37,7 +39,7 @@ public class LiveFragment extends Fragment {
 	private LiveAdapter listAdapter;
 	private LiveBean bean;
 
-	private ProgressDialog progressDialog;
+	private com.dongfang.view.ProgressDialog progDialog;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class LiveFragment extends Fragment {
 	}
 
 	private void initView(View view) {
-		progressDialog = new ProgressDialog(getActivity());
+		progDialog = com.dongfang.view.ProgressDialog.show(getActivity());
 		gridView = (GridView) view.findViewById(R.id.gv_fragment_live);
 		listAdapter = new LiveAdapter(getActivity(), null);
 		gridView.setAdapter(listAdapter);
@@ -95,13 +97,13 @@ public class LiveFragment extends Fragment {
 					listAdapter.setList(bean.getLives());
 					listAdapter.notifyDataSetChanged();
 
-					progressDialog.dismiss();
+					progDialog.dismiss();
 				}
 
 				@Override
 				public void onStart() {
 					ULog.i(TAG, "onStart");
-					progressDialog.show();
+					progDialog.show();
 
 				}
 
@@ -128,10 +130,15 @@ public class LiveFragment extends Fragment {
 
 		private List<HomeLivesItem> lives = null;
 		private Context mContext;
+		private int w = 0, h = 0;
+
+		private AbsListView.LayoutParams lparams = null;
 
 		public LiveAdapter(Context mContext, List<HomeLivesItem> lives) {
 			this.mContext = mContext;
 			this.lives = lives;
+			h = w = Util.getWindowWidth(getActivity()) / 3 - 10;
+			lparams = new AbsListView.LayoutParams(w, h);
 		}
 
 		public void setList(List<HomeLivesItem> lives) {
@@ -156,9 +163,11 @@ public class LiveFragment extends Fragment {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {
-				convertView = new ImageView(mContext);
+				convertView = LayoutInflater.from(mContext).inflate(R.layout.imageview_adapter, null);
 			}
-			BitmapUtils.create(mContext).display((ImageView) convertView, lives.get(position).PHONE_MEDIA_POSTER_SMALL);
+			convertView.setLayoutParams(lparams);
+			BitmapUtils.create(mContext).display((ImageView) convertView, lives.get(position).PHONE_MEDIA_POSTER_SMALL,
+					w, h);
 			return convertView;
 		}
 
