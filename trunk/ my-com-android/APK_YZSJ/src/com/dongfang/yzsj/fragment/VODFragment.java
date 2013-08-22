@@ -3,7 +3,6 @@ package com.dongfang.yzsj.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -45,7 +44,7 @@ public class VODFragment extends Fragment {
 	private ArrayList<VODItem> listVODItemVIP = null; // vip频道
 	private ArrayList<VODItem> listVODItemNOM = null; // 普通频道
 
-	private com.dongfang.view.ProgressDialog progressDialog;
+	private com.dongfang.view.ProgressDialog progDialog;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,7 +60,9 @@ public class VODFragment extends Fragment {
 	}
 
 	private void initView(View view) {
-		progressDialog = com.dongfang.view.ProgressDialog.show(getActivity());
+		progDialog = com.dongfang.view.ProgressDialog.show(getActivity());
+		progDialog.setCancelable(true);
+
 		gridView = (GridView) view.findViewById(R.id.gv_fragment_vod);
 		gridViewVIP = (GridView) view.findViewById(R.id.gv_fragment_vod_vip);
 		vodAdapter = new VODAdapter(getActivity(), null);
@@ -109,13 +110,13 @@ public class VODFragment extends Fragment {
 
 					setVODAdapterData();
 
-					progressDialog.dismiss();
+					progDialog.dismiss();
 				}
 
 				@Override
 				public void onStart() {
 					ULog.i(TAG, "onStart");
-					progressDialog.show();
+					progDialog.show();
 
 				}
 

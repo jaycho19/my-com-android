@@ -21,7 +21,7 @@ public class HomeBean implements Parcelable {
 	private List<HomeLivesItem> lives; // 直播
 	private List<HomeChannelItem> channelContents; // 频道数据
 
-	public HomeBean() {
+	private HomeBean() {
 		marquee = "";
 		slider = new ArrayList<HomeSliderItem>();
 		lives = new ArrayList<HomeLivesItem>();
@@ -72,7 +72,7 @@ public class HomeBean implements Parcelable {
 			ULog.d(TAG, "lives LivesItem = " + i + "\n" + lives.get(i).toString());
 		}
 		for (int i = 0, length = channelContents.size(); i < length; i++) {
-			//ULog.d(TAG, "channelContents ChannelItem = " + i + "\n" + channelContents.get(i).toString());
+			// ULog.d(TAG, "channelContents ChannelItem = " + i + "\n" + channelContents.get(i).toString());
 		}
 	}
 

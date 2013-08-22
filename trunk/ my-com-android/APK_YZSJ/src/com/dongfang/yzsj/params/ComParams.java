@@ -25,6 +25,8 @@ public class ComParams {
 	public static final String HTTP_AUTHCODE = "http://tv.inhe.net/user/user!createVerifyCode.action?";
 	/** 登陆 */
 	public static final String HTTP_LOGIN = "http://tv.inhe.net/user/user!phoneLogin.action?";
+	/** 列表页， 频道页 */
+	public static final String HTTP_CHANNEL = "http://tv.inhe.net/page/js/list.jsp?";
 
 	// ------------------------------------------------------------------------------
 	public static final String SP_NAME_WINDOW = "SP_NAME_WINDOW";

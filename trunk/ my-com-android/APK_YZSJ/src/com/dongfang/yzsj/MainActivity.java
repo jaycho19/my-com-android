@@ -100,23 +100,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 			@Override
 			public void onTabChanged(String tabId) {
 				ULog.d(TAG, "OnTabChangeListener = " + tabId);
-				if ("5".equals(tabId) && frameLayout.isShown()) {
-					frameLayout.setVisibility(View.GONE);
-					ULog.d(TAG, "frameLayout.setVisibility(View.GONE)");
-				}
-				else if (!frameLayout.isShown()) {
-					frameLayout.setVisibility(0);
-					ULog.d(TAG, "frameLayout.setVisibility(0) ");
-				}
+//				if ("5".equals(tabId) && frameLayout.isShown()) {
+//					frameLayout.setVisibility(View.GONE);
+//					ULog.d(TAG, "frameLayout.setVisibility(View.GONE)");
+//				}
+//				else if (!frameLayout.isShown()) {
+//					frameLayout.setVisibility(0);
+//					ULog.d(TAG, "frameLayout.setVisibility(0) ");
+//				}
 
-				if ("1".equals(tabId) && !loginFragment.isVisible()) {}
+//				if ("1".equals(tabId) && !loginFragment.isVisible()) {}
 			}
 		});
 
-		for (Fragment fg : mFragmentManager.getFragments()) {
-			ULog.w(TAG, "tag = " + fg.getTag() + ", id = " + fg.getId());
-			ULog.w(TAG, fg.toString());
-		}
+//		for (Fragment fg : mFragmentManager.getFragments()) {
+//			ULog.w(TAG, "tag = " + fg.getTag() + ", id = " + fg.getId());
+//			ULog.w(TAG, fg.toString());
+//		}
 
 		// ULog.w(TAG, fgtHost.getChildCount() + "");
 		// for(int i = 0 ; i < fgtHost.getChildCount();i++){
@@ -174,8 +174,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		// ULog.w(TAG, frameLayout.getChildAt(i).getClass().getName());
 		// }
 
-		ULog.w(TAG, fgtHost.getCurrentTabTag());
-		ULog.w(TAG, fgtHost.getCurrentTab() + "");
+//		ULog.w(TAG, fgtHost.getCurrentTabTag());
+//		ULog.w(TAG, fgtHost.getCurrentTab() + "");
 //		ULog.w(TAG, mFragmentManager.findFragmentById(fgtHost.getCurrentTab()) == null ? "null" : "!null");
 //
 //		mFragmentManager.getFragments()

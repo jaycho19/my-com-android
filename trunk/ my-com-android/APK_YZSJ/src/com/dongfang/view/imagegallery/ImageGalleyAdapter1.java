@@ -97,7 +97,7 @@ public class ImageGalleyAdapter1 extends PagerAdapter {
 		ULog.d(TAG, "instantiateItem --> position = " + position + "; mCount = " + mCount);
 		ImageView fling_image = new ImageView(context);
 
-		BitmapUtils.create(context).display(fling_image, list.get(position).MEDIA_PIC_RECOM2);
+		BitmapUtils.create(context).display(fling_image, list.get(position).PC_MEDIA_POSTER_HORIZONTAL_BIG);
 		fling_image.setLayoutParams(new LayoutParams(-1, -1));
 
 		fling_image.setOnClickListener(new OnClickListener() {
