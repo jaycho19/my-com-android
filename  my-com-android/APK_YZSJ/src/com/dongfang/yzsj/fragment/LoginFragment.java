@@ -40,12 +40,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_login, container, false);
+		progDialog = com.dongfang.view.ProgressDialog.show(getActivity());
+		progDialog.setCancelable(true);
 		initView(view);
 		return view;
 	}
 
 	private void initView(View view) {
-		progDialog = com.dongfang.view.ProgressDialog.show(getActivity());
 
 		btnLogin = view.findViewById(R.id.login_btn_login);
 		btnLogin.setOnClickListener(this);
@@ -55,7 +56,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 		etUserName = (EditText) view.findViewById(R.id.login_et_userName);
 		etAuthCode = (EditText) view.findViewById(R.id.login_et_authCode);
 
-		btnLogin.requestFocus();
+		//btnLogin.requestFocus();
 
 	}
 

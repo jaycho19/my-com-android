@@ -56,6 +56,7 @@ public class LiveFragment extends Fragment {
 
 	private void initView(View view) {
 		progDialog = com.dongfang.view.ProgressDialog.show(getActivity());
+		progDialog.setCancelable(true);
 		gridView = (GridView) view.findViewById(R.id.gv_fragment_live);
 		listAdapter = new LiveAdapter(getActivity(), null);
 		gridView.setAdapter(listAdapter);

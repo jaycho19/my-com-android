@@ -59,9 +59,10 @@
         android:typeface="serif" />
 
     <com.dongfang.view.PullToRefreshView
-        android:id="@+id/favorite_PullToRefreshView"
+        android:id="@+id/type_PullToRefreshView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:background="@color/background"
         android:orientation="vertical" >
 
         <ListView

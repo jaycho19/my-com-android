@@ -5,11 +5,11 @@ import android.os.Parcelable;
 
 public class MediaBean implements Parcelable {
 
-	String	imageUrl;	// 图片海报地址
-	String	title;		// 标题
-	String	actor;		// 演员
-	String	des;		// 描述
-	String	cid;		// 内容id
+	String imageUrl; // 图片海报地址
+	String title; // 标题
+	String actor; // 演员
+	String des; // 描述
+	String cid; // 内容id
 
 	public String getImageUrl() {
 		return imageUrl;

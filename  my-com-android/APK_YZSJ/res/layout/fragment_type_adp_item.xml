@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp" >
+
+    <ImageView
+        android:id="@+id/favorite_imageView_placard"
+        android:layout_width="105dp"
+        android:layout_height="137dp"
+        android:src="@drawable/image_bg" 
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/favorite_imageView_placard"
+        android:layout_alignTop="@+id/favorite_imageView_placard"
+        android:layout_toRightOf="@+id/favorite_imageView_placard"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/favorite_tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/favorite_tv_actor"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:text="TextView"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/favorite_tv_length"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/clock"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="TextView"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</RelativeLayout>
