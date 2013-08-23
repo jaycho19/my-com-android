@@ -71,7 +71,9 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/home_btn_more" />
+                android:background="@drawable/btn_gray"
+                android:gravity="center"
+                android:text="更多" />
         </RelativeLayout>
 
         <LinearLayout

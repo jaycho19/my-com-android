@@ -7,6 +7,7 @@
     android:orientation="vertical" >
 
     <RelativeLayout
+        android:id="@+id/rl_fragment_home_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/item_bar_type_bg" >
@@ -28,7 +29,9 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/home_btn_more" />
+            android:background="@drawable/btn_gray"
+            android:gravity="center"
+            android:text="更多" />
     </RelativeLayout>
 
     <HorizontalScrollView

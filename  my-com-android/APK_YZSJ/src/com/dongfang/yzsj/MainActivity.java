@@ -3,7 +3,6 @@ package com.dongfang.yzsj;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
 import android.view.KeyEvent;
@@ -38,7 +37,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 	private LoginFragment loginFragment;// 登陆Fragment
 	private FrameLayout frameLayout;// tab选择之后内容显示区域
 
-	private View tvLogin;// 登陆
+	private TextView tvLogin;// 登陆
 	private View tvhistory;// 播放信息
 	private TextView tvLoginDesc;// 登陆信息
 
@@ -96,27 +95,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		// fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator("4"), SearchFragment.class, null);
 		// fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator("5"), UserFragment.class, null);
 
+		// 在fragment代用之前就代用该listener
 		fgtHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 			@Override
 			public void onTabChanged(String tabId) {
 				ULog.d(TAG, "OnTabChangeListener = " + tabId);
-//				if ("5".equals(tabId) && frameLayout.isShown()) {
-//					frameLayout.setVisibility(View.GONE);
-//					ULog.d(TAG, "frameLayout.setVisibility(View.GONE)");
-//				}
-//				else if (!frameLayout.isShown()) {
-//					frameLayout.setVisibility(0);
-//					ULog.d(TAG, "frameLayout.setVisibility(0) ");
-//				}
-
-//				if ("1".equals(tabId) && !loginFragment.isVisible()) {}
+				if ("5".equals(tabId) && !User.isLogined(MainActivity.this)) {
+					frameLayout.setVisibility(View.GONE);
+					ULog.d(TAG, "frameLayout.setVisibility(View.GONE)");
+				}
+				else {
+					frameLayout.setVisibility(0);
+				}
 			}
 		});
 
-//		for (Fragment fg : mFragmentManager.getFragments()) {
-//			ULog.w(TAG, "tag = " + fg.getTag() + ", id = " + fg.getId());
-//			ULog.w(TAG, fg.toString());
-//		}
+		// for (Fragment fg : mFragmentManager.getFragments()) {
+		// ULog.w(TAG, "tag = " + fg.getTag() + ", id = " + fg.getId());
+		// ULog.w(TAG, fg.toString());
+		// }
 
 		// ULog.w(TAG, fgtHost.getChildCount() + "");
 		// for(int i = 0 ; i < fgtHost.getChildCount();i++){
@@ -135,8 +132,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 	/** 初始化view */
 	private void initView() {
-		tvLogin = findViewById(R.id.tv_topbar_login);
+		tvLogin = (TextView) findViewById(R.id.tv_topbar_login);
+		tvLogin.setText(User.isLogined(this) ? "注销" : "登陆");
 		tvLogin.setOnClickListener(this);
+
 		tvhistory = findViewById(R.id.tv_topbar_playhistory);
 		tvhistory.setOnClickListener(this);
 		tvLoginDesc = (TextView) findViewById(R.id.tv_topbar_login_decs);
@@ -152,11 +151,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 			@Override
 			public void login(boolean login, String phoneNumber) {
 				if (login) {
-					tvLogin.setBackgroundResource(R.drawable.top_bar_btn_logout);
+					tvLogin.setText("注销");
 					frameLayout.setVisibility(0);
 				}
 				else {
-					tvLogin.setBackgroundResource(R.drawable.top_bar_btn_login);
+					tvLogin.setText("登陆");
 				}
 			}
 		});
@@ -174,12 +173,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		// ULog.w(TAG, frameLayout.getChildAt(i).getClass().getName());
 		// }
 
-//		ULog.w(TAG, fgtHost.getCurrentTabTag());
-//		ULog.w(TAG, fgtHost.getCurrentTab() + "");
-//		ULog.w(TAG, mFragmentManager.findFragmentById(fgtHost.getCurrentTab()) == null ? "null" : "!null");
-//
-//		mFragmentManager.getFragments()
-//		
+		// ULog.w(TAG, fgtHost.getCurrentTabTag());
+		// ULog.w(TAG, fgtHost.getCurrentTab() + "");
+		// ULog.w(TAG, mFragmentManager.findFragmentById(fgtHost.getCurrentTab()) == null ? "null" : "!null");
+		//
+		// mFragmentManager.getFragments()
+		//
 		// ULog.w(TAG, mFragmentManager.findFragmentById(fgtHost.getCurrentTab()).getClass().getName());
 
 	}
@@ -229,7 +228,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 			if (User.isLogined(this)) {
 				// 注销
 				User.saveUserLoginStatu(this, false);
-				tvLogin.setBackgroundResource(R.drawable.top_bar_btn_login);
+				tvLogin.setText("登陆");
 				Toast.makeText(this, "注销成功", Toast.LENGTH_LONG).show();
 			}
 			else {

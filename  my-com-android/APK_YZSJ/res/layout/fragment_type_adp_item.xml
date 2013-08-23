@@ -39,7 +39,6 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:padding="5dp"
-            android:singleLine="true"
             android:text="TextView"
             android:textColor="@color/white" />
 
