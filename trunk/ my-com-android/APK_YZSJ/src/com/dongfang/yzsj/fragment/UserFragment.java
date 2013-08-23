@@ -1,6 +1,5 @@
 package com.dongfang.yzsj.fragment;
 
-import android.R.menu;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
@@ -8,12 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
 
-import com.dongfang.yzsj.MainActivity;
+import com.df.util.ULog;
 import com.dongfang.yzsj.R;
-import com.dongfang.yzsj.utils.User;
 
 /**
  * 个人中心
@@ -22,16 +20,18 @@ import com.dongfang.yzsj.utils.User;
  * 
  */
 public class UserFragment extends Fragment {
+	public static final String TAG = "UserFragment";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		ULog.d(TAG, "onCreateView(...)");
 		View view = inflater.inflate(R.layout.fragment_user, container, false);
-		if (User.isLogined(getActivity())) {
-			initTabhostItems(view, inflater);
-		}
-		else {
-			((MainActivity) getActivity()).showLoginFragment();
-		}
+		// if (User.isLogined(getActivity())) {
+		initTabhostItems(view, inflater);
+		// }
+		// else {
+		// ((MainActivity) getActivity()).showLoginFragment();
+		// }
 		return view;
 	}
 
@@ -60,6 +60,24 @@ public class UserFragment extends Fragment {
 		// fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator("1"), LoginFragment.class, null);
 		// fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator("2"), LiveFragment.class, null);
 		// fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator("3"), VODFragment.class, null);
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		ULog.d(TAG, "onStart()");
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		ULog.d(TAG, "onResume()");
+	}
+
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
 	}
 
 }

@@ -12,11 +12,12 @@ public class ComParams {
 	public static final String INTENT_LIVEBEAN = "livebean";
 	public static final String INTENT_VODBEAN = "vodbean";
 	public static final String INTENT_VODBEAN_VIP = "vodbeanVIP";
-	public static final String INTENT_MOVIELIST_CHANNLID = "channelId";
+	public static final String INTENT_MOVIELIST_CHANNEL = "channel";
 
 	// ------------------------------------------------------------------------------
 	/** 首页 */
-	public static final String HTTP_HOME = "http://tv.inhe.net/page/hbMobile/?jsonFormat=true";
+	public static final String HTTP_HOME = "http://m.fortune-net.cn/page/hbMobile/?jsonFormat=true";
+	// public static final String HTTP_HOME = "http://tv.inhe.net/page/hbMobile/?jsonFormat=true";
 	/** 直播 */
 	public static final String HTTP_LIVE = "http://tv.inhe.net/page/hbMobile/live.jsp?jsonFormat=true";
 	/** 点播 */

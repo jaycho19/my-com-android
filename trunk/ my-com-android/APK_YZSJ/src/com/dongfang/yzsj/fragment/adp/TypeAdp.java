@@ -3,6 +3,7 @@ package com.dongfang.yzsj.fragment.adp;
 import java.util.List;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.bean.HomeMovie;
+import com.dongfang.yzsj.utils.UtilOfTime;
 import com.lidroid.xutils.BitmapUtils;
 
 /**
@@ -75,7 +77,9 @@ public class TypeAdp extends BaseAdapter {
 		BitmapUtils.create(context).display(holder.iv_placard, movie.PC_MEDIA_POSTER_BIG, 105, 137);
 		holder.tv_title.setText(movie.MEDIA_NAME);
 		holder.tv_actor.setText(movie.MEDIA_ACTORS);
-		holder.tv_length.setText(movie.MEDIA_LENGTH);
+		String length = UtilOfTime.formatSeconds2Date(Long.valueOf(TextUtils.isEmpty(movie.MEDIA_LENGTH) ? "0"
+				: movie.MEDIA_LENGTH));
+		holder.tv_length.setText(length);
 		return convertView;
 	}
 

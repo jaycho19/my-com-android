@@ -1,8 +1,9 @@
 package com.dongfang.yzsj;
 
-import com.dongfang.yzsj.params.ComParams;
-
 import android.os.Bundle;
+
+import com.dongfang.yzsj.bean.HomeChannel;
+import com.dongfang.yzsj.params.ComParams;
 
 public class MovieListActivity extends BaseActivity {
 
@@ -11,13 +12,13 @@ public class MovieListActivity extends BaseActivity {
 		TAG = "MovieListActivity";
 	}
 
-	public String channel;
+	public HomeChannel channel;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_movie_list);
-		channel = getIntent().getExtras().getString(ComParams.INTENT_MOVIELIST_CHANNLID, "");
+		channel = getIntent().getExtras().getParcelable(ComParams.INTENT_MOVIELIST_CHANNEL);
 	}
 
 }

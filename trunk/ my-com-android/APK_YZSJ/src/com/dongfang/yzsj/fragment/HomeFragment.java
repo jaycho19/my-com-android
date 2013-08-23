@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.df.util.ULog;
@@ -110,22 +111,25 @@ public class HomeFragment extends Fragment {
 
 		// 频道
 		if (null != bean.getChannelContents() && bean.getChannelContents().size() > 0) {
+			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(-1, 50);
+			RelativeLayout.LayoutParams rparam = new RelativeLayout.LayoutParams(200, 50);
 			for (final HomeChannelItem item : bean.getChannelContents()) {
 				View viewItem = inflater.inflate(R.layout.fragment_home_item, null);
+				viewItem.findViewById(R.id.rl_fragment_home_item).setLayoutParams(lparam);
 				ImageView imageView = (ImageView) viewItem.findViewById(R.id.iv_fragment_home_item_channelName);
-				BitmapUtils.create(getActivity()).display(imageView, item.channel.poster);
+				imageView.setLayoutParams(rparam);
+				BitmapUtils.create(getActivity()).display(imageView, item.channel.getPoster());
 
 				viewItem.findViewById(R.id.iv_fragment_home_item_more).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						Intent intent = new Intent(getActivity(), MovieListActivity.class);
-						intent.putExtra(ComParams.INTENT_MOVIELIST_CHANNLID, item.channel.channelId);
+						intent.putExtra(ComParams.INTENT_MOVIELIST_CHANNEL, item.channel);
 						getActivity().startActivity(intent);
 					}
 				});
 
-				LinearLayout llHomeItemContain = (LinearLayout) viewItem
-						.findViewById(R.id.ll_fragment_home_item_contain);
+				LinearLayout llHomeItemContain = (LinearLayout) viewItem.findViewById(R.id.ll_fragment_home_item_contain);
 				initViewHomeItem(llHomeItemContain, item);
 				llHome.addView(viewItem, llHome.getChildCount() - 1);
 

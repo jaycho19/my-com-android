@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dongfang.view.CheckTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/checkTextView1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@drawable/type_subchannel_btn_bg"
+    android:clickable="true"
+    android:gravity="center"
+    android:padding="5dp"
+    android:text="subchannel"
+    android:textColor="@color/color_check_text_view" />

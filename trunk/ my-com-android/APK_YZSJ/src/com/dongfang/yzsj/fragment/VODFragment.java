@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
@@ -16,7 +18,9 @@ import android.widget.ImageView;
 
 import com.df.util.ULog;
 import com.dongfang.utils.ACache;
+import com.dongfang.yzsj.MovieListActivity;
 import com.dongfang.yzsj.R;
+import com.dongfang.yzsj.bean.HomeChannel;
 import com.dongfang.yzsj.bean.VODItem;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.Util;
@@ -209,9 +213,31 @@ public class VODFragment extends Fragment {
 			}
 			convertView.setLayoutParams(lparams);
 			BitmapUtils.create(mContext).display((ImageView) convertView, lives.get(position).getPoster(), w, h);
+
+			convertView.setOnClickListener(new ClickListener(lives.get(position)));
+
 			return convertView;
 		}
+	}
 
+	/** 跳转到列表页 */
+	private class ClickListener implements OnClickListener {
+
+		private HomeChannel channel = null;
+
+		public ClickListener(VODItem voditem) {
+			channel = new HomeChannel();
+			channel.setChannelId(voditem.getChannelId());
+			channel.setName(voditem.getName());
+		}
+
+		@Override
+		public void onClick(View v) {
+			Intent intent = new Intent(getActivity(), MovieListActivity.class);
+			intent.putExtra(ComParams.INTENT_MOVIELIST_CHANNEL, channel);
+			getActivity().startActivity(intent);
+
+		}
 	}
 
 }

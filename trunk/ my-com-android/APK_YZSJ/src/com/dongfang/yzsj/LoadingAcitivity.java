@@ -8,6 +8,7 @@ import com.df.util.ULog;
 import com.dongfang.utils.ACache;
 import com.dongfang.yzsj.bean.HomeBean;
 import com.dongfang.yzsj.params.ComParams;
+import com.dongfang.yzsj.utils.User;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
@@ -49,7 +50,7 @@ public class LoadingAcitivity extends BaseActivity {
 					bean.toLog();
 					// 缓存数据
 					ACache.get(LoadingAcitivity.this).put(ComParams.INTENT_HOMEBEAN, result, ACache.TIME_DAY * 7);
-//					ACache.get(LoadingAcitivity.this).put(ComParams.INTENT_HOMEBEAN, result, 60 * 5);
+					// ACache.get(LoadingAcitivity.this).put(ComParams.INTENT_HOMEBEAN, result, 60 * 5);
 
 					intent(bean);
 
@@ -70,6 +71,8 @@ public class LoadingAcitivity extends BaseActivity {
 
 	/** 跳转到MainActivity */
 	private void intent(HomeBean bean) {
+		// User.saveUserLoginStatu(this, false); // 设置用户处于登出状态
+
 		Intent intent = new Intent(LoadingAcitivity.this, MainActivity.class);
 		intent.putExtra(ComParams.INTENT_HOMEBEAN, bean);
 		startActivity(intent);

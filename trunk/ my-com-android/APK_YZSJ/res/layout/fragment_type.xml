@@ -25,7 +25,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:background="@drawable/type_btn_back" />
+            android:background="@drawable/btn_gray"
+            android:clickable="true"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="返回" />
 
         <TextView
             android:id="@+id/type_tv_change_type"
@@ -33,30 +38,69 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/type_btn_change" />
+            android:background="@drawable/btn_gray"
+            android:clickable="true"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="切换频道" />
     </RelativeLayout>
-
-    <com.dongfang.view.MyHorizontalScrollView
-        android:id="@+id/myHorizontalScrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </com.dongfang.view.MyHorizontalScrollView>
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@color/background" >
 
-    <TextView
+        <!-- 横向滑动的子频道 -->
+
+        <LinearLayout
+            android:id="@+id/type_ll_subChannels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="20dp"
+            android:orientation="horizontal"
+            android:padding="5dp" />
+    </HorizontalScrollView>
+
+    <!-- <HorizontalScrollView -->
+    <!-- android:layout_width="match_parent" -->
+    <!-- android:layout_height="wrap_content" /> -->
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/item_bar_type_bg"
-        android:drawableLeft="@drawable/search_result"
-        android:gravity="center_vertical"
-        android:paddingLeft="5dp"
-        android:text="  影片列表"
-        android:textColor="@color/text_orange"
-        android:textStyle="bold"
-        android:typeface="serif" />
+        android:background="@drawable/item_bar_type_bg" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/search_result"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:text="  影片列表"
+            android:textColor="@color/text_orange"
+            android:textStyle="bold"
+            android:typeface="serif" />
+
+        <TextView
+            android:id="@+id/type_tv_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="切换排序方式>>>"
+            android:textColor="@color/text_orange"
+            android:textStyle="bold"
+            android:typeface="serif" />
+    </RelativeLayout>
+
+    <!-- 上拉下拉更新 -->
 
     <com.dongfang.view.PullToRefreshView
         android:id="@+id/type_PullToRefreshView"
