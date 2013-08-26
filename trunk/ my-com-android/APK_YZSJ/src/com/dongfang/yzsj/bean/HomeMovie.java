@@ -5,14 +5,46 @@ import android.os.Parcelable;
 
 /** 每个频道的视频信息@author dongfang */
 public class HomeMovie implements Parcelable {
-	public String MEDIA_ACTORS; // 演员
-	public String MEDIA_LENGTH; // 视频长度
-	public String MEDIA_NAME; // 视频名称
+	private String MEDIA_ACTORS; // 演员
+	private String MEDIA_LENGTH; // 视频长度
+	private String MEDIA_NAME; // 视频名称
 	// public String MEDIA_PIC_RECOM2;// 640*200
 	// public String PAD_MEDIA_POSTER_BIG; // 740*360
 	public String PC_MEDIA_POSTER_BIG; // 330*456
 	// public String PC_MEDIA_POSTER_HORIZONTAL_BIG; // 464*329
-	public String id;
+	private String id;
+	
+	public String getMEDIA_ACTORS() {
+		return MEDIA_ACTORS;
+	}
+
+	public void setMEDIA_ACTORS(String mEDIA_ACTORS) {
+		MEDIA_ACTORS = mEDIA_ACTORS;
+	}
+
+	public String getMEDIA_LENGTH() {
+		return MEDIA_LENGTH;
+	}
+
+	public void setMEDIA_LENGTH(String mEDIA_LENGTH) {
+		MEDIA_LENGTH = mEDIA_LENGTH;
+	}
+
+	public String getMEDIA_NAME() {
+		return MEDIA_NAME;
+	}
+
+	public void setMEDIA_NAME(String mEDIA_NAME) {
+		MEDIA_NAME = mEDIA_NAME;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	@Override
 	public int describeContents() {

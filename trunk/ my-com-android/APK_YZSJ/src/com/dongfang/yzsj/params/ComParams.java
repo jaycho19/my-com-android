@@ -13,6 +13,7 @@ public class ComParams {
 	public static final String INTENT_VODBEAN = "vodbean";
 	public static final String INTENT_VODBEAN_VIP = "vodbeanVIP";
 	public static final String INTENT_MOVIELIST_CHANNEL = "channel";
+	public static final String INTENT_MOVIEDETAIL_CONNENTID = "connentid";
 
 	// ------------------------------------------------------------------------------
 	/** 首页 */

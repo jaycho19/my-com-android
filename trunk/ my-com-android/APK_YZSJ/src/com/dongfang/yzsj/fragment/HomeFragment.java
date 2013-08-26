@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTabHost;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.df.util.ULog;
 import com.dongfang.view.ImageGallery;
+import com.dongfang.yzsj.DetailsActiivity;
 import com.dongfang.yzsj.MainActivity;
 import com.dongfang.yzsj.MovieListActivity;
 import com.dongfang.yzsj.R;
@@ -129,7 +131,8 @@ public class HomeFragment extends Fragment {
 					}
 				});
 
-				LinearLayout llHomeItemContain = (LinearLayout) viewItem.findViewById(R.id.ll_fragment_home_item_contain);
+				LinearLayout llHomeItemContain = (LinearLayout) viewItem
+						.findViewById(R.id.ll_fragment_home_item_contain);
 				initViewHomeItem(llHomeItemContain, item);
 				llHome.addView(viewItem, llHome.getChildCount() - 1);
 
@@ -144,10 +147,19 @@ public class HomeFragment extends Fragment {
 			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(w, w * 456 / 330);
 			lparam.setMargins(5, 5, 5, 5);
 
-			for (HomeMovie movie : item.movies) {
+			for (final HomeMovie movie : item.movies) {
 				ImageView imageView = new ImageView(getActivity());
 				imageView.setLayoutParams(lparam);
 				BitmapUtils.create(getActivity()).display(imageView, movie.PC_MEDIA_POSTER_BIG, w, w * 456 / 330);
+				imageView.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(getActivity(), DetailsActiivity.class);
+						intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID, movie.getId());
+						getActivity().startActivity(intent);
+					}
+				});
+
 				linearLayout.addView(imageView);
 			}
 		}
