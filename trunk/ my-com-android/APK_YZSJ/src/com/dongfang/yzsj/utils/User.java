@@ -2,6 +2,7 @@ package com.dongfang.yzsj.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
 import com.df.util.ULog;
 import com.dongfang.encrypt.AESEncrypt;
@@ -44,8 +45,11 @@ public class User {
 	 * @return 已登录，返回true，否则，返回false
 	 */
 	public static boolean isLogined(Context context) {
-		SharedPreferences sp = context.getSharedPreferences(SHAREDPREFERENCES_USER_INFO_FILENAME, Context.MODE_PRIVATE);
-		return sp.getBoolean(SHAREDPREFERENCES_USER_INFO_ISLOGIN, false);
+		// SharedPreferences sp = context.getSharedPreferences(SHAREDPREFERENCES_USER_INFO_FILENAME,
+		// Context.MODE_PRIVATE);
+		// return sp.getBoolean(SHAREDPREFERENCES_USER_INFO_ISLOGIN, false);
+		//
+		return !TextUtils.isEmpty(getToken(context));
 	}
 
 	/**
@@ -137,7 +141,8 @@ public class User {
 				.putString(SHAREDPREFERENCES_USER_INFO_USER_ID, userId).commit();
 	}
 
-	/**
+	/**  @deprecated see {@link #saveToken(Context, String)
+	 * 
 	 * 更新用户登陆状态
 	 * 
 	 * @param context
@@ -145,9 +150,11 @@ public class User {
 	 * @return 更新是否成功
 	 */
 	public static boolean saveUserLoginStatu(Context context, boolean isLogin) {
-		ULog.d(TAG, "saveUserLoginStatu isLogin = " + isLogin);
-		return context.getSharedPreferences(SHAREDPREFERENCES_USER_INFO_FILENAME, Context.MODE_PRIVATE).edit()
-				.putBoolean(SHAREDPREFERENCES_USER_INFO_ISLOGIN, isLogin).commit();
+		// ULog.d(TAG, "saveUserLoginStatu isLogin = " + isLogin);
+		// return context.getSharedPreferences(SHAREDPREFERENCES_USER_INFO_FILENAME, Context.MODE_PRIVATE).edit()
+		// .putBoolean(SHAREDPREFERENCES_USER_INFO_ISLOGIN, isLogin).commit();
+		saveToken(context, "");
+		return false;
 	}
 
 	/**

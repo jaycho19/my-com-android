@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.df.util.ULog;
 import com.dongfang.yzsj.R;
+import com.dongfang.yzsj.bean.LoginBean;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
 import com.lidroid.xutils.HttpUtils;
@@ -56,7 +57,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 		etUserName = (EditText) view.findViewById(R.id.login_et_userName);
 		etAuthCode = (EditText) view.findViewById(R.id.login_et_authCode);
 
-		//btnLogin.requestFocus();
+		// btnLogin.requestFocus();
 
 	}
 
@@ -97,10 +98,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 					ULog.d(TAG, "onSuccess  --" + result);
 					progDialog.dismiss();
 					try {
-						JSONObject obj = new JSONObject(result);
-						if (obj.has("success") && obj.getBoolean("success")) {
-							// 获取成功
-							User.saveUserLoginStatu(getActivity(), true);
+
+						LoginBean bean = new com.google.gson.Gson().fromJson(result, LoginBean.class);
+
+						if (null != bean && bean.isSuccess() && !TextUtils.isEmpty(bean.getToken())) {
+							// 保存token
+							User.saveToken(getActivity(), bean.getToken());
+							// 保存登陆状态
+							// User.saveUserLoginStatu(getActivity(), true);
+
 							User.savePhone(getActivity(), etUserName.getText().toString());
 
 							Toast.makeText(getActivity(), "登陆成功！", Toast.LENGTH_LONG).show();
@@ -109,15 +115,17 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 								onLoginAndVerify.login(true, etUserName.getText().toString());
 						}
 						else {
+							// 保存token
+							User.saveToken(getActivity(), "");
 							// 获取失败
-							User.saveUserLoginStatu(getActivity(), false);
+							// User.saveUserLoginStatu(getActivity(), false);
 							User.savePhone(getActivity(), "");
 
 							Toast.makeText(getActivity(), "登陆失败！", Toast.LENGTH_LONG).show();
 							if (null != onLoginAndVerify)
 								onLoginAndVerify.login(false, etUserName.getText().toString());
 						}
-					} catch (JSONException e) {
+					} catch (Exception e) {
 						Toast.makeText(getActivity(), "JSON解析失败", Toast.LENGTH_LONG).show();
 						if (null != onLoginAndVerify)
 							onLoginAndVerify.login(false, etUserName.getText().toString());
@@ -168,7 +176,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
 									if (null != onLoginAndVerify)
 										onLoginAndVerify.verify(false, etUserName.getText().toString());
-									// 获取失败
 								}
 							} catch (JSONException e) {
 								Toast.makeText(getActivity(), "JSON解析失败", Toast.LENGTH_LONG).show();

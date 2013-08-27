@@ -2,10 +2,8 @@ package com.dongfang.utils;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.df.util.ULog;
-import com.dongfang.yzsj.R;
 
 /**
  * @author dongfang

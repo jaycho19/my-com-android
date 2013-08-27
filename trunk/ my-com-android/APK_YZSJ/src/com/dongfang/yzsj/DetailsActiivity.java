@@ -1,15 +1,12 @@
 package com.dongfang.yzsj;
 
+import android.os.Bundle;
+import android.text.TextUtils;
+
 import com.df.util.ULog;
-import com.dongfang.utils.ACache;
-import com.dongfang.yzsj.bean.HomeBean;
-import com.dongfang.yzsj.params.ComParams;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
-
-import android.os.Bundle;
-import android.text.TextUtils;
 
 /**
  * 视频详情页

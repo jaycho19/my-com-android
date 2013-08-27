@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 
 import com.df.util.ULog;
 import com.dongfang.yzsj.bean.HomeSliderItem;
-import com.dongfang.yzsj.utils.Util;
 import com.lidroid.xutils.BitmapUtils;
 
 public class ImageGalleyAdapter1 extends PagerAdapter {

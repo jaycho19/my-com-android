@@ -16,19 +16,20 @@ public class ComParams {
 	public static final String INTENT_MOVIEDETAIL_CONNENTID = "connentid";
 
 	// ------------------------------------------------------------------------------
+	// private static final String HTTP_BASE = "http://tv.inhe.net/";
+	private static final String HTTP_BASE = "http://m.fortune-net.cn";
 	/** 首页 */
-	public static final String HTTP_HOME = "http://m.fortune-net.cn/page/hbMobile/?jsonFormat=true";
-	// public static final String HTTP_HOME = "http://tv.inhe.net/page/hbMobile/?jsonFormat=true";
+	public static final String HTTP_HOME = HTTP_BASE + "/page/hbMobile/?jsonFormat=true";
 	/** 直播 */
-	public static final String HTTP_LIVE = "http://tv.inhe.net/page/hbMobile/live.jsp?jsonFormat=true";
+	public static final String HTTP_LIVE = HTTP_BASE + "/page/hbMobile/live.jsp?jsonFormat=true";
 	/** 点播 */
-	public static final String HTTP_VOD = "http://tv.inhe.net/page/hbMobile/vod.jsp?jsonFormat=true";
+	public static final String HTTP_VOD = HTTP_BASE + "/page/hbMobile/vod.jsp?jsonFormat=true";
 	/** 验证码 */
-	public static final String HTTP_AUTHCODE = "http://tv.inhe.net/user/user!createVerifyCode.action?";
+	public static final String HTTP_AUTHCODE = HTTP_BASE + "/user/user!createVerifyCode.action?";
 	/** 登陆 */
-	public static final String HTTP_LOGIN = "http://tv.inhe.net/user/user!phoneLogin.action?";
+	public static final String HTTP_LOGIN = HTTP_BASE + "/user/user!phoneLogin.action?";
 	/** 列表页， 频道页 */
-	public static final String HTTP_CHANNEL = "http://tv.inhe.net/page/js/list.jsp?";
+	public static final String HTTP_CHANNEL = HTTP_BASE + "/page/js/list.jsp?";
 
 	// ------------------------------------------------------------------------------
 	public static final String SP_NAME_WINDOW = "SP_NAME_WINDOW";

@@ -45,7 +45,7 @@
             android:windowSoftInputMode="stateUnchanged" >
         </activity>
         <activity
-            android:name="LoadingAcitivity"
+            android:name="com.dongfang.yzsj.LoadingAcitivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateUnchanged" >

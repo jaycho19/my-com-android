@@ -6,8 +6,6 @@ import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.df.util.ULog;
-
 /**
  * 频道列表结构
  * 
