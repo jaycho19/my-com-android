@@ -127,6 +127,7 @@ public class VODFragment extends Fragment {
 				@Override
 				public void onFailure(Throwable error, String msg) {
 					ULog.i(TAG, "onFailure");
+					progDialog.dismiss();
 				}
 			});
 		}
