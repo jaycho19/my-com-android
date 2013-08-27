@@ -86,8 +86,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 			if (!isPhoneNumber(etUserName.getText().toString()) || !isAuthCode(etAuthCode.getText().toString()))
 				return;
 
-			new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_LOGIN + "obj.tel=" + etUserName.getText()
-					+ "&obj.verifyCode=" + etAuthCode.getText(), new RequestCallBack<String>() {
+			String url = ComParams.HTTP_LOGIN + "obj.tel=" + etUserName.getText() + "&obj.verifyCode="
+					+ etAuthCode.getText();
+			ULog.i(TAG, url);
+			
+			// http://m.fortune-net.cn/user/user!phoneLogin.action?obj.tel=15631127974&obj.verifyCode=888222
+
+			new HttpUtils().send(HttpRequest.HttpMethod.GET, url, new RequestCallBack<String>() {
 				@Override
 				public void onLoading(long total, long current) {
 					ULog.d(TAG, "total = " + total + "; current = " + current);

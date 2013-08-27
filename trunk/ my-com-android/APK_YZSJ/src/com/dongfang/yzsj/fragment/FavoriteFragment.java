@@ -15,6 +15,7 @@ import com.dongfang.view.PullToRefreshView.OnFooterRefreshListener;
 import com.dongfang.view.PullToRefreshView.OnHeaderRefreshListener;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.bean.MediaBean;
+import com.dongfang.yzsj.bean.VODItem;
 import com.dongfang.yzsj.fragment.adp.FavoriteAdp;
 
 /**
@@ -25,10 +26,11 @@ import com.dongfang.yzsj.fragment.adp.FavoriteAdp;
  */
 public class FavoriteFragment extends Fragment implements OnHeaderRefreshListener, OnFooterRefreshListener {
 
-	private ListView			mList;
-	private PullToRefreshView	mPullToRefreshView;
-	private FavoriteAdp			mFavoriteAdp;
-	private List<MediaBean>		mediaBeanList;		// = new ArrayList<MediaBean>;
+	private ListView mList;
+	private PullToRefreshView mPullToRefreshView;
+	private FavoriteAdp mFavoriteAdp;
+	private List<MediaBean> mediaBeanList; // = new ArrayList<MediaBean>;
+	private ArrayList<VODItem> listVODItem = null;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
