@@ -14,8 +14,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import com.dongfang.utils.DFException;
-import com.dongfang.yzsj.params.ComParams;
-import com.dongfang.yzsj.utils.Util;
 
 /**
  * Usage: 加密

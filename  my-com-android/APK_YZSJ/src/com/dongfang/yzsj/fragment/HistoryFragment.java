@@ -3,19 +3,19 @@ package com.dongfang.yzsj.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dongfang.view.PullToRefreshView;
-import com.dongfang.view.PullToRefreshView.OnFooterRefreshListener;
-import com.dongfang.view.PullToRefreshView.OnHeaderRefreshListener;
-import com.dongfang.yzsj.R;
-import com.dongfang.yzsj.bean.MediaBean;
-import com.dongfang.yzsj.fragment.adp.FavoriteAdp;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.dongfang.view.PullToRefreshView;
+import com.dongfang.view.PullToRefreshView.OnFooterRefreshListener;
+import com.dongfang.view.PullToRefreshView.OnHeaderRefreshListener;
+import com.dongfang.yzsj.R;
+import com.dongfang.yzsj.bean.MediaBean;
+import com.dongfang.yzsj.fragment.adp.FavoriteAdp;
 
 /**
  * 播放历史

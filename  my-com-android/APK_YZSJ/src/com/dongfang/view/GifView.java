@@ -2,10 +2,6 @@ package com.dongfang.view;
 
 import java.io.InputStream;
 
-import com.dongfang.view.gif.GifAction;
-import com.dongfang.view.gif.GifDecoder;
-import com.dongfang.view.gif.GifFrame;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -19,6 +15,10 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.dongfang.view.gif.GifAction;
+import com.dongfang.view.gif.GifDecoder;
+import com.dongfang.view.gif.GifFrame;
 
 /**
  * GifView<br>

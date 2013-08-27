@@ -2,7 +2,6 @@ package com.dongfang.yzsj.fragment;
 
 import java.util.List;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
