@@ -2,13 +2,17 @@ package com.dongfang.yzsj.fragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.df.util.ULog;
 import com.dongfang.utils.ACache;
@@ -27,12 +31,16 @@ import com.lidroid.xutils.http.client.HttpRequest;
  * @author dongfang
  * 
  */
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment implements View.OnClickListener {
 
 	public static final String TAG = "SearchFragment";
 
+	private TextView tvSearch; // 搜索按钮
+	private EditText etSearchBox; // 搜索按钮
+	private CheckTextView ctvQanbu; // 全部按钮
 	private LinearLayout linearLayout_0, linearLayout_1, linearLayout_2; // 用于存放搜索频道
 
+	private Vector<String> selectChannels = null; // 保存选定的频道
 	private ArrayList<VODItem> listChannels = null; // 频道列表
 
 	private com.dongfang.view.ProgressDialog progDialog;
@@ -54,12 +62,56 @@ public class SearchFragment extends Fragment {
 		progDialog = com.dongfang.view.ProgressDialog.show(getActivity());
 		progDialog.setCancelable(true);
 
+		tvSearch = (TextView) view.findViewById(R.id.search_btn);
+		tvSearch.setOnClickListener(this);
+		etSearchBox = (EditText) view.findViewById(R.id.search_et_input_box);
+
 		linearLayout_0 = (LinearLayout) view.findViewById(R.id.search_ll_0);
 		linearLayout_1 = (LinearLayout) view.findViewById(R.id.search_ll_1);
 		linearLayout_2 = (LinearLayout) view.findViewById(R.id.search_ll_2);
 
+		ctvQanbu = (CheckTextView) view.findViewById(R.id.search_type_ctv_quanbu);
+		ctvQanbu.setChecked(true);
+		ctvQanbu.setOnCheckedChangeListener(new android.widget.CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton paramCompoundButton, boolean paramBoolean) {
+				selectChannels.removeAllElements(); // 清空
+				if (paramBoolean) {
+					paramCompoundButton.setChecked(true);
+					for (VODItem vodItem : listChannels) {
+						selectChannels.add(vodItem.getChannelId());
+					}
+
+					for (int i = 0, l = linearLayout_0.getChildCount(); i < l; i++) {
+						((CompoundButton) linearLayout_0.getChildAt(i)).setClickable(true);
+					}
+					for (int i = 0, l = linearLayout_1.getChildCount(); i < l; i++) {
+						((CompoundButton) linearLayout_1.getChildAt(i)).setClickable(true);
+					}
+					for (int i = 0, l = linearLayout_2.getChildCount(); i < l; i++) {
+						((CompoundButton) linearLayout_2.getChildAt(i)).setClickable(true);
+					}
+				}
+				else {
+					paramCompoundButton.setChecked(false);
+					for (int i = 0, l = linearLayout_0.getChildCount(); i < l; i++) {
+						((CompoundButton) linearLayout_0.getChildAt(i)).setClickable(false);
+					}
+					for (int i = 0, l = linearLayout_1.getChildCount(); i < l; i++) {
+						((CompoundButton) linearLayout_1.getChildAt(i)).setClickable(false);
+					}
+					for (int i = 0, l = linearLayout_2.getChildCount(); i < l; i++) {
+						((CompoundButton) linearLayout_2.getChildAt(i)).setClickable(false);
+					}
+				}
+			}
+		});
+
+		selectChannels = new Vector<String>();
+
 		if (null != listChannels && listChannels.size() > 1)
 			initChannelItems();
+
 	}
 
 	@Override
@@ -80,6 +132,7 @@ public class SearchFragment extends Fragment {
 		}
 		else {
 			// bean为空，网络请求数据，需对网络进行判断
+			ULog.d(TAG, ComParams.HTTP_VOD);
 			new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_VOD, new RequestCallBack<String>() {
 				@Override
 				public void onLoading(long total, long current) {
@@ -124,22 +177,50 @@ public class SearchFragment extends Fragment {
 	private void initChannelItems() {
 		int length = listChannels.size();
 		ULog.d(TAG, " listChannels.size() " + length);
+
+		if (length > 0) {
+			linearLayout_0.removeAllViews();
+			linearLayout_1.removeAllViews();
+			linearLayout_2.removeAllViews();
+		}
 		for (int i = 0; i < Math.min(length, 5); i++) {
 			CheckTextView view = (CheckTextView) inflater.inflate(R.layout.fragment_search_check_textview, null);
 			view.setText(listChannels.get(i).getName());
+			view.setOnCheckedChangeListener(new CheckedChangeListener(listChannels.get(i).getChannelId()));
 			linearLayout_0.addView(view);
 		}
 		for (int i = 5; i < Math.min(length, 11); i++) {
 			CheckTextView view = (CheckTextView) inflater.inflate(R.layout.fragment_search_check_textview, null);
 			view.setText(listChannels.get(i).getName());
+			view.setOnCheckedChangeListener(new CheckedChangeListener(listChannels.get(i).getChannelId()));
 			linearLayout_1.addView(view);
 		}
 		for (int i = 11; i < Math.min(length, 15); i++) {
 			CheckTextView view = (CheckTextView) inflater.inflate(R.layout.fragment_search_check_textview, null);
 			view.setText(listChannels.get(i).getName());
+			view.setOnCheckedChangeListener(new CheckedChangeListener(listChannels.get(i).getChannelId()));
 			linearLayout_2.addView(view);
 		}
+	}
 
+	// 搜索频道点击按钮
+	private class CheckedChangeListener implements android.widget.CompoundButton.OnCheckedChangeListener {
+		private String channelId;
+
+		public CheckedChangeListener(String channelId) {
+			this.channelId = channelId;
+		}
+
+		@Override
+		public void onCheckedChanged(CompoundButton paramCompoundButton, boolean paramBoolean) {
+			if (paramBoolean) {
+				if (!selectChannels.contains(channelId))
+					selectChannels.add(channelId);
+			}
+			else {
+				selectChannels.remove(channelId);
+			}
+		}
 	}
 
 	@Override
@@ -149,5 +230,11 @@ public class SearchFragment extends Fragment {
 			ULog.d(TAG, "listChannelItem.size = " + listChannels.size());
 			outState.putParcelableArrayList(ComParams.INTENT_SEARCH_CHANNELS, listChannels);
 		}
+	}
+
+	@Override
+	public void onClick(View paramView) {
+		// TODO Auto-generated method stub
+
 	}
 }
