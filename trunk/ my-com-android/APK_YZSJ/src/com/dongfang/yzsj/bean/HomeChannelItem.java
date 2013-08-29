@@ -8,11 +8,11 @@ import android.os.Parcelable;
 
 /** 平道内容 @author dongfang */
 public class HomeChannelItem implements Parcelable {
-	public List<HomeMovie> movies;
+	public List<Movie> movies;
 	public HomeChannel channel;
 
 	public HomeChannelItem() {
-		movies = new ArrayList<HomeMovie>();
+		movies = new ArrayList<Movie>();
 		channel = new HomeChannel();
 	}
 
@@ -31,7 +31,7 @@ public class HomeChannelItem implements Parcelable {
 		@Override
 		public HomeChannelItem createFromParcel(Parcel in) {
 			HomeChannelItem data = new HomeChannelItem();
-			in.readList(data.movies, HomeMovie.class.getClassLoader());
+			in.readList(data.movies, Movie.class.getClassLoader());
 			data.channel = in.readParcelable(HomeChannel.class.getClassLoader());
 			return data;
 		}
@@ -46,7 +46,7 @@ public class HomeChannelItem implements Parcelable {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(" --  ChannelItem channel = " + channel).append("\n");
-		for (HomeMovie m : movies)
+		for (Movie m : movies)
 			sb.append(" -- ChannelItem movies = \n" + m.toString()).append("\n");
 		return sb.toString();
 	}

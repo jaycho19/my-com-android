@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dongfang.yzsj.R;
-import com.dongfang.yzsj.bean.HomeMovie;
+import com.dongfang.yzsj.bean.Movie;
 import com.dongfang.yzsj.utils.UtilOfTime;
 import com.lidroid.xutils.BitmapUtils;
 
@@ -25,18 +25,18 @@ public class TypeAdp extends BaseAdapter {
 
 	public static final String TAG = TypeAdp.class.getSimpleName();
 
-	private List<HomeMovie> list = null;
+	private List<Movie> list = null;
 	private Context context;
 
 	public TypeAdp(Context context) {
 		this.context = context;
 	}
 
-	public List<HomeMovie> getList() {
+	public List<Movie> getList() {
 		return list;
 	}
 
-	public void setList(List<HomeMovie> list) {
+	public void setList(List<Movie> list) {
 		this.list = list;
 	}
 
@@ -72,9 +72,9 @@ public class TypeAdp extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		final HomeMovie movie = list.get(position);
+		final Movie movie = list.get(position);
 
-		BitmapUtils.create(context).display(holder.iv_placard, movie.PC_MEDIA_POSTER_BIG, 105, 137);
+		BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG(), 105, 137);
 		holder.tv_title.setText(movie.getMEDIA_NAME());
 		holder.tv_actor.setText(movie.getMEDIA_ACTORS());
 		String length = UtilOfTime.formatSeconds2Date(Long.valueOf(TextUtils.isEmpty(movie.getMEDIA_LENGTH()) ? "0"

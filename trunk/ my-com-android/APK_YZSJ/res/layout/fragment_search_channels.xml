@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <com.dongfang.view.CheckTextView
+        android:id="@+id/search_type_ctv_quanbu"
+        style="@style/SearchTypeCTV"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:clickable="true"
+        android:text="全部" />
+
+    <LinearLayout
+        android:id="@+id/search_ll_0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/search_type_ctv_quanbu"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/search_type_ctv_quanbu"
+        android:orientation="horizontal" />
+
+    <View
+        android:id="@+id/view_line_0"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/search_type_ctv_quanbu"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:id="@+id/search_ll_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/search_ll_0"
+        android:layout_below="@+id/view_line_0"
+        android:orientation="horizontal" />
+
+    <View
+        android:id="@+id/view_line_1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/search_ll_1"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:id="@+id/search_ll_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/search_ll_1"
+        android:layout_below="@+id/view_line_1"
+        android:orientation="horizontal" />
+
+</RelativeLayout>

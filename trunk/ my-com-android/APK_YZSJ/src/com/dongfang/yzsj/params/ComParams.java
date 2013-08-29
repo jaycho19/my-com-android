@@ -31,6 +31,8 @@ public class ComParams {
 	public static final String HTTP_LOGIN = HTTP_BASE + "/user/user!phoneLogin.action?";
 	/** 列表页， 频道页 */
 	public static final String HTTP_CHANNEL = HTTP_BASE + "/page/js/list.jsp?";
+	/** 搜索 */
+	public static final String HTTP_SEARCH = HTTP_BASE + "/page/js/list.jsp?isChannelIds=true&";
 
 	// ------------------------------------------------------------------------------
 	public static final String SP_NAME_WINDOW = "SP_NAME_WINDOW";
