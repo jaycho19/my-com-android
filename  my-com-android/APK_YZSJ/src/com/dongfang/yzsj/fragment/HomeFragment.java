@@ -22,7 +22,7 @@ import com.dongfang.yzsj.MovieListActivity;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.bean.HomeBean;
 import com.dongfang.yzsj.bean.HomeChannelItem;
-import com.dongfang.yzsj.bean.HomeMovie;
+import com.dongfang.yzsj.bean.Movie;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.Util;
 import com.lidroid.xutils.BitmapUtils;
@@ -147,10 +147,10 @@ public class HomeFragment extends Fragment {
 			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(w, w * 456 / 330);
 			lparam.setMargins(5, 5, 5, 5);
 
-			for (final HomeMovie movie : item.movies) {
+			for (final Movie movie : item.movies) {
 				ImageView imageView = new ImageView(getActivity());
 				imageView.setLayoutParams(lparam);
-				BitmapUtils.create(getActivity()).display(imageView, movie.PC_MEDIA_POSTER_BIG, w, w * 456 / 330);
+				BitmapUtils.create(getActivity()).display(imageView, movie.getPC_MEDIA_POSTER_BIG(), w, w * 456 / 330);
 				imageView.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {

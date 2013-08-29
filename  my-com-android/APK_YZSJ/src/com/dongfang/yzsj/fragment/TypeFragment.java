@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.df.util.ULog;
 import com.dongfang.view.CheckTextView;
@@ -26,7 +27,7 @@ import com.dongfang.view.PullToRefreshView.OnHeaderRefreshListener;
 import com.dongfang.yzsj.MovieListActivity;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.bean.HomeChannel;
-import com.dongfang.yzsj.bean.HomeMovie;
+import com.dongfang.yzsj.bean.Movie;
 import com.dongfang.yzsj.bean.TypeBean;
 import com.dongfang.yzsj.fragment.adp.TypeAdp;
 import com.dongfang.yzsj.params.ComParams;
@@ -60,12 +61,14 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 	private LinearLayout llSubChannels; // 子频道
 	private LayoutInflater inflater;
 
-	private List<HomeMovie> listData; // 显示列表
-	private String listDataChannel;
+	private List<Movie> listData; // 显示列表
+	private String listDataChannel; // 最近一次的频道信息
 	private TypeAdp channelAdp;
 	private ListView listView;
 	private PullToRefreshView pulltoRefreshView;
 	private HomeChannel channel; // 当前列表显示的频道信息
+
+	private int lastTotal;// 最近一次加载更多时返回的数据量
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -122,7 +125,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 		llSubChannels = (LinearLayout) view.findViewById(R.id.type_ll_subChannels);
 
 		channelAdp = new TypeAdp(getActivity());
-		listData = new ArrayList<HomeMovie>();
+		listData = new ArrayList<Movie>();
 		channelAdp.setList(listData);
 		listView = (ListView) view.findViewById(R.id.type_listview);
 		listView.setAdapter(channelAdp);
@@ -157,6 +160,15 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
 	/** 获取网络数据 */
 	private void getMovies(final String channelId, final int start, final int limit) {
+
+		if (0 == start) {
+			lastTotal = 0;
+		}
+
+		else if (start > 0 && limit > lastTotal) {
+			Toast.makeText(getActivity(), "没有更多内容啦O(∩_∩)O", Toast.LENGTH_LONG).show();
+			return;
+		}
 
 		// start = start < 0 ? 0 : start;
 		// limit = limit < 10 ? 0 : limit;

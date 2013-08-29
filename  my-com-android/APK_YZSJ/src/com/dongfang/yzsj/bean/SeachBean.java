@@ -11,18 +11,20 @@ import android.os.Parcelable;
  * 
  * @author dongfang
  */
-public class TypeBean implements Parcelable {
+public class SeachBean implements Parcelable {
 	public static final String TAG = "TypeBean";
 
 	private HomeChannel channel;
 	private HomeChannel parentChannel;
-	private List<Movie> listData;
+	private SeachListData listData;
+
+	// private List<Movie> listData;
 	private List<HomeChannel> subChannels;
 
-	private TypeBean() {
+	private SeachBean() {
 		channel = null;
 		parentChannel = null;
-		listData = new ArrayList<Movie>();
+		listData = new SeachListData();
 		subChannels = new ArrayList<HomeChannel>();
 	}
 
@@ -42,11 +44,11 @@ public class TypeBean implements Parcelable {
 		this.parentChannel = parentChannel;
 	}
 
-	public List<Movie> getListData() {
+	public SeachListData getListData() {
 		return listData;
 	}
 
-	public void setListData(List<Movie> listData) {
+	public void setListData(SeachListData listData) {
 		this.listData = listData;
 	}
 
@@ -63,11 +65,9 @@ public class TypeBean implements Parcelable {
 		StringBuilder sb = new StringBuilder();
 		sb.append("channel       = ").append(channel.toString()).append("\n");
 		sb.append("parentChannel = ").append(parentChannel.toString()).append("\n");
+		sb.append("listData      = ").append(listData.toString()).append("\n");
 		for (int i = 0, length = subChannels.size(); i < length; i++) {
 			sb.append("subChannels ").append(i).append(" = ").append(subChannels.get(i).toString()).append("\n");
-		}
-		for (int i = 0, length = listData.size(); i < length; i++) {
-			sb.append("listData ").append(i).append(" = ").append(listData.get(i).toString()).append("\n");
 		}
 		return sb.toString();
 	}
@@ -81,25 +81,25 @@ public class TypeBean implements Parcelable {
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeParcelable(channel, 0);
 		dest.writeParcelable(parentChannel, 1);
+		dest.writeParcelable(listData, 0);
 		dest.writeList(subChannels);
-		dest.writeList(listData);
 	}
 
-	public static final Parcelable.Creator<TypeBean> CREATOR = new Parcelable.Creator<TypeBean>() {
+	public static final Parcelable.Creator<SeachBean> CREATOR = new Parcelable.Creator<SeachBean>() {
 
 		@Override
-		public TypeBean createFromParcel(Parcel in) {
-			TypeBean data = new TypeBean();
+		public SeachBean createFromParcel(Parcel in) {
+			SeachBean data = new SeachBean();
 			data.setChannel((HomeChannel) in.readParcelable(HomeChannel.class.getClassLoader()));
 			data.setParentChannel((HomeChannel) in.readParcelable(HomeChannel.class.getClassLoader()));
+			data.setListData((SeachListData) in.readParcelable(SeachListData.class.getClassLoader()));
 			in.readList(data.getSubChannels(), HomeChannel.class.getClassLoader());
-			in.readList(data.getListData(), Movie.class.getClassLoader());
 			return data;
 		}
 
 		@Override
-		public TypeBean[] newArray(int size) {
-			return new TypeBean[size];
+		public SeachBean[] newArray(int size) {
+			return new SeachBean[size];
 		}
 	};
 
