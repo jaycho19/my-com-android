@@ -109,7 +109,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 				}
 			}
 		});
-		
+
 		// for (Fragment fg : mFragmentManager.getFragments()) {
 		// ULog.w(TAG, "tag = " + fg.getTag() + ", id = " + fg.getId());
 		// ULog.w(TAG, fg.toString());
@@ -184,6 +184,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		// 用于调试方便
 		// fgtHost.setCurrentTabByTag("4");
 
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		if (User.isLogined(this)) {
+			tvLogin.setText("注销");
+			frameLayout.setVisibility(0);
+		}
+		else {
+			tvLogin.setText("登陆");
+		}
 	}
 
 	public HomeBean getHomeBean() {

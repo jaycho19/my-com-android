@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.df.util.ULog;
+import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
 import com.dongfang.yzsj.bean.DetailBean;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.Util;
@@ -77,7 +78,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 
 	}
 
-	private void initViewData(DetailBean bean) {
+	private void initViewData(final DetailBean bean) {
 		if (null == bean)
 			return;
 
@@ -94,20 +95,15 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 			int length = bean.getRelateContents().size();
 			ULog.d(TAG, "length = " + length);
 			int w = Util.getWindowWidth(this) / 3 - 10;
-			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(w, LinearLayout.LayoutParams.WRAP_CONTENT);
+			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(w, w * 456 / 330);
 			lparam.setMargins(5, 5, 5, 5);
 			for (int i = 0, l = Math.min(length, 3); i < l; i++) {
 				ImageView imageView = new ImageView(this);
 				imageView.setLayoutParams(lparam);
 				BitmapUtils.create(this).display(imageView, bean.getRelateContents().get(i).getPC_MEDIA_POSTER_BIG(),
 						w, LinearLayout.LayoutParams.WRAP_CONTENT);
-				imageView.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						// new ToDetailAsyncTask(this, item.getChannel().getChannelId(), movie.getId()).execute();
-					}
-				});
-
+				imageView.setOnClickListener(new MyOnClickListener(bean.getChannel().getChannelId(), bean
+						.getRelateContents().get(i).getId()));
 				llLikeContain_0.addView(imageView);
 			}
 			for (int i = 3, l = Math.min(length, 6); i < l; i++) {
@@ -115,13 +111,8 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 				imageView.setLayoutParams(lparam);
 				BitmapUtils.create(this).display(imageView, bean.getRelateContents().get(i).getPC_MEDIA_POSTER_BIG(),
 						w, LinearLayout.LayoutParams.WRAP_CONTENT);
-				imageView.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						// new ToDetailAsyncTask(this, item.getChannel().getChannelId(), movie.getId()).execute();
-					}
-				});
-
+				imageView.setOnClickListener(new MyOnClickListener(bean.getChannel().getChannelId(), bean
+						.getRelateContents().get(i).getId()));
 				llLikeContain_1.addView(imageView);
 			}
 
@@ -166,6 +157,22 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		// });
 		// }
 
+	}
+
+	private class MyOnClickListener implements OnClickListener {
+		private String contentId;
+		private String channelId;
+
+		public MyOnClickListener(String channelId, String contentId) {
+			this.contentId = contentId;
+			this.channelId = channelId;
+		}
+
+		@Override
+		public void onClick(View v) {
+			ULog.d(TAG, v.toString());
+			new ToDetailAsyncTask(DetailsActiivity.this, channelId, contentId).execute();
+		}
 	}
 
 	@Override

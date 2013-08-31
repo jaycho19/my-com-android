@@ -12,9 +12,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.df.util.ULog;
+import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
 import com.dongfang.yzsj.bean.HomeSliderItem;
 import com.lidroid.xutils.BitmapUtils;
 
+/**
+ * 首页一张 kv图 适配器
+ * 
+ * @author dongfang
+ * 
+ */
 public class ImageGalleyAdapter1 extends PagerAdapter {
 	public static final String TAG = ImageGalleyAdapter1.class.getSimpleName();
 	protected Context context;
@@ -52,7 +59,7 @@ public class ImageGalleyAdapter1 extends PagerAdapter {
 
 	@Override
 	public void destroyItem(ViewGroup container, int position, Object object) {
-//		ULog.d(TAG, "destroyItem --> position = " + position);
+		// ULog.d(TAG, "destroyItem --> position = " + position);
 		ULog.d(TAG, " object ? = null " + (null == object));
 		if (null != object)
 			container.removeView((View) object);
@@ -73,7 +80,7 @@ public class ImageGalleyAdapter1 extends PagerAdapter {
 
 	@Override
 	public Object instantiateItem(ViewGroup container, int position) {
-//		ULog.d(TAG, "instantiateItem --> position = " + position + "; mCount = " + mCount);
+		// ULog.d(TAG, "instantiateItem --> position = " + position + "; mCount = " + mCount);
 
 		if (position >= list.size()) {
 			position = position % list.size();
@@ -93,18 +100,14 @@ public class ImageGalleyAdapter1 extends PagerAdapter {
 		LinearLayout linearLayout = new LinearLayout(context);
 		linearLayout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		linearLayout.setPadding(1, 1, 1, 1);
-		ULog.d(TAG, "instantiateItem --> position = " + position + "; mCount = " + mCount);
-		ImageView fling_image = new ImageView(context);
+		// ULog.d(TAG, "instantiateItem --> position = " + position + "; mCount = " + mCount);
 
-		BitmapUtils.create(context).display(fling_image, list.get(position).MEDIA_PIC_RECOM2);
+		HomeSliderItem kv = list.get(position);
+		ImageView fling_image = new ImageView(context);
+		BitmapUtils.create(context).display(fling_image, kv.getMEDIA_PIC_RECOM2());
 		fling_image.setLayoutParams(new LayoutParams(-1, -1));
 
-		fling_image.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-			}
-		});
+		fling_image.setOnClickListener(new MyOnClickListener(kv.getChannelId(), kv.getId()));
 
 		fling_image.setId(position);
 		linearLayout.addView(fling_image);
@@ -115,13 +118,18 @@ public class ImageGalleyAdapter1 extends PagerAdapter {
 	}
 
 	protected class MyOnClickListener implements OnClickListener {
+		private String contentId;
+		private String channelId;
 
-		public MyOnClickListener(String str) {}
+		public MyOnClickListener(String channelId, String contentId) {
+			this.contentId = contentId;
+			this.channelId = channelId;
+		}
 
 		@Override
 		public void onClick(View v) {
 			ULog.d(TAG, v.toString());
-
+			new ToDetailAsyncTask(context, channelId, contentId).execute();
 		}
 	}
 }

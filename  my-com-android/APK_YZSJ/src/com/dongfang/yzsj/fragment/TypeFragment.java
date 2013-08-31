@@ -46,7 +46,7 @@ import com.lidroid.xutils.http.client.HttpRequest;
 public class TypeFragment extends Fragment implements View.OnClickListener {
 	public static final String TAG = TypeFragment.class.getSimpleName();
 	/** 每次请求长度 */
-	public static final int LIMIT = 20;
+	public static final int LIMIT = 10;
 	/** 每次请求页数 */
 	private int pageStart = 0;
 
@@ -124,7 +124,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
 		llSubChannels = (LinearLayout) view.findViewById(R.id.type_ll_subChannels);
 
-		channelAdp = new TypeAdp(getActivity());
+		channelAdp = new TypeAdp(getActivity(), "0");
 		listData = new ArrayList<Movie>();
 		channelAdp.setList(listData);
 		listView = (ListView) view.findViewById(R.id.type_listview);
@@ -206,7 +206,8 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 					listDataChannel = channelId;
 				}
 
-				listData.addAll(bean.getListData());
+				listData.addAll(bean.getListData().getObjs());
+				channelAdp.setChannelId(channelId);
 				channelAdp.notifyDataSetChanged();
 				ULog.d(TAG, "list length = " + listData.size());
 

@@ -8,6 +8,7 @@ package com.dongfang.yzsj.params;
  */
 public class ComParams {
 
+	public static final String INTENT_TODO = "TODO";
 	public static final String INTENT_HOMEBEAN = "homebean";
 	public static final String INTENT_LIVEBEAN = "livebean";
 	public static final String INTENT_VODBEAN = "vodbean";

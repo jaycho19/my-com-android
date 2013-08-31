@@ -12,8 +12,8 @@ import org.apache.http.protocol.BasicHttpContext;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -21,10 +21,7 @@ import android.widget.Toast;
 
 import com.df.util.ULog;
 import com.dongfang.utils.ACache;
-import com.dongfang.view.ProgressDialog;
 import com.dongfang.yzsj.DetailsActiivity;
-import com.dongfang.yzsj.LoadingAcitivity;
-import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.bean.DetailBean;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
@@ -137,11 +134,15 @@ public class ToDetailAsyncTask extends AsyncTask<String, String, DetailBean> {
 			return;
 		}
 
+		if (context instanceof DetailsActiivity) {
+			((DetailsActiivity) context).finish();
+		}
+		
 		Intent intent = new Intent(context, DetailsActiivity.class);
-		Bundle data = new Bundle();
-		data.putParcelable(ComParams.INTENT_MOVIEDETAIL_BEAN, result);
-		intent.putExtras(data);
+		intent.putExtra(ComParams.INTENT_MOVIEDETAIL_BEAN, result);
 		context.startActivity(intent);
+
+
 	}
 
 	@Override
@@ -152,7 +153,7 @@ public class ToDetailAsyncTask extends AsyncTask<String, String, DetailBean> {
 	}
 
 	private String read(HttpEntity entity, String charset) {
-		long current = 0L;
+		// long current = 0L;
 		StringBuilder sb = new StringBuilder();
 		InputStream ins = null;
 		try {
@@ -161,7 +162,7 @@ public class ToDetailAsyncTask extends AsyncTask<String, String, DetailBean> {
 			String line = "";
 			while ((line = reader.readLine()) != null) {
 				sb.append(line);
-				current += line.getBytes(charset).length;
+				// current += line.getBytes(charset).length;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

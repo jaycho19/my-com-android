@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.df.util.ULog;
 import com.dongfang.view.ImageGallery;
-import com.dongfang.yzsj.DetailsActiivity;
 import com.dongfang.yzsj.MainActivity;
 import com.dongfang.yzsj.MovieListActivity;
 import com.dongfang.yzsj.R;

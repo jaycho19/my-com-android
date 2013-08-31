@@ -27,28 +27,40 @@
         <activity
             android:name="com.dongfang.yzsj.MainActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:finishOnTaskLaunch="true"
+            android:finishOnTaskLaunch="true"            android:launchMode="singleTask"
+            
             android:label="@string/app_name"
             android:windowSoftInputMode="stateUnchanged" >
         </activity>
         <activity
             android:name="com.dongfang.yzsj.MovieListActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:finishOnTaskLaunch="true"
+            android:finishOnTaskLaunch="true"            android:launchMode="singleTask"
+            
             android:label="@string/app_name"
             android:windowSoftInputMode="stateUnchanged" >
         </activity>
         <activity
             android:name="com.dongfang.yzsj.DetailsActiivity"
             android:configChanges="orientation|keyboardHidden"
-            android:finishOnTaskLaunch="true"
+            android:finishOnTaskLaunch="true"            android:launchMode="singleTask"
+            
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateUnchanged" >
+        </activity>
+        <activity
+            android:name="com.dongfang.yzsj.LoginActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:finishOnTaskLaunch="true"            android:launchMode="singleTask"
+            
             android:label="@string/app_name"
             android:windowSoftInputMode="stateUnchanged" >
         </activity>
         <activity
             android:name="com.dongfang.yzsj.LoadingAcitivity"
             android:configChanges="orientation|keyboardHidden"
-            android:theme="@style/AppTheme"
+            android:theme="@style/AppTheme"            android:launchMode="singleTask"
+            
             android:windowSoftInputMode="stateUnchanged" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

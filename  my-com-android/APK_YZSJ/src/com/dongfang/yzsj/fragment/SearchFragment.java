@@ -95,7 +95,7 @@ public class SearchFragment extends Fragment {
 			}
 		});
 
-		searchAdp = new TypeAdp(getActivity());
+		searchAdp = new TypeAdp(getActivity(),"0");
 		listData = new ArrayList<Movie>();
 		searchAdp.setList(listData);
 		listView = (ListView) view.findViewById(R.id.lv_search_result);
@@ -338,6 +338,7 @@ public class SearchFragment extends Fragment {
 				lastTotal = bean.getListData().getTotal();
 
 				listData.addAll(bean.getListData().getObjs());
+				searchAdp.setChannelId(bean.getChannel().getChannelId());
 				searchAdp.notifyDataSetChanged();
 				ULog.d(TAG, "list length = " + listData.size());
 			}

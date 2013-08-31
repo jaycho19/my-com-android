@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity" >
 
-    <include layout="@layout/action_main_top_bar" />
+    <include layout="@layout/activity_main_top_bar" />
 
     <FrameLayout
         android:layout_width="match_parent"
