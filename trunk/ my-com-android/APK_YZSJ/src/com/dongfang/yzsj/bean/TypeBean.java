@@ -16,14 +16,22 @@ public class TypeBean implements Parcelable {
 
 	private Channel channel;
 	private Channel parentChannel;
-	private List<Movie> listData;
+	private TypeListData listData;
 	private List<Channel> subChannels;
 
 	private TypeBean() {
 		channel = null;
 		parentChannel = null;
-		listData = new ArrayList<Movie>();
+		listData = null;
 		subChannels = new ArrayList<Channel>();
+	}
+
+	public TypeListData getListData() {
+		return listData;
+	}
+
+	public void setListData(TypeListData listData) {
+		this.listData = listData;
 	}
 
 	public Channel getChannel() {
@@ -42,14 +50,6 @@ public class TypeBean implements Parcelable {
 		this.parentChannel = parentChannel;
 	}
 
-	public List<Movie> getListData() {
-		return listData;
-	}
-
-	public void setListData(List<Movie> listData) {
-		this.listData = listData;
-	}
-
 	public List<Channel> getSubChannels() {
 		return subChannels;
 	}
@@ -63,11 +63,9 @@ public class TypeBean implements Parcelable {
 		StringBuilder sb = new StringBuilder();
 		sb.append("channel       = ").append(channel.toString()).append("\n");
 		sb.append("parentChannel = ").append(parentChannel.toString()).append("\n");
+		sb.append("listData      = ").append(listData.toString()).append("\n");
 		for (int i = 0, length = subChannels.size(); i < length; i++) {
 			sb.append("subChannels ").append(i).append(" = ").append(subChannels.get(i).toString()).append("\n");
-		}
-		for (int i = 0, length = listData.size(); i < length; i++) {
-			sb.append("listData ").append(i).append(" = ").append(listData.get(i).toString()).append("\n");
 		}
 		return sb.toString();
 	}
@@ -80,9 +78,9 @@ public class TypeBean implements Parcelable {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeParcelable(channel, 0);
-		dest.writeParcelable(parentChannel, 1);
+		dest.writeParcelable(parentChannel, 0);
+		dest.writeParcelable(listData, 0);
 		dest.writeList(subChannels);
-		dest.writeList(listData);
 	}
 
 	public static final Parcelable.Creator<TypeBean> CREATOR = new Parcelable.Creator<TypeBean>() {
@@ -90,10 +88,10 @@ public class TypeBean implements Parcelable {
 		@Override
 		public TypeBean createFromParcel(Parcel in) {
 			TypeBean data = new TypeBean();
-			data.setChannel((Channel) in.readParcelable(Channel.class.getClassLoader()));
-			data.setParentChannel((Channel) in.readParcelable(Channel.class.getClassLoader()));
+			data.channel = in.readParcelable(Channel.class.getClassLoader());
+			data.parentChannel = in.readParcelable(Channel.class.getClassLoader());
+			data.listData = in.readParcelable(TypeListData.class.getClassLoader());
 			in.readList(data.getSubChannels(), Channel.class.getClassLoader());
-			in.readList(data.getListData(), Movie.class.getClassLoader());
 			return data;
 		}
 

@@ -86,7 +86,7 @@ public class ImageGallery extends LinearLayout {
 
 		if (size > 0) {
 			ll_fling_desc_image.removeAllViews();
-			tv_fling_desc.setText(list.get(0).MEDIA_NAME);
+			tv_fling_desc.setText(list.get(0).getMEDIA_NAME());
 			if (size < 2) {
 				ll_fling_desc_image.setVisibility(View.GONE);
 			}
@@ -161,7 +161,7 @@ public class ImageGallery extends LinearLayout {
 			ll_fling_desc_image.getChildAt(i).setBackgroundResource(R.drawable.image_gralley_dot02);
 		}
 		ll_fling_desc_image.getChildAt(position).setBackgroundResource(R.drawable.image_gralley_dot01);
-		tv_fling_desc.setText(list.get(position).MEDIA_NAME);
+		tv_fling_desc.setText(list.get(position).getMEDIA_NAME());
 	}
 
 	public int getCurrentIndex() {
