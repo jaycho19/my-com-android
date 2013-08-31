@@ -20,7 +20,7 @@ import com.df.util.ULog;
 import com.dongfang.utils.ACache;
 import com.dongfang.yzsj.MovieListActivity;
 import com.dongfang.yzsj.R;
-import com.dongfang.yzsj.bean.HomeChannel;
+import com.dongfang.yzsj.bean.Channel;
 import com.dongfang.yzsj.bean.VODItem;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.Util;
@@ -224,10 +224,10 @@ public class VODFragment extends Fragment {
 	/** 跳转到列表页 */
 	private class ClickListener implements OnClickListener {
 
-		private HomeChannel channel = null;
+		private Channel channel = null;
 
 		public ClickListener(VODItem voditem) {
-			channel = new HomeChannel();
+			channel = new Channel();
 			channel.setChannelId(voditem.getChannelId());
 			channel.setName(voditem.getName());
 		}

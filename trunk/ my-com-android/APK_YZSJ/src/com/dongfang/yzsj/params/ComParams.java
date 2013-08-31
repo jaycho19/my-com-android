@@ -14,7 +14,9 @@ public class ComParams {
 	public static final String INTENT_SEARCH_CHANNELS = "search_channels";
 	public static final String INTENT_VODBEAN_VIP = "vodbeanVIP";
 	public static final String INTENT_MOVIELIST_CHANNEL = "channel";
+	public static final String INTENT_MOVIEDETAIL_CHANNELID = "channelId";
 	public static final String INTENT_MOVIEDETAIL_CONNENTID = "connentid";
+	public static final String INTENT_MOVIEDETAIL_BEAN = "detailBean";
 
 	// ------------------------------------------------------------------------------
 	// private static final String HTTP_BASE = "http://tv.inhe.net/";
@@ -25,6 +27,8 @@ public class ComParams {
 	public static final String HTTP_LIVE = HTTP_BASE + "/page/hbMobile/live.jsp?jsonFormat=true";
 	/** 点播 */
 	public static final String HTTP_VOD = HTTP_BASE + "/page/hbMobile/vod.jsp?jsonFormat=true";
+	/** 详情页 */
+	public static final String HTTP_DETAIL = HTTP_BASE + "/page/hbMobile/detail.jsp?jsonFormat=true&";
 	/** 验证码 */
 	public static final String HTTP_AUTHCODE = HTTP_BASE + "/user/user!createVerifyCode.action?";
 	/** 登陆 */

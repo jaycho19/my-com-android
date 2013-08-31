@@ -26,7 +26,7 @@ import com.dongfang.view.PullToRefreshView.OnFooterRefreshListener;
 import com.dongfang.view.PullToRefreshView.OnHeaderRefreshListener;
 import com.dongfang.yzsj.MovieListActivity;
 import com.dongfang.yzsj.R;
-import com.dongfang.yzsj.bean.HomeChannel;
+import com.dongfang.yzsj.bean.Channel;
 import com.dongfang.yzsj.bean.Movie;
 import com.dongfang.yzsj.bean.TypeBean;
 import com.dongfang.yzsj.fragment.adp.TypeAdp;
@@ -66,7 +66,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 	private TypeAdp channelAdp;
 	private ListView listView;
 	private PullToRefreshView pulltoRefreshView;
-	private HomeChannel channel; // 当前列表显示的频道信息
+	private Channel channel; // 当前列表显示的频道信息
 
 	private int lastTotal;// 最近一次加载更多时返回的数据量
 
@@ -211,7 +211,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 				ULog.d(TAG, "list length = " + listData.size());
 
 				if (bean.getSubChannels().size() > 0 && null != llSubChannels && llSubChannels.getChildCount() == 0) {
-					for (final HomeChannel channel : bean.getSubChannels()) {
+					for (final Channel channel : bean.getSubChannels()) {
 						CheckTextView textview = (CheckTextView) inflater.inflate(R.layout.fragment_type_subchannel,
 								null);
 						textview.setText(channel.getName());
@@ -251,7 +251,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 	}
 
 	/** 点击子栏目进行内容修改 */
-	private void getListBySubChannel(View v, HomeChannel channel) {
+	private void getListBySubChannel(View v, Channel channel) {
 		for (int i = 0, l = llSubChannels.getChildCount(); i < l; i++) {
 			llSubChannels.getChildAt(i).setSelected(false);
 		}
@@ -272,11 +272,11 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 		}
 	}
 
-	public HomeChannel getChannel() {
+	public Channel getChannel() {
 		return channel;
 	}
 
-	public void setChannel(HomeChannel channel) {
+	public void setChannel(Channel channel) {
 		this.channel = channel;
 	}
 

@@ -14,31 +14,31 @@ import android.os.Parcelable;
 public class TypeBean implements Parcelable {
 	public static final String TAG = "TypeBean";
 
-	private HomeChannel channel;
-	private HomeChannel parentChannel;
+	private Channel channel;
+	private Channel parentChannel;
 	private List<Movie> listData;
-	private List<HomeChannel> subChannels;
+	private List<Channel> subChannels;
 
 	private TypeBean() {
 		channel = null;
 		parentChannel = null;
 		listData = new ArrayList<Movie>();
-		subChannels = new ArrayList<HomeChannel>();
+		subChannels = new ArrayList<Channel>();
 	}
 
-	public HomeChannel getChannel() {
+	public Channel getChannel() {
 		return channel;
 	}
 
-	public void setChannel(HomeChannel channel) {
+	public void setChannel(Channel channel) {
 		this.channel = channel;
 	}
 
-	public HomeChannel getParentChannel() {
+	public Channel getParentChannel() {
 		return parentChannel;
 	}
 
-	public void setParentChannel(HomeChannel parentChannel) {
+	public void setParentChannel(Channel parentChannel) {
 		this.parentChannel = parentChannel;
 	}
 
@@ -50,11 +50,11 @@ public class TypeBean implements Parcelable {
 		this.listData = listData;
 	}
 
-	public List<HomeChannel> getSubChannels() {
+	public List<Channel> getSubChannels() {
 		return subChannels;
 	}
 
-	public void setSubChannels(List<HomeChannel> subChannels) {
+	public void setSubChannels(List<Channel> subChannels) {
 		this.subChannels = subChannels;
 	}
 
@@ -90,9 +90,9 @@ public class TypeBean implements Parcelable {
 		@Override
 		public TypeBean createFromParcel(Parcel in) {
 			TypeBean data = new TypeBean();
-			data.setChannel((HomeChannel) in.readParcelable(HomeChannel.class.getClassLoader()));
-			data.setParentChannel((HomeChannel) in.readParcelable(HomeChannel.class.getClassLoader()));
-			in.readList(data.getSubChannels(), HomeChannel.class.getClassLoader());
+			data.setChannel((Channel) in.readParcelable(Channel.class.getClassLoader()));
+			data.setParentChannel((Channel) in.readParcelable(Channel.class.getClassLoader()));
+			in.readList(data.getSubChannels(), Channel.class.getClassLoader());
 			in.readList(data.getListData(), Movie.class.getClassLoader());
 			return data;
 		}

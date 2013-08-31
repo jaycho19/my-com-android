@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * 首页每个频道的视频信息 <br>
  * 频道列表信息<br>
- * 搜索列表信息<dr>
+ * 搜索列表信息<dr> 详情页我的喜欢信息<dr>
  * 
  * @author dongfang
  */
@@ -56,11 +56,6 @@ public class Movie implements Parcelable {
 		this.id = id;
 	}
 
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-
 	public String getMEDIA_HOMETOWN() {
 		return MEDIA_HOMETOWN;
 	}
@@ -102,6 +97,11 @@ public class Movie implements Parcelable {
 	}
 
 	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(MEDIA_ACTORS);
 		dest.writeString(MEDIA_LENGTH);
@@ -140,7 +140,7 @@ public class Movie implements Parcelable {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder("\n");
 		sb.append(" -- -- MEDIA_ACTORS    = " + MEDIA_ACTORS).append("\n");
 		sb.append(" -- -- MEDIA_LENGTH    = " + MEDIA_LENGTH).append("\n");
 		sb.append(" -- -- MEDIA_NAME      = " + MEDIA_NAME).append("\n");
