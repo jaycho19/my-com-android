@@ -4,8 +4,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-/** 频道信息 @author dongfang */
-public class HomeChannel implements Parcelable {
+/**
+ * 频道信息<br>
+ * 首页， 点播页面，列表页，详情页，搜索页面 均使用<br>
+ * 
+ * @author dongfang
+ */
+public class Channel implements Parcelable {
 
 	private String id; // 列表页中，子频道属性
 	private String channelId;
@@ -68,11 +73,11 @@ public class HomeChannel implements Parcelable {
 		dest.writeString(parentId);
 	}
 
-	public static final Parcelable.Creator<HomeChannel> CREATOR = new Parcelable.Creator<HomeChannel>() {
+	public static final Parcelable.Creator<Channel> CREATOR = new Parcelable.Creator<Channel>() {
 
 		@Override
-		public HomeChannel createFromParcel(Parcel in) {
-			HomeChannel data = new HomeChannel();
+		public Channel createFromParcel(Parcel in) {
+			Channel data = new Channel();
 			data.id = in.readString();
 			data.channelId = in.readString();
 			data.name = in.readString();
@@ -82,8 +87,8 @@ public class HomeChannel implements Parcelable {
 		}
 
 		@Override
-		public HomeChannel[] newArray(int size) {
-			return new HomeChannel[size];
+		public Channel[] newArray(int size) {
+			return new Channel[size];
 		}
 	};
 

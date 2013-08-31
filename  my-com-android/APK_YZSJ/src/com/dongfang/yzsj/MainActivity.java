@@ -182,7 +182,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		// ULog.w(TAG, mFragmentManager.findFragmentById(fgtHost.getCurrentTab()).getClass().getName());
 
 		// 用于调试方便
-		fgtHost.setCurrentTabByTag("4");
+		// fgtHost.setCurrentTabByTag("4");
 
 	}
 

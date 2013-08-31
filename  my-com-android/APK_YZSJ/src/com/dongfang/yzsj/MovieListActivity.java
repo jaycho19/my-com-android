@@ -2,7 +2,7 @@ package com.dongfang.yzsj;
 
 import android.os.Bundle;
 
-import com.dongfang.yzsj.bean.HomeChannel;
+import com.dongfang.yzsj.bean.Channel;
 import com.dongfang.yzsj.params.ComParams;
 
 public class MovieListActivity extends BaseActivity {
@@ -12,7 +12,7 @@ public class MovieListActivity extends BaseActivity {
 		TAG = "MovieListActivity";
 	}
 
-	public HomeChannel channel;
+	public Channel channel;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -14,33 +14,33 @@ import android.os.Parcelable;
 public class SeachBean implements Parcelable {
 	public static final String TAG = "TypeBean";
 
-	private HomeChannel channel;
-	private HomeChannel parentChannel;
+	private Channel channel;
+	private Channel parentChannel;
 	private SeachListData listData;
 
 	// private List<Movie> listData;
-	private List<HomeChannel> subChannels;
+	private List<Channel> subChannels;
 
 	private SeachBean() {
 		channel = null;
 		parentChannel = null;
 		listData = new SeachListData();
-		subChannels = new ArrayList<HomeChannel>();
+		subChannels = new ArrayList<Channel>();
 	}
 
-	public HomeChannel getChannel() {
+	public Channel getChannel() {
 		return channel;
 	}
 
-	public void setChannel(HomeChannel channel) {
+	public void setChannel(Channel channel) {
 		this.channel = channel;
 	}
 
-	public HomeChannel getParentChannel() {
+	public Channel getParentChannel() {
 		return parentChannel;
 	}
 
-	public void setParentChannel(HomeChannel parentChannel) {
+	public void setParentChannel(Channel parentChannel) {
 		this.parentChannel = parentChannel;
 	}
 
@@ -52,11 +52,11 @@ public class SeachBean implements Parcelable {
 		this.listData = listData;
 	}
 
-	public List<HomeChannel> getSubChannels() {
+	public List<Channel> getSubChannels() {
 		return subChannels;
 	}
 
-	public void setSubChannels(List<HomeChannel> subChannels) {
+	public void setSubChannels(List<Channel> subChannels) {
 		this.subChannels = subChannels;
 	}
 
@@ -90,10 +90,10 @@ public class SeachBean implements Parcelable {
 		@Override
 		public SeachBean createFromParcel(Parcel in) {
 			SeachBean data = new SeachBean();
-			data.setChannel((HomeChannel) in.readParcelable(HomeChannel.class.getClassLoader()));
-			data.setParentChannel((HomeChannel) in.readParcelable(HomeChannel.class.getClassLoader()));
+			data.setChannel((Channel) in.readParcelable(Channel.class.getClassLoader()));
+			data.setParentChannel((Channel) in.readParcelable(Channel.class.getClassLoader()));
 			data.setListData((SeachListData) in.readParcelable(SeachListData.class.getClassLoader()));
-			in.readList(data.getSubChannels(), HomeChannel.class.getClassLoader());
+			in.readList(data.getSubChannels(), Channel.class.getClassLoader());
 			return data;
 		}
 

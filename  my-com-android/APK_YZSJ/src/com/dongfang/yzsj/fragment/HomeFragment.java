@@ -20,6 +20,7 @@ import com.dongfang.yzsj.DetailsActiivity;
 import com.dongfang.yzsj.MainActivity;
 import com.dongfang.yzsj.MovieListActivity;
 import com.dongfang.yzsj.R;
+import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
 import com.dongfang.yzsj.bean.HomeBean;
 import com.dongfang.yzsj.bean.HomeChannelItem;
 import com.dongfang.yzsj.bean.Movie;
@@ -120,13 +121,13 @@ public class HomeFragment extends Fragment {
 				viewItem.findViewById(R.id.rl_fragment_home_item).setLayoutParams(lparam);
 				ImageView imageView = (ImageView) viewItem.findViewById(R.id.iv_fragment_home_item_channelName);
 				imageView.setLayoutParams(rparam);
-				BitmapUtils.create(getActivity()).display(imageView, item.channel.getPoster());
+				BitmapUtils.create(getActivity()).display(imageView, item.getChannel().getPoster());
 
 				viewItem.findViewById(R.id.iv_fragment_home_item_more).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						Intent intent = new Intent(getActivity(), MovieListActivity.class);
-						intent.putExtra(ComParams.INTENT_MOVIELIST_CHANNEL, item.channel);
+						intent.putExtra(ComParams.INTENT_MOVIELIST_CHANNEL, item.getChannel());
 						getActivity().startActivity(intent);
 					}
 				});
@@ -141,29 +142,26 @@ public class HomeFragment extends Fragment {
 	}
 
 	// 每一个频道
-	private void initViewHomeItem(LinearLayout linearLayout, HomeChannelItem item) {
-		if (null != item.movies && item.movies.size() > 0) {
+	private void initViewHomeItem(LinearLayout linearLayout, final HomeChannelItem item) {
+		if (null != item.getMovies() && item.getMovies().size() > 0) {
 			int w = Util.getWindowWidth(getActivity()) / 3 - 10;
 			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(w, w * 456 / 330);
 			lparam.setMargins(5, 5, 5, 5);
 
-			for (final Movie movie : item.movies) {
+			for (final Movie movie : item.getMovies()) {
 				ImageView imageView = new ImageView(getActivity());
 				imageView.setLayoutParams(lparam);
 				BitmapUtils.create(getActivity()).display(imageView, movie.getPC_MEDIA_POSTER_BIG(), w, w * 456 / 330);
 				imageView.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						Intent intent = new Intent(getActivity(), DetailsActiivity.class);
-						intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID, movie.getId());
-						getActivity().startActivity(intent);
+						new ToDetailAsyncTask(getActivity(), item.getChannel().getChannelId(), movie.getId()).execute();
 					}
 				});
 
 				linearLayout.addView(imageView);
 			}
 		}
-
 	}
 
 	/** 可以保持中端的数据 */

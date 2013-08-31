@@ -8,7 +8,6 @@ import com.df.util.ULog;
 import com.dongfang.utils.ACache;
 import com.dongfang.yzsj.bean.HomeBean;
 import com.dongfang.yzsj.params.ComParams;
-import com.dongfang.yzsj.utils.User;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
@@ -31,7 +30,7 @@ public class LoadingAcitivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_loading);
-		User.saveUserLoginStatu(this, false);
+		// User.saveUserLoginStatu(this, false);
 
 		HomeBean bean = new com.google.gson.Gson().fromJson(ACache.get(this).getAsString(ComParams.INTENT_HOMEBEAN),
 				HomeBean.class);
