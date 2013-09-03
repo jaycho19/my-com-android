@@ -94,7 +94,25 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/btn_orange"
-                    android:text="播放" />
+                    android:text="流畅" />
+
+                <Button
+                    android:id="@+id/detail_btn_play_qingxi"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_orange"
+                    android:text="清晰" />
+
+                <Button
+                    android:id="@+id/detail_btn_play_gaoqing"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_orange"
+                    android:text="高清" />
 
                 <Button
                     android:id="@+id/detail_btn_addfavorite"
@@ -128,6 +146,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
+
                 <!-- <include layout="@layout/activity_detail_juji" /> -->
                 <!-- <include layout="@layout/activity_detail_juji" /> -->
             </LinearLayout>

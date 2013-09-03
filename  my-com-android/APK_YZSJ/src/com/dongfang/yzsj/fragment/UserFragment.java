@@ -46,16 +46,18 @@ public class UserFragment extends Fragment {
 		tab2.setText("我的订阅");
 		tab3.setText("播放记录");
 
-		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), FavoriteFragment.class, null);
-		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), LoginFragment.class, null);
-		// fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), SubscibeFragment.class, null);
-		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab3), HistoryFragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab3), HistoryFragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), SubscibeFragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab1), FavoriteFragment.class, null);
+		// fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), LoginFragment.class, null);
 
 		final LinearLayout.LayoutParams lp = new LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
 		lp.setMargins(10, 10, 10, 10);
 		for (int i = 0, length = fgtHost.getTabWidget().getChildCount(); i < length; i++) {
 			fgtHost.getTabWidget().getChildAt(i).setLayoutParams(lp);
 		}
+
+		// fgtHost.setCurrentTabByTag("2");
 
 		// fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator("1"), LoginFragment.class, null);
 		// fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator("2"), LiveFragment.class, null);

@@ -15,7 +15,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -129,7 +128,6 @@ public class ToDetailAsyncTask extends AsyncTask<String, String, DetailBean> {
 		}
 
 		else if (!result.isSuccess()) {
-
 			Toast.makeText(context, result.getError0(), Toast.LENGTH_LONG).show();
 			return;
 		}

@@ -39,7 +39,26 @@ public class ComParams {
 	/** 搜索 */
 	public static final String HTTP_SEARCH = HTTP_BASE + "/page/js/list.jsp?isChannelIds=true&";
 	/** 播放地址 */
-	public static final String HTTP_PLAYURL = HTTP_BASE + "/user/getPlayUrl.jsp?jsonFormat=true&clipId=1&clientType=m3u8&";
+	public static final String HTTP_PLAYURL = HTTP_BASE
+			+ "/user/getPlayUrl.jsp?jsonFormat=true&clipId=1&clientType=m3u8&";
+	/** 播放记录 */
+	public static final String HTTP_HISTORY = HTTP_BASE
+			+ "/page/hbMobile/userOptions.jsp?jsonFormat=true&command=listPlayHistory&";
+	/** 增加播放记录 */
+	public static final String HTTP_HISTORY_ADD = HTTP_BASE
+			+ "/page/hbMobile/userOptions.jsp?jsonFormat=true&command=addPlayHistory&";
+	/** 删除播放记录 */
+	public static final String HTTP_HISTORY_DEL = HTTP_BASE
+			+ "/page/hbMobile/userOptions.jsp?jsonFormat=true&command=removePlayHistory&";
+	/** 个人收藏 */
+	public static final String HTTP_FAVORITE = HTTP_BASE
+			+ "/page/hbMobile/userOptions.jsp?jsonFormat=true&command=listFavorite&";
+	/** 添加个人收藏 */
+	public static final String HTTP_FAVORITE_ADD = HTTP_BASE
+			+ "/page/hbMobile/userOptions.jsp?jsonFormat=true&command=addFavorite&";
+	/** 删除个人收藏 */
+	public static final String HTTP_FAVORITE_DEL = HTTP_BASE
+			+ "/page/hbMobile/userOptions.jsp?jsonFormat=true&command=removeCollect&";
 
 	// ------------------------------------------------------------------------------
 	public static final String SP_NAME_WINDOW = "SP_NAME_WINDOW";
