@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.df.util.ULog;
 import com.dongfang.yzsj.R;
+import com.dongfang.yzsj.bean.HistoryBean;
 import com.dongfang.yzsj.bean.Movie;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
@@ -31,14 +32,14 @@ import com.lidroid.xutils.http.client.HttpRequest;
  * @author dongfang
  * 
  */
-public class FavoriteAdp extends BaseAdapter {
+public class HistoryAdp extends BaseAdapter {
 
-	public static final String TAG = FavoriteAdp.class.getSimpleName();
+	public static final String TAG = HistoryAdp.class.getSimpleName();
 	private com.dongfang.view.ProgressDialog progDialog;
 	private List<Movie> list;
 	private Context context;
 
-	public FavoriteAdp(Context context, List<Movie> list) {
+	public HistoryAdp(Context context, List<Movie> list) {
 		this.list = list;
 		this.context = context;
 		progDialog = com.dongfang.view.ProgressDialog.show(context);
@@ -122,7 +123,7 @@ public class FavoriteAdp extends BaseAdapter {
 		@Override
 		public void onClick(View v) {
 			ULog.d(TAG, v.toString());
-			StringBuilder url = new StringBuilder(ComParams.HTTP_FAVORITE_DEL);
+			StringBuilder url = new StringBuilder(ComParams.HTTP_HISTORY_DEL);
 			url.append("token=").append(User.getToken(context)).append("&");
 			url.append("userTelephone=").append(User.getPhone(context));
 

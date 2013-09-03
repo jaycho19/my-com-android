@@ -205,6 +205,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 					listData.clear();
 					listDataChannel = channelId;
 				}
+				lastTotal = bean.getListData().getObjs().size();
 
 				listData.addAll(bean.getListData().getObjs());
 				channelAdp.setChannelId(channelId);

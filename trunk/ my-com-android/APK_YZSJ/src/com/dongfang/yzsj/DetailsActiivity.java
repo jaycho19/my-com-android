@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
@@ -45,7 +46,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 	private TextView tvMovieName;// 名称
 	private TextView tvMovieLength;// 视频长度
 	private TextView tvMovieDesc;// 详情
-	private Button btnPlay;// 播放按钮
+	private Button btnPlay_liuchang, btnPlay_qingxi, btnPlay_gaoqing;// 播放按钮
 	private Button btnAddFavorite;// 添加到收藏
 	private LinearLayout llJuJiContain, llJuJiTitle;// 我的喜欢
 	private LinearLayout llLikeContain_0, llLikeContain_1;// 我的喜欢
@@ -84,8 +85,12 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		tvMovieName = (TextView) findViewById(R.id.detail_tv_movie_name);
 		tvMovieLength = (TextView) findViewById(R.id.detail_tv_length);
 		tvMovieDesc = (TextView) findViewById(R.id.detail_tv_desc);
-		btnPlay = (Button) findViewById(R.id.detail_btn_play);
-		btnPlay.setOnClickListener(this);
+		btnPlay_liuchang = (Button) findViewById(R.id.detail_btn_play);
+		btnPlay_liuchang.setOnClickListener(this);
+		btnPlay_qingxi = (Button) findViewById(R.id.detail_btn_play_qingxi);
+		btnPlay_qingxi.setOnClickListener(this);
+		btnPlay_gaoqing = (Button) findViewById(R.id.detail_btn_play_gaoqing);
+		btnPlay_gaoqing.setOnClickListener(this);
 		btnAddFavorite = (Button) findViewById(R.id.detail_btn_addfavorite);
 		btnAddFavorite.setOnClickListener(this);
 		llJuJiContain = (LinearLayout) findViewById(R.id.detail_ll_juji_contain);
@@ -261,6 +266,8 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 					Uri uri = Uri.parse(json.getString("url"));
 					intent.setDataAndType(uri, type);
 					startActivity(intent);
+					
+					addHistory();
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -289,11 +296,86 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		case R.id.detail_tv_back:
 			finish();
 			break;
+		case R.id.detail_btn_addfavorite:
+			addToFavorite();
+			break;
 		case R.id.detail_btn_play:
 			toPlay(bean.getContent().getId(), bean.getContent().getCLIP_BANDWITHS().get(0).getCode());
+			break;
+		case R.id.detail_btn_play_qingxi:
+			toPlay(bean.getContent().getId(), bean.getContent().getCLIP_BANDWITHS().get(1).getCode());
+			break;
+		case R.id.detail_btn_play_gaoqing:
+			toPlay(bean.getContent().getId(), bean.getContent().getCLIP_BANDWITHS().get(2).getCode());
 			break;
 		default:
 			break;
 		}
+	}
+
+	private void addToFavorite() {
+		StringBuilder url = new StringBuilder(ComParams.HTTP_FAVORITE_ADD);
+		url.append("contentId=").append(bean.getContent().getId()).append("&");
+		url.append("token=").append(User.getToken(this)).append("&");
+		url.append("userTelephone=").append(User.getPhone(this));
+
+		ULog.i(TAG, url.toString());
+
+		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
+			@Override
+			public void onLoading(long total, long current) {
+				ULog.d(TAG, "RequestCallBack.onLoading total = " + total + "; current = " + current);
+			}
+
+			@Override
+			public void onSuccess(String result) {
+				ULog.d(TAG, "onSuccess  --" + result);
+				progDialog.dismiss();
+
+				try {
+					JSONObject json = new JSONObject(result);
+					if (json.getBoolean("success")) {
+						Toast.makeText(DetailsActiivity.this, "收藏成功", Toast.LENGTH_LONG).show();
+					}
+					else {
+						Toast.makeText(DetailsActiivity.this, json.getJSONArray("error").getString(0),
+								Toast.LENGTH_LONG).show();
+					}
+				} catch (JSONException e) {
+					Toast.makeText(DetailsActiivity.this, "收藏失败~~~~(>_<)~~~~ ", Toast.LENGTH_LONG).show();
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onStart() {
+				ULog.i(TAG, "RequestCallBack.onStart");
+				progDialog.show();
+			}
+
+			@Override
+			public void onFailure(Throwable error, String msg) {
+				ULog.i(TAG, "RequestCallBack.onFailure");
+				progDialog.dismiss();
+			}
+		});
+	}
+
+	private void addHistory() {
+		StringBuilder url = new StringBuilder(ComParams.HTTP_HISTORY_ADD);
+		url.append("contentId=").append(bean.getContent().getId()).append("&");
+		url.append("token=").append(User.getToken(this)).append("&");
+		url.append("userTelephone=").append(User.getPhone(this));
+
+		ULog.i(TAG, url.toString());
+
+		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
+			@Override
+			public void onSuccess(String result) {
+				ULog.d(TAG, "onSuccess  --" + result);
+			}
+
+		});
+
 	}
 }
