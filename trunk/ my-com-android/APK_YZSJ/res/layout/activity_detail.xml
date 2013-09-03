@@ -107,6 +107,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/detail_ll_juji_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#666666" >
@@ -123,13 +124,12 @@
             <!-- 剧集具体布局 -->
 
             <LinearLayout
+                android:id="@+id/detail_ll_juji_contain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
-
-                <include layout="@layout/activity_detail_juji" />
-
-                <include layout="@layout/activity_detail_juji" />
+                <!-- <include layout="@layout/activity_detail_juji" /> -->
+                <!-- <include layout="@layout/activity_detail_juji" /> -->
             </LinearLayout>
 
             <View
