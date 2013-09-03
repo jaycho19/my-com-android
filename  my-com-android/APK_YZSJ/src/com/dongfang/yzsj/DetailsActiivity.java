@@ -1,19 +1,30 @@
 package com.dongfang.yzsj;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.df.util.ULog;
 import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
 import com.dongfang.yzsj.bean.DetailBean;
 import com.dongfang.yzsj.params.ComParams;
+import com.dongfang.yzsj.utils.User;
 import com.dongfang.yzsj.utils.Util;
 import com.lidroid.xutils.BitmapUtils;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.http.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
 
 /**
  * 视频详情页
@@ -36,7 +47,10 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 	private TextView tvMovieDesc;// 详情
 	private Button btnPlay;// 播放按钮
 	private Button btnAddFavorite;// 添加到收藏
+	private LinearLayout llJuJiContain, llJuJiTitle;// 我的喜欢
 	private LinearLayout llLikeContain_0, llLikeContain_1;// 我的喜欢
+
+	private com.dongfang.view.ProgressDialog progDialog;
 
 	@Override
 	protected void setBaseValues() {
@@ -59,6 +73,9 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 	}
 
 	private void initView() {
+		progDialog = com.dongfang.view.ProgressDialog.show(this);
+		progDialog.setCancelable(true);
+
 		tvBack = (TextView) findViewById(R.id.detail_tv_back);
 		tvBack.setOnClickListener(this);
 
@@ -71,6 +88,8 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		btnPlay.setOnClickListener(this);
 		btnAddFavorite = (Button) findViewById(R.id.detail_btn_addfavorite);
 		btnAddFavorite.setOnClickListener(this);
+		llJuJiContain = (LinearLayout) findViewById(R.id.detail_ll_juji_contain);
+		llJuJiTitle = (LinearLayout) findViewById(R.id.detail_ll_juji_title);
 		llLikeContain_0 = (LinearLayout) findViewById(R.id.detail_ll_like_contain_0);
 		llLikeContain_1 = (LinearLayout) findViewById(R.id.detail_ll_like_contain_1);
 
@@ -88,6 +107,46 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		tvMovieLength.setText(bean.getContent().getMEDIA_LENGTH());
 		tvMovieDesc.setText(bean.getContent().getMEDIA_INTRO());
 
+		// 剧集
+		if (bean.getContent().getCLIP_COUNT() > 1) {
+			int w = Util.getWindowWidth(this) / 5 - 10;
+			int rows = (bean.getContent().getCLIP_COUNT() / 5) + ((bean.getContent().getCLIP_COUNT() % 5) > 0 ? 1 : 0);
+			LinearLayout.LayoutParams lpTV = new LayoutParams(-2, -2, 1);
+			lpTV.setMargins(5, 5, 5, 5);
+			for (int row = 0; row < rows; row++) {
+				LinearLayout ll = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.activity_detail_juji_row,
+						null);
+				if (row == (rows - 1)) {
+					for (int i = 0, length = bean.getContent().getCLIP_COUNT() % 5; i < length; i++) {
+						TextView tv = (TextView) LayoutInflater.from(this).inflate(
+								R.layout.activity_detail_textview_juji, null);
+						tv.setLayoutParams(lpTV);
+						ULog.d(TAG, Integer.toString(row * 5 + i + 1));
+						tv.setText(Integer.toString(row * 5 + i + 1));
+						ll.addView(tv);
+					}
+
+				}
+				else {
+					for (int i = 0; i < 5; i++) {
+						TextView tv = (TextView) LayoutInflater.from(this).inflate(
+								R.layout.activity_detail_textview_juji, null);
+						tv.setLayoutParams(lpTV);
+						ULog.d(TAG, Integer.toString(row * 5 + i + 1));
+						tv.setText(Integer.toString(row * 5 + i + 1));
+						ll.addView(tv);
+					}
+				}
+				llJuJiContain.addView(ll);
+			}
+
+		}
+		else {
+			llJuJiTitle.setVisibility(View.GONE);
+			llJuJiContain.setVisibility(View.GONE);
+		}
+
+		// 我的喜欢，相关推荐
 		if (null != bean.getRelateContents() && bean.getRelateContents().size() > 0) {
 			llLikeContain_0.removeAllViews();
 			llLikeContain_1.removeAllViews();
@@ -159,6 +218,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 
 	}
 
+	/** 进入详情页 */
 	private class MyOnClickListener implements OnClickListener {
 		private String contentId;
 		private String channelId;
@@ -175,16 +235,65 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		}
 	}
 
+	private void toPlay(String conntentId, String band) {
+		StringBuilder url = new StringBuilder(ComParams.HTTP_PLAYURL);
+		url.append("token=").append(User.getToken(this));
+		url.append("&").append("phone=").append(User.getPhone(this));
+		url.append("&").append("contentId=").append(conntentId);
+		url.append("&").append("bandwidth=").append(band);
+
+		ULog.i(TAG, url.toString());
+
+		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
+			@Override
+			public void onLoading(long total, long current) {
+				ULog.d(TAG, "RequestCallBack.onLoading total = " + total + "; current = " + current);
+			}
+
+			@Override
+			public void onSuccess(String result) {
+				progDialog.dismiss();
+				ULog.d(TAG, "onSuccess  --" + result);
+				try {
+					JSONObject json = new JSONObject(result);
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					String type = "video/*";
+					Uri uri = Uri.parse(json.getString("url"));
+					intent.setDataAndType(uri, type);
+					startActivity(intent);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+			@Override
+			public void onStart() {
+				ULog.i(TAG, "RequestCallBack.onStart");
+				progDialog.show();
+			}
+
+			@Override
+			public void onFailure(Throwable error, String msg) {
+				ULog.i(TAG, "RequestCallBack.onFailure");
+				progDialog.dismiss();
+			}
+		});
+
+	}
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.detail_tv_back:
 			finish();
 			break;
-
+		case R.id.detail_btn_play:
+			toPlay(bean.getContent().getId(), bean.getContent().getCLIP_BANDWITHS().get(0).getCode());
+			break;
 		default:
 			break;
 		}
-
 	}
 }
