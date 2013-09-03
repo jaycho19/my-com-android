@@ -38,6 +38,8 @@ public class ComParams {
 	public static final String HTTP_CHANNEL = HTTP_BASE + "/page/js/list.jsp?";
 	/** 搜索 */
 	public static final String HTTP_SEARCH = HTTP_BASE + "/page/js/list.jsp?isChannelIds=true&";
+	/** 播放地址 */
+	public static final String HTTP_PLAYURL = HTTP_BASE + "/user/getPlayUrl.jsp?jsonFormat=true&clipId=1&clientType=m3u8&";
 
 	// ------------------------------------------------------------------------------
 	public static final String SP_NAME_WINDOW = "SP_NAME_WINDOW";
