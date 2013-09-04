@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,9 +20,11 @@ import android.widget.TextView;
 import com.df.util.ULog;
 import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
 import com.dongfang.yzsj.bean.DetailBean;
+import com.dongfang.yzsj.bean.OrderBean;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
 import com.dongfang.yzsj.utils.Util;
+import com.dongfang.yzsj.utils.UtilOfTime;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestCallBack;
@@ -34,9 +37,6 @@ import com.lidroid.xutils.http.client.HttpRequest;
  * 
  */
 public class DetailsActiivity extends BaseActivity implements OnClickListener {
-
-	private String conntentId; // 视频id
-	private String channelId; // 频道id
 
 	private DetailBean bean;
 
@@ -109,7 +109,15 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		tvTitle.setText(bean.getChannel().getName());
 		BitmapUtils.create(this).display(ivMovieIcon, bean.getContent().getPC_MEDIA_POSTER_BIG());
 		tvMovieName.setText(bean.getContent().getMEDIA_NAME());
-		tvMovieLength.setText(bean.getContent().getMEDIA_LENGTH());
+
+		try {
+			String ll = UtilOfTime.formatSeconds2Date(Long.valueOf(TextUtils.isEmpty(bean.getContent()
+					.getMEDIA_LENGTH()) ? "0" : bean.getContent().getMEDIA_LENGTH()));
+			tvMovieLength.setText(ll);
+		} catch (Exception e) {
+			tvMovieLength.setText(bean.getContent().getMEDIA_LENGTH());
+		}
+
 		tvMovieDesc.setText(bean.getContent().getMEDIA_INTRO());
 
 		// 剧集
@@ -128,6 +136,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 						tv.setLayoutParams(lpTV);
 						ULog.d(TAG, Integer.toString(row * 5 + i + 1));
 						tv.setText(Integer.toString(row * 5 + i + 1));
+						tv.setOnClickListener(new JuJiOnClickListener(row * 5 + i + 1));
 						ll.addView(tv);
 					}
 
@@ -139,6 +148,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 						tv.setLayoutParams(lpTV);
 						ULog.d(TAG, Integer.toString(row * 5 + i + 1));
 						tv.setText(Integer.toString(row * 5 + i + 1));
+						tv.setOnClickListener(new JuJiOnClickListener(row * 5 + i + 1));
 						ll.addView(tv);
 					}
 				}
@@ -240,12 +250,127 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		}
 	}
 
-	private void toPlay(String conntentId, String band) {
+	/** 剧集进入播放 */
+	private class JuJiOnClickListener implements OnClickListener {
+		private int clipId;
+
+		public JuJiOnClickListener(int clipId) {
+			this.clipId = clipId;
+		}
+
+		@Override
+		public void onClick(View v) {
+			ULog.d(TAG, v.toString());
+			toPlayAuth(bean.getChannel().getChannelId(), bean.getContent().getId(), bean.getContent()
+					.getCLIP_BANDWITHS().get(0).getCode(), clipId);
+		}
+	}
+
+	/** 播放鉴权 */
+	private void toPlayAuth(final String channelId, final String conntentId, final String band, final int clipId) {
+		StringBuilder url = new StringBuilder(ComParams.HTTP_PLAYAUTH);
+		url.append("userId=").append(User.getPhone(this));
+		url.append("&").append("contentId=").append(conntentId);
+		url.append("&").append("channelId=").append(channelId);
+
+		ULog.i(TAG, url.toString());
+
+		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
+			@Override
+			public void onSuccess(String result) {
+				// progDialog.dismiss();
+				ULog.d(TAG, "onSuccess  --" + result);
+				try {
+					JSONObject json = new JSONObject(result);
+					if (json.getBoolean("success")) {
+						// 鉴权通过
+						toPlay(conntentId, band, clipId);
+					}
+
+					else {
+						toOrder(channelId, conntentId, band, clipId);
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onStart() {
+				ULog.i(TAG, "RequestCallBack.onStart");
+				progDialog.show();
+			}
+
+			@Override
+			public void onFailure(Throwable error, String msg) {
+				ULog.i(TAG, "RequestCallBack.onFailure");
+				progDialog.dismiss();
+			}
+		});
+
+	}
+
+	/** 鉴权不通过，显示订购页面 */
+	private void toOrder(final String channelId, final String conntentId, final String band, final int clipId) {
+		// StringBuilder url = new StringBuilder("http://tv.inhe.net/page/hbMobile/buyList.jsp?jsonFormat=true&");
+		StringBuilder url = new StringBuilder(ComParams.HTTP_ORDERLIST);
+		url.append("u_serId=").append(User.getPhone(this));
+		url.append("&").append("contentId=").append(conntentId);
+		url.append("&").append("channelId=").append(channelId);
+
+		ULog.i(TAG, url.toString());
+
+		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
+
+			@Override
+			public void onSuccess(String result) {
+				progDialog.dismiss();
+				ULog.d(TAG, "onSuccess  --" + result);
+				OrderBean bean = new com.google.gson.Gson().fromJson(result, OrderBean.class);
+				if (null != bean.getProducts() && bean.getProducts().size() > 0) {
+					Intent intent = new Intent(DetailsActiivity.this, OrderAcitivity.class);
+					intent.putExtra(ComParams.INTENT_ORDER_BEAN, bean);
+					intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CHANNELID, channelId);
+					intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID, conntentId);
+					intent.putExtra(ComParams.INTENT_MOVIEDETAIL_BAND, band);
+					intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CLIPID, clipId);
+					startActivity(intent);
+				}
+				else {
+					// 获取订购页面失败，尝试着进行播放
+					toPlay(conntentId, band, clipId);
+				}
+			}
+
+			@Override
+			public void onStart() {
+				progDialog.show();
+			}
+
+			@Override
+			public void onFailure(Throwable error, String msg) {
+				progDialog.dismiss();
+			}
+		});
+	}
+
+	/**
+	 * 获取播放地址，进入播放页面
+	 * 
+	 * @param conntentId
+	 *            内容id
+	 * @param band
+	 *            码流类型
+	 * @param clipId
+	 *            第几集
+	 */
+	private void toPlay(String conntentId, String band, int clipId) {
 		StringBuilder url = new StringBuilder(ComParams.HTTP_PLAYURL);
 		url.append("token=").append(User.getToken(this));
 		url.append("&").append("phone=").append(User.getPhone(this));
 		url.append("&").append("contentId=").append(conntentId);
 		url.append("&").append("bandwidth=").append(band);
+		url.append("&").append("clipId=").append(clipId < 1 ? 1 : clipId);
 
 		ULog.i(TAG, url.toString());
 
@@ -266,7 +391,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 					Uri uri = Uri.parse(json.getString("url"));
 					intent.setDataAndType(uri, type);
 					startActivity(intent);
-					
+
 					addHistory();
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -287,7 +412,6 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 				progDialog.dismiss();
 			}
 		});
-
 	}
 
 	@Override
@@ -300,19 +424,23 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 			addToFavorite();
 			break;
 		case R.id.detail_btn_play:
-			toPlay(bean.getContent().getId(), bean.getContent().getCLIP_BANDWITHS().get(0).getCode());
+			toPlayAuth(bean.getChannel().getChannelId(), bean.getContent().getId(), bean.getContent()
+					.getCLIP_BANDWITHS().get(0).getCode(), 1);
 			break;
 		case R.id.detail_btn_play_qingxi:
-			toPlay(bean.getContent().getId(), bean.getContent().getCLIP_BANDWITHS().get(1).getCode());
+			toPlayAuth(bean.getChannel().getChannelId(), bean.getContent().getId(), bean.getContent()
+					.getCLIP_BANDWITHS().get(1).getCode(), 1);
 			break;
 		case R.id.detail_btn_play_gaoqing:
-			toPlay(bean.getContent().getId(), bean.getContent().getCLIP_BANDWITHS().get(2).getCode());
+			toPlayAuth(bean.getChannel().getChannelId(), bean.getContent().getId(), bean.getContent()
+					.getCLIP_BANDWITHS().get(2).getCode(), 1);
 			break;
 		default:
 			break;
 		}
 	}
 
+	/** 添加到收藏 */
 	private void addToFavorite() {
 		StringBuilder url = new StringBuilder(ComParams.HTTP_FAVORITE_ADD);
 		url.append("contentId=").append(bean.getContent().getId()).append("&");
@@ -361,6 +489,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		});
 	}
 
+	/** 增加播放历史 */
 	private void addHistory() {
 		StringBuilder url = new StringBuilder(ComParams.HTTP_HISTORY_ADD);
 		url.append("contentId=").append(bean.getContent().getId()).append("&");

@@ -17,7 +17,10 @@ public class ComParams {
 	public static final String INTENT_MOVIELIST_CHANNEL = "channel";
 	public static final String INTENT_MOVIEDETAIL_CHANNELID = "channelId";
 	public static final String INTENT_MOVIEDETAIL_CONNENTID = "connentid";
+	public static final String INTENT_MOVIEDETAIL_BAND = "band";
+	public static final String INTENT_MOVIEDETAIL_CLIPID = "clipId";
 	public static final String INTENT_MOVIEDETAIL_BEAN = "detailBean";
+	public static final String INTENT_ORDER_BEAN = "order";
 
 	// ------------------------------------------------------------------------------
 	// private static final String HTTP_BASE = "http://tv.inhe.net/";
@@ -38,9 +41,15 @@ public class ComParams {
 	public static final String HTTP_CHANNEL = HTTP_BASE + "/page/js/list.jsp?";
 	/** 搜索 */
 	public static final String HTTP_SEARCH = HTTP_BASE + "/page/js/list.jsp?isChannelIds=true&";
+	/** 播放鉴权 */
+	public static final String HTTP_PLAYAUTH = HTTP_BASE + "/user/user!checkPlayPermissions.action?";
+	/** 鉴权不通过，获取订购列表 */
+	public static final String HTTP_ORDERLIST = HTTP_BASE + "/hbMobile/buyList.jsp?jsonFormat=true&";
+	/** 订购产品 */
+	public static final String HTTP_ORDER_PRODUCT = HTTP_BASE + "/user/user!operateOrder.action?";
 	/** 播放地址 */
 	public static final String HTTP_PLAYURL = HTTP_BASE
-			+ "/user/getPlayUrl.jsp?jsonFormat=true&clipId=1&clientType=m3u8&";
+			+ "/user/getPlayUrl.jsp?jsonFormat=true&clientType=m3u8&clipId=1&";
 	/** 播放记录 */
 	public static final String HTTP_HISTORY = HTTP_BASE
 			+ "/page/hbMobile/userOptions.jsp?jsonFormat=true&command=listPlayHistory&";
