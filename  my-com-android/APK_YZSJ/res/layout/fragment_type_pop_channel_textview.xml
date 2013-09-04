@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/type_tv_change_type_dianying"
+    style="@style/ChangeTypeTV"
+    android:textStyle="bold"
+    android:gravity="center" />
