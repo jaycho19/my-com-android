@@ -243,7 +243,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		case R.id.tv_topbar_login:
 			if (User.isLogined(this)) {
 				// 注销
-				User.saveUserLoginStatu(this, false);
+				// User.saveUserLoginStatu(this, false);
+				User.saveToken(this, "");
+
 				tvLogin.setText("登陆");
 				Toast.makeText(this, "注销成功", Toast.LENGTH_LONG).show();
 			}
@@ -252,7 +254,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 			}
 			break;
 		case R.id.tv_topbar_playhistory:
-			frameLayout.setVisibility(0);
+			fgtHost.setCurrentTabByTag("5");
 			break;
 
 		default:
