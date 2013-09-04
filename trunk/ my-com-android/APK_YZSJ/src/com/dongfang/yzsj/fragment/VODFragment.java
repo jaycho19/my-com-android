@@ -229,6 +229,7 @@ public class VODFragment extends Fragment {
 		public ClickListener(VODItem voditem) {
 			channel = new Channel();
 			channel.setChannelId(voditem.getChannelId());
+			channel.setId(voditem.getChannelId());
 			channel.setName(voditem.getName());
 		}
 

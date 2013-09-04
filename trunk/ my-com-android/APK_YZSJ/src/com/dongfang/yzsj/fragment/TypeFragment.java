@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,8 +19,10 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.LinearLayout.LayoutParams;
 
 import com.df.util.ULog;
+import com.dongfang.utils.ACache;
 import com.dongfang.view.CheckTextView;
 import com.dongfang.view.PullToRefreshView;
 import com.dongfang.view.PullToRefreshView.OnFooterRefreshListener;
@@ -29,8 +32,10 @@ import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.bean.Channel;
 import com.dongfang.yzsj.bean.Movie;
 import com.dongfang.yzsj.bean.TypeBean;
+import com.dongfang.yzsj.bean.VODItem;
 import com.dongfang.yzsj.fragment.adp.TypeAdp;
 import com.dongfang.yzsj.params.ComParams;
+import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
@@ -70,21 +75,31 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
 	private int lastTotal;// 最近一次加载更多时返回的数据量
 
+	private List<VODItem> listChannels = null; // 频道列表
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		this.inflater = inflater;
 		progDialog = com.dongfang.view.ProgressDialog.show(getActivity());
 		progDialog.setCancelable(true);
 
+		if (null != savedInstanceState && savedInstanceState.containsKey(ComParams.INTENT_SEARCH_CHANNELS)) {
+			listChannels = savedInstanceState.getParcelableArrayList(ComParams.INTENT_SEARCH_CHANNELS);
+		}
+
 		View view = inflater.inflate(R.layout.fragment_type, container, false);
-		initPopuWindow(inflater);
+		initPopuWindow();
 		initView(view);
 		return view;
 	}
 
 	/** 初始化选择框 */
-	private void initPopuWindow(LayoutInflater inflater) {
-		View view = inflater.inflate(R.layout.type_popw_change, null);
+	private void initPopuWindow() {
+		if (null == listChannels || listChannels.size() == 0) {
+			return;
+		}
+
+		LinearLayout view = (LinearLayout) inflater.inflate(R.layout.type_popw_change, null);
 		popuWindow = new PopupWindow(view, -1, -2);
 		// 展开特效
 		popuWindow.setAnimationStyle(R.style.Animations_GrowFromTop);
@@ -104,14 +119,27 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 			}
 		});
 
-		int[] type = { R.id.type_tv_change_type_baishitong, R.id.type_tv_change_type_dianshiju,
-				R.id.type_tv_change_type_dianying, R.id.type_tv_change_type_fengshang, R.id.type_tv_change_type_huashu,
-				R.id.type_tv_change_type_jiaoyu, R.id.type_tv_change_type_jishi, R.id.type_tv_change_type_minglanmu,
-				R.id.type_tv_change_type_tiyu, R.id.type_tv_change_type_xinwen, R.id.type_tv_change_type_yinyue,
-				R.id.type_tv_change_type_youpeng, R.id.type_tv_change_type_yule, R.id.type_tv_change_type_zhuanti };
-		for (int i = 0; i < type.length; i++)
-			view.findViewById(type[i]).setOnClickListener(this);
+		LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(-1, -2);
+		llp.gravity = Gravity.CENTER;
+		llp.setMargins(5, 5, 5, 5);
 
+		LinearLayout.LayoutParams lpTV = new LayoutParams(-2, -2, 1);
+		lpTV.setMargins(5, 5, 5, 5);
+
+		int length = listChannels.size();
+		for (int row = 0; row < 3; row++) {
+			LinearLayout ll = new LinearLayout(getActivity());
+			ll.setLayoutParams(llp);
+
+			for (int i = 5 * row; i < Math.min(length, 5 * (row + 1)); i++) {
+				TextView tv = (TextView) inflater.inflate(R.layout.fragment_type_pop_channel_textview, null);
+				tv.setLayoutParams(lpTV);
+				tv.setText(listChannels.get(i).getName());
+				tv.setOnClickListener(new onChangeChannel(listChannels.get(i)));
+				ll.addView(tv);
+			}
+			view.addView(ll);
+		}
 	}
 
 	private void initView(View view) {
@@ -156,6 +184,66 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
 		ULog.d(TAG, "channel = " + channel.toString());
 		getMovies(channel.getChannelId(), 0, LIMIT);
+		// ------------- 获取切换频道数据 ---------------
+		getListChannels();
+	}
+
+	public void getListChannels() {
+		super.onResume();
+		ULog.d(TAG, "onResume");
+
+		// 非异常中断进入时，bean为空，判断是否有缓存
+		if (null == listChannels) {
+			listChannels = new com.google.gson.Gson().fromJson(
+					ACache.get(getActivity()).getAsString(ComParams.INTENT_SEARCH_CHANNELS),
+					new TypeToken<List<VODItem>>() {}.getType());
+		}
+
+		// bean非空初始化数据
+		if (null != listChannels) {
+			initPopuWindow();
+		}
+		else {
+			// bean为空，网络请求数据，需对网络进行判断
+			ULog.d(TAG, ComParams.HTTP_VOD);
+			new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_VOD, new RequestCallBack<String>() {
+				@Override
+				public void onLoading(long total, long current) {
+					ULog.d(TAG, "total = " + total + "; current = " + current);
+				}
+
+				@Override
+				public void onSuccess(String result) {
+					ULog.d(TAG, "onSuccess  --" + result);
+
+					listChannels = new com.google.gson.Gson().fromJson(result,
+							new TypeToken<List<VODItem>>() {}.getType());
+					StringBuilder sb = new StringBuilder();
+					for (int i = 0, length = listChannels.size(); i < length; i++)
+						sb.append("vod ").append(i).append(" --> ").append(listChannels.get(i).toString());
+					ULog.d(TAG, sb.toString());
+
+					ACache.get(getActivity()).put(ComParams.INTENT_SEARCH_CHANNELS, result, 60 * 5);// 缓存数据
+
+					initPopuWindow();
+
+					progDialog.dismiss();
+				}
+
+				@Override
+				public void onStart() {
+					ULog.i(TAG, "onStart");
+					progDialog.show();
+
+				}
+
+				@Override
+				public void onFailure(Throwable error, String msg) {
+					progDialog.dismiss();
+					ULog.i(TAG, "onFailure");
+				}
+			});
+		}
 	}
 
 	/** 获取网络数据 */
@@ -178,11 +266,6 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 		ULog.d(TAG, url);
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url, new RequestCallBack<String>() {
-			@Override
-			public void onLoading(long total, long current) {
-				ULog.d(TAG, "RequestCallBack.onLoading total = " + total + "; current = " + current);
-			}
-
 			@Override
 			public void onSuccess(String result) {
 				// ULog.d(TAG, "onSuccess  --" + result);
@@ -255,10 +338,10 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 	/** 点击子栏目进行内容修改 */
 	private void getListBySubChannel(View v, Channel channel) {
 		for (int i = 0, l = llSubChannels.getChildCount(); i < l; i++) {
-			llSubChannels.getChildAt(i).setSelected(false);
+			((CheckTextView) llSubChannels.getChildAt(i)).setChecked(false);
 		}
 
-		// v.setSelected(true);
+		((CheckTextView) v).setChecked(true);
 
 		// 修改当前channel的数值
 		setChannel(channel);
@@ -296,51 +379,74 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 				popuWindow.dismiss();
 			}
 			break;
-		case R.id.type_tv_change_type_baishitong:
-			tvTitle.setText("百视通VIP");
-			break;
-		case R.id.type_tv_change_type_dianshiju:
-			tvTitle.setText("电视剧");
-			break;
-		case R.id.type_tv_change_type_dianying:
-			tvTitle.setText("电影");
-			break;
-		case R.id.type_tv_change_type_fengshang:
-			tvTitle.setText("风尚");
-			break;
-		case R.id.type_tv_change_type_huashu:
-			tvTitle.setText("华数VIP");
-			break;
-		case R.id.type_tv_change_type_jiaoyu:
-			tvTitle.setText("教育");
-			break;
-		case R.id.type_tv_change_type_jishi:
-			tvTitle.setText("纪实");
-			break;
-		case R.id.type_tv_change_type_minglanmu:
-			tvTitle.setText("名栏目");
-			break;
-		case R.id.type_tv_change_type_tiyu:
-			tvTitle.setText("体育");
-			break;
-		case R.id.type_tv_change_type_xinwen:
-			tvTitle.setText("新闻");
-			break;
-		case R.id.type_tv_change_type_yinyue:
-			tvTitle.setText("音乐");
-			break;
-		case R.id.type_tv_change_type_youpeng:
-			tvTitle.setText("优朋VIP");
-			break;
-		case R.id.type_tv_change_type_yule:
-			tvTitle.setText("娱乐");
-			break;
-		case R.id.type_tv_change_type_zhuanti:
-			tvTitle.setText("专题");
-			break;
+		// case R.id.type_tv_change_type_baishitong:
+		// tvTitle.setText("百视通VIP");
+		// break;
+		// case R.id.type_tv_change_type_dianshiju:
+		// tvTitle.setText("电视剧");
+		// break;
+		// case R.id.type_tv_change_type_dianying:
+		// tvTitle.setText("电影");
+		// break;
+		// case R.id.type_tv_change_type_fengshang:
+		// tvTitle.setText("风尚");
+		// break;
+		// case R.id.type_tv_change_type_huashu:
+		// tvTitle.setText("华数VIP");
+		// break;
+		// case R.id.type_tv_change_type_jiaoyu:
+		// tvTitle.setText("教育");
+		// break;
+		// case R.id.type_tv_change_type_jishi:
+		// tvTitle.setText("纪实");
+		// break;
+		// case R.id.type_tv_change_type_minglanmu:
+		// tvTitle.setText("名栏目");
+		// break;
+		// case R.id.type_tv_change_type_tiyu:
+		// tvTitle.setText("体育");
+		// break;
+		// case R.id.type_tv_change_type_xinwen:
+		// tvTitle.setText("新闻");
+		// break;
+		// case R.id.type_tv_change_type_yinyue:
+		// tvTitle.setText("音乐");
+		// break;
+		// case R.id.type_tv_change_type_youpeng:
+		// tvTitle.setText("优朋VIP");
+		// break;
+		// case R.id.type_tv_change_type_yule:
+		// tvTitle.setText("娱乐");
+		// break;
+		// case R.id.type_tv_change_type_zhuanti:
+		// tvTitle.setText("专题");
+		// break;
 
 		default:
 			break;
 		}
+	}
+
+	private class onChangeChannel implements View.OnClickListener {
+		private VODItem voditem;
+
+		public onChangeChannel(VODItem voditem) {
+			this.voditem = voditem;
+		}
+
+		@Override
+		public void onClick(View v) {
+			channel.setChannelId(voditem.getChannelId());
+			channel.setId(voditem.getChannelId());
+			channel.setName(voditem.getName());
+
+			tvTitle.setText(channel.getName());
+
+			ULog.d(TAG, "channel = " + channel.toString());
+			listData.clear();
+			getMovies(channel.getChannelId(), 0, LIMIT);
+
+		}
+
 	}
 }
