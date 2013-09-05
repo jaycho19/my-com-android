@@ -16,7 +16,7 @@ import com.dongfang.view.PullToRefreshView;
 import com.dongfang.view.PullToRefreshView.OnFooterRefreshListener;
 import com.dongfang.view.PullToRefreshView.OnHeaderRefreshListener;
 import com.dongfang.yzsj.R;
-import com.dongfang.yzsj.bean.HistoryBean;
+import com.dongfang.yzsj.bean.MyOrderBean;
 import com.dongfang.yzsj.bean.OrderProduct;
 import com.dongfang.yzsj.fragment.adp.OrderAdp;
 import com.dongfang.yzsj.params.ComParams;
@@ -67,7 +67,7 @@ public class SubscibeFragment extends Fragment {
 			@Override
 			public void onHeaderRefresh(PullToRefreshView view) {
 				listData.clear();
-				getPlayHistory(0, LIMIT);
+				getMyOrders(0, LIMIT);
 			}
 		});
 
@@ -75,21 +75,21 @@ public class SubscibeFragment extends Fragment {
 
 			@Override
 			public void onFooterRefresh(PullToRefreshView view) {
-				getPlayHistory(pageStart, LIMIT);
+				getMyOrders(pageStart, LIMIT);
 			}
 		});
 	}
 
-	public List<OrderProduct> getListData() {
-		return listData;
-	}
-
-	public void setListData(List<OrderProduct> listData) {
-		this.listData = listData;
+	@Override
+	public void onStart() {
+		super.onStart();
+		if (1 > listData.size()) {
+			getMyOrders(0, LIMIT);
+		}
 	}
 
 	/** 获取网络数据 */
-	private void getPlayHistory(final int start, final int limit) {
+	private void getMyOrders(final int start, final int limit) {
 
 		if (0 == start) {
 			lastTotal = 0;
@@ -104,7 +104,7 @@ public class SubscibeFragment extends Fragment {
 		// limit = limit < 10 ? 0 : limit;
 		// limit = limit > 30 ? 30 : limit;
 
-		StringBuilder url = new StringBuilder(ComParams.HTTP_HISTORY);
+		StringBuilder url = new StringBuilder(ComParams.HTTP_MY_ORDER);
 		url.append("start=").append(start).append("&");
 		url.append("limit=").append(limit).append("&");
 		url.append("token=").append(User.getToken(getActivity())).append("&");
@@ -113,10 +113,6 @@ public class SubscibeFragment extends Fragment {
 		ULog.i(TAG, url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
-			@Override
-			public void onLoading(long total, long current) {
-				ULog.d(TAG, "RequestCallBack.onLoading total = " + total + "; current = " + current);
-			}
 
 			@Override
 			public void onSuccess(String result) {
@@ -131,14 +127,23 @@ public class SubscibeFragment extends Fragment {
 					pulltoRefreshView.onFooterRefreshComplete();
 				}
 
-				// HistoryBean bean = new com.google.gson.Gson().fromJson(result, HistoryBean.class);
-				// if (null == bean)
-				// return;
-				//
-				// lastTotal = bean.getListData().getObjs().size();
-				//
-				// listData.addAll(bean.getListData().getObjs());
-				// ULog.d(TAG, "list length = " + listData.size());
+				MyOrderBean bean = new com.google.gson.Gson().fromJson(result, MyOrderBean.class);
+				if (null == bean)
+					return;
+
+				ULog.d(TAG, bean.toString());
+
+				lastTotal = bean.getListData().getObjs().size();
+
+				listData.addAll(bean.getListData().getObjs());
+
+				for (int i = listData.size() - 1; i > -1; i--) {
+					if (listData.get(i).getStatus() == 0 || 12 == listData.get(i).getStatus()) {
+						listData.remove(i);
+					}
+				}
+
+				ULog.d(TAG, "list length = " + listData.size());
 			}
 
 			@Override

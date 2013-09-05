@@ -15,11 +15,11 @@ import com.dongfang.yzsj.utils.UtilOfTime;
 
 /** 抓取系统崩溃日志 */
 public class MyUnCaughtExceptionHandler implements UncaughtExceptionHandler {
-	private static final String					TAG							= MyUnCaughtExceptionHandler.class.getSimpleName();
+	private static final String TAG = MyUnCaughtExceptionHandler.class.getSimpleName();
 	/** 异常文件 */
-	private static final String					EXP_FILE_NAME				= "exception.log";
-	private Context								mContext;
-	private static MyUnCaughtExceptionHandler	mMyUnCaughtExceptionHandler	= null;
+	private static final String EXP_FILE_NAME = "exception.log";
+	private Context mContext;
+	private static MyUnCaughtExceptionHandler mMyUnCaughtExceptionHandler = null;
 
 	// private UncaughtExceptionHandler mDefaultUEH;
 	// private static final int RESTART_DELAY = 5000;
@@ -63,7 +63,8 @@ public class MyUnCaughtExceptionHandler implements UncaughtExceptionHandler {
 
 		// 重启
 		if (!(mContext instanceof MainActivity)) {
-			Intent intent = ((Application) mContext).getBaseContext().getPackageManager().getLaunchIntentForPackage(((Application) mContext).getBaseContext().getPackageName());
+			Intent intent = ((Application) mContext).getBaseContext().getPackageManager()
+					.getLaunchIntentForPackage(((Application) mContext).getBaseContext().getPackageName());
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			mContext.startActivity(intent);
 		}

@@ -80,7 +80,7 @@ public class OrderBean implements Parcelable {
 			data.userId = in.readString();
 			data.channelId = in.readString();
 			data.contentId = in.readString();
-			in.readTypedList(data.products, OrderProduct.CREATOR);
+			data.products = in.createTypedArrayList(OrderProduct.CREATOR);
 			return data;
 		}
 

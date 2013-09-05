@@ -15,17 +15,17 @@ import com.df.util.ULog;
  * @author yanghua
  */
 public class UtilOfTime {
-	private static final String	TAG					= UtilOfTime.class.getSimpleName();
+	private static final String TAG = UtilOfTime.class.getSimpleName();
 
 	// 常用日期输出格式
-	public final static String	YYYYMMDD			= "yyyyMMdd";
-	public final static String	YYYY_MM_DD			= "yyyy-MM-dd";
-	public final static String	YYYYMMDDHHMM		= "yyyyMMddHHmm";
-	public final static String	YYYY_MM_DD_HH_MM	= "yyyy-MM-dd HH:mm";
-	public final static String	YYYYMMDDHHMMSS		= "yyyyMMddHHmmss";
-	public final static String	YYYY_MM_DD_HH_MM_SS	= "yyyy-MM-dd HH:mm:ss";
-	public final static String	HHMMSS				= "HHmmss";
-	public final static String	HH_MM_SS			= "HH:mm:ss";
+	public final static String YYYYMMDD = "yyyyMMdd";
+	public final static String YYYY_MM_DD = "yyyy-MM-dd";
+	public final static String YYYYMMDDHHMM = "yyyyMMddHHmm";
+	public final static String YYYY_MM_DD_HH_MM = "yyyy-MM-dd HH:mm";
+	public final static String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
+	public final static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+	public final static String HHMMSS = "HHmmss";
+	public final static String HH_MM_SS = "HH:mm:ss";
 
 	/**
 	 * 获取当前时间日期 以参数pattern格式返回
@@ -144,7 +144,8 @@ public class UtilOfTime {
 			SimpleDateFormat sdf = new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS);
 			long time = sdf.parse(millisecond).getTime();
 			long currentTime = new Date().getTime();
-			ULog.i(TAG, "11compare date: " + millisecond + "  compare time: " + time + "=========>  current time: " + currentTime);
+			ULog.i(TAG, "11compare date: " + millisecond + "  compare time: " + time + "=========>  current time: "
+					+ currentTime);
 			return time < currentTime;
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -266,7 +267,8 @@ public class UtilOfTime {
 		ULog.d(TAG, "getDateWithSpecialFromat(YYYY_MM_DD, 1) = " + getDateWithSpecialFromat(YYYY_MM_DD, 1));
 		ULog.d(TAG, "CurrentDate() = " + CurrentDate());
 		String currentTimeMS = String.valueOf(CurrentDate().getTime());
-		ULog.d(TAG, "getDateByMillisecondWithSpecialFromat(YYYY_MM_DD_HH_MM, currentTimeMS) = " + getDateByMillisecondWithSpecialFromat(YYYY_MM_DD_HH_MM, currentTimeMS));
+		ULog.d(TAG, "getDateByMillisecondWithSpecialFromat(YYYY_MM_DD_HH_MM, currentTimeMS) = "
+				+ getDateByMillisecondWithSpecialFromat(YYYY_MM_DD_HH_MM, currentTimeMS));
 
 		long currentS = CurrentDate().getHours() * 3600 + CurrentDate().getMinutes() * 60 + CurrentDate().getSeconds();
 		ULog.d(TAG, "formatSeconds2Date(currentS) = " + formatSeconds2Date(currentS));

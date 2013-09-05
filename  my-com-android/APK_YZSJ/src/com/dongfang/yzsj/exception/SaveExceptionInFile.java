@@ -10,9 +10,9 @@ import com.df.util.ULog;
 
 public class SaveExceptionInFile extends AsyncTask<Bundle, Integer, Bundle> {
 
-	public static final String	TAG	= SaveExceptionInFile.class.getSimpleName();
+	public static final String TAG = SaveExceptionInFile.class.getSimpleName();
 
-	private Context				context;
+	private Context context;
 
 	public SaveExceptionInFile(Context context) {
 		this.context = context;

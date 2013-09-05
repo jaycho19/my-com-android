@@ -141,7 +141,7 @@ public class User {
 				.putString(SHAREDPREFERENCES_USER_INFO_USER_ID, userId).commit();
 	}
 
-	/**  @deprecated see {@link #saveToken(Context, String)
+/**  @deprecated see {@link #saveToken(Context, String)
 	 * 
 	 * 更新用户登陆状态
 	 * 

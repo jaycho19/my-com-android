@@ -11,17 +11,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="5dp"
-        android:background="@drawable/user_fragment_btn_bg"
+        android:layout_margin="5dp"
+        android:background="@drawable/btn_orange"
         android:clickable="true"
-        android:text="取消关注" />
+        android:gravity="center"
+        android:padding="5dp"
+        android:textSize="18sp"
+        android:text="订购"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/order_tv_cancel"
+        android:layout_toLeftOf="@+id/order_tv_sub"
         android:background="@drawable/order_bg"
         android:orientation="vertical" >
 

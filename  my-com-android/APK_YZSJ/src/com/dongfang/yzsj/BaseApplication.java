@@ -10,8 +10,8 @@ import com.df.util.ULog;
 
 /** @author dongfang 该类当下只正对QAS有效，2013-2-1 */
 public class BaseApplication extends Application {
-	public static final String		TAG				= BaseApplication.class.getSimpleName();
-	private static BaseApplication	myApplication	= null;
+	public static final String TAG = BaseApplication.class.getSimpleName();
+	private static BaseApplication myApplication = null;
 
 	public static BaseApplication getInstance() {
 		if (myApplication == null) {
@@ -52,7 +52,8 @@ public class BaseApplication extends Application {
 		}
 		Constants.DENSITYDPI = dm.densityDpi;
 		Constants.DENSITY = dm.density;
-		ULog.i(TAG, "setupBaseData, SCREEN_WIDTH = " + dm.widthPixels + ", SCREEN_HEIGHT = " + dm.heightPixels + ", densityDpi = " + dm.densityDpi);
+		ULog.i(TAG, "setupBaseData, SCREEN_WIDTH = " + dm.widthPixels + ", SCREEN_HEIGHT = " + dm.heightPixels
+				+ ", densityDpi = " + dm.densityDpi);
 	}
 
 }

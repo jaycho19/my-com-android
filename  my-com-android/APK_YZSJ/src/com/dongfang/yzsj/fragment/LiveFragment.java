@@ -2,11 +2,17 @@ package com.dongfang.yzsj.fragment;
 
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
@@ -19,6 +25,7 @@ import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.bean.HomeLivesItem;
 import com.dongfang.yzsj.bean.LiveBean;
 import com.dongfang.yzsj.params.ComParams;
+import com.dongfang.yzsj.utils.User;
 import com.dongfang.yzsj.utils.Util;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
@@ -125,6 +132,64 @@ public class LiveFragment extends Fragment {
 
 	}
 
+	/**
+	 * 获取播放地址，进入播放页面
+	 * 
+	 * @param conntentId
+	 *            内容id
+	 * @param band
+	 *            码流类型
+	 * @param clipId
+	 *            第几集
+	 */
+	private void toPlay(String conntentId) {
+		StringBuilder url = new StringBuilder(ComParams.HTTP_PLAYURL);
+		url.append("token=").append(User.getToken(getActivity()));
+		url.append("&").append("phone=").append(User.getPhone(getActivity()));
+		url.append("&").append("contentId=").append(conntentId);
+		url.append("&").append("bandwidth=").append("Media_Url_Source");
+		url.append("&").append("clipId=").append(1);
+
+		ULog.i(TAG, url.toString());
+
+		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
+			@Override
+			public void onLoading(long total, long current) {
+				ULog.d(TAG, "RequestCallBack.onLoading total = " + total + "; current = " + current);
+			}
+
+			@Override
+			public void onSuccess(String result) {
+				progDialog.dismiss();
+				ULog.d(TAG, "onSuccess  --" + result);
+				try {
+					JSONObject json = new JSONObject(result);
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					String type = "video/*";
+					Uri uri = Uri.parse(json.getString("url"));
+					intent.setDataAndType(uri, type);
+					startActivity(intent);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+			@Override
+			public void onStart() {
+				ULog.i(TAG, "RequestCallBack.onStart");
+				progDialog.show();
+			}
+
+			@Override
+			public void onFailure(Throwable error, String msg) {
+				ULog.i(TAG, "RequestCallBack.onFailure");
+				progDialog.dismiss();
+			}
+		});
+	}
+
 	/** 直播页面adapter */
 	class LiveAdapter extends BaseAdapter {
 
@@ -161,13 +226,23 @@ public class LiveFragment extends Fragment {
 		}
 
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
+		public View getView(final int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {
 				convertView = LayoutInflater.from(mContext).inflate(R.layout.imageview_adapter, null);
 			}
 			convertView.setLayoutParams(lparams);
 			BitmapUtils.create(mContext).display((ImageView) convertView, lives.get(position).PHONE_MEDIA_POSTER_SMALL,
 					w, h);
+
+			convertView.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					toPlay(lives.get(position).id);
+				}
+			});
+
 			return convertView;
 		}
 

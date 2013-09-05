@@ -128,18 +128,25 @@ public class ToDetailAsyncTask extends AsyncTask<String, String, DetailBean> {
 		}
 
 		else if (!result.isSuccess()) {
-			Toast.makeText(context, result.getError0(), Toast.LENGTH_LONG).show();
+			if ("Error Token".equals(result.getError0())) {
+				User.saveToken(context, "");
+				Toast.makeText(context, "请先进行登录 ^_^", Toast.LENGTH_LONG).show();
+
+			}
+			else {
+				Toast.makeText(context, result.getError0(), Toast.LENGTH_LONG).show();
+			}
+
 			return;
 		}
 
 		if (context instanceof DetailsActiivity) {
 			((DetailsActiivity) context).finish();
 		}
-		
+
 		Intent intent = new Intent(context, DetailsActiivity.class);
 		intent.putExtra(ComParams.INTENT_MOVIEDETAIL_BEAN, result);
 		context.startActivity(intent);
-
 
 	}
 

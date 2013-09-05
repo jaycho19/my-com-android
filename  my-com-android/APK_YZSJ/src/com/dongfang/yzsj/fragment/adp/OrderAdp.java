@@ -100,8 +100,25 @@ public class OrderAdp extends BaseAdapter {
 		holder.productPrice.setText(product.getPrice() + " 元");
 		holder.productType.setText(product.getType());
 		holder.productDesc.setText(product.getDescription());
-		holder.btn_order.setOnClickListener(new MyOnClickListener(product.getPayProductNo(), position));
 
+		if (!product.isHasBuyThis() && product.getStatus() == 1) {
+			holder.btn_order.setOnClickListener(new MyOnClickListener(product.getPayProductNo(), position));
+		}
+		else if (12 == product.getStatus()) { // 12、只显示，不能购买也不能退
+			holder.btn_order.setVisibility(View.INVISIBLE);
+		}
+		else if (11 == product.getStatus()) {// 11、只能购买，不能退
+			if (product.isHasBuyThis())
+				holder.btn_order.setVisibility(View.INVISIBLE);
+		}
+		else if (10 == product.getStatus()) {// 10、只能退订，不能购买
+			if (product.isHasBuyThis()) {
+				holder.btn_order.setText("退订");
+			}
+			else {
+				holder.btn_order.setVisibility(View.INVISIBLE);
+			}
+		}
 		return convertView;
 	}
 
@@ -112,7 +129,6 @@ public class OrderAdp extends BaseAdapter {
 		TextView productType; // 类型
 		TextView productDesc; // 描述
 		TextView btn_order; // 订购按钮
-
 	}
 
 	private class MyOnClickListener implements OnClickListener {
