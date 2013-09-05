@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.df.util.ULog;
+import com.dongfang.view.OrderDialog;
+import com.dongfang.view.OrderDialog.OnOrderDialogBtnListener;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.bean.OrderProduct;
 import com.dongfang.yzsj.interf.OrderResult;
@@ -102,7 +104,7 @@ public class OrderAdp extends BaseAdapter {
 		holder.productDesc.setText(product.getDescription());
 
 		if (!product.isHasBuyThis() && product.getStatus() == 1) {
-			holder.btn_order.setOnClickListener(new MyOnClickListener(product.getPayProductNo(), position));
+			holder.btn_order.setOnClickListener(new MyOnClickListener(product.getPayProductNo(), product.getCspId()));
 		}
 		else if (12 == product.getStatus()) { // 12、只显示，不能购买也不能退
 			holder.btn_order.setVisibility(View.INVISIBLE);
@@ -133,67 +135,84 @@ public class OrderAdp extends BaseAdapter {
 
 	private class MyOnClickListener implements OnClickListener {
 		private String productId;
-		private int position;
+		private String cspId;
 
-		public MyOnClickListener(String productId, int position) {
+		public MyOnClickListener(String productId, String cspId) {
 			this.productId = productId;
-			this.position = position;
+			this.cspId = cspId;
 		}
 
 		@Override
 		public void onClick(View v) {
 			ULog.d(TAG, v.toString());
-			StringBuilder url = new StringBuilder(ComParams.HTTP_ORDER_PRODUCT);
-			url.append("userId=").append(User.getPhone(context));
-			url.append("&").append("productId=").append(productId);
 
-			ULog.i(TAG, url.toString());
-
-			new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
+			OrderDialog.show(context, new OnOrderDialogBtnListener() {
 
 				@Override
-				public void onSuccess(String result) {
-					ULog.d(TAG, "onSuccess  --" + result);
-					progDialog.dismiss();
+				public void ok(String phone, String authCode) {
+					StringBuilder url = new StringBuilder(ComParams.HTTP_ORDER_PRODUCT);
+					url.append("userId=").append(phone);
+					url.append("&").append("productId=").append(productId);
+					url.append("&").append("verifyCode=").append(authCode);
+					url.append("&").append("cspId=").append(cspId);
 
-					try {
-						JSONObject json = new JSONObject(result);
-						if (json.getBoolean("success")) {
-							Toast.makeText(context, "订购成功", Toast.LENGTH_LONG).show();
+					ULog.i(TAG, url.toString());
 
-							if (null != orderResult) {
-								orderResult.successed();
+					new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
+
+						@Override
+						public void onSuccess(String result) {
+							ULog.d(TAG, "onSuccess  --" + result);
+							progDialog.dismiss();
+
+							try {
+								JSONObject json = new JSONObject(result);
+								if (json.getBoolean("success")) {
+									Toast.makeText(context, "订购成功", Toast.LENGTH_LONG).show();
+
+									if (null != orderResult) {
+										orderResult.successed();
+									}
+
+								}
+								else {
+									Toast.makeText(context, json.getJSONArray("error").getString(0), Toast.LENGTH_LONG)
+											.show();
+									if (null != orderResult) {
+										orderResult.failed();
+									}
+
+								}
+							} catch (JSONException e) {
+								if (null != orderResult) {
+									orderResult.failed();
+								}
+								Toast.makeText(context, "订购失败~~~~(>_<)~~~~ ", Toast.LENGTH_LONG).show();
+								e.printStackTrace();
 							}
+						}
 
+						@Override
+						public void onStart() {
+							ULog.i(TAG, "RequestCallBack.onStart");
+							progDialog.show();
 						}
-						else {
-							Toast.makeText(context, json.getJSONArray("error").getString(0), Toast.LENGTH_LONG).show();
-							if (null != orderResult) {
-								orderResult.failed();
-							}
 
+						@Override
+						public void onFailure(Throwable error, String msg) {
+							ULog.i(TAG, "RequestCallBack.onFailure");
+							progDialog.dismiss();
 						}
-					} catch (JSONException e) {
-						if (null != orderResult) {
-							orderResult.failed();
-						}
-						Toast.makeText(context, "订购失败~~~~(>_<)~~~~ ", Toast.LENGTH_LONG).show();
-						e.printStackTrace();
-					}
+					});
 				}
 
 				@Override
-				public void onStart() {
-					ULog.i(TAG, "RequestCallBack.onStart");
-					progDialog.show();
-				}
+				public void cancel() {
+					// TODO Auto-generated method stub
 
-				@Override
-				public void onFailure(Throwable error, String msg) {
-					ULog.i(TAG, "RequestCallBack.onFailure");
-					progDialog.dismiss();
 				}
-			});
+			}).show();
+
 		}
 	}
 
