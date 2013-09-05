@@ -44,7 +44,7 @@ public class ComParams {
 	/** 播放鉴权 */
 	public static final String HTTP_PLAYAUTH = HTTP_BASE + "/user/user!checkPlayPermissions.action?";
 	/** 鉴权不通过，获取订购列表 */
-	public static final String HTTP_ORDERLIST = HTTP_BASE + "/hbMobile/buyList.jsp?jsonFormat=true&";
+	public static final String HTTP_ORDERLIST = HTTP_BASE + "/page/hbMobile/buyList.jsp?jsonFormat=true&";
 	/** 订购产品 */
 	public static final String HTTP_ORDER_PRODUCT = HTTP_BASE + "/user/user!operateOrder.action?";
 	/** 播放地址 */
@@ -68,6 +68,9 @@ public class ComParams {
 	/** 删除个人收藏 */
 	public static final String HTTP_FAVORITE_DEL = HTTP_BASE
 			+ "/page/hbMobile/userOptions.jsp?jsonFormat=true&command=removeCollect&";
+	/** 我的订阅 */
+	public static final String HTTP_MY_ORDER = HTTP_BASE
+			+ "/page/hbMobile/userOptions.jsp?command=myBilling&jsonFormat=true&";
 
 	// ------------------------------------------------------------------------------
 	public static final String SP_NAME_WINDOW = "SP_NAME_WINDOW";

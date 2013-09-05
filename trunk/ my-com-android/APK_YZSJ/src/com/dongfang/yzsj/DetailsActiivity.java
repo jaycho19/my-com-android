@@ -63,6 +63,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail);
 		bean = getIntent().getParcelableExtra(ComParams.INTENT_MOVIEDETAIL_BEAN);
+
 		// ULog.d(TAG, bean.toString());
 
 		// conntentId = getIntent().getStringExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID);
@@ -286,7 +287,6 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 						// 鉴权通过
 						toPlay(conntentId, band, clipId);
 					}
-
 					else {
 						toOrder(channelId, conntentId, band, clipId);
 					}
@@ -325,8 +325,11 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 			@Override
 			public void onSuccess(String result) {
 				progDialog.dismiss();
-				ULog.d(TAG, "onSuccess  --" + result);
+				// ULog.d(TAG, "onSuccess  -- " + result);
 				OrderBean bean = new com.google.gson.Gson().fromJson(result, OrderBean.class);
+
+				ULog.d(TAG, bean.toString());
+
 				if (null != bean.getProducts() && bean.getProducts().size() > 0) {
 					Intent intent = new Intent(DetailsActiivity.this, OrderAcitivity.class);
 					intent.putExtra(ComParams.INTENT_ORDER_BEAN, bean);

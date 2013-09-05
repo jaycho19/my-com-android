@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.df.util.ULog;
 import com.dongfang.view.ImageGallery;
+import com.dongfang.yzsj.LoginActivity;
 import com.dongfang.yzsj.MainActivity;
 import com.dongfang.yzsj.MovieListActivity;
 import com.dongfang.yzsj.R;
@@ -24,6 +25,7 @@ import com.dongfang.yzsj.bean.HomeBean;
 import com.dongfang.yzsj.bean.HomeChannelItem;
 import com.dongfang.yzsj.bean.Movie;
 import com.dongfang.yzsj.params.ComParams;
+import com.dongfang.yzsj.utils.User;
 import com.dongfang.yzsj.utils.Util;
 import com.lidroid.xutils.BitmapUtils;
 
@@ -42,8 +44,6 @@ public class HomeFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		ULog.d(TAG, "onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)");
-
 		View view = inflater.inflate(R.layout.fragment_home, container, false);
 		initView(inflater, view);
 
@@ -154,7 +154,13 @@ public class HomeFragment extends Fragment {
 				imageView.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						new ToDetailAsyncTask(getActivity(), item.getChannel().getChannelId(), movie.getId()).execute();
+//						if (User.isLogined(getActivity())) {
+							new ToDetailAsyncTask(getActivity(), item.getChannel().getChannelId(), movie.getId())
+									.execute();
+//						}
+//						else {
+//							toLogin(item.getChannel().getChannelId(), movie.getId());
+//						}
 					}
 				});
 
@@ -168,4 +174,14 @@ public class HomeFragment extends Fragment {
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 	}
+
+//	/** 跳转到登陆页面 */
+//	private void toLogin(String channelId, String contentId) {
+//		Intent intent = new Intent(getActivity(), LoginActivity.class);
+//		intent.putExtra(ComParams.INTENT_TODO, ToDetailAsyncTask.TAG);
+//		intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CHANNELID, channelId);
+//		intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID, contentId);
+//		startActivityForResult(intent, 10);
+//	}
+
 }

@@ -13,11 +13,11 @@ public class DetailContentClip implements Parcelable {
 	private String name; // 清晰度名称
 	private String code; // 清晰度编号
 
-	private DetailContentClip(){
+	private DetailContentClip() {
 		name = "";
 		code = "";
 	}
-	
+
 	public String getName() {
 		return name;
 	}

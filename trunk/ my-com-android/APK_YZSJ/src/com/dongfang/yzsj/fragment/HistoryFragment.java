@@ -18,7 +18,6 @@ import com.dongfang.view.PullToRefreshView.OnHeaderRefreshListener;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.bean.HistoryBean;
 import com.dongfang.yzsj.bean.Movie;
-import com.dongfang.yzsj.fragment.adp.FavoriteAdp;
 import com.dongfang.yzsj.fragment.adp.HistoryAdp;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
@@ -49,6 +48,7 @@ public class HistoryFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		ULog.d(TAG, "onCreateView");
 		View view = inflater.inflate(R.layout.fragment_favorite, container, false);
 		initView(view);
 		return view;
@@ -82,8 +82,36 @@ public class HistoryFragment extends Fragment {
 
 	@Override
 	public void onStart() {
+		ULog.d(TAG, "onStart");
 		super.onStart();
-		getPlayHistory(0, LIMIT);
+	}
+
+	@Override
+	public void onResume() {
+		ULog.d(TAG, "onResume");
+		super.onResume();
+		if (User.isLogined(getActivity()) && (null == listData || listData.size() < 1)) {
+			getPlayHistory(0, LIMIT);
+		}
+
+	}
+
+	@Override
+	public void onPause() {
+		ULog.d(TAG, "onPause");
+		super.onPause();
+	}
+
+	@Override
+	public void onStop() {
+		ULog.d(TAG, "onStop");
+		super.onStop();
+	}
+
+	@Override
+	public void onDestroy() {
+		ULog.d(TAG, "onDestroy");
+		super.onDestroy();
 	}
 
 	/** 获取网络数据 */

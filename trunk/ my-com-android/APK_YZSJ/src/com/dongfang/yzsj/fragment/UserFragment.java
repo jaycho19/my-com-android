@@ -48,7 +48,7 @@ public class UserFragment extends Fragment {
 
 		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab3), HistoryFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), SubscibeFragment.class, null);
-		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab1), FavoriteFragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab1), FavoriteFragment.class, null);
 		// fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), LoginFragment.class, null);
 
 		final LinearLayout.LayoutParams lp = new LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);

@@ -21,9 +21,9 @@ import com.dongfang.yzsj.broadcast.CloseAppReceiver;
  * 
  */
 public abstract class BaseActivity extends FragmentActivity {
-	protected String			TAG	= BaseActivity.class.getSimpleName();
+	protected String TAG = BaseActivity.class.getSimpleName();
 
-	private CloseAppReceiver	closeApp;
+	private CloseAppReceiver closeApp;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -109,10 +109,10 @@ public abstract class BaseActivity extends FragmentActivity {
 
 	protected void appExit() {}
 
-	private BroadcastReceiver	connectReciver	= new BroadcastReceiver() {
+	private BroadcastReceiver connectReciver = new BroadcastReceiver() {
 
-													@Override
-													public void onReceive(Context context, Intent intent) {}
-												};
+		@Override
+		public void onReceive(Context context, Intent intent) {}
+	};
 
 }

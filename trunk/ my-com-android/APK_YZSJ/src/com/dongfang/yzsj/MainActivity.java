@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.df.util.ULog;
+import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
 import com.dongfang.yzsj.bean.HomeBean;
 import com.dongfang.yzsj.fragment.HomeFragment;
 import com.dongfang.yzsj.fragment.LiveFragment;
@@ -226,6 +227,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		super.onDestroy();
 		fgtHost = null;
 	}
+
+//	// 来源于HomeFragment
+//	@Override
+//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//		super.onActivityResult(requestCode, resultCode, data);
+//		ULog.d(TAG, "requestCode = " + requestCode + ", resultCode = " + resultCode);
+//		if (null != data){
+//			ULog.d(TAG, data.getAction());
+//		}
+//		
+//		
+//		// 可以根据多个请求代码来作相应的操作
+//		if (10 == resultCode && null != data) {
+//			if (ToDetailAsyncTask.TAG.equals(data.getStringExtra(ComParams.INTENT_TODO))) {
+//				new ToDetailAsyncTask(this, data.getStringExtra(ComParams.INTENT_MOVIEDETAIL_CHANNELID),
+//						data.getStringExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID)).execute();
+//			}
+//		}
+//	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
