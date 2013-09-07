@@ -80,12 +80,21 @@ public abstract class BaseActivity extends FragmentActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		ULog.d(TAG, "onCreateOptionsMenu");
+		getMenuInflater().inflate(R.menu.main, menu);
+
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		return super.onOptionsItemSelected(item);
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+		case R.id.menu_item_exit:
+			appExit();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	@Override
@@ -93,12 +102,6 @@ public abstract class BaseActivity extends FragmentActivity {
 		super.onStop();
 	}
 
-	/**
-	 * 原先五个Activity均有复写该退出口<br>
-	 * 现改为只有推荐页面有，其余页面跳转至该页面
-	 * 
-	 * @author wwei
-	 */
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		return super.onKeyDown(keyCode, event);
 	}
@@ -107,7 +110,9 @@ public abstract class BaseActivity extends FragmentActivity {
 
 	protected void showOfflineViewExitDialog() {}
 
-	protected void appExit() {}
+	protected void appExit() {
+		sendBroadcast(new Intent(getPackageName().toString() + "." + CloseAppReceiver.TAG));
+	}
 
 	private BroadcastReceiver connectReciver = new BroadcastReceiver() {
 

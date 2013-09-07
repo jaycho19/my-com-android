@@ -1,7 +1,9 @@
 package com.dongfang.yzsj;
 
 import com.df.util.ULog;
+import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
 import com.dongfang.yzsj.fragment.LoginFragment;
+import com.dongfang.yzsj.params.ComParams;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ public class LoginActivity extends BaseActivity {
 
 	private Bundle data;
 	private LoginFragment loginFragment;// 登陆Fragment
+	private Intent intent;
 
 	@Override
 	protected void setBaseValues() {
@@ -28,7 +31,6 @@ public class LoginActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		data = getIntent().getExtras();
-
 		findViewById(R.id.login_tv_back).setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -48,8 +50,8 @@ public class LoginActivity extends BaseActivity {
 			@Override
 			public void login(boolean login, String phoneNumber) {
 				if (login) {
-					toResult(10);
-					finish();
+					toResult();
+					//finish();
 				}
 			}
 		});
@@ -57,11 +59,16 @@ public class LoginActivity extends BaseActivity {
 	}
 
 	/** 返回信息给进入这个界面的activity */
-	private void toResult(int resultCode) {
-		ULog.d(TAG, "resultCode = " + resultCode);
-		Intent intent = new Intent();
-		intent.putExtras(data);
-		setResult(resultCode, intent);
+	private void toResult() {
+		if (null == data) {
+			return;
+		}
+
+		if (ToDetailAsyncTask.TAG.equals(data.getString(ComParams.INTENT_TODO))) {
+			new ToDetailAsyncTask(this, data.getString(ComParams.INTENT_MOVIEDETAIL_CHANNELID),
+					data.getString(ComParams.INTENT_MOVIEDETAIL_CONNENTID)).execute();
+		}
+
 	}
 
 }

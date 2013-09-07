@@ -22,7 +22,6 @@ import com.dongfang.yzsj.bean.Movie;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
 import com.dongfang.yzsj.utils.UtilOfTime;
-import com.lidroid.xutils.BitmapUtils;
 
 /**
  * 频道列表adp
@@ -92,7 +91,7 @@ public class TypeAdp extends BaseAdapter {
 
 		final Movie movie = list.get(position);
 		holder.iv_placard.setImage(movie.getPC_MEDIA_POSTER_BIG());
-//		BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG(), 105, 137);
+		// BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG(), 105, 137);
 		holder.tv_title.setText(movie.getMEDIA_NAME());
 		holder.tv_actor.setText(movie.getMEDIA_ACTORS());
 		String length = UtilOfTime.formatSeconds2Date(Long.valueOf(TextUtils.isEmpty(movie.getMEDIA_LENGTH()) ? "0"
@@ -139,6 +138,7 @@ public class TypeAdp extends BaseAdapter {
 		intent.putExtra(ComParams.INTENT_TODO, ToDetailAsyncTask.TAG);
 		intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CHANNELID, channelId);
 		intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID, contentId);
-		((Activity) context).startActivityForResult(intent, 10);
+		((Activity) context).startActivity(intent);
+
 	}
 }

@@ -68,6 +68,16 @@ public class Util {
 	// "sdcard/TYSX/dl";
 	public static final String DOWNLOAD_DEFAULT_SDCARD_PATH = Environment.getExternalStorageDirectory() + "/TYSX/dl";
 
+	// ------------------------------------------------------------------------------
+	public static final String SP_NAME_WINDOW = "SP_NAME_WINDOW";
+	public static final String SP_WINDOW_WIDTH = "SP_WINDOW_WIDTH";
+	public static final String SP_WINDOW_HEIGHT = "SP_WINDOW_HEIGHT";
+	public static final String SP_WINDOW_DENSITY = "SP_WINDOW_DENSITY";
+	public static final String SP_NAME_MAIN = "SP_NAME_MAIN";
+	public static final String SP_MAIN_LOADING_URL = "SP_MAIN_LOADING_URL";
+	public static final String SP_MAIN_LOADING_URL_LASTTIME = "SP_MAIN_LOADING_URL_LASTTIME";
+	public static final String SP_MAIN_SHORTCUT_CREATED = "SP_MAIN_SHORTCUT_CREATED";
+
 	/**
 	 * 更新视频下载路径值
 	 * 
@@ -91,7 +101,7 @@ public class Util {
 		SharedPreferences sp = context.getSharedPreferences(SHAREDPREFERENCES_USER_SETTINGS, Context.MODE_PRIVATE);
 		return sp.getString(SHAREDPREFERENCES_USER_DOWNLOAD_PATH, DOWNLOAD_DEFAULT_SDCARD_PATH);
 	}
-	
+
 	/**
 	 * 返回屏幕宽度
 	 * 
@@ -99,10 +109,10 @@ public class Util {
 	 * @return
 	 */
 	public static int getWindowWidth(Context context) {
-		SharedPreferences sp = context.getSharedPreferences(ComParams.SP_NAME_WINDOW, 0);
+		SharedPreferences sp = context.getSharedPreferences(SP_NAME_WINDOW, 0);
 		int width = 0;
-		if (sp.contains(ComParams.SP_WINDOW_WIDTH)) {
-			width = sp.getInt(ComParams.SP_WINDOW_WIDTH, 0);
+		if (sp.contains(SP_WINDOW_WIDTH)) {
+			width = sp.getInt(SP_WINDOW_WIDTH, 0);
 		}
 		if (width <= 0) {
 			DisplayMetrics dm = new android.util.DisplayMetrics();
@@ -110,7 +120,7 @@ public class Util {
 			width = dm.widthPixels;
 
 			Editor editor = sp.edit();
-			editor.putInt(ComParams.SP_WINDOW_WIDTH, width);
+			editor.putInt(SP_WINDOW_WIDTH, width);
 			editor.commit();
 		}
 		return width;
@@ -123,10 +133,10 @@ public class Util {
 	 * @return
 	 */
 	public static int getWindowHeight(Context context) {
-		SharedPreferences sp = context.getSharedPreferences(ComParams.SP_NAME_WINDOW, 0);
+		SharedPreferences sp = context.getSharedPreferences(SP_NAME_WINDOW, 0);
 		int height = 0;
-		if (sp.contains(ComParams.SP_WINDOW_HEIGHT)) {
-			height = sp.getInt(ComParams.SP_WINDOW_HEIGHT, 0);
+		if (sp.contains(SP_WINDOW_HEIGHT)) {
+			height = sp.getInt(SP_WINDOW_HEIGHT, 0);
 		}
 		if (height <= 0) {
 			DisplayMetrics dm = new android.util.DisplayMetrics();
@@ -134,7 +144,7 @@ public class Util {
 			height = dm.heightPixels;
 
 			Editor editor = sp.edit();
-			editor.putInt(ComParams.SP_WINDOW_HEIGHT, height);
+			editor.putInt(SP_WINDOW_HEIGHT, height);
 			editor.commit();
 		}
 		return height;
@@ -150,10 +160,10 @@ public class Util {
 		if (context == null) {
 			return Constants.DENSITY;
 		}
-		SharedPreferences sp = context.getSharedPreferences(ComParams.SP_NAME_WINDOW, 0);
+		SharedPreferences sp = context.getSharedPreferences(SP_NAME_WINDOW, 0);
 		float density = 0;
-		if (sp.contains(ComParams.SP_WINDOW_DENSITY)) {
-			density = sp.getFloat(ComParams.SP_WINDOW_DENSITY, 0);
+		if (sp.contains(SP_WINDOW_DENSITY)) {
+			density = sp.getFloat(SP_WINDOW_DENSITY, 0);
 		}
 		if (density <= 0) {
 			DisplayMetrics dm = new android.util.DisplayMetrics();
@@ -161,7 +171,7 @@ public class Util {
 			density = dm.density;
 
 			Editor editor = sp.edit();
-			editor.putFloat(ComParams.SP_WINDOW_DENSITY, density);
+			editor.putFloat(SP_WINDOW_DENSITY, density);
 			editor.commit();
 		}
 		return density;
@@ -1031,6 +1041,7 @@ public class Util {
 		}
 		return text;
 	}
+
 	/**
 	 * 若账号密码登陆接口下发msg中包含Unicode码，将其转换为可读的字符输出
 	 * 

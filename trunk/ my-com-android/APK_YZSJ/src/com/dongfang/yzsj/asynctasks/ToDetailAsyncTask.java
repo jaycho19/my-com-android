@@ -10,6 +10,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.df.util.ULog;
 import com.dongfang.utils.ACache;
 import com.dongfang.yzsj.DetailsActiivity;
+import com.dongfang.yzsj.LoginActivity;
 import com.dongfang.yzsj.bean.DetailBean;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
@@ -147,6 +149,10 @@ public class ToDetailAsyncTask extends AsyncTask<String, String, DetailBean> {
 		Intent intent = new Intent(context, DetailsActiivity.class);
 		intent.putExtra(ComParams.INTENT_MOVIEDETAIL_BEAN, result);
 		context.startActivity(intent);
+		
+		if (context instanceof LoginActivity){
+			((Activity)context).finish();
+		}
 
 	}
 
