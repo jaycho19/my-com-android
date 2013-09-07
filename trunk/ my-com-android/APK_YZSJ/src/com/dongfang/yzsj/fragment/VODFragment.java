@@ -18,12 +18,13 @@ import android.widget.ImageView;
 
 import com.df.util.ULog;
 import com.dongfang.utils.ACache;
+import com.dongfang.utils.Util;
+import com.dongfang.view.MyImageView;
 import com.dongfang.yzsj.MovieListActivity;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.bean.Channel;
 import com.dongfang.yzsj.bean.VODItem;
 import com.dongfang.yzsj.params.ComParams;
-import com.dongfang.yzsj.utils.Util;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
@@ -213,7 +214,8 @@ public class VODFragment extends Fragment {
 				convertView = LayoutInflater.from(mContext).inflate(R.layout.imageview_adapter, null);
 			}
 			convertView.setLayoutParams(lparams);
-			BitmapUtils.create(mContext).display((ImageView) convertView, lives.get(position).getPoster(), w, h);
+			((MyImageView) convertView).setImage(lives.get(position).getPoster());
+			// BitmapUtils.create(mContext).display((ImageView) convertView,lives.get(position).getPoster() , w, h);
 
 			convertView.setOnClickListener(new ClickListener(lives.get(position)));
 

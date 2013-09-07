@@ -14,9 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.df.util.ULog;
+import com.dongfang.utils.Util;
 import com.dongfang.view.hscroll.TitleItemBeans;
 import com.dongfang.yzsj.R;
-import com.dongfang.yzsj.utils.Util;
 
 /**
  * 横向滑动布局，子菜单

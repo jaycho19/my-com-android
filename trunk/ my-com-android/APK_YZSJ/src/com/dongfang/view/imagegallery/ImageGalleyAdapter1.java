@@ -8,10 +8,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.FrameLayout.LayoutParams;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.df.util.ULog;
+import com.dongfang.view.MyImageView;
 import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
 import com.dongfang.yzsj.bean.HomeSliderItem;
 import com.lidroid.xutils.BitmapUtils;
@@ -103,8 +103,8 @@ public class ImageGalleyAdapter1 extends PagerAdapter {
 		// ULog.d(TAG, "instantiateItem --> position = " + position + "; mCount = " + mCount);
 
 		HomeSliderItem kv = list.get(position);
-		ImageView fling_image = new ImageView(context);
-		BitmapUtils.create(context).display(fling_image, kv.getMEDIA_PIC_RECOM2());
+		MyImageView fling_image = new MyImageView(context);
+		fling_image.setImage(kv.getMEDIA_PIC_RECOM2(),true);
 		fling_image.setLayoutParams(new LayoutParams(-1, -1));
 
 		fling_image.setOnClickListener(new MyOnClickListener(kv.getChannelId(), kv.getId()));

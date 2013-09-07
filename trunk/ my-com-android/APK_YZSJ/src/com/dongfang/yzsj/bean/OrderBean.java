@@ -1,5 +1,6 @@
 package com.dongfang.yzsj.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Parcel;
@@ -16,6 +17,9 @@ public class OrderBean implements Parcelable {
 	private String channelId;// 影片所属的频道Id
 	private String contentId; // 影片id标识
 	private List<OrderProduct> products;// 产品列表
+
+	private boolean success = true;
+	private List<String> error;
 
 	public String getUserId() {
 		return userId;
@@ -49,9 +53,32 @@ public class OrderBean implements Parcelable {
 		this.products = products;
 	}
 
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+
+	public List<String> getError() {
+		return error;
+	}
+
+	public void setError(List<String> error) {
+		this.error = error;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("\n");
+		sb.append("success   = ").append(success).append("\n");
+		if (null != error && error.size() > 0) {
+			sb.append("error     = ").append(error.get(0)).append("\n");
+		}
+		else {
+			sb.append("error     = ").append("").append("\n");
+		}
 		sb.append("userId    = ").append(userId).append("\n");
 		sb.append("channelId = ").append(channelId).append("\n");
 		sb.append("contentId = ").append(contentId).append("\n");
@@ -67,6 +94,8 @@ public class OrderBean implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(success ? 1 : 0);
+		dest.writeStringList(error);
 		dest.writeString(userId);
 		dest.writeString(channelId);
 		dest.writeString(contentId);
@@ -77,6 +106,8 @@ public class OrderBean implements Parcelable {
 		@Override
 		public OrderBean createFromParcel(Parcel in) {
 			OrderBean data = new OrderBean();
+			data.success = in.readInt() == 1 ? true : false;
+			data.error = in.createStringArrayList();
 			data.userId = in.readString();
 			data.channelId = in.readString();
 			data.contentId = in.readString();

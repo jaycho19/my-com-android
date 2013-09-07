@@ -95,7 +95,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="切换排序方式>>>"
-            android:textColor="@color/text_orange"
+            android:textColor="@color/color_type_sort_textview"
             android:textStyle="bold"
             android:typeface="serif" />
     </RelativeLayout>

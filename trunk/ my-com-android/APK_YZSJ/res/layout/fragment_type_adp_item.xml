@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:padding="5dp" >
 
-    <ImageView
+    <com.dongfang.view.MyImageView
         android:id="@+id/favorite_imageView_placard"
         android:layout_width="105dp"
         android:layout_height="137dp"
