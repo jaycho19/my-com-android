@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
 
 import com.df.util.ULog;
 import com.dongfang.utils.ACache;
@@ -28,7 +27,6 @@ import com.dongfang.yzsj.bean.HomeLivesItem;
 import com.dongfang.yzsj.bean.LiveBean;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
-import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
@@ -112,12 +110,12 @@ public class LiveFragment extends Fragment {
 				public void onStart() {
 					ULog.i(TAG, "onStart");
 					progDialog.show();
-
 				}
 
 				@Override
 				public void onFailure(Throwable error, String msg) {
 					ULog.i(TAG, "onFailure");
+					progDialog.dismiss();
 				}
 			});
 		}
@@ -154,11 +152,6 @@ public class LiveFragment extends Fragment {
 		ULog.i(TAG, url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
-			@Override
-			public void onLoading(long total, long current) {
-				ULog.d(TAG, "RequestCallBack.onLoading total = " + total + "; current = " + current);
-			}
-
 			@Override
 			public void onSuccess(String result) {
 				progDialog.dismiss();
@@ -232,9 +225,10 @@ public class LiveFragment extends Fragment {
 				convertView = LayoutInflater.from(mContext).inflate(R.layout.imageview_adapter, null);
 			}
 			convertView.setLayoutParams(lparams);
-			((MyImageView)convertView).setImage(lives.get(position).PHONE_MEDIA_POSTER_SMALL);
-//			BitmapUtils.create(mContext).display((ImageView) convertView, lives.get(position).PHONE_MEDIA_POSTER_SMALL,
-//					w, h);
+			((MyImageView) convertView).setImage(lives.get(position).PHONE_MEDIA_POSTER_SMALL);
+			// BitmapUtils.create(mContext).display((ImageView) convertView,
+			// lives.get(position).PHONE_MEDIA_POSTER_SMALL,
+			// w, h);
 
 			convertView.setOnClickListener(new OnClickListener() {
 

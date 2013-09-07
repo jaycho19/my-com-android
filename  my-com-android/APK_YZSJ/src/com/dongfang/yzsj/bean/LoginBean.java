@@ -27,4 +27,13 @@ public class LoginBean {
 	public void setToken(String token) {
 		this.token = token;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("success = ").append(success).append("\n");
+		sb.append("token = ").append(token);
+		return super.toString();
+	}
+
 }

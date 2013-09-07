@@ -89,52 +89,41 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 			String url = ComParams.HTTP_LOGIN + "obj.tel=" + etUserName.getText() + "&obj.verifyCode="
 					+ etAuthCode.getText();
 			ULog.i(TAG, url);
-			
+
 			// http://m.fortune-net.cn/user/user!phoneLogin.action?obj.tel=15631127974&obj.verifyCode=888222
 
 			new HttpUtils().send(HttpRequest.HttpMethod.GET, url, new RequestCallBack<String>() {
 				@Override
-				public void onLoading(long total, long current) {
-					ULog.d(TAG, "total = " + total + "; current = " + current);
-				}
-
-				@Override
 				public void onSuccess(String result) {
 					ULog.d(TAG, "onSuccess  --" + result);
 					progDialog.dismiss();
-					try {
 
-						LoginBean bean = new com.google.gson.Gson().fromJson(result, LoginBean.class);
+					LoginBean bean = new com.google.gson.Gson().fromJson(result, LoginBean.class);
 
-						if (null != bean && bean.isSuccess() && !TextUtils.isEmpty(bean.getToken())) {
-							// 保存token
-							User.saveToken(getActivity(), bean.getToken());
-							// 保存登陆状态
-							// User.saveUserLoginStatu(getActivity(), true);
+					ULog.d(TAG, bean.toString());
+					if (null != bean && bean.isSuccess() && !TextUtils.isEmpty(bean.getToken())) {
+						// 保存token
+						User.saveToken(getActivity(), bean.getToken());
+						// 保存登陆状态
+						// User.saveUserLoginStatu(getActivity(), true);
 
-							User.savePhone(getActivity(), etUserName.getText().toString());
+						User.savePhone(getActivity(), etUserName.getText().toString());
 
-							Toast.makeText(getActivity(), "登陆成功！", Toast.LENGTH_LONG).show();
+						Toast.makeText(getActivity(), "登陆成功！", Toast.LENGTH_LONG).show();
 
-							if (null != onLoginAndVerify)
-								onLoginAndVerify.login(true, etUserName.getText().toString());
-						}
-						else {
-							// 保存token
-							User.saveToken(getActivity(), "");
-							// 获取失败
-							// User.saveUserLoginStatu(getActivity(), false);
-							User.savePhone(getActivity(), "");
+						if (null != onLoginAndVerify)
+							onLoginAndVerify.login(true, etUserName.getText().toString());
+					}
+					else {
+						// 保存token
+						User.saveToken(getActivity(), "");
+						// 获取失败
+						// User.saveUserLoginStatu(getActivity(), false);
+						User.savePhone(getActivity(), "");
 
-							Toast.makeText(getActivity(), "登陆失败！", Toast.LENGTH_LONG).show();
-							if (null != onLoginAndVerify)
-								onLoginAndVerify.login(false, etUserName.getText().toString());
-						}
-					} catch (Exception e) {
-						Toast.makeText(getActivity(), "JSON解析失败", Toast.LENGTH_LONG).show();
+						Toast.makeText(getActivity(), "登陆失败！", Toast.LENGTH_LONG).show();
 						if (null != onLoginAndVerify)
 							onLoginAndVerify.login(false, etUserName.getText().toString());
-						e.printStackTrace();
 					}
 				}
 
@@ -149,6 +138,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 				public void onFailure(Throwable error, String msg) {
 					ULog.i(TAG, "onFailure");
 					progDialog.dismiss();
+
+					// 保存token
+					User.saveToken(getActivity(), "");
+					// 获取失败
+					// User.saveUserLoginStatu(getActivity(), false);
+					User.savePhone(getActivity(), "");
+
+					Toast.makeText(getActivity(), "登陆失败！", Toast.LENGTH_LONG).show();
+					if (null != onLoginAndVerify)
+						onLoginAndVerify.login(false, etUserName.getText().toString());
 				}
 			});
 

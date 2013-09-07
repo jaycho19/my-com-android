@@ -93,7 +93,6 @@ public class HistoryFragment extends Fragment {
 		if (User.isLogined(getActivity()) && (null == listData || listData.size() < 1)) {
 			getPlayHistory(0, LIMIT);
 		}
-
 	}
 
 	@Override

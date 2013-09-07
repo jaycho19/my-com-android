@@ -146,7 +146,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 			@Override
 			public void verify(boolean verify, String phoneNumber) {
-				// TODO Auto-generated method stub
 			}
 
 			@Override
@@ -154,6 +153,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 				if (login) {
 					tvLogin.setText("注销");
 					frameLayout.setVisibility(0);
+					fgtHost.refreshDrawableState();
 				}
 				else {
 					tvLogin.setText("登陆");
@@ -190,7 +190,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
-
+		ULog.d(TAG, "onResume");
+		
 		if (User.isLogined(this)) {
 			tvLogin.setText("注销");
 			frameLayout.setVisibility(0);
@@ -227,25 +228,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		super.onDestroy();
 		fgtHost = null;
 	}
-
-//	// 来源于HomeFragment
-//	@Override
-//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//		super.onActivityResult(requestCode, resultCode, data);
-//		ULog.d(TAG, "requestCode = " + requestCode + ", resultCode = " + resultCode);
-//		if (null != data){
-//			ULog.d(TAG, data.getAction());
-//		}
-//		
-//		
-//		// 可以根据多个请求代码来作相应的操作
-//		if (10 == resultCode && null != data) {
-//			if (ToDetailAsyncTask.TAG.equals(data.getStringExtra(ComParams.INTENT_TODO))) {
-//				new ToDetailAsyncTask(this, data.getStringExtra(ComParams.INTENT_MOVIEDETAIL_CHANNELID),
-//						data.getStringExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID)).execute();
-//			}
-//		}
-//	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
