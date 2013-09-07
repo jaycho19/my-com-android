@@ -15,8 +15,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.df.util.ULog;
+import com.dongfang.utils.Util;
 import com.dongfang.view.ImageGallery;
-import com.dongfang.yzsj.LoginActivity;
+import com.dongfang.view.MyImageView;
 import com.dongfang.yzsj.MainActivity;
 import com.dongfang.yzsj.MovieListActivity;
 import com.dongfang.yzsj.R;
@@ -25,8 +26,6 @@ import com.dongfang.yzsj.bean.HomeBean;
 import com.dongfang.yzsj.bean.HomeChannelItem;
 import com.dongfang.yzsj.bean.Movie;
 import com.dongfang.yzsj.params.ComParams;
-import com.dongfang.yzsj.utils.User;
-import com.dongfang.yzsj.utils.Util;
 import com.lidroid.xutils.BitmapUtils;
 
 /**
@@ -84,10 +83,12 @@ public class HomeFragment extends Fragment {
 			LinearLayout llLievLine2 = (LinearLayout) view.findViewById(R.id.ll_fragment_home_live_line2);
 			int length = bean.getLives().size();
 			for (int i = 0, l = Math.min(length, 5); i < l; i++) {
-				ImageView imageView = new ImageView(getActivity());
+				MyImageView imageView = new MyImageView(getActivity());
 				imageView.setLayoutParams(lparam);
-				BitmapUtils.create(getActivity()).display(imageView, bean.getLives().get(i).PHONE_MEDIA_POSTER_SMALL); // ,w,
-																														// w);
+				imageView.setImage(bean.getLives().get(i).PHONE_MEDIA_POSTER_SMALL);
+				// BitmapUtils.create(getActivity()).display(imageView,
+				// bean.getLives().get(i).PHONE_MEDIA_POSTER_SMALL); // ,w,
+				// w);
 				llLievLine1.addView(imageView);
 			}
 
@@ -148,19 +149,20 @@ public class HomeFragment extends Fragment {
 			lparam.setMargins(5, 5, 5, 5);
 
 			for (final Movie movie : item.getMovies()) {
-				ImageView imageView = new ImageView(getActivity());
+				MyImageView imageView = new MyImageView(getActivity());
 				imageView.setLayoutParams(lparam);
-				BitmapUtils.create(getActivity()).display(imageView, movie.getPC_MEDIA_POSTER_BIG(), w, w * 456 / 330);
+				imageView.setImage(movie.getPC_MEDIA_POSTER_BIG());
+				// BitmapUtils.create(getActivity()).display(imageView, movie.getPC_MEDIA_POSTER_BIG(), w, w * 456 /
+				// 330);
 				imageView.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-//						if (User.isLogined(getActivity())) {
-							new ToDetailAsyncTask(getActivity(), item.getChannel().getChannelId(), movie.getId())
-									.execute();
-//						}
-//						else {
-//							toLogin(item.getChannel().getChannelId(), movie.getId());
-//						}
+						// if (User.isLogined(getActivity())) {
+						new ToDetailAsyncTask(getActivity(), item.getChannel().getChannelId(), movie.getId()).execute();
+						// }
+						// else {
+						// toLogin(item.getChannel().getChannelId(), movie.getId());
+						// }
 					}
 				});
 
@@ -175,13 +177,13 @@ public class HomeFragment extends Fragment {
 		super.onSaveInstanceState(outState);
 	}
 
-//	/** 跳转到登陆页面 */
-//	private void toLogin(String channelId, String contentId) {
-//		Intent intent = new Intent(getActivity(), LoginActivity.class);
-//		intent.putExtra(ComParams.INTENT_TODO, ToDetailAsyncTask.TAG);
-//		intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CHANNELID, channelId);
-//		intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID, contentId);
-//		startActivityForResult(intent, 10);
-//	}
+	// /** 跳转到登陆页面 */
+	// private void toLogin(String channelId, String contentId) {
+	// Intent intent = new Intent(getActivity(), LoginActivity.class);
+	// intent.putExtra(ComParams.INTENT_TODO, ToDetailAsyncTask.TAG);
+	// intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CHANNELID, channelId);
+	// intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID, contentId);
+	// startActivityForResult(intent, 10);
+	// }
 
 }

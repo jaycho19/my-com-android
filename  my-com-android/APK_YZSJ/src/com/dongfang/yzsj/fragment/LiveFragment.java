@@ -21,12 +21,13 @@ import android.widget.ImageView;
 
 import com.df.util.ULog;
 import com.dongfang.utils.ACache;
+import com.dongfang.utils.Util;
+import com.dongfang.view.MyImageView;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.bean.HomeLivesItem;
 import com.dongfang.yzsj.bean.LiveBean;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
-import com.dongfang.yzsj.utils.Util;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestCallBack;
@@ -231,8 +232,9 @@ public class LiveFragment extends Fragment {
 				convertView = LayoutInflater.from(mContext).inflate(R.layout.imageview_adapter, null);
 			}
 			convertView.setLayoutParams(lparams);
-			BitmapUtils.create(mContext).display((ImageView) convertView, lives.get(position).PHONE_MEDIA_POSTER_SMALL,
-					w, h);
+			((MyImageView)convertView).setImage(lives.get(position).PHONE_MEDIA_POSTER_SMALL);
+//			BitmapUtils.create(mContext).display((ImageView) convertView, lives.get(position).PHONE_MEDIA_POSTER_SMALL,
+//					w, h);
 
 			convertView.setOnClickListener(new OnClickListener() {
 

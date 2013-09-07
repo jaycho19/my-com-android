@@ -49,10 +49,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp" >
 
-                <ImageView
+                <com.dongfang.view.MyImageView
                     android:id="@+id/detail_iv_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="120dp"
                     android:layout_margin="5dp"
                     android:background="@drawable/image_bg"
                     android:minHeight="120dp"

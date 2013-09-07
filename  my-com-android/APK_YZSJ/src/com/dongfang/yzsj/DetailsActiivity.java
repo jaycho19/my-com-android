@@ -11,21 +11,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.df.util.ULog;
+import com.dongfang.utils.Util;
+import com.dongfang.view.MyImageView;
 import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
 import com.dongfang.yzsj.bean.DetailBean;
 import com.dongfang.yzsj.bean.OrderBean;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
-import com.dongfang.yzsj.utils.Util;
 import com.dongfang.yzsj.utils.UtilOfTime;
-import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
@@ -42,7 +42,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 
 	private TextView tvBack; // 返回按钮
 	private TextView tvTitle; // 顶部按钮
-	private ImageView ivMovieIcon;// 图片
+	private MyImageView ivMovieIcon;// 图片
 	private TextView tvMovieName;// 名称
 	private TextView tvMovieLength;// 视频长度
 	private TextView tvMovieDesc;// 详情
@@ -82,7 +82,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		tvBack.setOnClickListener(this);
 
 		tvTitle = (TextView) findViewById(R.id.detail_tv_title);
-		ivMovieIcon = (ImageView) findViewById(R.id.detail_iv_icon);
+		ivMovieIcon = (MyImageView) findViewById(R.id.detail_iv_icon);
 		tvMovieName = (TextView) findViewById(R.id.detail_tv_movie_name);
 		tvMovieLength = (TextView) findViewById(R.id.detail_tv_length);
 		tvMovieDesc = (TextView) findViewById(R.id.detail_tv_desc);
@@ -108,7 +108,13 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 			return;
 
 		tvTitle.setText(bean.getChannel().getName());
-		BitmapUtils.create(this).display(ivMovieIcon, bean.getContent().getPC_MEDIA_POSTER_BIG());
+		{
+			int w = Util.getWindowWidth(this) / 3 - 10;
+			RelativeLayout.LayoutParams Rparam = new RelativeLayout.LayoutParams(w, w * 456 / 330);
+			Rparam.setMargins(5, 5, 5, 5);
+			ivMovieIcon.setLayoutParams(Rparam);
+		}
+		ivMovieIcon.setImage(bean.getContent().getPC_MEDIA_POSTER_BIG());
 		tvMovieName.setText(bean.getContent().getMEDIA_NAME());
 
 		try {
@@ -173,19 +179,17 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(w, w * 456 / 330);
 			lparam.setMargins(5, 5, 5, 5);
 			for (int i = 0, l = Math.min(length, 3); i < l; i++) {
-				ImageView imageView = new ImageView(this);
+				MyImageView imageView = new MyImageView(this);
 				imageView.setLayoutParams(lparam);
-				BitmapUtils.create(this).display(imageView, bean.getRelateContents().get(i).getPC_MEDIA_POSTER_BIG(),
-						w, LinearLayout.LayoutParams.WRAP_CONTENT);
+				imageView.setImage(bean.getRelateContents().get(i).getPC_MEDIA_POSTER_BIG());
 				imageView.setOnClickListener(new MyOnClickListener(bean.getChannel().getChannelId(), bean
 						.getRelateContents().get(i).getId()));
 				llLikeContain_0.addView(imageView);
 			}
 			for (int i = 3, l = Math.min(length, 6); i < l; i++) {
-				ImageView imageView = new ImageView(this);
+				MyImageView imageView = new MyImageView(this);
 				imageView.setLayoutParams(lparam);
-				BitmapUtils.create(this).display(imageView, bean.getRelateContents().get(i).getPC_MEDIA_POSTER_BIG(),
-						w, LinearLayout.LayoutParams.WRAP_CONTENT);
+				imageView.setImage(bean.getRelateContents().get(i).getPC_MEDIA_POSTER_BIG());
 				imageView.setOnClickListener(new MyOnClickListener(bean.getChannel().getChannelId(), bean
 						.getRelateContents().get(i).getId()));
 				llLikeContain_1.addView(imageView);
@@ -315,6 +319,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		// StringBuilder url = new StringBuilder("http://tv.inhe.net/page/hbMobile/buyList.jsp?jsonFormat=true&");
 		StringBuilder url = new StringBuilder(ComParams.HTTP_ORDERLIST);
 		url.append("u_serId=").append(User.getPhone(this));
+		url.append("&").append("token=").append(User.getToken(this));
 		url.append("&").append("contentId=").append(conntentId);
 		url.append("&").append("channelId=").append(channelId);
 
@@ -325,23 +330,28 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 			@Override
 			public void onSuccess(String result) {
 				progDialog.dismiss();
-				// ULog.d(TAG, "onSuccess  -- " + result);
+				ULog.d(TAG, "onSuccess  -- " + result);
 				OrderBean bean = new com.google.gson.Gson().fromJson(result, OrderBean.class);
 
 				ULog.d(TAG, bean.toString());
 
-				if (null != bean.getProducts() && bean.getProducts().size() > 0) {
-					Intent intent = new Intent(DetailsActiivity.this, OrderAcitivity.class);
-					intent.putExtra(ComParams.INTENT_ORDER_BEAN, bean);
-					intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CHANNELID, channelId);
-					intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID, conntentId);
-					intent.putExtra(ComParams.INTENT_MOVIEDETAIL_BAND, band);
-					intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CLIPID, clipId);
-					startActivity(intent);
+				if (bean.isSuccess()) {
+					if (null != bean.getProducts() && bean.getProducts().size() > 0) {
+						Intent intent = new Intent(DetailsActiivity.this, OrderAcitivity.class);
+						intent.putExtra(ComParams.INTENT_ORDER_BEAN, bean);
+						intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CHANNELID, channelId);
+						intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID, conntentId);
+						intent.putExtra(ComParams.INTENT_MOVIEDETAIL_BAND, band);
+						intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CLIPID, clipId);
+						startActivity(intent);
+					}
+					else {
+						// 获取订购页面失败，尝试着进行播放
+						toPlay(conntentId, band, clipId);
+					}
 				}
 				else {
-					// 获取订购页面失败，尝试着进行播放
-					toPlay(conntentId, band, clipId);
+					Toast.makeText(DetailsActiivity.this, bean.getError().get(0), Toast.LENGTH_LONG).show();
 				}
 			}
 

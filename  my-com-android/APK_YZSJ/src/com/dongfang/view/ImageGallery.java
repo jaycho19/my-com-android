@@ -14,10 +14,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.df.util.ULog;
+import com.dongfang.utils.Util;
 import com.dongfang.view.imagegallery.ImageGalleyAdapter1;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.bean.HomeSliderItem;
-import com.dongfang.yzsj.utils.Util;
 
 /** kv图片滑动 @author dongfang */
 public class ImageGallery extends LinearLayout {

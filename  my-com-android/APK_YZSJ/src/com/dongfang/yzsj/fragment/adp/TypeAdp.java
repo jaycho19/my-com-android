@@ -5,17 +5,16 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.sax.StartElementListener;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.df.util.ULog;
+import com.dongfang.view.MyImageView;
 import com.dongfang.yzsj.LoginActivity;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
@@ -81,7 +80,7 @@ public class TypeAdp extends BaseAdapter {
 		if (convertView == null) {
 			convertView = LayoutInflater.from(context).inflate(R.layout.fragment_type_adp_item, null);
 			holder = new ViewHolder();
-			holder.iv_placard = (ImageView) convertView.findViewById(R.id.favorite_imageView_placard);
+			holder.iv_placard = (MyImageView) convertView.findViewById(R.id.favorite_imageView_placard);
 			holder.tv_title = (TextView) convertView.findViewById(R.id.favorite_tv_title);
 			holder.tv_actor = (TextView) convertView.findViewById(R.id.favorite_tv_actor);
 			holder.tv_length = (TextView) convertView.findViewById(R.id.favorite_tv_length);
@@ -92,8 +91,8 @@ public class TypeAdp extends BaseAdapter {
 		}
 
 		final Movie movie = list.get(position);
-
-		BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG(), 105, 137);
+		holder.iv_placard.setImage(movie.getPC_MEDIA_POSTER_BIG());
+//		BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG(), 105, 137);
 		holder.tv_title.setText(movie.getMEDIA_NAME());
 		holder.tv_actor.setText(movie.getMEDIA_ACTORS());
 		String length = UtilOfTime.formatSeconds2Date(Long.valueOf(TextUtils.isEmpty(movie.getMEDIA_LENGTH()) ? "0"
@@ -107,7 +106,7 @@ public class TypeAdp extends BaseAdapter {
 
 	/** 列表item内容 */
 	private class ViewHolder {
-		ImageView iv_placard; // 海报，截图
+		MyImageView iv_placard; // 海报，截图
 		TextView tv_title;
 		TextView tv_actor;
 		TextView tv_length;

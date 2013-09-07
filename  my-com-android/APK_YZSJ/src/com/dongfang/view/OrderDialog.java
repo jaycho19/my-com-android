@@ -95,7 +95,7 @@ public class OrderDialog extends Dialog {
 	}
 
 	public static OrderDialog show(Context context, OnOrderDialogBtnListener onlistener) {
-		return show(context, onlistener, false);
+		return show(context, onlistener, true);
 	}
 
 	@Override
