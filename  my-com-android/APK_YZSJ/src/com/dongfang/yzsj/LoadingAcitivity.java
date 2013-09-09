@@ -32,6 +32,30 @@ public class LoadingAcitivity extends BaseActivity {
 		setContentView(R.layout.activity_loading);
 		// User.saveUserLoginStatu(this, false);
 
+		
+	}
+
+	/** 跳转到MainActivity */
+	private void intent(HomeBean bean) {
+		// User.saveUserLoginStatu(this, false); // 设置用户处于登出状态
+
+		Intent intent = new Intent(LoadingAcitivity.this, MainActivity.class);
+		intent.putExtra(ComParams.INTENT_HOMEBEAN, bean);
+		startActivity(intent);
+
+		finish();
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		// 需要判断网络
 		HomeBean bean = new com.google.gson.Gson().fromJson(ACache.get(this).getAsString(ComParams.INTENT_HOMEBEAN),
 				HomeBean.class);
 		if (null != bean && !TextUtils.isEmpty(bean.getMarquee()) && bean.getSlider().size() > 0) {
@@ -68,30 +92,6 @@ public class LoadingAcitivity extends BaseActivity {
 				}
 			});
 		}
-	}
-
-	/** 跳转到MainActivity */
-	private void intent(HomeBean bean) {
-		// User.saveUserLoginStatu(this, false); // 设置用户处于登出状态
-
-		Intent intent = new Intent(LoadingAcitivity.this, MainActivity.class);
-		intent.putExtra(ComParams.INTENT_HOMEBEAN, bean);
-		startActivity(intent);
-
-		finish();
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-
-		// 需要判断网络
-
 	}
 
 }

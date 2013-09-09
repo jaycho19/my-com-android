@@ -47,6 +47,14 @@ public class ComParams {
 	public static final String HTTP_ORDERLIST = HTTP_BASE + "/page/hbMobile/buyList.jsp?jsonFormat=true&";
 	/** 订购产品 */
 	public static final String HTTP_ORDER_PRODUCT = HTTP_BASE + "/user/user!operateOrder.action?";
+	
+//	/** 订购产品 */
+//	public static final String HTTP_SUBSCRIPTION_PRODUCT = HTTP_BASE
+//			+ "/web/bookMark!buyMessage.action?operationType=1";
+//	/** 退订产品 */
+//	public static final String HTTP_UNSUBSCRIPTION_PRODUCT = HTTP_BASE
+//			+ "/web/bookMark!buyMessage.action?operationType=2";
+	
 	/** 播放地址 */
 	public static final String HTTP_PLAYURL = HTTP_BASE
 			+ "/user/getPlayUrl.jsp?jsonFormat=true&clientType=m3u8&clipId=1&";

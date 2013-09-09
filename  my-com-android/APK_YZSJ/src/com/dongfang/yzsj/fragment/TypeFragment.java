@@ -61,7 +61,8 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 	private TextView tvTitle; // 类型
 	private TextView tvSort; // 类型
 
-	private PopupWindow popuWindow; // 频道切换框
+	private PopupWindow pinDaoPopuWindow; // 频道切换框
+	private PopupWindow paiXuPopuWindow; // 排序切换框
 
 	private LinearLayout llSubChannels; // 子频道
 	private LayoutInflater inflater;
@@ -72,6 +73,8 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 	private ListView listView;
 	private PullToRefreshView pulltoRefreshView;
 	private Channel channel; // 当前列表显示的频道信息
+	private int sortNumber = 1;
+	private List<CheckTextView> sortList = new ArrayList<CheckTextView>();
 
 	private int lastTotal;// 最近一次加载更多时返回的数据量
 
@@ -88,31 +91,32 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 		}
 
 		View view = inflater.inflate(R.layout.fragment_type, container, false);
-		initPopuWindow();
+		initPinDaoPopuWindow();
+		initPaiXuPopuWindow();
 		initView(view);
 		return view;
 	}
 
-	/** 初始化选择框 */
-	private void initPopuWindow() {
+	/** 初始化频道选择框 */
+	private void initPinDaoPopuWindow() {
 		if (null == listChannels || listChannels.size() == 0) {
 			return;
 		}
 
 		LinearLayout view = (LinearLayout) inflater.inflate(R.layout.type_popw_change, null);
-		popuWindow = new PopupWindow(view, -1, -2);
+		pinDaoPopuWindow = new PopupWindow(view, -1, -2);
 		// 展开特效
-		popuWindow.setAnimationStyle(R.style.Animations_GrowFromTop);
+		pinDaoPopuWindow.setAnimationStyle(R.style.Animations_GrowFromTop);
 		// when a touch even happens outside of the window
 		// make the window go away
-		popuWindow.setBackgroundDrawable(new ColorDrawable(0));
-		popuWindow.setFocusable(true);
-		popuWindow.setOutsideTouchable(true);
-		popuWindow.setTouchInterceptor(new OnTouchListener() {
+		pinDaoPopuWindow.setBackgroundDrawable(new ColorDrawable(0));
+		pinDaoPopuWindow.setFocusable(true);
+		pinDaoPopuWindow.setOutsideTouchable(true);
+		pinDaoPopuWindow.setTouchInterceptor(new OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-					popuWindow.dismiss();
+					pinDaoPopuWindow.dismiss();
 					return true;
 				}
 				return false;
@@ -142,9 +146,49 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 		}
 	}
 
+	private void initPaiXuPopuWindow() {
+		LinearLayout view = (LinearLayout) inflater.inflate(R.layout.type_popw_sort, null);
+		paiXuPopuWindow = new PopupWindow(view, -2, -2);
+		// 展开特效
+		paiXuPopuWindow.setAnimationStyle(R.style.Animations_GrowFromTop);
+		// when a touch even happens outside of the window
+		// make the window go away
+		paiXuPopuWindow.setBackgroundDrawable(new ColorDrawable(0));
+		paiXuPopuWindow.setFocusable(true);
+		paiXuPopuWindow.setOutsideTouchable(true);
+		paiXuPopuWindow.setTouchInterceptor(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+					paiXuPopuWindow.dismiss();
+					return true;
+				}
+				return false;
+			}
+		});
+
+		CheckTextView ctv1 = (CheckTextView) view.findViewById(R.id.type_tv_sort_week);
+		CheckTextView ctv2 = (CheckTextView) view.findViewById(R.id.type_tv_sort_month);
+		CheckTextView ctv3 = (CheckTextView) view.findViewById(R.id.type_tv_sort_all);
+		CheckTextView ctv4 = (CheckTextView) view.findViewById(R.id.type_tv_sort_new);
+		ctv1.setOnClickListener(new onSortChannel(1));
+		ctv2.setOnClickListener(new onSortChannel(2));
+		ctv3.setOnClickListener(new onSortChannel(3));
+		ctv4.setOnClickListener(new onSortChannel(4));
+
+		ctv1.setChecked(true);
+
+		sortList.add(ctv1);
+		sortList.add(ctv2);
+		sortList.add(ctv3);
+		sortList.add(ctv4);
+
+	}
+
 	private void initView(View view) {
 		tvTitle = (TextView) view.findViewById(R.id.type_tv_title);
 		tvSort = (TextView) view.findViewById(R.id.type_tv_sort);
+		tvSort.setOnClickListener(this);
 		btnBack = (TextView) view.findViewById(R.id.type_tv_back);
 		btnChangeType = (TextView) view.findViewById(R.id.type_tv_change_type);
 		btnChangeType.setOnClickListener(this);
@@ -201,7 +245,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
 		// bean非空初始化数据
 		if (null != listChannels) {
-			initPopuWindow();
+			initPinDaoPopuWindow();
 		}
 		else {
 			// bean为空，网络请求数据，需对网络进行判断
@@ -225,7 +269,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
 					ACache.get(getActivity()).put(ComParams.INTENT_SEARCH_CHANNELS, result, 60 * 5);// 缓存数据
 
-					initPopuWindow();
+					initPinDaoPopuWindow();
 
 					progDialog.dismiss();
 				}
@@ -262,10 +306,16 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 		// limit = limit < 10 ? 0 : limit;
 		// limit = limit > 30 ? 30 : limit;
 
-		String url = ComParams.HTTP_CHANNEL + "channelId=" + channelId + "&start=" + start + "&limit=" + limit;
-		ULog.d(TAG, url);
+		StringBuilder sb = new StringBuilder(ComParams.HTTP_CHANNEL);
+		sb.append("channelId=").append(channelId);
+		sb.append("&").append("start=").append(start);
+		sb.append("&").append("limit=").append(limit);
+		sb.append("&").append("sortNum=").append(sortNumber);
 
-		new HttpUtils().send(HttpRequest.HttpMethod.GET, url, new RequestCallBack<String>() {
+		// String url = ComParams.HTTP_CHANNEL + "channelId=" + channelId + "&start=" + start + "&limit=" + limit;
+		ULog.d(TAG, sb.toString());
+
+		new HttpUtils().send(HttpRequest.HttpMethod.GET, sb.toString(), new RequestCallBack<String>() {
 			@Override
 			public void onSuccess(String result) {
 				// ULog.d(TAG, "onSuccess  --" + result);
@@ -352,8 +402,11 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		if (null != popuWindow && popuWindow.isShowing()) {
-			popuWindow.dismiss();
+		if (null != pinDaoPopuWindow && pinDaoPopuWindow.isShowing()) {
+			pinDaoPopuWindow.dismiss();
+		}
+		if (null != paiXuPopuWindow && paiXuPopuWindow.isShowing()) {
+			paiXuPopuWindow.dismiss();
 		}
 	}
 
@@ -373,55 +426,19 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 			getActivity().finish();
 			break;
 		case R.id.type_tv_change_type:
-			if (null != popuWindow && !popuWindow.isShowing())
-				popuWindow.showAsDropDown(v, 0, 5);
-			else if (null != popuWindow) {
-				popuWindow.dismiss();
+			if (null != pinDaoPopuWindow && !pinDaoPopuWindow.isShowing())
+				pinDaoPopuWindow.showAsDropDown(v, 0, 5);
+			else if (null != pinDaoPopuWindow) {
+				pinDaoPopuWindow.dismiss();
 			}
 			break;
-		// case R.id.type_tv_change_type_baishitong:
-		// tvTitle.setText("百视通VIP");
-		// break;
-		// case R.id.type_tv_change_type_dianshiju:
-		// tvTitle.setText("电视剧");
-		// break;
-		// case R.id.type_tv_change_type_dianying:
-		// tvTitle.setText("电影");
-		// break;
-		// case R.id.type_tv_change_type_fengshang:
-		// tvTitle.setText("风尚");
-		// break;
-		// case R.id.type_tv_change_type_huashu:
-		// tvTitle.setText("华数VIP");
-		// break;
-		// case R.id.type_tv_change_type_jiaoyu:
-		// tvTitle.setText("教育");
-		// break;
-		// case R.id.type_tv_change_type_jishi:
-		// tvTitle.setText("纪实");
-		// break;
-		// case R.id.type_tv_change_type_minglanmu:
-		// tvTitle.setText("名栏目");
-		// break;
-		// case R.id.type_tv_change_type_tiyu:
-		// tvTitle.setText("体育");
-		// break;
-		// case R.id.type_tv_change_type_xinwen:
-		// tvTitle.setText("新闻");
-		// break;
-		// case R.id.type_tv_change_type_yinyue:
-		// tvTitle.setText("音乐");
-		// break;
-		// case R.id.type_tv_change_type_youpeng:
-		// tvTitle.setText("优朋VIP");
-		// break;
-		// case R.id.type_tv_change_type_yule:
-		// tvTitle.setText("娱乐");
-		// break;
-		// case R.id.type_tv_change_type_zhuanti:
-		// tvTitle.setText("专题");
-		// break;
-
+		case R.id.type_tv_sort:
+			if (null != paiXuPopuWindow && !paiXuPopuWindow.isShowing())
+				paiXuPopuWindow.showAsDropDown(v, 0, 5);
+			else if (null != paiXuPopuWindow) {
+				paiXuPopuWindow.dismiss();
+			}
+			break;
 		default:
 			break;
 		}
@@ -442,11 +459,38 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
 			tvTitle.setText(channel.getName());
 
+			pinDaoPopuWindow.dismiss();
+
 			ULog.d(TAG, "channel = " + channel.toString());
+
 			listData.clear();
 			getMovies(channel.getChannelId(), 0, LIMIT);
 
 		}
+	}
 
+	/** 排序获得数据 */
+	private class onSortChannel implements View.OnClickListener {
+		int sortNum = 1;
+
+		public onSortChannel(int sortNum) {
+			this.sortNum = sortNum;
+		}
+
+		@Override
+		public void onClick(View v) {
+			if (sortNumber != sortNum) {
+				sortNumber = sortNum;
+
+				for (CheckTextView ctv : sortList) {
+					ctv.setChecked(false);
+				}
+				sortList.get(sortNum - 1).setChecked(true);
+
+				paiXuPopuWindow.dismiss();
+
+				getMovies(channel.getChannelId(), 0, LIMIT);
+			}
+		}
 	}
 }
