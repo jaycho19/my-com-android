@@ -103,24 +103,31 @@ public class OrderAdp extends BaseAdapter {
 		holder.productType.setText(product.getType());
 		holder.productDesc.setText(product.getDescription());
 
-		if (!product.isHasBuyThis() && product.getStatus() == 1) {
-			holder.btn_order.setOnClickListener(new MyOnClickListener(product.getPayProductNo(), product.getCspId()));
+		if (product.isHasBuyThis()) {
+			holder.btn_order.setText("退订");
 		}
-		else if (12 == product.getStatus()) { // 12、只显示，不能购买也不能退
-			holder.btn_order.setVisibility(View.INVISIBLE);
-		}
-		else if (11 == product.getStatus()) {// 11、只能购买，不能退
-			if (product.isHasBuyThis())
-				holder.btn_order.setVisibility(View.INVISIBLE);
-		}
-		else if (10 == product.getStatus()) {// 10、只能退订，不能购买
-			if (product.isHasBuyThis()) {
-				holder.btn_order.setText("退订");
+		else {
+			if (product.getStatus() == 1) {
+				holder.btn_order
+						.setOnClickListener(new MyOnClickListener(product.getPayProductNo(), product.getCspId()));
 			}
-			else {
+			else if (12 == product.getStatus()) { // 12、只显示，不能购买也不能退
 				holder.btn_order.setVisibility(View.INVISIBLE);
 			}
+			else if (11 == product.getStatus()) {// 11、只能购买，不能退
+				if (product.isHasBuyThis())
+					holder.btn_order.setVisibility(View.INVISIBLE);
+			}
+			else if (10 == product.getStatus()) {// 10、只能退订，不能购买
+				if (product.isHasBuyThis()) {
+					holder.btn_order.setText("退订");
+				}
+				else {
+					holder.btn_order.setVisibility(View.INVISIBLE);
+				}
+			}
 		}
+
 		return convertView;
 	}
 

@@ -3,6 +3,7 @@ package com.dongfang.yzsj.fragment;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -107,7 +108,6 @@ public class HomeFragment extends Fragment {
 				imageView.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						// TODO Auto-generated method stub
 						toPlay(live.id);
 					}
 				});
@@ -127,7 +127,6 @@ public class HomeFragment extends Fragment {
 					imageView.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							// TODO Auto-generated method stub
 							toPlay(live.id);
 						}
 					});
@@ -251,6 +250,7 @@ public class HomeFragment extends Fragment {
 					String type = "video/*";
 					Uri uri = Uri.parse(json.getString("url"));
 					intent.setDataAndType(uri, type);
+			        // intent.setComponent(new ComponentName("com.android.gallery3d","com.android.gallery3d.MovieActivity"));  
 					startActivity(intent);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block

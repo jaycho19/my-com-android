@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/type_pupw_change_bg"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <com.dongfang.view.CheckTextView
+        android:id="@+id/type_tv_sort_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:clickable="true"
+        android:text="周播放最多"
+        android:textColor="@color/color_check_text_view_type" />
+
+    <com.dongfang.view.CheckTextView
+        android:id="@+id/type_tv_sort_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:clickable="true"
+        android:text="月播放最多"
+        android:textColor="@color/color_check_text_view_type" />
+
+    <com.dongfang.view.CheckTextView
+        android:id="@+id/type_tv_sort_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:clickable="true"
+        android:text="总播放最多"
+        android:textColor="@color/color_check_text_view_type" />
+
+    <com.dongfang.view.CheckTextView
+        android:id="@+id/type_tv_sort_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:clickable="true"
+        android:text="最新发布"
+        android:textColor="@color/color_check_text_view_type" />
+
+</LinearLayout>

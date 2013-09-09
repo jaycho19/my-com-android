@@ -43,7 +43,7 @@ public class UserFragment extends Fragment {
 		TextView tab2 = (TextView) inflater.inflate(R.layout.fragment_user_tab, null);
 		TextView tab3 = (TextView) inflater.inflate(R.layout.fragment_user_tab, null);
 		tab1.setText("个人收藏");
-		tab2.setText("我的订阅");
+		tab2.setText("我的订购");
 		tab3.setText("播放记录");
 
 		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab3), HistoryFragment.class, null);
