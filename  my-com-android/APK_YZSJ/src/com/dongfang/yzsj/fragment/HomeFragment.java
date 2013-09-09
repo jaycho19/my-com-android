@@ -1,6 +1,10 @@
 package com.dongfang.yzsj.fragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
@@ -25,10 +29,14 @@ import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
 import com.dongfang.yzsj.bean.HomeBean;
 import com.dongfang.yzsj.bean.HomeChannelItem;
+import com.dongfang.yzsj.bean.HomeLivesItem;
 import com.dongfang.yzsj.bean.Movie;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
 import com.lidroid.xutils.BitmapUtils;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.http.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
 
 /**
  * 首页
@@ -42,10 +50,14 @@ public class HomeFragment extends Fragment {
 	private ImageGallery imageGallery;
 	private TextView tvMarquee;
 	private LinearLayout llHome;
+	private com.dongfang.view.ProgressDialog progDialog;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_home, container, false);
+		progDialog = com.dongfang.view.ProgressDialog.show(getActivity());
+		progDialog.setCancelable(true);
+
 		initView(inflater, view);
 
 		if (null != savedInstanceState) {
@@ -85,21 +97,40 @@ public class HomeFragment extends Fragment {
 			LinearLayout llLievLine2 = (LinearLayout) view.findViewById(R.id.ll_fragment_home_live_line2);
 			int length = bean.getLives().size();
 			for (int i = 0, l = Math.min(length, 5); i < l; i++) {
+				final HomeLivesItem live = bean.getLives().get(i);
 				MyImageView imageView = new MyImageView(getActivity());
 				imageView.setLayoutParams(lparam);
-				imageView.setImage(bean.getLives().get(i).PHONE_MEDIA_POSTER_SMALL);
+				imageView.setImage(live.PHONE_MEDIA_POSTER_SMALL);
 				// BitmapUtils.create(getActivity()).display(imageView,
 				// bean.getLives().get(i).PHONE_MEDIA_POSTER_SMALL); // ,w,
 				// w);
+				imageView.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						toPlay(live.id);
+					}
+				});
+
 				llLievLine1.addView(imageView);
 			}
 
 			if (Math.min(length, 10) > 5) {
 				for (int i = 5, l = Math.min(length, 10); i < l; i++) {
-					ImageView imageView = new ImageView(getActivity());
+					final HomeLivesItem live = bean.getLives().get(i);
+					MyImageView imageView = new MyImageView(getActivity());
 					imageView.setLayoutParams(lparam);
-					BitmapUtils.create(getActivity()).display(imageView,
-							bean.getLives().get(i).PHONE_MEDIA_POSTER_SMALL, w, w);
+					imageView.setImage(live.PHONE_MEDIA_POSTER_SMALL);
+					// BitmapUtils.create(getActivity()).display(imageView,
+					// bean.getLives().get(i).PHONE_MEDIA_POSTER_SMALL); // ,w,
+					// w);
+					imageView.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							toPlay(live.id);
+						}
+					});
 					llLievLine2.addView(imageView);
 				}
 			}
@@ -180,13 +211,66 @@ public class HomeFragment extends Fragment {
 		super.onSaveInstanceState(outState);
 	}
 
-	 /** 跳转到登陆页面 */
+	/** 跳转到登陆页面 */
 	private void toLogin(String channelId, String contentId) {
 		Intent intent = new Intent(getActivity(), LoginActivity.class);
 		intent.putExtra(ComParams.INTENT_TODO, ToDetailAsyncTask.TAG);
 		intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CHANNELID, channelId);
 		intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID, contentId);
 		startActivity(intent);
+	}
+
+	/**
+	 * 获取播放地址，进入播放页面
+	 * 
+	 * @param conntentId
+	 *            内容id
+	 * @param band
+	 *            码流类型
+	 * @param clipId
+	 *            第几集
+	 */
+	private void toPlay(String conntentId) {
+		StringBuilder url = new StringBuilder(ComParams.HTTP_PLAYURL);
+		url.append("token=").append(User.getToken(getActivity()));
+		url.append("&").append("phone=").append(User.getPhone(getActivity()));
+		url.append("&").append("contentId=").append(conntentId);
+		url.append("&").append("bandwidth=").append("Media_Url_Source");
+		url.append("&").append("clipId=").append(1);
+
+		ULog.i(TAG, url.toString());
+
+		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
+			@Override
+			public void onSuccess(String result) {
+				progDialog.dismiss();
+				ULog.d(TAG, "onSuccess  --" + result);
+				try {
+					JSONObject json = new JSONObject(result);
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					String type = "video/*";
+					Uri uri = Uri.parse(json.getString("url"));
+					intent.setDataAndType(uri, type);
+					startActivity(intent);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+			@Override
+			public void onStart() {
+				ULog.i(TAG, "RequestCallBack.onStart");
+				progDialog.show();
+			}
+
+			@Override
+			public void onFailure(Throwable error, String msg) {
+				ULog.i(TAG, "RequestCallBack.onFailure");
+				progDialog.dismiss();
+			}
+		});
 	}
 
 }
