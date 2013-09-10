@@ -103,13 +103,17 @@ public class OrderAdp extends BaseAdapter {
 		holder.productType.setText(product.getType());
 		holder.productDesc.setText(product.getDescription());
 
+		holder.btn_order.setVisibility(View.VISIBLE);
+		
 		if (product.isHasBuyThis()) {
 			holder.btn_order.setText("退订");
+			holder.btn_order.setOnClickListener(
+					new MyOnClickListener(product.getPayProductNo(), product.getCspId(), 2));
 		}
 		else {
 			if (product.getStatus() == 1) {
-				holder.btn_order
-						.setOnClickListener(new MyOnClickListener(product.getPayProductNo(), product.getCspId()));
+				holder.btn_order.setOnClickListener(
+						new MyOnClickListener(product.getPayProductNo(), product.getCspId(), 1));
 			}
 			else if (12 == product.getStatus()) { // 12、只显示，不能购买也不能退
 				holder.btn_order.setVisibility(View.INVISIBLE);
@@ -117,10 +121,14 @@ public class OrderAdp extends BaseAdapter {
 			else if (11 == product.getStatus()) {// 11、只能购买，不能退
 				if (product.isHasBuyThis())
 					holder.btn_order.setVisibility(View.INVISIBLE);
+				holder.btn_order.setOnClickListener(
+						new MyOnClickListener(product.getPayProductNo(), product.getCspId(), 1));
 			}
 			else if (10 == product.getStatus()) {// 10、只能退订，不能购买
 				if (product.isHasBuyThis()) {
 					holder.btn_order.setText("退订");
+					holder.btn_order.setOnClickListener(
+							new MyOnClickListener(product.getPayProductNo(), product.getCspId(), 2));
 				}
 				else {
 					holder.btn_order.setVisibility(View.INVISIBLE);
@@ -143,10 +151,12 @@ public class OrderAdp extends BaseAdapter {
 	private class MyOnClickListener implements OnClickListener {
 		private String productId;
 		private String cspId;
+		private int operationType;
 
-		public MyOnClickListener(String productId, String cspId) {
+		public MyOnClickListener(String productId, String cspId, int operationType) {
 			this.productId = productId;
 			this.cspId = cspId;
+			this.operationType = operationType;
 		}
 
 		@Override
@@ -157,11 +167,12 @@ public class OrderAdp extends BaseAdapter {
 
 				@Override
 				public void ok(String phone, String authCode) {
-					StringBuilder url = new StringBuilder(ComParams.HTTP_ORDER_PRODUCT);
+					StringBuilder url = new StringBuilder(ComParams.HTTP_SUBSCRIPTION_PRODUCT);
 					url.append("userId=").append(phone);
 					url.append("&").append("productId=").append(productId);
 					url.append("&").append("verifyCode=").append(authCode);
 					url.append("&").append("cspId=").append(cspId);
+					url.append("&").append("operationType=").append(operationType);
 
 					ULog.i(TAG, url.toString());
 
@@ -175,8 +186,12 @@ public class OrderAdp extends BaseAdapter {
 							try {
 								JSONObject json = new JSONObject(result);
 								if (json.getBoolean("success")) {
-									Toast.makeText(context, "订购成功", Toast.LENGTH_LONG).show();
-
+									if (1 == operationType) {
+										Toast.makeText(context, "订购成功", Toast.LENGTH_LONG).show();
+									}
+									else {
+										Toast.makeText(context, "退订成功", Toast.LENGTH_LONG).show();
+									}
 									if (null != orderResult) {
 										orderResult.successed();
 									}
@@ -194,7 +209,13 @@ public class OrderAdp extends BaseAdapter {
 								if (null != orderResult) {
 									orderResult.failed();
 								}
-								Toast.makeText(context, "订购失败~~~~(>_<)~~~~ ", Toast.LENGTH_LONG).show();
+
+								if (1 == operationType) {
+									Toast.makeText(context, "订购失败~~~~(>_<)~~~~", Toast.LENGTH_LONG).show();
+								}
+								else {
+									Toast.makeText(context, "退订失败~~~~(>_<)~~~~ ", Toast.LENGTH_LONG).show();
+								}
 								e.printStackTrace();
 							}
 						}
