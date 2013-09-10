@@ -21,6 +21,7 @@ public class OrderProduct implements Parcelable {
 	private String type;// 产品资费类型（包月、按次）
 	private String cspId;// 产品所属的内容提供商
 	private String serviceProductName;// 产品名称
+	private int costType;// 消费类型，如下： 2、 人民币3、 M值
 
 	public int getStatus() {
 		return status;
@@ -110,6 +111,14 @@ public class OrderProduct implements Parcelable {
 		this.serviceProductName = serviceProductName;
 	}
 
+	public int getCostType() {
+		return costType;
+	}
+
+	public void setCostType(int costType) {
+		this.costType = costType;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("\n");
@@ -124,6 +133,7 @@ public class OrderProduct implements Parcelable {
 		sb.append(" -- type               = ").append(type).append("\n");
 		sb.append(" -- cspId              = ").append(cspId).append("\n");
 		sb.append(" -- serviceProductName = ").append(serviceProductName).append("\n");
+		sb.append(" -- costType           = ").append(costType).append("\n");
 		return sb.toString();
 	}
 
@@ -145,6 +155,7 @@ public class OrderProduct implements Parcelable {
 		dest.writeString(type);
 		dest.writeString(cspId);
 		dest.writeString(serviceProductName);
+		dest.writeInt(costType);
 	}
 
 	public static final Parcelable.Creator<OrderProduct> CREATOR = new Parcelable.Creator<OrderProduct>() {
@@ -162,6 +173,7 @@ public class OrderProduct implements Parcelable {
 			data.type = in.readString();
 			data.cspId = in.readString();
 			data.serviceProductName = in.readString();
+			data.costType = in.readInt();
 			return data;
 		}
 
