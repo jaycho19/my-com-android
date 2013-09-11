@@ -23,6 +23,7 @@ import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 
@@ -88,7 +89,8 @@ public class HistoryAdp extends BaseAdapter {
 		}
 
 		final Movie movie = list.get(position);
-		BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG(), 105, 137);
+		BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG());
+//		BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG(), 105, 137);
 		holder.tv_des.setText(movie.getMEDIA_INTRO());
 		holder.tv_actor.setText(movie.getMEDIA_ACTORS());
 		holder.tv_title.setText(movie.getMEDIA_NAME());
@@ -162,7 +164,7 @@ public class HistoryAdp extends BaseAdapter {
 				}
 
 				@Override
-				public void onFailure(Throwable error, String msg) {
+				public void onFailure(HttpException error, String msg) {
 					ULog.i(TAG, "RequestCallBack.onFailure");
 					progDialog.dismiss();
 				}

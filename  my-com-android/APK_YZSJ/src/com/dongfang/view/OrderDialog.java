@@ -16,6 +16,7 @@ import com.df.util.ULog;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.params.ComParams;
 import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 
@@ -144,7 +145,7 @@ public class OrderDialog extends Dialog {
 					}
 
 					@Override
-					public void onFailure(Throwable error, String msg) {
+					public void onFailure(HttpException error, String msg) {
 						ULog.i(TAG, "onFailure");
 						Toast.makeText(context, "验证码获取失败！", Toast.LENGTH_LONG).show();
 						progressDialog.dismiss();
