@@ -21,7 +21,6 @@ import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.bean.OrderProduct;
 import com.dongfang.yzsj.interf.OrderResult;
 import com.dongfang.yzsj.params.ComParams;
-import com.dongfang.yzsj.utils.User;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
@@ -104,16 +103,18 @@ public class OrderAdp extends BaseAdapter {
 		holder.productDesc.setText(product.getDescription());
 
 		holder.btn_order.setVisibility(View.VISIBLE);
-		
+
 		if (product.isHasBuyThis()) {
 			holder.btn_order.setText("退订");
-			holder.btn_order.setOnClickListener(
-					new MyOnClickListener(product.getPayProductNo(), product.getCspId(), 2));
+			holder.btn_order.setOnClickListener(new MyOnClickListener(position, product.getPayProductNo(), product
+					.getCspId(), 2));
 		}
 		else {
+			holder.btn_order.setText("订购");
+
 			if (product.getStatus() == 1) {
-				holder.btn_order.setOnClickListener(
-						new MyOnClickListener(product.getPayProductNo(), product.getCspId(), 1));
+				holder.btn_order.setOnClickListener(new MyOnClickListener(position, product.getPayProductNo(), product
+						.getCspId(), 1));
 			}
 			else if (12 == product.getStatus()) { // 12、只显示，不能购买也不能退
 				holder.btn_order.setVisibility(View.INVISIBLE);
@@ -121,14 +122,14 @@ public class OrderAdp extends BaseAdapter {
 			else if (11 == product.getStatus()) {// 11、只能购买，不能退
 				if (product.isHasBuyThis())
 					holder.btn_order.setVisibility(View.INVISIBLE);
-				holder.btn_order.setOnClickListener(
-						new MyOnClickListener(product.getPayProductNo(), product.getCspId(), 1));
+				holder.btn_order.setOnClickListener(new MyOnClickListener(position, product.getPayProductNo(), product
+						.getCspId(), 1));
 			}
 			else if (10 == product.getStatus()) {// 10、只能退订，不能购买
 				if (product.isHasBuyThis()) {
 					holder.btn_order.setText("退订");
-					holder.btn_order.setOnClickListener(
-							new MyOnClickListener(product.getPayProductNo(), product.getCspId(), 2));
+					holder.btn_order.setOnClickListener(new MyOnClickListener(position, product.getPayProductNo(),
+							product.getCspId(), 2));
 				}
 				else {
 					holder.btn_order.setVisibility(View.INVISIBLE);
@@ -152,15 +153,17 @@ public class OrderAdp extends BaseAdapter {
 		private String productId;
 		private String cspId;
 		private int operationType;
+		private int position;
 
-		public MyOnClickListener(String productId, String cspId, int operationType) {
+		public MyOnClickListener(int position, String productId, String cspId, int operationType) {
 			this.productId = productId;
 			this.cspId = cspId;
 			this.operationType = operationType;
+			this.position = position;
 		}
 
 		@Override
-		public void onClick(View v) {
+		public void onClick(final View v) {
 			ULog.d(TAG, v.toString());
 
 			OrderDialog.show(context, new OnOrderDialogBtnListener() {
@@ -188,9 +191,14 @@ public class OrderAdp extends BaseAdapter {
 								if (json.getBoolean("success")) {
 									if (1 == operationType) {
 										Toast.makeText(context, "订购成功", Toast.LENGTH_LONG).show();
+										((TextView) v).setText("退订");
+										list.get(position).setHasBuyThis(true);
 									}
 									else {
 										Toast.makeText(context, "退订成功", Toast.LENGTH_LONG).show();
+										list.get(position).setHasBuyThis(false);
+										((TextView) v).setText("订购");
+
 									}
 									if (null != orderResult) {
 										orderResult.successed();
@@ -236,7 +244,6 @@ public class OrderAdp extends BaseAdapter {
 
 				@Override
 				public void cancel() {
-					// TODO Auto-generated method stub
 
 				}
 			}).show();
