@@ -18,6 +18,7 @@ import com.dongfang.yzsj.bean.LoginBean;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
 import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 
@@ -135,7 +136,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 				}
 
 				@Override
-				public void onFailure(Throwable error, String msg) {
+				public void onFailure(HttpException error, String msg) {
 					ULog.i(TAG, "onFailure");
 					progDialog.dismiss();
 
@@ -199,7 +200,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 						}
 
 						@Override
-						public void onFailure(Throwable error, String msg) {
+						public void onFailure(HttpException error, String msg) {
 							ULog.i(TAG, "onFailure");
 							progDialog.dismiss();
 						}

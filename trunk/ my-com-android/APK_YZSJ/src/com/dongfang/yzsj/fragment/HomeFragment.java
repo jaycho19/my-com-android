@@ -3,7 +3,6 @@ package com.dongfang.yzsj.fragment;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,6 +27,7 @@ import com.dongfang.yzsj.MainActivity;
 import com.dongfang.yzsj.MovieListActivity;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
+import com.dongfang.yzsj.bean.Channel;
 import com.dongfang.yzsj.bean.HomeBean;
 import com.dongfang.yzsj.bean.HomeChannelItem;
 import com.dongfang.yzsj.bean.HomeLivesItem;
@@ -36,6 +36,7 @@ import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 
@@ -144,6 +145,68 @@ public class HomeFragment extends Fragment {
 			});
 		}
 
+		// VIP 数据都是写死
+		View viewVIP = inflater.inflate(R.layout.fragment_home_vip_item, null);
+		int w = Util.getWindowWidth(getActivity()) / 3 - 10;
+		int h = w * 90 / 179;
+		LinearLayout.LayoutParams viplparams = new LinearLayout.LayoutParams(w, h);
+		viplparams.setMargins(5, 5, 5, 5);
+		ImageView iv_hs = (ImageView) viewVIP.findViewById(R.id.fragment_home_iv_huashu); // 华数
+		ImageView iv_yp = (ImageView) viewVIP.findViewById(R.id.fragment_home_iv_youpengyingyue);// 优朋
+		ImageView iv_bst = (ImageView) viewVIP.findViewById(R.id.fragment_home_iv_baishitong);// 百事通
+		iv_hs.setLayoutParams(viplparams);
+		iv_yp.setLayoutParams(viplparams);
+		iv_bst.setLayoutParams(viplparams);
+
+		iv_hs.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Channel channel = new Channel();
+				channel.setChannelId("15884642");
+				channel.setId("15884642");
+				channel.setName("华数专区");
+				Intent intent = new Intent(getActivity(), MovieListActivity.class);
+				intent.putExtra(ComParams.INTENT_MOVIELIST_CHANNEL, channel);
+				getActivity().startActivity(intent);
+			}
+		});
+		iv_yp.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Channel channel = new Channel();
+				channel.setChannelId("15884644");
+				channel.setId("15884644");
+				channel.setName("优朋专区");
+				Intent intent = new Intent(getActivity(), MovieListActivity.class);
+				intent.putExtra(ComParams.INTENT_MOVIELIST_CHANNEL, channel);
+				getActivity().startActivity(intent);
+			}
+		});
+		iv_bst.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Channel channel = new Channel();
+				channel.setChannelId("15884646");
+				channel.setId("15884646");
+				channel.setName("百事通专区");
+				Intent intent = new Intent(getActivity(), MovieListActivity.class);
+				intent.putExtra(ComParams.INTENT_MOVIELIST_CHANNEL, channel);
+				getActivity().startActivity(intent);
+			}
+		});
+
+		// 更多
+		viewVIP.findViewById(R.id.fragment_home_tv_vip_item_more).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ULog.d(TAG, v.getId() + "");
+				FragmentTabHost fgtHost = ((MainActivity) getActivity()).getFgtHost();
+				fgtHost.setCurrentTabByTag("3");
+			}
+		});
+
+		llHome.addView(viewVIP, llHome.getChildCount() - 1);
+
 		// 频道
 		if (null != bean.getChannelContents() && bean.getChannelContents().size() > 0) {
 			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(-1, 50);
@@ -250,7 +313,8 @@ public class HomeFragment extends Fragment {
 					String type = "video/*";
 					Uri uri = Uri.parse(json.getString("url"));
 					intent.setDataAndType(uri, type);
-			        // intent.setComponent(new ComponentName("com.android.gallery3d","com.android.gallery3d.MovieActivity"));  
+					// intent.setComponent(new
+					// ComponentName("com.android.gallery3d","com.android.gallery3d.MovieActivity"));
 					startActivity(intent);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -266,7 +330,7 @@ public class HomeFragment extends Fragment {
 			}
 
 			@Override
-			public void onFailure(Throwable error, String msg) {
+			public void onFailure(HttpException error, String msg) {
 				ULog.i(TAG, "RequestCallBack.onFailure");
 				progDialog.dismiss();
 			}

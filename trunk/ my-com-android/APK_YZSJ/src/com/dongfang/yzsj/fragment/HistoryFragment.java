@@ -22,6 +22,7 @@ import com.dongfang.yzsj.fragment.adp.HistoryAdp;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
 import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 
@@ -173,7 +174,7 @@ public class HistoryFragment extends Fragment {
 			}
 
 			@Override
-			public void onFailure(Throwable error, String msg) {
+			public void onFailure(HttpException error, String msg) {
 				ULog.i(TAG, "RequestCallBack.onFailure");
 				progDialog.dismiss();
 

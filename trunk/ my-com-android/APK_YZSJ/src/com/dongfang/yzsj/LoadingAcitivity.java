@@ -12,6 +12,7 @@ import com.dongfang.utils.Util;
 import com.dongfang.yzsj.bean.HomeBean;
 import com.dongfang.yzsj.params.ComParams;
 import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 
@@ -103,7 +104,7 @@ public class LoadingAcitivity extends BaseActivity {
 				}
 
 				@Override
-				public void onFailure(Throwable error, String msg) {
+				public void onFailure(HttpException error, String msg) {
 					ULog.i(TAG, "RequestCallBack.onFailure");
 				}
 			});
