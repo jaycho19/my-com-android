@@ -300,6 +300,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
 		else if (start > 0 && limit > lastTotal) {
 			Toast.makeText(getActivity(), "没有更多内容啦O(∩_∩)O", Toast.LENGTH_LONG).show();
+			pulltoRefreshView.onFooterRefreshComplete();
 			return;
 		}
 

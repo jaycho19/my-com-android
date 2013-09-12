@@ -95,6 +95,7 @@ public class FavoriteFragment extends Fragment {
 
 		else if (start > 0 && limit > lastTotal) {
 			Toast.makeText(getActivity(), "没有更多内容啦O(∩_∩)O", Toast.LENGTH_LONG).show();
+			pulltoRefreshView.onFooterRefreshComplete();
 			return;
 		}
 

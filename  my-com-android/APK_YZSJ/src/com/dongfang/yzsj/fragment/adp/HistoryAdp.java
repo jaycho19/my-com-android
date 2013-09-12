@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.df.util.ULog;
 import com.dongfang.yzsj.R;
-import com.dongfang.yzsj.bean.HistoryBean;
+import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
 import com.dongfang.yzsj.bean.Movie;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
@@ -90,11 +90,16 @@ public class HistoryAdp extends BaseAdapter {
 
 		final Movie movie = list.get(position);
 		BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG());
-//		BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG(), 105, 137);
+		// BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG(), 105, 137);
 		holder.tv_des.setText(movie.getMEDIA_INTRO());
 		holder.tv_actor.setText(movie.getMEDIA_ACTORS());
 		holder.tv_title.setText(movie.getMEDIA_NAME());
-		holder.btn_cancel.setOnClickListener(new MyOnClickListener(movie.getId(), position));
+		holder.btn_cancel.setText("删除记录");
+		holder.btn_cancel.setOnClickListener(new MyOnClickDelListener(movie.getId(), position));
+
+		// holder.tv_title.setOnClickListener(new MyOnClickDetListener("0", movie.getId()));
+		// holder.iv_placard.setOnClickListener(new MyOnClickDetListener("0", movie.getId()));
+		convertView.setOnClickListener(new MyOnClickDetListener("0", movie.getId()));
 
 		return convertView;
 	}
@@ -113,11 +118,27 @@ public class HistoryAdp extends BaseAdapter {
 		this.notifyDataSetChanged();
 	}
 
-	private class MyOnClickListener implements OnClickListener {
+	private class MyOnClickDetListener implements OnClickListener {
+		private String channelId;
+		private String contentId;
+
+		public MyOnClickDetListener(String channelId, String contentId) {
+			this.contentId = contentId;
+			this.channelId = channelId;
+		}
+
+		@Override
+		public void onClick(View v) {
+			new ToDetailAsyncTask(context, channelId, contentId).execute();
+		}
+
+	}
+
+	private class MyOnClickDelListener implements OnClickListener {
 		private String contentId;
 		private int position;
 
-		public MyOnClickListener(String contentId, int position) {
+		public MyOnClickDelListener(String contentId, int position) {
 			this.contentId = contentId;
 			this.position = position;
 		}

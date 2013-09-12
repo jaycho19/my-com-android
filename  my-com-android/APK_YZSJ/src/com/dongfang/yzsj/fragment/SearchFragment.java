@@ -91,7 +91,7 @@ public class SearchFragment extends Fragment {
 				pageStart = 0;
 				lastTotal = 0;
 				// searchValue = "手机";
-				searchValue = etSearchBox.getText().toString();
+				searchValue = etSearchBox.getText().toString().trim();
 				getSearchResult(searchValue, pageStart, LIMIT);
 			}
 		});
@@ -295,6 +295,7 @@ public class SearchFragment extends Fragment {
 		// 已经加载了全部数据，不再进行数据获取
 		else if (start > 0 && limit > lastTotal) {
 			Toast.makeText(getActivity(), "没有更多内容啦O(∩_∩)O", Toast.LENGTH_LONG).show();
+			pulltoRefreshView.onFooterRefreshComplete();
 			return;
 		}
 
