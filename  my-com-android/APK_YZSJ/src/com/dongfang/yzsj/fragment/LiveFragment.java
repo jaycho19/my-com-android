@@ -22,6 +22,7 @@ import com.df.util.ULog;
 import com.dongfang.utils.ACache;
 import com.dongfang.utils.Util;
 import com.dongfang.view.MyImageView;
+import com.dongfang.yzsj.LoginActivity;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.bean.HomeLivesItem;
 import com.dongfang.yzsj.bean.LiveBean;
@@ -235,14 +236,25 @@ public class LiveFragment extends Fragment {
 
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					toPlay(lives.get(position).id);
+					if (User.isLogined(getActivity())) {
+						toPlay(lives.get(position).id);
+					}
+					else {
+						toLogin(lives.get(position).id);
+					}
 				}
 			});
 
 			return convertView;
 		}
 
+		/** 跳转到登陆页面,播放直播 */
+		private void toLogin(String liveId) {
+			Intent intent = new Intent(getActivity(), LoginActivity.class);
+			intent.putExtra(ComParams.INTENT_TODO, "TOPLAYR");
+			intent.putExtra(ComParams.INTENT_MOVIEDETAIL_LIVEID, liveId);
+			startActivity(intent);
+		}
 	}
 
 }

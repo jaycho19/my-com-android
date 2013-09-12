@@ -314,7 +314,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 		sb.append("&").append("sortNum=").append(sortNumber);
 
 		// String url = ComParams.HTTP_CHANNEL + "channelId=" + channelId + "&start=" + start + "&limit=" + limit;
-		ULog.d(TAG, sb.toString());
+		ULog.i(TAG, sb.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, sb.toString(), new RequestCallBack<String>() {
 			@Override

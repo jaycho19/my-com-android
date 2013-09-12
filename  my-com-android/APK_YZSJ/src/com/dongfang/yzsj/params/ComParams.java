@@ -15,6 +15,7 @@ public class ComParams {
 	public static final String INTENT_SEARCH_CHANNELS = "search_channels";
 	public static final String INTENT_VODBEAN_VIP = "vodbeanVIP";
 	public static final String INTENT_MOVIELIST_CHANNEL = "channel";
+	public static final String INTENT_MOVIEDETAIL_LIVEID = "liveId";
 	public static final String INTENT_MOVIEDETAIL_CHANNELID = "channelId";
 	public static final String INTENT_MOVIEDETAIL_CONNENTID = "connentid";
 	public static final String INTENT_MOVIEDETAIL_BAND = "band";
