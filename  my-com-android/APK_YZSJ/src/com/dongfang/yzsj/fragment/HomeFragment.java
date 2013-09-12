@@ -240,27 +240,35 @@ public class HomeFragment extends Fragment {
 
 				LinearLayout llHomeItemContain = (LinearLayout) viewItem
 						.findViewById(R.id.ll_fragment_home_item_contain);
-				initViewHomeItem(llHomeItemContain, item);
+				initViewHomeItem(inflater,llHomeItemContain, item);
 				llHome.addView(viewItem, llHome.getChildCount() - 1);
 
 			}
 		}
 	}
 
-	// 每一个频道
-	private void initViewHomeItem(LinearLayout linearLayout, final HomeChannelItem item) {
+	// 每一个频道 fragment_home_item_image
+	private void initViewHomeItem(LayoutInflater inflater, LinearLayout linearLayout, final HomeChannelItem item) {
+		// fragment_home_item_image
 		if (null != item.getMovies() && item.getMovies().size() > 0) {
 			int w = Util.getWindowWidth(getActivity()) / 3 - 10;
-			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(w, w * 456 / 330);
-			lparam.setMargins(5, 5, 5, 5);
+			LinearLayout.LayoutParams lParam = new LinearLayout.LayoutParams(w,-2);
+			lParam.setMargins(5, 5, 5, 5);
+			LinearLayout.LayoutParams mivParam = new LinearLayout.LayoutParams(w, w * 456 / 330);
 
 			for (final Movie movie : item.getMovies()) {
-				MyImageView imageView = new MyImageView(getActivity());
-				imageView.setLayoutParams(lparam);
+				View view = inflater.inflate(R.layout.fragment_home_item_image, null);
+				view.setLayoutParams(lParam);
+				MyImageView imageView = (MyImageView) view.findViewById(R.id.fragment_home_iv_item_myimage);
+				imageView.setLayoutParams(mivParam);
 				imageView.setImage(movie.getPC_MEDIA_POSTER_BIG());
+				
+				ULog.d(TAG,"  movie.getMEDIA_NAME() = " + movie.getMEDIA_NAME());
+				
+				((TextView)view.findViewById(R.id.fragment_home_tv_item_myimage)).setText(movie.getMEDIA_NAME());
 				// BitmapUtils.create(getActivity()).display(imageView, movie.getPC_MEDIA_POSTER_BIG(), w, w * 456 /
 				// 330);
-				imageView.setOnClickListener(new OnClickListener() {
+				view.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						if (User.isLogined(getActivity())) {
@@ -273,7 +281,7 @@ public class HomeFragment extends Fragment {
 					}
 				});
 
-				linearLayout.addView(imageView);
+				linearLayout.addView(view);
 			}
 		}
 	}
