@@ -109,7 +109,13 @@ public class HomeFragment extends Fragment {
 				imageView.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						toPlay(live.id);
+						if (User.isLogined(getActivity())) {
+							toPlay(live.id);
+						}
+						else {
+							toLogin(live.id);
+						}
+
 					}
 				});
 
@@ -128,7 +134,12 @@ public class HomeFragment extends Fragment {
 					imageView.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							toPlay(live.id);
+							if (User.isLogined(getActivity())) {
+								toPlay(live.id);
+							}
+							else {
+								toLogin(live.id);
+							}
 						}
 					});
 					llLievLine2.addView(imageView);
@@ -279,6 +290,14 @@ public class HomeFragment extends Fragment {
 		intent.putExtra(ComParams.INTENT_TODO, ToDetailAsyncTask.TAG);
 		intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CHANNELID, channelId);
 		intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID, contentId);
+		startActivity(intent);
+	}
+
+	/** 跳转到登陆页面,播放直播 */
+	private void toLogin(String liveId) {
+		Intent intent = new Intent(getActivity(), LoginActivity.class);
+		intent.putExtra(ComParams.INTENT_TODO, "TOPLAYR");
+		intent.putExtra(ComParams.INTENT_MOVIEDETAIL_LIVEID, liveId);
 		startActivity(intent);
 	}
 
