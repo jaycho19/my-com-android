@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.df.util.ULog;
 import com.dongfang.yzsj.R;
+import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
 import com.dongfang.yzsj.bean.Movie;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
@@ -95,6 +96,14 @@ public class FavoriteAdp extends BaseAdapter {
 		holder.tv_title.setText(movie.getMEDIA_NAME());
 		holder.btn_cancel.setOnClickListener(new MyOnClickListener(movie.getId(), position));
 
+		convertView.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				new ToDetailAsyncTask(context, "0", movie.getId()).execute();
+			}
+		});
+		
 		return convertView;
 	}
 
