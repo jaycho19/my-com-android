@@ -346,7 +346,8 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 				channelAdp.notifyDataSetChanged();
 				ULog.d(TAG, "list length = " + listData.size());
 
-				if (bean.getSubChannels().size() > 0 && null != llSubChannels && llSubChannels.getChildCount() == 0) {
+				if (bean.getSubChannels().size() > 0 && null != llSubChannels ) {
+					llSubChannels.removeAllViews();
 					for (final Channel channel : bean.getSubChannels()) {
 						CheckTextView textview = (CheckTextView) inflater.inflate(R.layout.fragment_type_subchannel,
 								null);

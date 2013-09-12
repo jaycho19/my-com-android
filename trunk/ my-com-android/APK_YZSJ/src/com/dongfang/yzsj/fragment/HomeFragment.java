@@ -262,9 +262,6 @@ public class HomeFragment extends Fragment {
 				MyImageView imageView = (MyImageView) view.findViewById(R.id.fragment_home_iv_item_myimage);
 				imageView.setLayoutParams(mivParam);
 				imageView.setImage(movie.getPC_MEDIA_POSTER_BIG());
-				
-				ULog.d(TAG,"  movie.getMEDIA_NAME() = " + movie.getMEDIA_NAME());
-				
 				((TextView)view.findViewById(R.id.fragment_home_tv_item_myimage)).setText(movie.getMEDIA_NAME());
 				// BitmapUtils.create(getActivity()).display(imageView, movie.getPC_MEDIA_POSTER_BIG(), w, w * 456 /
 				// 330);

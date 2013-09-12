@@ -177,23 +177,31 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 			int length = bean.getRelateContents().size();
 			ULog.d(TAG, "length = " + length);
 			int w = Util.getWindowWidth(this) / 3 - 10;
-			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(w, w * 456 / 330);
-			lparam.setMargins(5, 5, 5, 5);
+			LinearLayout.LayoutParams lParam = new LinearLayout.LayoutParams(w,-2);
+			lParam.setMargins(5, 5, 5, 5);
+			LinearLayout.LayoutParams mivParam = new LinearLayout.LayoutParams(w, w * 456 / 330);
+			
 			for (int i = 0, l = Math.min(length, 3); i < l; i++) {
-				MyImageView imageView = new MyImageView(this);
-				imageView.setLayoutParams(lparam);
+				View view =  (LinearLayout) LayoutInflater.from(this).inflate(R.layout.fragment_home_item_image, null);
+				view.setLayoutParams(lParam);
+				MyImageView imageView = (MyImageView) view.findViewById(R.id.fragment_home_iv_item_myimage);
+				imageView.setLayoutParams(mivParam);
 				imageView.setImage(bean.getRelateContents().get(i).getPC_MEDIA_POSTER_BIG());
-				imageView.setOnClickListener(new MyOnClickListener(bean.getChannel().getChannelId(), bean
+				((TextView)view.findViewById(R.id.fragment_home_tv_item_myimage)).setText(bean.getRelateContents().get(i).getMEDIA_NAME());
+				view.setOnClickListener(new MyOnClickListener(bean.getChannel().getChannelId(), bean
 						.getRelateContents().get(i).getId()));
-				llLikeContain_0.addView(imageView);
+				llLikeContain_0.addView(view);
 			}
 			for (int i = 3, l = Math.min(length, 6); i < l; i++) {
-				MyImageView imageView = new MyImageView(this);
-				imageView.setLayoutParams(lparam);
+				View view =  (LinearLayout) LayoutInflater.from(this).inflate(R.layout.fragment_home_item_image, null);
+				view.setLayoutParams(lParam);
+				MyImageView imageView = (MyImageView) view.findViewById(R.id.fragment_home_iv_item_myimage);
+				imageView.setLayoutParams(mivParam);
 				imageView.setImage(bean.getRelateContents().get(i).getPC_MEDIA_POSTER_BIG());
-				imageView.setOnClickListener(new MyOnClickListener(bean.getChannel().getChannelId(), bean
+				((TextView)view.findViewById(R.id.fragment_home_tv_item_myimage)).setText(bean.getRelateContents().get(i).getMEDIA_NAME());
+				view.setOnClickListener(new MyOnClickListener(bean.getChannel().getChannelId(), bean
 						.getRelateContents().get(i).getId()));
-				llLikeContain_1.addView(imageView);
+				llLikeContain_1.addView(view);
 			}
 
 		}
