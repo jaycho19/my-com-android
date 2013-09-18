@@ -6,7 +6,7 @@ import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.df.util.ULog;
+import com.dongfang.utils.ULog;
 
 /**
  * 首页数据结构

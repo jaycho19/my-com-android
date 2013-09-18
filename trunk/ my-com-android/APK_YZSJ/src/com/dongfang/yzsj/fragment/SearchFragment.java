@@ -17,8 +17,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.df.util.ULog;
 import com.dongfang.utils.ACache;
+import com.dongfang.utils.ULog;
 import com.dongfang.view.CheckTextView;
 import com.dongfang.view.PullToRefreshView;
 import com.dongfang.view.PullToRefreshView.OnFooterRefreshListener;
@@ -96,7 +96,7 @@ public class SearchFragment extends Fragment {
 			}
 		});
 
-		searchAdp = new TypeAdp(getActivity(),"0");
+		searchAdp = new TypeAdp(getActivity(), "0");
 		listData = new ArrayList<Movie>();
 		searchAdp.setList(listData);
 		listView = (ListView) view.findViewById(R.id.lv_search_result);
@@ -302,7 +302,7 @@ public class SearchFragment extends Fragment {
 		StringBuilder url = new StringBuilder();
 		url.append(ComParams.HTTP_SEARCH);
 		url.append("searchType=MEDIA_NAME&");
-		url.append("start=").append(start).append("&");
+		url.append("start=").append(start * limit).append("&");
 		url.append("limit=").append(limit).append("&");
 		url.append("channelIds=").append(getChannelsUrl()).append("&");
 		url.append("searchValue=").append(Util.toUTF8(searchName));

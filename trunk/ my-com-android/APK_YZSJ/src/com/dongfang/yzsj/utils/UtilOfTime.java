@@ -7,7 +7,7 @@ import java.util.Date;
 
 import android.text.TextUtils;
 
-import com.df.util.ULog;
+import com.dongfang.utils.ULog;
 
 /**
  * 此工具类主要处理 时间，日期格式化输出，还有关于时间判断、应用的一些方法。 使用详情可以参考 例子 main()

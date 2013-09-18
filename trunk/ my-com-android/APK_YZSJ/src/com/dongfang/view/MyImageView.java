@@ -17,10 +17,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.df.util.ULog;
 import com.dongfang.dl.DownloadInfo;
 import com.dongfang.dl.DownloadTask;
 import com.dongfang.dl.OnDownloadListener;
+import com.dongfang.utils.ULog;
 import com.dongfang.utils.URLUtil;
 import com.dongfang.view.utils.ImageCache;
 import com.dongfang.view.utils.LoadImageRunnable;

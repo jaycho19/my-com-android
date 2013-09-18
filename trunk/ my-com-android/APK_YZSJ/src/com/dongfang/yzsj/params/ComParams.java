@@ -65,13 +65,57 @@ public class ComParams {
 	public static final String HTTP_FAVORITE = HTTP_BASE
 			+ "/page/hbMobile/userOptions.jsp?jsonFormat=true&command=listFavorite&";
 	/** 添加个人收藏 */
-	public static final String HTTP_FAVORITE_ADD = HTTP_BASE
-			+ "/page/hbMobile/userOptions.jsp?jsonFormat=true&command=addFavorite&";
+	public static final String HTTP_FAVORITE_ADD = HTTP_BASE + "/portal/userFavorites!save.action?obj.contentId=";
 	/** 删除个人收藏 */
-	public static final String HTTP_FAVORITE_DEL = HTTP_BASE
-			+ "/page/hbMobile/userOptions.jsp?jsonFormat=true&command=removeCollect&";
+	public static final String HTTP_FAVORITE_DEL = HTTP_BASE + "/portal/userFavorites!remove.action?obj.contentId=";
 	/** 我的订阅 */
 	public static final String HTTP_MY_ORDER = HTTP_BASE
 			+ "/page/hbMobile/userOptions.jsp?command=myBilling&jsonFormat=true&";
 
+	// ------------play view mode and frompage ---------
+	// IsFromPage: IsFromPage, IsFromRecommend
+	/************** MediaplayActivity播放器用到的常量参数：playMode: Local , Program , schedule, Live *******************/
+	public static final String PLAY_VIEW_LOCAL = "local";
+	public static final String PLAY_VIEW_PROGRAM = "program";
+	public static final String PLAY_VIEW_SCHEDULE = "schedule";
+	public static final String PLAY_VIEW_LIVE = "live";
+	public static final String PLAY_VIEW_DEFAULT = PLAY_VIEW_PROGRAM; // program
+																		// 为默认播放模式
+	public static final String PLAY_VIEW_ISFROMPAGE = "isfrompage";
+	public static final String PLAY_VIEW_ISFROMRECOMMEND = "isfromrecommend";
+	/** 第三方页面进入的播放 */
+	public static final String PLAY_VIEW_EXTERNALPAGE = "externalpages"; // 第三页面进入的播放
+	public static final String PLAY_VIEW_RESULT = "schedule";
+
+	public static final String PLAY_KEY_BUNDLEDATA = "mediadata";
+	public static final String PLAY_KEY_CURPOSITON = "curpositon";
+
+	public static final String PLAY_KEY_FROMPLACE = "fromPlace";
+	public static final String PLAY_KEY_PLAYMODE = "playMode";
+	public static final String PLAY_KEY_ADPAGE = "adPage";
+	public static final String PLAY_KEY_DETAILURL = "detailURL";
+	public static final String PLAY_KEY_VIDEOURL = "videoURL";
+	public static final String PLAY_KEY_VIEWINFO = "viewinfo";
+	public static final String PLAY_KEY_VIDEOSTATUS = "videostatue";
+	public static final String PLAY_KEY_CONTENTID = "contentid";
+	public static final String PLAY_KEY_PARENTID = "parentId";
+
+	public static final int PLAY_CONTROL_BACK = 226;
+	public static final int PLAY_ERROR_RECEIVE = 227;
+	/** 重播视频 */
+	public static final int PLAY_CONTROL_REPLAY = 228;
+	public static final int PLAY_CONTROL_VIEWTIMEOUT = 229;
+	/** 视频播放是隐藏webview广告 */
+	public static final int PLAY_CONTROL_GONEWEBVIEW = 230;
+	/** 视频播放，音量相关 */
+	/** 获取播放列表 */
+	public static final int GET_PALYlIST = 233;
+	/** 播放列表 */
+	public static final int PLAY_PALYlIST = 234;
+	/** 互动答题更新时间 */
+	public static final int QUESTION_REFRESH = 235;
+	/*** 准备视频 */
+	public static final int PREPARESTATE = 236;
+	/** 播放时弹出提示 */
+	public static final int SHOW_DIALOGE = 237;
 }

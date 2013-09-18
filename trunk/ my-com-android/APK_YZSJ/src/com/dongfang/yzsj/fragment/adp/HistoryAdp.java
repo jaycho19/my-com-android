@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.df.util.ULog;
+import com.dongfang.utils.ULog;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
 import com.dongfang.yzsj.bean.Movie;

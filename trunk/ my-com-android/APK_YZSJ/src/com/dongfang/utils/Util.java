@@ -41,6 +41,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
+import android.provider.SyncStateContract.Constants;
 import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.text.TextUtils;
@@ -52,8 +53,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.df.mediaplayer.constants.Constants;
-import com.df.util.ULog;
 import com.dongfang.yzsj.params.ComParams;
 
 public class Util {
@@ -158,7 +157,7 @@ public class Util {
 	 */
 	public static float getWindowDensity(Context context) {
 		if (context == null) {
-			return Constants.DENSITY;
+			return com.dongfang.utils.Constants.DENSITY;
 		}
 		SharedPreferences sp = context.getSharedPreferences(SP_NAME_WINDOW, 0);
 		float density = 0;
@@ -1013,7 +1012,7 @@ public class Util {
 	 * @return
 	 */
 	public static int dip2px(int dip) {
-		return (int) (dip * (Constants.DENSITYDPI / 160));
+		return (int) (dip * (com.dongfang.utils.Constants.DENSITYDPI / 160));
 
 	}
 

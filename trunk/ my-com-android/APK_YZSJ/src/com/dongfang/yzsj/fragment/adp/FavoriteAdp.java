@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.df.util.ULog;
+import com.dongfang.utils.ULog;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
 import com.dongfang.yzsj.bean.Movie;
@@ -90,7 +90,7 @@ public class FavoriteAdp extends BaseAdapter {
 
 		final Movie movie = list.get(position);
 		BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG());
-//		BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG(), 105, 137);
+		// BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG(), 105, 137);
 		holder.tv_des.setText(movie.getMEDIA_INTRO());
 		holder.tv_actor.setText(movie.getMEDIA_ACTORS());
 		holder.tv_title.setText(movie.getMEDIA_NAME());
@@ -103,7 +103,7 @@ public class FavoriteAdp extends BaseAdapter {
 				new ToDetailAsyncTask(context, "0", movie.getId()).execute();
 			}
 		});
-		
+
 		return convertView;
 	}
 
@@ -134,8 +134,9 @@ public class FavoriteAdp extends BaseAdapter {
 		public void onClick(View v) {
 			ULog.d(TAG, v.toString());
 			StringBuilder url = new StringBuilder(ComParams.HTTP_FAVORITE_DEL);
-			url.append("token=").append(User.getToken(context)).append("&");
-			url.append("userTelephone=").append(User.getPhone(context));
+			url.append(contentId);
+			url.append("&").append("token=").append(User.getToken(context));
+			url.append("&").append("userTelephone=").append(User.getPhone(context));
 
 			ULog.i(TAG, url.toString());
 
