@@ -17,10 +17,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.df.util.ULog;
+import com.dongfang.utils.ULog;
 import com.dongfang.utils.Util;
 import com.dongfang.view.MyImageView;
 import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
+import com.dongfang.yzsj.bean.DelAddResult;
 import com.dongfang.yzsj.bean.DetailBean;
 import com.dongfang.yzsj.bean.OrderBean;
 import com.dongfang.yzsj.params.ComParams;
@@ -128,6 +129,11 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 
 		tvMovieDesc.setText(bean.getContent().getMEDIA_INTRO());
 
+		if (bean.isHasFavoriteIt())
+			btnAddFavorite.setText("取消收藏");
+		else
+			btnAddFavorite.setText("收藏");
+
 		// 剧集
 		if (bean.getContent().getCLIP_COUNT() > 1) {
 			int w = Util.getWindowWidth(this) / 5 - 10;
@@ -177,28 +183,30 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 			int length = bean.getRelateContents().size();
 			ULog.d(TAG, "length = " + length);
 			int w = Util.getWindowWidth(this) / 3 - 10;
-			LinearLayout.LayoutParams lParam = new LinearLayout.LayoutParams(w,-2);
+			LinearLayout.LayoutParams lParam = new LinearLayout.LayoutParams(w, -2);
 			lParam.setMargins(5, 5, 5, 5);
 			LinearLayout.LayoutParams mivParam = new LinearLayout.LayoutParams(w, w * 456 / 330);
-			
+
 			for (int i = 0, l = Math.min(length, 3); i < l; i++) {
-				View view =  (LinearLayout) LayoutInflater.from(this).inflate(R.layout.fragment_home_item_image, null);
+				View view = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.fragment_home_item_image, null);
 				view.setLayoutParams(lParam);
 				MyImageView imageView = (MyImageView) view.findViewById(R.id.fragment_home_iv_item_myimage);
 				imageView.setLayoutParams(mivParam);
 				imageView.setImage(bean.getRelateContents().get(i).getPC_MEDIA_POSTER_BIG());
-				((TextView)view.findViewById(R.id.fragment_home_tv_item_myimage)).setText(bean.getRelateContents().get(i).getMEDIA_NAME());
+				((TextView) view.findViewById(R.id.fragment_home_tv_item_myimage)).setText(bean.getRelateContents()
+						.get(i).getMEDIA_NAME());
 				view.setOnClickListener(new MyOnClickListener(bean.getChannel().getChannelId(), bean
 						.getRelateContents().get(i).getId()));
 				llLikeContain_0.addView(view);
 			}
 			for (int i = 3, l = Math.min(length, 6); i < l; i++) {
-				View view =  (LinearLayout) LayoutInflater.from(this).inflate(R.layout.fragment_home_item_image, null);
+				View view = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.fragment_home_item_image, null);
 				view.setLayoutParams(lParam);
 				MyImageView imageView = (MyImageView) view.findViewById(R.id.fragment_home_iv_item_myimage);
 				imageView.setLayoutParams(mivParam);
 				imageView.setImage(bean.getRelateContents().get(i).getPC_MEDIA_POSTER_BIG());
-				((TextView)view.findViewById(R.id.fragment_home_tv_item_myimage)).setText(bean.getRelateContents().get(i).getMEDIA_NAME());
+				((TextView) view.findViewById(R.id.fragment_home_tv_item_myimage)).setText(bean.getRelateContents()
+						.get(i).getMEDIA_NAME());
 				view.setOnClickListener(new MyOnClickListener(bean.getChannel().getChannelId(), bean
 						.getRelateContents().get(i).getId()));
 				llLikeContain_1.addView(view);
@@ -443,7 +451,10 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 			finish();
 			break;
 		case R.id.detail_btn_addfavorite:
-			addToFavorite();
+			if (bean.isHasFavoriteIt())
+				delFromFavorite();
+			else
+				addToFavorite();
 			break;
 		case R.id.detail_btn_play:
 			toPlayAuth(bean.getChannel().getChannelId(), bean.getContent().getId(), bean.getContent()
@@ -465,9 +476,9 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 	/** 添加到收藏 */
 	private void addToFavorite() {
 		StringBuilder url = new StringBuilder(ComParams.HTTP_FAVORITE_ADD);
-		url.append("contentId=").append(bean.getContent().getId()).append("&");
-		url.append("token=").append(User.getToken(this)).append("&");
-		url.append("userTelephone=").append(User.getPhone(this));
+		url.append(bean.getContent().getId());
+		url.append("&").append("token=").append(User.getToken(this));
+		url.append("&").append("userTelephone=").append(User.getPhone(this));
 
 		ULog.i(TAG, url.toString());
 
@@ -482,19 +493,95 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 				ULog.d(TAG, "onSuccess  --" + result);
 				progDialog.dismiss();
 
-				try {
-					JSONObject json = new JSONObject(result);
-					if (json.getBoolean("success")) {
-						Toast.makeText(DetailsActiivity.this, "收藏成功", Toast.LENGTH_LONG).show();
-					}
-					else {
-						Toast.makeText(DetailsActiivity.this, json.getJSONArray("error").getString(0),
-								Toast.LENGTH_LONG).show();
-					}
-				} catch (JSONException e) {
-					Toast.makeText(DetailsActiivity.this, "收藏失败~~~~(>_<)~~~~ ", Toast.LENGTH_LONG).show();
-					e.printStackTrace();
+				DelAddResult addResult = new com.google.gson.Gson().fromJson(result, DelAddResult.class);
+
+				if (addResult.isSuccess()) {
+					Toast.makeText(DetailsActiivity.this, addResult.getMsg(), Toast.LENGTH_LONG).show();
+					bean.setHasFavoriteIt(true);
+					btnAddFavorite.setText("取消收藏");
 				}
+				else {
+					Toast.makeText(DetailsActiivity.this, addResult.getMsg(), Toast.LENGTH_LONG).show();
+				}
+
+				// try {
+				// JSONObject json = new JSONObject(result);
+				// if (json.getBoolean("success")) {
+				// Toast.makeText(DetailsActiivity.this, "收藏成功", Toast.LENGTH_LONG).show();
+				// bean.setHasFavoriteIt(true);
+				// btnAddFavorite.setText("取消收藏");
+				//
+				// }
+				// else {
+				// Toast.makeText(DetailsActiivity.this, json.getJSONArray("error").getString(0),
+				// Toast.LENGTH_LONG).show();
+				// }
+				// } catch (JSONException e) {
+				// Toast.makeText(DetailsActiivity.this, "收藏失败~~~~(>_<)~~~~ ", Toast.LENGTH_LONG).show();
+				// e.printStackTrace();
+				// }
+			}
+
+			@Override
+			public void onStart() {
+				ULog.i(TAG, "RequestCallBack.onStart");
+				progDialog.show();
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				ULog.i(TAG, "RequestCallBack.onFailure");
+				progDialog.dismiss();
+			}
+		});
+	}
+
+	/** 取消收藏 */
+	private void delFromFavorite() {
+		StringBuilder url = new StringBuilder(ComParams.HTTP_FAVORITE_DEL);
+		url.append(bean.getContent().getId());
+		url.append("&").append("token=").append(User.getToken(this));
+		url.append("&").append("userTelephone=").append(User.getPhone(this));
+
+		ULog.i(TAG, url.toString());
+
+		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
+			@Override
+			public void onLoading(long total, long current) {
+				ULog.d(TAG, "RequestCallBack.onLoading total = " + total + "; current = " + current);
+			}
+
+			@Override
+			public void onSuccess(String result) {
+				ULog.d(TAG, "onSuccess  --" + result);
+				progDialog.dismiss();
+
+				DelAddResult delResult = new com.google.gson.Gson().fromJson(result, DelAddResult.class);
+
+				if (delResult.isSuccess()) {
+					Toast.makeText(DetailsActiivity.this, delResult.getMsg(), Toast.LENGTH_LONG).show();
+					bean.setHasFavoriteIt(false);
+					btnAddFavorite.setText("收藏");
+				}
+				else {
+					Toast.makeText(DetailsActiivity.this, delResult.getMsg(), Toast.LENGTH_LONG).show();
+				}
+
+				// try {
+				// JSONObject json = new JSONObject(result);
+				// if (json.getBoolean("success")) {
+				// Toast.makeText(DetailsActiivity.this, "删除成功", Toast.LENGTH_LONG).show();
+				// bean.setHasFavoriteIt(false);
+				// btnAddFavorite.setText("收藏");
+				// }
+				// else {
+				// Toast.makeText(DetailsActiivity.this, json.getJSONArray("error").getString(0),
+				// Toast.LENGTH_LONG).show();
+				// }
+				// } catch (JSONException e) {
+				// Toast.makeText(DetailsActiivity.this, "删除收藏失败~~~~(>_<)~~~~ ", Toast.LENGTH_LONG).show();
+				// e.printStackTrace();
+				// }
 			}
 
 			@Override

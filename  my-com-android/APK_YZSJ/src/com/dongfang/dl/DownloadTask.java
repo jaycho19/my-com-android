@@ -20,12 +20,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.storage.StorageManager;
-import android.widget.Toast;
 
-import com.df.util.ULog;
 import com.dongfang.net.Http;
 import com.dongfang.utils.TVException;
 import com.dongfang.utils.Types;
+import com.dongfang.utils.ULog;
 import com.dongfang.utils.Util;
 
 /**

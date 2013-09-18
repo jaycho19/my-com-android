@@ -5,8 +5,7 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-import com.df.mediaplayer.constants.Constants;
-import com.df.util.ULog;
+import com.dongfang.utils.ULog;
 
 /** @author dongfang 该类当下只正对QAS有效，2013-2-1 */
 public class BaseApplication extends Application {
@@ -36,22 +35,22 @@ public class BaseApplication extends Application {
 
 		if (dm.widthPixels < dm.heightPixels) {
 			// 竖屏
-			Constants.SCREEN_WIDTH_PORTRAIT = dm.widthPixels;
-			Constants.SCREEN_HEIGHT_PORTRAIT = dm.heightPixels;
+			com.dongfang.utils.Constants.SCREEN_WIDTH_PORTRAIT = dm.widthPixels;
+			com.dongfang.utils.Constants.SCREEN_HEIGHT_PORTRAIT = dm.heightPixels;
 
-			Constants.SCREEN_HEIGHT_LANDSCAPE = dm.widthPixels;
-			Constants.SCREEN_WIDTH_LANDSCAPE = dm.heightPixels;
+			com.dongfang.utils.Constants.SCREEN_HEIGHT_LANDSCAPE = dm.widthPixels;
+			com.dongfang.utils.Constants.SCREEN_WIDTH_LANDSCAPE = dm.heightPixels;
 		}
 		else {
 			// 横屏
-			Constants.SCREEN_WIDTH_PORTRAIT = dm.heightPixels;
-			Constants.SCREEN_HEIGHT_PORTRAIT = dm.widthPixels;
+			com.dongfang.utils.Constants.SCREEN_WIDTH_PORTRAIT = dm.heightPixels;
+			com.dongfang.utils.Constants.SCREEN_HEIGHT_PORTRAIT = dm.widthPixels;
 
-			Constants.SCREEN_HEIGHT_LANDSCAPE = dm.heightPixels;
-			Constants.SCREEN_WIDTH_LANDSCAPE = dm.widthPixels;
+			com.dongfang.utils.Constants.SCREEN_HEIGHT_LANDSCAPE = dm.heightPixels;
+			com.dongfang.utils.Constants.SCREEN_WIDTH_LANDSCAPE = dm.widthPixels;
 		}
-		Constants.DENSITYDPI = dm.densityDpi;
-		Constants.DENSITY = dm.density;
+		com.dongfang.utils.Constants.DENSITYDPI = dm.densityDpi;
+		com.dongfang.utils.Constants.DENSITY = dm.density;
 		ULog.i(TAG, "setupBaseData, SCREEN_WIDTH = " + dm.widthPixels + ", SCREEN_HEIGHT = " + dm.heightPixels
 				+ ", densityDpi = " + dm.densityDpi);
 	}

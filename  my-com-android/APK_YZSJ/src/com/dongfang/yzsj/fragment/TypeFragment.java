@@ -15,14 +15,14 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.LinearLayout.LayoutParams;
 
-import com.df.util.ULog;
 import com.dongfang.utils.ACache;
+import com.dongfang.utils.ULog;
 import com.dongfang.view.CheckTextView;
 import com.dongfang.view.PullToRefreshView;
 import com.dongfang.view.PullToRefreshView.OnFooterRefreshListener;
@@ -310,7 +310,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_CHANNEL);
 		sb.append("channelId=").append(channelId);
-		sb.append("&").append("start=").append(start);
+		sb.append("&").append("start=").append(start * limit);
 		sb.append("&").append("limit=").append(limit);
 		sb.append("&").append("sortNum=").append(sortNumber);
 
@@ -347,7 +347,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 				channelAdp.notifyDataSetChanged();
 				ULog.d(TAG, "list length = " + listData.size());
 
-				if (bean.getSubChannels().size() > 0 && null != llSubChannels ) {
+				if (bean.getSubChannels().size() > 0 && null != llSubChannels) {
 					llSubChannels.removeAllViews();
 					for (final Channel channel : bean.getSubChannels()) {
 						CheckTextView textview = (CheckTextView) inflater.inflate(R.layout.fragment_type_subchannel,

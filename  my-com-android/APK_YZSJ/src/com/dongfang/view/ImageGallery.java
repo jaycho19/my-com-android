@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.df.util.ULog;
+import com.dongfang.utils.ULog;
 import com.dongfang.utils.Util;
 import com.dongfang.view.imagegallery.ImageGalleyAdapter1;
 import com.dongfang.yzsj.R;

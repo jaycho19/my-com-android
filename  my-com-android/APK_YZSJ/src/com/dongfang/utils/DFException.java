@@ -3,8 +3,6 @@ package com.dongfang.utils;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.df.util.ULog;
-
 /**
  * @author dongfang
  */

@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
-import com.df.util.ULog;
 import com.dongfang.encrypt.AESEncrypt;
+import com.dongfang.utils.ULog;
 
 /** 用户相关信息 */
 public class User {

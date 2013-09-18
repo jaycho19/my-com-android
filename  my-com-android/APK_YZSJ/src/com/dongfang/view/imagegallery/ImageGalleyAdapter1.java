@@ -12,14 +12,13 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
 
-import com.df.util.ULog;
+import com.dongfang.utils.ULog;
 import com.dongfang.view.MyImageView;
 import com.dongfang.yzsj.LoginActivity;
 import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
 import com.dongfang.yzsj.bean.HomeSliderItem;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
-import com.lidroid.xutils.BitmapUtils;
 
 /**
  * 首页一张 kv图 适配器
