@@ -286,8 +286,15 @@
 
     <color name="black">#000000</color> <!-- 黑色 -->
 
+    <drawable name="transparent_background">#00000000</drawable>
+
     <color name="transparent">#00000000</color>
     <color name="text_orange">#F8B202</color> <!-- 按钮的字体颜色 -->
     <color name="background">#313131</color> <!-- 背景颜色 -->
+    <color name="button_color">#ffffff</color>
+    <color name="text_white">#FFFFFF</color>
+    <color name="text_gray">#999999</color>
+    <color name="live_channel_item_bg">#f5e1e0</color>
+    <color name="seek_bar_buffer_grey">#666666</color> <!-- SeekBar 缓冲颜色 -->
 
 </resources>

@@ -7,6 +7,7 @@ package com.dongfang.yzsj.params;
  * 
  */
 public class ComParams {
+	public static final boolean IS_PLAYER_ACTIVITY = true; // 使用内置播放器播放
 
 	public static final String INTENT_TODO = "TODO";
 	public static final String INTENT_HOMEBEAN = "homebean";
@@ -79,43 +80,15 @@ public class ComParams {
 	public static final String PLAY_VIEW_PROGRAM = "program";
 	public static final String PLAY_VIEW_SCHEDULE = "schedule";
 	public static final String PLAY_VIEW_LIVE = "live";
-	public static final String PLAY_VIEW_DEFAULT = PLAY_VIEW_PROGRAM; // program
-																		// 为默认播放模式
-	public static final String PLAY_VIEW_ISFROMPAGE = "isfrompage";
-	public static final String PLAY_VIEW_ISFROMRECOMMEND = "isfromrecommend";
-	/** 第三方页面进入的播放 */
-	public static final String PLAY_VIEW_EXTERNALPAGE = "externalpages"; // 第三页面进入的播放
-	public static final String PLAY_VIEW_RESULT = "schedule";
-
-	public static final String PLAY_KEY_BUNDLEDATA = "mediadata";
-	public static final String PLAY_KEY_CURPOSITON = "curpositon";
 
 	public static final String PLAY_KEY_FROMPLACE = "fromPlace";
 	public static final String PLAY_KEY_PLAYMODE = "playMode";
-	public static final String PLAY_KEY_ADPAGE = "adPage";
 	public static final String PLAY_KEY_DETAILURL = "detailURL";
 	public static final String PLAY_KEY_VIDEOURL = "videoURL";
-	public static final String PLAY_KEY_VIEWINFO = "viewinfo";
-	public static final String PLAY_KEY_VIDEOSTATUS = "videostatue";
-	public static final String PLAY_KEY_CONTENTID = "contentid";
-	public static final String PLAY_KEY_PARENTID = "parentId";
 
-	public static final int PLAY_CONTROL_BACK = 226;
-	public static final int PLAY_ERROR_RECEIVE = 227;
-	/** 重播视频 */
-	public static final int PLAY_CONTROL_REPLAY = 228;
-	public static final int PLAY_CONTROL_VIEWTIMEOUT = 229;
-	/** 视频播放是隐藏webview广告 */
-	public static final int PLAY_CONTROL_GONEWEBVIEW = 230;
-	/** 视频播放，音量相关 */
-	/** 获取播放列表 */
-	public static final int GET_PALYlIST = 233;
-	/** 播放列表 */
-	public static final int PLAY_PALYlIST = 234;
-	/** 互动答题更新时间 */
-	public static final int QUESTION_REFRESH = 235;
-	/*** 准备视频 */
-	public static final int PREPARESTATE = 236;
-	/** 播放时弹出提示 */
-	public static final int SHOW_DIALOGE = 237;
+	public static final String PLAY_BAND_LIUCHANG = "流畅";
+	public static final String PLAY_BAND_QINGXI = "清晰";
+	public static final String PLAY_BAND_GAOQING = "高清";
+	public static final String PLAY_BAND_CHAOQING = "超清";
+
 }

@@ -116,10 +116,13 @@ public class LoginActivity extends BaseActivity {
 				ULog.d(TAG, "onSuccess  --" + result);
 				try {
 					JSONObject json = new JSONObject(result);
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					String type = "video/*";
-					Uri uri = Uri.parse(json.getString("url"));
-					intent.setDataAndType(uri, type);
+
+					PlayerActivity.toPlay(LoginActivity.this, json.getString("url"));
+
+					// Intent intent = new Intent(Intent.ACTION_VIEW);
+					// String type = "video/*";
+					// Uri uri = Uri.parse(json.getString("url"));
+					// intent.setDataAndType(uri, type);
 					// intent.setComponent(new
 					// ComponentName("com.android.gallery3d","com.android.gallery3d.MovieActivity"));
 					startActivity(intent);

@@ -25,6 +25,7 @@ import com.dongfang.view.MyImageView;
 import com.dongfang.yzsj.LoginActivity;
 import com.dongfang.yzsj.MainActivity;
 import com.dongfang.yzsj.MovieListActivity;
+import com.dongfang.yzsj.PlayerActivity;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
 import com.dongfang.yzsj.bean.Channel;
@@ -240,7 +241,7 @@ public class HomeFragment extends Fragment {
 
 				LinearLayout llHomeItemContain = (LinearLayout) viewItem
 						.findViewById(R.id.ll_fragment_home_item_contain);
-				initViewHomeItem(inflater,llHomeItemContain, item);
+				initViewHomeItem(inflater, llHomeItemContain, item);
 				llHome.addView(viewItem, llHome.getChildCount() - 1);
 
 			}
@@ -252,7 +253,7 @@ public class HomeFragment extends Fragment {
 		// fragment_home_item_image
 		if (null != item.getMovies() && item.getMovies().size() > 0) {
 			int w = Util.getWindowWidth(getActivity()) / 3 - 10;
-			LinearLayout.LayoutParams lParam = new LinearLayout.LayoutParams(w,-2);
+			LinearLayout.LayoutParams lParam = new LinearLayout.LayoutParams(w, -2);
 			lParam.setMargins(5, 5, 5, 5);
 			LinearLayout.LayoutParams mivParam = new LinearLayout.LayoutParams(w, w * 456 / 330);
 
@@ -262,7 +263,7 @@ public class HomeFragment extends Fragment {
 				MyImageView imageView = (MyImageView) view.findViewById(R.id.fragment_home_iv_item_myimage);
 				imageView.setLayoutParams(mivParam);
 				imageView.setImage(movie.getPC_MEDIA_POSTER_BIG());
-				((TextView)view.findViewById(R.id.fragment_home_tv_item_myimage)).setText(movie.getMEDIA_NAME());
+				((TextView) view.findViewById(R.id.fragment_home_tv_item_myimage)).setText(movie.getMEDIA_NAME());
 				// BitmapUtils.create(getActivity()).display(imageView, movie.getPC_MEDIA_POSTER_BIG(), w, w * 456 /
 				// 330);
 				view.setOnClickListener(new OnClickListener() {
@@ -333,13 +334,16 @@ public class HomeFragment extends Fragment {
 				ULog.d(TAG, "onSuccess  --" + result);
 				try {
 					JSONObject json = new JSONObject(result);
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					String type = "video/*";
-					Uri uri = Uri.parse(json.getString("url"));
-					intent.setDataAndType(uri, type);
+
+					PlayerActivity.toPlay(getActivity(), json.getString("url"));
+
+					// Intent intent = new Intent(Intent.ACTION_VIEW);
+					// String type = "video/*";
+					// Uri uri = Uri.parse(json.getString("url"));
+					// intent.setDataAndType(uri, type);
 					// intent.setComponent(new
 					// ComponentName("com.android.gallery3d","com.android.gallery3d.MovieActivity"));
-					startActivity(intent);
+					// startActivity(intent);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

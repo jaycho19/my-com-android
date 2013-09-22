@@ -1,4 +1,4 @@
-package com.dongfang.utils;
+package com.dongfang.mediaplayer.constants;
 
 public class Constants {
 	public static int	SCREEN_WIDTH_LANDSCAPE	= 0;

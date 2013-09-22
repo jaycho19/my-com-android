@@ -84,6 +84,19 @@ public class DetailContent implements Parcelable {
 		CLIP_BANDWITHS = cLIP_BANDWITHS;
 	}
 
+	/** 根据编码名称，获取视频类型 */
+	public String getBandByName(String name) {
+		if (null == CLIP_BANDWITHS || CLIP_BANDWITHS.size() < 1)
+			return null;
+
+		for (DetailContentClip detailContentClip : CLIP_BANDWITHS) {
+			if (detailContentClip.getName().trim().equals(name)) {
+				return detailContentClip.getCode();
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("\n");

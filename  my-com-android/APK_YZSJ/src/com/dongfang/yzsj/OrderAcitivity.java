@@ -116,11 +116,13 @@ public class OrderAcitivity extends BaseActivity implements OnClickListener {
 				ULog.d(TAG, "onSuccess  --" + result);
 				try {
 					JSONObject json = new JSONObject(result);
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					String type = "video/*";
-					Uri uri = Uri.parse(json.getString("url"));
-					intent.setDataAndType(uri, type);
-					startActivity(intent);
+					PlayerActivity.toPlay(OrderAcitivity.this, json.getString("url"));
+
+					// Intent intent = new Intent(Intent.ACTION_VIEW);
+					// String type = "video/*";
+					// Uri uri = Uri.parse(json.getString("url"));
+					// intent.setDataAndType(uri, type);
+					// startActivity(intent);
 
 					addHistory();
 				} catch (JSONException e) {

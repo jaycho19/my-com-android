@@ -4,7 +4,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -48,7 +47,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 	private TextView tvMovieName;// 名称
 	private TextView tvMovieLength;// 视频长度
 	private TextView tvMovieDesc;// 详情
-	private Button btnPlay_liuchang, btnPlay_qingxi, btnPlay_gaoqing;// 播放按钮
+	private Button btnPlay_liuchang, btnPlay_qingxi, btnPlay_gaoqing, btnPlay_chaoqing;// 播放按钮
 	private Button btnAddFavorite;// 添加到收藏
 	private LinearLayout llJuJiContain, llJuJiTitle;// 我的喜欢
 	private LinearLayout llLikeContain_0, llLikeContain_1;// 我的喜欢
@@ -94,6 +93,8 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		btnPlay_qingxi.setOnClickListener(this);
 		btnPlay_gaoqing = (Button) findViewById(R.id.detail_btn_play_gaoqing);
 		btnPlay_gaoqing.setOnClickListener(this);
+		btnPlay_chaoqing = (Button) findViewById(R.id.detail_btn_play_chaoqing);
+		btnPlay_chaoqing.setOnClickListener(this);
 		btnAddFavorite = (Button) findViewById(R.id.detail_btn_addfavorite);
 		btnAddFavorite.setOnClickListener(this);
 		llJuJiContain = (LinearLayout) findViewById(R.id.detail_ll_juji_contain);
@@ -128,6 +129,20 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		}
 
 		tvMovieDesc.setText(bean.getContent().getMEDIA_INTRO());
+
+		// 不同码流按钮初始化
+		if (TextUtils.isEmpty(bean.getContent().getBandByName(ComParams.PLAY_BAND_LIUCHANG))) {
+			btnPlay_liuchang.setEnabled(false);
+		}
+		if (TextUtils.isEmpty(bean.getContent().getBandByName(ComParams.PLAY_BAND_QINGXI))) {
+			btnPlay_qingxi.setEnabled(false);
+		}
+		if (TextUtils.isEmpty(bean.getContent().getBandByName(ComParams.PLAY_BAND_GAOQING))) {
+			btnPlay_gaoqing.setEnabled(false);
+		}
+		if (TextUtils.isEmpty(bean.getContent().getBandByName(ComParams.PLAY_BAND_CHAOQING))) {
+			btnPlay_chaoqing.setEnabled(false);
+		}
 
 		if (bean.isHasFavoriteIt())
 			btnAddFavorite.setText("取消收藏");
@@ -416,12 +431,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 				ULog.d(TAG, "onSuccess  --" + result);
 				try {
 					JSONObject json = new JSONObject(result);
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					String type = "video/*";
-					Uri uri = Uri.parse(json.getString("url"));
-					intent.setDataAndType(uri, type);
-					startActivity(intent);
-
+					PlayerActivity.toPlay(DetailsActiivity.this, json.getString("url"));
 					addHistory();
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -457,16 +467,20 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 				addToFavorite();
 			break;
 		case R.id.detail_btn_play:
-			toPlayAuth(bean.getChannel().getChannelId(), bean.getContent().getId(), bean.getContent()
-					.getCLIP_BANDWITHS().get(0).getCode(), 1);
+			toPlayAuth(bean.getChannel().getChannelId(), bean.getContent().getId(),
+					bean.getContent().getBandByName(ComParams.PLAY_BAND_LIUCHANG), 1);
 			break;
 		case R.id.detail_btn_play_qingxi:
-			toPlayAuth(bean.getChannel().getChannelId(), bean.getContent().getId(), bean.getContent()
-					.getCLIP_BANDWITHS().get(1).getCode(), 1);
+			toPlayAuth(bean.getChannel().getChannelId(), bean.getContent().getId(),
+					bean.getContent().getBandByName(ComParams.PLAY_BAND_QINGXI), 1);
 			break;
 		case R.id.detail_btn_play_gaoqing:
-			toPlayAuth(bean.getChannel().getChannelId(), bean.getContent().getId(), bean.getContent()
-					.getCLIP_BANDWITHS().get(2).getCode(), 1);
+			toPlayAuth(bean.getChannel().getChannelId(), bean.getContent().getId(),
+					bean.getContent().getBandByName(ComParams.PLAY_BAND_GAOQING), 1);
+			break;
+		case R.id.detail_btn_play_chaoqing:
+			toPlayAuth(bean.getChannel().getChannelId(), bean.getContent().getId(),
+					bean.getContent().getBandByName(ComParams.PLAY_BAND_CHAOQING), 1);
 			break;
 		default:
 			break;
