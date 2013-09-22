@@ -1,6 +1,7 @@
 package com.dongfang.yzsj;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -58,13 +59,7 @@ public class LoadingAcitivity extends BaseActivity {
 	protected void onResume() {
 		super.onResume();
 		if (Util.isNetworkAvailable(this)) {
-			new Handler().postAtTime(new Runnable() {
-
-				@Override
-				public void run() {
-					initData();
-				}
-			}, 100);
+			new LoadingData().execute();
 		}
 		else {
 			Toast.makeText(this, "请检查网络连接", Toast.LENGTH_LONG).show();
@@ -74,41 +69,64 @@ public class LoadingAcitivity extends BaseActivity {
 
 	private void initData() {
 		// 需要判断网络
-		HomeBean bean = new com.google.gson.Gson().fromJson(ACache.get(this).getAsString(ComParams.INTENT_HOMEBEAN),
-				HomeBean.class);
-		if (null != bean && !TextUtils.isEmpty(bean.getMarquee()) && bean.getSlider().size() > 0) {
-			intent(bean);
-		}
-		else {
-			new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_HOME, new RequestCallBack<String>() {
-				@Override
-				public void onLoading(long total, long current) {
-					ULog.d(TAG, "RequestCallBack.onLoading total = " + total + "; current = " + current);
-				}
+		// HomeBean bean = new com.google.gson.Gson().fromJson(ACache.get(this).getAsString(ComParams.INTENT_HOMEBEAN),
+		// HomeBean.class);
+		// if (null != bean && !TextUtils.isEmpty(bean.getMarquee()) && bean.getSlider().size() > 0) {
+		// intent(bean);
+		// }
+		// else {
+		new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_HOME, new RequestCallBack<String>() {
+			@Override
+			public void onLoading(long total, long current) {
+				ULog.d(TAG, "RequestCallBack.onLoading total = " + total + "; current = " + current);
+			}
 
-				@Override
-				public void onSuccess(String result) {
-					// ULog.d(TAG, "onSuccess  --" + result);
-					HomeBean bean = new com.google.gson.Gson().fromJson(result, HomeBean.class);
-					bean.toLog();
-					// 缓存数据
-					ACache.get(LoadingAcitivity.this).put(ComParams.INTENT_HOMEBEAN, result, ACache.TIME_HOUR);
-					// ACache.get(LoadingAcitivity.this).put(ComParams.INTENT_HOMEBEAN, result, 60 * 5);
-					intent(bean);
+			@Override
+			public void onSuccess(String result) {
+				// ULog.d(TAG, "onSuccess  --" + result);
+				HomeBean bean = new com.google.gson.Gson().fromJson(result, HomeBean.class);
+				bean.toLog();
+				// 缓存数据
+				ACache.get(LoadingAcitivity.this).put(ComParams.INTENT_HOMEBEAN, result, ACache.TIME_HOUR);
+				// ACache.get(LoadingAcitivity.this).put(ComParams.INTENT_HOMEBEAN, result, 60 * 5);
+				intent(bean);
 
-				}
+			}
 
-				@Override
-				public void onStart() {
-					ULog.i(TAG, "RequestCallBack.onStart");
-				}
+			@Override
+			public void onStart() {
+				ULog.i(TAG, "RequestCallBack.onStart");
 
-				@Override
-				public void onFailure(HttpException error, String msg) {
-					ULog.i(TAG, "RequestCallBack.onFailure");
-				}
-			});
-		}
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				ULog.i(TAG, "RequestCallBack.onFailure");
+			}
+		});
+		// }
 	}
 
+	class LoadingData extends AsyncTask<String, String, Integer> {
+		@Override
+		protected Integer doInBackground(String... paramArrayOfParams) {
+			HomeBean bean = new com.google.gson.Gson().fromJson(
+					ACache.get(LoadingAcitivity.this).getAsString(ComParams.INTENT_HOMEBEAN), HomeBean.class);
+			if (null != bean && !TextUtils.isEmpty(bean.getMarquee()) && bean.getSlider().size() > 0) {
+				intent(bean);
+				return 0;
+			}
+			return 1;
+		}
+
+		@Override
+		protected void onPostExecute(Integer result) {
+			super.onPostExecute(result);
+
+			if (1 == result.intValue()) {
+				initData();
+			}
+
+		}
+	}
 }
