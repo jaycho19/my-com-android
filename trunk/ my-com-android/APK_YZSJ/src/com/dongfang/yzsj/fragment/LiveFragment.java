@@ -23,6 +23,7 @@ import com.dongfang.utils.ULog;
 import com.dongfang.utils.Util;
 import com.dongfang.view.MyImageView;
 import com.dongfang.yzsj.LoginActivity;
+import com.dongfang.yzsj.PlayerActivity;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.bean.HomeLivesItem;
 import com.dongfang.yzsj.bean.LiveBean;
@@ -143,7 +144,7 @@ public class LiveFragment extends Fragment {
 	 * @param clipId
 	 *            第几集
 	 */
-	private void toPlay(String conntentId) {
+	private void toPlay(final String conntentId) {
 		StringBuilder url = new StringBuilder(ComParams.HTTP_PLAYURL);
 		url.append("token=").append(User.getToken(getActivity()));
 		url.append("&").append("phone=").append(User.getPhone(getActivity()));
@@ -160,13 +161,10 @@ public class LiveFragment extends Fragment {
 				ULog.d(TAG, "onSuccess  --" + result);
 				try {
 					JSONObject json = new JSONObject(result);
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					String type = "video/*";
-					Uri uri = Uri.parse(json.getString("url"));
-					intent.setDataAndType(uri, type);
-					startActivity(intent);
+
+					PlayerActivity.toPlay(getActivity(), json.getString("url"));
+
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -226,11 +224,8 @@ public class LiveFragment extends Fragment {
 			if (convertView == null) {
 				convertView = LayoutInflater.from(mContext).inflate(R.layout.imageview_adapter, null);
 			}
-			convertView.setLayoutParams(lparams);
 			((MyImageView) convertView).setImage(lives.get(position).PHONE_MEDIA_POSTER_SMALL);
-			// BitmapUtils.create(mContext).display((ImageView) convertView,
-			// lives.get(position).PHONE_MEDIA_POSTER_SMALL,
-			// w, h);
+			convertView.setLayoutParams(lparams);
 
 			convertView.setOnClickListener(new OnClickListener() {
 

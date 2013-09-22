@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/img_voice_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/add" />
+
+    <ImageView
+        android:id="@+id/img_voice_reduce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/reduce" />
+
+    <com.dongfang.view.MyVerticalSeekBar
+        android:id="@+id/sb_voice"
+        style="@style/vertical_seek_bar_sytle"
+        android:layout_above="@id/img_voice_reduce"
+        android:layout_below="@id/img_voice_add"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:id="@+id/control_btn_container"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:weightSum="10" >
+
+    
+        <LinearLayout
+            android:id="@+id/mc_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <ImageButton
+                android:id="@+id/btn_backwardplay"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_popupwin_bottom_bg01"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/btn_backwardplay_icon" />
+
+            <ImageButton
+                android:id="@+id/btn_play_pause"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_popupwin_bottom_bg01"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/btn_pause_icon" />
+
+            <ImageButton
+                android:id="@+id/btn_forwardplay"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_popupwin_bottom_bg01"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/btn_forwardplay_icon" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/video_seekbar_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/control_btn_container"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="8dp" >
+
+        <TextView
+            android:id="@+id/played_time"
+            style="@style/MiddleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center_vertical"
+            android:text="@string/current_time" />
+
+        <TextView
+            android:id="@+id/total_time"
+            style="@style/MiddleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical"
+            android:text="@string/total_time" />
+
+        <SeekBar
+            android:id="@+id/video_seekbar"
+            style="@style/seek_bar_sytle"
+            android:layout_gravity="center_vertical"
+            android:layout_toLeftOf="@id/total_time"
+            android:layout_toRightOf="@id/played_time" />
+    </RelativeLayout>
+
+</RelativeLayout>

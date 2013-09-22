@@ -2,13 +2,12 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.    -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
@@ -70,6 +69,54 @@
         <item name="android:windowNoTitle">true</item>
         <item name="@android:windowEnterAnimation">@anim/grow_from_top</item>
         <item name="@android:windowExitAnimation">@anim/shrink_from_bottom</item>
+    </style>
+    <!-- 应用播放器文字style -->
+    <style name="LargeText">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@drawable/text_color_selector</item>
+    </style>
+
+    <style name="MiddleText">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@drawable/text_color_selector</item>
+    </style>
+
+    <style name="seek_bar_sytle">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:max">1000</item>
+        <item name="android:maxHeight">12px</item>
+        <item name="android:minHeight">12px</item>
+        <item name="android:paddingLeft">18dp</item>
+        <item name="android:paddingRight">18dp</item>
+        <item name="android:progress">0</item>
+        <item name="android:progressDrawable">@xml/seekbar_style</item>
+        <item name="android:thumb">@drawable/video_slide_btn</item>
+    </style>
+
+    <!-- 应用顶部返回按钮style -->
+    <style name="app_title_back_btn_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/btn_title_back_bg</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:textColor">@color/button_color</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">2dp</item>
+    </style>
+
+    <style name="vertical_seek_bar_sytle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:max">15</item>
+        <item name="android:maxHeight">6dp</item>
+        <item name="android:minHeight">6dp</item>
+        <item name="android:progress">0</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:progressDrawable">@xml/vertical_seekbar_style</item>
+        <item name="android:thumb">@drawable/video_slide_btn</item>
     </style>
 
 </resources>

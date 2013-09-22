@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.dongfang.utils.ACache;
 import com.dongfang.utils.ULog;
+import com.dongfang.utils.Util;
 import com.dongfang.view.CheckTextView;
 import com.dongfang.view.PullToRefreshView;
 import com.dongfang.view.PullToRefreshView.OnFooterRefreshListener;
@@ -29,7 +30,6 @@ import com.dongfang.yzsj.bean.SeachBean;
 import com.dongfang.yzsj.bean.VODItem;
 import com.dongfang.yzsj.fragment.adp.TypeAdp;
 import com.dongfang.yzsj.params.ComParams;
-import com.dongfang.yzsj.utils.Util;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;

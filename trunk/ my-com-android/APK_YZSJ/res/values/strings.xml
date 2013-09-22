@@ -5,5 +5,21 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="progress_dialog_loading">数据加载中...</string>
+    <!-- 播放器页面 -->
+    <string name="push_to_bigscreen">推送大屏</string>
+    <string name="original_picture_video">原画</string>
+    <string name="super_definition_video">超清</string>
+    <string name="hd_video">高清</string>
+    <string name="standard_definition_video">标清</string>
+    <string name="smooth_definition_video">流畅</string>
+    <string name="choose_set">选集</string>
+    <string name="current_time">00:00</string>
+    <string name="total_time">00:00</string>
+    <string name="video_loading_start">缓冲中,请稍后\u2026</string>
+    <string name="video_loading_pecent">缓冲中,请稍后\u2026 %d%%</string>
+    <string name="video_is_screen_lock">屏幕已锁定</string>
+    <string name="video_scale_full">全屏</string>
+    <string name="video_scale_original">原始</string>
+    <string name="video_loading">稍待片刻，精彩马上呈现……</string>
 
 </resources>
