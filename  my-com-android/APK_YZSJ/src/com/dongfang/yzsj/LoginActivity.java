@@ -3,8 +3,6 @@ package com.dongfang.yzsj;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -28,7 +26,6 @@ public class LoginActivity extends BaseActivity {
 
 	private Bundle data;
 	private LoginFragment loginFragment;// 登陆Fragment
-	private Intent intent;
 	private com.dongfang.view.ProgressDialog progDialog;
 
 	@Override
@@ -125,7 +122,7 @@ public class LoginActivity extends BaseActivity {
 					// intent.setDataAndType(uri, type);
 					// intent.setComponent(new
 					// ComponentName("com.android.gallery3d","com.android.gallery3d.MovieActivity"));
-					startActivity(intent);
+					// startActivity(intent);
 					finish();
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block

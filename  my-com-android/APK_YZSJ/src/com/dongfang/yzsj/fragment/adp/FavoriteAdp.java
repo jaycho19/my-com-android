@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dongfang.utils.ULog;
+import com.dongfang.view.MyImageView;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.asynctasks.ToDetailAsyncTask;
 import com.dongfang.yzsj.bean.Movie;
@@ -77,7 +78,7 @@ public class FavoriteAdp extends BaseAdapter {
 		if (convertView == null) {
 			convertView = LayoutInflater.from(context).inflate(R.layout.fragment_favorite_adp_item, null);
 			holder = new ViewHolder();
-			holder.iv_placard = (ImageView) convertView.findViewById(R.id.favorite_imageView_placard);
+			holder.iv_placard = (MyImageView) convertView.findViewById(R.id.favorite_imageView_placard);
 			holder.tv_title = (TextView) convertView.findViewById(R.id.favorite_tv_title);
 			holder.tv_actor = (TextView) convertView.findViewById(R.id.favorite_tv_actor);
 			holder.tv_des = (TextView) convertView.findViewById(R.id.favorite_tv_des);
@@ -89,7 +90,8 @@ public class FavoriteAdp extends BaseAdapter {
 		}
 
 		final Movie movie = list.get(position);
-		BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG());
+		holder.iv_placard.setImage(movie.getPC_MEDIA_POSTER_BIG());	
+		// BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG());
 		// BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG(), 105, 137);
 		holder.tv_des.setText(movie.getMEDIA_INTRO());
 		holder.tv_actor.setText(movie.getMEDIA_ACTORS());
@@ -109,7 +111,7 @@ public class FavoriteAdp extends BaseAdapter {
 
 	/** 列表item内容 */
 	private class ViewHolder {
-		ImageView iv_placard; // 海报，截图
+		MyImageView iv_placard; // 海报，截图
 		TextView tv_title;
 		TextView tv_actor;
 		TextView tv_des;

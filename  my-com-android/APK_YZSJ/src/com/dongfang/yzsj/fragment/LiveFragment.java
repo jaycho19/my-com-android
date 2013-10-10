@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.LinearLayout.LayoutParams;
 
 import com.dongfang.utils.ACache;
 import com.dongfang.utils.ULog;
@@ -224,6 +223,7 @@ public class LiveFragment extends Fragment {
 			if (convertView == null) {
 				convertView = LayoutInflater.from(mContext).inflate(R.layout.imageview_adapter, null);
 			}
+			
 			((MyImageView) convertView).setImage(lives.get(position).PHONE_MEDIA_POSTER_SMALL);
 			convertView.setLayoutParams(lparams);
 

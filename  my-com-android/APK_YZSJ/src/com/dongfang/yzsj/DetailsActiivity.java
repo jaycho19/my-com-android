@@ -150,16 +150,17 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 			btnAddFavorite.setText("收藏");
 
 		// 剧集
-		if (bean.getContent().getCLIP_COUNT() > 1) {
-			int w = Util.getWindowWidth(this) / 5 - 10;
-			int rows = (bean.getContent().getCLIP_COUNT() / 5) + ((bean.getContent().getCLIP_COUNT() % 5) > 0 ? 1 : 0);
+		int clipCount = bean.getContent().getCLIP_COUNT(); // 集数
+		ULog.d(TAG, "CLIP_COUNT = " + clipCount);
+		if (clipCount > 1) {
+			int rows = (clipCount / 5) + ((clipCount % 5) > 0 ? 1 : 0);
 			LinearLayout.LayoutParams lpTV = new LayoutParams(-2, -2, 1);
 			lpTV.setMargins(5, 5, 5, 5);
 			for (int row = 0; row < rows; row++) {
 				LinearLayout ll = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.activity_detail_juji_row,
 						null);
 				if (row == (rows - 1)) {
-					for (int i = 0, length = bean.getContent().getCLIP_COUNT() % 5; i < length; i++) {
+					for (int i = 0, length = clipCount - row * 5 ; i < length; i++) {
 						TextView tv = (TextView) LayoutInflater.from(this).inflate(
 								R.layout.activity_detail_textview_juji, null);
 						tv.setLayoutParams(lpTV);
@@ -168,7 +169,14 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 						tv.setOnClickListener(new JuJiOnClickListener(row * 5 + i + 1));
 						ll.addView(tv);
 					}
-
+					for (int i = 0, length = 5 - ll.getChildCount(); i < length; i++) {
+						TextView tv = (TextView) LayoutInflater.from(this).inflate(
+								R.layout.activity_detail_textview_juji, null);
+						tv.setLayoutParams(lpTV);
+						tv.setVisibility(View.INVISIBLE);
+						ULog.d(TAG, Integer.toString(clipCount + 1 + i) + "  invisible");
+						ll.addView(tv);
+					}
 				}
 				else {
 					for (int i = 0; i < 5; i++) {
@@ -196,7 +204,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 			llLikeContain_1.removeAllViews();
 
 			int length = bean.getRelateContents().size();
-			ULog.d(TAG, "length = " + length);
+			ULog.d(TAG, "RelateContents size = " + length);
 			int w = Util.getWindowWidth(this) / 3 - 10;
 			LinearLayout.LayoutParams lParam = new LinearLayout.LayoutParams(w, -2);
 			lParam.setMargins(5, 5, 5, 5);
