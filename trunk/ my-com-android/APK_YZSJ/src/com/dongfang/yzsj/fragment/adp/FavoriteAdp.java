@@ -136,7 +136,7 @@ public class FavoriteAdp extends BaseAdapter {
 		public void onClick(View v) {
 			ULog.d(TAG, v.toString());
 			StringBuilder url = new StringBuilder(ComParams.HTTP_FAVORITE_DEL);
-			url.append(contentId);
+			url.append("contentId=").append(contentId);
 			url.append("&").append("token=").append(User.getToken(context));
 			url.append("&").append("userTelephone=").append(User.getPhone(context));
 

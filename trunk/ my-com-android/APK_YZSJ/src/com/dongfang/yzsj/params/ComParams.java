@@ -18,7 +18,7 @@ public class ComParams {
 	public static final String INTENT_MOVIELIST_CHANNEL = "channel";
 	public static final String INTENT_MOVIEDETAIL_LIVEID = "liveId";
 	public static final String INTENT_MOVIEDETAIL_CHANNELID = "channelId";
-	public static final String INTENT_MOVIEDETAIL_CONNENTID = "connentid";
+	public static final String INTENT_MOVIEDETAIL_CONNENTID = "connentId";
 	public static final String INTENT_MOVIEDETAIL_BAND = "band";
 	public static final String INTENT_MOVIEDETAIL_CLIPID = "clipId";
 	public static final String INTENT_MOVIEDETAIL_BEAN = "detailBean";
@@ -66,9 +66,12 @@ public class ComParams {
 	public static final String HTTP_FAVORITE = HTTP_BASE
 			+ "/page/hbMobile/userOptions.jsp?jsonFormat=true&command=listFavorite&";
 	/** 添加个人收藏 */
-	public static final String HTTP_FAVORITE_ADD = HTTP_BASE + "/portal/userFavorites!save.action?obj.contentId=";
+	public static final String HTTP_FAVORITE_ADD = HTTP_BASE
+			+ "/page/hbMobile/userOptions.jsp?jsonFormat=true&command=addFavorite&";
 	/** 删除个人收藏 */
-	public static final String HTTP_FAVORITE_DEL = HTTP_BASE + "/portal/userFavorites!remove.action?obj.contentId=";
+	public static final String HTTP_FAVORITE_DEL = HTTP_BASE
+			+ "/page/hbMobile/userOptions.jsp?jsonFormat=true&command=removeCollect&";
+
 	/** 我的订阅 */
 	public static final String HTTP_MY_ORDER = HTTP_BASE
 			+ "/page/hbMobile/userOptions.jsp?command=myBilling&jsonFormat=true&";

@@ -96,7 +96,7 @@ public class LoginActivity extends BaseActivity {
 	 * @param clipId
 	 *            第几集
 	 */
-	private void toPlay(String conntentId) {
+	private void toPlay(final String conntentId) {
 		StringBuilder url = new StringBuilder(ComParams.HTTP_PLAYURL);
 		url.append("token=").append(User.getToken(this));
 		url.append("&").append("phone=").append(User.getPhone(this));
@@ -113,8 +113,10 @@ public class LoginActivity extends BaseActivity {
 				ULog.d(TAG, "onSuccess  --" + result);
 				try {
 					JSONObject json = new JSONObject(result);
-
-					PlayerActivity.toPlay(LoginActivity.this, json.getString("url"));
+					Bundle data = new Bundle();
+					data.putString(ComParams.INTENT_MOVIEDETAIL_CONNENTID, conntentId);
+					data.putInt(ComParams.INTENT_MOVIEDETAIL_CLIPID,1);
+					PlayerActivity.toPlay(LoginActivity.this, json.getString("url"),data);
 
 					// Intent intent = new Intent(Intent.ACTION_VIEW);
 					// String type = "video/*";

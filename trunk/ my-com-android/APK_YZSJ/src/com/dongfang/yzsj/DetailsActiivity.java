@@ -160,7 +160,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 				LinearLayout ll = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.activity_detail_juji_row,
 						null);
 				if (row == (rows - 1)) {
-					for (int i = 0, length = clipCount - row * 5 ; i < length; i++) {
+					for (int i = 0, length = clipCount - row * 5; i < length; i++) {
 						TextView tv = (TextView) LayoutInflater.from(this).inflate(
 								R.layout.activity_detail_textview_juji, null);
 						tv.setLayoutParams(lpTV);
@@ -417,7 +417,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 	 * @param clipId
 	 *            第几集
 	 */
-	private void toPlay(String conntentId, String band, int clipId) {
+	private void toPlay(final String conntentId, final String band, final int clipId) {
 		StringBuilder url = new StringBuilder(ComParams.HTTP_PLAYURL);
 		url.append("token=").append(User.getToken(this));
 		url.append("&").append("phone=").append(User.getPhone(this));
@@ -439,8 +439,11 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 				ULog.d(TAG, "onSuccess  --" + result);
 				try {
 					JSONObject json = new JSONObject(result);
-					PlayerActivity.toPlay(DetailsActiivity.this, json.getString("url"));
-					addHistory();
+					Bundle data = new Bundle();
+					data.putString(ComParams.INTENT_MOVIEDETAIL_CONNENTID, conntentId);
+					data.putInt(ComParams.INTENT_MOVIEDETAIL_CLIPID, clipId < 1 ? 1 : clipId);
+					PlayerActivity.toPlay(DetailsActiivity.this, json.getString("url"),data);
+					// addHistory();
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -498,7 +501,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 	/** 添加到收藏 */
 	private void addToFavorite() {
 		StringBuilder url = new StringBuilder(ComParams.HTTP_FAVORITE_ADD);
-		url.append(bean.getContent().getId());
+		url.append("contentId=").append(bean.getContent().getId());
 		url.append("&").append("token=").append(User.getToken(this));
 		url.append("&").append("userTelephone=").append(User.getPhone(this));
 
@@ -518,7 +521,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 				DelAddResult addResult = new com.google.gson.Gson().fromJson(result, DelAddResult.class);
 
 				if (addResult.isSuccess()) {
-					Toast.makeText(DetailsActiivity.this, addResult.getMsg(), Toast.LENGTH_LONG).show();
+					Toast.makeText(DetailsActiivity.this, "收藏成功!", Toast.LENGTH_LONG).show();
 					bean.setHasFavoriteIt(true);
 					btnAddFavorite.setText("取消收藏");
 				}
@@ -561,7 +564,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 	/** 取消收藏 */
 	private void delFromFavorite() {
 		StringBuilder url = new StringBuilder(ComParams.HTTP_FAVORITE_DEL);
-		url.append(bean.getContent().getId());
+		url.append("contentId=").append(bean.getContent().getId());
 		url.append("&").append("token=").append(User.getToken(this));
 		url.append("&").append("userTelephone=").append(User.getPhone(this));
 
@@ -581,7 +584,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 				DelAddResult delResult = new com.google.gson.Gson().fromJson(result, DelAddResult.class);
 
 				if (delResult.isSuccess()) {
-					Toast.makeText(DetailsActiivity.this, delResult.getMsg(), Toast.LENGTH_LONG).show();
+					Toast.makeText(DetailsActiivity.this, "取消收藏成功!", Toast.LENGTH_LONG).show();
 					bean.setHasFavoriteIt(false);
 					btnAddFavorite.setText("收藏");
 				}
@@ -620,7 +623,11 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		});
 	}
 
-	/** 增加播放历史 */
+	/**
+	 * 增加播放历史
+	 * 
+	 * @deprecated
+	 */
 	private void addHistory() {
 		StringBuilder url = new StringBuilder(ComParams.HTTP_HISTORY_ADD);
 		url.append("contentId=").append(bean.getContent().getId()).append("&");

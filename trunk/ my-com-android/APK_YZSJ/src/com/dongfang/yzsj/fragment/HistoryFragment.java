@@ -132,7 +132,7 @@ public class HistoryFragment extends Fragment {
 		// limit = limit > 30 ? 30 : limit;
 
 		StringBuilder url = new StringBuilder(ComParams.HTTP_HISTORY);
-		url.append("start=").append(start).append("&");
+		url.append("start=").append(start * limit).append("&");
 		url.append("limit=").append(limit).append("&");
 		url.append("token=").append(User.getToken(getActivity())).append("&");
 		url.append("userTelephone=").append(User.getPhone(getActivity()));

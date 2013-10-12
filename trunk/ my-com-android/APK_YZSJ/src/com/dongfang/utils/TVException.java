@@ -227,16 +227,16 @@ public class TVException extends Exception {
 
 	// ---------------[960 , 969]
 	// ---------------------------------------------------------------
-	public static final int DOWNLOAD_NO_STORAGE_SPACE = 960;
-	public static final int DOWNLOAD_CONTENT_LENGTH_ZERO = 961;
-	public static final int DOWNLOAD_FILE_NOT_FOUND_EXCEPTION = 962;
-	public static final int DOWNLOAD_DOINBACKGROUND_IO_EXCEPTION = 963;
-	public static final int DOWNLOAD_WRITE_IO_EXCEPTION = 964;
-	public static final int DOWNLOAD_NO_FILE_PATH = 965;
-	public static final int DOWNLOAD_HAVA_DOWNLOADED = 966;
-	public static final int DOWNLOAD_IS_DOWNLOADING = 967;
+	public static final int DOWNLOAD_NO_STORAGE_SPACE = 5960;
+	public static final int DOWNLOAD_CONTENT_LENGTH_ZERO = 5961;
+	public static final int DOWNLOAD_FILE_NOT_FOUND_EXCEPTION = 5962;
+	public static final int DOWNLOAD_DOINBACKGROUND_IO_EXCEPTION = 5963;
+	public static final int DOWNLOAD_WRITE_IO_EXCEPTION = 5964;
+	public static final int DOWNLOAD_NO_FILE_PATH = 5965;
+	public static final int DOWNLOAD_HAVA_DOWNLOADED = 5966;
+	public static final int DOWNLOAD_IS_DOWNLOADING = 5967;
 
-	public static final int UTIL_ENCODERBYMD5_EXCEPTION = 980;
+	public static final int UTIL_ENCODERBYMD5_EXCEPTION = 5980;
 
 	// /** 登录返回后需要的解析的xml信息错误编号（下发错误导致解析错误，或者仅仅解析错误） */
 	// public static final String LOGIN_RESULT_ERROR_XML_MSGMAP_NULL_CODE =
