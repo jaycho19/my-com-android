@@ -41,7 +41,13 @@ import com.dongfang.mediaplayer.constants.Constants;
 import com.dongfang.mediaplayer.windows.BasePopupWindow;
 import com.dongfang.mediaplayer.windows.BasePopupWindow.LandPopUpWinWorkingListener;
 import com.dongfang.utils.ULog;
+import com.dongfang.yzsj.PlayerActivity;
 import com.dongfang.yzsj.R;
+import com.dongfang.yzsj.params.ComParams;
+import com.dongfang.yzsj.utils.User;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.http.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
 
 /**
  * 视频播放界面Fragment
@@ -52,51 +58,50 @@ import com.dongfang.yzsj.R;
 @SuppressLint("ValidFragment")
 public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedListener, OnMPClickListener,
 		OnMPDoubleClickListener {
-	private final String									TAG										= VideoPlayerFragment.class
-																											.getSimpleName();
+	private final String TAG = VideoPlayerFragment.class.getSimpleName();
 
-	private Context											context;
-	private FrameLayout										fragview;
-	private BasePopupWindow									basePop;
+	private Context context;
+	private FrameLayout fragview;
+	private BasePopupWindow basePop;
 
-	private Mediaplayer										mediaPlayer;
+	private Mediaplayer mediaPlayer;
 	// private static VideoView mVideoView;
 
-	private LinearLayout									loadingBar;
-	private AnimationDrawable								loadingAnim;
+	private LinearLayout loadingBar;
+	private AnimationDrawable loadingAnim;
 
 	// private int mSaveMediaPosition = 0;
 	/** 是否播放器被挂起状�? */
-	private boolean											isOnMediaSaveState						= false;
+	private boolean isOnMediaSaveState = false;
 
-	private boolean											hasFocus;
-	private boolean											resumeFocusNot;
+	private boolean hasFocus;
+	private boolean resumeFocusNot;
 
-	private boolean											mediaIsPrepared;
+	private boolean mediaIsPrepared;
 
-	private boolean											mIsLandscape;
-	private int												mPortScreenHeight						= Constants.SCREEN_HEIGHT_PORTRAIT;
-	private float											mPortScreenHeightPer					= (float) 0.5;
+	private boolean mIsLandscape;
+	private int mPortScreenHeight = Constants.SCREEN_HEIGHT_PORTRAIT;
+	private float mPortScreenHeightPer = (float) 0.5;
 
-	public static int										mPortScreenPaddingTopPx					= 0;
+	public static int mPortScreenPaddingTopPx = 0;
 
-	private final int										hidePopupwindow							= 0;
-	private final int										showMediaLoding							= 1;
-	private final int										hideMediaLoding							= 2;
+	private final int hidePopupwindow = 0;
+	private final int showMediaLoding = 1;
+	private final int hideMediaLoding = 2;
 
 	/** 几秒钟之后popupwin自动消失 */
-	private int												popupwindowDissmissDelay				= 5;
-	/** 控制缓冲�?popupwin 是否自动弹出的标�?*/
-	private boolean											mFromUserClick;
+	private int popupwindowDissmissDelay = 5;
+	/** 控制缓冲�?popupwin 是否自动弹出的标�? */
+	private boolean mFromUserClick;
 
-	public static final int									SHOW_VOICE_POPUPWINDOW_ADJUST_VOLUME	= 100;
-	public static final int									ADJUST_LOWER							= 101;
-	public static final int									ADJUST_RAISE							= 102;
+	public static final int SHOW_VOICE_POPUPWINDOW_ADJUST_VOLUME = 100;
+	public static final int ADJUST_LOWER = 101;
+	public static final int ADJUST_RAISE = 102;
 
-//	private static Bundle									bundle;
-	private static String  mUri;
-	private VPFragmentOnClickListener						mExternalOnClickListener;
-	private VPFragmentPopupWinAutoDissmissOrShowListener	mExternalPopupWinAutoDissmissOrShowListener;
+	// private static Bundle bundle;
+	private static String mUri;
+	private VPFragmentOnClickListener mExternalOnClickListener;
+	private VPFragmentPopupWinAutoDissmissOrShowListener mExternalPopupWinAutoDissmissOrShowListener;
 
 	/** 让播放器做的事情 */
 	public static enum MEDIA_TODO {
@@ -184,6 +189,8 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	public void onPause() {
 		super.onPause();
 		ULog.i(TAG, "--> onPause");
+		addHistory(mediaPlayer.getCurrentPosition()/1000);
+		
 		mediaPlayer.releaseMediaPlayer();
 		isOnMediaSaveState = true;
 	}
@@ -200,7 +207,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 		if (!hasFocus) {
 			dissmissAllPopupWin();
 		}
-		// 为了修复2.3�?2.2版本，锁屏点亮屏�?未开锁之后会直接调用onResume�?		// 修复�?��播放器界面没有焦点时，就�?��播放视频的BUG
+		// 为了修复2.3�?2.2版本，锁屏点亮屏�?未开锁之后会直接调用onResume�? // 修复�?��播放器界面没有焦点时，就�?��播放视频的BUG
 		if (resumeFocusNot == true && hasFocus && isOnMediaSaveState == true) {
 			onResume();
 			return;
@@ -233,7 +240,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	public void onDestroyView() {
 		super.onDestroyView();
 		ULog.i(TAG, "--> onDestroyView");
-		// 播放页面�?��时还是loading状�?�?�?		loadingCompleted();
+		// 播放页面�?��时还是loading状�?�?�? loadingCompleted();
 
 		// getActivity().unregisterReceiver(voice_changed_receiver);
 		cancelHideAllPopupWindDelay();
@@ -254,22 +261,18 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 		ULog.i(TAG, "--> onCreateView");
 		fragview = (FrameLayout) inflater.inflate(R.layout.fragment_videoview_player, container, false);
 
-//		initVideoParams();
+		// initVideoParams();
 		initView();
 		initMediaPlayer();
 		setupData();
 		return fragview;
 	}
 
-//	private void initVideoParams() {
-//		
-//		ULog.i(TAG, "mPlayData.playType = " + mPlayData.getPlayType() + "contentId--> " + mPlayData.getContentId()
-//				+ "nplayUrl = " + mPlayData.getPlayUrlNowSelect() + "bundle = " + bundle.toString());
-//	}
-
-	
-
-	
+	// private void initVideoParams() {
+	//
+	// ULog.i(TAG, "mPlayData.playType = " + mPlayData.getPlayType() + "contentId--> " + mPlayData.getContentId()
+	// + "nplayUrl = " + mPlayData.getPlayUrlNowSelect() + "bundle = " + bundle.toString());
+	// }
 
 	/** 初始化view */
 	public void initView() {
@@ -281,8 +284,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 		if (mIsLandscape) {
 			initLandScapePopupWin();
 		}
-		else {
-		}
+		else {}
 
 	}
 
@@ -300,7 +302,6 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 
 	public void initLandScapePopupWin() {
 
-
 		basePop = BasePopupWindow.getInstance(context);
 		basePop.initBasePopupWindow(context);
 		basePop.setLandPopUpWinWorkingListener(new LandPopUpWinWorkingListener() {
@@ -312,13 +313,11 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 		});
 	}
 
-
 	private void destroyLandScapePopupWin() {
 		if (basePop != null) {
 			basePop.dissmissAll();
 		}
 	}
-
 
 	private void setupData() {
 		getWindowStatusBarHeight();
@@ -355,7 +354,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 
 	}
 
-	/** 初始化MediaPlayer控制�?*/
+	/** 初始化MediaPlayer控制�? */
 	@SuppressLint("NewApi")
 	private void initMediaPlayer() {
 
@@ -371,13 +370,15 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 		mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
 			@Override
 			public void onCompletion(android.media.MediaPlayer mp) {
-				// 判断是否是连续剧，如果是连续剧并且不是最后一集，�?��播放下一�?	
-//				if (mPlayData.isEpisode()) {
-//					autoPlayNextEpisode();
-//				}
-//				else {
-//					((Activity) context).finish();
-//				}
+				// 判断是否是连续剧，如果是连续剧并且不是最后一集，�?��播放下一�?
+				// if (mPlayData.isEpisode()) {
+				// autoPlayNextEpisode();
+				// }
+				// else {
+				// ((Activity) context).finish();
+				// }
+				
+				addHistory(mp.getCurrentPosition()/1000);
 			}
 		});
 		mediaPlayer.setOnCurrentPositionUpdateListener(new OnCurrentPositionUpdateListener() {
@@ -488,8 +489,6 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 		// }
 	}
 
-	
-
 	/**
 	 * 显示Land PopupWindow
 	 */
@@ -500,7 +499,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 		// return;
 		// }
 		if (basePop.isFirstLayerShowing() == false) {
-			// popupwindow显示，开始计时进行自动消�?			hideAllPopupWinDelay();
+			// popupwindow显示，开始计时进行自动消�? hideAllPopupWinDelay();
 			basePop.firstLayerShow();
 		}
 		else {
@@ -510,9 +509,9 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 
 	}
 
-
 	/**
-	 * 参数 单位 �?�?	 * 
+	 * 参数 单位 �?�? *
+	 * 
 	 * @param time
 	 *            seconds
 	 */
@@ -529,8 +528,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 		if (mIsLandscape) {
 			basePop.dissmissAll();
 		}
-		else {
-		}
+		else {}
 
 	}
 
@@ -543,7 +541,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 			return;
 		}
 		if (loadingBar.isShown() && firstLayerPopupWinIsShowing()) {
-			// 在缓冲中 关闭 popupwin 才有�?			mFromUserClick = true;
+			// 在缓冲中 关闭 popupwin 才有�? mFromUserClick = true;
 		}
 		else if (loadingBar.isShown() && firstLayerPopupWinIsShowing() == false) {
 			mFromUserClick = false;
@@ -564,9 +562,9 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 
 		hideAllPopupWinDelay();
 		// 用户操作了的话，此函数就无效不用做任何事情返回
-				if (mFromUserClick || !hasFocus) {
-					return;
-				}
+		if (mFromUserClick || !hasFocus) {
+			return;
+		}
 		if (mIsLandscape) {
 			if (basePop.isFirstLayerShowing() == false) {
 				if (mExternalPopupWinAutoDissmissOrShowListener != null) {
@@ -588,7 +586,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 		else {
 			return false;
 		}
-		
+
 	}
 
 	public void setVPFragmentOnClickListener(VPFragmentOnClickListener mListener) {
@@ -626,7 +624,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	@Override
 	public boolean onClick(View v) {
 		if (loadingBar.isShown() && firstLayerPopupWinIsShowing()) {
-			// 在缓冲中 关闭 popupwin 才有�?			mFromUserClick = true;
+			// 在缓冲中 关闭 popupwin 才有�? mFromUserClick = true;
 		}
 		else if (loadingBar.isShown() && firstLayerPopupWinIsShowing() == false) {
 			mFromUserClick = false;
@@ -762,7 +760,8 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	}
 
 	/**
-	 * 设置是否是横屏显�?	 * 
+	 * 设置是否是横屏显�? *
+	 * 
 	 * @param mIsLandscape
 	 */
 	public void setScreenOrientation(boolean mIsLandscape) {
@@ -803,9 +802,6 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 		super.onSaveInstanceState(savedInstanceState);
 	}
 
-
-	
-
 	/**
 	 * 从外部传进来事件
 	 * 
@@ -818,37 +814,58 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 		myHandler.sendMessage(message);
 	}
 
-	private Handler	myHandler	= new Handler() {
+	private Handler myHandler = new Handler() {
 
-									@Override
-									public void handleMessage(Message msg) {
-										super.handleMessage(msg);
-										switch (msg.what) {
-										case hidePopupwindow:
-											if (mExternalPopupWinAutoDissmissOrShowListener != null) {
-												mExternalPopupWinAutoDissmissOrShowListener.popupWinAutoChanged(false);
-											}
-											dissmissAllPopupWin();
-											break;
-										case SHOW_VOICE_POPUPWINDOW_ADJUST_VOLUME:
-											if (hasFocus) {
-												if (mIsLandscape) {
-													basePop.sendMessage(msg.what, msg.arg1);
-												}
-												else {
-												}
-											}
-											break;
-										case showMediaLoding:
-											loadingStart(msg.arg1);
-											break;
-										case hideMediaLoding:
-											loadingCompleted();
-											break;
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			switch (msg.what) {
+			case hidePopupwindow:
+				if (mExternalPopupWinAutoDissmissOrShowListener != null) {
+					mExternalPopupWinAutoDissmissOrShowListener.popupWinAutoChanged(false);
+				}
+				dissmissAllPopupWin();
+				break;
+			case SHOW_VOICE_POPUPWINDOW_ADJUST_VOLUME:
+				if (hasFocus) {
+					if (mIsLandscape) {
+						basePop.sendMessage(msg.what, msg.arg1);
+					}
+					else {}
+				}
+				break;
+			case showMediaLoding:
+				loadingStart(msg.arg1);
+				break;
+			case hideMediaLoding:
+				loadingCompleted();
+				break;
 
-										}
-									}
+			}
+		}
 
-								};
+	};
 
+	/** 增加播放历史 */
+	private void addHistory(final int position) {
+		StringBuilder url = new StringBuilder(ComParams.HTTP_HISTORY_ADD);
+		url.append("contentId=").append(PlayerActivity.contentId);
+		url.append("&").append("clipId=").append(PlayerActivity.clipId);
+		url.append("&").append("position=").append(position);
+		url.append("&").append("token=").append(User.getToken(getActivity()));
+		url.append("&").append("userTelephone=").append(User.getPhone(getActivity()));
+
+		ULog.i(TAG, url.toString());
+
+		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
+			@Override
+			public void onSuccess(String result) {
+				ULog.d(TAG, "onSuccess  --" + result);
+			}
+
+		});
+	}
+
+	
+	
 }

@@ -4,8 +4,34 @@ import java.util.List;
 
 public class DelAddResult {
 	private boolean success = false;
-	private List<String> msg;
 	private List<String> error;
+	private String command;
+	private String beginTime;
+	private String endTime;
+
+	public String getCommand() {
+		return command;
+	}
+
+	public void setCommand(String command) {
+		this.command = command;
+	}
+
+	public String getBeginTime() {
+		return beginTime;
+	}
+
+	public void setBeginTime(String beginTime) {
+		this.beginTime = beginTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
 
 	public boolean isSuccess() {
 		return success;
@@ -23,13 +49,7 @@ public class DelAddResult {
 		this.error = error;
 	}
 
-	public void setMsg(List<String> msg) {
-		this.msg = msg;
-	}
-
 	public String getMsg() {
-		if (null != msg && msg.size() > 0)
-			return msg.get(0);
 		if (null != error && error.size() > 0)
 			return error.get(0);
 		return "";

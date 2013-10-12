@@ -3,8 +3,6 @@ package com.dongfang.yzsj;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -98,7 +96,7 @@ public class OrderAcitivity extends BaseActivity implements OnClickListener {
 	 * @param clipId
 	 *            第几集
 	 */
-	private void toPlay(String conntentId, String band, int clipId) {
+	private void toPlay(final String conntentId, final String band, final int clipId) {
 		StringBuilder url = new StringBuilder(ComParams.HTTP_PLAYURL);
 		url.append("token=").append(User.getToken(this));
 		url.append("&").append("phone=").append(User.getPhone(this));
@@ -116,7 +114,10 @@ public class OrderAcitivity extends BaseActivity implements OnClickListener {
 				ULog.d(TAG, "onSuccess  --" + result);
 				try {
 					JSONObject json = new JSONObject(result);
-					PlayerActivity.toPlay(OrderAcitivity.this, json.getString("url"));
+					Bundle data = new Bundle();
+					data.putString(ComParams.INTENT_MOVIEDETAIL_CONNENTID, conntentId);
+					data.putInt(ComParams.INTENT_MOVIEDETAIL_CLIPID, clipId < 1 ? 1 : clipId);
+					PlayerActivity.toPlay(OrderAcitivity.this, json.getString("url"), data);
 
 					// Intent intent = new Intent(Intent.ACTION_VIEW);
 					// String type = "video/*";
@@ -124,7 +125,7 @@ public class OrderAcitivity extends BaseActivity implements OnClickListener {
 					// intent.setDataAndType(uri, type);
 					// startActivity(intent);
 
-					addHistory();
+					// addHistory();
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -145,7 +146,11 @@ public class OrderAcitivity extends BaseActivity implements OnClickListener {
 		});
 	}
 
-	/** 增加播放历史 */
+	/**
+	 * 增加播放历史
+	 * 
+	 * @deprecated
+	 */
 	private void addHistory() {
 		StringBuilder url = new StringBuilder(ComParams.HTTP_HISTORY_ADD);
 		url.append("contentId=").append(conntentId).append("&");

@@ -160,8 +160,10 @@ public class LiveFragment extends Fragment {
 				ULog.d(TAG, "onSuccess  --" + result);
 				try {
 					JSONObject json = new JSONObject(result);
-
-					PlayerActivity.toPlay(getActivity(), json.getString("url"));
+					Bundle data = new Bundle();
+					data.putString(ComParams.INTENT_MOVIEDETAIL_CONNENTID, conntentId);
+					data.putInt(ComParams.INTENT_MOVIEDETAIL_CLIPID, 1);
+					PlayerActivity.toPlay(getActivity(), json.getString("url"), data);
 
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -223,7 +225,7 @@ public class LiveFragment extends Fragment {
 			if (convertView == null) {
 				convertView = LayoutInflater.from(mContext).inflate(R.layout.imageview_adapter, null);
 			}
-			
+
 			((MyImageView) convertView).setImage(lives.get(position).PHONE_MEDIA_POSTER_SMALL);
 			convertView.setLayoutParams(lparams);
 

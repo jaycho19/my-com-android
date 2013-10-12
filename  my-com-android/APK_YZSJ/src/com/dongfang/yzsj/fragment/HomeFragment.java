@@ -34,7 +34,6 @@ import com.dongfang.yzsj.bean.HomeLivesItem;
 import com.dongfang.yzsj.bean.Movie;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
-import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestCallBack;
@@ -225,10 +224,10 @@ public class HomeFragment extends Fragment {
 			for (final HomeChannelItem item : bean.getChannelContents()) {
 				View viewItem = inflater.inflate(R.layout.fragment_home_item, null);
 				viewItem.findViewById(R.id.rl_fragment_home_item).setLayoutParams(lparam);
-				ImageView imageView = (ImageView) viewItem.findViewById(R.id.iv_fragment_home_item_channelName);
+				MyImageView imageView = (MyImageView) viewItem.findViewById(R.id.iv_fragment_home_item_channelName);
 				imageView.setLayoutParams(rparam);
-				BitmapUtils.create(getActivity()).display(imageView, item.getChannel().getPoster());
-
+				imageView.setImage(item.getChannel().getPoster());
+				// BitmapUtils.create(getActivity()).display(imageView, item.getChannel().getPoster());
 				viewItem.findViewById(R.id.iv_fragment_home_item_more).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -316,7 +315,7 @@ public class HomeFragment extends Fragment {
 	 * @param clipId
 	 *            第几集
 	 */
-	private void toPlay(String conntentId) {
+	private void toPlay(final String conntentId) {
 		StringBuilder url = new StringBuilder(ComParams.HTTP_PLAYURL);
 		url.append("token=").append(User.getToken(getActivity()));
 		url.append("&").append("phone=").append(User.getPhone(getActivity()));
@@ -333,9 +332,10 @@ public class HomeFragment extends Fragment {
 				ULog.d(TAG, "onSuccess  --" + result);
 				try {
 					JSONObject json = new JSONObject(result);
-
-					PlayerActivity.toPlay(getActivity(), json.getString("url"));
-
+					Bundle data = new Bundle();
+					data.putString(ComParams.INTENT_MOVIEDETAIL_CONNENTID, conntentId);
+					data.putInt(ComParams.INTENT_MOVIEDETAIL_CLIPID, 1);
+					PlayerActivity.toPlay(getActivity(), json.getString("url"), data);
 					// Intent intent = new Intent(Intent.ACTION_VIEW);
 					// String type = "video/*";
 					// Uri uri = Uri.parse(json.getString("url"));

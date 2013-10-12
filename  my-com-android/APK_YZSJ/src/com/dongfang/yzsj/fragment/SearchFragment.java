@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -224,20 +225,25 @@ public class SearchFragment extends Fragment {
 			linearLayout_1.removeAllViews();
 			linearLayout_2.removeAllViews();
 		}
+		
+		LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(-1, -2, 1) ;
 		for (int i = 0; i < Math.min(length, 5); i++) {
 			CheckTextView view = (CheckTextView) inflater.inflate(R.layout.fragment_search_check_textview, null);
+			view.setLayoutParams(llp);
 			view.setText(listChannels.get(i).getName());
 			view.setOnCheckedChangeListener(new CheckedChangeListener(listChannels.get(i).getChannelId()));
 			linearLayout_0.addView(view);
 		}
 		for (int i = 5; i < Math.min(length, 11); i++) {
 			CheckTextView view = (CheckTextView) inflater.inflate(R.layout.fragment_search_check_textview, null);
+			view.setLayoutParams(llp);
 			view.setText(listChannels.get(i).getName());
 			view.setOnCheckedChangeListener(new CheckedChangeListener(listChannels.get(i).getChannelId()));
 			linearLayout_1.addView(view);
 		}
 		for (int i = 11; i < Math.min(length, 15); i++) {
 			CheckTextView view = (CheckTextView) inflater.inflate(R.layout.fragment_search_check_textview, null);
+			view.setLayoutParams(llp);
 			view.setText(listChannels.get(i).getName());
 			view.setOnCheckedChangeListener(new CheckedChangeListener(listChannels.get(i).getChannelId()));
 			linearLayout_2.addView(view);

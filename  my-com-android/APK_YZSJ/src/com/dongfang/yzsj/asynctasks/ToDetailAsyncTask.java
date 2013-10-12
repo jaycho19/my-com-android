@@ -102,7 +102,8 @@ public class ToDetailAsyncTask extends AsyncTask<String, String, DetailBean> {
 					}
 					String result = read(entity, charset);
 
-					ACache.get(context).put(ComParams.INTENT_MOVIEDETAIL_BEAN, result, ACache.TIME_DAY * 7);
+					// 是详情保存7天
+					// ACache.get(context).put(ComParams.INTENT_MOVIEDETAIL_BEAN, result, ACache.TIME_DAY * 7);
 
 					DetailBean bean = new com.google.gson.Gson().fromJson(result, DetailBean.class);
 					// ULog.d(TAG, bean.toString());

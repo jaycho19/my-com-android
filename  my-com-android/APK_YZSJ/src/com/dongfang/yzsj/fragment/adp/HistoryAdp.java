@@ -150,8 +150,11 @@ public class HistoryAdp extends BaseAdapter {
 		public void onClick(View v) {
 			ULog.d(TAG, v.toString());
 			StringBuilder url = new StringBuilder(ComParams.HTTP_HISTORY_DEL);
-			url.append("token=").append(User.getToken(context)).append("&");
-			url.append("userTelephone=").append(User.getPhone(context));
+			url.append("contentId").append(contentId);
+			// url.append("&").append("start").append(0);
+			// url.append("&").append("limit").append(10);
+			url.append("&").append("token=").append(User.getToken(context));
+			url.append("&").append("userTelephone=").append(User.getPhone(context));
 
 			ULog.i(TAG, url.toString());
 

@@ -14,7 +14,7 @@
 
         <!-- android:background="@drawable/home_channel_zhibo" -->
 
-        <ImageView
+        <com.dongfang.view.MyImageView
             android:id="@+id/iv_fragment_home_item_channelName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

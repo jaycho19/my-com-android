@@ -20,12 +20,16 @@ import com.dongfang.yzsj.params.ComParams;
  * 
  */
 public class PlayerActivity extends FragmentActivity {
+	private static final String TAG = PlayerActivity.class.getSimpleName();
 
 	private VideoPlayerFragment mVideoPlayer;
 	private boolean mIsSavedInstanceState = false;
 	private boolean hasFocus;
 	private String url;
-	private String TAG = "VideoPlayerLandActivity";
+	
+	
+	public static String contentId;// 媒体id
+	public static int clipId; // 集数
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,9 +44,18 @@ public class PlayerActivity extends FragmentActivity {
 		// creatVideoFragment(url);
 		// }
 
+		contentId = getIntent().getStringExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID);
+		clipId = getIntent().getIntExtra(ComParams.INTENT_MOVIEDETAIL_CLIPID, 1);
+
 		url = getIntent().getStringExtra(ComParams.PLAY_KEY_VIDEOURL);
 		creatVideoFragment(url);
 
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
 	}
 
 	protected void onDestroy() {
@@ -114,12 +127,15 @@ public class PlayerActivity extends FragmentActivity {
 		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {}
 		else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {}
 	}
-
+	
 	/** 视频播放 */
-	public static void toPlay(Context context, String url) {
+	public static void toPlay(Context context, String url, Bundle data) {
 		if (ComParams.IS_PLAYER_ACTIVITY) {
 			Intent intent = new Intent(context, PlayerActivity.class);
 			intent.putExtra(ComParams.PLAY_KEY_VIDEOURL, url);
+			intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID,
+					data.getString(ComParams.INTENT_MOVIEDETAIL_CONNENTID));
+			intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CLIPID, data.getInt(ComParams.INTENT_MOVIEDETAIL_CLIPID, 1));
 			context.startActivity(intent);
 		}
 		else {
