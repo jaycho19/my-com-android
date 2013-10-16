@@ -75,6 +75,9 @@ public class ComParams {
 	/** 我的订阅 */
 	public static final String HTTP_MY_ORDER = HTTP_BASE
 			+ "/page/hbMobile/userOptions.jsp?command=myBilling&jsonFormat=true&";
+	
+	/** 通过IP寻找手机号码 */
+	public static final String HTTP_GET_TOKEN_BY_UUID = HTTP_BASE + "/page/hbMobile/uniLogin.jsp?jsonFormat=true&unikey=";
 
 	// ------------play view mode and frompage ---------
 	// IsFromPage: IsFromPage, IsFromRecommend

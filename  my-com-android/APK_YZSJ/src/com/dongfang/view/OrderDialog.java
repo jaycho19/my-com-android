@@ -12,13 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dongfang.net.HttpUtils;
+import com.dongfang.net.http.RequestCallBack;
+import com.dongfang.net.http.client.HttpRequest;
+import com.dongfang.utils.HttpException;
 import com.dongfang.utils.ULog;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.params.ComParams;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
 
 /**
  * 进度条对话框

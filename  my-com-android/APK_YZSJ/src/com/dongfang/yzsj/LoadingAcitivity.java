@@ -3,19 +3,18 @@ package com.dongfang.yzsj;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.dongfang.net.HttpUtils;
+import com.dongfang.net.http.RequestCallBack;
+import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.utils.ACache;
+import com.dongfang.utils.HttpException;
 import com.dongfang.utils.ULog;
 import com.dongfang.utils.Util;
 import com.dongfang.yzsj.bean.HomeBean;
 import com.dongfang.yzsj.params.ComParams;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
 
 /**
  * 启动页面

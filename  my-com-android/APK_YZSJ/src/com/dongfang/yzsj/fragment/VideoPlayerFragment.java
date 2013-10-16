@@ -1,3 +1,4 @@
+
 package com.dongfang.yzsj.fragment;
 
 import java.lang.reflect.Field;
@@ -29,7 +30,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dongfang.mediaplayer.Mediaplayer;
-import com.dongfang.mediaplayer.VideoView;
 import com.dongfang.mediaplayer.Mediaplayer.OnCurrentPositionUpdateListener;
 import com.dongfang.mediaplayer.Mediaplayer.OnLoadingListener;
 import com.dongfang.mediaplayer.Mediaplayer.OnMPClickListener;
@@ -37,17 +37,18 @@ import com.dongfang.mediaplayer.Mediaplayer.OnMPDoubleClickListener;
 import com.dongfang.mediaplayer.Mediaplayer.OnSurfaceCreatedListener;
 import com.dongfang.mediaplayer.Mediaplayer.OnSwitchListener;
 import com.dongfang.mediaplayer.Mediaplayer.VIDEOSIZESTATE;
+import com.dongfang.mediaplayer.VideoView;
 import com.dongfang.mediaplayer.constants.Constants;
 import com.dongfang.mediaplayer.windows.BasePopupWindow;
 import com.dongfang.mediaplayer.windows.BasePopupWindow.LandPopUpWinWorkingListener;
+import com.dongfang.net.HttpUtils;
+import com.dongfang.net.http.RequestCallBack;
+import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.utils.ULog;
 import com.dongfang.yzsj.PlayerActivity;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.http.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
 
 /**
  * 视频播放界面Fragment

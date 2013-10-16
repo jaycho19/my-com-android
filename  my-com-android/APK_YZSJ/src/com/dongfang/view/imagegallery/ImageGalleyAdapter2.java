@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.lidroid.xutils.BitmapUtils;
-
 public class ImageGalleyAdapter2 extends ImageGalleyAdapter1 {
 	public static final String TAG = ImageGalleyAdapter2.class.getName();
 
@@ -41,8 +39,8 @@ public class ImageGalleyAdapter2 extends ImageGalleyAdapter1 {
 			ImageView imageView = new ImageView(context);
 			imageView.setLayoutParams(lp);
 			imageView.setOnClickListener(new MyOnClickListener("0", "0"));
-			BitmapUtils.create(context).display(imageView,
-					"http://img3.douban.com/view/photo/albumicon/public/p1785901007.jpg");
+			// BitmapUtils.create(context).display(imageView,
+			// "http://img3.douban.com/view/photo/albumicon/public/p1785901007.jpg");
 			ll.addView(imageView, i);
 		}
 		container.addView(ll);
