@@ -21,7 +21,11 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dongfang.net.HttpUtils;
+import com.dongfang.net.http.RequestCallBack;
+import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.utils.ACache;
+import com.dongfang.utils.HttpException;
 import com.dongfang.utils.ULog;
 import com.dongfang.view.CheckTextView;
 import com.dongfang.view.PullToRefreshView;
@@ -36,10 +40,6 @@ import com.dongfang.yzsj.bean.VODItem;
 import com.dongfang.yzsj.fragment.adp.TypeAdp;
 import com.dongfang.yzsj.params.ComParams;
 import com.google.gson.reflect.TypeToken;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
 
 /**
  * 各种类型的更多页面

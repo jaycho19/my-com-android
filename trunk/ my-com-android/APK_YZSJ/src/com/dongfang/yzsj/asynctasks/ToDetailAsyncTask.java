@@ -3,6 +3,7 @@ package com.dongfang.yzsj.asynctasks;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.UUID;
 
 import org.apache.http.HeaderElement;
 import org.apache.http.HttpEntity;
@@ -19,15 +20,15 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.dongfang.utils.ACache;
+import com.dongfang.net.HttpUtils;
+import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.utils.ULog;
 import com.dongfang.yzsj.DetailsActiivity;
 import com.dongfang.yzsj.LoginActivity;
 import com.dongfang.yzsj.bean.DetailBean;
+import com.dongfang.yzsj.bean.LoginBean;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.http.client.HttpRequest;
 
 /**
  * 跳转到视频详情页
@@ -68,10 +69,7 @@ public class ToDetailAsyncTask extends AsyncTask<String, String, DetailBean> {
 
 	@Override
 	protected DetailBean doInBackground(String... params) {
-		// String s = ACache.get(context).getAsString(ComParams.INTENT_MOVIEDETAIL_BEAN);
-		// if (!TextUtils.isEmpty(s)) {
-		// return new com.google.gson.Gson().fromJson(s, DetailBean.class);
-		// }
+		DetailBean bean = null;
 
 		if (!TextUtils.isEmpty(conntentId)) {
 
@@ -81,41 +79,25 @@ public class ToDetailAsyncTask extends AsyncTask<String, String, DetailBean> {
 			sb.append("channelId=").append(channelId).append("&");
 			sb.append("contentId=").append(conntentId);
 			ULog.i(TAG, sb.toString());
-			HttpUtils httpUtils = new HttpUtils();
 
+			String result = httpGet(sb.toString());
+			
 			try {
-				HttpResponse response = httpUtils.getHttpClient().execute(
-						new com.lidroid.xutils.http.client.HttpRequest(HttpRequest.HttpMethod.GET, sb.toString()),
-						new BasicHttpContext());
+				bean = new com.google.gson.Gson().fromJson(httpGet(sb.toString()), DetailBean.class);
 
-				if (null != response && response.getStatusLine().getStatusCode() < 300) {
-					HttpEntity entity = response.getEntity();
-					String charset = "utf-8";
-					if (entity.getContentType() != null) {
-						HeaderElement[] values = entity.getContentType().getElements();
-						if (values.length > 0) {
-							NameValuePair param = values[0].getParameterByName("charset");
-							if (param != null) {
-								charset = ((TextUtils.isEmpty(param.getValue())) ? charset : param.getValue());
-							}
-						}
+				// 当token失效时，根据ip重新请求token值
+				if (!bean.isSuccess() && "Error Token".equals(bean.getError0())) {
+					if (getToken()) {
+						bean = new com.google.gson.Gson().fromJson(result, DetailBean.class);
 					}
-					String result = read(entity, charset);
 
-					// 是详情保存7天
-					// ACache.get(context).put(ComParams.INTENT_MOVIEDETAIL_BEAN, result, ACache.TIME_DAY * 7);
-
-					DetailBean bean = new com.google.gson.Gson().fromJson(result, DetailBean.class);
-					// ULog.d(TAG, bean.toString());
-
-					return bean;
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (Exception jdr) {
+				jdr.printStackTrace();
 			}
 		}
 
-		return null;
+		return bean;
 	}
 
 	@Override
@@ -150,9 +132,9 @@ public class ToDetailAsyncTask extends AsyncTask<String, String, DetailBean> {
 		Intent intent = new Intent(context, DetailsActiivity.class);
 		intent.putExtra(ComParams.INTENT_MOVIEDETAIL_BEAN, result);
 		context.startActivity(intent);
-		
-		if (context instanceof LoginActivity){
-			((Activity)context).finish();
+
+		if (context instanceof LoginActivity) {
+			((Activity) context).finish();
 		}
 
 	}
@@ -162,6 +144,54 @@ public class ToDetailAsyncTask extends AsyncTask<String, String, DetailBean> {
 		if (null != progDialog)
 			progDialog.cancel();
 		super.onCancelled();
+	}
+
+	/** 根据ip获取token是否成功 */
+	private boolean getToken() {
+		try {
+			String st = httpGet(ComParams.HTTP_GET_TOKEN_BY_UUID + UUID.randomUUID().toString().replace("-", ""));
+			LoginBean bean = new com.google.gson.Gson().fromJson(st, LoginBean.class);
+
+			ULog.d(TAG, bean.toString());
+			if (null != bean && bean.isSuccess() && !TextUtils.isEmpty(bean.getToken())) {
+				// 保存token
+				User.saveToken(context, bean.getToken());
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return false;
+	}
+
+	/** 读取网络信息 */
+	private String httpGet(String url) {
+		String result = null;
+		try {
+			HttpResponse response = new HttpUtils().getHttpClient().execute(
+					new HttpRequest(HttpRequest.HttpMethod.GET, url),
+					new BasicHttpContext());
+
+			if (null != response && response.getStatusLine().getStatusCode() < 300) {
+				HttpEntity entity = response.getEntity();
+				String charset = "utf-8";
+				if (entity.getContentType() != null) {
+					HeaderElement[] values = entity.getContentType().getElements();
+					if (values.length > 0) {
+						NameValuePair param = values[0].getParameterByName("charset");
+						if (param != null) {
+							charset = ((TextUtils.isEmpty(param.getValue())) ? charset : param.getValue());
+						}
+					}
+				}
+				result = read(entity, charset);
+			}
+		} catch (Exception e) {
+
+		}
+
+		return result;
 	}
 
 	private String read(HttpEntity entity, String charset) {

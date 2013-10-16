@@ -17,6 +17,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.dongfang.net.HttpUtils;
+import com.dongfang.net.http.RequestCallBack;
+import com.dongfang.net.http.client.HttpRequest;
+import com.dongfang.utils.HttpException;
 import com.dongfang.utils.ULog;
 import com.dongfang.utils.Util;
 import com.dongfang.view.ImageGallery;
@@ -34,10 +38,6 @@ import com.dongfang.yzsj.bean.HomeLivesItem;
 import com.dongfang.yzsj.bean.Movie;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
 
 /**
  * 首页
