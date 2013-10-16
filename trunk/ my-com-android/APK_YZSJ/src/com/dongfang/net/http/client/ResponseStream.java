@@ -96,9 +96,9 @@ public class ResponseStream extends InputStream {
                 sb.append(line);
             }
             _directResult = sb.toString();
-            if (url != null) {
-                HttpUtils.sHttpGetCache.put(url, _directResult, expiry);
-            }
+			// if (url != null) {
+			// HttpUtils.sHttpGetCache.put(url, _directResult, expiry);
+			// }
             return _directResult;
         } catch (IOException e) {
             throw e;

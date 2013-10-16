@@ -27,13 +27,13 @@ import org.apache.http.protocol.HttpContext;
 
 import android.text.TextUtils;
 
-import com.dongfang.net.HttpUtils;
 import com.dongfang.net.http.client.HttpGetCache;
 import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.net.http.client.ResponseStream;
 import com.dongfang.net.http.client.callback.DefaultHttpRedirectHandler;
 import com.dongfang.net.http.client.callback.HttpRedirectHandler;
 import com.dongfang.utils.HttpException;
+import com.dongfang.utils.LogUtils;
 import com.dongfang.utils.OtherUtils;
 
 public class SyncHttpHandler {
@@ -76,12 +76,15 @@ public class SyncHttpHandler {
                 } else {
                     _getMethodRequestUrl = null;
                 }
-                if (_getMethodRequestUrl != null) {
-                    String result = HttpUtils.sHttpGetCache.get(_getMethodRequestUrl);
-                    if (result != null) {
-                        return new ResponseStream(result);
-                    }
-                }
+                
+                LogUtils.d(_getMethodRequestUrl);
+                
+				// if (_getMethodRequestUrl != null) {
+				// String result = HttpUtils.sHttpGetCache.get(_getMethodRequestUrl);
+				// if (result != null) {
+				// return new ResponseStream(result);
+				// }
+				// }
                 HttpResponse response = client.execute(request, context);
                 return handleResponse(response);
             } catch (UnknownHostException e) {
