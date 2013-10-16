@@ -7,6 +7,7 @@ package com.dongfang.yzsj.bean;
  * 
  */
 public class LoginBean {
+	private boolean result = true;//token是否有效，默认有效
 	private boolean success = false;
 	private String token;
 
@@ -28,11 +29,20 @@ public class LoginBean {
 		this.token = token;
 	}
 
+	public boolean isResult() {
+		return result;
+	}
+
+	public void setResult(boolean result) {
+		this.result = result;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append("result  = ").append(result).append("\n");
 		sb.append("success = ").append(success).append("\n");
-		sb.append("token = ").append(token);
+		sb.append("token   = ").append(token);
 		return super.toString();
 	}
 

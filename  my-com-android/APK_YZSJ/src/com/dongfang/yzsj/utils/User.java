@@ -16,6 +16,8 @@ public class User {
 	public static final String SHAREDPREFERENCES_ACCESS = "ACCESS";
 	/** {@link HttpActions#loading(context)} 接口中返回的token值保存的key */
 	public static final String SHAREDPREFERENCES_ACCESS_TOKEN = "ACCESS_TOKEN";
+	public static String SHAREDPREFERENCES_ACCESS_TOKEN_NEW = "";
+	public static String SHAREDPREFERENCES_ACCESS_TOKEN_OLD = "";
 	/** {@link HttpActions#loading(context)} 接口中返回的phone保存的key */
 	public static final String SHAREDPREFERENCES_ACCESS_PHONE = "ACCESS_PHONE";
 
@@ -83,8 +85,13 @@ public class User {
 	 * @return token, 如果不存在，这返回空串
 	 */
 	public static synchronized String getToken(Context context) {
+		if (!TextUtils.isEmpty(SHAREDPREFERENCES_ACCESS_TOKEN_NEW)) {
+			saveToken(context, SHAREDPREFERENCES_ACCESS_TOKEN_NEW);
+			SHAREDPREFERENCES_ACCESS_TOKEN_NEW = "";
+		}
+		
 		SharedPreferences sp = context.getSharedPreferences(SHAREDPREFERENCES_ACCESS, Context.MODE_PRIVATE);
-		return sp.getString(SHAREDPREFERENCES_ACCESS_TOKEN, "");
+		return SHAREDPREFERENCES_ACCESS_TOKEN_OLD = sp.getString(SHAREDPREFERENCES_ACCESS_TOKEN, "");
 	}
 
 	/**

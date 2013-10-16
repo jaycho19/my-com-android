@@ -7,7 +7,8 @@ public class ULog {
 
 	public static void i(String tag, String msg) {
 		if (ISDUG == true) {
-			android.util.Log.i(tag, msg);
+			//android.util.Log.i(tag, msg);
+			LogUtils.i(tag + " -- " +msg);
 		}
 	}
 
