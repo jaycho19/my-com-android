@@ -109,17 +109,17 @@ public class FavoriteFragment extends Fragment {
 		url.append("token=").append(User.getToken(getActivity())).append("&");
 		url.append("userTelephone=").append(User.getPhone(getActivity()));
 
-		ULog.i(TAG, url.toString());
+		ULog.i( url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
 			public void onLoading(long total, long current) {
-				ULog.d(TAG, "RequestCallBack.onLoading total = " + total + "; current = " + current);
+				ULog.d( "RequestCallBack.onLoading total = " + total + "; current = " + current);
 			}
 
 			@Override
 			public void onSuccess(String result) {
-				ULog.d(TAG, "onSuccess  --" + result);
+				ULog.d( "onSuccess  --" + result);
 				progDialog.dismiss();
 				pageStart = 1 + start;
 
@@ -137,18 +137,18 @@ public class FavoriteFragment extends Fragment {
 				lastTotal = bean.getListData().getObjs().size();
 
 				listData.addAll(bean.getListData().getObjs());
-				ULog.d(TAG, "list length = " + listData.size());
+				ULog.d( "list length = " + listData.size());
 			}
 
 			@Override
 			public void onStart() {
-				ULog.i(TAG, "RequestCallBack.onStart");
+				ULog.i( "RequestCallBack.onStart");
 				progDialog.show();
 			}
 
 			@Override
 			public void onFailure(HttpException error, String msg) {
-				ULog.i(TAG, "RequestCallBack.onFailure");
+				ULog.i( "RequestCallBack.onFailure");
 				progDialog.dismiss();
 
 				if (0 == start) {

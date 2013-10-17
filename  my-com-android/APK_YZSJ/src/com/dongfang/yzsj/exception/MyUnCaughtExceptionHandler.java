@@ -48,11 +48,11 @@ public class MyUnCaughtExceptionHandler implements UncaughtExceptionHandler {
 
 	@Override
 	public void uncaughtException(Thread thread, Throwable ex) {
-		ULog.d(TAG, "Class Name -> " + ex.getClass().getName());
-		ULog.d(TAG, "thread Name -> " + thread.getName());
+		ULog.d( "Class Name -> " + ex.getClass().getName());
+		ULog.d( "thread Name -> " + thread.getName());
 		// ex.printStackTrace();
-		// ULog.e(TAG, "UncaughtException" + ex.toString());
-		// ULog.e(TAG, "--" + getStackTraceAsString(ex));
+		// ULog.e( "UncaughtException" + ex.toString());
+		// ULog.e( "--" + getStackTraceAsString(ex));
 		// RePorterMessage.getInstance().saveRunLogInFile(mContext,
 		// RePorterMessage.REPORT_FILE_TYPE1, getStackTraceAsString(ex));
 

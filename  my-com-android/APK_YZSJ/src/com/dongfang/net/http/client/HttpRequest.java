@@ -30,7 +30,7 @@ import org.apache.http.protocol.HTTP;
 import com.dongfang.net.http.client.callback.RequestCallBackHandler;
 import com.dongfang.net.http.client.entity.UploadEntity;
 import com.dongfang.net.http.client.util.URIBuilder;
-import com.dongfang.utils.LogUtils;
+import com.dongfang.utils.ULog;
 
 /**
  * Author: wyouflf
@@ -126,7 +126,7 @@ public class HttpRequest extends HttpRequestBase implements HttpEntityEnclosingR
         try {
             return uriBuilder.build();
         } catch (URISyntaxException e) {
-            LogUtils.e(e.getMessage(), e);
+            ULog.e(e.getMessage(), e);
             return null;
         }
     }

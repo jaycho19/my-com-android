@@ -94,7 +94,7 @@ public class ImageGallery extends LinearLayout {
 				ll_fling_desc_image.setVisibility(View.VISIBLE);
 
 				for (int i = 0; i < size; i++) {
-					// ULog.i(TAG, "--- " + list.get(i).toString());
+					// ULog.i( "--- " + list.get(i).toString());
 					ImageView image = new ImageView(context);
 					LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(-2, -2);
 					params.setMargins(3, 0, 3, 0);
@@ -130,7 +130,7 @@ public class ImageGallery extends LinearLayout {
 
 				@Override
 				public void onPageSelected(int arg0) {
-					ULog.d(TAG, "onPageSelected arg0 = " + arg0);
+					ULog.d( "onPageSelected arg0 = " + arg0);
 					changeDesc(arg0 % list.size());
 					// if (arg0 == 0) {
 					// viewPager.setCurrentItem(list.size() - 1, false);

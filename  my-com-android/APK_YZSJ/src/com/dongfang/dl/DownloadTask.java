@@ -61,7 +61,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-		ULog.i(TAG, "onPreExecute");
+		ULog.i( "onPreExecute");
 		/** 创建完成路径 */
 		new File(dlInfo.filePath.substring(0, dlInfo.filePath.lastIndexOf("/"))).mkdirs();
 		dlInfo.status = STATE_WAITING;
@@ -75,7 +75,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 	@SuppressLint("NewApi")
 	@Override
 	protected Bundle doInBackground(Void... params) {
-		ULog.i(TAG, "doInBackground " + dlInfo.toString());
+		ULog.i( "doInBackground " + dlInfo.toString());
 		Bundle bundle = new Bundle();
 
 		try {
@@ -94,7 +94,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 			if (dlInfo.currentBytes <= 0)
 				dlInfo.totalbytes = connect.getContentLength();
 
-			//ULog.v(TAG, "total = " + dlInfo.totalbytes + " , current = " + dlInfo.currentBytes);
+			//ULog.v( "total = " + dlInfo.totalbytes + " , current = " + dlInfo.currentBytes);
 
 			// if (dlInfo.totalbytes < 1) {
 			// bundle.putInt("statuscode",
@@ -127,7 +127,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 			}
 
 			if (needSpace > freeStorage) {
-				ULog.i(TAG, "Current downloadpath do not have enough free space ! " + needSpace + " -- " + freeStorage);
+				ULog.i( "Current downloadpath do not have enough free space ! " + needSpace + " -- " + freeStorage);
 				try {
 					StorageManager sm = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
 					// 获取sdcard的路径：外置和内置
@@ -150,7 +150,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 									file = new File(dlInfo.filePath + "temp");
 									flag = true;
 									Util.saveDownloadPath(context, path + "/TYSX/dl");
-									ULog.i(TAG, "DownloadPath change to " + dlInfo.filePath);
+									ULog.i( "DownloadPath change to " + dlInfo.filePath);
 									break;
 								}
 							}
@@ -169,7 +169,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 							file = null;
 							file = new File(dlInfo.filePath + "temp");
 							flag = true;
-							ULog.i(TAG, "DownloadPath change to " + dlInfo.filePath);
+							ULog.i( "DownloadPath change to " + dlInfo.filePath);
 						}
 					}
 					// 断点续传时，需在新的路径重新下载
@@ -179,20 +179,20 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 					}
 
 				} catch (IllegalArgumentException e) {
-					ULog.e(TAG, "IllegalArgumentException");
+					ULog.e( "IllegalArgumentException");
 				} catch (IllegalAccessException e) {
-					ULog.e(TAG, "IllegalAccessException");
+					ULog.e( "IllegalAccessException");
 				} catch (InvocationTargetException e) {
-					ULog.e(TAG, "InvocationTargetException");
+					ULog.e( "InvocationTargetException");
 				} catch (NoSuchMethodException e) {
-					ULog.e(TAG, "NoSuchMethodException");
+					ULog.e( "NoSuchMethodException");
 				}
 
 			}
 			else
 				flag = true;
 
-			// ULog.i(TAG, "storage:" + storage + " totalSize:" +
+			// ULog.i( "storage:" + storage + " totalSize:" +
 			// dlInfo.totalbytes);
 			// if (dlInfo.totalbytes - dlInfo.currentBytes > storage) {
 			if (!flag) {
@@ -223,7 +223,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 	@Override
 	protected void onProgressUpdate(DownloadInfo... values) {
 		super.onProgressUpdate(values);
-		ULog.d(TAG, "onProgressUpdate -->" + dlInfo.contentId + ": total = " + dlInfo.totalbytes + " , current = "
+		ULog.d( "onProgressUpdate -->" + dlInfo.contentId + ": total = " + dlInfo.totalbytes + " , current = "
 				+ dlInfo.currentBytes);
 		if (null != listener)
 			listener.updateProcess(dlInfo);
@@ -240,7 +240,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 				// new DialogFactory(context).showToast("当前存储空间不足！", Toast.LENGTH_SHORT);
 				listener.errorDownload(dlInfo, new TVException("当前存储空间不足！"));
 			}
-			ULog.d(TAG,
+			ULog.d(
 					result.containsKey("msg") ? result.getString("msg") : "下载异常" + "(" + result.getInt("statuscode")
 							+ ")");
 		}
@@ -253,24 +253,24 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 	@Override
 	protected void onCancelled() {
 		super.onCancelled();
-		ULog.d(TAG, dlInfo.contentId + " -->onCancelled()!");
+		ULog.d( dlInfo.contentId + " -->onCancelled()!");
 		// publishProgress(dlInfo);
 		if (null != listener)
 			listener.updateProcess(dlInfo);
-		ULog.i(TAG, dlInfo.toString());
+		ULog.i( dlInfo.toString());
 	}
 
 	/** 暂停下载 */
 	public void pause() {
 		this.cancel(true);
-		ULog.d(TAG, dlInfo.contentId + " -->pause()!");
+		ULog.d( dlInfo.contentId + " -->pause()!");
 		dlInfo.status = STATE_PAUSE;
 	}
 
 	/** 取消下载 */
 	public void cacel() {
 		this.cancel(true);
-		ULog.d(TAG, dlInfo.contentId + " -->cancel()!");
+		ULog.d( dlInfo.contentId + " -->cancel()!");
 		dlInfo.status = STATE_CANCEL;
 	}
 
@@ -290,7 +290,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 			 */
 			for (int num = 0, i = 0; ((num = ins.read(b)) > 0)
 					&& ((0 >= dlInfo.totalbytes) ? true : dlInfo.currentBytes <= dlInfo.totalbytes); i++) {
-			/*	ULog.v(TAG, "while --> total = " + dlInfo.totalbytes + " , current = " + dlInfo.currentBytes
+			/*	ULog.v( "while --> total = " + dlInfo.totalbytes + " , current = " + dlInfo.currentBytes
 						+ ", num = " + num + ", i = " + i);*/
 				if (isCancelled()) {
 					ins.close();
@@ -315,7 +315,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 			publishProgress(dlInfo);
 			return;
 		} catch (FileNotFoundException e) {
-			ULog.e(TAG, e.toString());
+			ULog.e( e.toString());
 			throw new TVException(TVException.DOWNLOAD_FILE_NOT_FOUND_EXCEPTION);
 		} catch (IOException e) {
 			throw new TVException(TVException.DOWNLOAD_WRITE_IO_EXCEPTION);
@@ -328,7 +328,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 					accessFile.close();
 				}
 			} catch (Exception e) {
-				ULog.e(TAG, e.getMessage());
+				ULog.e( e.getMessage());
 			}
 		}
 	}

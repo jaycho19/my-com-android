@@ -66,7 +66,7 @@ public class MyVerticalSeekBar extends SeekBar {
 	}
 
 	private void setThumbPos(int h, Drawable thumb, float scale, int gap) {
-		ULog.d(TAG, "h = " + h + ", scale = " + scale + ", gap = " + gap);
+		ULog.d( "h = " + h + ", scale = " + scale + ", gap = " + gap);
 		int available = h - getPaddingLeft() - getPaddingRight();
 		int thumbWidth = thumb.getIntrinsicWidth();
 		int thumbHeight = thumb.getIntrinsicHeight();

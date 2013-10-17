@@ -32,7 +32,7 @@ import org.apache.http.protocol.HttpContext;
 
 import android.os.SystemClock;
 
-import com.dongfang.utils.LogUtils;
+import com.dongfang.utils.ULog;
 
 public class RetryHandler implements HttpRequestRetryHandler {
 
@@ -91,18 +91,18 @@ public class RetryHandler implements HttpRequestRetryHandler {
                     }
                 } else {
                     retry = false;
-                    LogUtils.e("retry error, curr request is null");
+                    ULog.e("retry error, curr request is null");
                 }
             } catch (Exception e) {
                 retry = false;
-                LogUtils.e("retry error", e);
+                ULog.e("retry error", e);
             }
         }
 
         if (retry) {
             SystemClock.sleep(RETRY_SLEEP_INTERVAL); // sleep a while and retry http request again.
         } else {
-            LogUtils.e(exception.getMessage(), exception);
+            ULog.e(exception.getMessage(), exception);
         }
 
         return retry;

@@ -63,20 +63,20 @@ public class ImageGalleyAdapter1 extends PagerAdapter {
 
 	@Override
 	public void destroyItem(ViewGroup container, int position, Object object) {
-		// ULog.d(TAG, "destroyItem --> position = " + position);
-		ULog.d(TAG, " object ? = null " + (null == object));
+		// ULog.d( "destroyItem --> position = " + position);
+		ULog.d( " object ? = null " + (null == object));
 		if (null != object)
 			container.removeView((View) object);
 
 		// position = position % list.size();
-		// ULog.d(TAG, "destroyItem     --> position = " + position);
+		// ULog.d( "destroyItem     --> position = " + position);
 		// if (null != container.getChildAt(position))
 		// container.removeViewAt(position);
 
 		// int newPosition = mPosition - 2;
 		// newPosition = (newPosition < 0) ? list.size() + newPosition :
 		// newPosition;
-		// ULog.d(TAG, "destroyItem  --> newPosition = " + newPosition);
+		// ULog.d( "destroyItem  --> newPosition = " + newPosition);
 		// if (null != container.getChildAt(newPosition))
 		// container.removeViewAt(newPosition);
 
@@ -84,7 +84,7 @@ public class ImageGalleyAdapter1 extends PagerAdapter {
 
 	@Override
 	public Object instantiateItem(ViewGroup container, int position) {
-		// ULog.d(TAG, "instantiateItem --> position = " + position + "; mCount = " + mCount);
+		// ULog.d( "instantiateItem --> position = " + position + "; mCount = " + mCount);
 
 		if (position >= list.size()) {
 			position = position % list.size();
@@ -104,7 +104,7 @@ public class ImageGalleyAdapter1 extends PagerAdapter {
 		LinearLayout linearLayout = new LinearLayout(context);
 		linearLayout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		linearLayout.setPadding(1, 1, 1, 1);
-		// ULog.d(TAG, "instantiateItem --> position = " + position + "; mCount = " + mCount);
+		// ULog.d( "instantiateItem --> position = " + position + "; mCount = " + mCount);
 
 		HomeSliderItem kv = list.get(position);
 		MyImageView fling_image = new MyImageView(context);
@@ -132,7 +132,7 @@ public class ImageGalleyAdapter1 extends PagerAdapter {
 
 		@Override
 		public void onClick(View v) {
-			ULog.d(TAG, v.toString());
+			ULog.d( v.toString());
 
 			if (User.isLogined(context)) {
 				new ToDetailAsyncTask(context, channelId, contentId).execute();

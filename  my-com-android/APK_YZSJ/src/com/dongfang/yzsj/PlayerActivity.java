@@ -34,10 +34,10 @@ public class PlayerActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.video_play);
-		ULog.d(TAG, "onCreate");
+		ULog.d( "onCreate");
 
 		// if (savedInstanceState == null) {
-		// ULog.d(TAG, "savedInstanceState is null");
+		// ULog.d( "savedInstanceState is null");
 		// // bundle = getIntent().getExtras();
 		// url =
 		// "http://vod02.v.vnet.mobi/mobi/vod/st02/2013/09/21/Q350_2009383882.3gp?sid=31776106&msisdn=18900000002&timestamp=20130922095552&H=0020&channelid=&nodeid=&videotype=2&encrypt=b6f65ce6ff49445c335169acca22b394&ua=30&nettype=2&imsi=null&spid=00000124";
@@ -59,7 +59,7 @@ public class PlayerActivity extends FragmentActivity {
 	}
 
 	protected void onDestroy() {
-		ULog.d(TAG, "onDestroy");
+		ULog.d( "onDestroy");
 		super.onDestroy();
 	}
 
@@ -68,7 +68,7 @@ public class PlayerActivity extends FragmentActivity {
 	 * @param bundle
 	 */
 	private void creatVideoFragment(String uri) {
-		ULog.d(TAG, "creatVideoFragment");
+		ULog.d( "creatVideoFragment");
 		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 		if (mVideoPlayer != null) {
 			transaction.remove(mVideoPlayer);
@@ -109,7 +109,7 @@ public class PlayerActivity extends FragmentActivity {
 
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-		ULog.i(TAG, "--> onWindowFocusChanged hasFocus = " + hasFocus);
+		ULog.i( "--> onWindowFocusChanged hasFocus = " + hasFocus);
 		this.hasFocus = hasFocus;
 		if (hasFocus && mIsSavedInstanceState) {
 			creatVideoFragment(url);
@@ -123,7 +123,7 @@ public class PlayerActivity extends FragmentActivity {
 
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		ULog.i(TAG, "onConfigurationChanged");
+		ULog.i( "onConfigurationChanged");
 		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {}
 		else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {}
 	}

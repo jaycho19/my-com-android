@@ -29,7 +29,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 
 import com.dongfang.net.http.client.util.URLEncodedUtils;
-import com.dongfang.utils.LogUtils;
+import com.dongfang.utils.ULog;
 
 /**
  * Author: wyouflf
@@ -90,7 +90,7 @@ public class BodyParamsEntity extends AbstractHttpEntity implements Cloneable {
             try {
                 this.content = URLEncodedUtils.format(params, charset).getBytes(charset);
             } catch (UnsupportedEncodingException e) {
-                LogUtils.e(e.getMessage(), e);
+                ULog.e(e.getMessage(), e);
             }
             dirty = false;
         }

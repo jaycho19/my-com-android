@@ -52,7 +52,7 @@ public class VODFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		ULog.d(TAG, "onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)");
+		ULog.d( "onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)");
 		View view = inflater.inflate(R.layout.fragment_vod, container, false);
 		initView(view);
 
@@ -89,26 +89,26 @@ public class VODFragment extends Fragment {
 		// bean非空初始化数据
 		if (null != listVODItem) {
 			setVODAdapterData();
-			// ULog.d(TAG, "onResume --> " + bean.toString());
+			// ULog.d( "onResume --> " + bean.toString());
 		}
 		else {
 			// bean为空，网络请求数据，需对网络进行判断
 			new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_VOD, new RequestCallBack<String>() {
 				@Override
 				public void onLoading(long total, long current) {
-					ULog.d(TAG, "total = " + total + "; current = " + current);
+					ULog.d( "total = " + total + "; current = " + current);
 				}
 
 				@Override
 				public void onSuccess(String result) {
-					ULog.d(TAG, "onSuccess  --" + result);
+					ULog.d( "onSuccess  --" + result);
 
 					listVODItem = new com.google.gson.Gson().fromJson(result,
 							new TypeToken<List<VODItem>>() {}.getType());
 					StringBuilder sb = new StringBuilder();
 					for (int i = 0, length = listVODItem.size(); i < length; i++)
 						sb.append("vod ").append(i).append(" --> ").append(listVODItem.get(i).toString());
-					ULog.d(TAG, sb.toString());
+					ULog.d( sb.toString());
 
 					ACache.get(getActivity()).put(ComParams.INTENT_VODBEAN, result, 60 * 5);// 缓存数据
 
@@ -119,14 +119,14 @@ public class VODFragment extends Fragment {
 
 				@Override
 				public void onStart() {
-					ULog.i(TAG, "onStart");
+					ULog.i( "onStart");
 					progDialog.show();
 
 				}
 
 				@Override
 				public void onFailure(HttpException error, String msg) {
-					ULog.i(TAG, "onFailure");
+					ULog.i( "onFailure");
 					progDialog.dismiss();
 				}
 			});
@@ -162,12 +162,12 @@ public class VODFragment extends Fragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		ULog.d(TAG, "listVODItem.size = " + listVODItem.size() + ", listVODItemVIP.size = " + listVODItemVIP.size());
+		ULog.d( "listVODItem.size = " + listVODItem.size() + ", listVODItemVIP.size = " + listVODItemVIP.size());
 		// if (null != listVODItemVIP && null != listVODItem) {
 		// listVODItem.addAll(listVODItemVIP);
 		// }
 		if (null != listVODItem) {
-			ULog.d(TAG, "listVODItem.size = " + listVODItem.size() + ", listVODItemVIP.size = " + listVODItemVIP.size());
+			ULog.d( "listVODItem.size = " + listVODItem.size() + ", listVODItemVIP.size = " + listVODItemVIP.size());
 			outState.putParcelableArrayList(ComParams.INTENT_VODBEAN, listVODItem);
 		}
 	}

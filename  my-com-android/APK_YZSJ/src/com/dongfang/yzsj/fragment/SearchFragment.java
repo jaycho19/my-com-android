@@ -158,7 +158,7 @@ public class SearchFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		ULog.d(TAG, "onResume");
+		ULog.d( "onResume");
 
 		// 非异常中断进入时，bean为空，判断是否有缓存
 		if (null == listChannels) {
@@ -173,23 +173,23 @@ public class SearchFragment extends Fragment {
 		}
 		else {
 			// bean为空，网络请求数据，需对网络进行判断
-			ULog.d(TAG, ComParams.HTTP_VOD);
+			ULog.d( ComParams.HTTP_VOD);
 			new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_VOD, new RequestCallBack<String>() {
 				@Override
 				public void onLoading(long total, long current) {
-					ULog.d(TAG, "total = " + total + "; current = " + current);
+					ULog.d( "total = " + total + "; current = " + current);
 				}
 
 				@Override
 				public void onSuccess(String result) {
-					ULog.d(TAG, "onSuccess  --" + result);
+					ULog.d( "onSuccess  --" + result);
 
 					listChannels = new com.google.gson.Gson().fromJson(result,
 							new TypeToken<List<VODItem>>() {}.getType());
 					StringBuilder sb = new StringBuilder();
 					for (int i = 0, length = listChannels.size(); i < length; i++)
 						sb.append("vod ").append(i).append(" --> ").append(listChannels.get(i).toString());
-					ULog.d(TAG, sb.toString());
+					ULog.d( sb.toString());
 
 					ACache.get(getActivity()).put(ComParams.INTENT_SEARCH_CHANNELS, result, 60 * 5);// 缓存数据
 
@@ -200,7 +200,7 @@ public class SearchFragment extends Fragment {
 
 				@Override
 				public void onStart() {
-					ULog.i(TAG, "onStart");
+					ULog.i( "onStart");
 					progDialog.show();
 
 				}
@@ -208,7 +208,7 @@ public class SearchFragment extends Fragment {
 				@Override
 				public void onFailure(HttpException error, String msg) {
 					progDialog.dismiss();
-					ULog.i(TAG, "onFailure");
+					ULog.i( "onFailure");
 				}
 			});
 		}
@@ -217,7 +217,7 @@ public class SearchFragment extends Fragment {
 	/** 动态布局搜索频道 */
 	private void initChannelItems() {
 		int length = listChannels.size();
-		ULog.d(TAG, " listChannels.size() " + length);
+		ULog.d( " listChannels.size() " + length);
 
 		if (length > 0) {
 			linearLayout_0.removeAllViews();
@@ -274,7 +274,7 @@ public class SearchFragment extends Fragment {
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		if (null != listChannels) {
-			ULog.d(TAG, "listChannelItem.size = " + listChannels.size());
+			ULog.d( "listChannelItem.size = " + listChannels.size());
 			outState.putParcelableArrayList(ComParams.INTENT_SEARCH_CHANNELS, listChannels);
 		}
 	}
@@ -312,17 +312,17 @@ public class SearchFragment extends Fragment {
 		url.append("channelIds=").append(getChannelsUrl()).append("&");
 		url.append("searchValue=").append(Util.toUTF8(searchName));
 
-		ULog.i(TAG, url.toString());
+		ULog.i( url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
 			public void onLoading(long total, long current) {
-				ULog.d(TAG, "RequestCallBack.onLoading total = " + total + "; current = " + current);
+				ULog.d( "RequestCallBack.onLoading total = " + total + "; current = " + current);
 			}
 
 			@Override
 			public void onSuccess(String result) {
-				ULog.d(TAG, "onSuccess  --" + result);
+				ULog.d( "onSuccess  --" + result);
 				progDialog.dismiss();
 				pageStart = 1 + start;
 
@@ -337,7 +337,7 @@ public class SearchFragment extends Fragment {
 				if (null == bean)
 					return;
 
-				ULog.d(TAG, bean.toString());
+				ULog.d( bean.toString());
 				if (TextUtils.isEmpty(searchValue) || !searchName.equals(searchValue)) {
 					listData.clear();
 				}
@@ -347,18 +347,18 @@ public class SearchFragment extends Fragment {
 				listData.addAll(bean.getListData().getObjs());
 				searchAdp.setChannelId(bean.getChannel().getChannelId());
 				searchAdp.notifyDataSetChanged();
-				ULog.d(TAG, "list length = " + listData.size());
+				ULog.d( "list length = " + listData.size());
 			}
 
 			@Override
 			public void onStart() {
-				ULog.i(TAG, "RequestCallBack.onStart");
+				ULog.i( "RequestCallBack.onStart");
 				progDialog.show();
 			}
 
 			@Override
 			public void onFailure(HttpException error, String msg) {
-				ULog.i(TAG, "RequestCallBack.onFailure");
+				ULog.i( "RequestCallBack.onFailure");
 				progDialog.dismiss();
 
 				if (0 == start) {

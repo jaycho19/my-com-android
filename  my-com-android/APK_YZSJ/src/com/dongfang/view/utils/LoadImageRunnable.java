@@ -103,7 +103,7 @@ public class LoadImageRunnable implements Runnable {
 			}
 
 			if (needSpace > freeStorage) {
-				ULog.i(TAG, "Current downloadpath do not have enough free space ! " + needSpace + " -- " + freeStorage);
+				ULog.i( "Current downloadpath do not have enough free space ! " + needSpace + " -- " + freeStorage);
 				try {
 					StorageManager sm = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
 					// 获取sdcard的路径：外置和内置
@@ -126,7 +126,7 @@ public class LoadImageRunnable implements Runnable {
 									file = new File(dlInfo.filePath + "temp");
 									flag = true;
 									Util.saveDownloadPath(context, path + "/TYSX/dl");
-									ULog.i(TAG, "DownloadPath change to " + dlInfo.filePath);
+									ULog.i( "DownloadPath change to " + dlInfo.filePath);
 									break;
 								}
 							}
@@ -145,7 +145,7 @@ public class LoadImageRunnable implements Runnable {
 							file = null;
 							file = new File(dlInfo.filePath + "temp");
 							flag = true;
-							ULog.i(TAG, "DownloadPath change to " + dlInfo.filePath);
+							ULog.i( "DownloadPath change to " + dlInfo.filePath);
 						}
 					}
 					// 断点续传时，需在新的路径重新下载
@@ -155,13 +155,13 @@ public class LoadImageRunnable implements Runnable {
 					}
 
 				} catch (IllegalArgumentException e) {
-					ULog.e(TAG, "IllegalArgumentException");
+					ULog.e( "IllegalArgumentException");
 				} catch (IllegalAccessException e) {
-					ULog.e(TAG, "IllegalAccessException");
+					ULog.e( "IllegalAccessException");
 				} catch (InvocationTargetException e) {
-					ULog.e(TAG, "InvocationTargetException");
+					ULog.e( "InvocationTargetException");
 				} catch (NoSuchMethodException e) {
-					ULog.e(TAG, "NoSuchMethodException");
+					ULog.e( "NoSuchMethodException");
 				}
 
 			}
@@ -191,7 +191,7 @@ public class LoadImageRunnable implements Runnable {
 				
 				if (bundle.getInt("statuscode") == TVException.DOWNLOAD_NO_STORAGE_SPACE)
 					//new DialogFactory(context).showToast("当前存储空间不足！", Toast.LENGTH_SHORT);
-				ULog.e(TAG,
+				ULog.e(
 						bundle.containsKey("msg") ? bundle.getString("msg") : "下载异常" + "(" + bundle.getInt("statuscode")
 								+ ")");
 			}
@@ -205,7 +205,7 @@ public class LoadImageRunnable implements Runnable {
 			}
 
 		} catch (Exception e) {
-			ULog.e("LoadImageRunnable", " Exception >> " + e.toString());
+			ULog.e(" Exception >> " + e.toString());
 		}
 	}
 	
@@ -229,7 +229,7 @@ public class LoadImageRunnable implements Runnable {
 			 */
 			for (int num = 0, i = 0; ((num = ins.read(b)) > 0)
 					&& ((0 >= dlInfo.totalbytes) ? true : dlInfo.currentBytes <= dlInfo.totalbytes); i++) {
-			/*	ULog.v(TAG, "while --> total = " + dlInfo.totalbytes + " , current = " + dlInfo.currentBytes
+			/*	ULog.v( "while --> total = " + dlInfo.totalbytes + " , current = " + dlInfo.currentBytes
 						+ ", num = " + num + ", i = " + i);*/
 //				if (isCancelled()) {
 //					ins.close();
@@ -254,7 +254,7 @@ public class LoadImageRunnable implements Runnable {
 			//publishProgress(dlInfo);
 			return;
 		} catch (FileNotFoundException e) {
-			ULog.e(TAG, e.toString());
+			ULog.e( e.toString());
 			throw new TVException(TVException.DOWNLOAD_FILE_NOT_FOUND_EXCEPTION);
 		} catch (IOException e) {
 			throw new TVException(TVException.DOWNLOAD_WRITE_IO_EXCEPTION);
@@ -267,7 +267,7 @@ public class LoadImageRunnable implements Runnable {
 					accessFile.close();
 				}
 			} catch (Exception e) {
-				ULog.e(TAG, e.getMessage());
+				ULog.e( e.getMessage());
 			}
 		}
 	}

@@ -104,14 +104,14 @@ public class OrderAcitivity extends BaseActivity implements OnClickListener {
 		url.append("&").append("bandwidth=").append(band);
 		url.append("&").append("clipId=").append(clipId < 1 ? 1 : clipId);
 
-		ULog.i(TAG, url.toString());
+		ULog.i( url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 
 			@Override
 			public void onSuccess(String result) {
 				progDialog.dismiss();
-				ULog.d(TAG, "onSuccess  --" + result);
+				ULog.d( "onSuccess  --" + result);
 				try {
 					JSONObject json = new JSONObject(result);
 					Bundle data = new Bundle();
@@ -134,13 +134,13 @@ public class OrderAcitivity extends BaseActivity implements OnClickListener {
 
 			@Override
 			public void onStart() {
-				ULog.i(TAG, "RequestCallBack.onStart");
+				ULog.i( "RequestCallBack.onStart");
 				progDialog.show();
 			}
 
 			@Override
 			public void onFailure(HttpException error, String msg) {
-				ULog.i(TAG, "RequestCallBack.onFailure");
+				ULog.i( "RequestCallBack.onFailure");
 				progDialog.dismiss();
 			}
 		});
@@ -157,12 +157,12 @@ public class OrderAcitivity extends BaseActivity implements OnClickListener {
 		url.append("token=").append(User.getToken(this)).append("&");
 		url.append("userTelephone=").append(User.getPhone(this));
 
-		ULog.i(TAG, url.toString());
+		ULog.i( url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
 			public void onSuccess(String result) {
-				ULog.d(TAG, "onSuccess  --" + result);
+				ULog.d( "onSuccess  --" + result);
 			}
 
 		});

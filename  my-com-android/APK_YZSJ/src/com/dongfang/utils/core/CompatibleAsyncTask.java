@@ -34,7 +34,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
 
-import com.dongfang.utils.LogUtils;
+import com.dongfang.utils.ULog;
 
 /**
  * A compatible AsyncTask for android2.3.
@@ -299,7 +299,7 @@ public abstract class CompatibleAsyncTask<Params, Progress, Result> {
                 try {
                     postResultIfNotInvoked(get());
                 } catch (InterruptedException e) {
-                    LogUtils.w(e);
+                    ULog.w(e);
                 } catch (ExecutionException e) {
                     throw new RuntimeException("An error occured while executing doInBackground()",
                             e.getCause());

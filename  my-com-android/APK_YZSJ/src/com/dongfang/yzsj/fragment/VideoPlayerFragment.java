@@ -120,13 +120,13 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	// super.setArguments(args);
 	//
 	// this.bundle = args;
-	// ULog.i(TAG, "--> setArguments bundle = "+bundle.toString());
+	// ULog.i( "--> setArguments bundle = "+bundle.toString());
 	// }
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		ULog.i(TAG, "--> onAttach");
+		ULog.i( "--> onAttach");
 		context = activity;
 	}
 
@@ -134,13 +134,13 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		ULog.i(TAG, "--> onCreate");
+		ULog.i( "--> onCreate");
 	}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		ULog.i(TAG, "--> onViewCreated");
+		ULog.i( "--> onViewCreated");
 
 		// 缓冲�?..
 		// loadingStart(-1);
@@ -153,19 +153,19 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	@Override
 	public void onStart() {
 		super.onStart();
-		ULog.i(TAG, "--> onStart");
+		ULog.i( "--> onStart");
 	}
 
 	@Override
 	public void onSurfaceViewCreated() {
-		ULog.d(TAG, "VideoPlayerFragment onSurfaceViewCreated()");
+		ULog.d( "VideoPlayerFragment onSurfaceViewCreated()");
 		mediaPlayer.playNewVideo(mUri);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		ULog.i(TAG, "--> VideoPlayerFragment onResume()");
+		ULog.i( "--> VideoPlayerFragment onResume()");
 		// if (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 		if (hasFocus == false) {
 			resumeFocusNot = true;
@@ -189,7 +189,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	@Override
 	public void onPause() {
 		super.onPause();
-		ULog.i(TAG, "--> onPause");
+		ULog.i( "--> onPause");
 		addHistory(mediaPlayer.getCurrentPosition()/1000);
 		
 		mediaPlayer.releaseMediaPlayer();
@@ -199,11 +199,11 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	@Override
 	public void onStop() {
 		super.onStop();
-		ULog.i(TAG, "--> onStop");
+		ULog.i( "--> onStop");
 	}
 
 	public void onWindowFocusChanged(boolean hasFocus) {
-		ULog.d(TAG, "--> VideoPlayerFragment onWindowFocusChanged()");
+		ULog.d( "--> VideoPlayerFragment onWindowFocusChanged()");
 		this.hasFocus = hasFocus;
 		if (!hasFocus) {
 			dissmissAllPopupWin();
@@ -228,19 +228,19 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		ULog.i(TAG, "--> onDestroy");
+		ULog.i( "--> onDestroy");
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		ULog.i(TAG, "--> onActivityCreated");
+		ULog.i( "--> onActivityCreated");
 	}
 
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		ULog.i(TAG, "--> onDestroyView");
+		ULog.i( "--> onDestroyView");
 		// 播放页面�?��时还是loading状�?�?�? loadingCompleted();
 
 		// getActivity().unregisterReceiver(voice_changed_receiver);
@@ -254,12 +254,12 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		ULog.i(TAG, "--> onDetach");
+		ULog.i( "--> onDetach");
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		ULog.i(TAG, "--> onCreateView");
+		ULog.i( "--> onCreateView");
 		fragview = (FrameLayout) inflater.inflate(R.layout.fragment_videoview_player, container, false);
 
 		// initVideoParams();
@@ -271,7 +271,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 
 	// private void initVideoParams() {
 	//
-	// ULog.i(TAG, "mPlayData.playType = " + mPlayData.getPlayType() + "contentId--> " + mPlayData.getContentId()
+	// ULog.i( "mPlayData.playType = " + mPlayData.getPlayType() + "contentId--> " + mPlayData.getContentId()
 	// + "nplayUrl = " + mPlayData.getPlayUrlNowSelect() + "bundle = " + bundle.toString());
 	// }
 
@@ -351,7 +351,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 			Constants.STATUSBARHEIGHT = frame.top;
 		}
 
-		ULog.i(TAG, "Constants.STATUSBARHEIGHT = " + Constants.STATUSBARHEIGHT);
+		ULog.i( "Constants.STATUSBARHEIGHT = " + Constants.STATUSBARHEIGHT);
 
 	}
 
@@ -421,7 +421,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 		mediaPlayer.setOnPreparedListener(new OnPreparedListener() {
 			@Override
 			public void onPrepared(android.media.MediaPlayer paramMediaPlayer) {
-				ULog.v(TAG, "onPrepared");
+				ULog.v( "onPrepared");
 
 				mediaIsPrepared = true;
 				if (mIsLandscape) {
@@ -494,7 +494,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	 * 显示Land PopupWindow
 	 */
 	private void showLandFirstLayerPopupWindows() {
-		ULog.d(TAG, "showFirstLayerPopupWindows");
+		ULog.d( "showFirstLayerPopupWindows");
 
 		// if (mediaIsPrepared == false) {
 		// return;
@@ -525,7 +525,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	 * Dissmiss all PopupWindow
 	 */
 	public void dissmissAllPopupWin() {
-		ULog.d(TAG, "dissmissAllPopupWin");
+		ULog.d( "dissmissAllPopupWin");
 		if (mIsLandscape) {
 			basePop.dissmissAll();
 		}
@@ -674,7 +674,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	}
 
 	public void loadingStart(int percent) {
-		ULog.i(TAG, "--> loadingStart = percent =" + percent);
+		ULog.i( "--> loadingStart = percent =" + percent);
 		String Text = "";
 		loadingAnim.start();
 		loadingBar.setVisibility(View.VISIBLE);
@@ -699,7 +699,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	}
 
 	public void loadingCompleted() {
-		ULog.i(TAG, "--> loadingCompleted");
+		ULog.i( "--> loadingCompleted");
 		if (loadingBar.getVisibility() == View.VISIBLE) {
 
 			loadingBar.setVisibility(View.GONE);
@@ -750,7 +750,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	 * @param what
 	 */
 	public void letMediaPlayDo(MEDIA_TODO what) {
-		ULog.d(TAG, "--> VideoPlayerFragment letMediaPlayDo()");
+		ULog.d( "--> VideoPlayerFragment letMediaPlayDo()");
 
 		if (what == MEDIA_TODO.PAUSE) {
 			mediaPlayer.pause();
@@ -856,12 +856,12 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 		url.append("&").append("token=").append(User.getToken(getActivity()));
 		url.append("&").append("userTelephone=").append(User.getPhone(getActivity()));
 
-		ULog.i(TAG, url.toString());
+		ULog.i( url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
 			public void onSuccess(String result) {
-				ULog.d(TAG, "onSuccess  --" + result);
+				ULog.d( "onSuccess  --" + result);
 			}
 
 		});

@@ -89,19 +89,19 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
 			String url = ComParams.HTTP_LOGIN + "obj.tel=" + etUserName.getText() + "&obj.verifyCode="
 					+ etAuthCode.getText();
-			ULog.i(TAG, url);
+			ULog.i( url);
 
 			// http://m.fortune-net.cn/user/user!phoneLogin.action?obj.tel=15631127974&obj.verifyCode=888222
 
 			new HttpUtils().send(HttpRequest.HttpMethod.GET, url, new RequestCallBack<String>() {
 				@Override
 				public void onSuccess(String result) {
-					ULog.d(TAG, "onSuccess  --" + result);
+					ULog.d( "onSuccess  --" + result);
 					progDialog.dismiss();
 
 					LoginBean bean = new com.google.gson.Gson().fromJson(result, LoginBean.class);
 
-					ULog.d(TAG, bean.toString());
+					ULog.d( bean.toString());
 					if (null != bean && bean.isSuccess() && !TextUtils.isEmpty(bean.getToken())) {
 						// 保存token
 						User.saveToken(getActivity(), bean.getToken());
@@ -130,14 +130,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
 				@Override
 				public void onStart() {
-					ULog.i(TAG, "onStart");
+					ULog.i( "onStart");
 					progDialog.show();
 
 				}
 
 				@Override
 				public void onFailure(HttpException error, String msg) {
-					ULog.i(TAG, "onFailure");
+					ULog.i( "onFailure");
 					progDialog.dismiss();
 
 					// 保存token
@@ -161,12 +161,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 					ComParams.HTTP_AUTHCODE + "obj.tel=" + etUserName.getText(), new RequestCallBack<String>() {
 						@Override
 						public void onLoading(long total, long current) {
-							ULog.d(TAG, "total = " + total + "; current = " + current);
+							ULog.d( "total = " + total + "; current = " + current);
 						}
 
 						@Override
 						public void onSuccess(String result) {
-							ULog.d(TAG, "onSuccess  --" + result);
+							ULog.d( "onSuccess  --" + result);
 							try {
 								JSONObject obj = new JSONObject(result);
 								if (obj.has("success") && obj.getBoolean("success")) {
@@ -194,14 +194,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
 						@Override
 						public void onStart() {
-							ULog.i(TAG, "onStart");
+							ULog.i( "onStart");
 							progDialog.show();
 
 						}
 
 						@Override
 						public void onFailure(HttpException error, String msg) {
-							ULog.i(TAG, "onFailure");
+							ULog.i( "onFailure");
 							progDialog.dismiss();
 						}
 					});

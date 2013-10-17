@@ -4,11 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import org.apache.http.HeaderElement;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.protocol.BasicHttpContext;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,9 +16,7 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.dongfang.net.HttpUtils;
-import com.dongfang.net.http.HttpHandler;
 import com.dongfang.net.http.client.HttpRequest;
-import com.dongfang.utils.LogUtils;
 import com.dongfang.utils.ULog;
 import com.dongfang.yzsj.DetailsActiivity;
 import com.dongfang.yzsj.LoginActivity;
@@ -78,7 +72,7 @@ public class ToDetailAsyncTask extends AsyncTask<String, String, DetailBean> {
 			sb.append("phone=").append(User.getPhone(context)).append("&");
 			sb.append("channelId=").append(channelId).append("&");
 			sb.append("contentId=").append(conntentId);
-			ULog.i(TAG, sb.toString());
+			ULog.i( sb.toString());
 
 			try {
 				bean = new com.google.gson.Gson().fromJson(httpGet(sb.toString()), DetailBean.class);
@@ -142,7 +136,7 @@ public class ToDetailAsyncTask extends AsyncTask<String, String, DetailBean> {
 		try {
 
 			result = new HttpUtils().sendSync(HttpRequest.HttpMethod.GET, url).readString();
-			LogUtils.d(result);
+			ULog.d(result);
 
 			//
 			// HttpResponse response = new HttpUtils().getHttpClient().execute(
@@ -163,7 +157,7 @@ public class ToDetailAsyncTask extends AsyncTask<String, String, DetailBean> {
 			// result = read(entity, charset);
 			// }
 		} catch (Exception e) {
-			LogUtils.e(e.toString());
+			ULog.e(e.toString());
 		}
 
 		return result;

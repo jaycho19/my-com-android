@@ -14,7 +14,7 @@ import javax.net.ssl.X509TrustManager;
 
 import org.apache.http.conn.ssl.SSLSocketFactory;
 
-import com.dongfang.utils.LogUtils;
+import com.dongfang.utils.ULog;
 
 /**
  * Created with IntelliJ IDEA.
@@ -33,7 +33,7 @@ public class SimpleSSLSocketFactory extends SSLSocketFactory {
             trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
             trustStore.load(null, null);
         } catch (Exception e) {
-            LogUtils.e(e.getMessage(), e);
+            ULog.e(e.getMessage(), e);
         }
     }
 
@@ -44,7 +44,7 @@ public class SimpleSSLSocketFactory extends SSLSocketFactory {
             try {
                 instance = new SimpleSSLSocketFactory();
             } catch (Exception e) {
-                LogUtils.e(e.getMessage(), e);
+                ULog.e(e.getMessage(), e);
             }
         }
         return instance;

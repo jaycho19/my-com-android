@@ -33,8 +33,8 @@ import com.dongfang.net.http.client.ResponseStream;
 import com.dongfang.net.http.client.callback.DefaultHttpRedirectHandler;
 import com.dongfang.net.http.client.callback.HttpRedirectHandler;
 import com.dongfang.utils.HttpException;
-import com.dongfang.utils.LogUtils;
 import com.dongfang.utils.OtherUtils;
+import com.dongfang.utils.ULog;
 
 public class SyncHttpHandler {
 
@@ -77,7 +77,7 @@ public class SyncHttpHandler {
                     _getMethodRequestUrl = null;
                 }
                 
-                LogUtils.d(_getMethodRequestUrl);
+                ULog.d(_getMethodRequestUrl);
                 
 				// if (_getMethodRequestUrl != null) {
 				// String result = HttpUtils.sHttpGetCache.get(_getMethodRequestUrl);

@@ -65,7 +65,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		setContentView(R.layout.activity_detail);
 		bean = getIntent().getParcelableExtra(ComParams.INTENT_MOVIEDETAIL_BEAN);
 
-		// ULog.d(TAG, bean.toString());
+		// ULog.d( bean.toString());
 
 		// conntentId = getIntent().getStringExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID);
 		// channelId = getIntent().getStringExtra(ComParams.INTENT_MOVIEDETAIL_CHANNELID);
@@ -151,7 +151,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 
 		// 剧集
 		int clipCount = bean.getContent().getCLIP_COUNT(); // 集数
-		ULog.d(TAG, "CLIP_COUNT = " + clipCount);
+		ULog.d( "CLIP_COUNT = " + clipCount);
 		if (clipCount > 1) {
 			int rows = (clipCount / 5) + ((clipCount % 5) > 0 ? 1 : 0);
 			LinearLayout.LayoutParams lpTV = new LayoutParams(-2, -2, 1);
@@ -164,7 +164,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 						TextView tv = (TextView) LayoutInflater.from(this).inflate(
 								R.layout.activity_detail_textview_juji, null);
 						tv.setLayoutParams(lpTV);
-						ULog.d(TAG, Integer.toString(row * 5 + i + 1));
+						ULog.d( Integer.toString(row * 5 + i + 1));
 						tv.setText(Integer.toString(row * 5 + i + 1));
 						tv.setOnClickListener(new JuJiOnClickListener(row * 5 + i + 1));
 						ll.addView(tv);
@@ -174,7 +174,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 								R.layout.activity_detail_textview_juji, null);
 						tv.setLayoutParams(lpTV);
 						tv.setVisibility(View.INVISIBLE);
-						ULog.d(TAG, Integer.toString(clipCount + 1 + i) + "  invisible");
+						ULog.d( Integer.toString(clipCount + 1 + i) + "  invisible");
 						ll.addView(tv);
 					}
 				}
@@ -183,7 +183,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 						TextView tv = (TextView) LayoutInflater.from(this).inflate(
 								R.layout.activity_detail_textview_juji, null);
 						tv.setLayoutParams(lpTV);
-						ULog.d(TAG, Integer.toString(row * 5 + i + 1));
+						ULog.d( Integer.toString(row * 5 + i + 1));
 						tv.setText(Integer.toString(row * 5 + i + 1));
 						tv.setOnClickListener(new JuJiOnClickListener(row * 5 + i + 1));
 						ll.addView(tv);
@@ -204,7 +204,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 			llLikeContain_1.removeAllViews();
 
 			int length = bean.getRelateContents().size();
-			ULog.d(TAG, "RelateContents size = " + length);
+			ULog.d( "RelateContents size = " + length);
 			int w = Util.getWindowWidth(this) / 3 - 10;
 			LinearLayout.LayoutParams lParam = new LinearLayout.LayoutParams(w, -2);
 			lParam.setMargins(5, 5, 5, 5);
@@ -249,29 +249,29 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		// sb.append("phone=").append(User.getPhone(this)).append("&");
 		// sb.append("channelId=").append(channelId).append("&");
 		// sb.append("contentId=").append(conntentId);
-		// ULog.i(TAG, sb.toString());
+		// ULog.i( sb.toString());
 		//
 		// new HttpUtils().send(HttpRequest.HttpMethod.GET, sb.toString(), new RequestCallBack<String>() {
 		// @Override
 		// public void onLoading(long total, long current) {
-		// ULog.d(TAG, "RequestCallBack.onLoading total = " + total + "; current = " + current);
+		// ULog.d( "RequestCallBack.onLoading total = " + total + "; current = " + current);
 		// }
 		//
 		// @Override
 		// public void onSuccess(String result) {
-		// ULog.d(TAG, "onSuccess  --" + result);
+		// ULog.d( "onSuccess  --" + result);
 		// DetailBean bean = new com.google.gson.Gson().fromJson(result, DetailBean.class);
-		// ULog.d(TAG, bean.toString());
+		// ULog.d( bean.toString());
 		// }
 		//
 		// @Override
 		// public void onStart() {
-		// ULog.i(TAG, "RequestCallBack.onStart");
+		// ULog.i( "RequestCallBack.onStart");
 		// }
 		//
 		// @Override
 		// public void onFailure(Throwable error, String msg) {
-		// ULog.i(TAG, "RequestCallBack.onFailure");
+		// ULog.i( "RequestCallBack.onFailure");
 		// }
 		// });
 		// }
@@ -290,7 +290,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
-			ULog.d(TAG, v.toString());
+			ULog.d( v.toString());
 			new ToDetailAsyncTask(DetailsActiivity.this, channelId, contentId).execute();
 		}
 	}
@@ -305,7 +305,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
-			ULog.d(TAG, v.toString());
+			ULog.d( v.toString());
 			toPlayAuth(bean.getChannel().getChannelId(), bean.getContent().getId(), bean.getContent()
 					.getCLIP_BANDWITHS().get(0).getCode(), clipId);
 		}
@@ -318,13 +318,13 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		url.append("&").append("contentId=").append(conntentId);
 		url.append("&").append("channelId=").append(channelId);
 
-		ULog.i(TAG, url.toString());
+		ULog.i( url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
 			public void onSuccess(String result) {
 				// progDialog.dismiss();
-				ULog.d(TAG, "onSuccess  --" + result);
+				ULog.d( "onSuccess  --" + result);
 				try {
 					JSONObject json = new JSONObject(result);
 					if (json.getBoolean("success")) {
@@ -341,13 +341,13 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 
 			@Override
 			public void onStart() {
-				ULog.i(TAG, "RequestCallBack.onStart");
+				ULog.i( "RequestCallBack.onStart");
 				progDialog.show();
 			}
 
 			@Override
 			public void onFailure(HttpException error, String msg) {
-				ULog.i(TAG, "RequestCallBack.onFailure");
+				ULog.i( "RequestCallBack.onFailure");
 				progDialog.dismiss();
 			}
 		});
@@ -363,17 +363,17 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		url.append("&").append("contentId=").append(conntentId);
 		url.append("&").append("channelId=").append(channelId);
 
-		ULog.i(TAG, url.toString());
+		ULog.i( url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 
 			@Override
 			public void onSuccess(String result) {
 				progDialog.dismiss();
-				ULog.d(TAG, "onSuccess  -- " + result);
+				ULog.d( "onSuccess  -- " + result);
 				OrderBean bean = new com.google.gson.Gson().fromJson(result, OrderBean.class);
 
-				ULog.d(TAG, bean.toString());
+				ULog.d( bean.toString());
 
 				if (bean.isSuccess()) {
 					if (null != bean.getProducts() && bean.getProducts().size() > 0) {
@@ -425,18 +425,18 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		url.append("&").append("bandwidth=").append(band);
 		url.append("&").append("clipId=").append(clipId < 1 ? 1 : clipId);
 
-		ULog.i(TAG, url.toString());
+		ULog.i( url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
 			public void onLoading(long total, long current) {
-				ULog.d(TAG, "RequestCallBack.onLoading total = " + total + "; current = " + current);
+				ULog.d( "RequestCallBack.onLoading total = " + total + "; current = " + current);
 			}
 
 			@Override
 			public void onSuccess(String result) {
 				progDialog.dismiss();
-				ULog.d(TAG, "onSuccess  --" + result);
+				ULog.d( "onSuccess  --" + result);
 				try {
 					JSONObject json = new JSONObject(result);
 					Bundle data = new Bundle();
@@ -453,13 +453,13 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 
 			@Override
 			public void onStart() {
-				ULog.i(TAG, "RequestCallBack.onStart");
+				ULog.i( "RequestCallBack.onStart");
 				progDialog.show();
 			}
 
 			@Override
 			public void onFailure(HttpException error, String msg) {
-				ULog.i(TAG, "RequestCallBack.onFailure");
+				ULog.i( "RequestCallBack.onFailure");
 				progDialog.dismiss();
 			}
 		});
@@ -505,17 +505,17 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		url.append("&").append("token=").append(User.getToken(this));
 		url.append("&").append("userTelephone=").append(User.getPhone(this));
 
-		ULog.i(TAG, url.toString());
+		ULog.i( url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
 			public void onLoading(long total, long current) {
-				ULog.d(TAG, "RequestCallBack.onLoading total = " + total + "; current = " + current);
+				ULog.d( "RequestCallBack.onLoading total = " + total + "; current = " + current);
 			}
 
 			@Override
 			public void onSuccess(String result) {
-				ULog.d(TAG, "onSuccess  --" + result);
+				ULog.d( "onSuccess  --" + result);
 				progDialog.dismiss();
 
 				DelAddResult addResult = new com.google.gson.Gson().fromJson(result, DelAddResult.class);
@@ -549,13 +549,13 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 
 			@Override
 			public void onStart() {
-				ULog.i(TAG, "RequestCallBack.onStart");
+				ULog.i( "RequestCallBack.onStart");
 				progDialog.show();
 			}
 
 			@Override
 			public void onFailure(HttpException error, String msg) {
-				ULog.i(TAG, "RequestCallBack.onFailure");
+				ULog.i( "RequestCallBack.onFailure");
 				progDialog.dismiss();
 			}
 		});
@@ -568,17 +568,17 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		url.append("&").append("token=").append(User.getToken(this));
 		url.append("&").append("userTelephone=").append(User.getPhone(this));
 
-		ULog.i(TAG, url.toString());
+		ULog.i( url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
 			public void onLoading(long total, long current) {
-				ULog.d(TAG, "RequestCallBack.onLoading total = " + total + "; current = " + current);
+				ULog.d( "RequestCallBack.onLoading total = " + total + "; current = " + current);
 			}
 
 			@Override
 			public void onSuccess(String result) {
-				ULog.d(TAG, "onSuccess  --" + result);
+				ULog.d( "onSuccess  --" + result);
 				progDialog.dismiss();
 
 				DelAddResult delResult = new com.google.gson.Gson().fromJson(result, DelAddResult.class);
@@ -611,13 +611,13 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 
 			@Override
 			public void onStart() {
-				ULog.i(TAG, "RequestCallBack.onStart");
+				ULog.i( "RequestCallBack.onStart");
 				progDialog.show();
 			}
 
 			@Override
 			public void onFailure(HttpException error, String msg) {
-				ULog.i(TAG, "RequestCallBack.onFailure");
+				ULog.i( "RequestCallBack.onFailure");
 				progDialog.dismiss();
 			}
 		});
@@ -634,12 +634,12 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		url.append("token=").append(User.getToken(this)).append("&");
 		url.append("userTelephone=").append(User.getPhone(this));
 
-		ULog.i(TAG, url.toString());
+		ULog.i( url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
 			public void onSuccess(String result) {
-				ULog.d(TAG, "onSuccess  --" + result);
+				ULog.d( "onSuccess  --" + result);
 			}
 
 		});

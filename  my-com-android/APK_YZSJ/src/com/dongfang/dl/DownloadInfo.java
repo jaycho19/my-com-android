@@ -154,7 +154,7 @@ public class DownloadInfo implements Serializable {
 		else {
 			fileName_temp = contentUrl.substring(contentUrl.lastIndexOf("/") + 1);
 		}
-		ULog.d(TAG, fileName_temp);
+		ULog.d( fileName_temp);
 		if (TextUtils.isEmpty(contentName))
 			return fileName_temp;
 		return contentName + fileName_temp.substring(fileName_temp.lastIndexOf("."));

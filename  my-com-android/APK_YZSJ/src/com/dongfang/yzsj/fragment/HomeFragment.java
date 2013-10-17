@@ -62,10 +62,10 @@ public class HomeFragment extends Fragment {
 		initView(inflater, view);
 
 		if (null != savedInstanceState) {
-			ULog.d(TAG, savedInstanceState.toString());
+			ULog.d( savedInstanceState.toString());
 		}
 		else {
-			ULog.d(TAG, "NULL");;
+			ULog.d( "NULL");;
 		}
 
 		return view;
@@ -148,7 +148,7 @@ public class HomeFragment extends Fragment {
 			view.findViewById(R.id.tv_fragment_home_live_more).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					ULog.d(TAG, v.getId() + "");
+					ULog.d( v.getId() + "");
 					FragmentTabHost fgtHost = ((MainActivity) getActivity()).getFgtHost();
 					fgtHost.setCurrentTabByTag("2");
 				}
@@ -209,7 +209,7 @@ public class HomeFragment extends Fragment {
 		viewVIP.findViewById(R.id.fragment_home_tv_vip_item_more).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ULog.d(TAG, v.getId() + "");
+				ULog.d( v.getId() + "");
 				FragmentTabHost fgtHost = ((MainActivity) getActivity()).getFgtHost();
 				fgtHost.setCurrentTabByTag("3");
 			}
@@ -323,13 +323,13 @@ public class HomeFragment extends Fragment {
 		url.append("&").append("bandwidth=").append("Media_Url_Source");
 		url.append("&").append("clipId=").append(1);
 
-		ULog.i(TAG, url.toString());
+		ULog.i( url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
 			public void onSuccess(String result) {
 				progDialog.dismiss();
-				ULog.d(TAG, "onSuccess  --" + result);
+				ULog.d( "onSuccess  --" + result);
 				try {
 					JSONObject json = new JSONObject(result);
 					Bundle data = new Bundle();
@@ -352,13 +352,13 @@ public class HomeFragment extends Fragment {
 
 			@Override
 			public void onStart() {
-				ULog.i(TAG, "RequestCallBack.onStart");
+				ULog.i( "RequestCallBack.onStart");
 				progDialog.show();
 			}
 
 			@Override
 			public void onFailure(HttpException error, String msg) {
-				ULog.i(TAG, "RequestCallBack.onFailure");
+				ULog.i( "RequestCallBack.onFailure");
 				progDialog.dismiss();
 			}
 		});

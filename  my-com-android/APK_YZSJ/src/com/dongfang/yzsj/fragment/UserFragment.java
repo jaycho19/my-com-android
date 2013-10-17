@@ -24,7 +24,7 @@ public class UserFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		ULog.d(TAG, "onCreateView(...)");
+		ULog.d( "onCreateView(...)");
 		View view = inflater.inflate(R.layout.fragment_user, container, false);
 		// if (User.isLogined(getActivity())) {
 		initTabhostItems(view, inflater);
@@ -67,13 +67,13 @@ public class UserFragment extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		ULog.d(TAG, "onStart()");
+		ULog.d( "onStart()");
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		ULog.d(TAG, "onResume()");
+		ULog.d( "onResume()");
 	}
 
 	@Override

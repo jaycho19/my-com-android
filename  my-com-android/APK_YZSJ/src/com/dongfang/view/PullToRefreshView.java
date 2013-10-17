@@ -303,13 +303,13 @@ public class PullToRefreshView extends LinearLayout {
 			int deltaY = y - mLastMotionY;
 			if (mPullState == PULL_DOWN_STATE) {
 				// PullToRefreshView执行下拉
-				ULog.i(TAG, " pull down!parent view move!");
+				ULog.i( " pull down!parent view move!");
 				headerPrepareToRefresh(deltaY);
 				// setHeaderPadding(-mHeaderViewHeight);
 			}
 			else if (mPullState == PULL_UP_STATE) {
 				// PullToRefreshView执行上拉
-				ULog.i(TAG, "pull up!parent view move!");
+				ULog.i( "pull up!parent view move!");
 				footerPrepareToRefresh(deltaY);
 			}
 			mLastMotionY = y;
@@ -537,7 +537,7 @@ public class PullToRefreshView extends LinearLayout {
 	 * 
 	 */
 	public void onHeaderRefreshComplete() {
-		ULog.i(TAG, "--> onHeaderRefreshComplete");
+		ULog.i( "--> onHeaderRefreshComplete");
 		setHeaderTopMargin(-mHeaderViewHeight);
 		mHeaderImageView.setVisibility(View.VISIBLE);
 		mHeaderImageView.setImageResource(R.drawable.pull_2_refresh_arrow);
@@ -562,7 +562,7 @@ public class PullToRefreshView extends LinearLayout {
 	 * footer view 完成更新后恢复初始状态
 	 */
 	public void onFooterRefreshComplete() {
-		ULog.i(TAG, "--> onFooterRefreshComplete");
+		ULog.i( "--> onFooterRefreshComplete");
 		setHeaderTopMargin(-mHeaderViewHeight);
 		mFooterImageView.setVisibility(View.VISIBLE);
 		mFooterImageView.setImageResource(R.drawable.pull_2_refresh_arrow_up);

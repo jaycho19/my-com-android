@@ -41,8 +41,8 @@ import com.dongfang.net.http.client.callback.HttpRedirectHandler;
 import com.dongfang.net.http.client.callback.RequestCallBackHandler;
 import com.dongfang.net.http.client.callback.StringDownloadHandler;
 import com.dongfang.utils.HttpException;
-import com.dongfang.utils.LogUtils;
 import com.dongfang.utils.OtherUtils;
+import com.dongfang.utils.ULog;
 import com.dongfang.utils.core.CompatibleAsyncTask;
 import com.dongfang.yzsj.bean.LoginBean;
 import com.dongfang.yzsj.params.ComParams;
@@ -110,7 +110,7 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Object> 
 				else {
 					_getRequestUrl = null;
 				}
-				LogUtils.d(_getRequestUrl);
+				ULog.d(_getRequestUrl);
 				// if (_getRequestUrl != null) {
 				// String result = HttpUtils.sHttpGetCache.get(_getRequestUrl);
 				// if (result != null) {

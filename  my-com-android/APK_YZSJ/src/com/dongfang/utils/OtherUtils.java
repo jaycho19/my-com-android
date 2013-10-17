@@ -100,7 +100,7 @@ public class OtherUtils {
             sslContext.init(null, trustAllCerts, null);
             HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
         } catch (Exception e) {
-            LogUtils.e(e.getMessage(), e);
+            ULog.e(e.getMessage(), e);
         }
         HttpsURLConnection.setDefaultHostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
     }
