@@ -112,13 +112,13 @@ public class SubscibeFragment extends Fragment {
 		url.append("token=").append(User.getToken(getActivity())).append("&");
 		url.append("userTelephone=").append(User.getPhone(getActivity()));
 
-		ULog.i(TAG, url.toString());
+		ULog.i( url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 
 			@Override
 			public void onSuccess(String result) {
-				ULog.d(TAG, "onSuccess  --" + result);
+				ULog.d( "onSuccess  --" + result);
 				progDialog.dismiss();
 				pageStart = 1 + start;
 
@@ -133,7 +133,7 @@ public class SubscibeFragment extends Fragment {
 				if (null == bean)
 					return;
 
-				ULog.d(TAG, bean.toString());
+				ULog.d( bean.toString());
 
 				lastTotal = bean.getListData().getObjs().size();
 
@@ -145,18 +145,18 @@ public class SubscibeFragment extends Fragment {
 					}
 				}
 
-				ULog.d(TAG, "list length = " + listData.size());
+				ULog.d( "list length = " + listData.size());
 			}
 
 			@Override
 			public void onStart() {
-				ULog.i(TAG, "RequestCallBack.onStart");
+				ULog.i( "RequestCallBack.onStart");
 				progDialog.show();
 			}
 
 			@Override
 			public void onFailure(HttpException error, String msg) {
-				ULog.i(TAG, "RequestCallBack.onFailure");
+				ULog.i( "RequestCallBack.onFailure");
 				progDialog.dismiss();
 
 				if (0 == start) {

@@ -144,7 +144,7 @@ public class UtilOfTime {
 			SimpleDateFormat sdf = new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS);
 			long time = sdf.parse(millisecond).getTime();
 			long currentTime = new Date().getTime();
-			ULog.i(TAG, "11compare date: " + millisecond + "  compare time: " + time + "=========>  current time: "
+			ULog.i( "11compare date: " + millisecond + "  compare time: " + time + "=========>  current time: "
 					+ currentTime);
 			return time < currentTime;
 		} catch (ParseException e) {
@@ -183,7 +183,7 @@ public class UtilOfTime {
 				end_H = sdfFormat.parse(str_end).getHours() + "";
 				end_M = sdfFormat.parse(str_end).getMinutes() + "";
 
-				ULog.d("time ", returnAPM(start_H, start_M) + "-" + returnAPM(end_H, end_M));
+				ULog.d( returnAPM(start_H, start_M) + "-" + returnAPM(end_H, end_M));
 				rt = start_MM + "月" + start_DD + "日 " + returnAPM(start_H, start_M) + "-" + returnAPM(end_H, end_M);
 			}
 			else {
@@ -191,7 +191,7 @@ public class UtilOfTime {
 				start_M = sdfFormat.parse(str_star).getMinutes() + "";
 				end_H = sdfFormat.parse(str_end).getHours() + "";
 				end_M = sdfFormat.parse(str_end).getMinutes() + "";
-				ULog.d("time ", returnAPM(start_H, start_M) + "-" + returnAPM(end_H, end_M));
+				ULog.d( returnAPM(start_H, start_M) + "-" + returnAPM(end_H, end_M));
 				rt = returnAPM(start_H, start_M) + "-" + returnAPM(end_H, end_M);
 			}
 		} catch (Throwable e) {
@@ -262,25 +262,25 @@ public class UtilOfTime {
 	 * @param args
 	 */
 	public void test() {
-		ULog.d(TAG, "getDateWithSpecialFromat(YYYY_MM_DD) = " + getDateWithSpecialFromat(YYYY_MM_DD));
-		ULog.d(TAG, "getDateWithSpecialFromat(YYYY_MM_DD, -1) = " + getDateWithSpecialFromat(YYYY_MM_DD, -1));
-		ULog.d(TAG, "getDateWithSpecialFromat(YYYY_MM_DD, 1) = " + getDateWithSpecialFromat(YYYY_MM_DD, 1));
-		ULog.d(TAG, "CurrentDate() = " + CurrentDate());
+		ULog.d( "getDateWithSpecialFromat(YYYY_MM_DD) = " + getDateWithSpecialFromat(YYYY_MM_DD));
+		ULog.d( "getDateWithSpecialFromat(YYYY_MM_DD, -1) = " + getDateWithSpecialFromat(YYYY_MM_DD, -1));
+		ULog.d( "getDateWithSpecialFromat(YYYY_MM_DD, 1) = " + getDateWithSpecialFromat(YYYY_MM_DD, 1));
+		ULog.d( "CurrentDate() = " + CurrentDate());
 		String currentTimeMS = String.valueOf(CurrentDate().getTime());
-		ULog.d(TAG, "getDateByMillisecondWithSpecialFromat(YYYY_MM_DD_HH_MM, currentTimeMS) = "
+		ULog.d( "getDateByMillisecondWithSpecialFromat(YYYY_MM_DD_HH_MM, currentTimeMS) = "
 				+ getDateByMillisecondWithSpecialFromat(YYYY_MM_DD_HH_MM, currentTimeMS));
 
 		long currentS = CurrentDate().getHours() * 3600 + CurrentDate().getMinutes() * 60 + CurrentDate().getSeconds();
-		ULog.d(TAG, "formatSeconds2Date(currentS) = " + formatSeconds2Date(currentS));
+		ULog.d( "formatSeconds2Date(currentS) = " + formatSeconds2Date(currentS));
 		String time = formatSeconds2Date(currentS);
-		ULog.d(TAG, "formatDate2Seconds(time) = " + formatDate2Seconds(time));
-		ULog.d(TAG, "isBeforeCurrentTime(2013-07-25 21:15:00) = " + isBeforeCurrentTime("2013-07-25 21:15:00"));
+		ULog.d( "formatDate2Seconds(time) = " + formatDate2Seconds(time));
+		ULog.d( "isBeforeCurrentTime(2013-07-25 21:15:00) = " + isBeforeCurrentTime("2013-07-25 21:15:00"));
 
-		ULog.d(TAG, "returnAPM(9,20) = " + returnAPM("9", "20"));
-		ULog.d(TAG, "returnAPM(18,20) = " + returnAPM("9", "20"));
+		ULog.d( "returnAPM(9,20) = " + returnAPM("9", "20"));
+		ULog.d( "returnAPM(18,20) = " + returnAPM("9", "20"));
 
-		ULog.d(TAG, "formatData(9) = " + formatData("9"));
-		ULog.d(TAG, "formatData(12) = " + formatData("12"));
+		ULog.d( "formatData(9) = " + formatData("9"));
+		ULog.d( "formatData(12) = " + formatData("12"));
 
 	}
 

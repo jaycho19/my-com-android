@@ -161,7 +161,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 
 	/** 播放视频 */
 	public void start() {
-		ULog.i(TAG, "--> Mediaplayer start()");
+		ULog.i( "--> Mediaplayer start()");
 		if (mDefaultPlayer != null && mPlayerState == PLAYSTATE.PREPARED) {
 			mDefaultPlayer.start();
 			notifyPlayPauseStateChaged();
@@ -172,7 +172,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 	}
 
 	public void stop() {
-		ULog.v(TAG, "start");
+		ULog.v( "start");
 		if (mDefaultPlayer != null && mPlayerState == PLAYSTATE.PREPARED) {
 			mDefaultPlayer.stop();
 		}
@@ -180,7 +180,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 	}
 
 	public void pause() {
-		ULog.v(TAG, "pause");
+		ULog.v( "pause");
 		if (mDefaultPlayer != null && mPlayerState == PLAYSTATE.PREPARED) {
 			mDefaultPlayer.pause();
 			notifyPlayPauseStateChaged();
@@ -198,7 +198,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 	}
 
 	public void release() {
-		ULog.v(TAG, "release");
+		ULog.v( "release");
 		// mediaPlayer = null;
 		if (mDefaultPlayer != null) {
 			mDefaultPlayer.release();
@@ -209,11 +209,11 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 	public int getCurrentPosition() {
 		int ret = 0;
 		if (mDefaultPlayer != null && mPlayerState == PLAYSTATE.PREPARED) {
-			ULog.d(TAG, "getCurrentPosition = " + mDefaultPlayer.getCurrentPosition());
+			ULog.d( "getCurrentPosition = " + mDefaultPlayer.getCurrentPosition());
 			ret = this.mCurrentPosition = mDefaultPlayer.getCurrentPosition();
 		}
 		else {
-			ULog.d(TAG, "getCurrentPosition = " + mCurrentPosition);
+			ULog.d( "getCurrentPosition = " + mCurrentPosition);
 			ret = mCurrentPosition;
 		}
 		return ret;
@@ -261,7 +261,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 
 	/** 重置资源 */
 	private void resetMediaPlayer() {
-		ULog.v(TAG, "resetMediaPlayer");
+		ULog.v( "resetMediaPlayer");
 		if (mDefaultPlayer != null) {
 			mDefaultPlayer.reset();
 			mBufferingPercent = 0;
@@ -280,7 +280,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 	 * @return
 	 */
 	public void releaseMediaPlayer() {
-		ULog.v(TAG, "releaseDefaultPlayer");
+		ULog.v( "releaseDefaultPlayer");
 		// CancelTimerForListnerCurrentPosition();
 		mIsDefaultPlayerReleasing = true;
 		// 修复因为延迟重新调用播放器时用户正好退出播放页面而导致的问题
@@ -291,7 +291,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 			mDefaultPlayer.release();
 			mDefaultPlayer = null;
 			mIsDefaultPlayerReleasing = false;
-			ULog.d(TAG, "releaseMediaPlayer  mIsDefaultPlayerReleasing = " + mIsDefaultPlayerReleasing);
+			ULog.d( "releaseMediaPlayer  mIsDefaultPlayerReleasing = " + mIsDefaultPlayerReleasing);
 		}
 		else {
 			mIsDefaultPlayerReleasing = false;
@@ -303,7 +303,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 	// }
 
 	public void seekTo(int seekToTargetPosition) {
-		// ULog.v(TAG, "release = " + seekToTargetPosition);
+		// ULog.v( "release = " + seekToTargetPosition);
 
 		// if (this.onLoadingListener != null)
 		// this.onLoadingListener.onLoading();
@@ -313,15 +313,15 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 		// localMessage.what = 3;
 		// localMessage.arg1 = seekToTargetPosition;
 		// this.mHandler.sendMessage(localMessage);
-		ULog.i(TAG, "--> seekTo  seekToTargetPosition = " + seekToTargetPosition);
+		ULog.i( "--> seekTo  seekToTargetPosition = " + seekToTargetPosition);
 		if (mDefaultPlayer != null && mPlayerState == PLAYSTATE.PREPARED) {
 			mDefaultPlayer.seekTo(seekToTargetPosition);
 			notifyCurrentPositionUpdate(seekToTargetPosition);
-			ULog.i(TAG, "--> seekTo  PREPARED ");
+			ULog.i( "--> seekTo  PREPARED ");
 		}
 		else {
 			mSeekWhenPrepared = seekToTargetPosition;
-			ULog.i(TAG, "--> seekTo mSeekWhenPrepared ");
+			ULog.i( "--> seekTo mSeekWhenPrepared ");
 		}
 		this.mMediaBufferingState = BUFFERSTATE.BUFFERING;
 		mLoadingStartPosition = seekToTargetPosition;
@@ -337,7 +337,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 		else {
 			seekToTargetPosition = (mCurrentPosition - 10000 > 0) ? mCurrentPosition - 10000 : 0;
 		}
-		ULog.i(TAG, "seekToTargetPosition = " + seekToTargetPosition + "mCurrentPosition = " + mCurrentPosition
+		ULog.i( "seekToTargetPosition = " + seekToTargetPosition + "mCurrentPosition = " + mCurrentPosition
 				+ "mDuration= " + mDuration);
 		seekTo(seekToTargetPosition);
 
@@ -354,7 +354,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 		else {
 			seekToTargetPosition = (mCurrentPosition - 2 * 60 * 1000 > 0) ? mCurrentPosition - 2 * 60 * 1000 : 0;
 		}
-		ULog.i(TAG, "seekToTargetPosition = " + seekToTargetPosition + "mCurrentPosition = " + mCurrentPosition
+		ULog.i( "seekToTargetPosition = " + seekToTargetPosition + "mCurrentPosition = " + mCurrentPosition
 				+ "mDuration= " + mDuration);
 		seekTo(seekToTargetPosition);
 
@@ -404,7 +404,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 		if (mIsLandscape) {
 			float surfaceContainScale = (float) mSurfaceContainWidth / mSurfaceContainHeight;
 			float originalScale = (float) mVideoOriginalWidth / mVideoOriginalHeight;
-			ULog.i(TAG, "surfaceContainScale = " + surfaceContainScale + "originalScale" + originalScale);
+			ULog.i( "surfaceContainScale = " + surfaceContainScale + "originalScale" + originalScale);
 			switch (mVideoSizeState) {
 			case ORIGINAL:
 				if (surfaceContainScale > originalScale) {
@@ -441,7 +441,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 			mVideoWidth = mSurfaceContainWidth;
 		}
 
-		ULog.i(TAG, "mVideoWidth = " + mVideoWidth + "mVideoHeight = " + mVideoHeight);
+		ULog.i( "mVideoWidth = " + mVideoWidth + "mVideoHeight = " + mVideoHeight);
 	}
 
 	/**
@@ -497,7 +497,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 	}
 
 	public void prepareDefaultPlayer(String path) {
-		ULog.e(TAG, "--> Mediaplayeer prepareDefaultPlayer()");
+		ULog.e( "--> Mediaplayeer prepareDefaultPlayer()");
 
 		try {
 			mDefaultPlayer.setDataSource(path);
@@ -513,7 +513,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 			mDefaultPlayer.setOnVideoSizeChangedListener(mOnVideoSizeChangedListener);
 			mDefaultPlayer.setOnErrorListener(mOnErrorListener);
 			SetupTimer();
-			ULog.i(TAG, "mDefaultPlayer init complete");
+			ULog.i( "mDefaultPlayer init complete");
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
@@ -529,7 +529,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 	 * 播放一个新的video
 	 */
 	public void playNewVideo(String uri) {
-		ULog.d(TAG, "--> Mediaplayer playNewVideo()");
+		ULog.d( "--> Mediaplayer playNewVideo()");
 		if (uri == null || uri.isEmpty()) {
 			return;
 		}
@@ -560,7 +560,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 	 * 重新播放现在的视频 保持原有的Duration
 	 */
 	private void tryPlayNowVideo(int oldDuration) {
-		ULog.d(TAG, "--> Mediaplayer tryPlayNowVideo()");
+		ULog.d( "--> Mediaplayer tryPlayNowVideo()");
 		if (mDefaultPlayer != null) {
 			mediaPlayer.stop();
 			mediaPlayer.resetMediaPlayer();
@@ -607,7 +607,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 	private void notifyDurationUpdate() {
 		if (this.onDurationUpdateListener != null) {
 			this.onDurationUpdateListener.onDurationUpdate(getDuration());
-			ULog.i(TAG, "getDuration = " + mDuration);
+			ULog.i( "getDuration = " + mDuration);
 		}
 
 	}
@@ -699,7 +699,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 	// }
 
 	private void outErrorInfo() {
-		ULog.e(TAG, "mDefaultPlayerState :" + this.mPlayerState);
+		ULog.e( "mDefaultPlayerState :" + this.mPlayerState);
 	}
 
 	// /** 视频播放状态 ， 在handler中使用 */
@@ -795,7 +795,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 	// mCurrentPosition = getCurrentPosition();
 	// mDuration = getDuration();
 	// int currentBufferingTime = mBufferingPercent * mDuration / 100;
-	// ULog.i(TAG, "mCurrentPosition = " + mCurrentPosition +
+	// ULog.i( "mCurrentPosition = " + mCurrentPosition +
 	// "currentBufferingTime=" + currentBufferingTime
 	// + "(currentBufferingTime-mCurrentPosition)/1000= " +
 	// (currentBufferingTime - mCurrentPosition) / 1000);
@@ -821,7 +821,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 	// mMediaBufferingState = BUFFERSTATE.NONEEDBUFFERING;
 	// }
 	// else {
-	// ULog.i(TAG, "percent = " + (currentBufferingTime - mCurrentPosition) /
+	// ULog.i( "percent = " + (currentBufferingTime - mCurrentPosition) /
 	// 100 / 1);
 	// onLoadingListener.onLoading((currentBufferingTime - mCurrentPosition) /
 	// 100 / 1);
@@ -915,7 +915,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 				// Auto-generated
 				// method
 				// stub
-				ULog.w(TAG, "percent = " + percent);
+				ULog.w( "percent = " + percent);
 				mBufferingPercent = percent;
 				// compareCurrenPositonAndCurrentBuffering();
 				if (mExternalOnBufferingUpdateListener != null) {
@@ -929,7 +929,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 
 			@Override
 			public void onPrepared(MediaPlayer mp) {
-				ULog.d(TAG, "--> OnPreparedListener onPrepared()");
+				ULog.d( "--> OnPreparedListener onPrepared()");
 				mPlayerState = PLAYSTATE.PREPARED;
 				if (mSeekWhenPrepared != 0) {
 					mediaPlayer.seekTo(mSeekWhenPrepared);
@@ -945,7 +945,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 
 			@Override
 			public void onCompletion(MediaPlayer mp) {
-				ULog.d(TAG, "onCompletion first mCurrentPosition = " + mCurrentPosition + "mDuration =" + mDuration);
+				ULog.d( "onCompletion first mCurrentPosition = " + mCurrentPosition + "mDuration =" + mDuration);
 				// mPlayerState = PLAYSTATE.ERROR;
 				// return;
 				// if (mPlayerState == PLAYSTATE.PREPARED) {
@@ -953,7 +953,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 
 				// 不知道为什么有的手机播放器一播放视频直接回收到onCompletion 或者直播就不应该会自动关闭
 				if ((mCurrentPosition == 0 && mDuration == 0) ) {
-					ULog.d(TAG, "onCompletion not normal");
+					ULog.d( "onCompletion not normal");
 					myHandler.removeMessages(tryRestartMedia);
 					myHandler.sendEmptyMessageDelayed(tryRestartMedia, 3000);
 					mPlayerState = PLAYSTATE.ERROR;
@@ -967,13 +967,13 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 				}
 				else {
 					// 非正常关闭，重新启动MediaPlayer来进行继续播放
-					ULog.d(TAG, "onCompletion not normal");
+					ULog.d( "onCompletion not normal");
 					myHandler.removeMessages(tryRestartMedia);
 					myHandler.sendEmptyMessageDelayed(tryRestartMedia, 3000);
 					mPlayerState = PLAYSTATE.ERROR;
 				}
 				if (isEnd ) {
-					ULog.d(TAG, "onCompletion really ");
+					ULog.d( "onCompletion really ");
 					mPlayerState = PLAYSTATE.IDLE;
 					
 					mediaPlayer.releaseMediaPlayer();
@@ -986,7 +986,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 
 			@Override
 			public void onSeekComplete(MediaPlayer mp) {
-				ULog.d(TAG, "--> OnSeekCompleteListener onSeekComplete()");
+				ULog.d( "--> OnSeekCompleteListener onSeekComplete()");
 				mediaPlayer.start();
 			}
 		};
@@ -994,7 +994,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 
 			@Override
 			public boolean onInfo(MediaPlayer mp, int what, int extra) {
-				ULog.d(TAG, "OnInfoListener  what = " + what + "extra = " + extra);
+				ULog.d( "OnInfoListener  what = " + what + "extra = " + extra);
 				switch (what) {
 				case MediaPlayer.MEDIA_INFO_BUFFERING_START:
 					myHandler.sendEmptyMessage(loadingStart);
@@ -1022,7 +1022,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 			@Override
 			public boolean onError(MediaPlayer mp, int what, int extra) {
 				// 遇到问题，进行重新播放。
-				ULog.d(TAG, "onError  what = " + what + "extra = " + extra);
+				ULog.d( "onError  what = " + what + "extra = " + extra);
 				// myHandler.removeMessages(tryRestartMedia);
 				// myHandler.sendEmptyMessageDelayed(tryRestartMedia, 1000);
 				mPlayerState = PLAYSTATE.ERROR;
@@ -1086,7 +1086,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 
 		// 如果正在loading状态
 		if (mMediaBufferingState == BUFFERSTATE.BUFFERING) {
-			ULog.d(TAG, "mCurrentPosition =  " + mCurrentPosition + "mLoadingStartPosition" + mLoadingStartPosition);
+			ULog.d( "mCurrentPosition =  " + mCurrentPosition + "mLoadingStartPosition" + mLoadingStartPosition);
 			if (mCurrentPosition > mLoadingStartPosition + 300) {
 				mMediaBufferingState = BUFFERSTATE.NONEEDBUFFERING;
 			}
@@ -1119,7 +1119,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 	 * @param height
 	 */
 	public void setFixedSize(int width, int height, boolean mIsLandscape) {
-		ULog.i(TAG, "setFixedSize SCREEN_WIDTH = " + width + "SCREEN_HEIGHT =" + height);
+		ULog.i( "setFixedSize SCREEN_WIDTH = " + width + "SCREEN_HEIGHT =" + height);
 		this.mIsLandscape = mIsLandscape;
 		setSurfaceContainWidth(width);
 		setSurfaceContainHeight(height);
@@ -1161,14 +1161,14 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-		ULog.v(TAG, "surfaceChanged holder:" + holder + "  " + "format:" + format + "  " + "width:" + width + "  "
+		ULog.v( "surfaceChanged holder:" + holder + "  " + "format:" + format + "  " + "width:" + width + "  "
 				+ "height:" + height);
 		// surface view 的大小改变
 	}
 
 	@Override
 	public void surfaceCreated(SurfaceHolder mholder) {
-		ULog.v(TAG, "surfaceCreated = " + mholder);
+		ULog.v( "surfaceCreated = " + mholder);
 		// mMediaplayer.SetHolder(holder);
 		// mMediaplayer.prepareDefaultPlayer();
 		setHolder(mholder);
@@ -1179,7 +1179,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		ULog.v(TAG, "surfaceDestroyed = " + holder);
+		ULog.v( "surfaceDestroyed = " + holder);
 		// releaseMediaPlayer();
 		mIsSurfaceCreated = false;
 	}
@@ -1207,7 +1207,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 
 			@Override
 			public void run() {
-				ULog.d(TAG, "mIsDefaultPlayerReleasing = " + mIsDefaultPlayerReleasing);
+				ULog.d( "mIsDefaultPlayerReleasing = " + mIsDefaultPlayerReleasing);
 				if (mPlayerState != PLAYSTATE.PREPARED) {
 					notifyLoadingState();
 					return;
@@ -1219,7 +1219,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 				if (currentPosition < 0) {
 					return;
 				}
-				ULog.d(TAG, "mTimer is run currentPosition = " + mDefaultPlayer.getCurrentPosition()
+				ULog.d( "mTimer is run currentPosition = " + mDefaultPlayer.getCurrentPosition()
 						+ "PreviousPosition = " + mediaPlayer.getPreviousPosition());
 
 				// 对于RTSP的回看会一直播放下去，而不是到了时间自动关闭的问题修复
@@ -1306,7 +1306,7 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 		@Override
 		public boolean onDoubleTap(MotionEvent e) {
 			// 双击
-			ULog.d(TAG, "onDoubleTap e =  ");
+			ULog.d( "onDoubleTap e =  ");
 			notifyOnMPDoubleClickListener(mVideoView);
 			return super.onDoubleTap(e);
 		}
@@ -1314,14 +1314,14 @@ public class Mediaplayer implements SurfaceHolder.Callback {
 		@Override
 		public void onLongPress(MotionEvent e) {
 			// 长按
-			ULog.d(TAG, "onLongPress e =  ");
+			ULog.d( "onLongPress e =  ");
 			notifyOnLongClickListener(mVideoView);
 			super.onLongPress(e);
 		}
 
 		@Override
 		public boolean onSingleTapConfirmed(MotionEvent e) {
-			ULog.d(TAG, "onSingleTapConfirmed e =  ");
+			ULog.d( "onSingleTapConfirmed e =  ");
 			// 等于onclick一次点击
 			notifyOnClickListener(mVideoView);
 			return super.onSingleTapConfirmed(e);

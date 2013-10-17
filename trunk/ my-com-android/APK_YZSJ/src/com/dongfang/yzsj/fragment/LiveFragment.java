@@ -50,7 +50,7 @@ public class LiveFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		ULog.d(TAG, "onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)");
+		ULog.d( "onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)");
 		View view = inflater.inflate(R.layout.fragment_live, container, false);
 		initView(view);
 
@@ -85,21 +85,21 @@ public class LiveFragment extends Fragment {
 			listAdapter.setList(bean.getLives());
 			listAdapter.notifyDataSetChanged();
 
-			ULog.d(TAG, "onResume --> " + bean.toString());
+			ULog.d( "onResume --> " + bean.toString());
 		}
 		else {
 			// bean为空，网络请求数据，需对网络进行判断
 			new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_LIVE, new RequestCallBack<String>() {
 				@Override
 				public void onLoading(long total, long current) {
-					ULog.d(TAG, "total = " + total + "; current = " + current);
+					ULog.d( "total = " + total + "; current = " + current);
 				}
 
 				@Override
 				public void onSuccess(String result) {
-					ULog.d(TAG, "onSuccess  --" + result);
+					ULog.d( "onSuccess  --" + result);
 					bean = new com.google.gson.Gson().fromJson(result, LiveBean.class);
-					ULog.i(TAG, "HttpUtils --> " + bean.toString());
+					ULog.i( "HttpUtils --> " + bean.toString());
 					ACache.get(getActivity()).put(ComParams.INTENT_LIVEBEAN, result, 60 * 5);// 缓存数据
 
 					listAdapter.setList(bean.getLives());
@@ -110,13 +110,13 @@ public class LiveFragment extends Fragment {
 
 				@Override
 				public void onStart() {
-					ULog.i(TAG, "onStart");
+					ULog.i( "onStart");
 					progDialog.show();
 				}
 
 				@Override
 				public void onFailure(HttpException error, String msg) {
-					ULog.i(TAG, "onFailure");
+					ULog.i( "onFailure");
 					progDialog.dismiss();
 				}
 			});
@@ -128,7 +128,7 @@ public class LiveFragment extends Fragment {
 		super.onSaveInstanceState(outState);
 		if (null != bean) {
 			outState.putParcelable(ComParams.INTENT_LIVEBEAN, bean);
-			ULog.d(TAG, "onSaveInstanceState --> " + bean.toString());
+			ULog.d( "onSaveInstanceState --> " + bean.toString());
 		}
 
 	}
@@ -151,13 +151,13 @@ public class LiveFragment extends Fragment {
 		url.append("&").append("bandwidth=").append("Media_Url_Source");
 		url.append("&").append("clipId=").append(1);
 
-		ULog.i(TAG, url.toString());
+		ULog.i( url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
 			public void onSuccess(String result) {
 				progDialog.dismiss();
-				ULog.d(TAG, "onSuccess  --" + result);
+				ULog.d( "onSuccess  --" + result);
 				try {
 					JSONObject json = new JSONObject(result);
 					Bundle data = new Bundle();
@@ -173,13 +173,13 @@ public class LiveFragment extends Fragment {
 
 			@Override
 			public void onStart() {
-				ULog.i(TAG, "RequestCallBack.onStart");
+				ULog.i( "RequestCallBack.onStart");
 				progDialog.show();
 			}
 
 			@Override
 			public void onFailure(HttpException error, String msg) {
-				ULog.i(TAG, "RequestCallBack.onFailure");
+				ULog.i( "RequestCallBack.onFailure");
 				progDialog.dismiss();
 			}
 		});

@@ -67,7 +67,7 @@ public class MyHorizontalScrollView extends FrameLayout {
 	class OnItemListener implements OnClickListener {
 		@Override
 		public void onClick(View v) {
-			ULog.d(TAG, "v.getId() = " + v.getId());
+			ULog.d( "v.getId() = " + v.getId());
 			for (int i = 0, length = itemLayout.getChildCount(); i < length; i++) {
 				if (null != v && v.getId() == itemLayout.getChildAt(i).getId()) {
 					if (itemClickList != null && itemClickList.get(i) != null) {

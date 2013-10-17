@@ -132,23 +132,23 @@ public class FavoriteAdp extends BaseAdapter {
 
 		@Override
 		public void onClick(View v) {
-			ULog.d(TAG, v.toString());
+			ULog.d( v.toString());
 			StringBuilder url = new StringBuilder(ComParams.HTTP_FAVORITE_DEL);
 			url.append("contentId=").append(contentId);
 			url.append("&").append("token=").append(User.getToken(context));
 			url.append("&").append("userTelephone=").append(User.getPhone(context));
 
-			ULog.i(TAG, url.toString());
+			ULog.i( url.toString());
 
 			new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 				@Override
 				public void onLoading(long total, long current) {
-					ULog.d(TAG, "RequestCallBack.onLoading total = " + total + "; current = " + current);
+					ULog.d( "RequestCallBack.onLoading total = " + total + "; current = " + current);
 				}
 
 				@Override
 				public void onSuccess(String result) {
-					ULog.d(TAG, "onSuccess  --" + result);
+					ULog.d( "onSuccess  --" + result);
 					progDialog.dismiss();
 
 					try {
@@ -168,13 +168,13 @@ public class FavoriteAdp extends BaseAdapter {
 
 				@Override
 				public void onStart() {
-					ULog.i(TAG, "RequestCallBack.onStart");
+					ULog.i( "RequestCallBack.onStart");
 					progDialog.show();
 				}
 
 				@Override
 				public void onFailure(HttpException error, String msg) {
-					ULog.i(TAG, "RequestCallBack.onFailure");
+					ULog.i( "RequestCallBack.onFailure");
 					progDialog.dismiss();
 				}
 			});

@@ -204,7 +204,7 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 	//
 	// @Override
 	// public void run() {
-	// ULog.d(TAG, "mTimer is run ");
+	// ULog.d( "mTimer is run ");
 	// if (mMediaplayer != null) {
 	// myHandler.sendEmptyMessage(PROGRESS_CHANGED);
 	//
@@ -264,7 +264,7 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 		int duration = mDuration;
 		// mCurrentBufferPercentage = mMediaplayer.getCurrentBufferingUpdate();
 
-		ULog.w(TAG, "CurrentPosition = " + position + "; Duration = " + duration + " buffer = ");
+		ULog.w( "CurrentPosition = " + position + "; Duration = " + duration + " buffer = ");
 
 		if (duration > 0) {
 			int pos = skbProgress.getMax() * (position / 1000) / (duration / 1000);
@@ -288,9 +288,9 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 			}
 			duration = mDuration;
 			newposition = (duration * progress) / 1000L;
-			ULog.d(TAG, "duration    = " + duration);
-			ULog.d(TAG, "CurPosition = " + mMediaplayer.getCurrentPosition());
-			ULog.d(TAG, "newposition = " + newposition);
+			ULog.d( "duration    = " + duration);
+			ULog.d( "CurPosition = " + mMediaplayer.getCurrentPosition());
+			ULog.d( "newposition = " + newposition);
 
 			if (mPlayedTime != null && newposition > 0) {
 				String time = Util.formatTime(newposition / 1000);
@@ -309,7 +309,7 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 
 		@Override
 		public void onStopTrackingTouch(SeekBar seekBar) {
-			ULog.d(TAG, "newposition = " + newposition);
+			ULog.d( "newposition = " + newposition);
 			if (mMediaplayer == null)
 				return;
 
@@ -323,7 +323,7 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 	}
 
 	private void resetSeekBar() {
-		ULog.d(TAG, "resetSeekBar ");
+		ULog.d( "resetSeekBar ");
 		mPlayedTime.setText("00:00");
 		mTotalTime.setText("00:00:00");
 
@@ -350,7 +350,7 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 
 	@Override
 	public void onClick(View v) {
-		ULog.d(TAG, "onClick ");
+		ULog.d( "onClick ");
 		switch (v.getId()) {
 		case R.id.btn_backwardplay:
 			basePop.sendMessage(BasePopupWindow.PRESS_BACKWARDPLAY_BTN, null);
@@ -366,7 +366,7 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 
 	@Override
 	public boolean onLongClick(View v) {
-		ULog.d(TAG, "onLongClick ");
+		ULog.d( "onLongClick ");
 		switch (v.getId()) {
 
 		case R.id.btn_backwardplay:

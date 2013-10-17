@@ -100,16 +100,16 @@ public class PhonePopupWindowVoice extends PopupWindow {
 			mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
 
 		if (mAudioManager != null && android.os.Build.VERSION.SDK_INT > 7) {
-			ULog.i(TAG, "Request audio focus");
+			ULog.i( "Request audio focus");
 			int ret = mAudioManager.requestAudioFocus(new AudioManager.OnAudioFocusChangeListener() {
 				public void onAudioFocusChange(int focusChange) {
-					ULog.d(TAG, "focusChange =" + focusChange);
+					ULog.d( "focusChange =" + focusChange);
 					// Do something
 				}
 			}, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
 
 			if (ret != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-				ULog.i(TAG, "request audio focus fail. " + ret);
+				ULog.i( "request audio focus fail. " + ret);
 			}
 
 			// android.provider.Settings.System.putString(mContext.getContentResolver(),
@@ -128,13 +128,13 @@ public class PhonePopupWindowVoice extends PopupWindow {
 		mVoiceSeekBar.setMax(maxVolume);
 		mVoiceSeekBar.setProgress(currentVolume);
 
-		ULog.d(TAG, "maxVolume=" + maxVolume + "currentVolume=" + currentVolume);
+		ULog.d( "maxVolume=" + maxVolume + "currentVolume=" + currentVolume);
 
 		mVoiceSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
 			@Override
 			public void onStopTrackingTouch(MyVerticalSeekBar verticalSeekBar) {
-				ULog.d(TAG, "onStopTrackingTouch progress=" + verticalSeekBar.getProgress());
+				ULog.d( "onStopTrackingTouch progress=" + verticalSeekBar.getProgress());
 
 			}
 
@@ -145,7 +145,7 @@ public class PhonePopupWindowVoice extends PopupWindow {
 
 			@Override
 			public void onProgressChanged(MyVerticalSeekBar verticalSeekBar, int progress, boolean fromUser) {
-				ULog.d(TAG, "progress=" + progress + "   fromUser =" + fromUser);
+				ULog.d( "progress=" + progress + "   fromUser =" + fromUser);
 
 				if (progress == 0) {
 					basePop.sendMessage(BasePopupWindow.SET_VOICE_MUTE_ICON, null);
@@ -204,7 +204,7 @@ public class PhonePopupWindowVoice extends PopupWindow {
 	// mVoiceSeekBar.setProgress(index);
 	// dissmissSelfDelay();
 	//
-	// ULog.d(TAG, "type=" + type + "   index=" + index
+	// ULog.d( "type=" + type + "   index=" + index
 	// + "    oldIndex=" + oldIndex);
 	//
 	// }

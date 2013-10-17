@@ -165,7 +165,7 @@ public class OrderAdp extends BaseAdapter {
 
 		@Override
 		public void onClick(final View v) {
-			ULog.d(TAG, v.toString());
+			ULog.d( v.toString());
 
 			OrderDialog.show(context, new OnOrderDialogBtnListener() {
 
@@ -178,13 +178,13 @@ public class OrderAdp extends BaseAdapter {
 					url.append("&").append("cspId=").append(cspId);
 					url.append("&").append("operationType=").append(operationType);
 
-					ULog.i(TAG, url.toString());
+					ULog.i( url.toString());
 
 					new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 
 						@Override
 						public void onSuccess(String result) {
-							ULog.d(TAG, "onSuccess  --" + result);
+							ULog.d( "onSuccess  --" + result);
 							progDialog.dismiss();
 
 							try {
@@ -231,13 +231,13 @@ public class OrderAdp extends BaseAdapter {
 
 						@Override
 						public void onStart() {
-							ULog.i(TAG, "RequestCallBack.onStart");
+							ULog.i( "RequestCallBack.onStart");
 							progDialog.show();
 						}
 
 						@Override
 						public void onFailure(HttpException error, String msg) {
-							ULog.i(TAG, "RequestCallBack.onFailure");
+							ULog.i( "RequestCallBack.onFailure");
 							progDialog.dismiss();
 						}
 					});

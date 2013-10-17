@@ -19,7 +19,7 @@ public class DFException extends Exception {
 	public DFException(Context context, int statusCode) {
 		super(getMsg(context, statusCode));
 		this.statusCode = statusCode;
-		ULog.e(TAG,
+		ULog.e(
 				"TVException   statusCode : " + statusCode + " \n    Exception message  = "
 						+ getMsg(context, statusCode));
 		switch (statusCode) {
@@ -39,24 +39,24 @@ public class DFException extends Exception {
 
 	public DFException(int statusCode) {
 		super(getMsg(null, statusCode));
-		ULog.e(TAG,
+		ULog.e(
 				"TVException   statusCode : " + statusCode + " \n    Exception message  = " + getMsg(null, statusCode));
 		this.statusCode = statusCode;
 	}
 
 	public DFException(String msg) {
 		super(msg);
-		ULog.e(TAG, "TVException  message  = " + msg);
+		ULog.e( "TVException  message  = " + msg);
 	}
 
 	public DFException(Exception cause) {
 		super(cause);
-		ULog.e(TAG, "TVException  cause  = " + cause.toString());
+		ULog.e( "TVException  cause  = " + cause.toString());
 	}
 
 	public DFException(Throwable throwable) {
 		super(throwable);
-		ULog.e(TAG, "TVException  cause  = " + throwable.toString());
+		ULog.e( "TVException  cause  = " + throwable.toString());
 	}
 
 	public DFException(String msg, int statusCode) {
@@ -64,32 +64,32 @@ public class DFException extends Exception {
 		if (917 == statusCode)
 			msg = "请重新登录";
 		this.statusCode = statusCode;
-		ULog.e(TAG, "TVException   statusCode : " + statusCode + " \n    Exception message  = " + msg);
+		ULog.e( "TVException   statusCode : " + statusCode + " \n    Exception message  = " + msg);
 	}
 
 	public DFException(Exception cause, int statusCode) {
 		super(cause);
 		this.statusCode = statusCode;
-		ULog.e(TAG, "TVException   statusCode : " + statusCode + " \n    Exception cause  = " + cause.toString());
+		ULog.e( "TVException   statusCode : " + statusCode + " \n    Exception cause  = " + cause.toString());
 
 	}
 
 	public DFException(String msg, Exception cause) {
 		super(msg, cause);
-		ULog.e(TAG, "TVException   msg : " + msg + " \n    Exception cause  = " + cause.toString());
+		ULog.e( "TVException   msg : " + msg + " \n    Exception cause  = " + cause.toString());
 
 	}
 
 	public DFException(String msg, Exception cause, int statusCode) {
 		super(msg, cause);
 		this.statusCode = statusCode;
-		ULog.e(TAG, "TVException   msg : " + msg + " \n    Exception cause  = " + cause.toString()
+		ULog.e( "TVException   msg : " + msg + " \n    Exception cause  = " + cause.toString()
 				+ "         statusCode  = " + statusCode);
 	}
 
 	public DFException(String detailMessage, Throwable throwable) {
 		super(detailMessage, throwable);
-		ULog.e(TAG,
+		ULog.e(
 				"TVException   detailMessage : " + detailMessage + "\n    Exception throwable  = "
 						+ throwable.toString());
 	}

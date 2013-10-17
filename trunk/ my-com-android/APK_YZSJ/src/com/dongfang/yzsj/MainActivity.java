@@ -54,9 +54,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 	/** 获取首页数据 */
 	private void initData(Intent intent) {
-		ULog.d(TAG, "initData");
+		ULog.d( "initData");
 		if (null == intent || null == intent.getParcelableExtra(ComParams.INTENT_HOMEBEAN)) {
-			ULog.d(TAG, " ---  -- --- ---- -- null");
+			ULog.d( " ---  -- --- ---- -- null");
 			return;
 		}
 
@@ -99,10 +99,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		fgtHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 			@Override
 			public void onTabChanged(String tabId) {
-				ULog.d(TAG, "OnTabChangeListener = " + tabId);
+				ULog.d( "OnTabChangeListener = " + tabId);
 				if ("5".equals(tabId) && !User.isLogined(MainActivity.this)) {
 					frameLayout.setVisibility(View.GONE);
-					ULog.d(TAG, "frameLayout.setVisibility(View.GONE)");
+					ULog.d( "frameLayout.setVisibility(View.GONE)");
 				}
 				else {
 					frameLayout.setVisibility(0);
@@ -111,20 +111,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		});
 
 		// for (Fragment fg : mFragmentManager.getFragments()) {
-		// ULog.w(TAG, "tag = " + fg.getTag() + ", id = " + fg.getId());
-		// ULog.w(TAG, fg.toString());
+		// ULog.w( "tag = " + fg.getTag() + ", id = " + fg.getId());
+		// ULog.w( fg.toString());
 		// }
 
-		// ULog.w(TAG, fgtHost.getChildCount() + "");
+		// ULog.w( fgtHost.getChildCount() + "");
 		// for(int i = 0 ; i < fgtHost.getChildCount();i++){
-		// ULog.w(TAG, fgtHost.getChildAt(i).getClass().getName());
+		// ULog.w( fgtHost.getChildAt(i).getClass().getName());
 		// }
 
 		// if (null != getFragmentManager()..getFragment(null, "1")) {
-		// ULog.w(TAG, getFragmentManager().getFragment(null, "1").getClass().getName());
+		// ULog.w( getFragmentManager().getFragment(null, "1").getClass().getName());
 		// }
 		// else {
-		// ULog.w(TAG, "null");
+		// ULog.w( "null");
 		//
 		// }
 
@@ -168,18 +168,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		// ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
 		// fgtHost.getApplicationWindowToken(), 2); // (WidgetSearchActivity是当前的Activity)
 
-		// ULog.w(TAG, frameLayout.getChildCount() + "");
+		// ULog.w( frameLayout.getChildCount() + "");
 		// for(int i = 0 ; i < frameLayout.getChildCount();i++){
-		// ULog.w(TAG, frameLayout.getChildAt(i).getClass().getName());
+		// ULog.w( frameLayout.getChildAt(i).getClass().getName());
 		// }
 
-		// ULog.w(TAG, fgtHost.getCurrentTabTag());
-		// ULog.w(TAG, fgtHost.getCurrentTab() + "");
-		// ULog.w(TAG, mFragmentManager.findFragmentById(fgtHost.getCurrentTab()) == null ? "null" : "!null");
+		// ULog.w( fgtHost.getCurrentTabTag());
+		// ULog.w( fgtHost.getCurrentTab() + "");
+		// ULog.w( mFragmentManager.findFragmentById(fgtHost.getCurrentTab()) == null ? "null" : "!null");
 		//
 		// mFragmentManager.getFragments()
 		//
-		// ULog.w(TAG, mFragmentManager.findFragmentById(fgtHost.getCurrentTab()).getClass().getName());
+		// ULog.w( mFragmentManager.findFragmentById(fgtHost.getCurrentTab()).getClass().getName());
 
 		// 用于调试方便
 		// fgtHost.setCurrentTabByTag("4");
@@ -189,7 +189,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		ULog.d(TAG, "onResume");
+		ULog.d( "onResume");
 		
 		if (User.isLogined(this)) {
 			tvLogin.setText("注销");
@@ -239,7 +239,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		ULog.d(TAG, "onClick = " + v.getId());
+		ULog.d( "onClick = " + v.getId());
 		switch (v.getId()) {
 		case R.id.tv_topbar_login:
 			if (User.isLogined(this)) {

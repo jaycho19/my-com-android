@@ -122,7 +122,7 @@ public class TypeAdp extends BaseAdapter {
 
 		@Override
 		public void onClick(View v) {
-			ULog.d(TAG, v.toString());
+			ULog.d( v.toString());
 			if (User.isLogined(context)) {
 				new ToDetailAsyncTask(context, channelId, contentId).execute();
 			}

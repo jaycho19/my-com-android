@@ -104,13 +104,13 @@ public class LoginActivity extends BaseActivity {
 		url.append("&").append("bandwidth=").append("Media_Url_Source");
 		url.append("&").append("clipId=").append(1);
 
-		ULog.i(TAG, url.toString());
+		ULog.i( url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
 			public void onSuccess(String result) {
 				progDialog.dismiss();
-				ULog.d(TAG, "onSuccess  --" + result);
+				ULog.d( "onSuccess  --" + result);
 				try {
 					JSONObject json = new JSONObject(result);
 					Bundle data = new Bundle();
@@ -135,13 +135,13 @@ public class LoginActivity extends BaseActivity {
 
 			@Override
 			public void onStart() {
-				ULog.i(TAG, "RequestCallBack.onStart");
+				ULog.i( "RequestCallBack.onStart");
 				progDialog.show();
 			}
 
 			@Override
 			public void onFailure(HttpException error, String msg) {
-				ULog.i(TAG, "RequestCallBack.onFailure");
+				ULog.i( "RequestCallBack.onFailure");
 				progDialog.dismiss();
 			}
 		});

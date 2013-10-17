@@ -56,7 +56,7 @@ public class BaseApplication extends Application {
 		}
 		Constants.DENSITYDPI = dm.densityDpi;
 		Constants.DENSITY = dm.density;
-		ULog.i(TAG, "setupBaseData, SCREEN_WIDTH = " + dm.widthPixels + ", SCREEN_HEIGHT = " + dm.heightPixels
+		ULog.i( "setupBaseData, SCREEN_WIDTH = " + dm.widthPixels + ", SCREEN_HEIGHT = " + dm.heightPixels
 				+ ", densityDpi = " + dm.densityDpi);
 	}
 

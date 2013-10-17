@@ -74,7 +74,7 @@ public class MyImageView extends RelativeLayout {
 			case 100:
 				DownloadInfo dlInfo = (DownloadInfo) msg.obj;
 				count--;
-				// ULog.d(TAG, "url =  " + imgUrl + " thread count :" + count);
+				// ULog.d( "url =  " + imgUrl + " thread count :" + count);
 				// 防止错位，通过Tag找到view
 				ImageView imageViewByTag = (ImageView) findViewWithTag(dlInfo.filePath);
 				if (imageViewByTag != null) {
@@ -144,7 +144,7 @@ public class MyImageView extends RelativeLayout {
 			if (imageViewByTag != null) {
 				imageViewByTag.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image_bg));
 			}
-			ULog.d(TAG, "reuest url :" + imgUrl + " send status :" + mRequest);
+			ULog.d( "reuest url :" + imgUrl + " send status :" + mRequest);
 			if (mRequest) {
 				return;
 			}
@@ -164,7 +164,7 @@ public class MyImageView extends RelativeLayout {
 				public void finishDownload(DownloadInfo dlInfo) {
 					// myProgressBar.setVisibility(View.GONE);
 					count--;
-					ULog.d(TAG, "url =  " + imgUrl + " thread count :" + count);
+					ULog.d( "url =  " + imgUrl + " thread count :" + count);
 					// 防止错位，通过Tag找到view
 					ImageView imageViewByTag = (ImageView) findViewWithTag(dlInfo.filePath);
 					if (imageViewByTag != null) {
@@ -193,7 +193,7 @@ public class MyImageView extends RelativeLayout {
 		// imageView.setBackgroundDrawable(defaultDraw);
 		// } catch (Exception e) {
 		// // TODO Auto-generated catch block
-		// ULog.e(TAG, e.getMessage());
+		// ULog.e( e.getMessage());
 		// }
 		// // myProgressBar.setVisibility(View.GONE);
 		// }else{
@@ -218,7 +218,7 @@ public class MyImageView extends RelativeLayout {
 		// imageView.setBackgroundDrawable(defaultDraw);
 		// } catch (Exception e) {
 		// // TODO Auto-generated catch block
-		// ULog.e(TAG, e.getMessage());
+		// ULog.e( e.getMessage());
 		// }
 		// }
 		// // myProgressBar.setVisibility(View.GONE);
@@ -270,7 +270,7 @@ public class MyImageView extends RelativeLayout {
 			if (imageViewByTag != null) {
 				imageViewByTag.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image_bg));
 			}
-			ULog.d(TAG, "reuest url :" + imgUrl + " send status :" + mRequest);
+			ULog.d( "reuest url :" + imgUrl + " send status :" + mRequest);
 			if (mRequest) {
 				return;
 			}
@@ -290,7 +290,7 @@ public class MyImageView extends RelativeLayout {
 				public void finishDownload(DownloadInfo dlInfo) {
 					// myProgressBar.setVisibility(View.GONE);
 					count--;
-					ULog.d(TAG, "url =  " + imgUrl + " thread count :" + count);
+					ULog.d( "url =  " + imgUrl + " thread count :" + count);
 					// 防止错位，通过Tag找到view
 					ImageView imageViewByTag = (ImageView) findViewWithTag(dlInfo.filePath);
 					if (imageViewByTag != null) {
@@ -352,7 +352,7 @@ public class MyImageView extends RelativeLayout {
 				imageViewByTag.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image_bg));
 
 			}
-			ULog.d(TAG, "reuest url :" + imgUrl + " send status :" + mRequest);
+			ULog.d( "reuest url :" + imgUrl + " send status :" + mRequest);
 			if (mRequest) {
 				return;
 			}
@@ -401,7 +401,7 @@ public class MyImageView extends RelativeLayout {
 			if (imageViewByTag != null) {
 				imageViewByTag.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image_bg));
 			}
-			ULog.d(TAG, "reuest url :" + imgUrl + " send status :" + mRequest);
+			ULog.d( "reuest url :" + imgUrl + " send status :" + mRequest);
 			if (mRequest) {
 				return;
 			}

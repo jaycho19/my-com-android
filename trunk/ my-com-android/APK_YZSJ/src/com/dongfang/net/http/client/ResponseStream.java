@@ -26,7 +26,6 @@ import java.util.Locale;
 import org.apache.http.HttpResponse;
 import org.apache.http.protocol.HTTP;
 
-import com.dongfang.net.HttpUtils;
 import com.dongfang.utils.IOUtils;
 
 /**

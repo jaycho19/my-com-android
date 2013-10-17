@@ -37,7 +37,7 @@ import com.dongfang.net.http.client.multipart.content.ContentBody;
 import com.dongfang.net.http.client.multipart.content.FileBody;
 import com.dongfang.net.http.client.multipart.content.InputStreamBody;
 import com.dongfang.net.http.client.multipart.content.StringBody;
-import com.dongfang.utils.LogUtils;
+import com.dongfang.utils.ULog;
 
 
 public class RequestParams {
@@ -246,7 +246,7 @@ public class RequestParams {
                     try {
                         multipartEntity.addPart(param.getName(), new StringBody(param.getValue()));
                     } catch (UnsupportedEncodingException e) {
-                        LogUtils.e(e.getMessage(), e);
+                        ULog.e(e.getMessage(), e);
                     }
                 }
             }

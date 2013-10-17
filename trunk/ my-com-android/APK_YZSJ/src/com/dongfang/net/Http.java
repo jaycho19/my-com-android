@@ -95,7 +95,7 @@ public class Http {
 			int statusCode = httpURLConnection.getResponseCode();
 			if (statusCode < 200 || 300 < statusCode) {
 				inputStream = httpURLConnection.getErrorStream();
-				ULog.d(TAG, "httpURLConnection.getContentLength() = " + httpURLConnection.getContentLength());
+				ULog.d( "httpURLConnection.getContentLength() = " + httpURLConnection.getContentLength());
 				if (null == inputStream || httpURLConnection.getContentLength() < 1)
 					throw new TVException(statusCode);
 			}
@@ -119,7 +119,7 @@ public class Http {
 			String contentType = httpURLConnection.getContentType();
 			String charset = ((contentType.indexOf("charset=") != -1) && !TextUtils.isEmpty(charset = contentType
 					.substring(contentType.indexOf("charset=") + 8))) ? charset : "UTF-8";
-			ULog.v(TAG, "charset=" + charset);
+			ULog.v( "charset=" + charset);
 
 			result = new String(content.toByteArray(), charset).trim();
 		} catch (IOException e) {
@@ -135,7 +135,7 @@ public class Http {
 			int statusCode = httpURLConnection.getResponseCode();
 			if (statusCode < 200 || 300 < statusCode) {
 				inputStream = httpURLConnection.getErrorStream();
-				ULog.d(TAG, "httpURLConnection.getContentLength() = " + httpURLConnection.getContentLength());
+				ULog.d( "httpURLConnection.getContentLength() = " + httpURLConnection.getContentLength());
 				if (null == inputStream || httpURLConnection.getContentLength() < 1)
 					throw new TVException(statusCode);
 			}
@@ -171,16 +171,16 @@ public class Http {
 	private HttpsURLConnection getHttpsURLConnection(String type, String url, List<NameValuePair> list,
 			List<NameValuePair> addHeader, int conTimeOut, int socTimeOut) throws TVException {
 
-		ULog.i(TAG, "getHttpsURLConnection type        = " + type);
-		ULog.i(TAG, "getHttpsURLConnection url         = " + url);
-		ULog.i(TAG, "getHttpsURLConnection conTimeOut  = " + conTimeOut);
-		ULog.i(TAG, "getHttpsURLConnection socTimeOut  = " + socTimeOut);
+		ULog.i( "getHttpsURLConnection type        = " + type);
+		ULog.i( "getHttpsURLConnection url         = " + url);
+		ULog.i( "getHttpsURLConnection conTimeOut  = " + conTimeOut);
+		ULog.i( "getHttpsURLConnection socTimeOut  = " + socTimeOut);
 
 		disableConnectionReuseIfNecessary();
 
 		if (null != list && "GET".equalsIgnoreCase(type)) {
 			url = initGetUrl(url, list);
-			ULog.i(TAG, "getHttpsURLConnection url    = " + url);
+			ULog.i( "getHttpsURLConnection url    = " + url);
 			list = null;
 		}
 
@@ -199,13 +199,13 @@ public class Http {
 						if (length > (1 + i)) {
 							bf.append("&");
 						}
-						ULog.i(TAG,
+						ULog.i(
 								"getHttpsURLConnection AddHeaderList        = " + nvp.getName() + " : "
 										+ nvp.getValue());
 					}
 
 					nvp = null;
-					ULog.i(TAG, bf.toString());
+					ULog.i( bf.toString());
 					connection.setRequestProperty(HTTP_HEADER_CONTENT_TYPE_KEY, HTTP_HEADER_CONTENT_TYPE_VALUE);
 					connection.getOutputStream().write(bf.toString().getBytes());
 					connection.getOutputStream().flush();
@@ -216,14 +216,14 @@ public class Http {
 			if (null != addHeader && addHeader.size() > 0) {
 				for (NameValuePair nvp : addHeader) {
 					connection.setRequestProperty(nvp.getName(), nvp.getValue());
-					ULog.i(TAG, "getHttpsURLConnection AddHeaderList  = " + nvp.getName() + " : " + nvp.getValue());
+					ULog.i( "getHttpsURLConnection AddHeaderList  = " + nvp.getName() + " : " + nvp.getValue());
 				}
 			}
 
 			if (null != addHeader && addHeader.size() > 0) {
 				for (NameValuePair nvp : addHeader) {
 					connection.setRequestProperty(nvp.getName(), nvp.getValue());
-					ULog.i(TAG, "getHttpsURLConnection list  = " + nvp.getName() + "=" + nvp.getValue());
+					ULog.i( "getHttpsURLConnection list  = " + nvp.getName() + "=" + nvp.getValue());
 				}
 			}
 
@@ -257,7 +257,7 @@ public class Http {
 			connection.connect();
 
 			int statusCode = connection.getResponseCode();
-			ULog.i(TAG, "getHttpURLConnection statusCode = " + statusCode);
+			ULog.i( "getHttpURLConnection statusCode = " + statusCode);
 
 			/** 手动重定向操作 */
 			if (HttpURLConnection.HTTP_MOVED_TEMP == statusCode || HttpURLConnection.HTTP_MOVED_PERM == statusCode) {
@@ -300,15 +300,15 @@ public class Http {
 	 */
 	private HttpURLConnection getHttpURLConnection(String type, String url, List<NameValuePair> list,
 			List<NameValuePair> addHeader, int conTimeOut, int socTimeOut) throws TVException {
-		ULog.i(TAG, "getHttpURLConnection type        = " + type);
-		ULog.i(TAG, "getHttpURLConnection url         = " + url);
-		ULog.i(TAG, "getHttpURLConnection conTimeOut  = " + conTimeOut);
-		ULog.i(TAG, "getHttpURLConnection socTimeOut  = " + socTimeOut);
+		ULog.i( "getHttpURLConnection type        = " + type);
+		ULog.i( "getHttpURLConnection url         = " + url);
+		ULog.i( "getHttpURLConnection conTimeOut  = " + conTimeOut);
+		ULog.i( "getHttpURLConnection socTimeOut  = " + socTimeOut);
 
 		disableConnectionReuseIfNecessary();
 		if (null != list && "GET".equalsIgnoreCase(type)) {
 			url = initGetUrl(url, list);
-			ULog.i(TAG, "getHttpsURLConnection url(add list) = " + url);
+			ULog.i( "getHttpsURLConnection url(add list) = " + url);
 			list = null;
 		}
 		try {
@@ -326,11 +326,11 @@ public class Http {
 						if (length > (1 + i)) {
 							bf.append("&");
 						}
-						ULog.i(TAG, "getHttpsURLConnection AddHeaderList  = " + nvp.getName() + " : " + nvp.getValue());
+						ULog.i( "getHttpsURLConnection AddHeaderList  = " + nvp.getName() + " : " + nvp.getValue());
 					}
 
 					nvp = null;
-					ULog.i(TAG, bf.toString());
+					ULog.i( bf.toString());
 
 					connection.setRequestProperty(HTTP_HEADER_CONTENT_TYPE_KEY, HTTP_HEADER_CONTENT_TYPE_VALUE);
 					connection.getOutputStream().write(bf.toString().getBytes());
@@ -342,7 +342,7 @@ public class Http {
 			if (null != addHeader && addHeader.size() > 0) {
 				for (NameValuePair nvp : addHeader) {
 					connection.setRequestProperty(nvp.getName(), nvp.getValue());
-					ULog.i(TAG, "getHttpsURLConnection AddHeaderList  = " + nvp.getName() + " : " + nvp.getValue());
+					ULog.i( "getHttpsURLConnection AddHeaderList  = " + nvp.getName() + " : " + nvp.getValue());
 				}
 			}
 
@@ -357,7 +357,7 @@ public class Http {
 			connection.connect();
 
 			int statusCode = connection.getResponseCode();
-			ULog.i(TAG, "getHttpURLConnection statusCode = " + statusCode);
+			ULog.i( "getHttpURLConnection statusCode = " + statusCode);
 
 			/** 手动重定向操作 */
 			if (HttpURLConnection.HTTP_MOVED_TEMP == statusCode || HttpURLConnection.HTTP_MOVED_PERM == statusCode) {
@@ -522,7 +522,7 @@ public class Http {
 	 * @throws TVException
 	 * */
 	public String post(String url, List<NameValuePair> list, int conTimeOut, int soketTimeout) throws TVException {
-		ULog.d(TAG, url);
+		ULog.d( url);
 		if (url.startsWith("https"))
 			return read(getHttpsURLConnection("POST", url, list, null, conTimeOut, soketTimeout));
 		return read(getHttpURLConnection("POST", url, list, null, conTimeOut, soketTimeout));
@@ -695,7 +695,7 @@ public class Http {
 	// throws TVException {
 	// if (null != list && list.size() > 0)
 	// url = url + "?" + Util.encodeUrl(list,true);
-	// ULog.d(TAG, "post url=" + url);
+	// ULog.d( "post url=" + url);
 	// try {
 	// // 创建HttpPost对象
 	// HttpPost request = new HttpPost(url);
@@ -762,14 +762,14 @@ public class Http {
 	// charset = content_type.substring(content_type.indexOf("charset=") + 8);
 	// }
 	//
-	// // ULog.v(TAG, "charset=" + charset);
+	// // ULog.v( "charset=" + charset);
 	//
 	// if (TextUtils.isEmpty(charset))
 	// result = new String(content.toByteArray(), HTTP.UTF_8).trim();
 	// else
 	// result = new String(content.toByteArray(), charset).trim();
 	//
-	// // ULog.v(TAG, "read = " + result);
+	// // ULog.v( "read = " + result);
 	// } catch (IOException e) {
 	// throw new TVException(context, TVException.HTTP_READ_IO_EXCEPTION);
 	// }
