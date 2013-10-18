@@ -146,27 +146,5 @@ public class OrderAcitivity extends BaseActivity implements OnClickListener {
 		});
 	}
 
-	/**
-	 * 增加播放历史
-	 * 
-	 * @deprecated
-	 */
-	private void addHistory() {
-		StringBuilder url = new StringBuilder(ComParams.HTTP_HISTORY_ADD);
-		url.append("contentId=").append(conntentId).append("&");
-		url.append("token=").append(User.getToken(this)).append("&");
-		url.append("userTelephone=").append(User.getPhone(this));
-
-		ULog.i( url.toString());
-
-		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
-			@Override
-			public void onSuccess(String result) {
-				ULog.d( "onSuccess  --" + result);
-			}
-
-		});
-
-	}
 
 }

@@ -163,6 +163,7 @@ public class LiveFragment extends Fragment {
 					Bundle data = new Bundle();
 					data.putString(ComParams.INTENT_MOVIEDETAIL_CONNENTID, conntentId);
 					data.putInt(ComParams.INTENT_MOVIEDETAIL_CLIPID, 1);
+					data.putInt(ComParams.INTENT_MOVIEDETAIL_TYPE, ComParams.MOVIE_TYPE_Live);
 					PlayerActivity.toPlay(getActivity(), json.getString("url"), data);
 
 				} catch (JSONException e) {

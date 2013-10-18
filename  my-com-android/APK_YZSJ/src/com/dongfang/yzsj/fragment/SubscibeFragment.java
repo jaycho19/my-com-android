@@ -140,7 +140,7 @@ public class SubscibeFragment extends Fragment {
 				listData.addAll(bean.getListData().getObjs());
 
 				for (int i = listData.size() - 1; i > -1; i--) {
-					if (listData.get(i).getStatus() == 0 || 12 == listData.get(i).getStatus()) {
+					if (listData.get(i).getStatus() == 0 || 13 == listData.get(i).getStatus()) {
 						listData.remove(i);
 					}
 				}

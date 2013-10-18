@@ -8,6 +8,11 @@ package com.dongfang.yzsj.params;
  */
 public class ComParams {
 	public static final boolean IS_PLAYER_ACTIVITY = true; // 使用内置播放器播放
+	// ------------------------------------------------------------------------------
+
+	public static final int MOVIE_TYPE_VOD = 0;// 点播
+	public static final int MOVIE_TYPE_Live = 1; // 直播
+	// ------------------------------------------------------------------------------
 
 	public static final String INTENT_TODO = "TODO";
 	public static final String INTENT_HOMEBEAN = "homebean";
@@ -21,6 +26,7 @@ public class ComParams {
 	public static final String INTENT_MOVIEDETAIL_CONNENTID = "connentId";
 	public static final String INTENT_MOVIEDETAIL_BAND = "band";
 	public static final String INTENT_MOVIEDETAIL_CLIPID = "clipId";
+	public static final String INTENT_MOVIEDETAIL_TYPE = "movieType";// 视频类型，直播或者点播
 	public static final String INTENT_MOVIEDETAIL_BEAN = "detailBean";
 	public static final String INTENT_ORDER_BEAN = "order";
 
@@ -75,9 +81,10 @@ public class ComParams {
 	/** 我的订阅 */
 	public static final String HTTP_MY_ORDER = HTTP_BASE
 			+ "/page/hbMobile/userOptions.jsp?command=myBilling&jsonFormat=true&";
-	
+
 	/** 通过IP寻找手机号码 */
-	public static final String HTTP_GET_TOKEN_BY_UUID = HTTP_BASE + "/page/hbMobile/uniLogin.jsp?jsonFormat=true&unikey=";
+	public static final String HTTP_GET_TOKEN_BY_UUID = HTTP_BASE
+			+ "/page/hbMobile/uniLogin.jsp?jsonFormat=true&unikey=";
 
 	// ------------play view mode and frompage ---------
 	// IsFromPage: IsFromPage, IsFromRecommend

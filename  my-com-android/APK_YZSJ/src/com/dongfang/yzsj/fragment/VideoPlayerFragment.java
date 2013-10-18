@@ -849,6 +849,9 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 
 	/** 增加播放历史 */
 	private void addHistory(final int position) {
+		if (ComParams.MOVIE_TYPE_Live == PlayerActivity.movieType) // 直播不需要历史记录
+			return;
+
 		StringBuilder url = new StringBuilder(ComParams.HTTP_HISTORY_ADD);
 		url.append("contentId=").append(PlayerActivity.contentId);
 		url.append("&").append("clipId=").append(PlayerActivity.clipId);
@@ -856,12 +859,12 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 		url.append("&").append("token=").append(User.getToken(getActivity()));
 		url.append("&").append("userTelephone=").append(User.getPhone(getActivity()));
 
-		ULog.i( url.toString());
+		ULog.i(url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
 			public void onSuccess(String result) {
-				ULog.d( "onSuccess  --" + result);
+				ULog.d("onSuccess  --" + result);
 			}
 
 		});
