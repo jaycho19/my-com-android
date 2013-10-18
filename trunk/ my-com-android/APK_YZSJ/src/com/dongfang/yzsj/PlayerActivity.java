@@ -26,15 +26,15 @@ public class PlayerActivity extends FragmentActivity {
 	private boolean mIsSavedInstanceState = false;
 	private boolean hasFocus;
 	private String url;
-	
-	
+
 	public static String contentId;// 媒体id
 	public static int clipId; // 集数
+	public static int movieType;// 视频类型
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.video_play);
-		ULog.d( "onCreate");
+		ULog.d("onCreate");
 
 		// if (savedInstanceState == null) {
 		// ULog.d( "savedInstanceState is null");
@@ -46,7 +46,7 @@ public class PlayerActivity extends FragmentActivity {
 
 		contentId = getIntent().getStringExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID);
 		clipId = getIntent().getIntExtra(ComParams.INTENT_MOVIEDETAIL_CLIPID, 1);
-
+		movieType = getIntent().getIntExtra(ComParams.INTENT_MOVIEDETAIL_CLIPID, 0);
 		url = getIntent().getStringExtra(ComParams.PLAY_KEY_VIDEOURL);
 		creatVideoFragment(url);
 
@@ -59,7 +59,7 @@ public class PlayerActivity extends FragmentActivity {
 	}
 
 	protected void onDestroy() {
-		ULog.d( "onDestroy");
+		ULog.d("onDestroy");
 		super.onDestroy();
 	}
 
@@ -68,7 +68,7 @@ public class PlayerActivity extends FragmentActivity {
 	 * @param bundle
 	 */
 	private void creatVideoFragment(String uri) {
-		ULog.d( "creatVideoFragment");
+		ULog.d("creatVideoFragment");
 		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 		if (mVideoPlayer != null) {
 			transaction.remove(mVideoPlayer);
@@ -109,7 +109,7 @@ public class PlayerActivity extends FragmentActivity {
 
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-		ULog.i( "--> onWindowFocusChanged hasFocus = " + hasFocus);
+		ULog.i("--> onWindowFocusChanged hasFocus = " + hasFocus);
 		this.hasFocus = hasFocus;
 		if (hasFocus && mIsSavedInstanceState) {
 			creatVideoFragment(url);
@@ -123,19 +123,21 @@ public class PlayerActivity extends FragmentActivity {
 
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		ULog.i( "onConfigurationChanged");
+		ULog.i("onConfigurationChanged");
 		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {}
 		else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {}
 	}
-	
+
 	/** 视频播放 */
 	public static void toPlay(Context context, String url, Bundle data) {
 		if (ComParams.IS_PLAYER_ACTIVITY) {
 			Intent intent = new Intent(context, PlayerActivity.class);
+			intent.putExtras(data);
 			intent.putExtra(ComParams.PLAY_KEY_VIDEOURL, url);
-			intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID,
-					data.getString(ComParams.INTENT_MOVIEDETAIL_CONNENTID));
-			intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CLIPID, data.getInt(ComParams.INTENT_MOVIEDETAIL_CLIPID, 1));
+			// intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID,
+			// data.getString(ComParams.INTENT_MOVIEDETAIL_CONNENTID));
+			// intent.putExtra(ComParams.INTENT_MOVIEDETAIL_CLIPID, data.getInt(ComParams.INTENT_MOVIEDETAIL_CLIPID,
+			// 1));
 			context.startActivity(intent);
 		}
 		else {
