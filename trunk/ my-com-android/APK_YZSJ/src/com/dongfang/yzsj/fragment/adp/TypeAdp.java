@@ -94,8 +94,15 @@ public class TypeAdp extends BaseAdapter {
 		// BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG(), 105, 137);
 		holder.tv_title.setText(movie.getMEDIA_NAME());
 		holder.tv_actor.setText(movie.getMEDIA_ACTORS());
-		String length = UtilOfTime.formatSeconds2Date(Long.valueOf(TextUtils.isEmpty(movie.getMEDIA_LENGTH()) ? "0"
-				: movie.getMEDIA_LENGTH()));
+		
+		long l = 0l;
+		try {
+			l = Long.valueOf(TextUtils.isEmpty(movie.getMEDIA_LENGTH().trim()) ? "0" : movie.getMEDIA_LENGTH().trim());
+		} catch (Exception e) {
+			l = 0l;
+		}
+
+		String length = UtilOfTime.formatSeconds2Date(l);
 		holder.tv_length.setText(length);
 
 		convertView.setOnClickListener(new MyOnClickListener(channelId, movie.getId()));

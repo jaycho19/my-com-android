@@ -122,7 +122,7 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 
 		try {
 			String ll = UtilOfTime.formatSeconds2Date(Long.valueOf(TextUtils.isEmpty(bean.getContent()
-					.getMEDIA_LENGTH()) ? "0" : bean.getContent().getMEDIA_LENGTH()));
+					.getMEDIA_LENGTH().trim()) ? "0" : bean.getContent().getMEDIA_LENGTH().trim()));
 			tvMovieLength.setText(ll);
 		} catch (Exception e) {
 			tvMovieLength.setText(bean.getContent().getMEDIA_LENGTH());
