@@ -46,7 +46,7 @@ public class PlayerActivity extends FragmentActivity {
 
 		contentId = getIntent().getStringExtra(ComParams.INTENT_MOVIEDETAIL_CONNENTID);
 		clipId = getIntent().getIntExtra(ComParams.INTENT_MOVIEDETAIL_CLIPID, 1);
-		movieType = getIntent().getIntExtra(ComParams.INTENT_MOVIEDETAIL_CLIPID, 0);
+		movieType = getIntent().getIntExtra(ComParams.INTENT_MOVIEDETAIL_TYPE, 0);
 		url = getIntent().getStringExtra(ComParams.PLAY_KEY_VIDEOURL);
 		creatVideoFragment(url);
 

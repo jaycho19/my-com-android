@@ -851,6 +851,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	private void addHistory(final int position) {
 		if (ComParams.MOVIE_TYPE_Live == PlayerActivity.movieType) // 直播不需要历史记录
 			return;
+		ULog.d("addHistory");
 
 		StringBuilder url = new StringBuilder(ComParams.HTTP_HISTORY_ADD);
 		url.append("contentId=").append(PlayerActivity.contentId);
