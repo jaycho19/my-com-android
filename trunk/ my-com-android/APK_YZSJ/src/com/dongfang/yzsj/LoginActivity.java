@@ -104,19 +104,19 @@ public class LoginActivity extends BaseActivity {
 		url.append("&").append("bandwidth=").append("Media_Url_Source");
 		url.append("&").append("clipId=").append(1);
 
-		ULog.i( url.toString());
+		ULog.i(url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
 			public void onSuccess(String result) {
 				progDialog.dismiss();
-				ULog.d( "onSuccess  --" + result);
+				ULog.d("onSuccess  --" + result);
 				try {
 					JSONObject json = new JSONObject(result);
 					Bundle data = new Bundle();
 					data.putString(ComParams.INTENT_MOVIEDETAIL_CONNENTID, conntentId);
-					data.putInt(ComParams.INTENT_MOVIEDETAIL_CLIPID,1);
-					PlayerActivity.toPlay(LoginActivity.this, json.getString("url"),data);
+					data.putInt(ComParams.INTENT_MOVIEDETAIL_CLIPID, 1);
+					PlayerActivity.toPlay(LoginActivity.this, json.getString("url"), data);
 
 					// Intent intent = new Intent(Intent.ACTION_VIEW);
 					// String type = "video/*";
@@ -135,13 +135,13 @@ public class LoginActivity extends BaseActivity {
 
 			@Override
 			public void onStart() {
-				ULog.i( "RequestCallBack.onStart");
+				ULog.i("RequestCallBack.onStart");
 				progDialog.show();
 			}
 
 			@Override
 			public void onFailure(HttpException error, String msg) {
-				ULog.i( "RequestCallBack.onFailure");
+				ULog.i("RequestCallBack.onFailure");
 				progDialog.dismiss();
 			}
 		});

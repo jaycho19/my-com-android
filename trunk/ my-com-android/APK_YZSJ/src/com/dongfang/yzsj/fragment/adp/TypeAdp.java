@@ -94,7 +94,7 @@ public class TypeAdp extends BaseAdapter {
 		// BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG(), 105, 137);
 		holder.tv_title.setText(movie.getMEDIA_NAME());
 		holder.tv_actor.setText(movie.getMEDIA_ACTORS());
-		
+
 		long l = 0l;
 		try {
 			l = Long.valueOf(TextUtils.isEmpty(movie.getMEDIA_LENGTH().trim()) ? "0" : movie.getMEDIA_LENGTH().trim());
@@ -129,7 +129,7 @@ public class TypeAdp extends BaseAdapter {
 
 		@Override
 		public void onClick(View v) {
-			ULog.d( v.toString());
+			ULog.d(v.toString());
 			if (User.isLogined(context)) {
 				new ToDetailAsyncTask(context, channelId, contentId).execute();
 			}

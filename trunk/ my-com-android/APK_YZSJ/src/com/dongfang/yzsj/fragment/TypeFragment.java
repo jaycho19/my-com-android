@@ -227,7 +227,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 		channel = ((MovieListActivity) getActivity()).channel;
 		tvTitle.setText(channel.getName());
 
-		ULog.d( "channel = " + channel.toString());
+		ULog.d("channel = " + channel.toString());
 		getMovies(channel.getChannelId(), 0, LIMIT);
 		// ------------- 获取切换频道数据 ---------------
 		getListChannels();
@@ -235,7 +235,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
 	public void getListChannels() {
 		super.onResume();
-		ULog.d( "onResume");
+		ULog.d("onResume");
 
 		// 非异常中断进入时，bean为空，判断是否有缓存
 		if (null == listChannels) {
@@ -250,23 +250,23 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 		}
 		else {
 			// bean为空，网络请求数据，需对网络进行判断
-			ULog.d( ComParams.HTTP_VOD);
+			ULog.d(ComParams.HTTP_VOD);
 			new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_VOD, new RequestCallBack<String>() {
 				@Override
 				public void onLoading(long total, long current) {
-					ULog.d( "total = " + total + "; current = " + current);
+					ULog.d("total = " + total + "; current = " + current);
 				}
 
 				@Override
 				public void onSuccess(String result) {
-					ULog.d( "onSuccess  --" + result);
+					ULog.d("onSuccess  --" + result);
 
 					listChannels = new com.google.gson.Gson().fromJson(result,
 							new TypeToken<List<VODItem>>() {}.getType());
 					StringBuilder sb = new StringBuilder();
 					for (int i = 0, length = listChannels.size(); i < length; i++)
 						sb.append("vod ").append(i).append(" --> ").append(listChannels.get(i).toString());
-					ULog.d( sb.toString());
+					ULog.d(sb.toString());
 
 					ACache.get(getActivity()).put(ComParams.INTENT_SEARCH_CHANNELS, result, 60 * 5);// 缓存数据
 
@@ -277,7 +277,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
 				@Override
 				public void onStart() {
-					ULog.i( "onStart");
+					ULog.i("onStart");
 					progDialog.show();
 
 				}
@@ -285,7 +285,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 				@Override
 				public void onFailure(HttpException error, String msg) {
 					progDialog.dismiss();
-					ULog.i( "onFailure");
+					ULog.i("onFailure");
 				}
 			});
 		}
@@ -315,7 +315,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 		sb.append("&").append("sortNum=").append(sortNumber);
 
 		// String url = ComParams.HTTP_CHANNEL + "channelId=" + channelId + "&start=" + start + "&limit=" + limit;
-		ULog.i( sb.toString());
+		ULog.i(sb.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, sb.toString(), new RequestCallBack<String>() {
 			@Override
@@ -334,8 +334,8 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 				TypeBean bean = new com.google.gson.Gson().fromJson(result, TypeBean.class);
 				if (null == bean)
 					return;
+				ULog.d(bean.toString());
 
-				// ULog.d( bean.toString());
 				if (TextUtils.isEmpty(listDataChannel) || !channelId.equals(listDataChannel)) {
 					listData.clear();
 					listDataChannel = channelId;
@@ -345,7 +345,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 				listData.addAll(bean.getListData().getObjs());
 				channelAdp.setChannelId(channelId);
 				channelAdp.notifyDataSetChanged();
-				ULog.d( "list length = " + listData.size());
+				ULog.d("list length = " + listData.size());
 
 				if (bean.getSubChannels().size() > 0 && null != llSubChannels) {
 					llSubChannels.removeAllViews();
@@ -369,13 +369,13 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
 			@Override
 			public void onStart() {
-				ULog.i( "RequestCallBack.onStart");
+				ULog.i("RequestCallBack.onStart");
 				progDialog.show();
 			}
 
 			@Override
 			public void onFailure(HttpException error, String msg) {
-				ULog.i( "RequestCallBack.onFailure");
+				ULog.i("RequestCallBack.onFailure");
 				progDialog.dismiss();
 
 				if (0 == start) {
@@ -464,7 +464,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
 			pinDaoPopuWindow.dismiss();
 
-			ULog.d( "channel = " + channel.toString());
+			ULog.d("channel = " + channel.toString());
 
 			listData.clear();
 			getMovies(channel.getChannelId(), 0, LIMIT);

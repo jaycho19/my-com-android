@@ -72,7 +72,7 @@ public class ToDetailAsyncTask extends AsyncTask<String, String, DetailBean> {
 			sb.append("phone=").append(User.getPhone(context)).append("&");
 			sb.append("channelId=").append(channelId).append("&");
 			sb.append("contentId=").append(conntentId);
-			ULog.i( sb.toString());
+			ULog.i(sb.toString());
 
 			try {
 				bean = new com.google.gson.Gson().fromJson(httpGet(sb.toString()), DetailBean.class);

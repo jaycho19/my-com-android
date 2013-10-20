@@ -19,60 +19,60 @@ import com.dongfang.utils.Util;
  * @author dongfang
  */
 public class DownloadInfo implements Serializable {
-	public final String			TAG					= DownloadInfo.class.getSimpleName();
+	public final String TAG = DownloadInfo.class.getSimpleName();
 
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 187654567898765456L;
+	private static final long serialVersionUID = 187654567898765456L;
 
-	public static final String	KEY_CONTENT_ID		= "contentId";
-	public static final String	KEY_CONTENT_NAME	= "contentName";
-	public static final String	KEY_CONTENT_TYPE	= "contentType";
-	public static final String	KEY_CONTENT_URL		= "contentUrl";
-	public static final String	KEY_CURRENT_BYTES	= "currentBytes";
-	public static final String	KEY_TOTAL_BYTES		= "totalbytes";
-	public static final String	KEY_FILE_NAME		= "fileName";
-	public static final String	KEY_FILE_PATH		= "filePath";
-	public static final String	KEY_ICON_URL		= "iconUrl";
-	public static final String	KEY_ICON_NAME		= "iconName";
-	public static final String	KEY_ICON_PATH		= "iconPath";
-	public static final String	KEY_STATUS			= "status";
-	public static final String	KEY_TIMESTAMP		= "timeStamp";
-	public static final String	KEY_DESCRIPTION		= "description";
-	public static final String	KEY_VIDEO_LENGTH	= "videoLength";
-	public static final String	KEY_ERROR_CODE		= "errorCode";
+	public static final String KEY_CONTENT_ID = "contentId";
+	public static final String KEY_CONTENT_NAME = "contentName";
+	public static final String KEY_CONTENT_TYPE = "contentType";
+	public static final String KEY_CONTENT_URL = "contentUrl";
+	public static final String KEY_CURRENT_BYTES = "currentBytes";
+	public static final String KEY_TOTAL_BYTES = "totalbytes";
+	public static final String KEY_FILE_NAME = "fileName";
+	public static final String KEY_FILE_PATH = "filePath";
+	public static final String KEY_ICON_URL = "iconUrl";
+	public static final String KEY_ICON_NAME = "iconName";
+	public static final String KEY_ICON_PATH = "iconPath";
+	public static final String KEY_STATUS = "status";
+	public static final String KEY_TIMESTAMP = "timeStamp";
+	public static final String KEY_DESCRIPTION = "description";
+	public static final String KEY_VIDEO_LENGTH = "videoLength";
+	public static final String KEY_ERROR_CODE = "errorCode";
 
 	/** 文件的唯一编号,视频文件必须非空 */
-	public String				contentId;
+	public String contentId;
 	/** 文件显示名称 : "Life_of_PI" */
-	public String				contentName;
+	public String contentName;
 	/** 文件类型，如视频，图片等 */
-	public int					contentType;
+	public int contentType;
 	/** 文件下载地址 */
-	public String				contentUrl;
+	public String contentUrl;
 	/** 文件 当前下载的字节数 */
-	public long					currentBytes;
+	public long currentBytes;
 	/** 文件总字节数 */
-	public long					totalbytes;
+	public long totalbytes;
 	/** 文件被保存的名称: "Life_of_PI.3pg" */
-	public String				fileName;
+	public String fileName;
 	/** 文件完整路径 ："sdcard/TYSX/dl/Life_of_PI.3pg" */
-	public String				filePath;
+	public String filePath;
 	/** 文件对应展示图片地址 */
-	public String				iconUrl;
+	public String iconUrl;
 	/** 文件对应展示名称: "1234.png" */
-	public String				iconName;
+	public String iconName;
 	/** 文件对应展示图片完整路径："data/data/xxx.xxx.xxx/cache/1234.jpe" */
-	public String				iconPath;
+	public String iconPath;
 	/** 下载状态：如未下载，下载中，下载完成，取消下载等,默认为等待状态 */
-	public int					status;
+	public int status;
 	/** 最后一次下载操作时间 */
-	public long					timeStamp;
+	public long timeStamp;
 	/** 内容描述 */
-	public String				description;
+	public String description;
 	/** 视频播放时长 */
-	public String				videoLength;
+	public String videoLength;
 
 	public DownloadInfo() {}
 
@@ -154,7 +154,7 @@ public class DownloadInfo implements Serializable {
 		else {
 			fileName_temp = contentUrl.substring(contentUrl.lastIndexOf("/") + 1);
 		}
-		ULog.d( fileName_temp);
+		ULog.d(fileName_temp);
 		if (TextUtils.isEmpty(contentName))
 			return fileName_temp;
 		return contentName + fileName_temp.substring(fileName_temp.lastIndexOf("."));
@@ -183,8 +183,7 @@ public class DownloadInfo implements Serializable {
 	}
 
 	/**
-	 * 初始化文件保存完整路径 ,图片默认为sdcard/Android/data/com.xxx.xxx/xxxxx.png
-	 * ,次默认为data/data/com.xxx.xxx/cache/xxxxx.png
+	 * 初始化文件保存完整路径 ,图片默认为sdcard/Android/data/com.xxx.xxx/xxxxx.png ,次默认为data/data/com.xxx.xxx/cache/xxxxx.png
 	 */
 	@TargetApi(Build.VERSION_CODES.FROYO)
 	private String initFilePath(Context context, int type) {

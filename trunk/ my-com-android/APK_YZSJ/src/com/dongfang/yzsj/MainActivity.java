@@ -54,9 +54,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 	/** 获取首页数据 */
 	private void initData(Intent intent) {
-		ULog.d( "initData");
+		ULog.d("initData");
 		if (null == intent || null == intent.getParcelableExtra(ComParams.INTENT_HOMEBEAN)) {
-			ULog.d( " ---  -- --- ---- -- null");
+			ULog.d(" ---  -- --- ---- -- null");
 			return;
 		}
 
@@ -99,10 +99,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		fgtHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 			@Override
 			public void onTabChanged(String tabId) {
-				ULog.d( "OnTabChangeListener = " + tabId);
+				ULog.d("OnTabChangeListener = " + tabId);
 				if ("5".equals(tabId) && !User.isLogined(MainActivity.this)) {
 					frameLayout.setVisibility(View.GONE);
-					ULog.d( "frameLayout.setVisibility(View.GONE)");
+					ULog.d("frameLayout.setVisibility(View.GONE)");
 				}
 				else {
 					frameLayout.setVisibility(0);
@@ -144,8 +144,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		loginFragment.setOnLoginAndVerify(new LoginFragment.OnLoginAndVerify() {
 
 			@Override
-			public void verify(boolean verify, String phoneNumber) {
-			}
+			public void verify(boolean verify, String phoneNumber) {}
 
 			@Override
 			public void login(boolean login, String phoneNumber) {
@@ -189,8 +188,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		ULog.d( "onResume");
-		
+		ULog.d("onResume");
+
 		if (User.isLogined(this)) {
 			tvLogin.setText("注销");
 			frameLayout.setVisibility(0);
@@ -239,7 +238,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		ULog.d( "onClick = " + v.getId());
+		ULog.d("onClick = " + v.getId());
 		switch (v.getId()) {
 		case R.id.tv_topbar_login:
 			if (User.isLogined(this)) {

@@ -27,53 +27,50 @@ import com.dongfang.net.http.client.callback.RequestCallBackHandler;
 import com.dongfang.utils.IOUtils;
 
 /**
- * Created with IntelliJ IDEA.
- * User: wyouflf
- * Date: 13-6-24
- * Time: 下午4:45
+ * Created with IntelliJ IDEA. User: wyouflf Date: 13-6-24 Time: 下午4:45
  */
 public class FileUploadEntity extends FileEntity implements UploadEntity {
 
-    public FileUploadEntity(File file, String contentType) {
-        super(file, contentType);
-        fileSize = file.length();
-    }
+	public FileUploadEntity(File file, String contentType) {
+		super(file, contentType);
+		fileSize = file.length();
+	}
 
-    private long fileSize;
-    private long uploadedSize = 0;
+	private long fileSize;
+	private long uploadedSize = 0;
 
-    @Override
-    public void writeTo(OutputStream outStream) throws IOException {
-        if (outStream == null) {
-            throw new IllegalArgumentException("Output stream may not be null");
-        }
-        InputStream inStream = null;
-        try {
-            inStream = new FileInputStream(this.file);
-            byte[] tmp = new byte[4096];
-            int len;
-            while ((len = inStream.read(tmp)) != -1) {
-                outStream.write(tmp, 0, len);
-                uploadedSize += len;
-                if (callBackHandler != null) {
-                    if (!callBackHandler.updateProgress(fileSize, uploadedSize, false)) {
-                        return;
-                    }
-                }
-            }
-            outStream.flush();
-            if (callBackHandler != null) {
-                callBackHandler.updateProgress(fileSize, uploadedSize, true);
-            }
-        } finally {
-            IOUtils.closeQuietly(inStream);
-        }
-    }
+	@Override
+	public void writeTo(OutputStream outStream) throws IOException {
+		if (outStream == null) {
+			throw new IllegalArgumentException("Output stream may not be null");
+		}
+		InputStream inStream = null;
+		try {
+			inStream = new FileInputStream(this.file);
+			byte[] tmp = new byte[4096];
+			int len;
+			while ((len = inStream.read(tmp)) != -1) {
+				outStream.write(tmp, 0, len);
+				uploadedSize += len;
+				if (callBackHandler != null) {
+					if (!callBackHandler.updateProgress(fileSize, uploadedSize, false)) {
+						return;
+					}
+				}
+			}
+			outStream.flush();
+			if (callBackHandler != null) {
+				callBackHandler.updateProgress(fileSize, uploadedSize, true);
+			}
+		} finally {
+			IOUtils.closeQuietly(inStream);
+		}
+	}
 
-    private RequestCallBackHandler callBackHandler = null;
+	private RequestCallBackHandler callBackHandler = null;
 
-    @Override
-    public void setCallBackHandler(RequestCallBackHandler callBackHandler) {
-        this.callBackHandler = callBackHandler;
-    }
+	@Override
+	public void setCallBackHandler(RequestCallBackHandler callBackHandler) {
+		this.callBackHandler = callBackHandler;
+	}
 }

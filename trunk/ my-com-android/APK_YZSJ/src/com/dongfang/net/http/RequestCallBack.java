@@ -15,25 +15,21 @@
 
 package com.dongfang.net.http;
 
-
 import com.dongfang.utils.HttpException;
 
 public abstract class RequestCallBack<T> {
 
-    private int rate = 1000 * 1;
+	private int rate = 1000 * 1;
 
-    public int getRate() {
-        return rate;
-    }
+	public int getRate() {
+		return rate;
+	}
 
-    public void onStart() {
-    }
+	public void onStart() {}
 
-    public void onLoading(long total, long current) {
-    }
+	public void onLoading(long total, long current) {}
 
-    public abstract void onSuccess(T result);
+	public abstract void onSuccess(T result);
 
-    public void onFailure(HttpException error, String msg) {
-    }
+	public void onFailure(HttpException error, String msg) {}
 }

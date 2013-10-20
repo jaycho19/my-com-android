@@ -29,41 +29,41 @@ public class BasePopupWindow {
 
 	// ====================================================================
 	// for Phone_PopupWindow_VideoRate_Setting 设置 原画 超清 高清 标清
-	public static final int						SET_VIDEO_ORIGINALPICTURE			= 0;
-	public static final int						SET_VIDEO_SUPERDEFINITION			= 1;
-	public static final int						SET_VIDEO_HIGHDEFINITION			= 2;
-	public static final int						SET_VIDEO_STANDARDDEFINITION		= 3;
+	public static final int SET_VIDEO_ORIGINALPICTURE = 0;
+	public static final int SET_VIDEO_SUPERDEFINITION = 1;
+	public static final int SET_VIDEO_HIGHDEFINITION = 2;
+	public static final int SET_VIDEO_STANDARDDEFINITION = 3;
 	// for show or hide Phone_PopupWindow_VideoRate_Setting
-	public static final int						SHOW_HIDE_VIDEORATE_SETTING			= 4;
+	public static final int SHOW_HIDE_VIDEORATE_SETTING = 4;
 	// for show or hide Phone_PopupWindow_VideoList
-	public static final int						SHOW_HIDE_VIDEOLIST					= 5;
+	public static final int SHOW_HIDE_VIDEOLIST = 5;
 	// for show or hide Phone_PopupWindow_Voice
-	public static final int						SHOW_HIDE_VOICE						= 6;
+	public static final int SHOW_HIDE_VOICE = 6;
 
-	public static final int						PRESS_PLAY_PAUSE_BTN				= 7;
-	public static final int						PRESS_BACKWARDPLAY_BTN				= 8;
-	public static final int						PRESS_FORWARDPLAY_BTN				= 9;
-	public static final int						PRESS_FULLSCREEN2HALF_BTN			= 10;
-	public static final int						PRESS_LOCK_BTN						= 11;
-	public static final int						PRESS_BACK_BTN						= 12;
+	public static final int PRESS_PLAY_PAUSE_BTN = 7;
+	public static final int PRESS_BACKWARDPLAY_BTN = 8;
+	public static final int PRESS_FORWARDPLAY_BTN = 9;
+	public static final int PRESS_FULLSCREEN2HALF_BTN = 10;
+	public static final int PRESS_LOCK_BTN = 11;
+	public static final int PRESS_BACK_BTN = 12;
 
-	public static final int						LONGPRESS_BACKWARDPLAY_BTN			= 13;
-	public static final int						LONGPRESS_FORWARDPLAY_BTN			= 14;
+	public static final int LONGPRESS_BACKWARDPLAY_BTN = 13;
+	public static final int LONGPRESS_FORWARDPLAY_BTN = 14;
 
-	public static final int						SET_VOICE_MUTE_ICON					= 15;
-	public static final int						SET_VOICE_ICON						= 16;
+	public static final int SET_VOICE_MUTE_ICON = 15;
+	public static final int SET_VOICE_ICON = 16;
 
-	public static final int						PRESS_PUSH2TV_BTN					= 17;
-	public static final int						PRESS_DOWNLOAD_BTN					= 18;
+	public static final int PRESS_PUSH2TV_BTN = 17;
+	public static final int PRESS_DOWNLOAD_BTN = 18;
 
 	/**
 	 * 此功能是在用户使用音量seekbar和播放seekbar时，让popupwin延迟消失
 	 */
-	public static final int						VIDEO_SEEKBAR_IS_WORKING			= 19;
-	public static final int						VOICE_SEEKBAR_IS_WORKING			= 20;
-	public static final int						VIDEOLIST_POPUPWIN_IS_WORKING		= 21;
+	public static final int VIDEO_SEEKBAR_IS_WORKING = 19;
+	public static final int VOICE_SEEKBAR_IS_WORKING = 20;
+	public static final int VIDEOLIST_POPUPWIN_IS_WORKING = 21;
 
-	public static final int						VIDEO_LIST_SELECTED					= 22;
+	public static final int VIDEO_LIST_SELECTED = 22;
 
 	// ====================================================================
 
@@ -72,77 +72,77 @@ public class BasePopupWindow {
 	/**
 	 * 显示推送大屏
 	 */
-	public static final int						SHOW_BOTTOM_BAR_PUSH2TV				= 2000;
+	public static final int SHOW_BOTTOM_BAR_PUSH2TV = 2000;
 	/**
 	 * 显示快退
 	 */
-	public static final int						SHOW_BOTTOM_BAR_BACKWARDPLAY		= 2001;
+	public static final int SHOW_BOTTOM_BAR_BACKWARDPLAY = 2001;
 	/**
 	 * 显示播放/暫停
 	 */
-	public static final int						SHOW_BOTTOM_BAR_PLAYPAUSE			= 2002;
+	public static final int SHOW_BOTTOM_BAR_PLAYPAUSE = 2002;
 	/**
 	 * 显示快进
 	 */
-	public static final int						SHOW_BOTTOM_BAR_FORWARDPLAY			= 2003;
+	public static final int SHOW_BOTTOM_BAR_FORWARDPLAY = 2003;
 	/**
 	 * 显示选择视频码率（清晰度）
 	 */
-	public static final int						SHOW_BOTTOM_BAR_VIDEOBITRATE		= 2004;
+	public static final int SHOW_BOTTOM_BAR_VIDEOBITRATE = 2004;
 	/**
 	 * 显示选择视频集数
 	 */
-	public static final int						SHOW_BOTTOM_BAR_EPISODE				= 2005;
+	public static final int SHOW_BOTTOM_BAR_EPISODE = 2005;
 	/**
 	 * 显示播放时间
 	 */
-	public static final int						SHOW_BOTTOM_BAR_PLAYEDTIME			= 2006;
+	public static final int SHOW_BOTTOM_BAR_PLAYEDTIME = 2006;
 	/**
 	 * 显示视频总时间
 	 */
-	public static final int						SHOW_BOTTOM_BAR_TOTALTIME			= 2007;
+	public static final int SHOW_BOTTOM_BAR_TOTALTIME = 2007;
 	/**
 	 * 显示播放进度条
 	 */
-	public static final int						SHOW_BOTTOM_BAR_SEEKBAR				= 2008;
+	public static final int SHOW_BOTTOM_BAR_SEEKBAR = 2008;
 
 	// phoneBottomBar上控件定义 进行隐藏
 	/**
 	 * 隐藏推送大屏
 	 */
-	public static final int						HIDE_BOTTOM_BAR_PUSH2TV				= 3000;
+	public static final int HIDE_BOTTOM_BAR_PUSH2TV = 3000;
 	/**
 	 * 隐藏快退
 	 */
-	public static final int						HIDE_BOTTOM_BAR_BACKWARDPLAY		= 3001;
+	public static final int HIDE_BOTTOM_BAR_BACKWARDPLAY = 3001;
 	/**
 	 * 隐藏播放/暫停
 	 */
-	public static final int						HIDE_BOTTOM_BAR_PLAYPAUSE			= 3002;
+	public static final int HIDE_BOTTOM_BAR_PLAYPAUSE = 3002;
 	/**
 	 * 隐藏快进
 	 */
-	public static final int						HIDE_BOTTOM_BAR_FORWARDPLAY			= 3003;
+	public static final int HIDE_BOTTOM_BAR_FORWARDPLAY = 3003;
 	/**
 	 * 隐藏选择视频码率（清晰度）
 	 */
-	public static final int						HIDE_BOTTOM_BAR_VIDEOBITRATE		= 3004;
+	public static final int HIDE_BOTTOM_BAR_VIDEOBITRATE = 3004;
 	/**
 	 * 隐藏选择视频集数
 	 */
-	public static final int						HIDE_BOTTOM_BAR_EPISODE				= 3005;
+	public static final int HIDE_BOTTOM_BAR_EPISODE = 3005;
 	/**
 	 * 隐藏播放时间
 	 */
-	public static final int						HIDE_BOTTOM_BAR_PLAYEDTIME			= 3006;
+	public static final int HIDE_BOTTOM_BAR_PLAYEDTIME = 3006;
 	/**
 	 * 隐藏视频总时间
 	 */
-	public static final int						HIDE_BOTTOM_BAR_TOTALTIME			= 3007;
+	public static final int HIDE_BOTTOM_BAR_TOTALTIME = 3007;
 	/**
 	 * 隐藏播放进度条
 	 */
-	public static final int						HIDE_BOTTOM_BAR_SEEKBAR				= 3008;
+	public static final int HIDE_BOTTOM_BAR_SEEKBAR = 3008;
 
 	// ====================================================================
 	// ====================================================================
@@ -150,53 +150,53 @@ public class BasePopupWindow {
 	/**
 	 * 显示下载
 	 */
-	public static final int						SHOW_RIGHT_BAR_DOWNLOAD				= 4000;
+	public static final int SHOW_RIGHT_BAR_DOWNLOAD = 4000;
 	/**
 	 * 显示音量
 	 */
-	public static final int						SHOW_RIGHT_BAR_VOICE				= 4001;
+	public static final int SHOW_RIGHT_BAR_VOICE = 4001;
 	/**
 	 * 显示锁屏
 	 */
-	public static final int						SHOW_RIGHT_BAR_SCREEN_LOCK			= 4002;
+	public static final int SHOW_RIGHT_BAR_SCREEN_LOCK = 4002;
 
 	// phoneRightBar上控件定义 进行隐藏
 	/**
 	 * 隐藏下载
 	 */
-	public static final int						HIDE_RIGHT_BAR_DOWNLOAD				= 5000;
+	public static final int HIDE_RIGHT_BAR_DOWNLOAD = 5000;
 	/**
 	 * 隐藏音量
 	 */
-	public static final int						HIDE_RIGHT_BAR_VOICE				= 5001;
+	public static final int HIDE_RIGHT_BAR_VOICE = 5001;
 	/**
 	 * 隐藏锁屏
 	 */
-	public static final int						HIDE_RIGHT_BAR_SCREEN_LOCK			= 5002;
+	public static final int HIDE_RIGHT_BAR_SCREEN_LOCK = 5002;
 	// ====================================================================
 
-	private final int							popupwindowBottombarOffsetX			= 0;
-	private final int							popupwindowBottombarOffsetY			= 10;
-	private final int							POPUPWINDOW_TOPBAR_OFFSET_X			= 0;
-	private final int							POPUPWINDOW_TOPBAR_OFFSET_Y			= 0;
-	private final int							popupwindowRightbarOffsetX			= 10;
-	private final int							popupwindowRightbarOffsetY			= -26;
-	private final int							popupwindowVideorateSettingOffsetX	= popupwindowRightbarOffsetX;
-	private final int							popupwindowVideorateSettingOffsetY	= popupwindowBottombarOffsetY;
-	private final int							popupwindowVideolistOffsetX			= 0;
-	private final int							popupwindowVideolistOffsetY			= -20;
-	private final int							popupwindowVoiceOffsetX				= popupwindowRightbarOffsetX + 10;
-	private final int							popupwindowVoiceOffsetY				= -26;
+	private final int popupwindowBottombarOffsetX = 0;
+	private final int popupwindowBottombarOffsetY = 10;
+	private final int POPUPWINDOW_TOPBAR_OFFSET_X = 0;
+	private final int POPUPWINDOW_TOPBAR_OFFSET_Y = 0;
+	private final int popupwindowRightbarOffsetX = 10;
+	private final int popupwindowRightbarOffsetY = -26;
+	private final int popupwindowVideorateSettingOffsetX = popupwindowRightbarOffsetX;
+	private final int popupwindowVideorateSettingOffsetY = popupwindowBottombarOffsetY;
+	private final int popupwindowVideolistOffsetX = 0;
+	private final int popupwindowVideolistOffsetY = -20;
+	private final int popupwindowVoiceOffsetX = popupwindowRightbarOffsetX + 10;
+	private final int popupwindowVoiceOffsetY = -26;
 
-	private PhonePopupWindowBottomBar			phoneBottomBar;
-	private PhonePopupWindowTopBar				phoneTop;
-	private PhonePopupWindowVoice				phoneVoice;
+	private PhonePopupWindowBottomBar phoneBottomBar;
+	private PhonePopupWindowTopBar phoneTop;
+	private PhonePopupWindowVoice phoneVoice;
 
-	public static BasePopupWindow				mBasePopupWindow					= null;
+	public static BasePopupWindow mBasePopupWindow = null;
 
-	private LandPopUpWinWorkingListener			mLandPopUpWinWorkingListener;
-	private Mediaplayer							mMediaplayer;
-	private static Context						mContext;
+	private LandPopUpWinWorkingListener mLandPopUpWinWorkingListener;
+	private Mediaplayer mMediaplayer;
+	private static Context mContext;
 
 	public static BasePopupWindow getInstance() {
 		if (mBasePopupWindow == null)
@@ -260,8 +260,7 @@ public class BasePopupWindow {
 	 * @param whichCommand
 	 */
 	public void popupWinBottomBarShowOrHide(int whichCommand) {
-		if (phoneBottomBar != null) {
-		}
+		if (phoneBottomBar != null) {}
 	}
 
 	/**
@@ -269,8 +268,7 @@ public class BasePopupWindow {
 	 * 
 	 * @param whichCommand
 	 */
-	public void popupWinRightBarShowOrHide(int whichCommand) {
-	}
+	public void popupWinRightBarShowOrHide(int whichCommand) {}
 
 	/**
 	 * 显示或者隐藏控制音量的PopupWin
@@ -286,8 +284,6 @@ public class BasePopupWindow {
 
 	}
 
-
-
 	/**
 	 * 由系统物理按键来控制音量的改变和显示
 	 * 
@@ -299,8 +295,8 @@ public class BasePopupWindow {
 		}
 
 		if (phoneVoice.isShowing() == false) {
-				secondLayerHide();
-				phoneVoice.show(popupwindowRightbarOffsetX, popupwindowRightbarOffsetY);
+			secondLayerHide();
+			phoneVoice.show(popupwindowRightbarOffsetX, popupwindowRightbarOffsetY);
 		}
 
 		int oldProgress = phoneVoice.getVolumSeekBarProgress();
@@ -360,7 +356,6 @@ public class BasePopupWindow {
 
 	}
 
-
 	/**
 	 * 第一层的popupwin是否显示
 	 * 
@@ -374,10 +369,10 @@ public class BasePopupWindow {
 			return false;
 		}
 	}
-	
-	public void videoScaleChanged(){
+
+	public void videoScaleChanged() {
 		if (phoneTop != null)
-		phoneTop.setVideoScale();
+			phoneTop.setVideoScale();
 	}
 
 	/**
@@ -397,82 +392,80 @@ public class BasePopupWindow {
 	 * @param what
 	 */
 
-	public Handler	basePopUpWinHandler	= new Handler() {
-											@Override
-											public void handleMessage(Message msg) {
-												notifyLandPopUpWinIsWorkingListener();
-												super.handleMessage(msg);
-												switch (msg.what) {
-												case PRESS_DOWNLOAD_BTN:
-													String dlUrl = null;
-													
-													break;
-												case PRESS_PUSH2TV_BTN:
-													// just for test
-													Toast.makeText(mContext, "推送大屏", Toast.LENGTH_SHORT).show();
-													break;
-												case SET_VIDEO_ORIGINALPICTURE:
-												case SET_VIDEO_SUPERDEFINITION:
-												case SET_VIDEO_HIGHDEFINITION:
-												case SET_VIDEO_STANDARDDEFINITION:
-													if (phoneBottomBar != null) {
-													}
-													break;
-												case SHOW_HIDE_VIDEORATE_SETTING:
-													break;
-												case SHOW_HIDE_VIDEOLIST:
-													break;
-												case SHOW_HIDE_VOICE:
-													popUpWinVoiceShowOrHide();
-													break;
-												case PRESS_PLAY_PAUSE_BTN:
-													if (!mMediaplayer.isPlaying()) {
-														mMediaplayer.start();
-													}
-													else {
-														mMediaplayer.pause();
-													}
-													break;
-												case PRESS_BACKWARDPLAY_BTN:
-													mMediaplayer.seekToTenSecond(false);
-													break;
-												case PRESS_FORWARDPLAY_BTN:
-													mMediaplayer.seekToTenSecond(true);
-													break;
-												case LONGPRESS_BACKWARDPLAY_BTN:
-													mMediaplayer.seekToTwoMin(false);
-													break;
-												case LONGPRESS_FORWARDPLAY_BTN:
-													mMediaplayer.seekToTwoMin(true);
-													break;
-												case PRESS_FULLSCREEN2HALF_BTN:
-													((Activity) mContext)
-															.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);// 强制竖屏
-													break;
+	public Handler basePopUpWinHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			notifyLandPopUpWinIsWorkingListener();
+			super.handleMessage(msg);
+			switch (msg.what) {
+			case PRESS_DOWNLOAD_BTN:
+				String dlUrl = null;
 
-												case PRESS_LOCK_BTN:
-													break;
-												case PRESS_BACK_BTN:
-														((Activity) mContext).finish();
-													break;
-												case SET_VOICE_MUTE_ICON:
-													break;
-												case SET_VOICE_ICON:
-													break;
+				break;
+			case PRESS_PUSH2TV_BTN:
+				// just for test
+				Toast.makeText(mContext, "推送大屏", Toast.LENGTH_SHORT).show();
+				break;
+			case SET_VIDEO_ORIGINALPICTURE:
+			case SET_VIDEO_SUPERDEFINITION:
+			case SET_VIDEO_HIGHDEFINITION:
+			case SET_VIDEO_STANDARDDEFINITION:
+				if (phoneBottomBar != null) {}
+				break;
+			case SHOW_HIDE_VIDEORATE_SETTING:
+				break;
+			case SHOW_HIDE_VIDEOLIST:
+				break;
+			case SHOW_HIDE_VOICE:
+				popUpWinVoiceShowOrHide();
+				break;
+			case PRESS_PLAY_PAUSE_BTN:
+				if (!mMediaplayer.isPlaying()) {
+					mMediaplayer.start();
+				}
+				else {
+					mMediaplayer.pause();
+				}
+				break;
+			case PRESS_BACKWARDPLAY_BTN:
+				mMediaplayer.seekToTenSecond(false);
+				break;
+			case PRESS_FORWARDPLAY_BTN:
+				mMediaplayer.seekToTenSecond(true);
+				break;
+			case LONGPRESS_BACKWARDPLAY_BTN:
+				mMediaplayer.seekToTwoMin(false);
+				break;
+			case LONGPRESS_FORWARDPLAY_BTN:
+				mMediaplayer.seekToTwoMin(true);
+				break;
+			case PRESS_FULLSCREEN2HALF_BTN:
+				((Activity) mContext).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);// 强制竖屏
+				break;
 
-												case VideoPlayerFragment.SHOW_VOICE_POPUPWINDOW_ADJUST_VOLUME:
-													showVoicePopWinForReceiver((Integer) msg.obj);
-													break;
-												case VIDEO_SEEKBAR_IS_WORKING:
-												case VOICE_SEEKBAR_IS_WORKING:
-												case VIDEOLIST_POPUPWIN_IS_WORKING:
-													;
-													break;
-												case VIDEO_LIST_SELECTED:
-													break;
+			case PRESS_LOCK_BTN:
+				break;
+			case PRESS_BACK_BTN:
+				((Activity) mContext).finish();
+				break;
+			case SET_VOICE_MUTE_ICON:
+				break;
+			case SET_VOICE_ICON:
+				break;
 
-												}
-											}
-										};
+			case VideoPlayerFragment.SHOW_VOICE_POPUPWINDOW_ADJUST_VOLUME:
+				showVoicePopWinForReceiver((Integer) msg.obj);
+				break;
+			case VIDEO_SEEKBAR_IS_WORKING:
+			case VOICE_SEEKBAR_IS_WORKING:
+			case VIDEOLIST_POPUPWIN_IS_WORKING:
+				;
+				break;
+			case VIDEO_LIST_SELECTED:
+				break;
+
+			}
+		}
+	};
 
 }

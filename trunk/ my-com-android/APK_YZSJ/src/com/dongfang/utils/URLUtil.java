@@ -5,6 +5,7 @@ import android.text.TextUtils;
 public class URLUtil {
 	/**
 	 * 是否是有效的图片url
+	 * 
 	 * @param url
 	 * @return
 	 */

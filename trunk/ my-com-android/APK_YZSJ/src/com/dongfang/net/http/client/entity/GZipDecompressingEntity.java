@@ -22,31 +22,30 @@ import java.util.zip.GZIPInputStream;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 
-
 public class GZipDecompressingEntity extends DecompressingEntity {
 
-    /**
-     * Creates a new {@link GZipDecompressingEntity} which will wrap the specified
-     * {@link org.apache.http.HttpEntity}.
-     *
-     * @param entity the non-null {@link org.apache.http.HttpEntity} to be wrapped
-     */
-    public GZipDecompressingEntity(final HttpEntity entity) {
-        super(entity);
-    }
+	/**
+	 * Creates a new {@link GZipDecompressingEntity} which will wrap the specified {@link org.apache.http.HttpEntity}.
+	 * 
+	 * @param entity
+	 *            the non-null {@link org.apache.http.HttpEntity} to be wrapped
+	 */
+	public GZipDecompressingEntity(final HttpEntity entity) {
+		super(entity);
+	}
 
-    @Override
-    InputStream decorate(final InputStream wrapped) throws IOException {
-        return new GZIPInputStream(wrapped);
-    }
+	@Override
+	InputStream decorate(final InputStream wrapped) throws IOException {
+		return new GZIPInputStream(wrapped);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Header getContentEncoding() {
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Header getContentEncoding() {
 
-        /* This HttpEntityWrapper has dealt with the Content-Encoding. */
-        return null;
-    }
+		/* This HttpEntityWrapper has dealt with the Content-Encoding. */
+		return null;
+	}
 }

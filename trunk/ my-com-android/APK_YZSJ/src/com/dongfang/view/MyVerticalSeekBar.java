@@ -11,9 +11,9 @@ import android.widget.SeekBar;
 import com.dongfang.utils.ULog;
 
 public class MyVerticalSeekBar extends SeekBar {
-	public static final String	TAG	= MyVerticalSeekBar.class.getSimpleName();
+	public static final String TAG = MyVerticalSeekBar.class.getSimpleName();
 
-	private Drawable			mThumb;
+	private Drawable mThumb;
 
 	public interface OnSeekBarChangeListener {
 		void onProgressChanged(MyVerticalSeekBar verticalSeekBar, int progress, boolean fromUser);
@@ -23,7 +23,7 @@ public class MyVerticalSeekBar extends SeekBar {
 		void onStopTrackingTouch(MyVerticalSeekBar verticalSeekBar);
 	}
 
-	private OnSeekBarChangeListener	mOnSeekBarChangeListener;
+	private OnSeekBarChangeListener mOnSeekBarChangeListener;
 
 	public MyVerticalSeekBar(Context context) {
 		this(context, null);
@@ -66,27 +66,28 @@ public class MyVerticalSeekBar extends SeekBar {
 	}
 
 	private void setThumbPos(int h, Drawable thumb, float scale, int gap) {
-		ULog.d( "h = " + h + ", scale = " + scale + ", gap = " + gap);
+		ULog.d("h = " + h + ", scale = " + scale + ", gap = " + gap);
 		int available = h - getPaddingLeft() - getPaddingRight();
 		int thumbWidth = thumb.getIntrinsicWidth();
 		int thumbHeight = thumb.getIntrinsicHeight();
 
-		available -= thumbWidth;  
-        // The extra space for the thumb to move on the track  
-        available += getThumbOffset() * 2;  
-        int thumbPos = (int) (scale * available);  
-        int topBound, bottomBound;  
-        if (gap == Integer.MIN_VALUE) {  
-            Rect oldBounds = thumb.getBounds();  
-            topBound = oldBounds.top;  
-            bottomBound = oldBounds.bottom;  
-        } else {  
-            topBound = gap;  
-            bottomBound = gap + thumbHeight;  
-        }  
- 
-        // Canvas will be translated, so 0,0 is where we start drawing  
-        thumb.setBounds(thumbPos, topBound, thumbPos + thumbWidth, bottomBound);  
+		available -= thumbWidth;
+		// The extra space for the thumb to move on the track
+		available += getThumbOffset() * 2;
+		int thumbPos = (int) (scale * available);
+		int topBound, bottomBound;
+		if (gap == Integer.MIN_VALUE) {
+			Rect oldBounds = thumb.getBounds();
+			topBound = oldBounds.top;
+			bottomBound = oldBounds.bottom;
+		}
+		else {
+			topBound = gap;
+			bottomBound = gap + thumbHeight;
+		}
+
+		// Canvas will be translated, so 0,0 is where we start drawing
+		thumb.setBounds(thumbPos, topBound, thumbPos + thumbWidth, bottomBound);
 	}
 
 	@Override

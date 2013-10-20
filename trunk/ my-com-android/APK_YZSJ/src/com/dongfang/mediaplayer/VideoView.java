@@ -11,10 +11,10 @@ import android.view.SurfaceView;
  * 
  */
 public class VideoView extends SurfaceView {
-	private static final String	TAG					= VideoView.class.getName();
+	private static final String TAG = VideoView.class.getName();
 
-	private SurfaceHolder		holder;
-	private Mediaplayer			mMediaplayer		= Mediaplayer.getInstance();
+	private SurfaceHolder holder;
+	private Mediaplayer mMediaplayer = Mediaplayer.getInstance();
 
 	public VideoView(Context context) {
 		super(context);

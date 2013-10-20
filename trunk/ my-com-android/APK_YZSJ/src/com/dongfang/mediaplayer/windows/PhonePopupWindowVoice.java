@@ -19,23 +19,24 @@ import com.dongfang.yzsj.R;
 
 /**
  * O
+ * 
  * @author yanghua
  * 
  */
 public class PhonePopupWindowVoice extends PopupWindow {
 
-	public static final String	TAG						= PhonePopupWindowVoice.class.getName();
-	private Context				mContext;
-	private LayoutInflater		mInflater;
-	private final float			mWidthPercentOfWindow	= (float) 0.06;
-	private final float			mHightPercentOfWindow	= (float) 0.45;
+	public static final String TAG = PhonePopupWindowVoice.class.getName();
+	private Context mContext;
+	private LayoutInflater mInflater;
+	private final float mWidthPercentOfWindow = (float) 0.06;
+	private final float mHightPercentOfWindow = (float) 0.45;
 
-	private AudioManager		mAudioManager;
-	private MyVerticalSeekBar	mVoiceSeekBar;
+	private AudioManager mAudioManager;
+	private MyVerticalSeekBar mVoiceSeekBar;
 
-	private final int			dissmissSelf			= 0;
-	private final int			progressChanged			= 1;
-	private BasePopupWindow		basePop					= BasePopupWindow.getInstance();
+	private final int dissmissSelf = 0;
+	private final int progressChanged = 1;
+	private BasePopupWindow basePop = BasePopupWindow.getInstance();
 
 	public PhonePopupWindowVoice(Context context) {
 		super(context);
@@ -100,16 +101,16 @@ public class PhonePopupWindowVoice extends PopupWindow {
 			mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
 
 		if (mAudioManager != null && android.os.Build.VERSION.SDK_INT > 7) {
-			ULog.i( "Request audio focus");
+			ULog.i("Request audio focus");
 			int ret = mAudioManager.requestAudioFocus(new AudioManager.OnAudioFocusChangeListener() {
 				public void onAudioFocusChange(int focusChange) {
-					ULog.d( "focusChange =" + focusChange);
+					ULog.d("focusChange =" + focusChange);
 					// Do something
 				}
 			}, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
 
 			if (ret != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-				ULog.i( "request audio focus fail. " + ret);
+				ULog.i("request audio focus fail. " + ret);
 			}
 
 			// android.provider.Settings.System.putString(mContext.getContentResolver(),
@@ -128,13 +129,13 @@ public class PhonePopupWindowVoice extends PopupWindow {
 		mVoiceSeekBar.setMax(maxVolume);
 		mVoiceSeekBar.setProgress(currentVolume);
 
-		ULog.d( "maxVolume=" + maxVolume + "currentVolume=" + currentVolume);
+		ULog.d("maxVolume=" + maxVolume + "currentVolume=" + currentVolume);
 
 		mVoiceSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
 			@Override
 			public void onStopTrackingTouch(MyVerticalSeekBar verticalSeekBar) {
-				ULog.d( "onStopTrackingTouch progress=" + verticalSeekBar.getProgress());
+				ULog.d("onStopTrackingTouch progress=" + verticalSeekBar.getProgress());
 
 			}
 
@@ -145,7 +146,7 @@ public class PhonePopupWindowVoice extends PopupWindow {
 
 			@Override
 			public void onProgressChanged(MyVerticalSeekBar verticalSeekBar, int progress, boolean fromUser) {
-				ULog.d( "progress=" + progress + "   fromUser =" + fromUser);
+				ULog.d("progress=" + progress + "   fromUser =" + fromUser);
 
 				if (progress == 0) {
 					basePop.sendMessage(BasePopupWindow.SET_VOICE_MUTE_ICON, null);
@@ -226,22 +227,22 @@ public class PhonePopupWindowVoice extends PopupWindow {
 		myHandler.sendEmptyMessageDelayed(dissmissSelf, 3000);
 	}
 
-	private Handler	myHandler	= new Handler() {
+	private Handler myHandler = new Handler() {
 
-									@Override
-									public void handleMessage(Message msg) {
-										super.handleMessage(msg);
-										switch (msg.what) {
-										case dissmissSelf:
-											dissmissSelf();
-											break;
-										case progressChanged:
-											basePop.sendMessage(BasePopupWindow.VOICE_SEEKBAR_IS_WORKING, null);
-											break;
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			switch (msg.what) {
+			case dissmissSelf:
+				dissmissSelf();
+				break;
+			case progressChanged:
+				basePop.sendMessage(BasePopupWindow.VOICE_SEEKBAR_IS_WORKING, null);
+				break;
 
-										}
-									}
+			}
+		}
 
-								};
+	};
 
 }

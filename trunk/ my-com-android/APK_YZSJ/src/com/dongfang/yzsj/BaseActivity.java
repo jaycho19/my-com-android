@@ -79,7 +79,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		ULog.d( "onCreateOptionsMenu");
+		ULog.d("onCreateOptionsMenu");
 		getMenuInflater().inflate(R.menu.main, menu);
 
 		return true;

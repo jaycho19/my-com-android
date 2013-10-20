@@ -7,7 +7,7 @@ package com.dongfang.yzsj.bean;
  * 
  */
 public class LoginBean {
-	private boolean result = true;//token是否有效，默认有效
+	private boolean result = true;// token是否有效，默认有效
 	private boolean success = false;
 	private String token;
 

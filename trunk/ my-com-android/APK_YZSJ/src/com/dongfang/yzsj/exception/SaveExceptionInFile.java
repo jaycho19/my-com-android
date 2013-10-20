@@ -24,11 +24,11 @@ public class SaveExceptionInFile extends AsyncTask<Bundle, Integer, Bundle> {
 		if (bundle != null) {
 			String filename = bundle.getString(ExpKeys.EXP_FILENAME);
 			String log = bundle.getString(ExpKeys.EXP_LOG);
-			ULog.d( " ---> savelog");
+			ULog.d(" ---> savelog");
 			try {
 				FileOutputStream outStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
 				outStream.write(log.getBytes());
-				ULog.d( "write success " + filename);
+				ULog.d("write success " + filename);
 				outStream.close();
 			} catch (Throwable e) {
 				e.printStackTrace();

@@ -12,13 +12,13 @@ import android.os.Parcelable;
  * 
  */
 public class TitleItemBeans implements Parcelable {
-	private String	contentId;
-	private String	productId;
-	private int		clickType;
-	private String	clickParam;
-	private String	name;
-	private int		sortId;
-	private int		type;
+	private String contentId;
+	private String productId;
+	private int clickType;
+	private String clickParam;
+	private String name;
+	private int sortId;
+	private int type;
 
 	/**
 	 * @return the clickType
@@ -121,31 +121,26 @@ public class TitleItemBeans implements Parcelable {
 
 	public static final Parcelable.Creator<TitleItemBeans>
 
-															CREATOR	= new Parcelable.Creator<TitleItemBeans>()
+	CREATOR = new Parcelable.Creator<TitleItemBeans>()
 
-																	{
+	{
 
-																		@Override
-																		public TitleItemBeans createFromParcel(
-																				Parcel source) {
-																			TitleItemBeans titleItemBeans = new TitleItemBeans();
-																			titleItemBeans.setContentId(source
-																					.readString());
-																			titleItemBeans.setProductId(source
-																					.readString());
-																			titleItemBeans.setName(source.readString());
-																			titleItemBeans.setClickParam(source
-																					.readString());
-																			titleItemBeans.setClickType(source
-																					.readInt());
-																			titleItemBeans.setSortId(source.readInt());
-																			titleItemBeans.setType(source.readInt());
-																			return titleItemBeans;
-																		}
+		@Override
+		public TitleItemBeans createFromParcel(Parcel source) {
+			TitleItemBeans titleItemBeans = new TitleItemBeans();
+			titleItemBeans.setContentId(source.readString());
+			titleItemBeans.setProductId(source.readString());
+			titleItemBeans.setName(source.readString());
+			titleItemBeans.setClickParam(source.readString());
+			titleItemBeans.setClickType(source.readInt());
+			titleItemBeans.setSortId(source.readInt());
+			titleItemBeans.setType(source.readInt());
+			return titleItemBeans;
+		}
 
-																		@Override
-																		public TitleItemBeans[] newArray(int size) {
-																			return new TitleItemBeans[size];
-																		}
-																	};
+		@Override
+		public TitleItemBeans[] newArray(int size) {
+			return new TitleItemBeans[size];
+		}
+	};
 }

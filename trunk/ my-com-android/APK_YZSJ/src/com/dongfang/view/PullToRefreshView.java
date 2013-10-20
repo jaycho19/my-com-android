@@ -26,114 +26,114 @@ import com.dongfang.yzsj.R;
  * 
  */
 public class PullToRefreshView extends LinearLayout {
-	private static final String		TAG					= "PullToRefreshView";
+	private static final String TAG = "PullToRefreshView";
 	// refresh states
-	private static final int		PULL_TO_REFRESH		= 2;
-	private static final int		RELEASE_TO_REFRESH	= 3;
-	private static final int		REFRESHING			= 4;
+	private static final int PULL_TO_REFRESH = 2;
+	private static final int RELEASE_TO_REFRESH = 3;
+	private static final int REFRESHING = 4;
 	// pull state
-	private static final int		PULL_UP_STATE		= 0;
-	private static final int		PULL_DOWN_STATE		= 1;
+	private static final int PULL_UP_STATE = 0;
+	private static final int PULL_DOWN_STATE = 1;
 	/**
 	 * last y
 	 */
-	private int						mLastMotionY;
+	private int mLastMotionY;
 	/**
 	 * lock
 	 */
-	private boolean					mLock;
+	private boolean mLock;
 	/**
 	 * header view
 	 */
-	private View					mHeaderView;
+	private View mHeaderView;
 	/**
 	 * footer view
 	 */
-	private View					mFooterView;
+	private View mFooterView;
 	/**
 	 * list or grid
 	 */
-	private AdapterView<?>			mAdapterView;
+	private AdapterView<?> mAdapterView;
 	/**
 	 * scrollview
 	 */
-	private ScrollView				mScrollView;
+	private ScrollView mScrollView;
 	/**
 	 * header view height
 	 */
-	private int						mHeaderViewHeight;
+	private int mHeaderViewHeight;
 	/**
 	 * footer view height
 	 */
-	private int						mFooterViewHeight;
+	private int mFooterViewHeight;
 	/**
 	 * header view image
 	 */
-	private ImageView				mHeaderImageView;
+	private ImageView mHeaderImageView;
 	/**
 	 * footer view image
 	 */
-	private ImageView				mFooterImageView;
+	private ImageView mFooterImageView;
 	/**
 	 * header tip text
 	 */
-	private TextView				mHeaderTextView;
+	private TextView mHeaderTextView;
 	/**
 	 * footer tip text
 	 */
-	private TextView				mFooterTextView;
+	private TextView mFooterTextView;
 	/**
 	 * header refresh time
 	 */
-	private TextView				mHeaderUpdateTextView;
+	private TextView mHeaderUpdateTextView;
 	/**
 	 * footer refresh time
 	 */
-	private TextView				mFooterUpdateTextView;
+	private TextView mFooterUpdateTextView;
 	/**
 	 * header progress bar
 	 */
-	private ProgressBar				mHeaderProgressBar;
+	private ProgressBar mHeaderProgressBar;
 	/**
 	 * footer progress bar
 	 */
-	private ProgressBar				mFooterProgressBar;
+	private ProgressBar mFooterProgressBar;
 	/**
 	 * layout inflater
 	 */
-	private LayoutInflater			mInflater;
+	private LayoutInflater mInflater;
 	/**
 	 * header view current state
 	 */
-	private int						mHeaderState;
+	private int mHeaderState;
 	/**
 	 * footer view current state
 	 */
-	private int						mFooterState;
+	private int mFooterState;
 	/**
 	 * pull state,pull up or pull down;PULL_UP_STATE or PULL_DOWN_STATE
 	 */
-	private int						mPullState			= -1;
+	private int mPullState = -1;
 	/**
 	 * 变为向下的箭头,改变箭头方向
 	 */
-	private RotateAnimation			mFlipAnimation;
+	private RotateAnimation mFlipAnimation;
 	/**
 	 * 变为逆向的箭头,旋转
 	 */
-	private RotateAnimation			mReverseFlipAnimation;
+	private RotateAnimation mReverseFlipAnimation;
 	/**
 	 * footer refresh listener
 	 */
-	private OnFooterRefreshListener	mOnFooterRefreshListener;
+	private OnFooterRefreshListener mOnFooterRefreshListener;
 	/**
 	 * footer refresh listener
 	 */
-	private OnHeaderRefreshListener	mOnHeaderRefreshListener;
+	private OnHeaderRefreshListener mOnHeaderRefreshListener;
 	/**
 	 * last update time
 	 */
-	private String					mLastUpdateTime;
+	private String mLastUpdateTime;
 
 	public PullToRefreshView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -154,11 +154,13 @@ public class PullToRefreshView extends LinearLayout {
 	 */
 	private void init() {
 		// Load all of the animations we need in code rather than through XML
-		mFlipAnimation = new RotateAnimation(0, -180, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+		mFlipAnimation = new RotateAnimation(0, -180, RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+				RotateAnimation.RELATIVE_TO_SELF, 0.5f);
 		mFlipAnimation.setInterpolator(new LinearInterpolator());
 		mFlipAnimation.setDuration(250);
 		mFlipAnimation.setFillAfter(true);
-		mReverseFlipAnimation = new RotateAnimation(-180, 0, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+		mReverseFlipAnimation = new RotateAnimation(-180, 0, RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+				RotateAnimation.RELATIVE_TO_SELF, 0.5f);
 		mReverseFlipAnimation.setInterpolator(new LinearInterpolator());
 		mReverseFlipAnimation.setDuration(250);
 		mReverseFlipAnimation.setFillAfter(true);
@@ -226,7 +228,8 @@ public class PullToRefreshView extends LinearLayout {
 	private void initContentAdapterView() {
 		int count = getChildCount();
 		if (count < 3) {
-			throw new IllegalArgumentException("this layout must contain 3 child views,and AdapterView or ScrollView must in the second position!");
+			throw new IllegalArgumentException(
+					"this layout must contain 3 child views,and AdapterView or ScrollView must in the second position!");
 		}
 		View view = null;
 		for (int i = 0; i < count - 1; ++i) {
@@ -303,13 +306,13 @@ public class PullToRefreshView extends LinearLayout {
 			int deltaY = y - mLastMotionY;
 			if (mPullState == PULL_DOWN_STATE) {
 				// PullToRefreshView执行下拉
-				ULog.i( " pull down!parent view move!");
+				ULog.i(" pull down!parent view move!");
 				headerPrepareToRefresh(deltaY);
 				// setHeaderPadding(-mHeaderViewHeight);
 			}
 			else if (mPullState == PULL_UP_STATE) {
 				// PullToRefreshView执行上拉
-				ULog.i( "pull up!parent view move!");
+				ULog.i("pull up!parent view move!");
 				footerPrepareToRefresh(deltaY);
 			}
 			mLastMotionY = y;
@@ -388,7 +391,8 @@ public class PullToRefreshView extends LinearLayout {
 				}
 				// 最后一个子view的Bottom小于父View的高度说明mAdapterView的数据没有填满父view,
 				// 等于父View的高度说明mAdapterView已经滑动到最后
-				if (lastChild.getBottom() <= getHeight() && mAdapterView.getLastVisiblePosition() == mAdapterView.getCount() - 1) {
+				if (lastChild.getBottom() <= getHeight()
+						&& mAdapterView.getLastVisiblePosition() == mAdapterView.getCount() - 1) {
 					mPullState = PULL_UP_STATE;
 					return true;
 				}
@@ -537,7 +541,7 @@ public class PullToRefreshView extends LinearLayout {
 	 * 
 	 */
 	public void onHeaderRefreshComplete() {
-		ULog.i( "--> onHeaderRefreshComplete");
+		ULog.i("--> onHeaderRefreshComplete");
 		setHeaderTopMargin(-mHeaderViewHeight);
 		mHeaderImageView.setVisibility(View.VISIBLE);
 		mHeaderImageView.setImageResource(R.drawable.pull_2_refresh_arrow);
@@ -562,7 +566,7 @@ public class PullToRefreshView extends LinearLayout {
 	 * footer view 完成更新后恢复初始状态
 	 */
 	public void onFooterRefreshComplete() {
-		ULog.i( "--> onFooterRefreshComplete");
+		ULog.i("--> onFooterRefreshComplete");
 		setHeaderTopMargin(-mHeaderViewHeight);
 		mFooterImageView.setVisibility(View.VISIBLE);
 		mFooterImageView.setImageResource(R.drawable.pull_2_refresh_arrow_up);

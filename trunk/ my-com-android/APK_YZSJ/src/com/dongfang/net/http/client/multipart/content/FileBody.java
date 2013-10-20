@@ -29,90 +29,85 @@ import com.dongfang.utils.IOUtils;
  */
 public class FileBody extends AbstractContentBody {
 
-    private final File file;
-    private final String filename;
-    private final String charset;
+	private final File file;
+	private final String filename;
+	private final String charset;
 
-    /**
-     * @since 4.1
-     */
-    public FileBody(final File file,
-                    final String filename,
-                    final String mimeType,
-                    final String charset) {
-        super(mimeType);
-        if (file == null) {
-            throw new IllegalArgumentException("File may not be null");
-        }
-        this.file = file;
-        if (filename != null)
-            this.filename = filename;
-        else
-            this.filename = file.getName();
-        this.charset = charset;
-    }
+	/**
+	 * @since 4.1
+	 */
+	public FileBody(final File file, final String filename, final String mimeType, final String charset) {
+		super(mimeType);
+		if (file == null) {
+			throw new IllegalArgumentException("File may not be null");
+		}
+		this.file = file;
+		if (filename != null)
+			this.filename = filename;
+		else
+			this.filename = file.getName();
+		this.charset = charset;
+	}
 
-    /**
-     * @since 4.1
-     */
-    public FileBody(final File file,
-                    final String mimeType,
-                    final String charset) {
-        this(file, null, mimeType, charset);
-    }
+	/**
+	 * @since 4.1
+	 */
+	public FileBody(final File file, final String mimeType, final String charset) {
+		this(file, null, mimeType, charset);
+	}
 
-    public FileBody(final File file, final String mimeType) {
-        this(file, mimeType, null);
-    }
+	public FileBody(final File file, final String mimeType) {
+		this(file, mimeType, null);
+	}
 
-    public FileBody(final File file) {
-        this(file, "application/octet-stream");
-    }
+	public FileBody(final File file) {
+		this(file, "application/octet-stream");
+	}
 
-    public InputStream getInputStream() throws IOException {
-        return new FileInputStream(this.file);
-    }
+	public InputStream getInputStream() throws IOException {
+		return new FileInputStream(this.file);
+	}
 
-    public void writeTo(final OutputStream out) throws IOException {
-        if (out == null) {
-            throw new IllegalArgumentException("Output stream may not be null");
-        }
-        InputStream in = null;
-        try {
-            in = new FileInputStream(this.file);
-            byte[] tmp = new byte[4096];
-            int l;
-            while ((l = in.read(tmp)) != -1) {
-                out.write(tmp, 0, l);
-                callBackInfo.pos += l;
-                if (!callBackInfo.doCallBack(false)) {
-                    return;
-                }
-            }
-            out.flush();
-        } finally {
-            IOUtils.closeQuietly(in);
-        }
-    }
+	public void writeTo(final OutputStream out) throws IOException {
+		if (out == null) {
+			throw new IllegalArgumentException("Output stream may not be null");
+		}
+		InputStream in = null;
+		try {
+			in = new FileInputStream(this.file);
+			byte[] tmp = new byte[4096];
+			int l;
+			while ((l = in.read(tmp)) != -1) {
+				out.write(tmp, 0, l);
+				callBackInfo.pos += l;
+				if (!callBackInfo.doCallBack(false)) {
+					return;
+				}
+			}
+			out.flush();
+		} finally {
+			IOUtils.closeQuietly(in);
+		}
+	}
 
-    public String getTransferEncoding() {
-        return MIME.ENC_BINARY;
-    }
+	public String getTransferEncoding() {
+		return MIME.ENC_BINARY;
+	}
 
-    public String getCharset() {
-        return charset;
-    }
+	public String getCharset() {
+		return charset;
+	}
 
-    public long getContentLength() {
-        return this.file.length();
-    }
+	public long getContentLength() {
+		return this.file.length();
+	}
 
-    public String getFilename() {
-        return filename;
-    }
+	public String getFilename() {
+		return filename;
+	}
 
-    public File getFile() {
-        return this.file;
-    }
+	public File getFile() {
+		return this.file;
+	}
 
 }

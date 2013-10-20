@@ -130,7 +130,7 @@ public class ImageGallery extends LinearLayout {
 
 				@Override
 				public void onPageSelected(int arg0) {
-					ULog.d( "onPageSelected arg0 = " + arg0);
+					ULog.d("onPageSelected arg0 = " + arg0);
 					changeDesc(arg0 % list.size());
 					// if (arg0 == 0) {
 					// viewPager.setCurrentItem(list.size() - 1, false);

@@ -31,8 +31,8 @@ public class ComParams {
 	public static final String INTENT_ORDER_BEAN = "order";
 
 	// ------------------------------------------------------------------------------
-	// private static final String HTTP_BASE = "http://tv.inhe.net/";
-	private static final String HTTP_BASE = "http://m.fortune-net.cn";
+	private static final String HTTP_BASE = "http://tv.inhe.net/";
+	// private static final String HTTP_BASE = "http://m.fortune-net.cn";
 	/** 首页 */
 	public static final String HTTP_HOME = HTTP_BASE + "/page/hbMobile/?jsonFormat=true";
 	/** 直播 */

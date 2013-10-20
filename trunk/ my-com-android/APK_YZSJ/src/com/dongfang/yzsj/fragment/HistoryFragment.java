@@ -49,7 +49,7 @@ public class HistoryFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		ULog.d( "onCreateView");
+		ULog.d("onCreateView");
 		View view = inflater.inflate(R.layout.fragment_favorite, container, false);
 		initView(view);
 		return view;
@@ -83,13 +83,13 @@ public class HistoryFragment extends Fragment {
 
 	@Override
 	public void onStart() {
-		ULog.d( "onStart");
+		ULog.d("onStart");
 		super.onStart();
 	}
 
 	@Override
 	public void onResume() {
-		ULog.d( "onResume");
+		ULog.d("onResume");
 		super.onResume();
 		if (User.isLogined(getActivity()) && (null == listData || listData.size() < 1)) {
 			getPlayHistory(0, LIMIT);
@@ -98,19 +98,19 @@ public class HistoryFragment extends Fragment {
 
 	@Override
 	public void onPause() {
-		ULog.d( "onPause");
+		ULog.d("onPause");
 		super.onPause();
 	}
 
 	@Override
 	public void onStop() {
-		ULog.d( "onStop");
+		ULog.d("onStop");
 		super.onStop();
 	}
 
 	@Override
 	public void onDestroy() {
-		ULog.d( "onDestroy");
+		ULog.d("onDestroy");
 		super.onDestroy();
 	}
 
@@ -137,17 +137,17 @@ public class HistoryFragment extends Fragment {
 		url.append("token=").append(User.getToken(getActivity())).append("&");
 		url.append("userTelephone=").append(User.getPhone(getActivity()));
 
-		ULog.i( url.toString());
+		ULog.i(url.toString());
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
 			public void onLoading(long total, long current) {
-				ULog.d( "RequestCallBack.onLoading total = " + total + "; current = " + current);
+				ULog.d("RequestCallBack.onLoading total = " + total + "; current = " + current);
 			}
 
 			@Override
 			public void onSuccess(String result) {
-				ULog.d( "onSuccess  --" + result);
+				ULog.d("onSuccess  --" + result);
 				progDialog.dismiss();
 				pageStart = 1 + start;
 
@@ -165,18 +165,18 @@ public class HistoryFragment extends Fragment {
 				lastTotal = bean.getListData().getObjs().size();
 
 				listData.addAll(bean.getListData().getObjs());
-				ULog.d( "list length = " + listData.size());
+				ULog.d("list length = " + listData.size());
 			}
 
 			@Override
 			public void onStart() {
-				ULog.i( "RequestCallBack.onStart");
+				ULog.i("RequestCallBack.onStart");
 				progDialog.show();
 			}
 
 			@Override
 			public void onFailure(HttpException error, String msg) {
-				ULog.i( "RequestCallBack.onFailure");
+				ULog.i("RequestCallBack.onFailure");
 				progDialog.dismiss();
 
 				if (0 == start) {

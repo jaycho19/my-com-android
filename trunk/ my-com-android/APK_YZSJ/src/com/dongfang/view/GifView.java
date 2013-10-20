@@ -31,23 +31,23 @@ import com.dongfang.view.gif.GifFrame;
 public class GifView extends ImageView implements GifAction {
 
 	/** gif解码器 */
-	private GifDecoder		gifDecoder		= null;
+	private GifDecoder gifDecoder = null;
 	/** 当前要画的帧的图 */
-	private Bitmap			currentImage	= null;
+	private Bitmap currentImage = null;
 
-	private boolean			isRun			= true;
+	private boolean isRun = true;
 
-	private boolean			pause			= false;
+	private boolean pause = false;
 
-	private DrawThread		drawThread		= null;
+	private DrawThread drawThread = null;
 
-	private Context			context			= null;
+	private Context context = null;
 
-	private boolean			cacheImage		= false;
+	private boolean cacheImage = false;
 
-	private View			backView		= null;
+	private View backView = null;
 
-	private GifImageType	animationType	= GifImageType.SYNC_DECODER;
+	private GifImageType animationType = GifImageType.SYNC_DECODER;
 
 	/**
 	 * 解码过程中，Gif动画显示的方式<br>
@@ -74,7 +74,7 @@ public class GifView extends ImageView implements GifAction {
 		nativeInt = i;
 	}
 
-	final int	nativeInt;
+	final int nativeInt;
 	}
 
 	public GifView(Context context) {
@@ -303,20 +303,20 @@ public class GifView extends ImageView implements GifAction {
 		invalidate();
 	}
 
-	private Handler	redrawHandler	= new Handler() {
-										public void handleMessage(Message msg) {
-											try {
-												if (backView != null) {
-													backView.setBackgroundDrawable(new BitmapDrawable(currentImage));
-												}
-												else {
-													drawImage();
-												}
-											} catch (Exception ex) {
-												Log.e("GifView", ex.toString());
-											}
-										}
-									};
+	private Handler redrawHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			try {
+				if (backView != null) {
+					backView.setBackgroundDrawable(new BitmapDrawable(currentImage));
+				}
+				else {
+					drawImage();
+				}
+			} catch (Exception ex) {
+				Log.e("GifView", ex.toString());
+			}
+		}
+	};
 
 	/**
 	 * 动画线程
