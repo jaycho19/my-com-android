@@ -303,7 +303,7 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Object> 
 		return !mStop;
 	}
 
-	/**token过期重新获取token*/
+	/** token过期重新获取token */
 	private boolean isNewToken(String result) {
 		try {
 			LoginBean bean = new com.google.gson.Gson().fromJson(result, LoginBean.class);

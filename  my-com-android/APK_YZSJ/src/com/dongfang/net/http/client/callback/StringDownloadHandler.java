@@ -26,38 +26,40 @@ import com.dongfang.utils.IOUtils;
 
 public class StringDownloadHandler {
 
-    public String handleEntity(HttpEntity entity, RequestCallBackHandler callBackHandler, String charset) throws IOException {
-        if (entity == null) return null;
+	public String handleEntity(HttpEntity entity, RequestCallBackHandler callBackHandler, String charset)
+			throws IOException {
+		if (entity == null)
+			return null;
 
-        long current = 0;
-        long total = entity.getContentLength();
+		long current = 0;
+		long total = entity.getContentLength();
 
-        if (callBackHandler != null && !callBackHandler.updateProgress(total, current, true)) {
-            return null;
-        }
+		if (callBackHandler != null && !callBackHandler.updateProgress(total, current, true)) {
+			return null;
+		}
 
-        InputStream inputStream = null;
-        StringBuilder sb = new StringBuilder();
-        try {
-            inputStream = entity.getContent();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, charset));
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-                current += line.getBytes(charset).length;
-                if (callBackHandler != null) {
-                    if (!callBackHandler.updateProgress(total, current, false)) {
-                        return sb.toString();
-                    }
-                }
-            }
-            if (callBackHandler != null) {
-                callBackHandler.updateProgress(total, current, true);
-            }
-        } finally {
-            IOUtils.closeQuietly(inputStream);
-        }
-        return sb.toString();
-    }
+		InputStream inputStream = null;
+		StringBuilder sb = new StringBuilder();
+		try {
+			inputStream = entity.getContent();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, charset));
+			String line = "";
+			while ((line = reader.readLine()) != null) {
+				sb.append(line);
+				current += line.getBytes(charset).length;
+				if (callBackHandler != null) {
+					if (!callBackHandler.updateProgress(total, current, false)) {
+						return sb.toString();
+					}
+				}
+			}
+			if (callBackHandler != null) {
+				callBackHandler.updateProgress(total, current, true);
+			}
+		} finally {
+			IOUtils.closeQuietly(inputStream);
+		}
+		return sb.toString();
+	}
 
 }

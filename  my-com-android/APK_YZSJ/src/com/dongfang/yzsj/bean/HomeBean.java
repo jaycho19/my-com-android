@@ -62,14 +62,14 @@ public class HomeBean implements Parcelable {
 
 	/** 输出内容 */
 	public void toLog() {
-		ULog.d( "marquee = " + marquee);
+		ULog.d("marquee = " + marquee);
 
 		for (int i = 0, length = slider.size(); i < length; i++) {
-			ULog.d( "slider SliderItem = " + i + "\n" + slider.get(i).toString());
+			ULog.d("slider SliderItem = " + i + "\n" + slider.get(i).toString());
 		}
 
 		for (int i = 0, length = lives.size(); i < length; i++) {
-			ULog.d( "lives LivesItem = " + i + "\n" + lives.get(i).toString());
+			ULog.d("lives LivesItem = " + i + "\n" + lives.get(i).toString());
 		}
 		for (int i = 0, length = channelContents.size(); i < length; i++) {
 			// ULog.d( "channelContents ChannelItem = " + i + "\n" + channelContents.get(i).toString());

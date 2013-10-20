@@ -38,104 +38,108 @@ import com.dongfang.utils.ULog;
 
 public class SyncHttpHandler {
 
-    private final AbstractHttpClient client;
-    private final HttpContext context;
+	private final AbstractHttpClient client;
+	private final HttpContext context;
 
-    private int retriedTimes = 0;
+	private int retriedTimes = 0;
 
-    private String charset; // The default charset of response header info.
+	private String charset; // The default charset of response header info.
 
-    private HttpRedirectHandler httpRedirectHandler;
+	private HttpRedirectHandler httpRedirectHandler;
 
-    public void setHttpRedirectHandler(HttpRedirectHandler httpRedirectHandler) {
-        this.httpRedirectHandler = httpRedirectHandler;
-    }
+	public void setHttpRedirectHandler(HttpRedirectHandler httpRedirectHandler) {
+		this.httpRedirectHandler = httpRedirectHandler;
+	}
 
-    public SyncHttpHandler(AbstractHttpClient client, HttpContext context, String charset) {
-        this.client = client;
-        this.context = context;
-        this.charset = charset;
-    }
+	public SyncHttpHandler(AbstractHttpClient client, HttpContext context, String charset) {
+		this.client = client;
+		this.context = context;
+		this.charset = charset;
+	}
 
-    private String _getMethodRequestUrl; // If current request not http "get" method, it will be null.
-    private long expiry = HttpGetCache.getDefaultExpiryTime();
+	private String _getMethodRequestUrl; // If current request not http "get" method, it will be null.
+	private long expiry = HttpGetCache.getDefaultExpiryTime();
 
-    public void setExpiry(long expiry) {
-        this.expiry = expiry;
-    }
+	public void setExpiry(long expiry) {
+		this.expiry = expiry;
+	}
 
-    public ResponseStream sendRequest(HttpRequestBase request) throws HttpException {
+	public ResponseStream sendRequest(HttpRequestBase request) throws HttpException {
 
-        boolean retry = true;
-        HttpRequestRetryHandler retryHandler = client.getHttpRequestRetryHandler();
-        while (retry) {
-            IOException exception = null;
-            try {
-                if (request.getMethod().equals(HttpRequest.HttpMethod.GET.toString())) {
-                    _getMethodRequestUrl = request.getURI().toString();
-                } else {
-                    _getMethodRequestUrl = null;
-                }
-                
-                ULog.d(_getMethodRequestUrl);
-                
+		boolean retry = true;
+		HttpRequestRetryHandler retryHandler = client.getHttpRequestRetryHandler();
+		while (retry) {
+			IOException exception = null;
+			try {
+				if (request.getMethod().equals(HttpRequest.HttpMethod.GET.toString())) {
+					_getMethodRequestUrl = request.getURI().toString();
+				}
+				else {
+					_getMethodRequestUrl = null;
+				}
+
+				ULog.d(_getMethodRequestUrl);
+
 				// if (_getMethodRequestUrl != null) {
 				// String result = HttpUtils.sHttpGetCache.get(_getMethodRequestUrl);
 				// if (result != null) {
 				// return new ResponseStream(result);
 				// }
 				// }
-                HttpResponse response = client.execute(request, context);
-                return handleResponse(response);
-            } catch (UnknownHostException e) {
-                exception = e;
-                retry = retryHandler.retryRequest(exception, ++retriedTimes, context);
-            } catch (IOException e) {
-                exception = e;
-                retry = retryHandler.retryRequest(exception, ++retriedTimes, context);
-            } catch (NullPointerException e) {
-                exception = new IOException(e.getMessage());
-                retry = retryHandler.retryRequest(exception, ++retriedTimes, context);
-            } catch (HttpException e) {
-                throw e;
-            } catch (Exception e) {
-                exception = new IOException(e.getMessage());
-                retry = retryHandler.retryRequest(exception, ++retriedTimes, context);
-            } finally {
-                if (!retry && exception != null) {
-                    throw new HttpException(exception);
-                }
-            }
-        }
-        return null;
-    }
+				HttpResponse response = client.execute(request, context);
+				return handleResponse(response);
+			} catch (UnknownHostException e) {
+				exception = e;
+				retry = retryHandler.retryRequest(exception, ++retriedTimes, context);
+			} catch (IOException e) {
+				exception = e;
+				retry = retryHandler.retryRequest(exception, ++retriedTimes, context);
+			} catch (NullPointerException e) {
+				exception = new IOException(e.getMessage());
+				retry = retryHandler.retryRequest(exception, ++retriedTimes, context);
+			} catch (HttpException e) {
+				throw e;
+			} catch (Exception e) {
+				exception = new IOException(e.getMessage());
+				retry = retryHandler.retryRequest(exception, ++retriedTimes, context);
+			} finally {
+				if (!retry && exception != null) {
+					throw new HttpException(exception);
+				}
+			}
+		}
+		return null;
+	}
 
-    private ResponseStream handleResponse(HttpResponse response) throws HttpException, IOException {
-        if (response == null) {
-            throw new HttpException("response is null");
-        }
-        StatusLine status = response.getStatusLine();
-        int statusCode = status.getStatusCode();
-        if (statusCode < 300) {
+	private ResponseStream handleResponse(HttpResponse response) throws HttpException, IOException {
+		if (response == null) {
+			throw new HttpException("response is null");
+		}
+		StatusLine status = response.getStatusLine();
+		int statusCode = status.getStatusCode();
+		if (statusCode < 300) {
 
-            // Set charset from response header if it's exist.
-            String responseCharset = OtherUtils.getCharsetFromHttpResponse(response);
-            charset = TextUtils.isEmpty(responseCharset) ? charset : responseCharset;
+			// Set charset from response header if it's exist.
+			String responseCharset = OtherUtils.getCharsetFromHttpResponse(response);
+			charset = TextUtils.isEmpty(responseCharset) ? charset : responseCharset;
 
-            return new ResponseStream(response, charset, _getMethodRequestUrl, expiry);
-        } else if (statusCode == 301 || statusCode == 302) {
-            if (httpRedirectHandler == null) {
-                httpRedirectHandler = new DefaultHttpRedirectHandler();
-            }
-            HttpRequestBase request = httpRedirectHandler.getDirectRequest(response);
-            if (request != null) {
-                return this.sendRequest(request);
-            }
-        } else if (statusCode == 416) {
-            throw new HttpException(statusCode, "maybe the file has downloaded completely");
-        } else {
-            throw new HttpException(statusCode, status.getReasonPhrase());
-        }
-        return null;
-    }
+			return new ResponseStream(response, charset, _getMethodRequestUrl, expiry);
+		}
+		else if (statusCode == 301 || statusCode == 302) {
+			if (httpRedirectHandler == null) {
+				httpRedirectHandler = new DefaultHttpRedirectHandler();
+			}
+			HttpRequestBase request = httpRedirectHandler.getDirectRequest(response);
+			if (request != null) {
+				return this.sendRequest(request);
+			}
+		}
+		else if (statusCode == 416) {
+			throw new HttpException(statusCode, "maybe the file has downloaded completely");
+		}
+		else {
+			throw new HttpException(statusCode, status.getReasonPhrase());
+		}
+		return null;
+	}
 }

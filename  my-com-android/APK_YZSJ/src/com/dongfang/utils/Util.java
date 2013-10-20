@@ -85,7 +85,7 @@ public class Util {
 	 * @return 更新是否成功
 	 */
 	public static boolean saveDownloadPath(Context context, String path) {
-		ULog.d( "DownloadPath change to : " + path);
+		ULog.d("DownloadPath change to : " + path);
 		return context.getSharedPreferences(SHAREDPREFERENCES_USER_SETTINGS, Context.MODE_PRIVATE).edit()
 				.putString(SHAREDPREFERENCES_USER_DOWNLOAD_PATH, path).commit();
 	}
@@ -514,7 +514,7 @@ public class Util {
 	 */
 	public static void saveBitMap(Context context, Bitmap bitMap, String fileName, Bitmap.CompressFormat format) {
 		File f = new File("sdcard/" + fileName + ".png");
-		ULog.e( "saveBitMap filename = " + f.toString());
+		ULog.e("saveBitMap filename = " + f.toString());
 		try {
 			f.createNewFile();
 			FileOutputStream fOut = new FileOutputStream(f);
@@ -561,7 +561,7 @@ public class Util {
 	 * @return
 	 */
 	public static boolean IsPhoneNumber(String str) {
-		ULog.v( TAG + "  IsPhoneNumber(): " + str);
+		ULog.v(TAG + "  IsPhoneNumber(): " + str);
 		if (Pattern.compile("^\\+?[0-9]*").matcher(str).matches())
 			return true;
 		else
@@ -575,11 +575,11 @@ public class Util {
 	 * @return
 	 */
 	public static boolean IsEmailAddr(String str) {
-		ULog.v( "IsEmailAddr(): " + str);
+		ULog.v("IsEmailAddr(): " + str);
 		String estr = "^[a-zA-Z0-9._-]{1,}@[a-zA-Z0-9_-]{1,}(.([a-zA-Z0-9]){2,3}){1,3}$";
 		if (Pattern.compile(estr).matcher(str).matches()) {
 			String[] suffix = str.substring(str.indexOf("@") + 1).split("\\.");
-			ULog.v( "suffix.length = " + suffix.length);
+			ULog.v("suffix.length = " + suffix.length);
 			if (suffix.length <= 1) {
 				return false;
 			}
@@ -653,7 +653,7 @@ public class Util {
 			pro = Runtime.getRuntime().exec("curl ifconfig.me");
 			BufferedReader buf = new BufferedReader(new InputStreamReader(pro.getInputStream()));
 			if (!TextUtils.isEmpty(ipAddr = buf.readLine())) {
-				ULog.d( "curl ifconfig.me --> " + ipAddr);
+				ULog.d("curl ifconfig.me --> " + ipAddr);
 				return ipAddr;
 			}
 			pro.destroy();
@@ -670,7 +670,7 @@ public class Util {
 				http.setRequestMethod("GET");
 				BufferedReader buf = new BufferedReader(new InputStreamReader(http.getInputStream()));
 				while (!TextUtils.isEmpty(ipAddr = buf.readLine())) {
-					ULog.d( " IP --> " + ipAddr);
+					ULog.d(" IP --> " + ipAddr);
 					return ipAddr;
 				}
 			} catch (Exception e) {
@@ -1059,6 +1059,7 @@ public class Util {
 		}
 		return read;
 	}
+
 	/** 汉字等转成unicode */
 	public static String toUnicode(String s) {
 		String as[] = new String[s.length()];
@@ -1081,6 +1082,5 @@ public class Util {
 		s = s.replaceAll("%", "%25");
 		return s;
 	}
-
 
 }

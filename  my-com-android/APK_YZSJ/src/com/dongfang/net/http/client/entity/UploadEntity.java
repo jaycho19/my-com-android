@@ -18,11 +18,8 @@ package com.dongfang.net.http.client.entity;
 import com.dongfang.net.http.client.callback.RequestCallBackHandler;
 
 /**
- * Created with IntelliJ IDEA.
- * User: wyouflf
- * Date: 13-7-3
- * Time: 下午1:40
+ * Created with IntelliJ IDEA. User: wyouflf Date: 13-7-3 Time: 下午1:40
  */
 public interface UploadEntity {
-    void setCallBackHandler(RequestCallBackHandler callBackHandler);
+	void setCallBackHandler(RequestCallBackHandler callBackHandler);
 }

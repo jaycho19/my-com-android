@@ -29,71 +29,69 @@ import com.dongfang.utils.IOUtils;
 
 public class FileDownloadHandler {
 
-    public File handleEntity(HttpEntity entity,
-                             RequestCallBackHandler callBackHandler,
-                             String target,
-                             boolean isResume,
-                             String responseFileName) throws IOException {
-        if (entity == null || TextUtils.isEmpty(target)) {
-            return null;
-        }
+	public File handleEntity(HttpEntity entity, RequestCallBackHandler callBackHandler, String target,
+			boolean isResume, String responseFileName) throws IOException {
+		if (entity == null || TextUtils.isEmpty(target)) {
+			return null;
+		}
 
-        File targetFile = new File(target);
+		File targetFile = new File(target);
 
-        if (!targetFile.exists()) {
-            targetFile.createNewFile();
-        }
+		if (!targetFile.exists()) {
+			targetFile.createNewFile();
+		}
 
-        long current = 0;
-        InputStream inputStream = null;
-        FileOutputStream fileOutputStream = null;
+		long current = 0;
+		InputStream inputStream = null;
+		FileOutputStream fileOutputStream = null;
 
-        try {
+		try {
 
-            if (isResume) {
-                current = targetFile.length();
-                fileOutputStream = new FileOutputStream(target, true);
-            } else {
-                fileOutputStream = new FileOutputStream(target);
-            }
+			if (isResume) {
+				current = targetFile.length();
+				fileOutputStream = new FileOutputStream(target, true);
+			}
+			else {
+				fileOutputStream = new FileOutputStream(target);
+			}
 
-            long total = entity.getContentLength() + current;
+			long total = entity.getContentLength() + current;
 
-            if (callBackHandler != null && !callBackHandler.updateProgress(total, current, true)) {
-                return null;
-            }
+			if (callBackHandler != null && !callBackHandler.updateProgress(total, current, true)) {
+				return null;
+			}
 
+			inputStream = entity.getContent();
+			BufferedInputStream bis = new BufferedInputStream(inputStream);
 
-            inputStream = entity.getContent();
-            BufferedInputStream bis = new BufferedInputStream(inputStream);
+			byte[] tmp = new byte[4096];
+			int len;
+			while ((len = bis.read(tmp)) != -1) {
+				fileOutputStream.write(tmp, 0, len);
+				current += len;
+				if (callBackHandler != null) {
+					if (!callBackHandler.updateProgress(total, current, false)) {
+						return targetFile;
+					}
+				}
+			}
+			fileOutputStream.flush();
+			if (callBackHandler != null) {
+				callBackHandler.updateProgress(total, current, true);
+			}
+		} finally {
+			IOUtils.closeQuietly(inputStream);
+			IOUtils.closeQuietly(fileOutputStream);
+		}
 
-            byte[] tmp = new byte[4096];
-            int len;
-            while ((len = bis.read(tmp)) != -1) {
-                fileOutputStream.write(tmp, 0, len);
-                current += len;
-                if (callBackHandler != null) {
-                    if (!callBackHandler.updateProgress(total, current, false)) {
-                        return targetFile;
-                    }
-                }
-            }
-            fileOutputStream.flush();
-            if (callBackHandler != null) {
-                callBackHandler.updateProgress(total, current, true);
-            }
-        } finally {
-            IOUtils.closeQuietly(inputStream);
-            IOUtils.closeQuietly(fileOutputStream);
-        }
-
-        if (targetFile.exists() && !TextUtils.isEmpty(responseFileName)) {
-            File newFile = new File(targetFile.getParent(), responseFileName);
-            targetFile.renameTo(newFile);
-            return newFile;
-        } else {
-            return targetFile;
-        }
-    }
+		if (targetFile.exists() && !TextUtils.isEmpty(responseFileName)) {
+			File newFile = new File(targetFile.getParent(), responseFileName);
+			targetFile.renameTo(newFile);
+			return newFile;
+		}
+		else {
+			return targetFile;
+		}
+	}
 
 }

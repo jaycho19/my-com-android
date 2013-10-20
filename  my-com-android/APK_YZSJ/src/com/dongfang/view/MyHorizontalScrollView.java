@@ -24,31 +24,35 @@ import com.dongfang.yzsj.R;
  * @author dongfang,lichen,tangshaohua
  */
 public class MyHorizontalScrollView extends FrameLayout {
-	public static final String			TAG				= MyHorizontalScrollView.class.getSimpleName();
+	public static final String TAG = MyHorizontalScrollView.class.getSimpleName();
 
 	/** 子菜单之间的padding值 */
-	private static int					PADDING			= 2;
+	private static int PADDING = 2;
 
-	private Context						context;
-	private HorizontalScrollView		horScrollView;
-	private LinearLayout				itemLayout;
-	private ArrayList<TitleItemBeans>	itemList		= new ArrayList<TitleItemBeans>();
-	private List<ItemClickListener>		itemClickList	= new ArrayList<ItemClickListener>();
+	private Context context;
+	private HorizontalScrollView horScrollView;
+	private LinearLayout itemLayout;
+	private ArrayList<TitleItemBeans> itemList = new ArrayList<TitleItemBeans>();
+	private List<ItemClickListener> itemClickList = new ArrayList<ItemClickListener>();
 	private View conView;
 	private int textColor = 0xffffffff;
-	public 	LinearLayout getContainer(){
+
+	public LinearLayout getContainer() {
 		return itemLayout;
 	}
-	public void setTextColor(int textColor){
+
+	public void setTextColor(int textColor) {
 		this.textColor = textColor;
 	}
+
 	public MyHorizontalScrollView(Context context, AttributeSet attr) {
 		super(context, attr);
 		this.context = context;
 		initView(context);
 		PADDING = (int) (2 * Util.getWindowDensity(context));
 	}
-	public void setBackground(int resid){
+
+	public void setBackground(int resid) {
 		conView.setBackgroundResource(resid);
 	}
 
@@ -62,12 +66,12 @@ public class MyHorizontalScrollView extends FrameLayout {
 		addView(conView);
 	}
 
-	private OnItemListener	clickListener	= new OnItemListener();
+	private OnItemListener clickListener = new OnItemListener();
 
 	class OnItemListener implements OnClickListener {
 		@Override
 		public void onClick(View v) {
-			ULog.d( "v.getId() = " + v.getId());
+			ULog.d("v.getId() = " + v.getId());
 			for (int i = 0, length = itemLayout.getChildCount(); i < length; i++) {
 				if (null != v && v.getId() == itemLayout.getChildAt(i).getId()) {
 					if (itemClickList != null && itemClickList.get(i) != null) {

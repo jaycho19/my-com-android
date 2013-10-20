@@ -21,15 +21,15 @@ import com.dongfang.yzsj.R;
  * 
  */
 public class PhonePopupWindowTopBar extends PopupWindow implements OnClickListener {
-	public static final String	TAG					= PhonePopupWindowTopBar.class.getName();
-	private Context				mContext;
-	private LayoutInflater		mInflater;
-	private final float			mPercentOfWindow	= (float) 0.15;
+	public static final String TAG = PhonePopupWindowTopBar.class.getName();
+	private Context mContext;
+	private LayoutInflater mInflater;
+	private final float mPercentOfWindow = (float) 0.15;
 
-	private TextView			mVideoTitle;
-	private Button				btnBack;
-	private BasePopupWindow		basePop				= BasePopupWindow.getInstance();
-	private Mediaplayer			mMediaplayer		= Mediaplayer.getInstance();
+	private TextView mVideoTitle;
+	private Button btnBack;
+	private BasePopupWindow basePop = BasePopupWindow.getInstance();
+	private Mediaplayer mMediaplayer = Mediaplayer.getInstance();
 
 	public PhonePopupWindowTopBar(Context context) {
 		super(context);

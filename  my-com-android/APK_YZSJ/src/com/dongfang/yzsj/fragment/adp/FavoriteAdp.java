@@ -88,7 +88,7 @@ public class FavoriteAdp extends BaseAdapter {
 		}
 
 		final Movie movie = list.get(position);
-		holder.iv_placard.setImage(movie.getPC_MEDIA_POSTER_BIG());	
+		holder.iv_placard.setImage(movie.getPC_MEDIA_POSTER_BIG());
 		// BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG());
 		// BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG(), 105, 137);
 		holder.tv_des.setText(movie.getMEDIA_INTRO());
@@ -132,23 +132,23 @@ public class FavoriteAdp extends BaseAdapter {
 
 		@Override
 		public void onClick(View v) {
-			ULog.d( v.toString());
+			ULog.d(v.toString());
 			StringBuilder url = new StringBuilder(ComParams.HTTP_FAVORITE_DEL);
 			url.append("contentId=").append(contentId);
 			url.append("&").append("token=").append(User.getToken(context));
 			url.append("&").append("userTelephone=").append(User.getPhone(context));
 
-			ULog.i( url.toString());
+			ULog.i(url.toString());
 
 			new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 				@Override
 				public void onLoading(long total, long current) {
-					ULog.d( "RequestCallBack.onLoading total = " + total + "; current = " + current);
+					ULog.d("RequestCallBack.onLoading total = " + total + "; current = " + current);
 				}
 
 				@Override
 				public void onSuccess(String result) {
-					ULog.d( "onSuccess  --" + result);
+					ULog.d("onSuccess  --" + result);
 					progDialog.dismiss();
 
 					try {
@@ -168,13 +168,13 @@ public class FavoriteAdp extends BaseAdapter {
 
 				@Override
 				public void onStart() {
-					ULog.i( "RequestCallBack.onStart");
+					ULog.i("RequestCallBack.onStart");
 					progDialog.show();
 				}
 
 				@Override
 				public void onFailure(HttpException error, String msg) {
-					ULog.i( "RequestCallBack.onFailure");
+					ULog.i("RequestCallBack.onFailure");
 					progDialog.dismiss();
 				}
 			});

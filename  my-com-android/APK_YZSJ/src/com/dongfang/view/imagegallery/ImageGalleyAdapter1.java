@@ -64,7 +64,7 @@ public class ImageGalleyAdapter1 extends PagerAdapter {
 	@Override
 	public void destroyItem(ViewGroup container, int position, Object object) {
 		// ULog.d( "destroyItem --> position = " + position);
-		ULog.d( " object ? = null " + (null == object));
+		ULog.d(" object ? = null " + (null == object));
 		if (null != object)
 			container.removeView((View) object);
 
@@ -132,7 +132,7 @@ public class ImageGalleyAdapter1 extends PagerAdapter {
 
 		@Override
 		public void onClick(View v) {
-			ULog.d( v.toString());
+			ULog.d(v.toString());
 
 			if (User.isLogined(context)) {
 				new ToDetailAsyncTask(context, channelId, contentId).execute();

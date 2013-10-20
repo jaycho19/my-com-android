@@ -35,41 +35,41 @@ import com.dongfang.yzsj.R;
 public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickListener, OnLongClickListener,
 		OnCurrentPositionUpdateListener, OnPlayPauseStateChagedListener, OnBufferingUpdateListener,
 		OnDurationUpdateListener {
-	public static final String	TAG						= PhonePopupWindowBottomBar.class.getName();
+	public static final String TAG = PhonePopupWindowBottomBar.class.getName();
 
-	private Context				mContext;
-	private LayoutInflater		mInflater;
-	private float				mPercentOfWindow		= (float) 0.28;
-	private TextView			mPlayedTime;
-	private TextView			mTotalTime;
-	private Mediaplayer			mMediaplayer			= Mediaplayer.getInstance();
+	private Context mContext;
+	private LayoutInflater mInflater;
+	private float mPercentOfWindow = (float) 0.28;
+	private TextView mPlayedTime;
+	private TextView mTotalTime;
+	private Mediaplayer mMediaplayer = Mediaplayer.getInstance();
 	// private Timer mTimer;
 	// private int mCurrentBufferPercentage;
-	private SeekBar				skbProgress;
+	private SeekBar skbProgress;
 	/** 推送到TV按钮 */
-//	private Button				btnPush2tv;
-	private ImageButton			btnPlayPause;
-	private ImageButton			btnBackwardPlay;
-	private ImageButton			btnForwardPlay;
-//	private ImageButton			btnFullScreen2Half;
+	// private Button btnPush2tv;
+	private ImageButton btnPlayPause;
+	private ImageButton btnBackwardPlay;
+	private ImageButton btnForwardPlay;
+	// private ImageButton btnFullScreen2Half;
 	/** 选择视频码率（清晰度） */
-//	private Button				btnVideoBitRate;
+	// private Button btnVideoBitRate;
 	/** 选择视频集数 */
-//	private Button				btnEpisode;
+	// private Button btnEpisode;
 
 	/** 播放，快进，快退的容器 */
-	private View				viewMediaControl;
+	private View viewMediaControl;
 
-	private String				mCurrentVideoBitRate	= new String();
-	private String				mCurrentResolutionText	= new String();
+	private String mCurrentVideoBitRate = new String();
+	private String mCurrentResolutionText = new String();
 
-	private BasePopupWindow		basePop					= BasePopupWindow.getInstance();
+	private BasePopupWindow basePop = BasePopupWindow.getInstance();
 
-	private final int			progressChanged			= 0;
-	private final int			progressChangedFromUser	= 1;
+	private final int progressChanged = 0;
+	private final int progressChangedFromUser = 1;
 
-	private int					mDuration;
-	private int					mCurrentPosition;
+	private int mDuration;
+	private int mCurrentPosition;
 
 	// private final int ISBUFFERORNOT = 1;
 
@@ -162,13 +162,13 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 		mPlayedTime = (TextView) view.findViewById(R.id.played_time);
 		mTotalTime = (TextView) view.findViewById(R.id.total_time);
 		skbProgress = (SeekBar) view.findViewById(R.id.video_seekbar);
-//		btnPush2tv = (Button) view.findViewById(R.id.btn_push_to_tv);
+		// btnPush2tv = (Button) view.findViewById(R.id.btn_push_to_tv);
 		btnPlayPause = (ImageButton) view.findViewById(R.id.btn_play_pause);
 		btnBackwardPlay = (ImageButton) view.findViewById(R.id.btn_backwardplay);
 		btnForwardPlay = (ImageButton) view.findViewById(R.id.btn_forwardplay);
-//		btnVideoBitRate = (Button) view.findViewById(R.id.btn_video_bit_rate);
-//		btnEpisode = (Button) view.findViewById(R.id.btn_episode);
-//		btnFullScreen2Half = (ImageButton) view.findViewById(R.id.btn_fullscreen2half);
+		// btnVideoBitRate = (Button) view.findViewById(R.id.btn_video_bit_rate);
+		// btnEpisode = (Button) view.findViewById(R.id.btn_episode);
+		// btnFullScreen2Half = (ImageButton) view.findViewById(R.id.btn_fullscreen2half);
 
 		viewMediaControl = view.findViewById(R.id.mc_container);
 
@@ -176,20 +176,16 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 
 	private void setupView() {
 
-			// mPercentOfWindow = (float) 0.28;
+		// mPercentOfWindow = (float) 0.28;
 
-			btnPlayPause.setOnClickListener(this);
-			btnBackwardPlay.setOnClickListener(this);
-			btnForwardPlay.setOnClickListener(this);
+		btnPlayPause.setOnClickListener(this);
+		btnBackwardPlay.setOnClickListener(this);
+		btnForwardPlay.setOnClickListener(this);
 
-			btnBackwardPlay.setOnLongClickListener(this);
-			btnForwardPlay.setOnLongClickListener(this);
+		btnBackwardPlay.setOnLongClickListener(this);
+		btnForwardPlay.setOnLongClickListener(this);
 
-			skbProgress.setOnSeekBarChangeListener(new VideoSeekBarListener());
-
-		
-
-
+		skbProgress.setOnSeekBarChangeListener(new VideoSeekBarListener());
 
 	}
 
@@ -253,7 +249,7 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 			skbProgress.setSecondaryProgress(percent * 10);
 		}
 		else {
-				skbProgress.setSecondaryProgress(percent * 10);
+			skbProgress.setSecondaryProgress(percent * 10);
 		}
 
 	}
@@ -264,7 +260,7 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 		int duration = mDuration;
 		// mCurrentBufferPercentage = mMediaplayer.getCurrentBufferingUpdate();
 
-		ULog.w( "CurrentPosition = " + position + "; Duration = " + duration + " buffer = ");
+		ULog.w("CurrentPosition = " + position + "; Duration = " + duration + " buffer = ");
 
 		if (duration > 0) {
 			int pos = skbProgress.getMax() * (position / 1000) / (duration / 1000);
@@ -278,8 +274,8 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 	}
 
 	class VideoSeekBarListener implements SeekBar.OnSeekBarChangeListener {
-		private long	duration	= 0;
-		private long	newposition	= 0;
+		private long duration = 0;
+		private long newposition = 0;
 
 		@Override
 		public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -288,9 +284,9 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 			}
 			duration = mDuration;
 			newposition = (duration * progress) / 1000L;
-			ULog.d( "duration    = " + duration);
-			ULog.d( "CurPosition = " + mMediaplayer.getCurrentPosition());
-			ULog.d( "newposition = " + newposition);
+			ULog.d("duration    = " + duration);
+			ULog.d("CurPosition = " + mMediaplayer.getCurrentPosition());
+			ULog.d("newposition = " + newposition);
 
 			if (mPlayedTime != null && newposition > 0) {
 				String time = Util.formatTime(newposition / 1000);
@@ -309,7 +305,7 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 
 		@Override
 		public void onStopTrackingTouch(SeekBar seekBar) {
-			ULog.d( "newposition = " + newposition);
+			ULog.d("newposition = " + newposition);
 			if (mMediaplayer == null)
 				return;
 
@@ -323,7 +319,7 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 	}
 
 	private void resetSeekBar() {
-		ULog.d( "resetSeekBar ");
+		ULog.d("resetSeekBar ");
 		mPlayedTime.setText("00:00");
 		mTotalTime.setText("00:00:00");
 
@@ -331,7 +327,6 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 		skbProgress.setProgress(0);
 
 	}
-
 
 	/**
 	 * 根据播放器状态来显示播放或者暂停按键
@@ -350,7 +345,7 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 
 	@Override
 	public void onClick(View v) {
-		ULog.d( "onClick ");
+		ULog.d("onClick ");
 		switch (v.getId()) {
 		case R.id.btn_backwardplay:
 			basePop.sendMessage(BasePopupWindow.PRESS_BACKWARDPLAY_BTN, null);
@@ -366,7 +361,7 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 
 	@Override
 	public boolean onLongClick(View v) {
-		ULog.d( "onLongClick ");
+		ULog.d("onLongClick ");
 		switch (v.getId()) {
 
 		case R.id.btn_backwardplay:
@@ -380,20 +375,20 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 		return false;
 	}
 
-	private Handler	myHandler	= new Handler() {
-									@Override
-									public void handleMessage(Message msg) {
-										super.handleMessage(msg);
-										switch (msg.what) {
-										case progressChanged:
-											setProgressAndBufferingUpdate();
-											break;
-										case progressChangedFromUser:
-											basePop.sendMessage(BasePopupWindow.VIDEO_SEEKBAR_IS_WORKING, null);
-											break;
+	private Handler myHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			switch (msg.what) {
+			case progressChanged:
+				setProgressAndBufferingUpdate();
+				break;
+			case progressChangedFromUser:
+				basePop.sendMessage(BasePopupWindow.VIDEO_SEEKBAR_IS_WORKING, null);
+				break;
 
-										}
-									}
-								};
+			}
+		}
+	};
 
 }

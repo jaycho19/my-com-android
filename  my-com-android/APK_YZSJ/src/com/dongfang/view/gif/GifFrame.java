@@ -22,12 +22,12 @@ public class GifFrame {
 	}
 
 	/** 图片 */
-	public Bitmap	image;
+	public Bitmap image;
 	/** 延时 */
-	public int		delay;
+	public int delay;
 	/** 当图片存成文件时的文件名 */
-	public String	imageName	= null;
+	public String imageName = null;
 
 	/** 下一帧 */
-	public GifFrame	nextFrame	= null;
+	public GifFrame nextFrame = null;
 }

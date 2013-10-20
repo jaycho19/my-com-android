@@ -120,7 +120,7 @@ public class OrderDialog extends Dialog {
 					public void onSuccess(String result) {
 						progressDialog.dismiss();
 
-						ULog.d( "onSuccess  --" + result);
+						ULog.d("onSuccess  --" + result);
 						try {
 							JSONObject obj = new JSONObject(result);
 							if (obj.has("success") && obj.getBoolean("success")) {
@@ -139,14 +139,14 @@ public class OrderDialog extends Dialog {
 
 					@Override
 					public void onStart() {
-						ULog.i( "onStart");
+						ULog.i("onStart");
 						progressDialog.show();
 
 					}
 
 					@Override
 					public void onFailure(HttpException error, String msg) {
-						ULog.i( "onFailure");
+						ULog.i("onFailure");
 						Toast.makeText(context, "验证码获取失败！", Toast.LENGTH_LONG).show();
 						progressDialog.dismiss();
 

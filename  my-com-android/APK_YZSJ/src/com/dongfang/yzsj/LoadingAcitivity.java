@@ -77,7 +77,7 @@ public class LoadingAcitivity extends BaseActivity {
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_HOME, new RequestCallBack<String>() {
 			@Override
 			public void onLoading(long total, long current) {
-				ULog.d( "RequestCallBack.onLoading total = " + total + "; current = " + current);
+				ULog.d("RequestCallBack.onLoading total = " + total + "; current = " + current);
 			}
 
 			@Override
@@ -94,13 +94,13 @@ public class LoadingAcitivity extends BaseActivity {
 
 			@Override
 			public void onStart() {
-				ULog.i( "RequestCallBack.onStart");
+				ULog.i("RequestCallBack.onStart");
 
 			}
 
 			@Override
 			public void onFailure(HttpException error, String msg) {
-				ULog.i( "RequestCallBack.onFailure");
+				ULog.i("RequestCallBack.onFailure");
 			}
 		});
 		// }

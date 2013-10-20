@@ -1,6 +1,5 @@
 package com.dongfang.dl;
 
-
 public interface OnDownloadListener {
 
 	public void updateProcess(DownloadInfo dlInfo);

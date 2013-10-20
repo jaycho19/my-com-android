@@ -36,76 +36,82 @@ import com.dongfang.utils.ULog;
 
 public class RetryHandler implements HttpRequestRetryHandler {
 
-    private static final int RETRY_SLEEP_INTERVAL = 500;
+	private static final int RETRY_SLEEP_INTERVAL = 500;
 
-    private static HashSet<Class<?>> exceptionWhiteList = new HashSet<Class<?>>();
+	private static HashSet<Class<?>> exceptionWhiteList = new HashSet<Class<?>>();
 
-    private static HashSet<Class<?>> exceptionBlackList = new HashSet<Class<?>>();
+	private static HashSet<Class<?>> exceptionBlackList = new HashSet<Class<?>>();
 
-    static {
-        exceptionWhiteList.add(NoHttpResponseException.class);
-        exceptionWhiteList.add(UnknownHostException.class);
-        exceptionWhiteList.add(SocketException.class);
+	static {
+		exceptionWhiteList.add(NoHttpResponseException.class);
+		exceptionWhiteList.add(UnknownHostException.class);
+		exceptionWhiteList.add(SocketException.class);
 
-        exceptionBlackList.add(InterruptedIOException.class);
-        exceptionBlackList.add(SSLHandshakeException.class);
-    }
+		exceptionBlackList.add(InterruptedIOException.class);
+		exceptionBlackList.add(SSLHandshakeException.class);
+	}
 
-    private final int maxRetries;
+	private final int maxRetries;
 
-    public RetryHandler(int maxRetries) {
-        this.maxRetries = maxRetries;
-    }
+	public RetryHandler(int maxRetries) {
+		this.maxRetries = maxRetries;
+	}
 
-    @Override
-    public boolean retryRequest(IOException exception, int retriedTimes, HttpContext context) {
-        boolean retry = true;
+	@Override
+	public boolean retryRequest(IOException exception, int retriedTimes, HttpContext context) {
+		boolean retry = true;
 
-        if (exception == null || context == null) {
-            return false;
-        }
+		if (exception == null || context == null) {
+			return false;
+		}
 
-        Boolean b = (Boolean) context.getAttribute(ExecutionContext.HTTP_REQ_SENT);
-        boolean sent = (b != null && b.booleanValue());
+		Boolean b = (Boolean) context.getAttribute(ExecutionContext.HTTP_REQ_SENT);
+		boolean sent = (b != null && b.booleanValue());
 
-        if (retriedTimes > maxRetries) {
-            retry = false;
-        } else if (exceptionBlackList.contains(exception.getClass())) {
-            retry = false;
-        } else if (exceptionWhiteList.contains(exception.getClass())) {
-            retry = true;
-        } else if (!sent) {
-            retry = true;
-        }
+		if (retriedTimes > maxRetries) {
+			retry = false;
+		}
+		else if (exceptionBlackList.contains(exception.getClass())) {
+			retry = false;
+		}
+		else if (exceptionWhiteList.contains(exception.getClass())) {
+			retry = true;
+		}
+		else if (!sent) {
+			retry = true;
+		}
 
-        if (retry) {
-            try {
-                Object currRequest = context.getAttribute(ExecutionContext.HTTP_REQUEST);
-                if (currRequest != null) {
-                    if (currRequest instanceof HttpRequestBase) {
-                        HttpRequestBase requestBase = (HttpRequestBase) currRequest;
-                        retry = "GET".equals(requestBase.getMethod());
-                    } else if (currRequest instanceof RequestWrapper) {
-                        RequestWrapper requestWrapper = (RequestWrapper) currRequest;
-                        retry = "GET".equals(requestWrapper.getMethod());
-                    }
-                } else {
-                    retry = false;
-                    ULog.e("retry error, curr request is null");
-                }
-            } catch (Exception e) {
-                retry = false;
-                ULog.e("retry error", e);
-            }
-        }
+		if (retry) {
+			try {
+				Object currRequest = context.getAttribute(ExecutionContext.HTTP_REQUEST);
+				if (currRequest != null) {
+					if (currRequest instanceof HttpRequestBase) {
+						HttpRequestBase requestBase = (HttpRequestBase) currRequest;
+						retry = "GET".equals(requestBase.getMethod());
+					}
+					else if (currRequest instanceof RequestWrapper) {
+						RequestWrapper requestWrapper = (RequestWrapper) currRequest;
+						retry = "GET".equals(requestWrapper.getMethod());
+					}
+				}
+				else {
+					retry = false;
+					ULog.e("retry error, curr request is null");
+				}
+			} catch (Exception e) {
+				retry = false;
+				ULog.e("retry error", e);
+			}
+		}
 
-        if (retry) {
-            SystemClock.sleep(RETRY_SLEEP_INTERVAL); // sleep a while and retry http request again.
-        } else {
-            ULog.e(exception.getMessage(), exception);
-        }
+		if (retry) {
+			SystemClock.sleep(RETRY_SLEEP_INTERVAL); // sleep a while and retry http request again.
+		}
+		else {
+			ULog.e(exception.getMessage(), exception);
+		}
 
-        return retry;
-    }
+		return retry;
+	}
 
 }

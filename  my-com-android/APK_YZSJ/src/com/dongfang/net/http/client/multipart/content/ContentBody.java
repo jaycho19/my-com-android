@@ -25,10 +25,10 @@ import com.dongfang.net.http.client.multipart.MultipartEntity;
  */
 public interface ContentBody extends ContentDescriptor {
 
-    String getFilename();
+	String getFilename();
 
-    void writeTo(OutputStream out) throws IOException;
+	void writeTo(OutputStream out) throws IOException;
 
-    void setCallBackInfo(MultipartEntity.CallBackInfo callBackInfo);
+	void setCallBackInfo(MultipartEntity.CallBackInfo callBackInfo);
 
 }

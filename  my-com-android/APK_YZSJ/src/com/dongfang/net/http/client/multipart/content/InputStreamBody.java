@@ -27,66 +27,66 @@ import com.dongfang.utils.IOUtils;
  */
 public class InputStreamBody extends AbstractContentBody {
 
-    private final InputStream in;
-    private final String filename;
-    private long length;
+	private final InputStream in;
+	private final String filename;
+	private long length;
 
-    public InputStreamBody(final InputStream in, long length, final String mimeType, final String filename) {
-        super(mimeType);
-        if (in == null) {
-            throw new IllegalArgumentException("Input stream may not be null");
-        }
-        this.in = in;
-        this.filename = filename;
-        this.length = length;
-    }
+	public InputStreamBody(final InputStream in, long length, final String mimeType, final String filename) {
+		super(mimeType);
+		if (in == null) {
+			throw new IllegalArgumentException("Input stream may not be null");
+		}
+		this.in = in;
+		this.filename = filename;
+		this.length = length;
+	}
 
-    public InputStreamBody(final InputStream in, long length, final String filename) {
-        this(in, length, "application/octet-stream", filename);
-    }
+	public InputStreamBody(final InputStream in, long length, final String filename) {
+		this(in, length, "application/octet-stream", filename);
+	}
 
-    public InputStreamBody(final InputStream in, long length) {
-        this(in, length, "application/octet-stream", "no_name");
-    }
+	public InputStreamBody(final InputStream in, long length) {
+		this(in, length, "application/octet-stream", "no_name");
+	}
 
-    public InputStream getInputStream() {
-        return this.in;
-    }
+	public InputStream getInputStream() {
+		return this.in;
+	}
 
-    public void writeTo(final OutputStream out) throws IOException {
-        if (out == null) {
-            throw new IllegalArgumentException("Output stream may not be null");
-        }
-        try {
-            byte[] tmp = new byte[4096];
-            int l;
-            while ((l = this.in.read(tmp)) != -1) {
-                out.write(tmp, 0, l);
-                callBackInfo.pos += l;
-                if (!callBackInfo.doCallBack(false)) {
-                    return;
-                }
-            }
-            out.flush();
-        } finally {
-            IOUtils.closeQuietly(this.in);
-        }
-    }
+	public void writeTo(final OutputStream out) throws IOException {
+		if (out == null) {
+			throw new IllegalArgumentException("Output stream may not be null");
+		}
+		try {
+			byte[] tmp = new byte[4096];
+			int l;
+			while ((l = this.in.read(tmp)) != -1) {
+				out.write(tmp, 0, l);
+				callBackInfo.pos += l;
+				if (!callBackInfo.doCallBack(false)) {
+					return;
+				}
+			}
+			out.flush();
+		} finally {
+			IOUtils.closeQuietly(this.in);
+		}
+	}
 
-    public String getTransferEncoding() {
-        return MIME.ENC_BINARY;
-    }
+	public String getTransferEncoding() {
+		return MIME.ENC_BINARY;
+	}
 
-    public String getCharset() {
-        return null;
-    }
+	public String getCharset() {
+		return null;
+	}
 
-    public long getContentLength() {
-        return this.length;
-    }
+	public long getContentLength() {
+		return this.length;
+	}
 
-    public String getFilename() {
-        return this.filename;
-    }
+	public String getFilename() {
+		return this.filename;
+	}
 
 }

@@ -18,74 +18,74 @@ import android.os.Environment;
 public class GifDecoder extends Thread {
 
 	/** 状态：正在解码中 */
-	public static final int		STATUS_PARSING		= 0;
+	public static final int STATUS_PARSING = 0;
 	/** 状态：图片格式错误 */
-	public static final int		STATUS_FORMAT_ERROR	= 1;
+	public static final int STATUS_FORMAT_ERROR = 1;
 	/** 状态：打开失败 */
-	public static final int		STATUS_OPEN_ERROR	= 2;
+	public static final int STATUS_OPEN_ERROR = 2;
 	/** 状态：解码成功 */
-	public static final int		STATUS_FINISH		= -1;
+	public static final int STATUS_FINISH = -1;
 
-	private InputStream			in;
-	private int					status;
+	private InputStream in;
+	private int status;
 
-	public int					width;									// full image width
-	public int					height;								// full image height
-	private boolean				gctFlag;								// global color table used
-	private int					gctSize;								// size of global color table
-	private int					loopCount			= 1;				// iterations; 0 = repeat forever
+	public int width; // full image width
+	public int height; // full image height
+	private boolean gctFlag; // global color table used
+	private int gctSize; // size of global color table
+	private int loopCount = 1; // iterations; 0 = repeat forever
 
-	private int[]				gct;									// global color table
-	private int[]				lct;									// local color table
-	private int[]				act;									// active color table
+	private int[] gct; // global color table
+	private int[] lct; // local color table
+	private int[] act; // active color table
 
-	private int					bgIndex;								// background color index
-	private int					bgColor;								// background color
-	private int					lastBgColor;							// previous bg color
-	private int					pixelAspect;							// pixel aspect ratio
+	private int bgIndex; // background color index
+	private int bgColor; // background color
+	private int lastBgColor; // previous bg color
+	private int pixelAspect; // pixel aspect ratio
 
-	private boolean				lctFlag;								// local color table flag
-	private boolean				interlace;								// interlace flag
-	private int					lctSize;								// local color table size
+	private boolean lctFlag; // local color table flag
+	private boolean interlace; // interlace flag
+	private int lctSize; // local color table size
 
-	private int					ix, iy, iw, ih;						// current image rectangle
-	private int					lrx, lry, lrw, lrh;
-	private Bitmap				image;									// current frame
-	private Bitmap				lastImage;								// previous frame
-	private GifFrame			currentFrame		= null;
+	private int ix, iy, iw, ih; // current image rectangle
+	private int lrx, lry, lrw, lrh;
+	private Bitmap image; // current frame
+	private Bitmap lastImage; // previous frame
+	private GifFrame currentFrame = null;
 
-	private boolean				isShow				= false;
+	private boolean isShow = false;
 
-	private byte[]				block				= new byte[256];	// current data block
-	private int					blockSize			= 0;				// block size
+	private byte[] block = new byte[256]; // current data block
+	private int blockSize = 0; // block size
 
 	// last graphic control extension info
-	private int					dispose				= 0;
+	private int dispose = 0;
 	// 0=no action; 1=leave in place; 2=restore to bg; 3=restore to prev
-	private int					lastDispose			= 0;
-	private boolean				transparency		= false;			// use transparent color
-	private int					delay				= 0;				// delay in milliseconds
-	private int					transIndex;							// transparent color index
+	private int lastDispose = 0;
+	private boolean transparency = false; // use transparent color
+	private int delay = 0; // delay in milliseconds
+	private int transIndex; // transparent color index
 
-	private static final int	MaxStackSize		= 4096;
+	private static final int MaxStackSize = 4096;
 	// max decoder pixel stack size
 
 	// LZW decoder working arrays
-	private short[]				prefix;
-	private byte[]				suffix;
-	private byte[]				pixelStack;
-	private byte[]				pixels;
+	private short[] prefix;
+	private byte[] suffix;
+	private byte[] pixelStack;
+	private byte[] pixels;
 
-	private GifFrame			gifFrame;								// frames read from current file
-	private int					frameCount;
+	private GifFrame gifFrame; // frames read from current file
+	private int frameCount;
 
-	private GifAction			action				= null;
+	private GifAction action = null;
 
-	private byte[]				gifData				= null;
+	private byte[] gifData = null;
 	/** 图片缓存的路径 */
-	private String				imagePath			= null;
+	private String imagePath = null;
 	/** 是否要缓存图片 */
-	private boolean				cacheImage			= false;
+	private boolean cacheImage = false;
 
 	public GifDecoder(GifAction action) {
 		this.action = action;
@@ -128,7 +128,8 @@ public class GifDecoder extends Thread {
 				boolean f = true;
 
 				if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-					imagePath = android.os.Environment.getExternalStorageDirectory().getPath() + File.separator + "gifView_tmp_dir" + File.separator + getDir();
+					imagePath = android.os.Environment.getExternalStorageDirectory().getPath() + File.separator
+							+ "gifView_tmp_dir" + File.separator + getDir();
 					if (!createDir(imagePath)) {
 						f = true;
 					}

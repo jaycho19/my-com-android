@@ -17,99 +17,98 @@ package com.dongfang.net.http.client;
 
 import com.dongfang.utils.core.LruMemoryCache;
 
-
 /**
- * Author: wyouflf
- * Date: 13-8-1
- * Time: 下午12:04
+ * Author: wyouflf Date: 13-8-1 Time: 下午12:04
  */
 public class HttpGetCache {
 
-    /**
-     * key: url
-     * value: response result
-     */
-    private LruMemoryCache<String, String> mMemoryCache;
+	/**
+	 * key: url value: response result
+	 */
+	private LruMemoryCache<String, String> mMemoryCache;
 
-    private final static int DEFAULT_CACHE_SIZE = 1024 * 1024 * 1;// 1M
-    private final static long DEFAULT_EXPIRY_TIME = 1000 * 60; // 60 seconds
-    private final static long MIN_EXPIRY_TIME = 200;
+	private final static int DEFAULT_CACHE_SIZE = 1024 * 1024 * 1;// 1M
+	private final static long DEFAULT_EXPIRY_TIME = 1000 * 60; // 60 seconds
+	private final static long MIN_EXPIRY_TIME = 200;
 
-    private int cacheSize = DEFAULT_CACHE_SIZE;
+	private int cacheSize = DEFAULT_CACHE_SIZE;
 
-    private boolean enabled = true;
+	private boolean enabled = true;
 
-    private static long defaultExpiryTime = DEFAULT_EXPIRY_TIME;
+	private static long defaultExpiryTime = DEFAULT_EXPIRY_TIME;
 
-    /**
-     * HttpGetCache(HttpGetCache.DEFAULT_CACHE_SIZE, HttpGetCache.DEFAULT_EXPIRY_TIME);
-     */
-    public HttpGetCache() {
-        this(HttpGetCache.DEFAULT_CACHE_SIZE, HttpGetCache.DEFAULT_EXPIRY_TIME);
-    }
+	/**
+	 * HttpGetCache(HttpGetCache.DEFAULT_CACHE_SIZE, HttpGetCache.DEFAULT_EXPIRY_TIME);
+	 */
+	public HttpGetCache() {
+		this(HttpGetCache.DEFAULT_CACHE_SIZE, HttpGetCache.DEFAULT_EXPIRY_TIME);
+	}
 
-    public HttpGetCache(int cacheSize, long defaultExpiryTime) {
-        if (cacheSize > DEFAULT_CACHE_SIZE) {
-            this.cacheSize = cacheSize;
-        }
-        HttpGetCache.setDefaultExpiryTime(defaultExpiryTime);
+	public HttpGetCache(int cacheSize, long defaultExpiryTime) {
+		if (cacheSize > DEFAULT_CACHE_SIZE) {
+			this.cacheSize = cacheSize;
+		}
+		HttpGetCache.setDefaultExpiryTime(defaultExpiryTime);
 
-        mMemoryCache = new LruMemoryCache<String, String>(this.cacheSize) {
-            @Override
-            protected int sizeOf(String key, String value) {
-                if (value == null) return 0;
-                return value.length();
-            }
-        };
-    }
+		mMemoryCache = new LruMemoryCache<String, String>(this.cacheSize) {
+			@Override
+			protected int sizeOf(String key, String value) {
+				if (value == null)
+					return 0;
+				return value.length();
+			}
+		};
+	}
 
-    public void setCacheSize(int cacheSize) {
-        if (cacheSize > DEFAULT_CACHE_SIZE) {
-            mMemoryCache.setMaxSize(cacheSize);
-        }
-    }
+	public void setCacheSize(int cacheSize) {
+		if (cacheSize > DEFAULT_CACHE_SIZE) {
+			mMemoryCache.setMaxSize(cacheSize);
+		}
+	}
 
-    public static void setDefaultExpiryTime(long defaultExpiryTime) {
-        if (defaultExpiryTime > MIN_EXPIRY_TIME) {
-            HttpGetCache.defaultExpiryTime = defaultExpiryTime;
-        } else {
-            HttpGetCache.defaultExpiryTime = MIN_EXPIRY_TIME;
-        }
-    }
+	public static void setDefaultExpiryTime(long defaultExpiryTime) {
+		if (defaultExpiryTime > MIN_EXPIRY_TIME) {
+			HttpGetCache.defaultExpiryTime = defaultExpiryTime;
+		}
+		else {
+			HttpGetCache.defaultExpiryTime = MIN_EXPIRY_TIME;
+		}
+	}
 
-    public static long getDefaultExpiryTime() {
-        return HttpGetCache.defaultExpiryTime;
-    }
+	public static long getDefaultExpiryTime() {
+		return HttpGetCache.defaultExpiryTime;
+	}
 
-    public void put(String url, String result) {
-        put(url, result, defaultExpiryTime);
-    }
+	public void put(String url, String result) {
+		put(url, result, defaultExpiryTime);
+	}
 
-    public void put(String url, String result, long expiry) {
-        if (!enabled || url == null || result == null) return;
+	public void put(String url, String result, long expiry) {
+		if (!enabled || url == null || result == null)
+			return;
 
-        if (expiry < MIN_EXPIRY_TIME) {
-            expiry = MIN_EXPIRY_TIME;
-        }
+		if (expiry < MIN_EXPIRY_TIME) {
+			expiry = MIN_EXPIRY_TIME;
+		}
 
-        if (mMemoryCache != null) {
-            mMemoryCache.put(url, result, System.currentTimeMillis() + expiry);
-        }
-    }
+		if (mMemoryCache != null) {
+			mMemoryCache.put(url, result, System.currentTimeMillis() + expiry);
+		}
+	}
 
-    public String get(String url) {
-        return enabled ? mMemoryCache.get(url) : null;
-    }
+	public String get(String url) {
+		return enabled ? mMemoryCache.get(url) : null;
+	}
 
-    public void clear() {
-        mMemoryCache.evictAll();
-    }
+	public void clear() {
+		mMemoryCache.evictAll();
+	}
 
-    public boolean isEnabled() {
-        return enabled;
-    }
+	public boolean isEnabled() {
+		return enabled;
+	}
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 }

@@ -30,29 +30,26 @@ import com.dongfang.utils.ULog;
 import com.dongfang.utils.Util;
 
 public class LoadImageRunnable implements Runnable {
-	
-	public static final  String	TAG					= LoadImageRunnable.class.getSimpleName();
 
-	DownloadInfo			dlInfo;
-	//OnDownloadListener	listener;
-	public static final int		STATE_WAITING		= 0;									// 处于等待状态
-	public static final int		STATE_DOWNLOADING	= 1;									// 正在下载状态
-	public static final int		STATE_PAUSE			= 2;									// 处于暂停
-	public static final int		STATE_FINISH		= 3;									// 已经下载完成，重复下载时出现的提示
-	public static final int		STATE_CANCEL		= 4;									// 取消下载
-	public static final int		STATE_ERROR			= 5;									// 下载错误（无法下载，断网等）
-	public static final  int		BUFFER_SIZE			= 1024 * 2;
-	private Context				context;
-	private Handler             handler;
-	
-	
-	public LoadImageRunnable(Context context,final DownloadInfo info, Handler handler) {
-		this.context=context;
+	public static final String TAG = LoadImageRunnable.class.getSimpleName();
+
+	DownloadInfo dlInfo;
+	// OnDownloadListener listener;
+	public static final int STATE_WAITING = 0; // 处于等待状态
+	public static final int STATE_DOWNLOADING = 1; // 正在下载状态
+	public static final int STATE_PAUSE = 2; // 处于暂停
+	public static final int STATE_FINISH = 3; // 已经下载完成，重复下载时出现的提示
+	public static final int STATE_CANCEL = 4; // 取消下载
+	public static final int STATE_ERROR = 5; // 下载错误（无法下载，断网等）
+	public static final int BUFFER_SIZE = 1024 * 2;
+	private Context context;
+	private Handler handler;
+
+	public LoadImageRunnable(Context context, final DownloadInfo info, Handler handler) {
+		this.context = context;
 		this.dlInfo = info;
 		this.handler = handler;
 	}
-	
-	
 
 	@SuppressLint("NewApi")
 	@Override
@@ -65,12 +62,11 @@ public class LoadImageRunnable implements Runnable {
 			dlInfo.timeStamp = System.currentTimeMillis();
 
 			// 在每个任务下载之前，执行preDownload()，将需要下载的任务信息保存到数据库
-//			if (null != listener)
-//				listener.preDownload(dlInfo);
+			// if (null != listener)
+			// listener.preDownload(dlInfo);
 			Message msg = new Message();
-			msg.what=101;
+			msg.what = 101;
 			handler.sendMessage(msg);
-			
 
 			// 需要上报的参数列表
 			File file = new File(dlInfo.filePath + "temp");
@@ -85,7 +81,6 @@ public class LoadImageRunnable implements Runnable {
 			// 断点续传时，流被seek了，getContentLength()获取的是未下载的大小而非总大小，所以不需要重复设置
 			if (dlInfo.currentBytes <= 0)
 				dlInfo.totalbytes = connect.getContentLength();
-
 
 			boolean flag = false; // 是否有存储空间标识
 			final long needSpace = dlInfo.totalbytes - dlInfo.currentBytes;
@@ -103,11 +98,12 @@ public class LoadImageRunnable implements Runnable {
 			}
 
 			if (needSpace > freeStorage) {
-				ULog.i( "Current downloadpath do not have enough free space ! " + needSpace + " -- " + freeStorage);
+				ULog.i("Current downloadpath do not have enough free space ! " + needSpace + " -- " + freeStorage);
 				try {
 					StorageManager sm = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
 					// 获取sdcard的路径：外置和内置
-					String[] paths = (String[]) sm.getClass().getMethod("getVolumePaths", java.lang.String.class).invoke(sm, java.lang.String.class);
+					String[] paths = (String[]) sm.getClass().getMethod("getVolumePaths", java.lang.String.class)
+							.invoke(sm, java.lang.String.class);
 					if (null != paths) {
 						for (String path : paths) {
 							// 非当前存储器
@@ -126,7 +122,7 @@ public class LoadImageRunnable implements Runnable {
 									file = new File(dlInfo.filePath + "temp");
 									flag = true;
 									Util.saveDownloadPath(context, path + "/TYSX/dl");
-									ULog.i( "DownloadPath change to " + dlInfo.filePath);
+									ULog.i("DownloadPath change to " + dlInfo.filePath);
 									break;
 								}
 							}
@@ -145,7 +141,7 @@ public class LoadImageRunnable implements Runnable {
 							file = null;
 							file = new File(dlInfo.filePath + "temp");
 							flag = true;
-							ULog.i( "DownloadPath change to " + dlInfo.filePath);
+							ULog.i("DownloadPath change to " + dlInfo.filePath);
 						}
 					}
 					// 断点续传时，需在新的路径重新下载
@@ -155,20 +151,19 @@ public class LoadImageRunnable implements Runnable {
 					}
 
 				} catch (IllegalArgumentException e) {
-					ULog.e( "IllegalArgumentException");
+					ULog.e("IllegalArgumentException");
 				} catch (IllegalAccessException e) {
-					ULog.e( "IllegalAccessException");
+					ULog.e("IllegalAccessException");
 				} catch (InvocationTargetException e) {
-					ULog.e( "InvocationTargetException");
+					ULog.e("InvocationTargetException");
 				} catch (NoSuchMethodException e) {
-					ULog.e( "NoSuchMethodException");
+					ULog.e("NoSuchMethodException");
 				}
 
 			}
 			else
 				flag = true;
 
-			
 			if (!flag) {
 				bundle.putInt("statuscode", TVException.DOWNLOAD_NO_STORAGE_SPACE);
 			}
@@ -179,28 +174,26 @@ public class LoadImageRunnable implements Runnable {
 			if (STATE_FINISH == dlInfo.status) {
 				file.renameTo(new File(dlInfo.filePath));
 			}
-			
-			
+
 			if (bundle.containsKey("statuscode")) {
 				dlInfo.status = STATE_PAUSE;
-//				if (null != listener)
-//					listener.errorDownload(dlInfo, new TVException(0));
-			    msg = new Message();
-				msg.what=102;
+				// if (null != listener)
+				// listener.errorDownload(dlInfo, new TVException(0));
+				msg = new Message();
+				msg.what = 102;
 				handler.sendMessage(msg);
-				
+
 				if (bundle.getInt("statuscode") == TVException.DOWNLOAD_NO_STORAGE_SPACE)
-					//new DialogFactory(context).showToast("当前存储空间不足！", Toast.LENGTH_SHORT);
-				ULog.e(
-						bundle.containsKey("msg") ? bundle.getString("msg") : "下载异常" + "(" + bundle.getInt("statuscode")
-								+ ")");
+					// new DialogFactory(context).showToast("当前存储空间不足！", Toast.LENGTH_SHORT);
+					ULog.e(bundle.containsKey("msg") ? bundle.getString("msg") : "下载异常" + "("
+							+ bundle.getInt("statuscode") + ")");
 			}
 			else {
-//				if (null != listener)
-//					listener.finishDownload(dlInfo);
+				// if (null != listener)
+				// listener.finishDownload(dlInfo);
 				msg = new Message();
-				msg.what=100;
-				msg.obj=dlInfo;
+				msg.what = 100;
+				msg.obj = dlInfo;
 				handler.sendMessage(msg);
 			}
 
@@ -208,11 +201,7 @@ public class LoadImageRunnable implements Runnable {
 			ULog.e(" Exception >> " + e.toString());
 		}
 	}
-	
-	
-	
-	
-	
+
 	/** 写入文件 */
 	private void write(File file, InputStream ins, Bundle bundle) throws TVException {
 		RandomAccessFile accessFile = null;
@@ -224,26 +213,27 @@ public class LoadImageRunnable implements Runnable {
 
 			// for(int num=0 , i=0 ; (num = ins.read(b)) >0 ; i++){
 			/*
-			 * ((0 >= dlInfo.totalbytes) ? true : dlInfo.currentBytes <=
-			 * dlInfo.totalbytes) 该条件包含：试图对获取不到资源长度的资源进行下载
+			 * ((0 >= dlInfo.totalbytes) ? true : dlInfo.currentBytes <= dlInfo.totalbytes) 该条件包含：试图对获取不到资源长度的资源进行下载
 			 */
 			for (int num = 0, i = 0; ((num = ins.read(b)) > 0)
 					&& ((0 >= dlInfo.totalbytes) ? true : dlInfo.currentBytes <= dlInfo.totalbytes); i++) {
-			/*	ULog.v( "while --> total = " + dlInfo.totalbytes + " , current = " + dlInfo.currentBytes
-						+ ", num = " + num + ", i = " + i);*/
-//				if (isCancelled()) {
-//					ins.close();
-//					accessFile.close();
-//					return;
-//				}
+				/*
+				 * ULog.v( "while --> total = " + dlInfo.totalbytes + " , current = " + dlInfo.currentBytes + ", num = "
+				 * + num + ", i = " + i);
+				 */
+				// if (isCancelled()) {
+				// ins.close();
+				// accessFile.close();
+				// return;
+				// }
 
 				accessFile.write(b, 0, num);
 				dlInfo.currentBytes += num;
 
-//				if (50 < i) {
-//					i = 0;
-//					publishProgress(dlInfo);
-//				}
+				// if (50 < i) {
+				// i = 0;
+				// publishProgress(dlInfo);
+				// }
 			}
 			// 对资源长度异常的处理
 			if (dlInfo.currentBytes <= 0) {
@@ -251,10 +241,10 @@ public class LoadImageRunnable implements Runnable {
 				return;
 			}
 			dlInfo.status = STATE_FINISH;
-			//publishProgress(dlInfo);
+			// publishProgress(dlInfo);
 			return;
 		} catch (FileNotFoundException e) {
-			ULog.e( e.toString());
+			ULog.e(e.toString());
 			throw new TVException(TVException.DOWNLOAD_FILE_NOT_FOUND_EXCEPTION);
 		} catch (IOException e) {
 			throw new TVException(TVException.DOWNLOAD_WRITE_IO_EXCEPTION);
@@ -267,10 +257,9 @@ public class LoadImageRunnable implements Runnable {
 					accessFile.close();
 				}
 			} catch (Exception e) {
-				ULog.e( e.getMessage());
+				ULog.e(e.getMessage());
 			}
 		}
 	}
-	
-	
+
 }

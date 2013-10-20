@@ -33,19 +33,19 @@ import com.dongfang.utils.Util;
  * @author dongfang
  */
 public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
-	public static final  String	TAG					= DownloadTask.class.getSimpleName();
+	public static final String TAG = DownloadTask.class.getSimpleName();
 
-	public static final int		STATE_WAITING		= 0;									// 处于等待状态
-	public static final int		STATE_DOWNLOADING	= 1;									// 正在下载状态
-	public static final int		STATE_PAUSE			= 2;									// 处于暂停
-	public static final int		STATE_FINISH		= 3;									// 已经下载完成，重复下载时出现的提示
-	public static final int		STATE_CANCEL		= 4;									// 取消下载
-	public static final int		STATE_ERROR			= 5;									// 下载错误（无法下载，断网等）
-	public static final  int		BUFFER_SIZE			= 1024 * 2;
+	public static final int STATE_WAITING = 0; // 处于等待状态
+	public static final int STATE_DOWNLOADING = 1; // 正在下载状态
+	public static final int STATE_PAUSE = 2; // 处于暂停
+	public static final int STATE_FINISH = 3; // 已经下载完成，重复下载时出现的提示
+	public static final int STATE_CANCEL = 4; // 取消下载
+	public static final int STATE_ERROR = 5; // 下载错误（无法下载，断网等）
+	public static final int BUFFER_SIZE = 1024 * 2;
 
-	private Context				context;
-	public DownloadInfo			dlInfo;
-	private OnDownloadListener	listener;
+	private Context context;
+	public DownloadInfo dlInfo;
+	private OnDownloadListener listener;
 
 	public DownloadTask(Context context, DownloadInfo dlInfo) {
 		this(context, dlInfo, null);
@@ -61,7 +61,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-		ULog.i( "onPreExecute");
+		ULog.i("onPreExecute");
 		/** 创建完成路径 */
 		new File(dlInfo.filePath.substring(0, dlInfo.filePath.lastIndexOf("/"))).mkdirs();
 		dlInfo.status = STATE_WAITING;
@@ -75,7 +75,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 	@SuppressLint("NewApi")
 	@Override
 	protected Bundle doInBackground(Void... params) {
-		ULog.i( "doInBackground " + dlInfo.toString());
+		ULog.i("doInBackground " + dlInfo.toString());
 		Bundle bundle = new Bundle();
 
 		try {
@@ -94,7 +94,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 			if (dlInfo.currentBytes <= 0)
 				dlInfo.totalbytes = connect.getContentLength();
 
-			//ULog.v( "total = " + dlInfo.totalbytes + " , current = " + dlInfo.currentBytes);
+			// ULog.v( "total = " + dlInfo.totalbytes + " , current = " + dlInfo.currentBytes);
 
 			// if (dlInfo.totalbytes < 1) {
 			// bundle.putInt("statuscode",
@@ -127,11 +127,12 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 			}
 
 			if (needSpace > freeStorage) {
-				ULog.i( "Current downloadpath do not have enough free space ! " + needSpace + " -- " + freeStorage);
+				ULog.i("Current downloadpath do not have enough free space ! " + needSpace + " -- " + freeStorage);
 				try {
 					StorageManager sm = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
 					// 获取sdcard的路径：外置和内置
-					String[] paths = (String[]) sm.getClass().getMethod("getVolumePaths", java.lang.String.class).invoke(sm, java.lang.String.class);
+					String[] paths = (String[]) sm.getClass().getMethod("getVolumePaths", java.lang.String.class)
+							.invoke(sm, java.lang.String.class);
 					if (null != paths) {
 						for (String path : paths) {
 							// 非当前存储器
@@ -150,7 +151,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 									file = new File(dlInfo.filePath + "temp");
 									flag = true;
 									Util.saveDownloadPath(context, path + "/TYSX/dl");
-									ULog.i( "DownloadPath change to " + dlInfo.filePath);
+									ULog.i("DownloadPath change to " + dlInfo.filePath);
 									break;
 								}
 							}
@@ -169,7 +170,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 							file = null;
 							file = new File(dlInfo.filePath + "temp");
 							flag = true;
-							ULog.i( "DownloadPath change to " + dlInfo.filePath);
+							ULog.i("DownloadPath change to " + dlInfo.filePath);
 						}
 					}
 					// 断点续传时，需在新的路径重新下载
@@ -179,13 +180,13 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 					}
 
 				} catch (IllegalArgumentException e) {
-					ULog.e( "IllegalArgumentException");
+					ULog.e("IllegalArgumentException");
 				} catch (IllegalAccessException e) {
-					ULog.e( "IllegalAccessException");
+					ULog.e("IllegalAccessException");
 				} catch (InvocationTargetException e) {
-					ULog.e( "InvocationTargetException");
+					ULog.e("InvocationTargetException");
 				} catch (NoSuchMethodException e) {
-					ULog.e( "NoSuchMethodException");
+					ULog.e("NoSuchMethodException");
 				}
 
 			}
@@ -223,7 +224,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 	@Override
 	protected void onProgressUpdate(DownloadInfo... values) {
 		super.onProgressUpdate(values);
-		ULog.d( "onProgressUpdate -->" + dlInfo.contentId + ": total = " + dlInfo.totalbytes + " , current = "
+		ULog.d("onProgressUpdate -->" + dlInfo.contentId + ": total = " + dlInfo.totalbytes + " , current = "
 				+ dlInfo.currentBytes);
 		if (null != listener)
 			listener.updateProcess(dlInfo);
@@ -236,13 +237,12 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 			dlInfo.status = STATE_PAUSE;
 			if (null != listener)
 				listener.errorDownload(dlInfo, new TVException(0));
-			if (result.getInt("statuscode") == TVException.DOWNLOAD_NO_STORAGE_SPACE){
+			if (result.getInt("statuscode") == TVException.DOWNLOAD_NO_STORAGE_SPACE) {
 				// new DialogFactory(context).showToast("当前存储空间不足！", Toast.LENGTH_SHORT);
 				listener.errorDownload(dlInfo, new TVException("当前存储空间不足！"));
 			}
-			ULog.d(
-					result.containsKey("msg") ? result.getString("msg") : "下载异常" + "(" + result.getInt("statuscode")
-							+ ")");
+			ULog.d(result.containsKey("msg") ? result.getString("msg") : "下载异常" + "(" + result.getInt("statuscode")
+					+ ")");
 		}
 		else {
 			if (null != listener)
@@ -253,24 +253,24 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 	@Override
 	protected void onCancelled() {
 		super.onCancelled();
-		ULog.d( dlInfo.contentId + " -->onCancelled()!");
+		ULog.d(dlInfo.contentId + " -->onCancelled()!");
 		// publishProgress(dlInfo);
 		if (null != listener)
 			listener.updateProcess(dlInfo);
-		ULog.i( dlInfo.toString());
+		ULog.i(dlInfo.toString());
 	}
 
 	/** 暂停下载 */
 	public void pause() {
 		this.cancel(true);
-		ULog.d( dlInfo.contentId + " -->pause()!");
+		ULog.d(dlInfo.contentId + " -->pause()!");
 		dlInfo.status = STATE_PAUSE;
 	}
 
 	/** 取消下载 */
 	public void cacel() {
 		this.cancel(true);
-		ULog.d( dlInfo.contentId + " -->cancel()!");
+		ULog.d(dlInfo.contentId + " -->cancel()!");
 		dlInfo.status = STATE_CANCEL;
 	}
 
@@ -285,13 +285,14 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 
 			// for(int num=0 , i=0 ; (num = ins.read(b)) >0 ; i++){
 			/*
-			 * ((0 >= dlInfo.totalbytes) ? true : dlInfo.currentBytes <=
-			 * dlInfo.totalbytes) 该条件包含：试图对获取不到资源长度的资源进行下载
+			 * ((0 >= dlInfo.totalbytes) ? true : dlInfo.currentBytes <= dlInfo.totalbytes) 该条件包含：试图对获取不到资源长度的资源进行下载
 			 */
 			for (int num = 0, i = 0; ((num = ins.read(b)) > 0)
 					&& ((0 >= dlInfo.totalbytes) ? true : dlInfo.currentBytes <= dlInfo.totalbytes); i++) {
-			/*	ULog.v( "while --> total = " + dlInfo.totalbytes + " , current = " + dlInfo.currentBytes
-						+ ", num = " + num + ", i = " + i);*/
+				/*
+				 * ULog.v( "while --> total = " + dlInfo.totalbytes + " , current = " + dlInfo.currentBytes + ", num = "
+				 * + num + ", i = " + i);
+				 */
 				if (isCancelled()) {
 					ins.close();
 					accessFile.close();
@@ -315,7 +316,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 			publishProgress(dlInfo);
 			return;
 		} catch (FileNotFoundException e) {
-			ULog.e( e.toString());
+			ULog.e(e.toString());
 			throw new TVException(TVException.DOWNLOAD_FILE_NOT_FOUND_EXCEPTION);
 		} catch (IOException e) {
 			throw new TVException(TVException.DOWNLOAD_WRITE_IO_EXCEPTION);
@@ -328,7 +329,7 @@ public class DownloadTask extends AsyncTask<Void, DownloadInfo, Bundle> {
 					accessFile.close();
 				}
 			} catch (Exception e) {
-				ULog.e( e.getMessage());
+				ULog.e(e.getMessage());
 			}
 		}
 	}

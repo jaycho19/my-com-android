@@ -16,13 +16,13 @@
 package com.dongfang.net.http.client.callback;
 
 public interface RequestCallBackHandler {
-    /**
-     * @param total
-     * @param current
-     * @param forceUpdateUI
-     * @return continue
-     */
-    boolean updateProgress(long total, long current, boolean forceUpdateUI);
+	/**
+	 * @param total
+	 * @param current
+	 * @param forceUpdateUI
+	 * @return continue
+	 */
+	boolean updateProgress(long total, long current, boolean forceUpdateUI);
 
-    void stop();
+	void stop();
 }
