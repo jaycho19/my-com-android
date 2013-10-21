@@ -30,14 +30,14 @@ public class ULog {
 
 	private ULog() {}
 
-	public static final Boolean ISDUG = true;
+	public static final Boolean ISDUG = false;
 
-	public static boolean allowD = true;
-	public static boolean allowE = true;
-	public static boolean allowI = true;
-	public static boolean allowV = true;
-	public static boolean allowW = true;
-	public static boolean allowWtf = true;
+	public static boolean allowD = true && ISDUG;
+	public static boolean allowE = true && ISDUG;
+	public static boolean allowI = true && ISDUG;
+	public static boolean allowV = true && ISDUG;
+	public static boolean allowW = true && ISDUG;
+	public static boolean allowWtf = true && ISDUG;
 
 	private static String generateTag(StackTraceElement caller) {
 		String tag = "%s.%s(L:%d)";
@@ -81,7 +81,7 @@ public class ULog {
 	}
 
 	public static void d(String content) {
-		if (!ISDUG || !allowD)
+		if (!allowD)
 			return;
 		StackTraceElement caller = OtherUtils.getCallerStackTraceElement();
 		String tag = generateTag(caller);
@@ -95,7 +95,7 @@ public class ULog {
 	}
 
 	public static void d(String content, Throwable tr) {
-		if (!ISDUG || !allowD)
+		if (!allowD)
 			return;
 		StackTraceElement caller = OtherUtils.getCallerStackTraceElement();
 		String tag = generateTag(caller);
@@ -109,7 +109,7 @@ public class ULog {
 	}
 
 	public static void e(String content) {
-		if (!ISDUG || !allowE)
+		if (!allowE)
 			return;
 		StackTraceElement caller = OtherUtils.getCallerStackTraceElement();
 		String tag = generateTag(caller);
@@ -123,7 +123,7 @@ public class ULog {
 	}
 
 	public static void e(String content, Throwable tr) {
-		if (!ISDUG || !allowE)
+		if (!allowE)
 			return;
 		StackTraceElement caller = OtherUtils.getCallerStackTraceElement();
 		String tag = generateTag(caller);
@@ -137,7 +137,7 @@ public class ULog {
 	}
 
 	public static void i(String content) {
-		if (!ISDUG || !allowI)
+		if (!allowI)
 			return;
 		StackTraceElement caller = OtherUtils.getCallerStackTraceElement();
 		String tag = generateTag(caller);
@@ -151,7 +151,7 @@ public class ULog {
 	}
 
 	public static void i(String content, Throwable tr) {
-		if (!ISDUG || !allowI)
+		if (!allowI)
 			return;
 		StackTraceElement caller = OtherUtils.getCallerStackTraceElement();
 		String tag = generateTag(caller);
@@ -165,7 +165,7 @@ public class ULog {
 	}
 
 	public static void v(String content) {
-		if (!ISDUG || !allowV)
+		if (!allowV)
 			return;
 		StackTraceElement caller = OtherUtils.getCallerStackTraceElement();
 		String tag = generateTag(caller);
@@ -179,7 +179,7 @@ public class ULog {
 	}
 
 	public static void v(String content, Throwable tr) {
-		if (!ISDUG || !allowV)
+		if (!allowV)
 			return;
 		StackTraceElement caller = OtherUtils.getCallerStackTraceElement();
 		String tag = generateTag(caller);
@@ -193,7 +193,7 @@ public class ULog {
 	}
 
 	public static void w(String content) {
-		if (!ISDUG || !allowW)
+		if (!allowW)
 			return;
 		StackTraceElement caller = OtherUtils.getCallerStackTraceElement();
 		String tag = generateTag(caller);
@@ -221,7 +221,7 @@ public class ULog {
 	}
 
 	public static void w(Throwable tr) {
-		if (!ISDUG || !allowW)
+		if (!allowW)
 			return;
 		StackTraceElement caller = OtherUtils.getCallerStackTraceElement();
 		String tag = generateTag(caller);
@@ -235,7 +235,7 @@ public class ULog {
 	}
 
 	public static void wtf(String content) {
-		if (!ISDUG || !allowWtf)
+		if (!allowWtf)
 			return;
 		StackTraceElement caller = OtherUtils.getCallerStackTraceElement();
 		String tag = generateTag(caller);
@@ -249,7 +249,7 @@ public class ULog {
 	}
 
 	public static void wtf(String content, Throwable tr) {
-		if (!ISDUG || !allowWtf)
+		if (!allowWtf)
 			return;
 		StackTraceElement caller = OtherUtils.getCallerStackTraceElement();
 		String tag = generateTag(caller);
@@ -263,7 +263,7 @@ public class ULog {
 	}
 
 	public static void wtf(Throwable tr) {
-		if (!ISDUG || !allowWtf)
+		if (!allowWtf)
 			return;
 		StackTraceElement caller = OtherUtils.getCallerStackTraceElement();
 		String tag = generateTag(caller);
