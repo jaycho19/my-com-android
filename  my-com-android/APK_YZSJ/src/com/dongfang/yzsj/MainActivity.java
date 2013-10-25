@@ -152,6 +152,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 					tvLogin.setText("注销");
 					frameLayout.setVisibility(0);
 					fgtHost.refreshDrawableState();
+					ULog.d(fgtHost.getCurrentTabTag());
+					if (fgtHost.getCurrentTabTag().equals("5")){
+						fgtHost.getCurrentTabView().invalidate();
+					}
+					
 				}
 				else {
 					tvLogin.setText("登陆");
@@ -248,6 +253,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 				tvLogin.setText("登陆");
 				Toast.makeText(this, "注销成功", Toast.LENGTH_LONG).show();
+				if (fgtHost.getCurrentTabTag().equals("5")){
+					frameLayout.setVisibility(View.GONE);
+				}
 			}
 			else {
 				frameLayout.setVisibility(View.GONE);
