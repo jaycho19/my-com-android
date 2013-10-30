@@ -59,7 +59,7 @@ public class ImageGallery extends LinearLayout {
 		View view = LayoutInflater.from(context).inflate(R.layout.image_gallery, null);
 		viewPager = (ViewPager) view.findViewById(R.id.imageGallery_viewpage);
 		RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.MATCH_PARENT, (int) (Util.getWindowWidth(context) * 200 / 600));
+				RelativeLayout.LayoutParams.MATCH_PARENT, (int) (Util.getWindowWidth(context) * 270 / 640));
 		viewPager.setLayoutParams(layoutParams);
 		ll_fling_desc_image = (LinearLayout) view.findViewById(R.id.imageGallery_ll_fling_desc_image);
 		tv_fling_desc = (TextView) view.findViewById(R.id.imageGallery_tv_fling_desc);
