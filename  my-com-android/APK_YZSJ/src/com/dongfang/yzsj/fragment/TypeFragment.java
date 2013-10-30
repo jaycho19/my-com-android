@@ -331,7 +331,14 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 					pulltoRefreshView.onFooterRefreshComplete();
 				}
 
-				TypeBean bean = new com.google.gson.Gson().fromJson(result, TypeBean.class);
+				TypeBean bean = null;
+				try {
+					bean = new com.google.gson.Gson().fromJson(result, TypeBean.class);
+				} catch (Exception e) {
+					e.printStackTrace();
+					return;
+				}
+				
 				if (null == bean)
 					return;
 				ULog.d(bean.toString());
@@ -492,6 +499,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
 				paiXuPopuWindow.dismiss();
 
+				listData.clear();
 				getMovies(channel.getChannelId(), 0, LIMIT);
 			}
 		}
