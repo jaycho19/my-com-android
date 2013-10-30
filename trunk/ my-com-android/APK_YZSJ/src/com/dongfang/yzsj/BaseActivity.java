@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.dongfang.utils.ULog;
 import com.dongfang.yzsj.broadcast.CloseAppReceiver;
+import com.dongfang.yzsj.exception.MyUnCaughtExceptionHandler;
 
 /**
  * 1. 所有该项目activity都需要继承该类；<br>
@@ -33,7 +34,7 @@ public abstract class BaseActivity extends FragmentActivity {
 		filter.addAction(getPackageName().toString() + "." + CloseAppReceiver.TAG);
 		registerReceiver(closeApp, filter);
 		// 系统崩溃日志,崩溃重启
-		// MyUnCaughtExceptionHandler.getInstance(this);
+		MyUnCaughtExceptionHandler.getInstance(this);
 		setBaseValues();
 	}
 

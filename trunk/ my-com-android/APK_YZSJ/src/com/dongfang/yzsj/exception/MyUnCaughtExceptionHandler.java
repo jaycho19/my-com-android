@@ -50,7 +50,7 @@ public class MyUnCaughtExceptionHandler implements UncaughtExceptionHandler {
 	public void uncaughtException(Thread thread, Throwable ex) {
 		ULog.d("Class Name -> " + ex.getClass().getName());
 		ULog.d("thread Name -> " + thread.getName());
-		// ex.printStackTrace();
+		ex.printStackTrace();
 		// ULog.e( "UncaughtException" + ex.toString());
 		// ULog.e( "--" + getStackTraceAsString(ex));
 		// RePorterMessage.getInstance().saveRunLogInFile(mContext,

@@ -11,6 +11,7 @@ public class VODItem implements Parcelable {
 	private String code;
 	private String name;
 	private String poster;
+	private String smallPoster;
 	private boolean vip;
 
 	public String getChannelId() {
@@ -45,6 +46,14 @@ public class VODItem implements Parcelable {
 		this.poster = poster;
 	}
 
+	public String getSmallPoster() {
+		return smallPoster;
+	}
+
+	public void setSmallPoster(String smallPoster) {
+		this.smallPoster = smallPoster;
+	}
+
 	public boolean isVip() {
 		return vip;
 	}
@@ -56,11 +65,12 @@ public class VODItem implements Parcelable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(" -- channelId = ").append(channelId).append("\n");
-		sb.append(" -- code =      ").append(code).append("\n");
-		sb.append(" -- name =      ").append(name).append("\n");
-		sb.append(" -- poster =    ").append(poster).append("\n");
-		sb.append(" -- vip =       ").append(vip).append("\n");
+		sb.append(" -- channelId   = ").append(channelId).append("\n");
+		sb.append(" -- code        = ").append(code).append("\n");
+		sb.append(" -- name        = ").append(name).append("\n");
+		sb.append(" -- poster      = ").append(poster).append("\n");
+		sb.append(" -- smallPoster = ").append(smallPoster).append("\n");
+		sb.append(" -- vip         = ").append(vip).append("\n");
 		return sb.toString();
 	}
 
@@ -75,6 +85,7 @@ public class VODItem implements Parcelable {
 		dest.writeString(code);
 		dest.writeString(name);
 		dest.writeString(poster);
+		dest.writeString(smallPoster);
 		dest.writeInt(vip ? 1 : 0);
 	}
 
@@ -86,6 +97,7 @@ public class VODItem implements Parcelable {
 			data.setChannelId(in.readString());
 			data.setCode(in.readString());
 			data.setName(in.readString());
+			data.setPoster(in.readString());
 			data.setPoster(in.readString());
 			data.setVip(in.readInt() == 1 ? true : false);
 			return data;

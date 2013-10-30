@@ -364,8 +364,10 @@ public class MyImageView extends RelativeLayout {
 
 	public void setImage(String url) {
 
-		if (TextUtils.isEmpty(url) || !URLUtil.isValidateImgUrl(url))
+		if (TextUtils.isEmpty(url) || !URLUtil.isValidateImgUrl(url)){
+			setBackgroundResource(R.drawable.image_bg);
 			return;
+		}
 		final String imgUrl = url;
 		if (!url.startsWith("http://"))
 			return;
