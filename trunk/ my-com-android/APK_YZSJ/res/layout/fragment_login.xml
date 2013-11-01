@@ -29,7 +29,6 @@
             android:maxLength="11"
             android:padding="5dp"
             android:phoneNumber="true"
-            android:text="15631127974"
             android:textColor="#666666"
             android:textSize="18sp" />
     </LinearLayout>
@@ -77,7 +76,6 @@
                 android:inputType="number"
                 android:maxLength="6"
                 android:padding="3dp"
-                android:text="888222"
                 android:textColor="#666666"
                 android:textSize="18sp" >
 

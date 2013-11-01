@@ -57,14 +57,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
 		etUserName = (EditText) view.findViewById(R.id.login_et_userName);
 		etAuthCode = (EditText) view.findViewById(R.id.login_et_authCode);
-
-		// btnLogin.requestFocus();
-
 	}
 
 	@Override
-	public void onStart() {
-		super.onStart();
+	public void onResume() {
+		super.onResume();
+		etUserName.setText(User.getPhone(getActivity()));
+		etAuthCode.setText("");
 		btnLogin.requestFocus();
 	}
 
