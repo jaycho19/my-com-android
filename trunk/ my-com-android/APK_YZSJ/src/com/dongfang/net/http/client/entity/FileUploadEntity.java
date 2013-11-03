@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InterruptedIOException;
 import java.io.OutputStream;
 
 import org.apache.http.entity.FileEntity;
@@ -54,7 +55,7 @@ public class FileUploadEntity extends FileEntity implements UploadEntity {
 				uploadedSize += len;
 				if (callBackHandler != null) {
 					if (!callBackHandler.updateProgress(fileSize, uploadedSize, false)) {
-						return;
+						throw new InterruptedIOException("stop");
 					}
 				}
 			}

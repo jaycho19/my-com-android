@@ -79,7 +79,7 @@ public class SyncHttpHandler {
 				}
 
 				ULog.d(_getMethodRequestUrl);
-
+				// 获取缓存数据
 				// if (_getMethodRequestUrl != null) {
 				// String result = HttpUtils.sHttpGetCache.get(_getMethodRequestUrl);
 				// if (result != null) {
@@ -96,16 +96,17 @@ public class SyncHttpHandler {
 				retry = retryHandler.retryRequest(exception, ++retriedTimes, context);
 			} catch (NullPointerException e) {
 				exception = new IOException(e.getMessage());
+				exception.initCause(e);
 				retry = retryHandler.retryRequest(exception, ++retriedTimes, context);
 			} catch (HttpException e) {
 				throw e;
-			} catch (Exception e) {
+			} catch (Throwable e) {
 				exception = new IOException(e.getMessage());
+				exception.initCause(e);
 				retry = retryHandler.retryRequest(exception, ++retriedTimes, context);
-			} finally {
-				if (!retry && exception != null) {
-					throw new HttpException(exception);
-				}
+			}
+			if (!retry && exception != null) {
+				throw new HttpException(exception);
 			}
 		}
 		return null;

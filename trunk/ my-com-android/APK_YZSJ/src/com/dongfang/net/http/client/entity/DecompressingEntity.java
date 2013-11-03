@@ -17,6 +17,7 @@ package com.dongfang.net.http.client.entity;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InterruptedIOException;
 import java.io.OutputStream;
 
 import org.apache.http.HttpEntity;
@@ -107,7 +108,7 @@ abstract class DecompressingEntity extends HttpEntityWrapper implements UploadEn
 				uploadedSize += len;
 				if (callBackHandler != null) {
 					if (!callBackHandler.updateProgress(uncompressedLength, uploadedSize, false)) {
-						return;
+						throw new InterruptedIOException("stop");
 					}
 				}
 			}

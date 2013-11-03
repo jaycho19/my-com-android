@@ -17,6 +17,7 @@ import android.widget.GridView;
 
 import com.dongfang.net.HttpUtils;
 import com.dongfang.net.http.RequestCallBack;
+import com.dongfang.net.http.ResponseInfo;
 import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.utils.ACache;
 import com.dongfang.utils.HttpException;
@@ -95,22 +96,17 @@ public class VODFragment extends Fragment {
 			// bean为空，网络请求数据，需对网络进行判断
 			new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_VOD, new RequestCallBack<String>() {
 				@Override
-				public void onLoading(long total, long current) {
-					ULog.d("total = " + total + "; current = " + current);
-				}
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					ULog.d("onSuccess  --" + responseInfo.result);
 
-				@Override
-				public void onSuccess(String result) {
-					ULog.d("onSuccess  --" + result);
-
-					listVODItem = new com.google.gson.Gson().fromJson(result,
+					listVODItem = new com.google.gson.Gson().fromJson(responseInfo.result,
 							new TypeToken<List<VODItem>>() {}.getType());
 					StringBuilder sb = new StringBuilder();
 					for (int i = 0, length = listVODItem.size(); i < length; i++)
 						sb.append("vod ").append(i).append(" --> ").append(listVODItem.get(i).toString());
 					ULog.d(sb.toString());
 
-					ACache.get(getActivity()).put(ComParams.INTENT_VODBEAN, result, 60 * 5);// 缓存数据
+					ACache.get(getActivity()).put(ComParams.INTENT_VODBEAN, responseInfo.result, 60 * 5);// 缓存数据
 
 					setVODAdapterData();
 

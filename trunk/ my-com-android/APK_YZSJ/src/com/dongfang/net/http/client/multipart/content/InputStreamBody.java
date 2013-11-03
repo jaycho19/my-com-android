@@ -17,6 +17,7 @@ package com.dongfang.net.http.client.multipart.content;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InterruptedIOException;
 import java.io.OutputStream;
 
 import com.dongfang.net.http.client.multipart.MIME;
@@ -64,7 +65,7 @@ public class InputStreamBody extends AbstractContentBody {
 				out.write(tmp, 0, l);
 				callBackInfo.pos += l;
 				if (!callBackInfo.doCallBack(false)) {
-					return;
+					throw new InterruptedIOException("stop");
 				}
 			}
 			out.flush();

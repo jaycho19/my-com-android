@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.dongfang.net.HttpUtils;
 import com.dongfang.net.http.RequestCallBack;
+import com.dongfang.net.http.ResponseInfo;
 import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.utils.HttpException;
 import com.dongfang.utils.ULog;
@@ -322,11 +323,11 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
-			public void onSuccess(String result) {
+			public void onSuccess(ResponseInfo<String> responseInfo) {
 				// progDialog.dismiss();
-				ULog.d("onSuccess  --" + result);
+				ULog.d("onSuccess  --" + responseInfo.result);
 				try {
-					JSONObject json = new JSONObject(result);
+					JSONObject json = new JSONObject(responseInfo.result);
 					if (json.getBoolean("success")) {
 						// 鉴权通过
 						toPlay(conntentId, band, clipId);
@@ -368,10 +369,10 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 
 			@Override
-			public void onSuccess(String result) {
+			public void onSuccess(ResponseInfo<String> responseInfo) {
 				progDialog.dismiss();
-				ULog.d("onSuccess  -- " + result);
-				OrderBean bean = new com.google.gson.Gson().fromJson(result, OrderBean.class);
+				ULog.d("onSuccess  -- " + responseInfo.result);
+				OrderBean bean = new com.google.gson.Gson().fromJson(responseInfo.result, OrderBean.class);
 
 				ULog.d(bean.toString());
 
@@ -429,16 +430,11 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
-			public void onLoading(long total, long current) {
-				ULog.d("RequestCallBack.onLoading total = " + total + "; current = " + current);
-			}
-
-			@Override
-			public void onSuccess(String result) {
+			public void onSuccess(ResponseInfo<String> responseInfo) {
 				progDialog.dismiss();
-				ULog.d("onSuccess  --" + result);
+				ULog.d("onSuccess  --" + responseInfo.result);
 				try {
-					JSONObject json = new JSONObject(result);
+					JSONObject json = new JSONObject(responseInfo.result);
 					Bundle data = new Bundle();
 					data.putString(ComParams.INTENT_MOVIEDETAIL_CONNENTID, conntentId);
 					data.putInt(ComParams.INTENT_MOVIEDETAIL_CLIPID, clipId < 1 ? 1 : clipId);
@@ -509,16 +505,11 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
-			public void onLoading(long total, long current) {
-				ULog.d("RequestCallBack.onLoading total = " + total + "; current = " + current);
-			}
-
-			@Override
-			public void onSuccess(String result) {
-				ULog.d("onSuccess  --" + result);
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				ULog.d("onSuccess  --" + responseInfo.result);
 				progDialog.dismiss();
 
-				DelAddResult addResult = new com.google.gson.Gson().fromJson(result, DelAddResult.class);
+				DelAddResult addResult = new com.google.gson.Gson().fromJson(responseInfo.result, DelAddResult.class);
 
 				if (addResult.isSuccess()) {
 					Toast.makeText(DetailsActiivity.this, "收藏成功!", Toast.LENGTH_LONG).show();
@@ -572,16 +563,11 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
-			public void onLoading(long total, long current) {
-				ULog.d("RequestCallBack.onLoading total = " + total + "; current = " + current);
-			}
-
-			@Override
-			public void onSuccess(String result) {
-				ULog.d("onSuccess  --" + result);
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				ULog.d("onSuccess  --" + responseInfo.result);
 				progDialog.dismiss();
 
-				DelAddResult delResult = new com.google.gson.Gson().fromJson(result, DelAddResult.class);
+				DelAddResult delResult = new com.google.gson.Gson().fromJson(responseInfo.result, DelAddResult.class);
 
 				if (delResult.isSuccess()) {
 					Toast.makeText(DetailsActiivity.this, "取消收藏成功!", Toast.LENGTH_LONG).show();

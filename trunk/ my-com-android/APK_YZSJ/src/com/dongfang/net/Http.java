@@ -171,10 +171,10 @@ public class Http {
 	private HttpsURLConnection getHttpsURLConnection(String type, String url, List<NameValuePair> list,
 			List<NameValuePair> addHeader, int conTimeOut, int socTimeOut) throws TVException {
 
-		ULog.i("getHttpsURLConnection type        = " + type);
-		ULog.i("getHttpsURLConnection url         = " + url);
-		ULog.i("getHttpsURLConnection conTimeOut  = " + conTimeOut);
-		ULog.i("getHttpsURLConnection socTimeOut  = " + socTimeOut);
+		// ULog.i("getHttpsURLConnection type        = " + type);
+		// ULog.i("getHttpsURLConnection url         = " + url);
+		// ULog.i("getHttpsURLConnection conTimeOut  = " + conTimeOut);
+		// ULog.i("getHttpsURLConnection socTimeOut  = " + socTimeOut);
 
 		disableConnectionReuseIfNecessary();
 
@@ -298,10 +298,10 @@ public class Http {
 	 */
 	private HttpURLConnection getHttpURLConnection(String type, String url, List<NameValuePair> list,
 			List<NameValuePair> addHeader, int conTimeOut, int socTimeOut) throws TVException {
-		ULog.i("getHttpURLConnection type        = " + type);
-		ULog.i("getHttpURLConnection url         = " + url);
-		ULog.i("getHttpURLConnection conTimeOut  = " + conTimeOut);
-		ULog.i("getHttpURLConnection socTimeOut  = " + socTimeOut);
+		// ULog.i("getHttpURLConnection type        = " + type);
+		// ULog.i("getHttpURLConnection url         = " + url);
+		// ULog.i("getHttpURLConnection conTimeOut  = " + conTimeOut);
+		// ULog.i("getHttpURLConnection socTimeOut  = " + socTimeOut);
 
 		disableConnectionReuseIfNecessary();
 		if (null != list && "GET".equalsIgnoreCase(type)) {

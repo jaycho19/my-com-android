@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.dongfang.net.HttpUtils;
 import com.dongfang.net.http.RequestCallBack;
+import com.dongfang.net.http.ResponseInfo;
 import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.utils.ACache;
 import com.dongfang.utils.HttpException;
@@ -253,22 +254,17 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 			ULog.d(ComParams.HTTP_VOD);
 			new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_VOD, new RequestCallBack<String>() {
 				@Override
-				public void onLoading(long total, long current) {
-					ULog.d("total = " + total + "; current = " + current);
-				}
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					ULog.d("onSuccess  --" + responseInfo.result);
 
-				@Override
-				public void onSuccess(String result) {
-					ULog.d("onSuccess  --" + result);
-
-					listChannels = new com.google.gson.Gson().fromJson(result,
+					listChannels = new com.google.gson.Gson().fromJson(responseInfo.result,
 							new TypeToken<List<VODItem>>() {}.getType());
 					StringBuilder sb = new StringBuilder();
 					for (int i = 0, length = listChannels.size(); i < length; i++)
 						sb.append("vod ").append(i).append(" --> ").append(listChannels.get(i).toString());
 					ULog.d(sb.toString());
 
-					ACache.get(getActivity()).put(ComParams.INTENT_SEARCH_CHANNELS, result, 60 * 5);// 缓存数据
+					ACache.get(getActivity()).put(ComParams.INTENT_SEARCH_CHANNELS, responseInfo.result, 60 * 5);// 缓存数据
 
 					initPinDaoPopuWindow();
 
@@ -319,7 +315,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, sb.toString(), new RequestCallBack<String>() {
 			@Override
-			public void onSuccess(String result) {
+			public void onSuccess(ResponseInfo<String> responseInfo) {
 				// ULog.d( "onSuccess  --" + result);
 				progDialog.dismiss();
 				pageStart = 1 + start;
@@ -333,12 +329,12 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
 				TypeBean bean = null;
 				try {
-					bean = new com.google.gson.Gson().fromJson(result, TypeBean.class);
+					bean = new com.google.gson.Gson().fromJson(responseInfo.result, TypeBean.class);
 				} catch (Exception e) {
 					e.printStackTrace();
 					return;
 				}
-				
+
 				if (null == bean)
 					return;
 				ULog.d(bean.toString());
