@@ -58,7 +58,7 @@ public class FileDownloadHandler {
 			long total = entity.getContentLength() + current;
 
 			if (callBackHandler != null && !callBackHandler.updateProgress(total, current, true)) {
-				return null;
+				return targetFile;
 			}
 
 			inputStream = entity.getContent();
@@ -86,8 +86,10 @@ public class FileDownloadHandler {
 
 		if (targetFile.exists() && !TextUtils.isEmpty(responseFileName)) {
 			File newFile = new File(targetFile.getParent(), responseFileName);
-			targetFile.renameTo(newFile);
-			return newFile;
+			while (newFile.exists()) {
+				newFile = new File(targetFile.getParent(), System.currentTimeMillis() + responseFileName);
+			}
+			return targetFile.renameTo(newFile) ? newFile : targetFile;
 		}
 		else {
 			return targetFile;

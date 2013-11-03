@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.dongfang.net.HttpUtils;
 import com.dongfang.net.http.RequestCallBack;
+import com.dongfang.net.http.ResponseInfo;
 import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.utils.HttpException;
 import com.dongfang.utils.ULog;
@@ -94,11 +95,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
 			new HttpUtils().send(HttpRequest.HttpMethod.GET, url, new RequestCallBack<String>() {
 				@Override
-				public void onSuccess(String result) {
-					ULog.d("onSuccess  --" + result);
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					ULog.d("onSuccess  --" + responseInfo.result);
 					progDialog.dismiss();
 
-					LoginBean bean = new com.google.gson.Gson().fromJson(result, LoginBean.class);
+					LoginBean bean = new com.google.gson.Gson().fromJson(responseInfo.result, LoginBean.class);
 
 					ULog.d(bean.toString());
 					if (null != bean && bean.isSuccess() && !TextUtils.isEmpty(bean.getToken())) {
@@ -159,15 +160,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 			new HttpUtils().send(HttpRequest.HttpMethod.GET,
 					ComParams.HTTP_AUTHCODE + "obj.tel=" + etUserName.getText(), new RequestCallBack<String>() {
 						@Override
-						public void onLoading(long total, long current) {
-							ULog.d("total = " + total + "; current = " + current);
-						}
-
-						@Override
-						public void onSuccess(String result) {
-							ULog.d("onSuccess  --" + result);
+						public void onSuccess(ResponseInfo<String> responseInfo) {
+							ULog.d("onSuccess  --" + responseInfo.result);
 							try {
-								JSONObject obj = new JSONObject(result);
+								JSONObject obj = new JSONObject(responseInfo.result);
 								if (obj.has("success") && obj.getBoolean("success")) {
 									// 获取成功
 									Toast.makeText(getActivity(), "验证码获取成功！", Toast.LENGTH_LONG).show();

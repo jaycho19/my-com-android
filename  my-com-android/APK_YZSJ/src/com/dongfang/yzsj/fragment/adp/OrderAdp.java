@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.dongfang.net.HttpUtils;
 import com.dongfang.net.http.RequestCallBack;
+import com.dongfang.net.http.ResponseInfo;
 import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.utils.HttpException;
 import com.dongfang.utils.ULog;
@@ -189,12 +190,12 @@ public class OrderAdp extends BaseAdapter {
 					new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 
 						@Override
-						public void onSuccess(String result) {
-							ULog.d("onSuccess  --" + result);
+						public void onSuccess(ResponseInfo<String> responseInfo) {
+							ULog.d("onSuccess  --" + responseInfo.result);
 							progDialog.dismiss();
 
 							try {
-								JSONObject json = new JSONObject(result);
+								JSONObject json = new JSONObject(responseInfo.result);
 								if (json.getBoolean("success")) {
 									if (1 == operationType) {
 										Toast.makeText(context, "订购成功", Toast.LENGTH_LONG).show();

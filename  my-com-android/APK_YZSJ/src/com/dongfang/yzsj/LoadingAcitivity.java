@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.dongfang.net.HttpUtils;
 import com.dongfang.net.http.RequestCallBack;
+import com.dongfang.net.http.ResponseInfo;
 import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.utils.ACache;
 import com.dongfang.utils.HttpException;
@@ -75,18 +76,14 @@ public class LoadingAcitivity extends BaseActivity {
 		// }
 		// else {
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_HOME, new RequestCallBack<String>() {
-			@Override
-			public void onLoading(long total, long current) {
-				ULog.d("RequestCallBack.onLoading total = " + total + "; current = " + current);
-			}
 
 			@Override
-			public void onSuccess(String result) {
+			public void onSuccess(ResponseInfo<String> responseInfo) {
 				// ULog.d( "onSuccess  --" + result);
-				HomeBean bean = new com.google.gson.Gson().fromJson(result, HomeBean.class);
+				HomeBean bean = new com.google.gson.Gson().fromJson(responseInfo.result, HomeBean.class);
 				bean.toLog();
 				// 缓存数据
-				ACache.get(LoadingAcitivity.this).put(ComParams.INTENT_HOMEBEAN, result, ACache.TIME_HOUR);
+				ACache.get(LoadingAcitivity.this).put(ComParams.INTENT_HOMEBEAN, responseInfo.result, ACache.TIME_HOUR);
 				// ACache.get(LoadingAcitivity.this).put(ComParams.INTENT_HOMEBEAN, result, 60 * 5);
 				intent(bean);
 

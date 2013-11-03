@@ -25,9 +25,9 @@ public class HttpGetCache {
 	/**
 	 * key: url value: response result
 	 */
-	private LruMemoryCache<String, String> mMemoryCache;
+	private final LruMemoryCache<String, String> mMemoryCache;
 
-	private final static int DEFAULT_CACHE_SIZE = 1024 * 1024 * 1;// 1M
+	private final static int DEFAULT_CACHE_SIZE = 1024 * 100;// string length
 	private final static long DEFAULT_EXPIRY_TIME = 1000 * 60; // 60 seconds
 	private final static long MIN_EXPIRY_TIME = 200;
 
@@ -44,9 +44,9 @@ public class HttpGetCache {
 		this(HttpGetCache.DEFAULT_CACHE_SIZE, HttpGetCache.DEFAULT_EXPIRY_TIME);
 	}
 
-	public HttpGetCache(int cacheSize, long defaultExpiryTime) {
-		if (cacheSize > DEFAULT_CACHE_SIZE) {
-			this.cacheSize = cacheSize;
+	public HttpGetCache(int strLength, long defaultExpiryTime) {
+		if (strLength > DEFAULT_CACHE_SIZE) {
+			this.cacheSize = strLength;
 		}
 		HttpGetCache.setDefaultExpiryTime(defaultExpiryTime);
 
@@ -60,9 +60,9 @@ public class HttpGetCache {
 		};
 	}
 
-	public void setCacheSize(int cacheSize) {
-		if (cacheSize > DEFAULT_CACHE_SIZE) {
-			mMemoryCache.setMaxSize(cacheSize);
+	public void setCacheSize(int strLength) {
+		if (strLength > DEFAULT_CACHE_SIZE) {
+			mMemoryCache.setMaxSize(strLength);
 		}
 	}
 
@@ -91,9 +91,7 @@ public class HttpGetCache {
 			expiry = MIN_EXPIRY_TIME;
 		}
 
-		if (mMemoryCache != null) {
-			mMemoryCache.put(url, result, System.currentTimeMillis() + expiry);
-		}
+		mMemoryCache.put(url, result, System.currentTimeMillis() + expiry);
 	}
 
 	public String get(String url) {

@@ -98,6 +98,7 @@ public class ResponseStream extends InputStream {
 				sb.append(line);
 			}
 			_directResult = sb.toString();
+			// 存入缓存
 			// if (url != null) {
 			// HttpUtils.sHttpGetCache.put(url, _directResult, expiry);
 			// }
@@ -124,8 +125,6 @@ public class ResponseStream extends InputStream {
 				out.write(buffer, 0, len);
 			}
 			out.flush();
-		} catch (IOException e) {
-			throw e;
 		} finally {
 			IOUtils.closeQuietly(out);
 			IOUtils.closeQuietly(baseStream);

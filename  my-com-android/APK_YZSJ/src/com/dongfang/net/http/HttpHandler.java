@@ -48,7 +48,7 @@ import com.dongfang.yzsj.bean.LoginBean;
 import com.dongfang.yzsj.params.ComParams;
 import com.dongfang.yzsj.utils.User;
 
-public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Object> implements RequestCallBackHandler {
+public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Void> implements RequestCallBackHandler {
 
 	private final AbstractHttpClient client;
 	private final HttpContext context;
@@ -59,10 +59,13 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Object> 
 	private HttpRedirectHandler httpRedirectHandler;
 
 	public void setHttpRedirectHandler(HttpRedirectHandler httpRedirectHandler) {
-		this.httpRedirectHandler = httpRedirectHandler;
+		if (httpRedirectHandler != null) {
+			this.httpRedirectHandler = httpRedirectHandler;
+		}
 	}
 
 	private HttpRequestBase request;
+	private boolean isUploading = true;
 	private final RequestCallBack<T> callback;
 
 	private int retriedTimes = 0;
@@ -87,7 +90,8 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Object> 
 	}
 
 	// 执行请求
-	private Object sendRequest(HttpRequestBase request) throws HttpException {
+	@SuppressWarnings("unchecked")
+	private ResponseInfo<T> sendRequest(HttpRequestBase request) throws HttpException {
 		if (autoResume && isDownloadingFile) {
 			File downloadFile = new File(fileSavePath);
 			long fileLen = 0;
@@ -110,20 +114,20 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Object> 
 				else {
 					_getRequestUrl = null;
 				}
-				ULog.d(_getRequestUrl);
+				// 获取缓存
 				// if (_getRequestUrl != null) {
 				// String result = HttpUtils.sHttpGetCache.get(_getRequestUrl);
 				// if (result != null) {
-				// return result;
+				// return new ResponseInfo<T>(null, (T) result, true);
 				// }
 				// }
 
-				Object responseBody = null;
+				ResponseInfo<T> responseInfo = null;
 				if (!isCancelled()) {
 					HttpResponse response = client.execute(request, context);
-					responseBody = handleResponse(response);
+					responseInfo = handleResponse(response);
 				}
-				return responseBody;
+				return responseInfo;
 			} catch (UnknownHostException e) {
 				exception = e;
 				retry = retryHandler.retryRequest(exception, ++retriedTimes, context);
@@ -132,36 +136,42 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Object> 
 				retry = retryHandler.retryRequest(exception, ++retriedTimes, context);
 			} catch (NullPointerException e) {
 				exception = new IOException(e.getMessage());
+				exception.initCause(e);
 				retry = retryHandler.retryRequest(exception, ++retriedTimes, context);
 			} catch (HttpException e) {
 				throw e;
-			} catch (Exception e) {
+			} catch (Throwable e) {
 				exception = new IOException(e.getMessage());
+				exception.initCause(e);
 				retry = retryHandler.retryRequest(exception, ++retriedTimes, context);
-			} finally {
-				if (!retry && exception != null) {
-					throw new HttpException(exception);
-				}
+			}
+			if (!retry && exception != null) {
+				throw new HttpException(exception);
 			}
 		}
 		return null;
 	}
 
 	@Override
-	protected Object doInBackground(Object... params) {
-		if (params != null && params.length > 3) {
+	protected Void doInBackground(Object... params) {
+		if (params == null || params.length < 1)
+			return null;
+		if (params.length > 3) {
 			fileSavePath = String.valueOf(params[1]);
 			isDownloadingFile = fileSavePath != null;
 			autoResume = (Boolean) params[2];
 			autoRename = (Boolean) params[3];
 		}
 		try {
-			publishProgress(UPDATE_START);
+			this.publishProgress(UPDATE_START);
 			request = (HttpRequestBase) params[0];
-			Object responseBody = sendRequest(request);
-			publishProgress(UPDATE_SUCCESS, responseBody);
+			ResponseInfo<T> responseInfo = sendRequest(request);
+			if (responseInfo != null) {
+				this.publishProgress(UPDATE_SUCCESS, responseInfo);
+				return null;
+			}
 		} catch (HttpException e) {
-			publishProgress(UPDATE_FAILURE, e, e.getMessage());
+			this.publishProgress(UPDATE_FAILURE, e, e.getMessage());
 		}
 
 		return null;
@@ -172,53 +182,64 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Object> 
 	private final static int UPDATE_FAILURE = 3;
 	private final static int UPDATE_SUCCESS = 4;
 
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	protected void onProgressUpdate(Object... values) {
-		int update = Integer.valueOf(String.valueOf(values[0]));
-		switch (update) {
+		if (mStopped || values == null || values.length < 1)
+			return;
+		switch ((Integer) values[0]) {
 		case UPDATE_START:
 			if (callback != null) {
 				callback.onStart();
 			}
 			break;
 		case UPDATE_LOADING:
+			if (values.length != 3)
+				return;
 			if (callback != null) {
-				callback.onLoading(Long.valueOf(String.valueOf(values[1])), Long.valueOf(String.valueOf(values[2])));
+				callback.onLoading(Long.valueOf(String.valueOf(values[1])), Long.valueOf(String.valueOf(values[2])),
+						isUploading);
 			}
 			break;
 		case UPDATE_FAILURE:
-			this.stop();
+			if (values.length != 3)
+				return;
 			if (callback != null) {
 				callback.onFailure((HttpException) values[1], (String) values[2]);
 			}
 			break;
 		case UPDATE_SUCCESS:
+			if (values.length != 2)
+				return;
 			if (callback != null) {
-				callback.onSuccess((T) values[1]);
+				callback.onSuccess((ResponseInfo<T>) values[1]);
 			}
 			break;
 		default:
 			break;
 		}
-		super.onProgressUpdate(values);
 	}
 
-	private Object handleResponse(HttpResponse response) throws HttpException, IOException {
+	@SuppressWarnings("unchecked")
+	private ResponseInfo<T> handleResponse(HttpResponse response) throws HttpException, IOException {
 		if (response == null) {
 			throw new HttpException("response is null");
 		}
+		if (isCancelled())
+			return null;
 		StatusLine status = response.getStatusLine();
 		int statusCode = status.getStatusCode();
 		if (statusCode < 300) {
+			Object result = null;
 			HttpEntity entity = response.getEntity();
-			Object responseBody = null;
 			if (entity != null) {
+				isUploading = false;
 				lastUpdateTime = SystemClock.uptimeMillis();
 				if (isDownloadingFile) {
+					autoResume = autoResume && OtherUtils.isSupportRange(response);
 					String responseFileName = autoRename ? OtherUtils.getFileNameFromHttpResponse(response) : null;
-					responseBody = mFileDownloadHandler.handleEntity(entity, this, fileSavePath, autoResume,
-							responseFileName);
+					result = mFileDownloadHandler
+							.handleEntity(entity, this, fileSavePath, autoResume, responseFileName);
 				}
 				else {
 
@@ -226,9 +247,10 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Object> 
 					String responseCharset = OtherUtils.getCharsetFromHttpResponse(response);
 					charset = TextUtils.isEmpty(responseCharset) ? charset : responseCharset;
 
-					String sResponseBody = mStringDownloadHandler.handleEntity(entity, this, charset);
+					result = mStringDownloadHandler.handleEntity(entity, this, charset);
+					ULog.d(result.toString());
 					// -------- token 失效时，根据ip重新获取一次token ,by dongfang, 2013-10-16 17:38:40----------------------
-					if (isNewToken(sResponseBody)) {
+					if (isNewToken(result.toString())) {
 						String newUrl = _getRequestUrl.replace(User.SHAREDPREFERENCES_ACCESS_TOKEN_OLD,
 								User.SHAREDPREFERENCES_ACCESS_TOKEN_NEW);
 						request.setURI(URI.create(newUrl));
@@ -238,10 +260,9 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Object> 
 					// 不缓存数据 by dongfang, 2013-10-16 17:38:40
 					// HttpUtils.sHttpGetCache.put(_getRequestUrl, (String) responseBody, expiry);
 					// ---------------------------------------------------------------------------------------------------
-					responseBody = sResponseBody;
 				}
 			}
-			return responseBody;
+			return new ResponseInfo<T>(response, (T) result, false);
 		}
 		else if (statusCode == 301 || statusCode == 302) {
 			if (httpRedirectHandler == null) {
@@ -261,58 +282,62 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Object> 
 		return null;
 	}
 
-	private boolean mStop = false;
+	private boolean mStopped = false;
 
 	/**
 	 * stop request task.
 	 */
 	@Override
 	public void stop() {
-		this.mStop = true;
-		if (request != null && !request.isAborted()) {
-			request.abort();
+		this.mStopped = true;
+		if (!request.isAborted()) {
+			try {
+				request.abort();
+			} catch (Throwable e) {}
 		}
 		if (!this.isCancelled()) {
-			this.cancel(true);
+			try {
+				this.cancel(true);
+			} catch (Throwable e) {}
 		}
 	}
 
-	public boolean isStop() {
-		return mStop;
+	@Override
+	public boolean isStopped() {
+		return mStopped;
 	}
 
 	private long lastUpdateTime;
 
 	@Override
 	public boolean updateProgress(long total, long current, boolean forceUpdateUI) {
-		if (mStop) {
-			return !mStop;
-		}
-		if (callback != null) {
+		if (callback != null && !mStopped) {
 			if (forceUpdateUI) {
-				publishProgress(UPDATE_LOADING, total, current);
+				this.publishProgress(UPDATE_LOADING, total, current);
 			}
 			else {
 				long currTime = SystemClock.uptimeMillis();
 				if (currTime - lastUpdateTime >= callback.getRate()) {
 					lastUpdateTime = currTime;
-					publishProgress(UPDATE_LOADING, total, current);
+					this.publishProgress(UPDATE_LOADING, total, current);
 				}
 			}
 		}
-		return !mStop;
+		return !mStopped;
 	}
 
 	/** token过期重新获取token */
 	private boolean isNewToken(String result) {
 		try {
 			LoginBean bean = new com.google.gson.Gson().fromJson(result, LoginBean.class);
+			// ULog.d(bean.toString());
 			if (!bean.isResult() && !bean.isSuccess()) {
 				String url_token = ComParams.HTTP_GET_TOKEN_BY_UUID + UUID.randomUUID().toString().replace("-", "");
 				HttpRequest request = new HttpRequest(HttpMethod.GET, url_token);
 
 				HttpResponse response = client.execute(request, context);
-				String responseBody = (String) handleResponse(response);
+				String responseBody = handleResponse(response).result.toString();
+				ULog.d(responseBody);
 
 				LoginBean newbean = new com.google.gson.Gson().fromJson(responseBody, LoginBean.class);
 

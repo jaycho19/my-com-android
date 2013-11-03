@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.dongfang.net.HttpUtils;
 import com.dongfang.net.http.RequestCallBack;
+import com.dongfang.net.http.ResponseInfo;
 import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.utils.HttpException;
 import com.dongfang.utils.ULog;
@@ -117,12 +118,12 @@ public class OrderDialog extends Dialog {
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_AUTHCODE + "obj.tel=" + phone,
 				new RequestCallBack<String>() {
 					@Override
-					public void onSuccess(String result) {
+					public void onSuccess(ResponseInfo<String> responseInfo) {
 						progressDialog.dismiss();
 
-						ULog.d("onSuccess  --" + result);
+						ULog.d("onSuccess  --" + responseInfo.result);
 						try {
-							JSONObject obj = new JSONObject(result);
+							JSONObject obj = new JSONObject(responseInfo.result);
 							if (obj.has("success") && obj.getBoolean("success")) {
 								// 获取成功
 								Toast.makeText(context, "验证码获取成功！", Toast.LENGTH_LONG).show();
@@ -151,6 +152,7 @@ public class OrderDialog extends Dialog {
 						progressDialog.dismiss();
 
 					}
+
 				});
 
 	}

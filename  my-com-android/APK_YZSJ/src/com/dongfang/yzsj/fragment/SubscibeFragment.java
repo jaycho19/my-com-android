@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.dongfang.net.HttpUtils;
 import com.dongfang.net.http.RequestCallBack;
+import com.dongfang.net.http.ResponseInfo;
 import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.utils.HttpException;
 import com.dongfang.utils.ULog;
@@ -117,8 +118,8 @@ public class SubscibeFragment extends Fragment {
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 
 			@Override
-			public void onSuccess(String result) {
-				ULog.d("onSuccess  --" + result);
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				ULog.d("onSuccess  --" + responseInfo.result);
 				progDialog.dismiss();
 				pageStart = 1 + start;
 
@@ -129,7 +130,7 @@ public class SubscibeFragment extends Fragment {
 					pulltoRefreshView.onFooterRefreshComplete();
 				}
 
-				MyOrderBean bean = new com.google.gson.Gson().fromJson(result, MyOrderBean.class);
+				MyOrderBean bean = new com.google.gson.Gson().fromJson(responseInfo.result, MyOrderBean.class);
 				if (null == bean)
 					return;
 

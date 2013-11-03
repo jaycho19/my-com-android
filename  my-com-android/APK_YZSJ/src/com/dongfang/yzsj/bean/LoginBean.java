@@ -43,7 +43,7 @@ public class LoginBean {
 		sb.append("result  = ").append(result).append("\n");
 		sb.append("success = ").append(success).append("\n");
 		sb.append("token   = ").append(token);
-		return super.toString();
+		return sb.toString();
 	}
 
 }

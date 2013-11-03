@@ -42,7 +42,9 @@ import com.dongfang.mediaplayer.windows.BasePopupWindow;
 import com.dongfang.mediaplayer.windows.BasePopupWindow.LandPopUpWinWorkingListener;
 import com.dongfang.net.HttpUtils;
 import com.dongfang.net.http.RequestCallBack;
+import com.dongfang.net.http.ResponseInfo;
 import com.dongfang.net.http.client.HttpRequest;
+import com.dongfang.utils.HttpException;
 import com.dongfang.utils.ULog;
 import com.dongfang.yzsj.PlayerActivity;
 import com.dongfang.yzsj.R;
@@ -860,13 +862,19 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 		url.append("&").append("userTelephone=").append(User.getPhone(getActivity()));
 
 		ULog.i(url.toString());
-
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
+
 			@Override
-			public void onSuccess(String result) {
-				ULog.d("onSuccess  --" + result);
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				ULog.d("onSuccess  --" + responseInfo.result);
+
 			}
 
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				ULog.d("onFailure  --" + msg);
+
+			}
 		});
 	}
 

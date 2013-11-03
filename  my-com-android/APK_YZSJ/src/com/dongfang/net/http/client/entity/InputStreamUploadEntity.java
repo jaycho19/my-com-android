@@ -17,6 +17,7 @@ package com.dongfang.net.http.client.entity;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InterruptedIOException;
 import java.io.OutputStream;
 
 import org.apache.http.entity.AbstractHttpEntity;
@@ -72,7 +73,7 @@ public class InputStreamUploadEntity extends AbstractHttpEntity implements Uploa
 					uploadedSize += l;
 					if (callBackHandler != null) {
 						if (!callBackHandler.updateProgress(uploadedSize + 1, uploadedSize, false)) {
-							return;
+							throw new InterruptedIOException("stop");
 						}
 					}
 				}
@@ -90,7 +91,7 @@ public class InputStreamUploadEntity extends AbstractHttpEntity implements Uploa
 					uploadedSize += l;
 					if (callBackHandler != null) {
 						if (!callBackHandler.updateProgress(length, uploadedSize, false)) {
-							return;
+							throw new InterruptedIOException("stop");
 						}
 					}
 				}

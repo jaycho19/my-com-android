@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.dongfang.net.HttpUtils;
 import com.dongfang.net.http.RequestCallBack;
+import com.dongfang.net.http.ResponseInfo;
 import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.utils.HttpException;
 import com.dongfang.utils.ULog;
@@ -141,13 +142,8 @@ public class HistoryFragment extends Fragment {
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
-			public void onLoading(long total, long current) {
-				ULog.d("RequestCallBack.onLoading total = " + total + "; current = " + current);
-			}
-
-			@Override
-			public void onSuccess(String result) {
-				ULog.d("onSuccess  --" + result);
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				ULog.d("onSuccess  --" + responseInfo.result);
 				progDialog.dismiss();
 				pageStart = 1 + start;
 
@@ -158,7 +154,7 @@ public class HistoryFragment extends Fragment {
 					pulltoRefreshView.onFooterRefreshComplete();
 				}
 
-				HistoryBean bean = new com.google.gson.Gson().fromJson(result, HistoryBean.class);
+				HistoryBean bean = new com.google.gson.Gson().fromJson(responseInfo.result, HistoryBean.class);
 				if (null == bean)
 					return;
 

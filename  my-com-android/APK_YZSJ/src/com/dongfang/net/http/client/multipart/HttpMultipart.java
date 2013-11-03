@@ -17,6 +17,7 @@ package com.dongfang.net.http.client.multipart;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -179,7 +180,7 @@ class HttpMultipart {
 		ByteArrayBuffer boundary = encode(this.charset, getBoundary());
 		for (FormBodyPart part : this.parts) {
 			if (!callBackInfo.doCallBack(true)) {
-				return;
+				throw new InterruptedIOException("stop");
 			}
 			writeBytes(TWO_DASHES, out);
 			callBackInfo.pos += TWO_DASHES.length();
@@ -201,17 +202,19 @@ class HttpMultipart {
 			case BROWSER_COMPATIBLE:
 				// Only write Content-Disposition
 				// Use content charset
-				MinimalField cd = part.getHeader().getField(MIME.CONTENT_DISPOSITION);
+				MinimalField cd = header.getField(MIME.CONTENT_DISPOSITION);
 				writeField(cd, this.charset, out);
 				callBackInfo.pos += encode(this.charset, cd.getName() + cd.getBody()).length() + FIELD_SEP.length()
 						+ CR_LF.length();
 				String filename = part.getBody().getFilename();
 				if (filename != null) {
-					MinimalField ct = part.getHeader().getField(MIME.CONTENT_TYPE);
+					MinimalField ct = header.getField(MIME.CONTENT_TYPE);
 					writeField(ct, this.charset, out);
 					callBackInfo.pos += encode(this.charset, ct.getName() + ct.getBody()).length() + FIELD_SEP.length()
 							+ CR_LF.length();
 				}
+				break;
+			default:
 				break;
 			}
 			writeBytes(CR_LF, out);
@@ -273,7 +276,7 @@ class HttpMultipart {
 			doWriteTo(this.mode, out, false);
 			byte[] extra = out.toByteArray();
 			return contentLen + extra.length;
-		} catch (IOException ex) {
+		} catch (Throwable ex) {
 			// Should never happen
 			return -1;
 		}

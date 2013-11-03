@@ -15,8 +15,6 @@
 
 package com.dongfang.utils;
 
-import java.io.UnsupportedEncodingException;
-
 import org.apache.http.protocol.HTTP;
 
 /**
@@ -30,7 +28,7 @@ public class CharsetUtils {
 		try {
 			String oldCharset = getEncoding(str, judgeCharsetLength);
 			return new String(str.getBytes(oldCharset), charset);
-		} catch (Exception ex) {
+		} catch (Throwable ex) {
 			ULog.w(ex);
 			return str;
 		}
@@ -51,7 +49,7 @@ public class CharsetUtils {
 		try {
 			String temp = str.length() > judgeCharsetLength ? str.substring(0, judgeCharsetLength) : str;
 			return temp.equals(new String(temp.getBytes(charset), charset));
-		} catch (UnsupportedEncodingException e) {
+		} catch (Throwable e) {
 			return false;
 		}
 	}

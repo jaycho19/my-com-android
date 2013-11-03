@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.dongfang.net.HttpUtils;
 import com.dongfang.net.http.RequestCallBack;
+import com.dongfang.net.http.ResponseInfo;
 import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.utils.HttpException;
 import com.dongfang.utils.ULog;
@@ -108,11 +109,11 @@ public class LoginActivity extends BaseActivity {
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
-			public void onSuccess(String result) {
+			public void onSuccess(ResponseInfo<String> responseInfo) {
 				progDialog.dismiss();
-				ULog.d("onSuccess  --" + result);
+				ULog.d("onSuccess  --" + responseInfo.result);
 				try {
-					JSONObject json = new JSONObject(result);
+					JSONObject json = new JSONObject(responseInfo.result);
 					Bundle data = new Bundle();
 					data.putString(ComParams.INTENT_MOVIEDETAIL_CONNENTID, conntentId);
 					data.putInt(ComParams.INTENT_MOVIEDETAIL_CLIPID, 1);

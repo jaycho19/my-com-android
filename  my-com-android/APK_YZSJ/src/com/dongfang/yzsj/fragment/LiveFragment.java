@@ -19,6 +19,7 @@ import android.widget.GridView;
 
 import com.dongfang.net.HttpUtils;
 import com.dongfang.net.http.RequestCallBack;
+import com.dongfang.net.http.ResponseInfo;
 import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.utils.ACache;
 import com.dongfang.utils.HttpException;
@@ -91,16 +92,11 @@ public class LiveFragment extends Fragment {
 			// bean为空，网络请求数据，需对网络进行判断
 			new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_LIVE, new RequestCallBack<String>() {
 				@Override
-				public void onLoading(long total, long current) {
-					ULog.d("total = " + total + "; current = " + current);
-				}
-
-				@Override
-				public void onSuccess(String result) {
-					ULog.d("onSuccess  --" + result);
-					bean = new com.google.gson.Gson().fromJson(result, LiveBean.class);
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					ULog.d("onSuccess  --" + responseInfo.result);
+					bean = new com.google.gson.Gson().fromJson(responseInfo.result, LiveBean.class);
 					ULog.i("HttpUtils --> " + bean.toString());
-					ACache.get(getActivity()).put(ComParams.INTENT_LIVEBEAN, result, 60 * 5);// 缓存数据
+					ACache.get(getActivity()).put(ComParams.INTENT_LIVEBEAN, responseInfo.result, 60 * 5);// 缓存数据
 
 					listAdapter.setList(bean.getLives());
 					listAdapter.notifyDataSetChanged();
@@ -155,11 +151,11 @@ public class LiveFragment extends Fragment {
 
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
-			public void onSuccess(String result) {
+			public void onSuccess(ResponseInfo<String> responseInfo) {
 				progDialog.dismiss();
-				ULog.d("onSuccess  --" + result);
+				ULog.d("onSuccess  --" + responseInfo.result);
 				try {
-					JSONObject json = new JSONObject(result);
+					JSONObject json = new JSONObject(responseInfo.result);
 					Bundle data = new Bundle();
 					data.putString(ComParams.INTENT_MOVIEDETAIL_CONNENTID, conntentId);
 					data.putInt(ComParams.INTENT_MOVIEDETAIL_CLIPID, 1);

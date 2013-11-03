@@ -15,6 +15,8 @@
 
 package com.dongfang.utils;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.security.cert.X509Certificate;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -28,11 +30,28 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.protocol.HTTP;
 
+import android.text.TextUtils;
+
 /**
  * Created by wyouflf on 13-8-30.
  */
 public class OtherUtils {
 	private OtherUtils() {}
+
+	public static boolean isSupportRange(HttpResponse response) {
+		if (response == null)
+			return false;
+		Header header = response.getFirstHeader("Accept-Ranges");
+		if (header != null) {
+			return "bytes".equals(header.getValue());
+		}
+		header = response.getFirstHeader("Content-Range");
+		if (header != null) {
+			String value = header.getValue();
+			return value != null && value.startsWith("bytes");
+		}
+		return false;
+	}
 
 	public static String getFileNameFromHttpResponse(HttpResponse response) {
 		if (response == null)
@@ -66,7 +85,37 @@ public class OtherUtils {
 				}
 			}
 		}
-		return result;
+		boolean isSupportedCharset = false;
+		if (!TextUtils.isEmpty(result)) {
+			try {
+				isSupportedCharset = Charset.isSupported(result);
+			} catch (Throwable e) {}
+		}
+		return isSupportedCharset ? result : null;
+	}
+
+	private static final int STRING_BUFFER_LENGTH = 100;
+
+	public static long sizeOfString(String str, String charset) throws UnsupportedEncodingException {
+		if (TextUtils.isEmpty(str)) {
+			return 0;
+		}
+		int len = str.length();
+		if (len < STRING_BUFFER_LENGTH) {
+			return str.getBytes(charset).length;
+		}
+		long size = 0;
+		for (int i = 0; i < len; i += STRING_BUFFER_LENGTH) {
+			int end = i + STRING_BUFFER_LENGTH;
+			end = end < len ? end : len;
+			String temp = getSubString(str, i, end);
+			size += temp.getBytes(charset).length;
+		}
+		return size;
+	}
+
+	public static String getSubString(String str, int start, int end) {
+		return new String(str.substring(start, end));
 	}
 
 	public static StackTraceElement getCurrentStackTraceElement() {
@@ -98,7 +147,7 @@ public class OtherUtils {
 			sslContext = SSLContext.getInstance("TLS");
 			sslContext.init(null, trustAllCerts, null);
 			HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			ULog.e(e.getMessage(), e);
 		}
 		HttpsURLConnection

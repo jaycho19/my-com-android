@@ -23,6 +23,7 @@ import java.io.InputStreamReader;
 import org.apache.http.HttpEntity;
 
 import com.dongfang.utils.IOUtils;
+import com.dongfang.utils.OtherUtils;
 
 public class StringDownloadHandler {
 
@@ -46,7 +47,7 @@ public class StringDownloadHandler {
 			String line = "";
 			while ((line = reader.readLine()) != null) {
 				sb.append(line);
-				current += line.getBytes(charset).length;
+				current += OtherUtils.sizeOfString(line, charset);
 				if (callBackHandler != null) {
 					if (!callBackHandler.updateProgress(total, current, false)) {
 						return sb.toString();
