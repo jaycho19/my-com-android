@@ -129,7 +129,7 @@ class HttpMultipart {
 	 *             if charset is null or boundary is null
 	 */
 	public HttpMultipart(final String subType, final Charset charset, final String boundary) {
-		this(subType, charset, boundary, HttpMultipartMode.BROWSER_COMPATIBLE);
+		this(subType, charset, boundary, HttpMultipartMode.STRICT);
 	}
 
 	public HttpMultipart(final String subType, final String boundary) {

@@ -65,13 +65,13 @@ public class ToDetailAsyncTask extends AsyncTask<String, String, DetailBean> {
 	protected DetailBean doInBackground(String... params) {
 		DetailBean bean = null;
 
-		if (!TextUtils.isEmpty(conntentId)) {
-
+		if (!TextUtils.isEmpty(conntentId.trim())) {
 			StringBuilder sb = new StringBuilder(ComParams.HTTP_DETAIL);
-			sb.append("token=").append(User.getToken(context)).append("&");
-			sb.append("phone=").append(User.getPhone(context)).append("&");
-			sb.append("channelId=").append(channelId).append("&");
-			sb.append("contentId=").append(conntentId);
+			sb.append("token=").append(User.getToken(context));
+			sb.append("&").append("phone=").append(User.getPhone(context));
+			if (!TextUtils.isEmpty(channelId.trim()))
+				sb.append("&").append("channelId=").append(channelId);
+			sb.append("&").append("contentId=").append(conntentId);
 			ULog.i(sb.toString());
 
 			try {

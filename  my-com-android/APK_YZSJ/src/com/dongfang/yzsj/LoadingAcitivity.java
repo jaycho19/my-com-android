@@ -75,6 +75,8 @@ public class LoadingAcitivity extends BaseActivity {
 		// intent(bean);
 		// }
 		// else {
+
+		ULog.d(ComParams.HTTP_HOME);
 		new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_HOME, new RequestCallBack<String>() {
 
 			@Override

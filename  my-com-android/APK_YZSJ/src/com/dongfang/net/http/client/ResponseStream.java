@@ -38,25 +38,35 @@ public class ResponseStream extends InputStream {
 
 	private String charset;
 
-	private String url;
+	private String requestUrl;
 	private long expiry;
 
-	public ResponseStream(HttpResponse baseResponse, String url, long expiry) throws IOException {
-		this(baseResponse, HTTP.UTF_8, url, expiry);
+	public ResponseStream(HttpResponse baseResponse, String requestUrl, long expiry) throws IOException {
+		this(baseResponse, HTTP.UTF_8, requestUrl, expiry);
 	}
 
-	public ResponseStream(HttpResponse baseResponse, String charset, String url, long expiry) throws IOException {
+	public ResponseStream(HttpResponse baseResponse, String charset, String requestUrl, long expiry) throws IOException {
+		if (baseResponse == null) {
+			throw new IllegalArgumentException("baseResponse may not be null");
+		}
 		this.baseResponse = baseResponse;
 		this.baseStream = baseResponse.getEntity().getContent();
 		this.charset = charset;
-		this.url = url;
+		this.requestUrl = requestUrl;
 		this.expiry = expiry;
 	}
 
 	private String _directResult;
 
 	public ResponseStream(String result) throws IOException {
+		if (result == null) {
+			throw new IllegalArgumentException("result may not be null");
+		}
 		_directResult = result;
+	}
+
+	public String getRequestUrl() {
+		return requestUrl;
 	}
 
 	public InputStream getBaseStream() {

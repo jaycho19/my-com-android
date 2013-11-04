@@ -32,6 +32,7 @@ import org.apache.http.protocol.HttpContext;
 import android.os.SystemClock;
 import android.text.TextUtils;
 
+import com.dongfang.net.HttpUtils;
 import com.dongfang.net.http.client.HttpGetCache;
 import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.net.http.client.HttpRequest.HttpMethod;
@@ -64,13 +65,14 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Void> im
 		}
 	}
 
+	private String requestUrl;
 	private HttpRequestBase request;
 	private boolean isUploading = true;
 	private final RequestCallBack<T> callback;
 
 	private int retriedTimes = 0;
 	private String fileSavePath = null;
-	private boolean isDownloadingFile;
+	private boolean isDownloadingFile = false;
 	private boolean autoResume = false; // Whether the downloading could continue from the point of interruption.
 	private boolean autoRename = false; // Whether rename the file by response header info when the download completely.
 	private String charset; // The default charset of response header info.
@@ -82,7 +84,6 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Void> im
 		this.charset = charset;
 	}
 
-	private String _getRequestUrl;// if not get method, it will be null.
 	private long expiry = HttpGetCache.getDefaultExpiryTime();
 
 	public void setExpiry(long expiry) {
@@ -108,15 +109,9 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Void> im
 		while (retry) {
 			IOException exception = null;
 			try {
-				if (request.getMethod().equals(HttpRequest.HttpMethod.GET.toString())) {
-					_getRequestUrl = request.getURI().toString();
-				}
-				else {
-					_getRequestUrl = null;
-				}
-				// 获取缓存
-				// if (_getRequestUrl != null) {
-				// String result = HttpUtils.sHttpGetCache.get(_getRequestUrl);
+				// 不进行缓存操作
+				// if (request.getMethod().equals(HttpRequest.HttpMethod.GET.toString())) {
+				// String result = HttpUtils.sHttpGetCache.get(requestUrl);
 				// if (result != null) {
 				// return new ResponseInfo<T>(null, (T) result, true);
 				// }
@@ -156,6 +151,7 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Void> im
 	protected Void doInBackground(Object... params) {
 		if (params == null || params.length < 1)
 			return null;
+
 		if (params.length > 3) {
 			fileSavePath = String.valueOf(params[1]);
 			isDownloadingFile = fileSavePath != null;
@@ -163,8 +159,14 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Void> im
 			autoRename = (Boolean) params[3];
 		}
 		try {
-			this.publishProgress(UPDATE_START);
+			// init request & requestUrl
 			request = (HttpRequestBase) params[0];
+			requestUrl = request.getURI().toString();
+			if (callback != null) {
+				callback.setRequestUrl(requestUrl);
+			}
+			this.publishProgress(UPDATE_START);
+			lastUpdateTime = SystemClock.uptimeMillis();
 			ResponseInfo<T> responseInfo = sendRequest(request);
 			if (responseInfo != null) {
 				this.publishProgress(UPDATE_SUCCESS, responseInfo);
@@ -185,35 +187,27 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Void> im
 	@Override
 	@SuppressWarnings("unchecked")
 	protected void onProgressUpdate(Object... values) {
-		if (mStopped || values == null || values.length < 1)
+		if (mStopped || values == null || values.length < 1 || callback == null)
 			return;
 		switch ((Integer) values[0]) {
 		case UPDATE_START:
-			if (callback != null) {
-				callback.onStart();
-			}
+			callback.onStart();
 			break;
 		case UPDATE_LOADING:
 			if (values.length != 3)
 				return;
-			if (callback != null) {
-				callback.onLoading(Long.valueOf(String.valueOf(values[1])), Long.valueOf(String.valueOf(values[2])),
-						isUploading);
-			}
+			callback.onLoading(Long.valueOf(String.valueOf(values[1])), Long.valueOf(String.valueOf(values[2])),
+					isUploading);
 			break;
 		case UPDATE_FAILURE:
 			if (values.length != 3)
 				return;
-			if (callback != null) {
-				callback.onFailure((HttpException) values[1], (String) values[2]);
-			}
+			callback.onFailure((HttpException) values[1], (String) values[2]);
 			break;
 		case UPDATE_SUCCESS:
 			if (values.length != 2)
 				return;
-			if (callback != null) {
-				callback.onSuccess((ResponseInfo<T>) values[1]);
-			}
+			callback.onSuccess((ResponseInfo<T>) values[1]);
 			break;
 		default:
 			break;
@@ -227,6 +221,7 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Void> im
 		}
 		if (isCancelled())
 			return null;
+
 		StatusLine status = response.getStatusLine();
 		int statusCode = status.getStatusCode();
 		if (statusCode < 300) {
@@ -234,7 +229,6 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Void> im
 			HttpEntity entity = response.getEntity();
 			if (entity != null) {
 				isUploading = false;
-				lastUpdateTime = SystemClock.uptimeMillis();
 				if (isDownloadingFile) {
 					autoResume = autoResume && OtherUtils.isSupportRange(response);
 					String responseFileName = autoRename ? OtherUtils.getFileNameFromHttpResponse(response) : null;
@@ -251,7 +245,7 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Void> im
 					ULog.d(result.toString());
 					// -------- token 失效时，根据ip重新获取一次token ,by dongfang, 2013-10-16 17:38:40----------------------
 					if (isNewToken(result.toString())) {
-						String newUrl = _getRequestUrl.replace(User.SHAREDPREFERENCES_ACCESS_TOKEN_OLD,
+						String newUrl = requestUrl.replace(User.SHAREDPREFERENCES_ACCESS_TOKEN_OLD,
 								User.SHAREDPREFERENCES_ACCESS_TOKEN_NEW);
 						request.setURI(URI.create(newUrl));
 						return handleResponse(client.execute(request, context));
@@ -299,6 +293,9 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Void> im
 			try {
 				this.cancel(true);
 			} catch (Throwable e) {}
+		}
+		if (callback != null) {
+			callback.onStopped();
 		}
 	}
 

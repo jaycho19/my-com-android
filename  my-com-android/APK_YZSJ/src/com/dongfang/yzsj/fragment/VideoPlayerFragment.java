@@ -242,7 +242,6 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	public void onDestroyView() {
 		super.onDestroyView();
 		ULog.i("--> onDestroyView");
-		// 播放页面�?��时还是loading状�?�?�? loadingCompleted();
 
 		// getActivity().unregisterReceiver(voice_changed_receiver);
 		cancelHideAllPopupWindDelay();
@@ -326,7 +325,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 	}
 
 	/**
-	 * 获得屏幕状�?栏的高度
+	 * 获得屏幕状态栏的高度
 	 */
 	private void getWindowStatusBarHeight() {
 		Rect frame = new Rect();
@@ -356,11 +355,11 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 
 	}
 
-	/** 初始化MediaPlayer控制�? */
+	/** 初始化MediaPlayer控制 */
 	@SuppressLint("NewApi")
 	private void initMediaPlayer() {
 
-		// 暂停�?��媒体播放
+		// 暂停媒体播放
 		context.sendBroadcast(new Intent("com.android.music.musicservicecommand").putExtra("command", "pause"));
 
 		// mediaPlayer.setOnBufferingUpdateListener(new
@@ -372,7 +371,7 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 		mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
 			@Override
 			public void onCompletion(android.media.MediaPlayer mp) {
-				// 判断是否是连续剧，如果是连续剧并且不是最后一集，�?��播放下一�?
+				// 判断是否是连续剧，如果是连续剧并且不是最后一集，播放下一集?
 				// if (mPlayData.isEpisode()) {
 				// autoPlayNextEpisode();
 				// }
@@ -399,12 +398,12 @@ public class VideoPlayerFragment extends Fragment implements OnSurfaceCreatedLis
 				String test = "";
 				switch (what) {
 				case MediaPlayer.MEDIA_INFO_BUFFERING_START:
-					test = "努力加载�?";
+					test = "努力加载中...";
 					break;
 				case MediaPlayer.MEDIA_INFO_BUFFERING_END:
 					break;
 				case MediaPlayer.MEDIA_INFO_VIDEO_TRACK_LAGGING:
-					test = "视频画面�?��解码，请稍等。�?�?";
+					test = "视频画面解码中，请稍等。";
 					break;
 				default:
 					break;

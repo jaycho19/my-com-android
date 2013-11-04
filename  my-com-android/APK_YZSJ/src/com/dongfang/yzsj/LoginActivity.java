@@ -82,7 +82,8 @@ public class LoginActivity extends BaseActivity {
 		}
 
 		else if ("TOPLAYR".equals(data.getString(ComParams.INTENT_TODO))) {
-			toPlay(data.getString(ComParams.INTENT_MOVIEDETAIL_LIVEID));
+			toPlay(data.getString(ComParams.INTENT_MOVIEDETAIL_LIVEID),
+					data.getInt(ComParams.INTENT_MOVIEDETAIL_TYPE, 0));
 		}
 
 	}
@@ -97,7 +98,7 @@ public class LoginActivity extends BaseActivity {
 	 * @param clipId
 	 *            第几集
 	 */
-	private void toPlay(final String conntentId) {
+	private void toPlay(final String conntentId, final int movieType) {
 		StringBuilder url = new StringBuilder(ComParams.HTTP_PLAYURL);
 		url.append("token=").append(User.getToken(this));
 		url.append("&").append("phone=").append(User.getPhone(this));
@@ -117,6 +118,7 @@ public class LoginActivity extends BaseActivity {
 					Bundle data = new Bundle();
 					data.putString(ComParams.INTENT_MOVIEDETAIL_CONNENTID, conntentId);
 					data.putInt(ComParams.INTENT_MOVIEDETAIL_CLIPID, 1);
+					data.putInt(ComParams.INTENT_MOVIEDETAIL_TYPE, movieType);
 					PlayerActivity.toPlay(LoginActivity.this, json.getString("url"), data);
 
 					// Intent intent = new Intent(Intent.ACTION_VIEW);

@@ -120,6 +120,7 @@ public class HistoryFragment extends Fragment {
 
 		if (0 == start) {
 			lastTotal = 0;
+			listData.clear();
 		}
 
 		else if (start > 0 && limit > lastTotal) {
