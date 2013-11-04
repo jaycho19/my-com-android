@@ -29,7 +29,7 @@ public class SimpleSSLSocketFactory extends SSLSocketFactory {
 		try {
 			trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
 			trustStore.load(null, null);
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			ULog.e(e.getMessage(), e);
 		}
 	}
@@ -40,7 +40,7 @@ public class SimpleSSLSocketFactory extends SSLSocketFactory {
 		if (instance == null) {
 			try {
 				instance = new SimpleSSLSocketFactory();
-			} catch (Exception e) {
+			} catch (Throwable e) {
 				ULog.e(e.getMessage(), e);
 			}
 		}

@@ -65,7 +65,7 @@ import com.dongfang.utils.core.SimpleSSLSocketFactory;
 
 public class HttpUtils {
 
-	// public final static HttpGetCache sHttpGetCache = new HttpGetCache();
+	public final static HttpGetCache sHttpGetCache = new HttpGetCache();
 
 	private final DefaultHttpClient httpClient;
 	private final HttpContext httpContext = new BasicHttpContext();

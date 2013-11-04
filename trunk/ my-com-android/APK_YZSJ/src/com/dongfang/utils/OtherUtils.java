@@ -38,7 +38,7 @@ import android.text.TextUtils;
 public class OtherUtils {
 	private OtherUtils() {}
 
-	public static boolean isSupportRange(HttpResponse response) {
+	public static boolean isSupportRange(final HttpResponse response) {
 		if (response == null)
 			return false;
 		Header header = response.getFirstHeader("Accept-Ranges");
@@ -53,7 +53,7 @@ public class OtherUtils {
 		return false;
 	}
 
-	public static String getFileNameFromHttpResponse(HttpResponse response) {
+	public static String getFileNameFromHttpResponse(final HttpResponse response) {
 		if (response == null)
 			return null;
 		String result = null;
@@ -71,7 +71,7 @@ public class OtherUtils {
 		return result;
 	}
 
-	public static String getCharsetFromHttpResponse(HttpResponse response) {
+	public static String getCharsetFromHttpResponse(final HttpResponse response) {
 		if (response == null)
 			return null;
 		String result = null;
@@ -96,7 +96,7 @@ public class OtherUtils {
 
 	private static final int STRING_BUFFER_LENGTH = 100;
 
-	public static long sizeOfString(String str, String charset) throws UnsupportedEncodingException {
+	public static long sizeOfString(final String str, String charset) throws UnsupportedEncodingException {
 		if (TextUtils.isEmpty(str)) {
 			return 0;
 		}
@@ -114,7 +114,7 @@ public class OtherUtils {
 		return size;
 	}
 
-	public static String getSubString(String str, int start, int end) {
+	public static String getSubString(final String str, int start, int end) {
 		return new String(str.substring(start, end));
 	}
 

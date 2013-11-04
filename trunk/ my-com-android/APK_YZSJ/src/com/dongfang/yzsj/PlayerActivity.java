@@ -20,11 +20,9 @@ import com.dongfang.yzsj.params.ComParams;
  * 
  */
 public class PlayerActivity extends FragmentActivity {
-	private static final String TAG = PlayerActivity.class.getSimpleName();
 
 	private VideoPlayerFragment mVideoPlayer;
 	private boolean mIsSavedInstanceState = false;
-	private boolean hasFocus;
 	private String url;
 
 	public static String contentId;// 媒体id
@@ -110,7 +108,6 @@ public class PlayerActivity extends FragmentActivity {
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
 		ULog.i("--> onWindowFocusChanged hasFocus = " + hasFocus);
-		this.hasFocus = hasFocus;
 		if (hasFocus && mIsSavedInstanceState) {
 			creatVideoFragment(url);
 			mIsSavedInstanceState = false;
