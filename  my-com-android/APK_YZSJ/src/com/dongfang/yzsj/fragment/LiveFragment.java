@@ -247,6 +247,7 @@ public class LiveFragment extends Fragment {
 			Intent intent = new Intent(getActivity(), LoginActivity.class);
 			intent.putExtra(ComParams.INTENT_TODO, "TOPLAYR");
 			intent.putExtra(ComParams.INTENT_MOVIEDETAIL_LIVEID, liveId);
+			intent.putExtra(ComParams.INTENT_MOVIEDETAIL_TYPE, ComParams.MOVIE_TYPE_Live);
 			startActivity(intent);
 		}
 	}
