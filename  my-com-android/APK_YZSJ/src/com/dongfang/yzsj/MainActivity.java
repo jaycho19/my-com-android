@@ -1,8 +1,10 @@
 package com.dongfang.yzsj;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
 import android.view.KeyEvent;
@@ -12,8 +14,17 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dongfang.net.HttpUtils;
+import com.dongfang.net.http.RequestCallBack;
+import com.dongfang.net.http.ResponseInfo;
+import com.dongfang.net.http.client.HttpRequest.HttpMethod;
+import com.dongfang.utils.HttpException;
 import com.dongfang.utils.ULog;
+import com.dongfang.utils.Util;
+import com.dongfang.yzsj.bean.DelAddResult;
 import com.dongfang.yzsj.bean.HomeBean;
+import com.dongfang.yzsj.bean.UpdateBean;
+import com.dongfang.yzsj.dialog.UpdateDialog;
 import com.dongfang.yzsj.fragment.HomeFragment;
 import com.dongfang.yzsj.fragment.LiveFragment;
 import com.dongfang.yzsj.fragment.LoginFragment;
@@ -30,6 +41,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		this.TAG = MainActivity.class.getSimpleName();
 	}
 
+	private Context context;
+
 	private FragmentTabHost fgtHost;
 	private FragmentManager mFragmentManager;
 	private HomeBean homeBean;
@@ -41,15 +54,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 	private View tvhistory;// 播放信息
 	private TextView tvLoginDesc;// 登陆信息
 
+	private UpdateDialog updateDialog;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		context = this;
+
 		initData(getIntent());
 
 		setContentView(R.layout.activity_main);
 		mFragmentManager = getSupportFragmentManager();
 		initTabhostItems();
 		initView();
+
+		chkUpdate();
 	}
 
 	/** 获取首页数据 */
@@ -154,7 +173,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 					fgtHost.refreshDrawableState();
 					ULog.d(fgtHost.getCurrentTabTag());
 					if (fgtHost.getCurrentTabTag().equals("5")) {
-						fgtHost.getCurrentTabView().invalidate();
+						fgtHost.setCurrentTabByTag("1");
+						fgtHost.setCurrentTabByTag("5");
 					}
 
 				}
@@ -204,6 +224,35 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		}
 	}
 
+	/**
+	 * 检测升级
+	 */
+	private void chkUpdate() {
+		new HttpUtils().send(HttpMethod.GET, ComParams.HTTP_GET_UPDATE, new RequestCallBack<String>() {
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				UpdateBean updateBean = new com.google.gson.Gson().fromJson(responseInfo.result, UpdateBean.class);
+				// updateBean.setDownoadUrl("http://tv.inhe.net/apk/AdobeFlashPlayer11.1.111.9.apk");
+				boolean isupdate = Util.isUpdate(context, updateBean.getCurrentVersion());
+				ULog.d(isupdate + "");
+				if (isupdate) {
+
+					if (null != updateDialog)
+						updateDialog.dismiss();
+
+					updateDialog = UpdateDialog.show(context, updateBean, null);
+					updateDialog.show();
+				}
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+
+			}
+		});
+	}
+
 	public HomeBean getHomeBean() {
 		return homeBean;
 	}
@@ -234,9 +283,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK && !frameLayout.isShown()) {
-			frameLayout.setVisibility(0);
-			return true;
+		// if (keyCode == KeyEvent.KEYCODE_BACK && !frameLayout.isShown()) {
+		// frameLayout.setVisibility(0);
+		// return true;
+		// }
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			ULog.d("getCurrentTabTag = " + fgtHost.getCurrentTabTag());
+			if (!frameLayout.isShown()) {
+				frameLayout.setVisibility(0);
+				if (fgtHost.getCurrentTabTag().equals("5")) {
+					fgtHost.setCurrentTabByTag("1");
+				}
+				return true;
+			}
+			else if (!fgtHost.getCurrentTabTag().equals("1")) {
+				fgtHost.setCurrentTabByTag("1");
+				return true;
+			}
 		}
 		return super.onKeyDown(keyCode, event);
 	}

@@ -1,4 +1,4 @@
-package com.dongfang.view;
+package com.dongfang.yzsj.dialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,8 +18,10 @@ import com.dongfang.net.http.ResponseInfo;
 import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.utils.HttpException;
 import com.dongfang.utils.ULog;
+import com.dongfang.view.ProgressDialog;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.params.ComParams;
+import com.dongfang.yzsj.utils.User;
 
 /**
  * 进度条对话框
@@ -51,6 +53,7 @@ public class OrderDialog extends Dialog {
 
 		final EditText etAuthCode = (EditText) orderDialog.findViewById(R.id.order_et_authCode);
 		final EditText etPhoneNum = (EditText) orderDialog.findViewById(R.id.order_et_userName);
+		etPhoneNum.setText(User.getPhone(context));
 		TextView tvAuthCode = (TextView) orderDialog.findViewById(R.id.order_tv_get_authcode);
 		tvAuthCode.setOnClickListener(new View.OnClickListener() {
 
@@ -142,7 +145,6 @@ public class OrderDialog extends Dialog {
 					public void onStart() {
 						ULog.i("onStart");
 						progressDialog.show();
-
 					}
 
 					@Override
@@ -150,9 +152,7 @@ public class OrderDialog extends Dialog {
 						ULog.i("onFailure");
 						Toast.makeText(context, "验证码获取失败！", Toast.LENGTH_LONG).show();
 						progressDialog.dismiss();
-
 					}
-
 				});
 
 	}
