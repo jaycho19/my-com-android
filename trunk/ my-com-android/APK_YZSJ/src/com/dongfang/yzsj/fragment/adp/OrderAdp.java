@@ -20,10 +20,10 @@ import com.dongfang.net.http.ResponseInfo;
 import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.utils.HttpException;
 import com.dongfang.utils.ULog;
-import com.dongfang.view.OrderDialog;
-import com.dongfang.view.OrderDialog.OnOrderDialogBtnListener;
 import com.dongfang.yzsj.R;
 import com.dongfang.yzsj.bean.OrderProduct;
+import com.dongfang.yzsj.dialog.OrderDialog;
+import com.dongfang.yzsj.dialog.OrderDialog.OnOrderDialogBtnListener;
 import com.dongfang.yzsj.interf.OrderResult;
 import com.dongfang.yzsj.params.ComParams;
 

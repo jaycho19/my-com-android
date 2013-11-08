@@ -29,9 +29,9 @@
             android:maxLength="11"
             android:padding="5dp"
             android:phoneNumber="true"
-            android:text="15631127974"
             android:textColor="#666666"
             android:textSize="18sp" />
+        <!-- android:text="15631127974" -->
     </LinearLayout>
 
     <LinearLayout
@@ -72,14 +72,15 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginRight="5dp"
-                android:layout_toLeftOf="@+id/login_tv_get_authcode"
+                android:layout_toLeftOf="@+id/order_tv_get_authcode"
                 android:background="@drawable/user_btn"
                 android:inputType="number"
                 android:maxLength="6"
                 android:padding="3dp"
-                android:text="888222"
                 android:textColor="#666666"
                 android:textSize="18sp" >
+
+                <!-- android:text="888222" -->
             </EditText>
         </RelativeLayout>
     </LinearLayout>

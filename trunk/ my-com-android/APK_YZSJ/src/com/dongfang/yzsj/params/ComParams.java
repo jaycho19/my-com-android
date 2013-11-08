@@ -86,6 +86,9 @@ public class ComParams {
 	public static final String HTTP_GET_TOKEN_BY_UUID = HTTP_BASE
 			+ "/page/hbMobile/uniLogin.jsp?jsonFormat=true&unikey=";
 
+	/** 获取升级信息 */
+	public static final String HTTP_GET_UPDATE = HTTP_BASE + "/page/hbMobile/checkUpdateAndroid.jsp";
+
 	// ------------play view mode and frompage ---------
 	// IsFromPage: IsFromPage, IsFromRecommend
 	/************** MediaplayActivity播放器用到的常量参数：playMode: Local , Program , schedule, Live *******************/
