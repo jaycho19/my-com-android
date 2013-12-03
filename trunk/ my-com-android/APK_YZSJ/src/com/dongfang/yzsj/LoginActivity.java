@@ -30,11 +30,6 @@ public class LoginActivity extends BaseActivity {
 	private com.dongfang.view.ProgressDialog progDialog;
 
 	@Override
-	protected void setBaseValues() {
-		TAG = "LoginActivity";
-	}
-
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);

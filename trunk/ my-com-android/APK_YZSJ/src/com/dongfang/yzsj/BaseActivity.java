@@ -35,10 +35,7 @@ public abstract class BaseActivity extends FragmentActivity {
 		registerReceiver(closeApp, filter);
 		// 系统崩溃日志,崩溃重启
 		MyUnCaughtExceptionHandler.getInstance(this);
-		setBaseValues();
 	}
-
-	protected abstract void setBaseValues();
 
 	@Override
 	protected void onStart() {

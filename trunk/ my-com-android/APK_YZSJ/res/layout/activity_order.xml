@@ -18,8 +18,8 @@
             android:layout_centerInParent="true"
             android:text="订购"
             android:textColor="@color/text_orange"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="17sp"
+            android:layout_margin="2dp"/>
 
         <TextView
             android:id="@+id/order_tv_back"

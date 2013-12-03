@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
 import android.view.KeyEvent;
@@ -21,7 +20,6 @@ import com.dongfang.net.http.client.HttpRequest.HttpMethod;
 import com.dongfang.utils.HttpException;
 import com.dongfang.utils.ULog;
 import com.dongfang.utils.Util;
-import com.dongfang.yzsj.bean.DelAddResult;
 import com.dongfang.yzsj.bean.HomeBean;
 import com.dongfang.yzsj.bean.UpdateBean;
 import com.dongfang.yzsj.dialog.UpdateDialog;
@@ -36,11 +34,8 @@ import com.dongfang.yzsj.utils.User;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
-	@Override
-	protected void setBaseValues() {
-		this.TAG = MainActivity.class.getSimpleName();
-	}
-
+	/** 在onResume中进行调用，根据changeTab的切换tab页 */
+	public static int changeTab = 0;
 	private Context context;
 
 	private FragmentTabHost fgtHost;
@@ -59,6 +54,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		ULog.d("onCreate(Bundle savedInstanceState)");
 		context = this;
 
 		initData(getIntent());
@@ -222,6 +218,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		else {
 			tvLogin.setText("登陆");
 		}
+
+		/** 检测是否需要更换tab页，一般在其他activity修改 */
+		if (0 != changeTab) {
+			fgtHost.setCurrentTabByTag(Integer.toString(changeTab));
+			changeTab = 0;
+		}
+
 	}
 
 	/**

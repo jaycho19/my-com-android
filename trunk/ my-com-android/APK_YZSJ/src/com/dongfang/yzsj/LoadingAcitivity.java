@@ -26,12 +26,6 @@ import com.dongfang.yzsj.params.ComParams;
 public class LoadingAcitivity extends BaseActivity {
 
 	@Override
-	protected void setBaseValues() {
-		TAG = "LoadingAcitivity";
-
-	}
-
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_loading);

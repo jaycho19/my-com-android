@@ -17,8 +17,9 @@
             android:layout_centerInParent="true"
             android:text="电影"
             android:textColor="@color/text_orange"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="17sp"
+            android:layout_margin="2dp"
+             />
 
         <TextView
             android:id="@+id/detail_tv_back"

@@ -23,11 +23,6 @@ import com.dongfang.yzsj.utils.User;
 
 public class OrderAcitivity extends BaseActivity implements OnClickListener {
 
-	@Override
-	protected void setBaseValues() {
-		TAG = "OrderAcitivity";
-	}
-
 	private TextView tvBack; // 返回按钮
 	private ListView listView;
 	private OrderAdp orderAdp;

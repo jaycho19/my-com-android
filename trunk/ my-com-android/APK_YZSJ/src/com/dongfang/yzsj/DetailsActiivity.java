@@ -56,11 +56,6 @@ public class DetailsActiivity extends BaseActivity implements OnClickListener {
 	private com.dongfang.view.ProgressDialog progDialog;
 
 	@Override
-	protected void setBaseValues() {
-		TAG = "DetailsActiivity";
-	}
-
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail);
