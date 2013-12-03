@@ -13,9 +13,6 @@ public class BaseApplication extends Application {
 	public static final String TAG = BaseApplication.class.getSimpleName();
 	private static BaseApplication myApplication = null;
 
-	/** 行为统计 */
-	private int actionReportCode = -1;
-
 	public static BaseApplication getInstance() {
 		if (myApplication == null) {
 			myApplication = new BaseApplication();

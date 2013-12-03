@@ -32,7 +32,6 @@ import org.apache.http.protocol.HttpContext;
 import android.os.SystemClock;
 import android.text.TextUtils;
 
-import com.dongfang.net.HttpUtils;
 import com.dongfang.net.http.client.HttpGetCache;
 import com.dongfang.net.http.client.HttpRequest;
 import com.dongfang.net.http.client.HttpRequest.HttpMethod;
@@ -345,7 +344,7 @@ public class HttpHandler<T> extends CompatibleAsyncTask<Object, Object, Void> im
 				}
 			}
 		} catch (Throwable t) {
-			t.printStackTrace();
+			// t.printStackTrace();
 		}
 		return false;
 	}

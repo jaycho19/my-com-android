@@ -14,11 +14,19 @@
         android:background="@drawable/item_bar_type_bg"
         android:gravity="center" >
 
-        <ImageView
+        <!-- <ImageView -->
+        <!-- android:layout_width="wrap_content" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:background="@drawable/vod_base" -->
+        <!-- android:contentDescription="@string/app_name" /> -->
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/vod_base"
-            android:contentDescription="@string/app_name" />
+            android:layout_margin="2dp"
+            android:text="基础频道"
+            android:textColor="@color/text_orange"
+            android:textSize="17sp" />
     </LinearLayout>
 
     <GridView
@@ -31,121 +39,25 @@
         android:verticalSpacing="5dp" >
     </GridView>
 
-    <!-- <TableLayout -->
-    <!-- android:layout_width="match_parent" -->
-    <!-- android:layout_height="wrap_content" -->
-    <!-- android:layout_marginLeft="10dp" -->
-    <!-- android:layout_marginRight="10dp" > -->
-
-
-    <!-- <TableRow -->
-    <!-- android:id="@+id/tableRow1" -->
-    <!-- android:layout_width="wrap_content" -->
-    <!-- android:layout_height="wrap_content" -->
-    <!-- android:paddingBottom="5dp" -->
-    <!-- android:paddingTop="5dp" > -->
-
-
-    <!-- <ImageView -->
-    <!-- android:layout_weight="1" -->
-    <!-- android:src="@drawable/vod_dianying" /> -->
-
-
-    <!-- <ImageView -->
-    <!-- android:layout_weight="1" -->
-    <!-- android:src="@drawable/vod_dianshiju" /> -->
-
-
-    <!-- <ImageView -->
-    <!-- android:layout_weight="1" -->
-    <!-- android:src="@drawable/vod_xinwen" /> -->
-    <!-- </TableRow> -->
-
-
-    <!-- <TableRow -->
-    <!-- android:id="@+id/tableRow2" -->
-    <!-- android:layout_width="wrap_content" -->
-    <!-- android:layout_height="wrap_content" -->
-    <!-- android:paddingBottom="5dp" -->
-    <!-- android:paddingTop="5dp" > -->
-
-
-    <!-- <ImageView -->
-    <!-- android:layout_weight="1" -->
-    <!-- android:src="@drawable/vod_tiyu" /> -->
-
-
-    <!-- <ImageView -->
-    <!-- android:layout_weight="1" -->
-    <!-- android:src="@drawable/vod_yule" /> -->
-
-
-    <!-- <ImageView -->
-    <!-- android:layout_weight="1" -->
-    <!-- android:src="@drawable/vod_minglanmu" /> -->
-    <!-- </TableRow> -->
-
-
-    <!-- <TableRow -->
-    <!-- android:id="@+id/tableRow3" -->
-    <!-- android:layout_width="wrap_content" -->
-    <!-- android:layout_height="wrap_content" -->
-    <!-- android:paddingBottom="5dp" -->
-    <!-- android:paddingTop="5dp" > -->
-
-
-    <!-- <ImageView -->
-    <!-- android:layout_weight="1" -->
-    <!-- android:src="@drawable/vod_jishi" /> -->
-
-
-    <!-- <ImageView -->
-    <!-- android:layout_weight="1" -->
-    <!-- android:src="@drawable/vod_yingyue" /> -->
-
-
-    <!-- <ImageView -->
-    <!-- android:layout_weight="1" -->
-    <!-- android:src="@drawable/vod_fengshang" /> -->
-    <!-- </TableRow> -->
-
-
-    <!-- <TableRow -->
-    <!-- android:id="@+id/tableRow4" -->
-    <!-- android:layout_width="wrap_content" -->
-    <!-- android:layout_height="wrap_content" -->
-    <!-- android:paddingBottom="5dp" -->
-    <!-- android:paddingTop="5dp" > -->
-
-
-    <!-- <ImageView -->
-    <!-- android:layout_weight="1" -->
-    <!-- android:src="@drawable/vod_jiaoyu" /> -->
-
-
-    <!-- <ImageView -->
-    <!-- android:layout_weight="1" -->
-    <!-- android:src="@drawable/vod_zhuanqu" /> -->
-
-
-    <!-- <ImageView -->
-    <!-- android:layout_weight="1" -->
-    <!-- android:src="@drawable/ic_launcher" -->
-    <!-- android:visibility="invisible" /> -->
-    <!-- </TableRow> -->
-    <!-- </TableLayout> -->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/item_bar_type_bg"
         android:gravity="center" >
 
-        <ImageView
+        <!-- <ImageView -->
+        <!-- android:layout_width="wrap_content" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:background="@drawable/vod_vip" -->
+        <!-- android:contentDescription="@string/app_name" /> -->
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/vod_vip"
-            android:contentDescription="@string/app_name" />
+            android:layout_margin="2dp"
+            android:text="增值频道"
+            android:textColor="@color/text_orange"
+            android:textSize="17sp" />
     </LinearLayout>
 
     <GridView
@@ -158,35 +70,4 @@
         android:verticalSpacing="10dp" >
     </GridView>
 
-    <!-- <TableLayout -->
-    <!-- android:layout_width="match_parent" -->
-    <!-- android:layout_height="wrap_content" -->
-    <!-- android:layout_marginLeft="10dp" -->
-    <!-- android:layout_marginRight="10dp" > -->
-
-
-    <!-- <TableRow -->
-    <!-- android:layout_width="wrap_content" -->
-    <!-- android:layout_height="wrap_content" -->
-    <!-- android:paddingBottom="5dp" -->
-    <!-- android:paddingTop="5dp" > -->
-
-
-    <!-- <ImageView -->
-    <!-- android:layout_weight="1" -->
-    <!-- android:src="@drawable/vod_huashu" /> -->
-
-
-    <!-- <ImageView -->
-    <!-- android:layout_weight="1" -->
-    <!-- android:src="@drawable/vod_youpengyingyue" /> -->
-
-
-    <!-- <ImageView -->
-    <!-- android:layout_weight="1" -->
-    <!-- android:src="@drawable/vod_baishitong" /> -->
-    <!-- </TableRow> -->
-    <!-- </TableLayout> -->
-
 </LinearLayout>
-<!-- </ScrollView> -->

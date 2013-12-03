@@ -6,9 +6,9 @@ import java.util.Vector;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dongfang.net.HttpUtils;
+import com.dongfang.net.http.HttpHandler;
 import com.dongfang.net.http.RequestCallBack;
 import com.dongfang.net.http.ResponseInfo;
 import com.dongfang.net.http.client.HttpRequest;
@@ -69,6 +70,8 @@ public class SearchFragment extends Fragment {
 
 	private int lastTotal;// 最近一次加载更多时返回的数据量
 
+	private HttpHandler<String> httpHandler = null;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		this.inflater = inflater;
@@ -89,13 +92,7 @@ public class SearchFragment extends Fragment {
 		tvSearch.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				pageStart = 0;
-				lastTotal = 0;
-				// searchValue = "手机";
-				if (null != listData)
-					listData.clear();
-				searchValue = etSearchBox.getText().toString().trim();
-				getSearchResult(searchValue, pageStart, LIMIT);
+				startSearch();
 			}
 		});
 
@@ -130,11 +127,13 @@ public class SearchFragment extends Fragment {
 		ctvQanbu.setOnCheckedChangeListener(new android.widget.CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				ULog.d("ctvQanbu.setOnCheckedChangeListener");
 				selectChannels.removeAllElements(); // 清空
 				if (isChecked) {
 					for (VODItem vodItem : listChannels) {
 						selectChannels.add(vodItem.getChannelId());
 					}
+					startSearch();
 				}
 
 				buttonView.setChecked(isChecked);
@@ -177,38 +176,42 @@ public class SearchFragment extends Fragment {
 		else {
 			// bean为空，网络请求数据，需对网络进行判断
 			ULog.d(ComParams.HTTP_VOD);
-			new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_VOD, new RequestCallBack<String>() {
-				@Override
-				public void onSuccess(ResponseInfo<String> responseInfo) {
-					ULog.d("onSuccess  --" + responseInfo.result);
+			if (null != httpHandler)
+				httpHandler.stop();
+			httpHandler = new HttpUtils().send(HttpRequest.HttpMethod.GET, ComParams.HTTP_VOD,
+					new RequestCallBack<String>() {
+						@Override
+						public void onSuccess(ResponseInfo<String> responseInfo) {
+							ULog.d("onSuccess  --" + responseInfo.result);
 
-					listChannels = new com.google.gson.Gson().fromJson(responseInfo.result,
-							new TypeToken<List<VODItem>>() {}.getType());
-					StringBuilder sb = new StringBuilder();
-					for (int i = 0, length = listChannels.size(); i < length; i++)
-						sb.append("vod ").append(i).append(" --> ").append(listChannels.get(i).toString());
-					ULog.d(sb.toString());
+							listChannels = new com.google.gson.Gson().fromJson(responseInfo.result,
+									new TypeToken<List<VODItem>>() {}.getType());
+							StringBuilder sb = new StringBuilder();
+							for (int i = 0, length = listChannels.size(); i < length; i++)
+								sb.append("vod ").append(i).append(" --> ").append(listChannels.get(i).toString());
+							ULog.d(sb.toString());
 
-					ACache.get(getActivity()).put(ComParams.INTENT_SEARCH_CHANNELS, responseInfo.result, 60 * 5);// 缓存数据
+							ACache.get(getActivity())
+									.put(ComParams.INTENT_SEARCH_CHANNELS, responseInfo.result, 60 * 5);// 缓存数据
 
-					initChannelItems();
+							initChannelItems();
 
-					progDialog.dismiss();
-				}
+							progDialog.dismiss();
+						}
 
-				@Override
-				public void onStart() {
-					ULog.i("onStart");
-					progDialog.show();
+						@Override
+						public void onStart() {
+							ULog.i("onStart");
+							progDialog.show();
 
-				}
+						}
 
-				@Override
-				public void onFailure(HttpException error, String msg) {
-					progDialog.dismiss();
-					ULog.i("onFailure");
-				}
-			});
+						@Override
+						public void onFailure(HttpException error, String msg) {
+							progDialog.dismiss();
+							ULog.i("onFailure");
+						}
+					});
 		}
 	}
 
@@ -229,6 +232,13 @@ public class SearchFragment extends Fragment {
 			view.setLayoutParams(llp);
 			view.setText(listChannels.get(i).getName());
 			view.setOnCheckedChangeListener(new CheckedChangeListener(listChannels.get(i).getChannelId()));
+			view.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					startSearch();
+				}
+			});
 			linearLayout_0.addView(view);
 		}
 		for (int i = 5; i < Math.min(length, 11); i++) {
@@ -236,6 +246,13 @@ public class SearchFragment extends Fragment {
 			view.setLayoutParams(llp);
 			view.setText(listChannels.get(i).getName());
 			view.setOnCheckedChangeListener(new CheckedChangeListener(listChannels.get(i).getChannelId()));
+			view.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					startSearch();
+				}
+			});
 			linearLayout_1.addView(view);
 		}
 		for (int i = 11; i < Math.min(length, 15); i++) {
@@ -243,6 +260,13 @@ public class SearchFragment extends Fragment {
 			view.setLayoutParams(llp);
 			view.setText(listChannels.get(i).getName());
 			view.setOnCheckedChangeListener(new CheckedChangeListener(listChannels.get(i).getChannelId()));
+			view.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					startSearch();
+				}
+			});
 			linearLayout_2.addView(view);
 		}
 	}
@@ -257,6 +281,8 @@ public class SearchFragment extends Fragment {
 
 		@Override
 		public void onCheckedChanged(CompoundButton paramCompoundButton, boolean param) {
+			ULog.d(paramCompoundButton.getText() + " setOnCheckedChangeListener " + param);
+
 			if (param) {
 				if (!selectChannels.contains(channelId))
 					selectChannels.add(channelId);
@@ -265,6 +291,8 @@ public class SearchFragment extends Fragment {
 				ctvQanbu.setChecked(false);
 				selectChannels.remove(channelId);
 			}
+
+			// startSearch();
 		}
 	}
 
@@ -277,6 +305,7 @@ public class SearchFragment extends Fragment {
 		}
 	}
 
+	/** 拼接渠道信息 */
 	private String getChannelsUrl() {
 		StringBuilder sb = new StringBuilder();
 
@@ -291,12 +320,13 @@ public class SearchFragment extends Fragment {
 
 	/** 获取搜索结果 */
 	private void getSearchResult(final String searchName, final int start, final int limit) {
-		if (TextUtils.isEmpty(searchName)) {
-			Toast.makeText(getActivity(), "请输入要搜索的内容", Toast.LENGTH_LONG).show();
-			return;
-		}
+		// if (TextUtils.isEmpty(searchName)) {
+		// Toast.makeText(getActivity(), "请输入要搜索的内容", Toast.LENGTH_LONG).show();
+		// return;
+		// }
 		// 已经加载了全部数据，不再进行数据获取
-		else if (start > 0 && limit > lastTotal) {
+		// else
+		if (start > 0 && limit > lastTotal) {
 			Toast.makeText(getActivity(), "没有更多内容啦O(∩_∩)O", Toast.LENGTH_LONG).show();
 			pulltoRefreshView.onFooterRefreshComplete();
 			return;
@@ -311,8 +341,9 @@ public class SearchFragment extends Fragment {
 		url.append("searchValue=").append(Util.toUTF8(searchName));
 
 		ULog.i(url.toString());
-
-		new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
+		if (null != httpHandler)
+			httpHandler.stop();
+		httpHandler = new HttpUtils().send(HttpRequest.HttpMethod.GET, url.toString(), new RequestCallBack<String>() {
 			@Override
 			public void onSuccess(ResponseInfo<String> responseInfo) {
 				ULog.d("onSuccess  --" + responseInfo.result);
@@ -363,6 +394,17 @@ public class SearchFragment extends Fragment {
 				}
 			}
 		});
+	}
+
+	/** 开始搜索 */
+	private void startSearch() {
+		ULog.d("startSearch()");
+		pageStart = 0;
+		lastTotal = 0;
+		if (null != listData)
+			listData.clear();
+		searchValue = etSearchBox.getText().toString().trim();
+		getSearchResult(searchValue, pageStart, LIMIT);
 	}
 
 }

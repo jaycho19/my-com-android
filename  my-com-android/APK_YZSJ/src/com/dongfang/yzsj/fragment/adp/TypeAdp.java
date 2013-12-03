@@ -91,7 +91,6 @@ public class TypeAdp extends BaseAdapter {
 
 		final Movie movie = list.get(position);
 		holder.iv_placard.setImage(movie.getPC_MEDIA_POSTER_BIG());
-		// BitmapUtils.create(context).display(holder.iv_placard, movie.getPC_MEDIA_POSTER_BIG(), 105, 137);
 		holder.tv_title.setText(movie.getMEDIA_NAME());
 		holder.tv_actor.setText(movie.getMEDIA_ACTORS());
 

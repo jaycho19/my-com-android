@@ -1,14 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical" >
 
+    <LinearLayout
+        android:id="@+id/ll_movie_list_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/iv_movie_list_tabs_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/mian_activity_tab_home_bg"
+            android:clickable="true"
+            android:contentDescription="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/iv_movie_list_tabs_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/mian_activity_tab_live_bg"
+            android:clickable="true"
+            android:contentDescription="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/iv_movie_list_tabs_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/mian_activity_tab_vod_bg"
+            android:clickable="true"
+            android:contentDescription="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/iv_movie_list_tabs_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/mian_activity_tab_search_bg"
+            android:clickable="true"
+            android:contentDescription="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/iv_movie_list_tabs_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/mian_activity_tab_user_bg"
+            android:clickable="true"
+            android:contentDescription="@string/app_name" />
+    </LinearLayout>
+
     <fragment
         android:id="@+id/fragment_type"
         android:name="com.dongfang.yzsj.fragment.TypeFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_movie_list_tabs" />
 
-</LinearLayout>
+</RelativeLayout>
