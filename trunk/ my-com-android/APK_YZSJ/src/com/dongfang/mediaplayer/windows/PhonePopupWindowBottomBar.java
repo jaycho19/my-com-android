@@ -25,6 +25,7 @@ import com.dongfang.mediaplayer.Mediaplayer.OnPlayPauseStateChagedListener;
 import com.dongfang.mediaplayer.constants.Constants;
 import com.dongfang.utils.ULog;
 import com.dongfang.utils.Util;
+import com.dongfang.yzsj.PlayerActivity;
 import com.dongfang.yzsj.R;
 
 /**
@@ -171,6 +172,11 @@ public class PhonePopupWindowBottomBar extends PopupWindow implements OnClickLis
 		// btnFullScreen2Half = (ImageButton) view.findViewById(R.id.btn_fullscreen2half);
 
 		viewMediaControl = view.findViewById(R.id.mc_container);
+		//---- df 2013-12-4 do not show buttons in livestyle
+		if (1 == PlayerActivity.movieType){
+			btnBackwardPlay.setVisibility(View.INVISIBLE);
+			btnForwardPlay.setVisibility(View.INVISIBLE);
+		}
 
 	}
 

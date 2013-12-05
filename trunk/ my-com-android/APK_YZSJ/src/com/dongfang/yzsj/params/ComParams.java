@@ -21,11 +21,11 @@ public class ComParams {
 	public static final String INTENT_SEARCH_CHANNELS = "search_channels";
 	public static final String INTENT_VODBEAN_VIP = "vodbeanVIP";
 	public static final String INTENT_MOVIELIST_CHANNEL = "channel";
-	public static final String INTENT_MOVIEDETAIL_LIVEID = "liveId";
-	public static final String INTENT_MOVIEDETAIL_CHANNELID = "channelId";
-	public static final String INTENT_MOVIEDETAIL_CONNENTID = "connentId";
+	public static final String INTENT_MOVIEDETAIL_LIVEID = "liveId";// 直播id
+	public static final String INTENT_MOVIEDETAIL_CHANNELID = "channelId";// 频道id
+	public static final String INTENT_MOVIEDETAIL_CONNENTID = "connentId";// 内容id
 	public static final String INTENT_MOVIEDETAIL_BAND = "band";
-	public static final String INTENT_MOVIEDETAIL_CLIPID = "clipId";
+	public static final String INTENT_MOVIEDETAIL_CLIPID = "clipId";// 第几集
 	public static final String INTENT_MOVIEDETAIL_TYPE = "movieType";// 视频类型，直播或者点播
 	public static final String INTENT_MOVIEDETAIL_BEAN = "detailBean";
 	public static final String INTENT_ORDER_BEAN = "order";
