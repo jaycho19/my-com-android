@@ -75,6 +75,9 @@ public class HomeFragment extends Fragment {
 	// 初始化view
 	private void initView(LayoutInflater inflater, View view) {
 		llHome = (LinearLayout) view.findViewById(R.id.ll_fragment_home);
+		/** 首页各栏目大小布局 */
+		int rparam_w = Util.getWindowWidth(getActivity()) * 50 / 540;
+		RelativeLayout.LayoutParams rparam = new RelativeLayout.LayoutParams(rparam_w * 4, rparam_w);
 
 		tvMarquee = (TextView) view.findViewById(R.id.home_tv_marquee);
 		imageGallery = (ImageGallery) view.findViewById(R.id.home_ig_slider);
@@ -103,9 +106,6 @@ public class HomeFragment extends Fragment {
 				MyImageView imageView = new MyImageView(getActivity());
 				imageView.setLayoutParams(lparam);
 				imageView.setImage(live.PHONE_MEDIA_POSTER_SMALL);
-				// BitmapUtils.create(getActivity()).display(imageView,
-				// bean.getLives().get(i).PHONE_MEDIA_POSTER_SMALL); // ,w,
-				// w);
 				imageView.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -128,9 +128,6 @@ public class HomeFragment extends Fragment {
 					MyImageView imageView = new MyImageView(getActivity());
 					imageView.setLayoutParams(lparam);
 					imageView.setImage(live.PHONE_MEDIA_POSTER_SMALL);
-					// BitmapUtils.create(getActivity()).display(imageView,
-					// bean.getLives().get(i).PHONE_MEDIA_POSTER_SMALL); // ,w,
-					// w);
 					imageView.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
@@ -145,6 +142,9 @@ public class HomeFragment extends Fragment {
 					llLievLine2.addView(imageView);
 				}
 			}
+
+			view.findViewById(R.id.iv_fragment_home_live_title).setLayoutParams(rparam);;
+
 			// 更多
 			view.findViewById(R.id.tv_fragment_home_live_more).setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -206,6 +206,8 @@ public class HomeFragment extends Fragment {
 			}
 		});
 
+		viewVIP.findViewById(R.id.fragment_home_iv_vip_item_channelName).setLayoutParams(rparam);
+
 		// 更多
 		viewVIP.findViewById(R.id.fragment_home_tv_vip_item_more).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -220,15 +222,13 @@ public class HomeFragment extends Fragment {
 
 		// 频道
 		if (null != bean.getChannelContents() && bean.getChannelContents().size() > 0) {
-			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(-1, 50);
-			RelativeLayout.LayoutParams rparam = new RelativeLayout.LayoutParams(200, 50);
+			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(-1, -2);
 			for (final HomeChannelItem item : bean.getChannelContents()) {
 				View viewItem = inflater.inflate(R.layout.fragment_home_item, null);
 				viewItem.findViewById(R.id.rl_fragment_home_item).setLayoutParams(lparam);
 				MyImageView imageView = (MyImageView) viewItem.findViewById(R.id.iv_fragment_home_item_channelName);
 				imageView.setLayoutParams(rparam);
 				imageView.setImage(item.getChannel().getPoster());
-				// BitmapUtils.create(getActivity()).display(imageView, item.getChannel().getPoster());
 				viewItem.findViewById(R.id.iv_fragment_home_item_more).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -263,8 +263,6 @@ public class HomeFragment extends Fragment {
 				imageView.setLayoutParams(mivParam);
 				imageView.setImage(movie.getPC_MEDIA_POSTER_BIG());
 				((TextView) view.findViewById(R.id.fragment_home_tv_item_myimage)).setText(movie.getMEDIA_NAME());
-				// BitmapUtils.create(getActivity()).display(imageView, movie.getPC_MEDIA_POSTER_BIG(), w, w * 456 /
-				// 330);
 				view.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {

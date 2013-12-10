@@ -30,7 +30,7 @@ public class ULog {
 
 	private ULog() {}
 
-	public static final Boolean ISDUG = false;
+	public static final Boolean ISDUG = true;
 
 	public static boolean allowD = true && ISDUG;
 	public static boolean allowE = true && ISDUG;
