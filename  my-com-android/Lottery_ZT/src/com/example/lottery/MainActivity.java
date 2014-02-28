@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentTabHost;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.lottery.menu.RibbonMenuView;
@@ -24,9 +26,12 @@ public class MainActivity extends BaseActivity {
 	private FragmentTabHost fgtHost;
 	@ViewInject(R.id.tv_topbar_menu)
 	private TextView tvTopBarMenu;
-	
-	@ViewInject(R.id.ribbonMenuView1)
+
+	@ViewInject(R.id.ribbonMenu_mainactivity)
 	private RibbonMenuView ribbonMenu;
+
+	@ViewInject(R.id.imageview_show_menu)
+	private ImageView showMenu;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +53,11 @@ public class MainActivity extends BaseActivity {
 		LogUtils.d("initTabhostItems");
 		fgtHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
-		 View tab1 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
-		 View tab2 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
-		 View tab3 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
-		 View tab4 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
-		 View tab5 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
+		View tab1 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
+		View tab2 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
+		View tab3 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
+		View tab4 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
+		View tab5 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
 		// tab2.setBackgroundResource(R.drawable.mian_activity_tab_live_bg);
 		// tab3.setBackgroundResource(R.drawable.mian_activity_tab_vod_bg);
 		// tab4.setBackgroundResource(R.drawable.mian_activity_tab_search_bg);
@@ -61,18 +66,18 @@ public class MainActivity extends BaseActivity {
 		// Bundle data = new Bundle();
 		// data.putParcelable("homebean", homeBean);
 
-		 fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), AboutActivity.class, null);
-		 fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), AboutActivity.class, null);
-		 fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab3), AboutActivity.class, null);
-		 fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab4), AboutActivity.class, null);
-		 fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator(tab5), AboutActivity.class, null);
-//		 fgtHost.addTab(fgtHost.newTabSpec("6").setIndicator("66"), TypeFragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), AboutActivity.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), AboutActivity.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab3), AboutActivity.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab4), AboutActivity.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator(tab5), AboutActivity.class, null);
+		// fgtHost.addTab(fgtHost.newTabSpec("6").setIndicator("66"), TypeFragment.class, null);
 
-//		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator("1"), AboutActivity.class, null);
-//		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator("2"), AboutActivity.class, null);
-//		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator("3"), AboutActivity.class, null);
-//		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator("4"), AboutActivity.class, null);
-//		fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator("5"), AboutActivity.class, null);
+		// fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator("1"), AboutActivity.class, null);
+		// fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator("2"), AboutActivity.class, null);
+		// fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator("3"), AboutActivity.class, null);
+		// fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator("4"), AboutActivity.class, null);
+		// fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator("5"), AboutActivity.class, null);
 
 		// 在fragment代用之前就代用该listener
 		// fgtHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
@@ -95,20 +100,30 @@ public class MainActivity extends BaseActivity {
 				ribbonMenu.toggleMenu();
 			}
 		});
+
+		showMenu.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (!ribbonMenu.isShown())
+					showMenu.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.rbm_in_from_left));
+				else
+					showMenu.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.rbm_out_to_left));
+				
+				ribbonMenu.toggleMenu();
+			}
+		});
+
 	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (KeyEvent.KEYCODE_BACK  == keyCode  && ribbonMenu.isShown()){
+		if (KeyEvent.KEYCODE_BACK == keyCode && ribbonMenu.isShown()) {
 			ribbonMenu.toggleMenu();
 			return true;
 		}
-		
-		
+
 		return super.onKeyDown(keyCode, event);
 	}
-
-	
-	
 
 }
