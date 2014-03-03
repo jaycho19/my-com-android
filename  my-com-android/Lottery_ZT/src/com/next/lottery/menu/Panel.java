@@ -1,4 +1,4 @@
-package com.example.lottery.menu;
+package com.next.lottery.menu;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -19,7 +19,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.example.lottery.R;
+import com.next.lottery.R;
 
 public class Panel extends LinearLayout {
 

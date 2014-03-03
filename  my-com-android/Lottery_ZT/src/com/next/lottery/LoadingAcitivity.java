@@ -1,12 +1,12 @@
-package com.example.lottery;
+package com.next.lottery;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.lottery.bean.HomeBean;
-import com.example.lottery.utils.Util;
+import com.next.lottery.bean.HomeBean;
+import com.next.lottery.utils.Util;
 
 /**
  * 启动页面

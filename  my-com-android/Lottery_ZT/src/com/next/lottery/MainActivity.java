@@ -1,4 +1,4 @@
-package com.example.lottery;
+package com.next.lottery;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,10 +10,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.lottery.menu.RibbonMenuView;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.next.lottery.menu.RibbonMenuView;
 
 /**
  * 主ACTIVITY

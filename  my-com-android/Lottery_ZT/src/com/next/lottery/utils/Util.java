@@ -1,4 +1,4 @@
-package com.example.lottery.utils;
+package com.next.lottery.utils;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -41,7 +41,6 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
-import android.provider.SyncStateContract.Constants;
 import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.text.TextUtils;

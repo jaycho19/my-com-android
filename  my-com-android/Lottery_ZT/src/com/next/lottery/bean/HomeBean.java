@@ -1,4 +1,4 @@
-package com.example.lottery.bean;
+package com.next.lottery.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
