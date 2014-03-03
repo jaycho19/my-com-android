@@ -1,4 +1,4 @@
-package com.example.lottery.menu;
+package com.next.lottery.menu;
 
 import android.content.Context;
 import android.os.Parcel;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
-import com.example.lottery.R;
+import com.next.lottery.R;
 
 /***
  * 侧边栏菜单类

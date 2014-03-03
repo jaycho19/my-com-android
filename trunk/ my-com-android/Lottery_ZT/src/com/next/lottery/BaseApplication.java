@@ -1,4 +1,4 @@
-package com.example.lottery;
+package com.next.lottery;
 
 import android.app.Application;
 import android.os.Handler;

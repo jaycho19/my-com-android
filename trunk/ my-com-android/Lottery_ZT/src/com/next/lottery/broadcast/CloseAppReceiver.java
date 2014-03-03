@@ -1,4 +1,4 @@
-package com.example.lottery.broadcast;
+package com.next.lottery.broadcast;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;

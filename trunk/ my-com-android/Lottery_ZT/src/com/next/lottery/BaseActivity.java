@@ -1,4 +1,4 @@
-package com.example.lottery;
+package com.next.lottery;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,8 +11,8 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.lottery.broadcast.CloseAppReceiver;
 import com.lidroid.xutils.util.LogUtils;
+import com.next.lottery.broadcast.CloseAppReceiver;
 
 /**
  * 1. 所有该项目activity都需要继承该类；<br>
