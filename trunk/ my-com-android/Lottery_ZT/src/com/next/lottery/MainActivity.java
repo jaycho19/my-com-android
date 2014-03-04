@@ -6,8 +6,6 @@ import android.support.v4.app.FragmentTabHost;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
@@ -30,8 +28,8 @@ public class MainActivity extends BaseActivity {
 	@ViewInject(R.id.ribbonMenu_mainactivity)
 	private RibbonMenuView ribbonMenu;
 
-	@ViewInject(R.id.imageview_show_menu)
-	private ImageView showMenu;
+	// @ViewInject(R.id.imageview_show_menu)
+	// private ImageView showMenu;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -97,22 +95,22 @@ public class MainActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				ribbonMenu.toggleMenu();
+				startActivity(new Intent(getApplicationContext(), LRLoginActivity.class));
 			}
 		});
 
-		showMenu.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				if (!ribbonMenu.isShown())
-					showMenu.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.rbm_in_from_left));
-				else
-					showMenu.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.rbm_out_to_left));
-				
-				ribbonMenu.toggleMenu();
-			}
-		});
+		// showMenu.setOnClickListener(new OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// if (!ribbonMenu.isShown())
+		// showMenu.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.rbm_in_from_left));
+		// else
+		// showMenu.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.rbm_out_to_left));
+		//
+		// ribbonMenu.toggleMenu();
+		// }
+		// });
 
 	}
 
