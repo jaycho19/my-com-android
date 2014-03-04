@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.next.lottery.fragment.UserCenterFragment;
 import com.next.lottery.menu.RibbonMenuView;
 
 /**
@@ -68,7 +69,7 @@ public class MainActivity extends BaseActivity {
 		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), AboutActivity.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab3), AboutActivity.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab4), AboutActivity.class, null);
-		fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator(tab5), AboutActivity.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator(tab5), UserCenterFragment.class, null);
 		// fgtHost.addTab(fgtHost.newTabSpec("6").setIndicator("66"), TypeFragment.class, null);
 
 		// fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator("1"), AboutActivity.class, null);
