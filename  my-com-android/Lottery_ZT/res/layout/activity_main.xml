@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:panel="http://schemas.android.com/apk/res/com.next.lottery"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
@@ -43,46 +42,4 @@
         android:layout_alignParentTop="true"
         android:background="@color/royalblue"
         android:visibility="gone" />
-
-    <ImageView
-        android:id="@+id/imageview_show_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/ribbonMenu_mainactivity"
-        android:background="@color/chocolate"
-        android:src="@drawable/ic_launcher" />
-
-    <com.next.lottery.menu.Panel
-        android:id="@+id/rightPanel"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_alignParentRight="true"
-        panel:animationDuration="1000"
-        panel:content="@+id/panelContent"
-        panel:handle="@+id/panelHandle"
-        panel:position="right"
-        panel:weight="75%p" >
-
-        <ImageView
-            android:id="@+id/panelHandle"
-            android:src="@drawable/ic_launcher"
-            android:layout_width="33dip"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="20dip" />
-
-        <TextView
-            android:id="@+id/panelContent"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:background="#329999"
-            android:gravity="center"
-            android:padding="4dip"
-            android:text="Expo Interpolator\n\nRight content #1"
-            android:textColor="#eee"
-            android:textSize="16dip"
-            android:textStyle="bold" />
-    </com.next.lottery.menu.Panel>
-
-</RelativeLayout>
+</RelativeLayout>
