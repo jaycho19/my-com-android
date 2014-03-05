@@ -286,6 +286,9 @@
 
     <color name="black">#000000</color> <!-- 黑色 -->
 
+    <color name="red_topbg">#cc3000</color> <!-- 暗红,标题栏 -->
+
+
     <drawable name="transparent_background">#00000000</drawable>
 
     <color name="transparent">#00000000</color>

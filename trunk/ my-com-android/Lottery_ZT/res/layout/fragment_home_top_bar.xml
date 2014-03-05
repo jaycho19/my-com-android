@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 顶部状态栏，包含登陆和播放历史 -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/red_topbg"
+    android:paddingBottom="5dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="5dp" >
+
+    <ImageView
+        android:id="@+id/fragment_home_top_bar_iv_qr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
+        android:src="@drawable/qr_code" />
+
+    <ImageView
+        android:id="@+id/fragment_home_top_bar_iv_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+        
+        android:layout_margin="5dp"
+        android:src="@drawable/search_btn_bg" />
+
+    <TextView
+        android:id="@+id/fragment_home_top_bar_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
+        android:layout_toLeftOf="@+id/fragment_home_top_bar_iv_search"
+        android:layout_toRightOf="@+id/fragment_home_top_bar_iv_qr"
+        android:gravity="center"
+        android:text="商户名称"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/whitesmoke" />
+
+</RelativeLayout>
