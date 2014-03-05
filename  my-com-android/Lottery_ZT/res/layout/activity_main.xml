@@ -12,7 +12,7 @@
         android:orientation="vertical"
         tools:context=".MainActivity" >
 
-        <include layout="@layout/activity_main_top_bar" />
+        <!-- <include layout="@layout/activity_main_top_bar" /> -->
 
         <FrameLayout
             android:id="@+id/realtabcontent"
@@ -23,8 +23,7 @@
         <android.support.v4.app.FragmentTabHost
             android:id="@android:id/tabhost"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/palegoldenrod" >
+            android:layout_height="wrap_content" >
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
@@ -42,4 +41,5 @@
         android:layout_alignParentTop="true"
         android:background="@color/royalblue"
         android:visibility="gone" />
-</RelativeLayout>
+
+</RelativeLayout>

@@ -5,14 +5,17 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.next.lottery.fragment.ClassifyFragment;
+import com.next.lottery.fragment.HomeFragment;
+import com.next.lottery.fragment.ShoppingCartFragment;
+import com.next.lottery.fragment.TrademarkFragment;
 import com.next.lottery.fragment.UserCenterFragment;
-import com.next.lottery.menu.RibbonMenuView;
 
 /**
  * 主ACTIVITY
@@ -23,11 +26,11 @@ public class MainActivity extends BaseActivity {
 
 	@ViewInject(android.R.id.tabhost)
 	private FragmentTabHost fgtHost;
-	@ViewInject(R.id.tv_topbar_menu)
-	private TextView tvTopBarMenu;
+//	@ViewInject(R.id.tv_topbar_menu)
+//	private TextView tvTopBarMenu;
 
-	@ViewInject(R.id.ribbonMenu_mainactivity)
-	private RibbonMenuView ribbonMenu;
+//	@ViewInject(R.id.ribbonMenu_mainactivity)
+//	private RibbonMenuView ribbonMenu;
 
 	// @ViewInject(R.id.imageview_show_menu)
 	// private ImageView showMenu;
@@ -57,6 +60,21 @@ public class MainActivity extends BaseActivity {
 		View tab3 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
 		View tab4 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
 		View tab5 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
+
+		((TextView) tab2.findViewById(R.id.activity_main_tab_tv)).setText("分类");
+		((TextView) tab3.findViewById(R.id.activity_main_tab_tv)).setText("品牌");
+		((TextView) tab4.findViewById(R.id.activity_main_tab_tv)).setText("购物车");
+		((TextView) tab5.findViewById(R.id.activity_main_tab_tv)).setText("个人");
+
+		((ImageView) tab2.findViewById(R.id.activity_main_tab_iv))
+				.setImageResource(R.drawable.mian_activity_tab_fenlei_bg);
+		((ImageView) tab3.findViewById(R.id.activity_main_tab_iv))
+				.setImageResource(R.drawable.mian_activity_tab_pinpai_bg);
+		((ImageView) tab4.findViewById(R.id.activity_main_tab_iv))
+				.setImageResource(R.drawable.mian_activity_tab_gouwuche_bg);
+		((ImageView) tab5.findViewById(R.id.activity_main_tab_iv))
+				.setImageResource(R.drawable.mian_activity_tab_usercenter_bg);
+
 		// tab2.setBackgroundResource(R.drawable.mian_activity_tab_live_bg);
 		// tab3.setBackgroundResource(R.drawable.mian_activity_tab_vod_bg);
 		// tab4.setBackgroundResource(R.drawable.mian_activity_tab_search_bg);
@@ -65,10 +83,10 @@ public class MainActivity extends BaseActivity {
 		// Bundle data = new Bundle();
 		// data.putParcelable("homebean", homeBean);
 
-		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), AboutActivity.class, null);
-		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), AboutActivity.class, null);
-		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab3), AboutActivity.class, null);
-		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab4), AboutActivity.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), HomeFragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), ClassifyFragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab3), TrademarkFragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab4), ShoppingCartFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator(tab5), UserCenterFragment.class, null);
 		// fgtHost.addTab(fgtHost.newTabSpec("6").setIndicator("66"), TypeFragment.class, null);
 
@@ -92,13 +110,13 @@ public class MainActivity extends BaseActivity {
 		// }
 		// }
 		// });
-		tvTopBarMenu.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(getApplicationContext(), LRLoginActivity.class));
-			}
-		});
+//		tvTopBarMenu.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				startActivity(new Intent(getApplicationContext(), LRLoginActivity.class));
+//			}
+//		});
 
 		// showMenu.setOnClickListener(new OnClickListener() {
 		//
@@ -117,10 +135,10 @@ public class MainActivity extends BaseActivity {
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (KeyEvent.KEYCODE_BACK == keyCode && ribbonMenu.isShown()) {
-			ribbonMenu.toggleMenu();
-			return true;
-		}
+//		if (KeyEvent.KEYCODE_BACK == keyCode && ribbonMenu.isShown()) {
+//			ribbonMenu.toggleMenu();
+//			return true;
+//		}
 
 		return super.onKeyDown(keyCode, event);
 	}
