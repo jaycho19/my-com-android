@@ -1,7 +1,6 @@
 package com.next.lottery.view;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -11,14 +10,13 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.text.Layout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 
-import com.lidroid.xutils.util.LogUtils;
+import com.dongfang.utils.ULog;
 import com.next.lottery.R;
 
 /**
@@ -74,7 +72,7 @@ public class SlipButton extends View implements OnTouchListener, OnClickListener
 		bg_off = mBgoff.getBitmap();// BitmapFactory.decodeResource(getResources(), R.drawable.icon3);
 		slip_btn = mSlipbtn.getBitmap(); // BitmapFactory.decodeResource(getResources(), R.drawable.icon4);
 
-		LogUtils.d(slipbtn.getIntrinsicWidth() + "---------------" + slip_btn.getWidth());
+		ULog.d(slipbtn.getIntrinsicWidth() + "---------------" + slip_btn.getWidth());
 		Btn_On = new Rect(0, 0, slip_btn.getWidth(), slip_btn.getHeight());
 
 		Btn_Off = new Rect(bg_off.getWidth() - slip_btn.getWidth(), 0, bg_off.getWidth(), slip_btn.getHeight());
