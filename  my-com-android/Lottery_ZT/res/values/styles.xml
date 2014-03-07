@@ -1,47 +1,47 @@
 <resources>
 
-    <style name="AppBaseTheme" parent="android:Theme.Light" />
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.NoActionBar" />
 
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-        <item name="android:windowNoTitle">true</item>
-    </style>
+    <style name="AppTheme" parent="AppBaseTheme"></style>
 
     <!-- 应用顶部关系布局标题style -->
-    <style name="app_title_rl_style">
-        <item name="android:layout_width">fill_parent</item>
+    <style name="app_top_title_rl">
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/red</item>
-        <item name="android:paddingLeft">5dp</item>
-        <item name="android:paddingRight">5dp</item>
+        <item name="android:background">@color/red_topbg</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingTop">5dp</item>
     </style>
 
-    <!-- 应用顶部返回按钮style -->
-    <style name="app_title_back_btn_style">
+    <!-- 应用顶部左侧按钮style -->
+    <style name="app_top_title_iv_left">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/ic_launcher</item>
         <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:textColor">@color/button_color</item>
-        <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_centerVertical">true</item>
-        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:layout_margin">5dp</item>
     </style>
 
-    <!-- 应用顶部标题style -->
-    <style name="app_title_text_style">
+    <!-- 应用顶部右侧按钮style -->
+    <style name="app_top_title_iv_right">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+    <!-- 应用顶部标题style -->
+    <style name="app_top_title_tv_center">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerInParent">true</item>
+        <item name="android:textColor">@color/whitesmoke</item>
+        <item name="android:gravity">center</item>
         <item name="android:singleLine">true</item>
-        <item name="android:paddingLeft">50dp</item>
-        <item name="android:paddingRight">50dp</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:layout_margin">5dp</item>
     </style>
 
 </resources>

@@ -57,7 +57,7 @@ public class MainActivity extends BaseActivity {
 	/** 初始化底部菜单 */
 	private void initTabhostItems() {
 		ULog.d("initTabhostItems");
-		((FragmentTabHost)fgtHost).setup(this, getSupportFragmentManager(), R.id.realtabcontent);
+		fgtHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
 		View tab1 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
 		View tab2 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
@@ -101,16 +101,16 @@ public class MainActivity extends BaseActivity {
 		// fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator("5"), AboutActivity.class, null);
 
 		fgtHost.getTabWidget().setOnFocusChangeListener(new OnFocusChangeListener() {
-			
+
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
 				// TODO Auto-generated method stub
 				ULog.d("tag  = " + v.getTag().getClass().getName());
 			}
 		});
-		
+
 		fgtHost.getTabWidget().setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -118,7 +118,7 @@ public class MainActivity extends BaseActivity {
 
 			}
 		});
-		
+
 		// 在fragment代用之前就代用该listener
 		// fgtHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 		// @Override

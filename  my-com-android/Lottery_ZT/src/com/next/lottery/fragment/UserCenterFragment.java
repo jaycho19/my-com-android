@@ -14,14 +14,11 @@ import com.next.lottery.utils.User;
 public class UserCenterFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		if (!User.isLogined(getActivity()))
-		{
+		if (!User.isLogined(getActivity())) {
 			startActivity(new Intent(getActivity(), LRLoginActivity.class));
 			return null;
 		}
-			
-		
-		
+
 		View view = inflater.inflate(R.layout.fragment_usercenter, container, false);
 		// initView(view);
 		return view;

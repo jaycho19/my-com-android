@@ -21,5 +21,4 @@ public class AboutActivity extends Fragment {
 		return view;
 	}
 
-
 }

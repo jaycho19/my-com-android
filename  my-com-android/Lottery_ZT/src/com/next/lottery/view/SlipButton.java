@@ -77,7 +77,7 @@ public class SlipButton extends View implements OnTouchListener, OnClickListener
 
 		Btn_Off = new Rect(bg_off.getWidth() - slip_btn.getWidth(), 0, bg_off.getWidth(), slip_btn.getHeight());
 		setOnTouchListener(this);// 设置监听器,也可以直接复写OnTouchEvent
-		//setOnClickListener(this);// 设置点击的监听
+		// setOnClickListener(this);// 设置点击的监听
 	}
 
 	@Override
