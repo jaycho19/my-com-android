@@ -2,16 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/app_top_title_rl" >
 
+    <!-- 顶部状态栏，包含左侧按钮，右侧按钮，中间文字 -->
+
     <ImageView
         android:id="@+id/app_top_title_iv_left"
         style="@style/app_top_title_iv_left"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/search_btn_bg" />
+        android:src="@drawable/arrows_back" />
 
     <TextView
         android:id="@+id/app_top_title_tv_centre"
         style="@style/app_top_title_tv_center"
-        android:gravity="center"
-        android:text="商品分类" />
+        android:text="登录" />
 
 </RelativeLayout>

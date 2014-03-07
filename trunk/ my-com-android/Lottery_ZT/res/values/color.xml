@@ -288,12 +288,10 @@
 
     <color name="red_topbg">#cc3000</color> <!-- 暗红,标题栏 -->
 
-
-    <drawable name="transparent_background">#00000000</drawable>
-
+    <color name="background">#E7E7E7</color> <!-- 背景颜色 -->
+    
     <color name="transparent">#00000000</color>
     <color name="text_orange">#F8B202</color> <!-- 按钮的字体颜色 -->
-    <color name="background">#313131</color> <!-- 背景颜色 -->
     <color name="button_color">#ffffff</color>
     <color name="text_white">#FFFFFF</color>
     <color name="text_gray">#999999</color>

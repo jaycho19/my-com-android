@@ -11,9 +11,9 @@ import android.content.Intent;
  * 
  */
 public class CloseAppReceiver extends BroadcastReceiver {
-	public static final String	TAG	= CloseAppReceiver.class.getSimpleName();
+	public static final String TAG = CloseAppReceiver.class.getSimpleName();
 
-	private Activity			activity;
+	private Activity activity;
 
 	public CloseAppReceiver(Activity activity) {
 		this.activity = activity;
