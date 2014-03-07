@@ -11,7 +11,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.lidroid.xutils.util.LogUtils;
+import com.dongfang.utils.ULog;
 import com.next.lottery.broadcast.CloseAppReceiver;
 
 /**
@@ -78,7 +78,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		LogUtils.d("onCreateOptionsMenu");
+		ULog.d("onCreateOptionsMenu");
 		// getMenuInflater().inflate(R.menu.main, menu);
 
 		return true;

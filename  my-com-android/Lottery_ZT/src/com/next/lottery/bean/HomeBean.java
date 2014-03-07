@@ -3,7 +3,7 @@ package com.next.lottery.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.lidroid.xutils.util.LogUtils;
+import com.dongfang.utils.ULog;
 
 /**
  * 首页数据结构
@@ -25,7 +25,7 @@ public class HomeBean implements Parcelable {
 
 	/** 输出内容 */
 	public void toLog() {
-		LogUtils.d("marquee = " + marquee);
+		ULog.d("marquee = " + marquee);
 	}
 
 	@Override

@@ -39,7 +39,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="LRLoginActivity"
+            android:name=".LRLoginActivity"
             android:alwaysRetainTaskState="true"
             android:configChanges="orientation|keyboardHidden|locale|fontScale|layoutDirection"
             android:screenOrientation="portrait"

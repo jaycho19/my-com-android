@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import com.dongfang.encrypt.AESEncrypt;
-import com.lidroid.xutils.util.LogUtils;
+import com.dongfang.utils.ULog;
 
 /** 用户相关信息 */
 public class User {
@@ -73,7 +73,7 @@ public class User {
 	 */
 
 	public static synchronized boolean saveToken(Context context, String token) {
-		LogUtils.d("saveToken token = " + token);
+		ULog.d("saveToken token = " + token);
 		return context.getSharedPreferences(SHAREDPREFERENCES_ACCESS, Context.MODE_PRIVATE).edit()
 				.putString(SHAREDPREFERENCES_ACCESS_TOKEN, token).commit();
 	}
@@ -103,7 +103,7 @@ public class User {
 	 */
 
 	public static boolean savePhone(Context context, String phone) {
-		LogUtils.d("savePhone phone = " + phone);
+		ULog.d("savePhone phone = " + phone);
 		return context.getSharedPreferences(SHAREDPREFERENCES_ACCESS, Context.MODE_PRIVATE).edit()
 				.putString(SHAREDPREFERENCES_ACCESS_PHONE, phone).commit();
 
@@ -129,7 +129,7 @@ public class User {
 	 * @return 更新是否成功
 	 */
 	public static boolean saveUserId(Context context, String userId, String userBindId) {
-		LogUtils.d("saveUserId uid = " + userId + "BindId = " + userBindId);
+		ULog.d("saveUserId uid = " + userId + "BindId = " + userBindId);
 		return context.getSharedPreferences(SHAREDPREFERENCES_USER_INFO_FILENAME, Context.MODE_PRIVATE).edit()
 				.putString(SHAREDPREFERENCES_USER_INFO_USER_ID, userId)
 				.putString(SHAREDPREFERENCES_USER_INFO_USER_BIND_ID, userBindId).commit();
@@ -143,7 +143,7 @@ public class User {
 	 * @return 更新是否成功
 	 */
 	public static boolean saveUserId(Context context, String userId) {
-		LogUtils.d("saveUserId uid = " + userId);
+		ULog.d("saveUserId uid = " + userId);
 		return context.getSharedPreferences(SHAREDPREFERENCES_USER_INFO_FILENAME, Context.MODE_PRIVATE).edit()
 				.putString(SHAREDPREFERENCES_USER_INFO_USER_ID, userId).commit();
 	}
@@ -172,7 +172,7 @@ public class User {
 	 * @return 更新是否成功
 	 */
 	public static boolean saveUserNickname(Context context, String nickname) {
-		LogUtils.d("saveUserNickname nickname = " + nickname);
+		ULog.d("saveUserNickname nickname = " + nickname);
 		return context.getSharedPreferences(SHAREDPREFERENCES_USER_INFO_FILENAME, Context.MODE_PRIVATE).edit()
 				.putString(SHAREDPREFERENCES_USER_INFO_NICKNAME, nickname).commit();
 	}
@@ -185,7 +185,7 @@ public class User {
 	 * @return 更新是否成功
 	 */
 	public static boolean saveUserHeadimg(Context context, int imgid) {
-		LogUtils.d("saveUserHeadimg imgid = " + imgid);
+		ULog.d("saveUserHeadimg imgid = " + imgid);
 		return context.getSharedPreferences(SHAREDPREFERENCES_USER_INFO_FILENAME, Context.MODE_PRIVATE).edit()
 				.putInt(SHAREDPREFERENCES_USER_INFO_HEADIMG, imgid).commit();
 	}
@@ -232,7 +232,7 @@ public class User {
 	 * @return 更新是否成功
 	 */
 	public static boolean saveUserPassword(Context context, String password) {
-		LogUtils.d("saveToken password = " + password);
+		ULog.d("saveToken password = " + password);
 		return context
 				.getSharedPreferences(SHAREDPREFERENCES_USER_INFO_FILENAME, Context.MODE_PRIVATE)
 				.edit()

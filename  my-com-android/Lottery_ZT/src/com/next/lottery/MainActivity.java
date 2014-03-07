@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dongfang.utils.ULog;
+import com.dongfang.v4.app.FragmentTabHostDF;
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.fragment.ClassifyFragment;
 import com.next.lottery.fragment.HomeFragment;
@@ -25,12 +28,13 @@ import com.next.lottery.fragment.UserCenterFragment;
 public class MainActivity extends BaseActivity {
 
 	@ViewInject(android.R.id.tabhost)
-	private FragmentTabHost fgtHost;
-//	@ViewInject(R.id.tv_topbar_menu)
-//	private TextView tvTopBarMenu;
+	private FragmentTabHostDF fgtHost;
 
-//	@ViewInject(R.id.ribbonMenu_mainactivity)
-//	private RibbonMenuView ribbonMenu;
+	// @ViewInject(R.id.tv_topbar_menu)
+	// private TextView tvTopBarMenu;
+
+	// @ViewInject(R.id.ribbonMenu_mainactivity)
+	// private RibbonMenuView ribbonMenu;
 
 	// @ViewInject(R.id.imageview_show_menu)
 	// private ImageView showMenu;
@@ -47,13 +51,13 @@ public class MainActivity extends BaseActivity {
 
 	/** 获取首页数据 */
 	private void initData(Intent intent) {
-		LogUtils.d("initData");
+		ULog.d("initData");
 	}
 
 	/** 初始化底部菜单 */
 	private void initTabhostItems() {
-		LogUtils.d("initTabhostItems");
-		fgtHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
+		ULog.d("initTabhostItems");
+		((FragmentTabHost)fgtHost).setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
 		View tab1 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
 		View tab2 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
@@ -96,27 +100,42 @@ public class MainActivity extends BaseActivity {
 		// fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator("4"), AboutActivity.class, null);
 		// fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator("5"), AboutActivity.class, null);
 
+		fgtHost.getTabWidget().setOnFocusChangeListener(new OnFocusChangeListener() {
+			
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				// TODO Auto-generated method stub
+				ULog.d("tag  = " + v.getTag().getClass().getName());
+			}
+		});
+		
+		fgtHost.getTabWidget().setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ULog.d("tag  = " + v.getTag().getClass().getName());
+
+			}
+		});
+		
 		// 在fragment代用之前就代用该listener
 		// fgtHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 		// @Override
 		// public void onTabChanged(String tabId) {
 		// ULog.d("OnTabChangeListener = " + tabId);
 		// if ("5".equals(tabId) && !User.isLogined(MainActivity.this)) {
-		// frameLayout.setVisibility(View.GONE);
-		// ULog.d("frameLayout.setVisibility(View.GONE)");
-		// }
-		// else {
-		// frameLayout.setVisibility(0);
+		// startActivity(new Intent(getApplicationContext(), LRLoginActivity.class));
 		// }
 		// }
 		// });
-//		tvTopBarMenu.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				startActivity(new Intent(getApplicationContext(), LRLoginActivity.class));
-//			}
-//		});
+		// tvTopBarMenu.setOnClickListener(new OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// startActivity(new Intent(getApplicationContext(), LRLoginActivity.class));
+		// }
+		// });
 
 		// showMenu.setOnClickListener(new OnClickListener() {
 		//
@@ -134,11 +153,16 @@ public class MainActivity extends BaseActivity {
 	}
 
 	@Override
+	protected void onResume() {
+		super.onResume();
+	}
+
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-//		if (KeyEvent.KEYCODE_BACK == keyCode && ribbonMenu.isShown()) {
-//			ribbonMenu.toggleMenu();
-//			return true;
-//		}
+		// if (KeyEvent.KEYCODE_BACK == keyCode && ribbonMenu.isShown()) {
+		// ribbonMenu.toggleMenu();
+		// return true;
+		// }
 
 		return super.onKeyDown(keyCode, event);
 	}
