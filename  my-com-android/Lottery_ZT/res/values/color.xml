@@ -286,7 +286,9 @@
 
     <color name="black">#000000</color> <!-- 黑色 -->
 
-    <color name="red_topbg">#cc3000</color> <!-- 暗红,标题栏 -->
+<!--     <color name="red_topbg">#cc3000</color> 暗红,标题栏 -->
+    <color name="top_bg">#000000</color> <!-- 暗红,标题栏 -->
+    <color name="bottom_bg">#000000</color> <!-- 暗红,标题栏 -->
 
     <color name="background">#E7E7E7</color> <!-- 背景颜色 -->
     

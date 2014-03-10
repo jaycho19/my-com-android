@@ -78,8 +78,8 @@
             android:id="@+id/activity_lr_login_psw_slipbtn"
             android:layout_width="64dp"
             android:layout_height="26dp"
-            slip:bgoff="@drawable/slipbtn_abc"
-            slip:bgon="@drawable/slipbtn_password"
+            slip:bgoff="@drawable/slipbtn_password"
+            slip:bgon="@drawable/slipbtn_abc"
             slip:slipbtn="@drawable/slipbtn_slipicon" />
     </LinearLayout>
 
@@ -91,7 +91,7 @@
         android:layout_marginTop="10dp"
         android:text=" 忘记密码？"
         android:textColor="@color/grey"
-        android:textSize="?android:attr/textAppearanceLarge" />
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -139,8 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/icon_sina"
-                android:textSize="13sp" />
+                android:src="@drawable/icon_sina" />
 
             <ImageView
                 android:id="@+id/activity_lr_login_mm"
@@ -148,8 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
-                android:src="@drawable/icon_qq"
-                android:textSize="13sp" />
+                android:src="@drawable/icon_qq" />
 
             <ImageView
                 android:id="@+id/activity_lr_login_qq"
@@ -157,8 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
-                android:src="@drawable/icon_renren"
-                android:textSize="13sp" />
+                android:src="@drawable/icon_renren" />
 
             <ImageView
                 android:id="@+id/activity_lr_login_rr"
@@ -166,8 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
-                android:src="@drawable/icon_baidu"
-                android:textSize="13sp" />
+                android:src="@drawable/icon_baidu" />
         </TableRow>
 
         <TableRow
@@ -180,24 +176,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/icon_zhifubao"
-                android:textSize="13sp" />
+                android:src="@drawable/icon_zhifubao" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
-                android:src="@drawable/icon_qq"
-                android:textSize="13sp"
-                android:visibility="invisible" />
+                android:src="@drawable/icon_mm" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:src="@drawable/icon_sina"
-                android:textSize="13sp"
                 android:visibility="invisible" />
 
             <ImageView
@@ -206,7 +198,6 @@
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:src="@drawable/icon_qq"
-                android:textSize="13sp"
                 android:visibility="invisible" />
         </TableRow>
     </TableLayout>

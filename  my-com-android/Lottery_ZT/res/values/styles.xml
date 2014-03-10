@@ -8,7 +8,7 @@
     <style name="app_top_title_rl">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/red_topbg</item>
+        <item name="android:background">@color/top_bg</item>
         <item name="android:paddingLeft">20dp</item>
         <item name="android:paddingRight">20dp</item>
         <item name="android:paddingBottom">5dp</item>
