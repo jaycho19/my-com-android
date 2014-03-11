@@ -12,10 +12,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
+            android:paddingLeft="10dp"
             android:text="取消"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textColor="@drawable/search_activity_cancel_tv_color"
+            android:textSize="16sp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -43,7 +43,10 @@
                 android:layout_toLeftOf="@+id/activity_search_iv_clear"
                 android:background="@null"
                 android:drawableLeft="@drawable/search_1"
-                android:ems="10" >
+                android:ems="10"
+                android:maxLength="100"
+                android:singleLine="true"
+                android:textColor="@color/black" >
 
                 <requestFocus />
             </EditText>
@@ -64,9 +67,9 @@
     </com.dongfang.v4.app.FragmentTabHostDF>
 
     <FrameLayout
-            android:id="@+id/realtabcontent"
-            android:layout_width="fill_parent"
-            android:layout_height="0dip"
-            android:layout_weight="1" />
+        android:id="@+id/realtabcontent"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" />
 
 </LinearLayout>
