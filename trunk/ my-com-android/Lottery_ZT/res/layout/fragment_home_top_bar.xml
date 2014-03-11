@@ -16,12 +16,12 @@
         android:contentDescription="@string/app_name"
         android:src="@drawable/search_btn_bg" />
 
-    <TextView
-        android:id="@+id/app_top_title_tv_centre"
+    <ImageView
+        android:id="@+id/app_top_title_iv_centre"
         style="@style/app_top_title_tv_center"
         android:layout_toLeftOf="@+id/app_top_title_iv_rigth"
         android:layout_toRightOf="@+id/app_top_title_iv_left"
-        android:text="商户名称" />
+        android:src="@drawable/logo_small" />
 
 
 </RelativeLayout>

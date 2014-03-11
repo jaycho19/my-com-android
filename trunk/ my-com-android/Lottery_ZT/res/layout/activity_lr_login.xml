@@ -28,7 +28,7 @@
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/activity_lr_login_userid"
+            android:id="@+id/activity_lr_login_et_userid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -61,7 +61,7 @@
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/activity_lr_login_psw"
+            android:id="@+id/activity_lr_login_et_psw"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="7.22"
@@ -76,14 +76,15 @@
 
         <com.next.lottery.view.SlipButton
             android:id="@+id/activity_lr_login_psw_slipbtn"
-            android:layout_width="64dp"
-            android:layout_height="26dp"
-            slip:bgoff="@drawable/slipbtn_password"
-            slip:bgon="@drawable/slipbtn_abc"
+            android:layout_width="80px"
+            android:layout_height="30px"
+            slip:bgoff="@drawable/slipbtn_abc"
+            slip:bgon="@drawable/slipbtn_password"
             slip:slipbtn="@drawable/slipbtn_slipicon" />
     </LinearLayout>
 
     <TextView
+        android:id="@+id/activity_lr_login_tv_forgetpsw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -102,23 +103,23 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/activity_lr_login_btn_login"
+        <TextView
+            android:id="@+id/activity_lr_login_tv_login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/login_btn"
+            android:background="@drawable/btn_login"
             android:gravity="center"
             android:text="登录"
             android:textColor="@color/white" />
 
-        <Button
-            android:id="@+id/activity_lr_login_btn_reister"
+        <TextView
+            android:id="@+id/activity_lr_login_tv_register"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:background="@drawable/reigist_btn"
+            android:background="@drawable/btn_register"
             android:gravity="center"
             android:text="注册"
             android:textColor="@color/white" />
@@ -142,7 +143,7 @@
                 android:src="@drawable/icon_sina" />
 
             <ImageView
-                android:id="@+id/activity_lr_login_mm"
+                android:id="@+id/activity_lr_login_qq"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -150,7 +151,7 @@
                 android:src="@drawable/icon_qq" />
 
             <ImageView
-                android:id="@+id/activity_lr_login_qq"
+                android:id="@+id/activity_lr_login_rr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -158,7 +159,7 @@
                 android:src="@drawable/icon_renren" />
 
             <ImageView
-                android:id="@+id/activity_lr_login_rr"
+                android:id="@+id/activity_lr_login_baidu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -173,12 +174,14 @@
             android:layout_marginTop="10dp" >
 
             <ImageView
+                android:id="@+id/activity_lr_login_zhifubao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:src="@drawable/icon_zhifubao" />
 
             <ImageView
+                android:id="@+id/activity_lr_login_mm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"

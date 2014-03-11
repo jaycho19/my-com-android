@@ -14,86 +14,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="20dp"
-                    android:src="@drawable/touxiang_04" />
-
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="54dp"
-                    android:layout_toRightOf="@+id/imageView2"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignRight="@+id/textView1"
-                    android:layout_below="@+id/textView1"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/textView2"
-                    android:layout_below="@+id/textView2"
-                    android:text="TextView" />
-
-                <Button
-                    android:id="@+id/button1"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/textView1"
-                    android:text="Button" />
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="2" >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="0.7dp"
-                    android:layout_weight="1"
-                    android:background="@color/midnightblue"
-                    android:gravity="center"
-                    android:padding="7dp"
-                    android:text="评价"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="0.7dp"
-                    android:layout_weight="1"
-                    android:background="@color/midnightblue"
-                    android:gravity="center"
-                    android:padding="7dp"
-                    android:text="退货/退款"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/white" />
-            </LinearLayout>
+            <include layout="@layout/fragment_usercenter_user" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -102,10 +26,10 @@
                 android:background="@color/white"
                 android:drawableRight="@drawable/arrows_2"
                 android:gravity="center_vertical"
-                android:paddingBottom="7dp"
+                android:paddingBottom="8dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:paddingTop="7dp"
+                android:paddingTop="8dp"
                 android:text="我的订单"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -116,10 +40,10 @@
                 android:background="@color/white"
                 android:drawableRight="@drawable/arrows_2"
                 android:gravity="center_vertical"
-                android:paddingBottom="7dp"
+                android:paddingBottom="8dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:paddingTop="7dp"
+                android:paddingTop="8dp"
                 android:text="我的收藏"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -130,10 +54,10 @@
                 android:background="@color/white"
                 android:drawableRight="@drawable/arrows_2"
                 android:gravity="center_vertical"
-                android:paddingBottom="7dp"
+                android:paddingBottom="8dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:paddingTop="7dp"
+                android:paddingTop="8dp"
                 android:text="我的优惠券"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -144,10 +68,10 @@
                 android:background="@color/white"
                 android:drawableRight="@drawable/arrows_2"
                 android:gravity="center_vertical"
-                android:paddingBottom="7dp"
+                android:paddingBottom="8dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:paddingTop="7dp"
+                android:paddingTop="8dp"
                 android:text="账户设置"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -158,10 +82,10 @@
                 android:background="@color/white"
                 android:drawableRight="@drawable/arrows_2"
                 android:gravity="center_vertical"
-                android:paddingBottom="7dp"
+                android:paddingBottom="8dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:paddingTop="7dp"
+                android:paddingTop="8dp"
                 android:text="密码管理"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -172,12 +96,25 @@
                 android:background="@color/white"
                 android:drawableRight="@drawable/arrows_2"
                 android:gravity="center_vertical"
-                android:paddingBottom="7dp"
+                android:paddingBottom="8dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:paddingTop="7dp"
+                android:paddingTop="8dp"
                 android:text="帮助中心"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:background="@drawable/bt_red_round_02"
+                android:gravity="center"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="退出当前账号"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
 

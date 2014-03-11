@@ -24,8 +24,7 @@
             android:id="@android:id/tabhost"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            
-                android:background="@color/bottom_bg" >
+            android:background="@color/bottom_bg" >
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
@@ -34,14 +33,4 @@
                 android:layout_weight="0" />
         </com.dongfang.v4.app.FragmentTabHostDF>
     </LinearLayout>
-
-    <com.next.lottery.menu.RibbonMenuView
-        android:id="@+id/ribbonMenu_mainactivity"
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@color/royalblue"
-        android:visibility="gone" />
-
 </RelativeLayout>
