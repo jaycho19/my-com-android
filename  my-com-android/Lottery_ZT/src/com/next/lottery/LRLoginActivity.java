@@ -1,42 +1,48 @@
 package com.next.lottery;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.widget.Button;
+import android.text.InputType;
+import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.PopupWindow;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.utils.User;
 import com.next.lottery.view.SlipButton;
+import com.next.lottery.view.SlipButton.OnChangedListener;
 
 public class LRLoginActivity extends BaseActivity {
 
-	private SlipButton slipBtn;
-	private EditText et_password;
-	private EditText et_username;
-	private Button btn_login, btn_oneregiest;
-	private TextView tv_title, tv_forgepwd, tv_emailregiest, tv_back;
-	private String ComeFromTag = null;
+	@ViewInject(R.id.app_top_title_iv_left)
+	private ImageView ivBack; // 返回
+	@ViewInject(R.id.activity_lr_login_et_psw)
+	private EditText etPassword; // 密码
+	@ViewInject(R.id.activity_lr_login_et_userid)
+	private EditText etUsername; // 用户名
+	@ViewInject(R.id.activity_lr_login_psw_slipbtn)
+	private SlipButton slipBtn; // 是否显示密码
+	@ViewInject(R.id.activity_lr_login_tv_forgetpsw)
+	private TextView tvForgetPsw; // 忘记密码
+	@ViewInject(R.id.activity_lr_login_tv_login)
+	private TextView tvLogin; // 忘记密码
+	@ViewInject(R.id.activity_lr_login_tv_register)
+	private TextView tvRegister; // 忘记密码
 
-	private LinearLayout mParent_Login; // PopupWindow 依附的控件
-	private int mParent_Width; // PopupWindow 宽度
-	private boolean flag = false; // 是否初始化完成标志
-	private PopupWindow mPopupWindow; // popupWindow对象
-	// private EmailTextViewAdapter mAdapter; //自定义Adapter
-	private ListView mListView = null; // 用来处理选中或者删除下拉项消息
-	private Handler mHandler; // 用来处理接受消息
-	private Boolean misPopwindow = true; // popupWindow 弹起状态
-	private static final String OCLICK_OK_STRING = "selIndex"; // 接受消息标识
-	private static final int RESPONSE_HANDLERINT = 1;
-	public boolean isFromUserCenter = false;
-	public Bundle mBundle;
-	private Context mContext;
+	@ViewInject(R.id.activity_lr_login_sina)
+	private ImageView ivSina;
+	@ViewInject(R.id.activity_lr_login_qq)
+	private ImageView ivQQ;
+	@ViewInject(R.id.activity_lr_login_rr)
+	private ImageView ivRR;
+	@ViewInject(R.id.activity_lr_login_baidu)
+	private ImageView ivBaidu;
+	@ViewInject(R.id.activity_lr_login_zhifubao)
+	private ImageView ivZhiFuBao;
+	@ViewInject(R.id.activity_lr_login_mm)
+	private ImageView ivMM;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,30 +50,32 @@ public class LRLoginActivity extends BaseActivity {
 		setContentView(R.layout.activity_lr_login);
 		ViewUtils.inject(this);
 
+		slipBtn.setCheck(true);
+
+		slipBtn.setCheck(true);
+		slipBtn.SetOnChangedListener(new OnChangedListener() {
+			@Override
+			public void OnChanged(boolean CheckState) {
+				// TODO Auto-generated method stub
+				if (CheckState) {
+					etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+				}
+				else {
+					etPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+
+				}
+			}
+
+		});
+
 		initlogin(savedInstanceState);
-	}
-
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-		while (!flag) {
-			inintview();// onWindowFocusChanged方法中调用获取PopupWindow浮动下拉框依附的组件宽度，在onCreate方法中是无法获取到该宽度的
-			flag = true;
-		}
-	}
-
-	@Override
-	protected void onNewIntent(Intent intent) {
-		// TODO Auto-generated method stub
-		super.onNewIntent(intent);
-		if (null != intent.getExtras() && intent.getExtras().containsKey("ComeFromTag"))
-			ComeFromTag = intent.getExtras().getString("ComeFromTag");
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putString("phonenum", et_username.getText().toString());
-		outState.putString("pwd", et_password.getText().toString());
+		outState.putString("phonenum", etUsername.getText().toString());
+		outState.putString("pwd", etPassword.getText().toString());
 		outState.putBoolean("saveinfo", true);
 
 	}
@@ -82,14 +90,6 @@ public class LRLoginActivity extends BaseActivity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		ComeFromTag = null;
-	}
-
-	private void inintview() {
-		// mParent_Login = (LinearLayout) findViewById(R.id.login_parent);
-		// mParent_Width = mParent_Login.getWidth();
-		// initPopuWindow();
-
 	}
 
 	private void initlogin(Bundle savedInstanceState) {
@@ -151,99 +151,118 @@ public class LRLoginActivity extends BaseActivity {
 	public void popupWindwShowing() {
 		// 将selectPopupWindow作为parent的下拉框显示，并指定selectPopupWindow在Y方向上向上偏移1pix，
 		// 这是为了防止下拉框与文本框之间产生缝隙，影响界面美化
-		mPopupWindow.showAsDropDown(mParent_Login, 0, -1);
 	}
 
-	public void dismiss() {
-		mPopupWindow.dismiss();
-		misPopwindow = true;
-	}
+	public void dismiss() {}
 
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onRestoreInstanceState(savedInstanceState);
 		if (savedInstanceState != null) {
-			if (null != et_username)
-				et_username.setText(savedInstanceState.getString("phonenum") + "feng");
-			if (null != et_password)
-				et_password.setText(savedInstanceState.getString("pwd"));
+			if (null != etUsername)
+				etUsername.setText(savedInstanceState.getString("phonenum") + "feng");
+			if (null != etPassword)
+				etPassword.setText(savedInstanceState.getString("pwd"));
 			// if (null != cbSaveInfo)
 			// cbSaveInfo.setSelected(savedInstanceState.getBoolean("saveinfo"));
 		}
 	}
 
-	// @Override
-	// public void onClick(View v) {
-	// // TODO Auto-generated method stub
-	// switch (v.getId()) {
-	// case R.id.btn_login:
-	// /** 登录页登录按钮点击 */
-	// ActionReport actionReport1 = new ActionReport(ActionType.LOGIN, null);
-	// BaseApplication.getInstance().getActionList().add(actionReport1);
-	// /** --------- end------------------ */
-	// String phone = et_username.getText().toString();
-	// String password = et_password.getText().toString();
-	// if (TextUtils.isEmpty(phone) || TextUtils.isEmpty(password)) {
-	// // new DialogFactory(getActivity()).showDialog("提示",
-	// // "用户名或密码不能为空", "确定", null);
-	// new DialogFactory(getApplication()).showToast(getString(R.string.dialog_content_input_empty),
-	// Toast.LENGTH_SHORT);
-	// return;
-	// }
-	// ULog.i(LRLoginActivity.class.getSimpleName(), "etPhoneNum = " + et_username + ", etPwd = "
-	// + et_password);
-	// Bundle b = new Bundle();
-	// b.putString(Keys.KEY_USERNAME, phone);
-	// b.putString(Keys.KEY_USERPASSWORD, password);
-	// b.putBoolean("isSave", true);
-	//
-	// if (!TextUtils.isEmpty(ComeFromTag))
-	// b.putString("ComeFromTag", ComeFromTag);
-	//
-	// new UserLoginTask(LRLoginActivity.this).execute(b);
-	// break;
-	// case R.id.btn_one_reister:
-	// Intent intent = new Intent(getApplication(), AKeyRegisterActivity.class);
-	// intent.putExtra(Keys.IS_FROM_USER_CENTER, isFromUserCenter);
-	// if (!TextUtils.isEmpty(ComeFromTag))
-	// intent.putExtra("ComeFromTag", ComeFromTag);
-	// this.startActivity(intent);
-	// ActionReport actionReport2 = new ActionReport(ActionType.REGISTER, null);
-	// BaseApplication.getInstance().getActionList().add(actionReport2);
-	// /** --------- end------------------ */
-	// // handleOneKeyRegister(LoginAndRegisterActivity.this);
-	// break;
-	// case R.id.tv_forgetpwd:
-	// // startActivity(new Intent(LoginAndRegisterActivity.this,
-	// // ResetPasswordActivity.class));
-	// new CategoryPopupWindow(tv_forgepwd).showResetPwdDropDown(0, 0);
-	// Util.hideInput(tv_forgepwd);
-	// break;
-	// case R.id.tv_email_register:
-	// // this.finish();
-	// Intent intent1 = new Intent(LRLoginActivity.this, EmailRegisterActivity.class);
-	// intent1.putExtra(Keys.IS_FROM_USER_CENTER, isFromUserCenter);
-	// if (!TextUtils.isEmpty(ComeFromTag))
-	// intent1.putExtra("ComeFromTag", ComeFromTag);
-	// startActivity(intent1);
-	// break;
-	// case R.id.title_back_btn:
-	// Util.hideInput(tv_back);
-	// this.finish();
-	// break;
-	// case R.id.login_username:
-	// if (misPopwindow == true && et_username.getText().toString().contains("@")) {
-	// if (et_username != null && et_username.length() > 0 && mAdapter.getCount() != 0) {
-	// popupWindwShowing();
-	// misPopwindow = false;
-	// }
-	// }
-	// break;
-	// default:
-	// break;
-	// }
-	// }
+	@OnClick({ R.id.app_top_title_iv_left, R.id.activity_lr_login_tv_login, R.id.activity_lr_login_tv_register,
+			R.id.activity_lr_login_sina, R.id.activity_lr_login_qq, R.id.activity_lr_login_rr,
+			R.id.activity_lr_login_baidu, R.id.activity_lr_login_zhifubao, R.id.activity_lr_login_mm })
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.app_top_title_iv_left:
+			finish();
+			break;
+
+		case R.id.activity_lr_login_tv_login:
+			break;
+		case R.id.activity_lr_login_tv_register:
+			break;
+		case R.id.activity_lr_login_tv_forgetpsw:
+			break;
+		case R.id.activity_lr_login_sina:
+			break;
+		case R.id.activity_lr_login_qq:
+			break;
+		case R.id.activity_lr_login_rr:
+			break;
+		case R.id.activity_lr_login_baidu:
+			break;
+		case R.id.activity_lr_login_zhifubao:
+			break;
+		case R.id.activity_lr_login_mm:
+			break;
+
+		// case R.id.btn_login:
+		// /** 登录页登录按钮点击 */
+		// ActionReport actionReport1 = new ActionReport(ActionType.LOGIN, null);
+		// BaseApplication.getInstance().getActionList().add(actionReport1);
+		// /** --------- end------------------ */
+		// String phone = etUsername.getText().toString();
+		// String password = etPassword.getText().toString();
+		// if (TextUtils.isEmpty(phone) || TextUtils.isEmpty(password)) {
+		// // new DialogFactory(getActivity()).showDialog("提示",
+		// // "用户名或密码不能为空", "确定", null);
+		// new DialogFactory(getApplication()).showToast(getString(R.string.dialog_content_input_empty),
+		// Toast.LENGTH_SHORT);
+		// return;
+		// }
+		// ULog.i(LRLoginActivity.class.getSimpleName(), "etPhoneNum = " + etUsername + ", etPwd = " + etPassword);
+		// Bundle b = new Bundle();
+		// b.putString(Keys.KEY_USERNAME, phone);
+		// b.putString(Keys.KEY_USERPASSWORD, password);
+		// b.putBoolean("isSave", true);
+		//
+		// if (!TextUtils.isEmpty(ComeFromTag))
+		// b.putString("ComeFromTag", ComeFromTag);
+		//
+		// new UserLoginTask(LRLoginActivity.this).execute(b);
+		// break;
+		// case R.id.btn_one_reister:
+		// Intent intent = new Intent(getApplication(), AKeyRegisterActivity.class);
+		// intent.putExtra(Keys.IS_FROM_USER_CENTER, isFromUserCenter);
+		// if (!TextUtils.isEmpty(ComeFromTag))
+		// intent.putExtra("ComeFromTag", ComeFromTag);
+		// this.startActivity(intent);
+		// ActionReport actionReport2 = new ActionReport(ActionType.REGISTER, null);
+		// BaseApplication.getInstance().getActionList().add(actionReport2);
+		// /** --------- end------------------ */
+		// // handleOneKeyRegister(LoginAndRegisterActivity.this);
+		// break;
+		// case R.id.tv_forgetpwd:
+		// // startActivity(new Intent(LoginAndRegisterActivity.this,
+		// // ResetPasswordActivity.class));
+		// new CategoryPopupWindow(tv_forgepwd).showResetPwdDropDown(0, 0);
+		// Util.hideInput(tv_forgepwd);
+		// break;
+		// case R.id.tv_email_register:
+		// // this.finish();
+		// Intent intent1 = new Intent(LRLoginActivity.this, EmailRegisterActivity.class);
+		// intent1.putExtra(Keys.IS_FROM_USER_CENTER, isFromUserCenter);
+		// if (!TextUtils.isEmpty(ComeFromTag))
+		// intent1.putExtra("ComeFromTag", ComeFromTag);
+		// startActivity(intent1);
+		// break;
+		// case R.id.title_back_btn:
+		// Util.hideInput(tv_back);
+		// this.finish();
+		// break;
+		// case R.id.login_username:
+		// if (misPopwindow == true && etUsername.getText().toString().contains("@")) {
+		// if (etUsername != null && etUsername.length() > 0 && mAdapter.getCount() != 0) {
+		// popupWindwShowing();
+		// misPopwindow = false;
+		// }
+		// }
+		// break;
+		default:
+			break;
+		}
+	}
 
 	/** login 异步线程 */
 	// class LoginTask extends AsyncTask<Bundle, Integer, Bundle> {

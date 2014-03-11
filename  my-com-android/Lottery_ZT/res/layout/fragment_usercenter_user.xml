@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/user_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/usercenter_iv_user_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="20dp"
+            android:src="@drawable/touxiang_04" />
+
+        <TextView
+            android:id="@+id/usercenter_tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/usercenter_iv_user_head"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@+id/usercenter_iv_user_head"
+            android:text="Come on buying"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/usercenter_tv_user_tishenghuiyuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/usercenter_tv_user_name"
+            android:layout_toRightOf="@+id/usercenter_iv_user_head"
+            android:text="如何提升会员？"
+            android:textColor="@color/yellow"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/usercenter_tv_user_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/usercenter_tv_user_tishenghuiyuan"
+            android:layout_below="@+id/usercenter_tv_user_tishenghuiyuan"
+            android:layout_marginTop="5dp"
+            android:drawableLeft="@drawable/icon_myaddress"
+            android:text="   我的收获地址"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/usercenter_iv_user_head"
+            android:layout_alignTop="@+id/usercenter_tv_user_address"
+            android:src="@drawable/icon_cuxiao" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/usercenter_tv_user_name"
+            android:layout_alignTop="@+id/usercenter_tv_user_name"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/usercenter_tv_user_name"
+            android:src="@drawable/icon_cuxiao" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" >
+
+        <Button
+            android:id="@+id/usercenter_tv_user_pingjia"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="0.7dp"
+            android:layout_weight="1"
+            android:background="#88FFFFFF"
+            android:drawableStart="@drawable/icon_dianping"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="评价"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/usercenter_tv_user_shouhou"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0.7dp"
+            android:layout_weight="1"
+            android:background="#88FFFFFF"
+            android:drawableStart="@drawable/icon_tuihuo"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="退货/退款"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+</LinearLayout>

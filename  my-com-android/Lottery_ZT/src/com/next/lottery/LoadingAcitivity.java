@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.next.lottery.bean.HomeBean;
+import com.next.lottery.utils.User;
 import com.next.lottery.utils.Util;
 
 /**
@@ -20,14 +21,13 @@ public class LoadingAcitivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_loading);
-		// User.saveUserLoginStatu(this, false);
+
 
 	}
 
 	/** 跳转到MainActivity */
 	private void intent(HomeBean bean) {
-		// User.saveUserLoginStatu(this, false); // 设置用户处于登出状态
-
+		User.saveToken(this, "111111111111"); // 表示登录
 		Intent intent = new Intent(LoadingAcitivity.this, MainActivity.class);
 		// intent.putExtra(ComParams.INTENT_HOMEBEAN, bean);
 		startActivity(intent);
@@ -53,6 +53,10 @@ public class LoadingAcitivity extends BaseActivity {
 	class LoadingData extends AsyncTask<String, String, Integer> {
 		@Override
 		protected Integer doInBackground(String... paramArrayOfParams) {
+			int i = 100000000;
+			while (i > 0) {
+				i--;
+			}
 			return 1;
 		}
 
