@@ -2,16 +2,22 @@ package com.next.lottery;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
+import android.view.View;
 import android.widget.TextView;
 
+import com.dongfang.utils.ULog;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.next.lottery.fragment.ClassifyFragment;
+import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.next.lottery.fragment.SearchHistoryFragment;
+import com.next.lottery.fragment.SearchHotWordFragment;
 
 public class SearchAcitivity extends BaseActivity {
 
 	@ViewInject(android.R.id.tabhost)
 	private FragmentTabHost fgtHost;
+	@ViewInject(R.id.activity_search_tv_cancelsearch)
+	private TextView tvCancelsearch;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +36,20 @@ public class SearchAcitivity extends BaseActivity {
 		tab1.setText("最近搜索");
 		tab2.setText("热门搜索");
 
-		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), ClassifyFragment.class, null);
-		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), ClassifyFragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), SearchHistoryFragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), SearchHotWordFragment.class, null);
 	}
 
+	@OnClick({ R.id.activity_search_tv_cancelsearch })
+	private void onclick(View v) {
+		ULog.d("id = " + v.getId());
+
+		switch (v.getId()) {
+		case R.id.activity_search_tv_cancelsearch:
+			finish();
+			break;
+		default:
+			break;
+		}
+	}
 }

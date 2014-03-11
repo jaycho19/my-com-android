@@ -57,7 +57,8 @@ public class MainActivity extends BaseActivity {
 	private void initTabhostItems() {
 		ULog.d("initTabhostItems");
 		fgtHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
-
+		//fgtHost.getTabWidget().setRightStripDrawable(getResources().getColor(R.color.black));
+		
 		View tab1 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
 		View tab2 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
 		View tab3 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
