@@ -1,11 +1,11 @@
 package com.next.lottery.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dongfang.v4.app.BaseFragment;
 import com.next.lottery.R;
 
 /**
@@ -14,11 +14,17 @@ import com.next.lottery.R;
  * @author dongfang
  * 
  */
-public class SearchHotWordFragment extends Fragment {
+public class SearchHotWordFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_search_hotword, container, false);
 		// initView(view);
 		return view;
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -1,4 +1,4 @@
-package com.next.lottery;
+package com.dongfang.v4.app;
 
 import android.app.Application;
 import android.os.Handler;

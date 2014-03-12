@@ -3,8 +3,10 @@ package com.next.lottery;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
+import com.dongfang.v4.app.BaseActivity;
 import com.next.lottery.bean.HomeBean;
 import com.next.lottery.utils.User;
 import com.next.lottery.utils.Util;
@@ -21,8 +23,6 @@ public class LoadingAcitivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_loading);
-
-
 	}
 
 	/** 跳转到MainActivity */
@@ -68,5 +68,11 @@ public class LoadingAcitivity extends BaseActivity {
 			}
 
 		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+
 	}
 }
