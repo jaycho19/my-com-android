@@ -8,20 +8,19 @@
         android:id="@+id/app_top_title_iv_left"
         style="@style/app_top_title_iv_left"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/qr_code" />
+        android:src="@drawable/arrows_back" />
 
     <ImageView
         android:id="@+id/app_top_title_iv_rigth"
         style="@style/app_top_title_iv_right"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/search_btn_bg" />
+        android:src="@drawable/icon_menu_02" />
 
-    <ImageView
-        android:id="@+id/app_top_title_iv_centre"
+    <TextView
+        android:id="@+id/app_top_title_tv_centre"
         style="@style/app_top_title_tv_center"
         android:layout_toLeftOf="@+id/app_top_title_iv_rigth"
         android:layout_toRightOf="@+id/app_top_title_iv_left"
-        android:src="@drawable/logo_small" />
-
+        android:text="系统设置" />
 
 </RelativeLayout>

@@ -72,35 +72,55 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp" >
 
-        <Button
-            android:id="@+id/usercenter_tv_user_pingjia"
+        <LinearLayout
+            android:id="@+id/usercenter_ll_user_pingjia"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="0.7dp"
             android:layout_weight="1"
-            android:background="#88FFFFFF"
-            android:drawableStart="@drawable/icon_dianping"
+            android:background="@drawable/usercenter_fragment_ll_color"
+            android:clickable="true"
             android:gravity="center"
             android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="评价"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/black" />
+            android:paddingTop="10dp" >
 
-        <Button
-            android:id="@+id/usercenter_tv_user_shouhou"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_dianping" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="评价"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/usercenter_ll_user_shouhou"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="0.7dp"
+            android:layout_marginRight="0.7dp"
             android:layout_weight="1"
-            android:background="#88FFFFFF"
-            android:drawableStart="@drawable/icon_tuihuo"
+            android:background="@drawable/usercenter_fragment_ll_color"
+            android:clickable="true"
             android:gravity="center"
             android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="退货/退款"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/black" />
+            android:paddingTop="10dp" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_tuihuo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="退货/退款"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/black" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
