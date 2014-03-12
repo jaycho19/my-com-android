@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dongfang.utils.ULog;
+import com.dongfang.v4.app.BaseActivity;
 import com.dongfang.v4.app.FragmentTabHostDF;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -57,8 +58,8 @@ public class MainActivity extends BaseActivity {
 	private void initTabhostItems() {
 		ULog.d("initTabhostItems");
 		fgtHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
-		//fgtHost.getTabWidget().setRightStripDrawable(getResources().getColor(R.color.black));
-		
+		// fgtHost.getTabWidget().setRightStripDrawable(getResources().getColor(R.color.black));
+
 		View tab1 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
 		View tab2 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
 		View tab3 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
@@ -165,6 +166,12 @@ public class MainActivity extends BaseActivity {
 		// }
 
 		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

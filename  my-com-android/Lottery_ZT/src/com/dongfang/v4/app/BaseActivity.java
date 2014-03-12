@@ -1,4 +1,4 @@
-package com.next.lottery;
+package com.dongfang.v4.app;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.dongfang.utils.ULog;
 import com.next.lottery.broadcast.CloseAppReceiver;
@@ -22,6 +23,8 @@ import com.next.lottery.broadcast.CloseAppReceiver;
  * 
  */
 public abstract class BaseActivity extends FragmentActivity {
+
+	public abstract void onClick(View v);
 
 	protected String TAG = BaseActivity.class.getSimpleName();
 
@@ -80,7 +83,6 @@ public abstract class BaseActivity extends FragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		ULog.d("onCreateOptionsMenu");
 		// getMenuInflater().inflate(R.menu.main, menu);
-
 		return true;
 	}
 

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.dongfang.utils.ULog;
+import com.dongfang.v4.app.BaseActivity;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
@@ -40,10 +41,9 @@ public class SearchAcitivity extends BaseActivity {
 		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), SearchHotWordFragment.class, null);
 	}
 
-	@OnClick({ R.id.activity_search_tv_cancelsearch })
-	private void onclick(View v) {
+	@OnClick(R.id.activity_search_tv_cancelsearch)
+	public void onClick(View v) {
 		ULog.d("id = " + v.getId());
-
 		switch (v.getId()) {
 		case R.id.activity_search_tv_cancelsearch:
 			finish();

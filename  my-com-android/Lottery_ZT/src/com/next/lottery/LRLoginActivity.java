@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dongfang.v4.app.BaseActivity;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
@@ -172,12 +173,12 @@ public class LRLoginActivity extends BaseActivity {
 	@OnClick({ R.id.app_top_title_iv_left, R.id.activity_lr_login_tv_login, R.id.activity_lr_login_tv_register,
 			R.id.activity_lr_login_sina, R.id.activity_lr_login_qq, R.id.activity_lr_login_rr,
 			R.id.activity_lr_login_baidu, R.id.activity_lr_login_zhifubao, R.id.activity_lr_login_mm })
+	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.app_top_title_iv_left:
 			finish();
 			break;
-
 		case R.id.activity_lr_login_tv_login:
 			break;
 		case R.id.activity_lr_login_tv_register:
