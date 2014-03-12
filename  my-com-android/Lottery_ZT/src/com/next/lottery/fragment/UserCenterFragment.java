@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseFragment;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -16,7 +17,14 @@ import com.next.lottery.R;
 import com.next.lottery.SettingActivity;
 import com.next.lottery.utils.User;
 
+/**
+ * 个人中心
+ * 
+ * @author dongfang
+ * 
+ */
 public class UserCenterFragment extends BaseFragment {
+
 	@ViewInject(R.id.app_top_title_iv_rigth)
 	private ImageView ivSetting;
 
@@ -28,13 +36,20 @@ public class UserCenterFragment extends BaseFragment {
 		}
 
 		View view = inflater.inflate(R.layout.fragment_usercenter, container, false);
-		ViewUtils.inject(view);
+		
+		ULog.e("000000000000000000000 ivSetting == null " + (null == ivSetting));
+		ViewUtils.inject(this,view);
+		ULog.e("ivSetting == null " + (null == ivSetting));
+		ivSetting = (ImageView) view.findViewById(R.id.app_top_title_iv_rigth);
+		ULog.e("ivSetting == null " + (null == ivSetting));
+		
 		return view;
 	}
 
-	@OnClick({ R.id.app_top_title_iv_rigth })
 	@Override
+	@OnClick({ R.id.app_top_title_iv_rigth })
 	public void onClick(View v) {
+		ULog.d("id = " + v.getId());
 		switch (v.getId()) {
 		case R.id.app_top_title_iv_rigth:
 			startActivity(new Intent(getActivity(), SettingActivity.class));

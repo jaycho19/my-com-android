@@ -2,8 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical" >
 
     <include layout="@layout/activity_setting_top_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                style="@style/textview_arrow_item"
+                android:layout_marginTop="1dp"
+                android:text="购物流程" />
+
+            <TextView
+                style="@style/textview_arrow_item"
+                android:text="支付方式" />
+
+            <TextView
+                style="@style/textview_arrow_item"
+                android:text="配送说明" />
+
+            <TextView
+                style="@style/textview_arrow_item"
+                android:text="退换货政策" />
+
+            <TextView
+                style="@style/textview_arrow_item"
+                android:text="常见问题" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
