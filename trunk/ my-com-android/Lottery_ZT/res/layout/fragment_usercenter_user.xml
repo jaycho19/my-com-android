@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/user_bg"
     android:orientation="vertical" >
-
+ 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -15,7 +15,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_margin="20dp"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:src="@drawable/touxiang_04" />
 
         <TextView
@@ -25,13 +27,14 @@
             android:layout_alignTop="@+id/usercenter_iv_user_head"
             android:layout_marginBottom="5dp"
             android:layout_toRightOf="@+id/usercenter_iv_user_head"
+            android:paddingRight="15dp"
             android:text="Come on buying"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
         <TextView
             android:id="@+id/usercenter_tv_user_tishenghuiyuan"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/usercenter_tv_user_name"
             android:layout_toRightOf="@+id/usercenter_iv_user_head"
@@ -41,7 +44,7 @@
 
         <TextView
             android:id="@+id/usercenter_tv_user_address"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/usercenter_tv_user_tishenghuiyuan"
             android:layout_below="@+id/usercenter_tv_user_tishenghuiyuan"
@@ -53,17 +56,19 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/usercenter_iv_user_head"
-            android:layout_alignTop="@+id/usercenter_tv_user_address"
+            android:layout_alignBottom="@+id/usercenter_tv_user_name"
+            android:layout_alignTop="@+id/usercenter_tv_user_name"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/usercenter_tv_user_name"
             android:src="@drawable/icon_cuxiao" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/usercenter_tv_user_name"
-            android:layout_alignTop="@+id/usercenter_tv_user_name"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/usercenter_tv_user_name"
+            android:layout_alignLeft="@+id/usercenter_iv_user_head"
+            android:layout_alignRight="@+id/usercenter_iv_user_head"
+            android:layout_below="@id/usercenter_iv_user_head"
+            android:layout_marginBottom="10dp"
             android:src="@drawable/icon_cuxiao" />
     </RelativeLayout>
 
