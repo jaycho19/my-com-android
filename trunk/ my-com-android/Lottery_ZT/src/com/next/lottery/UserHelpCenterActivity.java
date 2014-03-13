@@ -16,7 +16,7 @@ import android.widget.ImageView;
  * 
  */
 
-public class SettingActivity extends BaseActivity {
+public class UserHelpCenterActivity extends BaseActivity {
 
 	@ViewInject(R.id.app_top_title_iv_left)
 	private ImageView ivBack;
@@ -24,7 +24,7 @@ public class SettingActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_setting);
+		setContentView(R.layout.activity_user_helpcenter);
 		ViewUtils.inject(this);
 	}
 

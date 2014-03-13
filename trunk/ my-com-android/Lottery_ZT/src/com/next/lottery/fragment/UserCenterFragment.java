@@ -15,7 +15,8 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.LRLoginActivity;
 import com.next.lottery.R;
-import com.next.lottery.SettingActivity;
+import com.next.lottery.UserSettingActivity;
+import com.next.lottery.UserHelpCenterActivity;
 import com.next.lottery.UserInfoActivity;
 import com.next.lottery.utils.User;
 
@@ -36,6 +37,8 @@ public class UserCenterFragment extends BaseFragment {
 	private TextView tvUserName;
 	@ViewInject(R.id.usercenter_tv_user_tishenghuiyuan)
 	private TextView tvTiShengHuiYuan;
+	@ViewInject(R.id.fragment_usercenter_tv_myhelp)
+	private TextView tvHelpCenter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,20 +48,24 @@ public class UserCenterFragment extends BaseFragment {
 		}
 		View view = inflater.inflate(R.layout.fragment_usercenter, container, false);
 		ViewUtils.inject(this, view);
-		
+
 		return view;
 	}
 
 	@Override
 	@OnClick({ R.id.app_top_title_iv_rigth, R.id.usercenter_iv_user_head, R.id.usercenter_tv_user_name,
 			R.id.usercenter_tv_user_tishenghuiyuan
+			,R.id.fragment_usercenter_tv_myhelp
 
 	})
 	public void onClick(View v) {
 		ULog.d("id = " + v.getId());
 		switch (v.getId()) {
 		case R.id.app_top_title_iv_rigth:
-			startActivity(new Intent(getActivity(), SettingActivity.class));
+			startActivity(new Intent(getActivity(), UserSettingActivity.class));
+			break;
+		case R.id.fragment_usercenter_tv_myhelp:
+			startActivity(new Intent(getActivity(), UserHelpCenterActivity.class));
 			break;
 		case R.id.usercenter_iv_user_head:
 		case R.id.usercenter_tv_user_name:

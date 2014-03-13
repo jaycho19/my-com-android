@@ -1,5 +1,6 @@
 package com.next.lottery;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.view.View;
@@ -39,6 +40,8 @@ public class SearchAcitivity extends BaseActivity {
 
 		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), SearchHistoryFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), SearchHotWordFragment.class, null);
+		
+		fgtHost.getTabWidget().setDividerDrawable(new ColorDrawable(0xDFDFDF));
 	}
 
 	@OnClick(R.id.activity_search_tv_cancelsearch)

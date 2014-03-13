@@ -5,9 +5,9 @@
     <item android:drawable="@drawable/tab_gouwuche_2" android:state_pressed="true"/>
     <item android:drawable="@drawable/tab_gouwuche_2" android:state_focused="true"/>
     <item android:drawable="@drawable/tab_gouwuche_2" android:state_selected="true"/>
-    <item android:drawable="@drawable/tab_gouwuche_1" android:state_checked="false"/>
-    <item android:drawable="@drawable/tab_gouwuche_1" android:state_pressed="false"/>
-    <item android:drawable="@drawable/tab_gouwuche_1" android:state_focused="false"/>
-    <item android:drawable="@drawable/tab_gouwuche_1" android:state_selected="false"/>
+    <item android:drawable="@drawable/tab_gouwuche_3" android:state_checked="false"/>
+    <item android:drawable="@drawable/tab_gouwuche_3" android:state_pressed="false"/>
+    <item android:drawable="@drawable/tab_gouwuche_3" android:state_focused="false"/>
+    <item android:drawable="@drawable/tab_gouwuche_3" android:state_selected="false"/>
 
 </selector>

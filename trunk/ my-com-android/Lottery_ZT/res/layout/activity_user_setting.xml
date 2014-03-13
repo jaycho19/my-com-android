@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:slip="http://schemas.android.com/apk/res/com.next.lottery"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <include layout="@layout/activity_setting_top_bar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#FFE7E7E7"
+            android:gravity="center"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bt_red_round_02"
+                android:gravity="center"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="退出当前账号"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    style="@style/textview_arrow_item"
+                    android:layout_marginTop="1dp"
+                    android:background="@color/white" >
+
+                    <com.next.lottery.view.SlipButton
+                        android:id="@+id/slipButton1"
+                        android:layout_width="68px"
+                        android:layout_height="34px"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        slip:bgoff="@drawable/slipbtn_green"
+                        slip:bgon="@drawable/slipbtn_grey"
+                        slip:slipbtn="@drawable/slipbtn_slipicon32" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text="物流跟踪提醒"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    style="@style/textview_arrow_item"
+                    android:background="@color/white" >
+
+                    <com.next.lottery.view.SlipButton
+                        android:id="@+id/slipButton2"
+                        android:layout_width="68px"
+                        android:layout_height="34px"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        slip:bgoff="@drawable/slipbtn_green"
+                        slip:bgon="@drawable/slipbtn_grey"
+                        slip:isclicked="false"
+                        slip:slipbtn="@drawable/slipbtn_slipicon32" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text="最新活动提醒"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+
+                <TextView
+                    style="@style/textview_arrow_item"
+                    android:text="收藏商品变动提醒" />
+
+                <TextView
+                    style="@style/textview_arrow_item"
+                    android:text="免打扰设置" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="50dp"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:text="当前版本：V1.1.0 \n\n\t\t上海智辛网络科技有限公司 技术支持
+                        " />
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+</LinearLayout>
