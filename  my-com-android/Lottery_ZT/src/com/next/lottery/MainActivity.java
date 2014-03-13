@@ -1,11 +1,10 @@
 package com.next.lottery;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -93,6 +92,10 @@ public class MainActivity extends BaseActivity {
 		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab3), TrademarkFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab4), ShoppingCartFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator(tab5), UserCenterFragment.class, null);
+
+		ColorDrawable blackDrawable = new ColorDrawable(0x000000);
+		fgtHost.getTabWidget().setDividerDrawable(blackDrawable);
+
 		// fgtHost.addTab(fgtHost.newTabSpec("6").setIndicator("66"), TypeFragment.class, null);
 
 		// fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator("1"), AboutActivity.class, null);
@@ -101,10 +104,8 @@ public class MainActivity extends BaseActivity {
 		// fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator("4"), AboutActivity.class, null);
 		// fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator("5"), AboutActivity.class, null);
 
-		
 		fgtHost.setCurrentTab(4);
-		
-		
+
 		// 在fragment代用之前就代用该listener
 		// fgtHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 		// @Override

@@ -20,26 +20,32 @@
             <include layout="@layout/fragment_usercenter_user" />
 
             <TextView
+                android:id="@+id/fragment_usercenter_tv_myorder"
                 style="@style/textview_arrow_item"
                 android:text="我的订单" />
 
             <TextView
+                android:id="@+id/fragment_usercenter_tv_myfavorites"
                 style="@style/textview_arrow_item"
                 android:text="我的收藏" />
 
             <TextView
+                android:id="@+id/fragment_usercenter_tv_mycoupon"
                 style="@style/textview_arrow_item"
                 android:text="我的优惠券" />
 
             <TextView
+                android:id="@+id/fragment_usercenter_tv_myaccount"
                 style="@style/textview_arrow_item"
                 android:text="账户设置" />
 
             <TextView
+                android:id="@+id/fragment_usercenter_tv_mypassowrd"
                 style="@style/textview_arrow_item"
                 android:text="密码管理" />
 
             <TextView
+                android:id="@+id/fragment_usercenter_tv_myhelp"
                 style="@style/textview_arrow_item"
                 android:text="帮助中心" />
 

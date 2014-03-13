@@ -30,7 +30,7 @@ public class SlipButton extends View implements OnTouchListener, OnClickListener
 
 	private boolean NowChoose = false; // 记录当前按钮是否打开,true为打开,flase为关闭
 
-	private boolean isChecked;
+	private boolean isChecked = true;
 	private boolean isChgLsnOn = false;
 	private boolean OnSlip = false; // 记录用户是否在滑动的变量
 	private float DownX, NowX; // 按下时的x,当前的x
@@ -51,6 +51,7 @@ public class SlipButton extends View implements OnTouchListener, OnClickListener
 		bgon = typeArray.getDrawable(R.styleable.silpinfo_bgon);
 		bgoff = typeArray.getDrawable(R.styleable.silpinfo_bgoff);
 		slipbtn = typeArray.getDrawable(R.styleable.silpinfo_slipbtn);
+		isChecked = typeArray.getBoolean(R.styleable.silpinfo_isclicked, isChecked);
 		init(bgon, bgoff, slipbtn);
 	}
 
@@ -60,6 +61,7 @@ public class SlipButton extends View implements OnTouchListener, OnClickListener
 		bgon = typeArray.getDrawable(R.styleable.silpinfo_bgon);
 		bgoff = typeArray.getDrawable(R.styleable.silpinfo_bgoff);
 		slipbtn = typeArray.getDrawable(R.styleable.silpinfo_slipbtn);
+		isChecked = typeArray.getBoolean(R.styleable.silpinfo_isclicked, isChecked);
 		init(bgon, bgoff, slipbtn);
 	}
 

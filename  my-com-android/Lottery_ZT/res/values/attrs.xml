@@ -5,6 +5,7 @@
         <attr name="bgon" format="reference" />
         <attr name="bgoff" format="reference" />
         <attr name="slipbtn" format="reference" />
+        <attr name="isclicked" format="boolean" />
     </declare-styleable>
 
 </resources>

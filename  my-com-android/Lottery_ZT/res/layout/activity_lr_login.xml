@@ -76,7 +76,7 @@
 
         <com.next.lottery.view.SlipButton
             android:id="@+id/activity_lr_login_psw_slipbtn"
-            android:layout_width="80px"
+            android:layout_width="82px"
             android:layout_height="30px"
             slip:bgoff="@drawable/slipbtn_abc"
             slip:bgon="@drawable/slipbtn_password"
