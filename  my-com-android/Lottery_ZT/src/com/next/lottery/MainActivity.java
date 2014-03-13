@@ -59,25 +59,23 @@ public class MainActivity extends BaseActivity {
 		fgtHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 		// fgtHost.getTabWidget().setRightStripDrawable(getResources().getColor(R.color.black));
 
-		View tab1 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
-		View tab2 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
-		View tab3 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
-		View tab4 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
-		View tab5 = getLayoutInflater().inflate(R.layout.activity_main_tab, null);
+		TextView tab1 = (TextView) getLayoutInflater().inflate(R.layout.activity_main_tab, null);
+		TextView tab2 = (TextView) getLayoutInflater().inflate(R.layout.activity_main_tab, null);
+		TextView tab3 = (TextView) getLayoutInflater().inflate(R.layout.activity_main_tab, null);
+		TextView tab4 = (TextView) getLayoutInflater().inflate(R.layout.activity_main_tab, null);
+		TextView tab5 = (TextView) getLayoutInflater().inflate(R.layout.activity_main_tab, null);
 
-		((TextView) tab2.findViewById(R.id.activity_main_tab_tv)).setText("分类");
-		((TextView) tab3.findViewById(R.id.activity_main_tab_tv)).setText("品牌");
-		((TextView) tab4.findViewById(R.id.activity_main_tab_tv)).setText("购物车");
-		((TextView) tab5.findViewById(R.id.activity_main_tab_tv)).setText("个人");
+		tab2.setText("分类");
+		tab3.setText("品牌");
+		tab4.setText("购物车");
+		tab5.setText("个人");
 
-		((ImageView) tab2.findViewById(R.id.activity_main_tab_iv))
-				.setImageResource(R.drawable.mian_activity_tab_fenlei_bg);
-		((ImageView) tab3.findViewById(R.id.activity_main_tab_iv))
-				.setImageResource(R.drawable.mian_activity_tab_pinpai_bg);
-		((ImageView) tab4.findViewById(R.id.activity_main_tab_iv))
-				.setImageResource(R.drawable.mian_activity_tab_gouwuche_bg);
-		((ImageView) tab5.findViewById(R.id.activity_main_tab_iv))
-				.setImageResource(R.drawable.mian_activity_tab_usercenter_bg);
+		tab2.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.drawable.mian_activity_tab_fenlei_bg), null, null);
+		tab3.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.drawable.mian_activity_tab_pinpai_bg), null, null);
+		tab4.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.drawable.mian_activity_tab_gouwuche_bg), null,
+				null);
+		tab5.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.drawable.mian_activity_tab_usercenter_bg), null,
+				null);
 
 		// tab2.setBackgroundResource(R.drawable.mian_activity_tab_live_bg);
 		// tab3.setBackgroundResource(R.drawable.mian_activity_tab_vod_bg);
