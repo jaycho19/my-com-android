@@ -6,7 +6,7 @@
         android:id="@+id/app_top_title_iv_rigth"
         style="@style/app_top_title_iv_right"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/setting_1" />
+        android:src="@drawable/icon_setting_1" />
 
     <TextView
         android:id="@+id/app_top_title_tv_centre"

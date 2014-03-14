@@ -53,7 +53,7 @@ public class LoadingAcitivity extends BaseActivity {
 	class LoadingData extends AsyncTask<String, String, Integer> {
 		@Override
 		protected Integer doInBackground(String... paramArrayOfParams) {
-			int i = 100000000;
+			int i = 10000000;
 			while (i > 0) {
 				i--;
 			}

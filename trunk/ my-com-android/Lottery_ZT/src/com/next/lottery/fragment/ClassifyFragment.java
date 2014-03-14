@@ -8,6 +8,11 @@ import android.view.ViewGroup;
 import com.dongfang.v4.app.BaseFragment;
 import com.next.lottery.R;
 
+/**
+ * 分类
+ * @author dongfang
+ *
+ */
 public class ClassifyFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

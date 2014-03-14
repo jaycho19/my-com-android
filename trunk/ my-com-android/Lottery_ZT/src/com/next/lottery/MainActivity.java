@@ -70,12 +70,10 @@ public class MainActivity extends BaseActivity {
 		tab4.setText("购物车");
 		tab5.setText("个人");
 
-		tab2.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.drawable.mian_activity_tab_fenlei_bg), null, null);
-		tab3.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.drawable.mian_activity_tab_pinpai_bg), null, null);
-		tab4.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.drawable.mian_activity_tab_gouwuche_bg), null,
-				null);
-		tab5.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.drawable.mian_activity_tab_usercenter_bg), null,
-				null);
+		tab2.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.mian_activity_tab_fenlei_bg, 0, 0);
+		tab3.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.mian_activity_tab_pinpai_bg, 0, 0);
+		tab4.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.mian_activity_tab_gouwuche_bg, 0, 0);
+		tab5.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.mian_activity_tab_usercenter_bg, 0, 0);
 
 		// tab2.setBackgroundResource(R.drawable.mian_activity_tab_live_bg);
 		// tab3.setBackgroundResource(R.drawable.mian_activity_tab_vod_bg);
@@ -91,8 +89,8 @@ public class MainActivity extends BaseActivity {
 		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab4), ShoppingCartFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator(tab5), UserCenterFragment.class, null);
 
-		ColorDrawable blackDrawable = new ColorDrawable(0x000000);
-		fgtHost.getTabWidget().setDividerDrawable(blackDrawable);
+		fgtHost.getTabWidget().setDividerDrawable(null);
+
 
 		// fgtHost.addTab(fgtHost.newTabSpec("6").setIndicator("66"), TypeFragment.class, null);
 
@@ -102,7 +100,7 @@ public class MainActivity extends BaseActivity {
 		// fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator("4"), AboutActivity.class, null);
 		// fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator("5"), AboutActivity.class, null);
 
-		fgtHost.setCurrentTab(4);
+		fgtHost.setCurrentTab(3);
 
 		// 在fragment代用之前就代用该listener
 		// fgtHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
