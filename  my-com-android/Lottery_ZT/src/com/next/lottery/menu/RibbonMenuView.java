@@ -97,7 +97,6 @@ public class RibbonMenuView extends LinearLayout {
 
 		// rbmOutsideView.setVisibility(View.GONE);
 		view.setVisibility(View.GONE);
-
 		view.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.rbm_out_to_left));
 
 	}

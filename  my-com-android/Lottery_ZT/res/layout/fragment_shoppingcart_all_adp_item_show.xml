@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/fragment_shoppingcart_all_adp_item_edit_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:padding="2dp"
+            android:text="￥380" />
+
+        <TextView
+            android:id="@+id/fragment_shoppingcart_all_adp_item_edit_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="x1" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="2dp" >
+
+            <EditText
+                android:id="@+id/fragment_shoppingcart_all_adp_item_edit_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edt_number"
+                android:gravity="center"
+                android:text="1" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/fragment_shoppingcart_all_adp_item_edit_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="2dp"
+            android:src="@drawable/btn_delete" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@drawable/btn_suv_select"
+            android:padding="3dp" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/arrows_3" />
+
+            <TextView
+                android:id="@+id/fragment_shoppingcart_all_adp_item_edit_suv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/imageView1"
+                android:padding="2dp"
+                android:text="颜色分类：红色" />
+
+            <TextView
+                android:id="@+id/fragment_shoppingcart_all_adp_item_edit_suv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fragment_shoppingcart_all_adp_item_edit_suv1"
+                android:layout_toLeftOf="@+id/imageView1"
+                android:padding="2dp"
+                android:text="尺码：70B" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:padding="2dp"
+            android:text="保存"
+            android:textColor="@color/red"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/fragment_shoppingcart_all_adp_item_edit_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="保存"
+            android:textColor="@color/red" />
+    </LinearLayout>
+
+</LinearLayout>
