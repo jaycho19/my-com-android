@@ -1,0 +1,23 @@
+package com.next.lottery.beans;
+
+import java.util.ArrayList;
+
+/**
+ * 商品SKU属性
+ * 
+ * @author dongfang
+ * 
+ */
+public class SKUBean {
+	private ArrayList<SKUEntity> skuList;
+
+	public ArrayList<SKUEntity> getSkuList() {
+		return skuList;
+	}
+
+	public void setSkuList(ArrayList<SKUEntity> skuList) {
+		this.skuList = skuList;
+	}
+
+
+}

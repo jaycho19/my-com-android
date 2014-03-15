@@ -1,5 +1,6 @@
-package com.next.lottery.adapter;
+package com.next.lottery.fragment.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -16,6 +17,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.next.lottery.R;
+import com.next.lottery.beans.SKUBean;
+import com.next.lottery.beans.SKUEntity;
+import com.next.lottery.dialog.ShoppingSelectSKUDialog;
 
 /**
  * 购物车适配器
@@ -27,7 +31,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 
 	private List<String> list;
 	private Context context;
-
+	
 	public ShoppingCartAllAdapter(Context context, List<String> list) {
 		this.list = list;
 		this.context = context;
@@ -70,10 +74,10 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 
 		LinearLayout layoutEdit;
 		RelativeLayout layoutShow;
-		RelativeLayout layoutEditSUV;
+		RelativeLayout layoutEditSKU;
 
-		TextView tvSUV1Show, tvSUV1Edit;
-		TextView tvSUV2Show, tvSUV2Edit;
+		TextView tvSKU1Show, tvSKU1Edit;
+		TextView tvSKU2Show, tvSKU2Edit;
 		TextView tvPriceShow, tvPriceEdit;
 		TextView tvNumberShow, tvNumberEdit;
 		TextView tvEdit, tVSave;
@@ -87,12 +91,12 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 			tvTitle = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_title);
 			layoutEdit = (LinearLayout) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_edit_ll);
 			layoutShow = (RelativeLayout) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_rl);
-			layoutEditSUV = (RelativeLayout) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_edit_suv_rl);
+			layoutEditSKU = (RelativeLayout) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_edit_suv_rl);
 
-			tvSUV1Show = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_suv1);
-			tvSUV1Edit = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_edit_suv1);
-			tvSUV2Show = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_suv2);
-			tvSUV2Edit = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_edit_suv2);
+			tvSKU1Show = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_sku1);
+			tvSKU1Edit = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_edit_sku1);
+			tvSKU2Show = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_sku2);
+			tvSKU2Edit = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_edit_sku2);
 
 			tvNumberShow = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_number);
 			tvNumberEdit = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_edit_number);
@@ -105,11 +109,28 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 			tvEdit.setOnClickListener(this);
 			tVSave.setOnClickListener(this);
 			ivDel.setOnClickListener(this);
-			layoutEditSUV.setOnClickListener(this);
+			layoutEditSKU.setOnClickListener(this);
 			
 
 		}
 
+		private SKUBean getTestSKUBean(){
+			ArrayList<SKUEntity> all = new ArrayList<SKUEntity>();
+			for(int i =0 ; i < 2 ; i ++){
+				SKUEntity skuEntity = new SKUEntity();
+				skuEntity.setSkuName("颜色");
+				ArrayList<String> al = new ArrayList<String>();
+				for(int j =0 ; j < 3 ; j++)
+					al.add("红色" + j);
+				skuEntity.setSkuTypesList(al);
+				all.add(skuEntity);
+			}
+			SKUBean skuBean = new SKUBean();
+			skuBean.setSkuList(all);
+			return skuBean;
+		}
+		
+		
 		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
@@ -128,6 +149,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 			case R.id.fragment_shoppingcart_all_adp_item_edit_iv_del:
 				break;
 			case R.id.fragment_shoppingcart_all_adp_item_edit_suv_rl:
+				ShoppingSelectSKUDialog.show(context,getTestSKUBean());
 				break;
 
 			default:

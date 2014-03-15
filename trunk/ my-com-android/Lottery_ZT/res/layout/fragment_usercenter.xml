@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
-                android:background="@drawable/bt_red_round_02"
+                android:background="@drawable/btn_red_round"
                 android:gravity="center"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"

@@ -6,7 +6,7 @@
     android:background="@color/background"
     android:orientation="vertical" >
 
-    <include layout="@layout/activity_setting_top_bar" />
+    <include layout="@layout/activity_user_setting_top_bar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bt_red_round_02"
+                android:background="@drawable/btn_red_round"
                 android:gravity="center"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
