@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.dongfang.v4.app.BaseActivity;
-import com.next.lottery.bean.HomeBean;
+import com.next.lottery.beans.HomeBean;
 import com.next.lottery.utils.User;
 import com.next.lottery.utils.Util;
 

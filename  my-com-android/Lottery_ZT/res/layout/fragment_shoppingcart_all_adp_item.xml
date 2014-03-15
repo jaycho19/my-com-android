@@ -98,7 +98,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/fragment_shoppingcart_all_adp_item_show_suv1"
+                android:id="@+id/fragment_shoppingcart_all_adp_item_show_sku1"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -106,7 +106,7 @@
                 android:text="颜色分类：红色" />
 
             <TextView
-                android:id="@+id/fragment_shoppingcart_all_adp_item_show_suv2"
+                android:id="@+id/fragment_shoppingcart_all_adp_item_show_sku2"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -191,7 +191,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:background="@drawable/btn_suv_select"
+                android:background="@drawable/btn_sku_select"
                 android:padding="3dp" >
 
                 <ImageView
@@ -203,7 +203,7 @@
                     android:src="@drawable/arrows_3" />
 
                 <TextView
-                    android:id="@+id/fragment_shoppingcart_all_adp_item_edit_suv1"
+                    android:id="@+id/fragment_shoppingcart_all_adp_item_edit_sku1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -212,10 +212,10 @@
                     android:text="颜色分类：红色" />
 
                 <TextView
-                    android:id="@+id/fragment_shoppingcart_all_adp_item_edit_suv2"
+                    android:id="@+id/fragment_shoppingcart_all_adp_item_edit_sku2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/fragment_shoppingcart_all_adp_item_edit_suv1"
+                    android:layout_below="@+id/fragment_shoppingcart_all_adp_item_edit_sku1"
                     android:layout_toLeftOf="@+id/imageView1"
                     android:text="尺码：70B" />
             </RelativeLayout>
