@@ -1,5 +1,6 @@
 package com.next.lottery;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class MainActivity extends BaseActivity {
 
 	@ViewInject(android.R.id.tabhost)
 	private FragmentTabHostDF fgtHost;
+	public static Context context;
 
 	// @ViewInject(R.id.tv_topbar_menu)
 	// private TextView tvTopBarMenu;
@@ -44,7 +46,7 @@ public class MainActivity extends BaseActivity {
 		initData(getIntent());
 		setContentView(R.layout.activity_main);
 		ViewUtils.inject(this);
-
+		context= this;
 		initTabhostItems();
 	}
 
@@ -100,7 +102,7 @@ public class MainActivity extends BaseActivity {
 		// fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator("4"), AboutActivity.class, null);
 		// fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator("5"), AboutActivity.class, null);
 
-		fgtHost.setCurrentTab(3);
+		fgtHost.setCurrentTab(1);
 
 		// 在fragment代用之前就代用该listener
 		// fgtHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {

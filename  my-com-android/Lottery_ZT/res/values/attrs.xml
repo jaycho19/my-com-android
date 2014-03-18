@@ -7,5 +7,9 @@
         <attr name="slipbtn" format="reference" />
         <attr name="isclicked" format="boolean" />
     </declare-styleable>
+    
+    <declare-styleable name="DefaultScrollView">
+        <attr name="defaultScrollViewStyle" format="reference" />
+    </declare-styleable>
 
 </resources>

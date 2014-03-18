@@ -15,6 +15,8 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.MCaptureActivity;
 import com.next.lottery.R;
 import com.next.lottery.SearchAcitivity;
+import com.next.lottery.view.PullToRefreshView;
+import com.next.lottery.view.VerticalScrollView;
 
 public class HomeFragment extends BaseFragment {
 	@ViewInject(R.id.app_top_title_iv_rigth)
@@ -22,30 +24,16 @@ public class HomeFragment extends BaseFragment {
 
 	@ViewInject(R.id.app_top_title_iv_left)
 	private ImageView ivQR;
+	@ViewInject(R.id.home_fragment_sv)
+	VerticalScrollView				mScrollView;
+	@ViewInject(R.id.home_fragment_pull_to_refreshview)
+	PullToRefreshView				mPullToRefreshView;
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_home, container, false);
 		ViewUtils.inject(this, view);
-
-		// // initView(view);
-		// view.findViewById(R.id.app_top_title_iv_left).setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// Intent intent = new Intent();
-		// intent.setClass(getActivity(), MCaptureActivity.class);
-		// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		// startActivityForResult(intent, 1);
-		// }
-		// });
-		// view.findViewById(R.id.app_top_title_iv_rigth).setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// startActivity(new Intent(getActivity(), SearchAcitivity.class));
-		// }
-		// });
 
 		return view;
 	}

@@ -4,7 +4,7 @@
 
     <ImageView
         android:id="@+id/app_top_title_iv_left"
-        style="@style/app_top_title_iv_left"
+        style="@style/app_top_title_iv_right"
         android:contentDescription="@string/app_name"
         android:src="@drawable/search_btn_bg" />
 
