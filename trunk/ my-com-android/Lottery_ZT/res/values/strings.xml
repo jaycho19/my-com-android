@@ -1,5 +1,15 @@
 <resources>
 
     <string name="app_name">Lottery_ZT</string>
+   <!-- 下拉 上拉刷新相关 -->
+    <string name="pull_to_refresh_pull_label">下拉刷新</string>
+    <string name="pull_to_refresh_release_label">松开后刷新</string>
+    <string name="pull_to_refresh_refreshing_label">正在加载\u2026</string>
+    <string name="pull_to_refresh_footer_pull_label">上拉加载更多</string>
+    <string name="pull_to_refresh_footer_release_label">松开后加载</string>
+    <string name="pull_to_refresh_footer_refreshing_label">加载中\u2026</string>
+    
+    
+    <string name="home_fragment_bottom">Keep the world in my eyes</string>
 
 </resources>

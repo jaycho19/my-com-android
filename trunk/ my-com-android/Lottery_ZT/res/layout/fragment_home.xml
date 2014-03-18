@@ -7,4 +7,26 @@
 
     <include layout="@layout/fragment_home_top_bar" />
 
+    <com.next.lottery.view.PullToRefreshView
+        android:id="@+id/home_fragment_pull_to_refreshview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <com.next.lottery.view.VerticalScrollView
+            android:id="@+id/home_fragment_sv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:fadingEdge="none" >
+
+            <LinearLayout
+                android:id="@+id/home_fragment_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+            </LinearLayout>
+        </com.next.lottery.view.VerticalScrollView>
+    </com.next.lottery.view.PullToRefreshView>
+
 </LinearLayout>

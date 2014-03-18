@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tv_definition"
+        style="@style/textview_arrow_item"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="0dp"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp"
+        android:clickable="false" />
+
+  <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:gravity="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:singleLine="true"
+        android:paddingBottom="2dp"
+        android:background="@drawable/bg_white_grey"
+        android:text="连衣裙，半身裙，毛衣，短裤，短袖，上衣，皮衣，呢绒大衣"
+         android:layout_marginBottom="1dp"
+        android:textColor="@color/grey" />
+
+</LinearLayout>

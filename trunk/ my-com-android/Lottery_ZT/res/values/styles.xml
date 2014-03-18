@@ -52,7 +52,21 @@
         <item name="android:drawableRight">@drawable/arrows_2</item>
         <item name="android:singleLine">true</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:clickable">true</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+    </style>
+    <!-- 分类 右边字体格式 -->
+    <style name="textview_classify_right">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">1dp</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center</item>
         <item name="android:paddingTop">10dp</item>
         <item name="android:paddingBottom">10dp</item>
         <item name="android:paddingLeft">20dp</item>
@@ -76,5 +90,5 @@
         <item name="android:windowEnterAnimation">@anim/grow_from_top</item>
         <item name="android:windowExitAnimation">@anim/shrink_from_bottom</item>
     </style>
-
+    
 </resources>
