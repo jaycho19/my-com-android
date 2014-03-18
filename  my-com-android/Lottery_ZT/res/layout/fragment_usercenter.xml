@@ -59,6 +59,7 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:text="退出当前账号"
+                android:clickable="true"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/white" />
         </LinearLayout>

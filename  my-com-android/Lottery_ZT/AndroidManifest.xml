@@ -74,6 +74,13 @@
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
+            android:name="UserCouponActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <activity
             android:name="UserHelpCenterActivity"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTask"
