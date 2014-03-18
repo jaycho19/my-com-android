@@ -27,6 +27,7 @@
                 android:gravity="center"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
+                android:clickable="true"
                 android:text="退出当前账号"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/white" />

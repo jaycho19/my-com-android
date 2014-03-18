@@ -15,9 +15,10 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.LRLoginActivity;
 import com.next.lottery.R;
-import com.next.lottery.UserSettingActivity;
+import com.next.lottery.UserCouponActivity;
 import com.next.lottery.UserHelpCenterActivity;
 import com.next.lottery.UserInfoActivity;
+import com.next.lottery.UserSettingActivity;
 import com.next.lottery.utils.User;
 
 /**
@@ -38,7 +39,9 @@ public class UserCenterFragment extends BaseFragment {
 	@ViewInject(R.id.usercenter_tv_user_tishenghuiyuan)
 	private TextView tvTiShengHuiYuan;
 	@ViewInject(R.id.fragment_usercenter_tv_myhelp)
-	private TextView tvHelpCenter;
+	private TextView tvHelpCenter;//帮助中心
+	@ViewInject(R.id.fragment_usercenter_tv_mycoupon)
+	private TextView tvMyCoupon; // 我的优惠券
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,11 +59,16 @@ public class UserCenterFragment extends BaseFragment {
 	@OnClick({ R.id.app_top_title_iv_rigth, R.id.usercenter_iv_user_head, R.id.usercenter_tv_user_name,
 			R.id.usercenter_tv_user_tishenghuiyuan
 			,R.id.fragment_usercenter_tv_myhelp
+			,R.id.fragment_usercenter_tv_mycoupon
+			
 
 	})
 	public void onClick(View v) {
 		ULog.d("id = " + v.getId());
 		switch (v.getId()) {
+		case R.id.fragment_usercenter_tv_mycoupon:
+			startActivity(new Intent(getActivity(), UserCouponActivity.class));
+			break;
 		case R.id.app_top_title_iv_rigth:
 			startActivity(new Intent(getActivity(), UserSettingActivity.class));
 			break;
