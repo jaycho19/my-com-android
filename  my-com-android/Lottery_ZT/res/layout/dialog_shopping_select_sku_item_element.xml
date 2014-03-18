@@ -2,7 +2,9 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="30dp"
     android:background="@drawable/btn_sku_select"
-    android:text="颜色"
     android:gravity="center"
+    android:text="颜色"
+    android:clickable="true"
     android:textColor="@color/black" />

@@ -14,61 +14,81 @@ import android.view.ViewGroup;
  * 
  */
 public class LineLayout extends ViewGroup {
-	private final static int VIEW_MARGIN = 2;
+	private final static int VIEW_MARGIN = 5;
 
 	public LineLayout(Context context, AttributeSet attrs) {
-		super(context, attrs);
+		this(context, attrs, 0);
 	}
+
 	public LineLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+
+		ULog.d("getChildCount =  " + getChildCount());
 	}
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		ULog.d("widthMeasureSpec = " + widthMeasureSpec + ",heightMeasureSpec =  " + heightMeasureSpec);
-		
-		for (int index = 0; index < getChildCount(); index++) {
-			final View child = getChildAt(index);
-			child.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
-		}
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-	}
+		// ULog.d("widthMeasureSpec = " + widthMeasureSpec + ",heightMeasureSpec =  " + heightMeasureSpec);
+		int r = getMeasuredWidth();
+		// ULog.d("getMeasuredWidth = " + r);
 
-	@Override
-	protected void onLayout(boolean arg0, int arg1, int arg2, int arg3, int arg4) {
-		ULog.d("arg0 = " + arg0 
-				+ ",arg1 =  " + arg1
-				+ ",arg2 =  " + arg2
-				+ ",arg3 =  " + arg3
-				+ ",arg4 =  " + arg4
-				);
+		int row = 0;// which row lay you view relative to parent
+		int lengthX = 0; // right position of child relative to parent
+		int lengthY = 0; // bottom position of child relative to parent
 
 		final int count = getChildCount();
-		int row = 0;// which row lay you view relative to parent
-		int lengthX = arg1; // right position of child relative to parent
-		int lengthY = arg2; // bottom position of child relative to parent
 		for (int i = 0; i < count; i++) {
+			final View child = getChildAt(i);
+			child.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 
-			final View child = this.getChildAt(i);
 			int width = child.getMeasuredWidth();
 			int height = child.getMeasuredHeight();
 			lengthX += width + VIEW_MARGIN;
-			lengthY = row * (height + VIEW_MARGIN) + VIEW_MARGIN + height + arg2;
-			// if it can't drawing on a same line , skip to next line
-			if (lengthX > arg3) {
-				lengthX = width + VIEW_MARGIN + arg1;
+			if (lengthX > r) {
+				lengthX = width + VIEW_MARGIN;
 				row++;
-				lengthY = row * (height + VIEW_MARGIN) + VIEW_MARGIN + height + arg2;
+			}
+			lengthY = row * (height + VIEW_MARGIN) + VIEW_MARGIN + height;
+		}
+
+		setMeasuredDimension(widthMeasureSpec, lengthY + VIEW_MARGIN);
+
+	}
+
+	@Override
+	protected void onLayout(boolean changed, int l, int t, int r, int b) {
+		// ULog.d("changed = " + changed + ",l =  " + l + ",t =  " + t + ",r =  " + r + ",b =  " + b);
+
+		final int count = getChildCount();
+		int row = 0;// which row lay you view relative to parent
+		int lengthX = l; // right position of child relative to parent
+		int lengthY = t; // bottom position of child relative to parent
+		for (int i = 0; i < count; i++) {
+			final View child = this.getChildAt(i);
+			int width = child.getMeasuredWidth();
+			int height = child.getMeasuredHeight();
+
+			lengthX += width + VIEW_MARGIN;
+			lengthY = row * (height + VIEW_MARGIN) + VIEW_MARGIN + height;
+			// if it can't drawing on a same line , skip to next line
+			if (lengthX > r) {
+				lengthX = width + VIEW_MARGIN + l;
+				row++;
+				lengthY = row * (height + VIEW_MARGIN) + VIEW_MARGIN + height;
 			}
 			child.layout(lengthX - width, lengthY - height, lengthX, lengthY);
+
+			// ULog.d("lengthX - width = " + (lengthX - width) + ",lengthY - height =  " + (lengthY - height)
+			// + ",lengthX =  " + lengthX + ",lengthY =  " + lengthY);
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public void setNOSelect() {
+		final int count = getChildCount();
+		for (int i = 0; i < count; i++) {
+			getChildAt(i).setSelected(false);;
+		}
+	}
+
 }

@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.lidroid.xutils.util.OtherUtils;
+import com.next.lottery.BuildConfig;
 
 /**
  * 
@@ -19,7 +20,7 @@ public class ULog {
 
 	private ULog() {}
 
-	public static final Boolean ISDUG = true;
+	public static final Boolean ISDUG = BuildConfig.DEBUG;
 
 	public static boolean allowD = true && ISDUG;
 	public static boolean allowE = true && ISDUG;

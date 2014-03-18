@@ -120,7 +120,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 				SKUEntity skuEntity = new SKUEntity();
 				skuEntity.setSkuName("颜色");
 				ArrayList<String> al = new ArrayList<String>();
-				for(int j =0 ; j < 3 ; j++)
+				for(int j =0 ; j < 18 ; j++)
 					al.add("红色" + j);
 				skuEntity.setSkuTypesList(al);
 				all.add(skuEntity);
