@@ -4,13 +4,20 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/dialog_select_sku_content_ll"
+    <com.dongfang.views.ScrollViewExtend
+        android:id="@+id/dialog_select_sku_content_sl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#d8d8d8"
-        android:orientation="vertical"
-        android:padding="5dp" />
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:id="@+id/dialog_select_sku_content_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp" />
+    </com.dongfang.views.ScrollViewExtend>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +29,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp" >
+            android:layout_margin="5dp" >
 
             <TextView
                 android:id="@+id/dialog_select_sku_tv_addnumber"
@@ -75,7 +82,8 @@
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/dialog_select_sku_tv_reducenumber"
                 android:text="购买数量"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <View
