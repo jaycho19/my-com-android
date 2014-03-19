@@ -57,7 +57,7 @@ public class HomeFragmentTopKVFragment extends BaseFragment {
 		try {
 			imageGallery = (ImageGallery) view.findViewById(R.id.fragment_recommend_kv_ig);
 			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-					LinearLayout.LayoutParams.FILL_PARENT, (int) (Util.getWindowWidth(getActivity()) * 290 / 480));
+					LinearLayout.LayoutParams.FILL_PARENT, (int) (Util.getWindowWidth(getActivity()) * 170 / 480));
 			imageGallery.setLayoutParams(layoutParams);
 			imageGallery.setList(ImageGallery.IMAGE_VIEW_TYPE_1, list);
 			imageGallery.setOnPageScrolledListener(onPageScrolledListener);

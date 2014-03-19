@@ -1,5 +1,6 @@
 package com.next.lottery.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -16,7 +17,10 @@ import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseFragment;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.next.lottery.MCaptureActivity;
 import com.next.lottery.R;
+import com.next.lottery.SearchAcitivity;
 import com.next.lottery.fragment.adapter.ClassifyLeftListViewAdapter;
 import com.next.lottery.fragment.adapter.ClassifyRightListViewAdapter;
 
@@ -39,6 +43,8 @@ public class ClassifyFragment extends BaseFragment {
 	@ViewInject(R.id.layout_content_right)
 	private LinearLayout lin_content_right;
 	
+	private ClassifyLeftListViewAdapter leftAdapter;
+	
 	private float oldX=0;//记录滑动时横坐标
 	private float oldY=0;//记录滑动时竖坐标
 
@@ -54,9 +60,9 @@ public class ClassifyFragment extends BaseFragment {
 	}
 
 	private void initLeftListView() {
-		ClassifyLeftListViewAdapter adapter = new ClassifyLeftListViewAdapter(
+		leftAdapter = new ClassifyLeftListViewAdapter(
 				getActivity(), R.layout.fragment_classify_left, Lefttitles);
-		listViewleft.setAdapter(adapter);
+		listViewleft.setAdapter(leftAdapter);
 	}
 
 	private void setListener() {
@@ -65,6 +71,8 @@ public class ClassifyFragment extends BaseFragment {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				lin_content_right.setVisibility(View.VISIBLE);
+				leftAdapter.setIsRightShow(true);
+				leftAdapter.notifyDataSetChanged();
 				ClassifyRightListViewAdapter adapter = new ClassifyRightListViewAdapter(
 						getActivity(), R.layout.fragment_classify_right_item,
 						recipes2);
@@ -108,6 +116,8 @@ public class ClassifyFragment extends BaseFragment {
 						if (oldX>0&&event.getX()-oldX>120&&event.getY()-oldY<200) {
 							ULog.i("左划，消失右边Listview");
 							lin_content_right.setVisibility(View.GONE);
+							leftAdapter.setIsRightShow(false);
+							leftAdapter.notifyDataSetChanged();
 						}
 						oldX = 0F;
 						oldY = 0F;
@@ -123,8 +133,33 @@ public class ClassifyFragment extends BaseFragment {
 	}
 
 	@Override
+	@OnClick({ R.id.app_top_title_iv_rigth, R.id.app_top_title_iv_left })
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
-
+		ULog.d("v.id = " + v.getId());
+		switch (v.getId()) {
+		case R.id.app_top_title_iv_left:
+			/*Intent intent = new Intent();
+			intent.setClass(getActivity(), MCaptureActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivityForResult(intent, 1);
+			break;*/
+			startActivity(new Intent(getActivity(), SearchAcitivity.class));
+			break;
+		default:
+			break;
+		}
+	}
+	/**
+	 * 
+	 * @return 右边的Listview是否为打开状态
+	 */
+	public boolean getRightLinearlayoutIsShow(){
+		int visible = lin_content_right.getVisibility();
+		
+		if (visible ==View.VISIBLE) 
+			return true;
+		else
+			return false;
+		
 	}
 }

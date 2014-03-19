@@ -7,6 +7,6 @@
     <com.next.lottery.view.ImageGallery
         android:id="@+id/fragment_recommend_kv_ig"
         android:layout_width="fill_parent"
-        android:layout_height="150dip" />
+        android:layout_height="wrap_content" />
     
 </LinearLayout>

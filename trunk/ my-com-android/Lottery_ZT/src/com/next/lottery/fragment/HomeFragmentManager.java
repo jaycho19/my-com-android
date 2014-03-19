@@ -30,9 +30,6 @@ public class HomeFragmentManager {
 	private boolean LoadingData = false;
 	private int mPosition = -1;
 
-	private int votetype = 0;// 投票类型
-	private int mcommenttype = 0;// 评论类型
-
 	public HomeFragmentManager(Context context, int contentRes,
 			int fragmentRes, PullToRefreshView pullToRefreshView) {
 		this.context = context;
@@ -73,25 +70,38 @@ public class HomeFragmentManager {
 
 		// 测试数据，一次性添加所有fragment
 		int[] addFragmentIds = { ComParams.AREA_CODE_HOME_FRAGMENT_KV,
-				/*ComParams.AREA_CODE_HOME_FRAGMENT_RECOMMEND,
-				ComParams.AREA_CODE_HOME_FRAGMENT_SEASON_PANIC_BUYING,
+				ComParams.AREA_CODE_HOME_FRAGMENT_RECOMMEND,
+				ComParams.AREA_CODE_HOME_FRAGMENT_SEASON_HOT_SALE,
 				ComParams.AREA_CODE_HOME_FRAGMENT_SAIL_CHAMPION,
-				ComParams.AREA_CODE_HOME_FRAGMENT_NEW_PRODUCT,
+				/*ComParams.AREA_CODE_HOME_FRAGMENT_NEW_PRODUCT,
 				ComParams.AREA_CODE_HOME_FRAGMENT_BOTTOM_KV */};
 		
 		//KV图测试数据
-		List<Integer>	list = new ArrayList<Integer>();
-		list.add(R.drawable.icon_home_fragment_kv_1);
-		list.add(R.drawable.icon_home_fragment_kv_1);
-		list.add(R.drawable.icon_home_fragment_kv_1);
-		list.add(R.drawable.icon_home_fragment_kv_1);
+		List<Integer>	KVlist = new ArrayList<Integer>();
+		KVlist.add(R.drawable.icon_home_fragment_kv_1);
+		KVlist.add(R.drawable.icon_home_fragment_kv_1);
+		KVlist.add(R.drawable.icon_home_fragment_kv_1);
+		KVlist.add(R.drawable.icon_home_fragment_kv_1);
 		
+		
+		//推荐测试数据
+		List<String>	Recommendlist = new ArrayList<String>();
+		Recommendlist.add("限时抢购");
+		Recommendlist.add("今日优惠");
+		Recommendlist.add("猜你喜欢");
+		
+		//销售冠军测试数据
+		List<String>	SaleChampionlist = new ArrayList<String>();
+		SaleChampionlist.add("VeryModa2014年夏季新款废都元素精品凉鞋");
+		SaleChampionlist.add("Jackjones2013年冬季新款帝都元素精品西裤");
+		SaleChampionlist.add("Selected2012年秋季新款魔都元素精品上衣");
+		SaleChampionlist.add("Only2011年春季新款霸都元素绝版拉风小秋裤");
 
 		for (int i = 0; i < addFragmentIds.length; i++) {
 			switch (addFragmentIds[i]) {
 			case ComParams.AREA_CODE_HOME_FRAGMENT_KV:
-				HomeFragmentTopKVFragment f = new HomeFragmentTopKVFragment();
-				f.setData(list, onClickTypeListener, new OnPageScrolledListener() {
+				HomeFragmentTopKVFragment fKV = new HomeFragmentTopKVFragment();
+				fKV.setData(KVlist, onClickTypeListener, new OnPageScrolledListener() {
 					@Override
 					public void OnPageScrolled() {
 						/*if (pullToRefreshView != null) {
@@ -99,19 +109,31 @@ public class HomeFragmentManager {
 						}*/
 					}
 				});
-				fragmentTransaction.add(fragmentRes, f);
-				fragments.add(f);
+				fragmentTransaction.add(fragmentRes, fKV);
+				fragments.add(fKV);
 				
 				break;
 			case ComParams.AREA_CODE_HOME_FRAGMENT_RECOMMEND:
+				HomeFragmentRecommendFragment fRecomend = new HomeFragmentRecommendFragment();
+				fRecomend.setData(Recommendlist, onClickTypeListener);
+				fragmentTransaction.add(fragmentRes, fRecomend);
+				fragments.add(fRecomend);
 				
 				break;
-			case ComParams.AREA_CODE_HOME_FRAGMENT_SEASON_PANIC_BUYING:
+			case ComParams.AREA_CODE_HOME_FRAGMENT_SEASON_HOT_SALE:
 				
+				HomeFrammentSeasonSaleFragment fHotSale= new HomeFrammentSeasonSaleFragment();
+//				fRecomend.setData(Recommendlist, onClickTypeListener);
+				fragmentTransaction.add(fragmentRes, fHotSale);
+				fragments.add(fHotSale);
 				break;
 			case ComParams.AREA_CODE_HOME_FRAGMENT_SAIL_CHAMPION:
-				
+				HomeFragmentSaleChampionFragment fSaleChampion= new HomeFragmentSaleChampionFragment();
+				fSaleChampion.setData(SaleChampionlist, onClickTypeListener);
+				fragmentTransaction.add(fragmentRes, fSaleChampion);
+				fragments.add(fSaleChampion);
 				break;
+				
 			case ComParams.AREA_CODE_HOME_FRAGMENT_NEW_PRODUCT:
 				
 				break;

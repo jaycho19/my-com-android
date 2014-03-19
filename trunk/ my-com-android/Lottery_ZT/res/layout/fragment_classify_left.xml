@@ -1,32 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="horizontal"
+    android:background="@drawable/bg_white_grey" >
 
     <TextView
-        android:id="@+id/tv_definition"
+        android:id="@+id/fragment_classify_left_tv"
         style="@style/textview_arrow_item"
         android:layout_width="fill_parent"
         android:layout_height="60dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginBottom="1dp"
         android:paddingBottom="2dp"
+        android:layout_weight="0.9"
         android:paddingTop="2dp"
-        android:clickable="false" />
-
-  <TextView
-        android:id="@+id/tv_description"
-        android:layout_width="fill_parent"
+        android:clickable="false" 
+        />
+    <ImageView 
+        android:id="@+id/fragment_classify_left_arrow_icon"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="false"
-        android:gravity="center"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:singleLine="true"
-        android:paddingBottom="2dp"
-        android:background="@drawable/bg_white_grey"
-        android:text="连衣裙，半身裙，毛衣，短裤，短袖，上衣，皮衣，呢绒大衣"
-         android:layout_marginBottom="1dp"
-        android:textColor="@color/grey" />
+        android:layout_gravity="center_vertical|right"
+        android:src="@drawable/icon_fragment_classify_left_arrow"
+         android:layout_weight="0.1"
+        android:visibility="gone"/>
+
 
 </LinearLayout>
