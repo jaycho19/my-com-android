@@ -47,7 +47,7 @@ public class ClassifyFragment extends BaseFragment {
 	
 	private float oldX=0;//记录滑动时横坐标
 	private float oldY=0;//记录滑动时竖坐标
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class ClassifyFragment extends BaseFragment {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				lin_content_right.setVisibility(View.VISIBLE);
-				leftAdapter.setIsRightShow(true);
+				leftAdapter.setIsRightShowAndPosition(true,arg2);
 				leftAdapter.notifyDataSetChanged();
 				ClassifyRightListViewAdapter adapter = new ClassifyRightListViewAdapter(
 						getActivity(), R.layout.fragment_classify_right_item,
@@ -116,7 +116,7 @@ public class ClassifyFragment extends BaseFragment {
 						if (oldX>0&&event.getX()-oldX>120&&event.getY()-oldY<200) {
 							ULog.i("左划，消失右边Listview");
 							lin_content_right.setVisibility(View.GONE);
-							leftAdapter.setIsRightShow(false);
+							leftAdapter.setIsRightShowAndPosition(false,-1);
 							leftAdapter.notifyDataSetChanged();
 						}
 						oldX = 0F;

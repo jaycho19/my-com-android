@@ -42,7 +42,7 @@ public class ClassifyLeftListViewAdapter extends ArrayAdapter<String> {
 	@ViewInject(R.id.fragment_classify_left_arrow_icon)
 	private ImageView img;
 	private boolean IsRightShow;//判断右边的listView是否显示，这边的item作颜色字体，右边的黑色选中按钮
-
+	private int SelectPosition = -1;
 	public ClassifyLeftListViewAdapter(Context context, int LayoutResourceId,
 			String[] recipes2) {
 		super(context, LayoutResourceId, recipes2);
@@ -50,9 +50,12 @@ public class ClassifyLeftListViewAdapter extends ArrayAdapter<String> {
 		this.context = context;
 	}
 	
-	public void setIsRightShow(boolean isShow){
+	public void setIsRightShowAndPosition(boolean isShow,int position){
 		IsRightShow = isShow;
+		SelectPosition = position;
 	}
+	
+	
 
 	@SuppressLint("ResourceAsColor")
 	@Override
@@ -65,7 +68,7 @@ public class ClassifyLeftListViewAdapter extends ArrayAdapter<String> {
 		img = (ImageView)view.findViewById(R.id.fragment_classify_left_arrow_icon);
 		String tvInfo = this.getItem(position);
 		tv.setText(tvInfo);
-		if (IsRightShow) {
+		if (IsRightShow&&SelectPosition==position) {
 //			tv.setTextColor(R.color.grey);
 			img.setVisibility(View.VISIBLE);
 		}else{
