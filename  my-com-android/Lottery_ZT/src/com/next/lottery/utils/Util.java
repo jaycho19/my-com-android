@@ -53,6 +53,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.dongfang.utils.ULog;
+import com.next.lottery.beans.SizeBean;
 
 public class Util {
 	public static final String TAG = "Util";
@@ -64,7 +65,8 @@ public class Util {
 	/** 视频默认下载路径 */
 	// public static final String DOWNLOAD_DEFAULT_SDCARD_PATH =
 	// "sdcard/TYSX/dl";
-	public static final String DOWNLOAD_DEFAULT_SDCARD_PATH = Environment.getExternalStorageDirectory() + "/TYSX/dl";
+	public static final String DOWNLOAD_DEFAULT_SDCARD_PATH = Environment
+			.getExternalStorageDirectory() + "/TYSX/dl";
 
 	// ------------------------------------------------------------------------------
 	public static final String SP_NAME_WINDOW = "SP_NAME_WINDOW";
@@ -85,7 +87,9 @@ public class Util {
 	 */
 	public static boolean saveDownloadPath(Context context, String path) {
 		ULog.d("DownloadPath change to : " + path);
-		return context.getSharedPreferences(SHAREDPREFERENCES_USER_SETTINGS, Context.MODE_PRIVATE).edit()
+		return context
+				.getSharedPreferences(SHAREDPREFERENCES_USER_SETTINGS,
+						Context.MODE_PRIVATE).edit()
 				.putString(SHAREDPREFERENCES_USER_DOWNLOAD_PATH, path).commit();
 	}
 
@@ -96,8 +100,10 @@ public class Util {
 	 * @return 视频下载路径，默认返回 {@link ComParams#DOWNLOAD_DEFAULT_SDCARD_PATH}
 	 */
 	public static String getDownloadPath(Context context) {
-		SharedPreferences sp = context.getSharedPreferences(SHAREDPREFERENCES_USER_SETTINGS, Context.MODE_PRIVATE);
-		return sp.getString(SHAREDPREFERENCES_USER_DOWNLOAD_PATH, DOWNLOAD_DEFAULT_SDCARD_PATH);
+		SharedPreferences sp = context.getSharedPreferences(
+				SHAREDPREFERENCES_USER_SETTINGS, Context.MODE_PRIVATE);
+		return sp.getString(SHAREDPREFERENCES_USER_DOWNLOAD_PATH,
+				DOWNLOAD_DEFAULT_SDCARD_PATH);
 	}
 
 	/**
@@ -114,7 +120,8 @@ public class Util {
 		}
 		if (width <= 0) {
 			DisplayMetrics dm = new android.util.DisplayMetrics();
-			((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(dm);
+			((Activity) context).getWindowManager().getDefaultDisplay()
+					.getMetrics(dm);
 			width = dm.widthPixels;
 
 			Editor editor = sp.edit();
@@ -138,7 +145,8 @@ public class Util {
 		}
 		if (height <= 0) {
 			DisplayMetrics dm = new android.util.DisplayMetrics();
-			((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(dm);
+			((Activity) context).getWindowManager().getDefaultDisplay()
+					.getMetrics(dm);
 			height = dm.heightPixels;
 
 			Editor editor = sp.edit();
@@ -165,7 +173,8 @@ public class Util {
 		}
 		if (density <= 0) {
 			DisplayMetrics dm = new android.util.DisplayMetrics();
-			((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(dm);
+			((Activity) context).getWindowManager().getDefaultDisplay()
+					.getMetrics(dm);
 			density = dm.density;
 
 			Editor editor = sp.edit();
@@ -210,7 +219,8 @@ public class Util {
 	 * SDCARD是否存
 	 */
 	public static boolean externalMemoryAvailable() {
-		return android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
+		return android.os.Environment.getExternalStorageState().equals(
+				android.os.Environment.MEDIA_MOUNTED);
 	}
 
 	/**
@@ -251,8 +261,7 @@ public class Util {
 			long blockSize = stat.getBlockSize();
 			long availableBlocks = stat.getAvailableBlocks();
 			return availableBlocks * blockSize;
-		}
-		else {
+		} else {
 			return -1;
 		}
 	}
@@ -269,8 +278,7 @@ public class Util {
 			long blockSize = stat.getBlockSize();
 			long totalBlocks = stat.getBlockCount();
 			return totalBlocks * blockSize;
-		}
-		else {
+		} else {
 			return -1;
 		}
 	}
@@ -305,7 +313,8 @@ public class Util {
 	 * @return 是否挂载外部存储
 	 */
 	public static boolean isExternalStorageAvailable() {
-		return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+		return Environment.getExternalStorageState().equals(
+				Environment.MEDIA_MOUNTED);
 	}
 
 	/**
@@ -321,11 +330,9 @@ public class Util {
 			if (locale.getCountry().equalsIgnoreCase("TW"))
 				return "2";
 			return "1";
-		}
-		else if (language.equalsIgnoreCase("en")) {
+		} else if (language.equalsIgnoreCase("en")) {
 			return "3";
-		}
-		else {
+		} else {
 			return "1";
 		}
 
@@ -334,28 +341,32 @@ public class Util {
 	/**
 	 * 获取 IMSI id
 	 * <p>
-	 * Requires Permission: {@link android.Manifest.permission#READ_PHONE_STATE READ_PHONE_STATE}
+	 * Requires Permission: {@link android.Manifest.permission#READ_PHONE_STATE
+	 * READ_PHONE_STATE}
 	 * 
 	 * @param context
-	 * @return Returns the unique subscriber ID, for example, the IMSI for a GSM phone. Return null if it is
-	 *         unavailable.
+	 * @return Returns the unique subscriber ID, for example, the IMSI for a GSM
+	 *         phone. Return null if it is unavailable.
 	 * */
 	public static String getIMSI(Context context) {
-		String imsi = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getSubscriberId();
+		String imsi = ((TelephonyManager) context
+				.getSystemService(Context.TELEPHONY_SERVICE)).getSubscriberId();
 		return TextUtils.isEmpty(imsi) ? "" : imsi;
 	}
 
 	/**
 	 * 获取终端号
 	 * 
-	 * Returns the unique device ID, for example, the IMEI for GSM and the MEID for CDMA phones. Return null if device
-	 * ID is not available.
+	 * Returns the unique device ID, for example, the IMEI for GSM and the MEID
+	 * for CDMA phones. Return null if device ID is not available.
 	 * 
 	 * <p>
-	 * Requires Permission: {@link android.Manifest.permission#READ_PHONE_STATE READ_PHONE_STATE}
+	 * Requires Permission: {@link android.Manifest.permission#READ_PHONE_STATE
+	 * READ_PHONE_STATE}
 	 */
 	public static String getIMEI(Context context) {
-		String imei = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+		String imei = ((TelephonyManager) context
+				.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
 		return TextUtils.isEmpty(imei) ? "NULL" : imei;
 	}
 
@@ -413,7 +424,8 @@ public class Util {
 
 	@SuppressLint("SimpleDateFormat")
 	public static String getTimeStamp() {
-		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
+		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System
+				.currentTimeMillis());
 	}
 
 	public static Date CurrentDate() {
@@ -422,9 +434,10 @@ public class Util {
 
 	/** 毫秒转成： 年-月-日 */
 	/*
-	 * public static final String stringToDate(String string) { Date date = null; try { long dt =
-	 * Long.parseLong(string); date = new Date(); date.setTime(dt); } catch (Exception e) { e.printStackTrace(); }
-	 * return new SimpleDateFormat("yyyy-MM-dd").format(date); }
+	 * public static final String stringToDate(String string) { Date date =
+	 * null; try { long dt = Long.parseLong(string); date = new Date();
+	 * date.setTime(dt); } catch (Exception e) { e.printStackTrace(); } return
+	 * new SimpleDateFormat("yyyy-MM-dd").format(date); }
 	 */
 	/**
 	 * 返回一个有逗号(,)隔开的字符串
@@ -488,8 +501,7 @@ public class Util {
 			int i = (int) time % 3600;
 			min = i / 60;
 			sec = i % 60;
-		}
-		else {
+		} else {
 			min = (int) time / 60;
 			sec = (int) time % 60;
 		}
@@ -511,7 +523,8 @@ public class Util {
 	 * @param format
 	 *            图片类型，jpg或者png
 	 */
-	public static void saveBitMap(Context context, Bitmap bitMap, String fileName, Bitmap.CompressFormat format) {
+	public static void saveBitMap(Context context, Bitmap bitMap,
+			String fileName, Bitmap.CompressFormat format) {
 		File f = new File("sdcard/" + fileName + ".png");
 		ULog.e("saveBitMap filename = " + f.toString());
 		try {
@@ -588,8 +601,7 @@ public class Util {
 				}
 			}
 			return false;
-		}
-		else
+		} else
 			return false;
 	}
 
@@ -611,8 +623,9 @@ public class Util {
 	 * Get the date
 	 * 
 	 * @param distance
-	 *            The number of days from today, Positive value represents the days after today, Negative value
-	 *            represents the days before today, Zero represents today.
+	 *            The number of days from today, Positive value represents the
+	 *            days after today, Negative value represents the days before
+	 *            today, Zero represents today.
 	 * @return
 	 */
 	public static String getDate(int distance, boolean stripe) {
@@ -633,8 +646,7 @@ public class Util {
 
 		if (stripe) {
 			date = year + "-" + month + "-" + day;
-		}
-		else {
+		} else {
 			date = year + month + day;
 		}
 		return date;
@@ -650,7 +662,8 @@ public class Util {
 		Process pro;
 		try {
 			pro = Runtime.getRuntime().exec("curl ifconfig.me");
-			BufferedReader buf = new BufferedReader(new InputStreamReader(pro.getInputStream()));
+			BufferedReader buf = new BufferedReader(new InputStreamReader(
+					pro.getInputStream()));
 			if (!TextUtils.isEmpty(ipAddr = buf.readLine())) {
 				ULog.d("curl ifconfig.me --> " + ipAddr);
 				return ipAddr;
@@ -667,7 +680,8 @@ public class Util {
 				URL url = new URL("http://ifconfig.me/ip");
 				http = (HttpURLConnection) url.openConnection();
 				http.setRequestMethod("GET");
-				BufferedReader buf = new BufferedReader(new InputStreamReader(http.getInputStream()));
+				BufferedReader buf = new BufferedReader(new InputStreamReader(
+						http.getInputStream()));
 				while (!TextUtils.isEmpty(ipAddr = buf.readLine())) {
 					ULog.d(" IP --> " + ipAddr);
 					return ipAddr;
@@ -683,26 +697,36 @@ public class Util {
 		return ipAddr;
 	}
 
-	public static final String[] COUNTRY_SUFFIX = { "aero", "asia", "biz", "cat", "com", "coop", "edu", "eu", "gov",
-			"info", "int", "jobs", "mil", "mobi", "museum", "name", "net", "org", "pro", "tel", "travel", "xxx", "ac",
-			"ae", "af", "ag", "ai", "al", "am", "an", "ao", "aq", "ar", "as", "at", "aw", "ax", "az", "ba", "bb", "bd",
-			"be", "bf", "bg", "bh", "bi", "bj", "bm", "bn", "bo", "br", "bs", "bt", "bv", "bw", "by", "bz", "ca", "cc",
-			"cd", "cf", "cg", "ch", "ck", "cl", "cm", "cn", "co", "cr", "cs", "cu", "cv", "cx", "cy", "cz", "de", "dj",
-			"dk", "dm", "do", "dz", "ec", "ee", "eg", "er", "es", "et", "eu", "fi", "fj", "fk", "fm", "fo", "fr", "ga",
-			"gb", "gd", "ge", "gf", "gg", "gh", "gi", "gl", "gm", "gn", "gp", "gq", "gr", "gs", "gt", "gu", "gw", "gy",
-			"hk", "hm", "hn", "ht", "hu", "id", "ie", "il", "in", "io", "iq", "ir", "je", "jm", "jo", "jp", "kg", "ki",
-			"km", "kn", "kp", "kr", "kw", "ky", "kz", "la", "lb", "lc", "li", "lk", "lr", "ls", "lt", "lu", "lv", "ly",
-			"ma", "mc", "md", "me", "mg", "mh", "mk", "ml", "mm", "mn", "mo", "mp", "mq", "mr", "ms", "mt", "mu", "mv",
-			"mw", "mx", "my", "na", "nc", "ne", "nf", "ng", "ni", "nl", "no", "np", "nr", "nu", "nz", "om", "pa", "pe",
-			"pf", "pg", "ph", "pk", "pl", "pm", "pn", "pr", "ps", "pt", "pw", "py", "qa", "re", "ro", "rs", "ru", "rw",
-			"sa", "sb", "sc", "sd", "se", "sg", "sh", "si", "sj", "sk", "sl", "sm", "sn", "so", "sr", "st", "su", "sv",
-			"sy", "sz", "tc", "td", "tf", "tg", "th", "tj", "tk", "tl", "tm", "tn", "to", "tp", "tr", "tt", "tv", "tw",
-			"tz", "ua", "ug", "uk", "us", "uy", "uz", "va", "vc", "ve", "vg", "vi", "vn", "vu", "wf", "ws", "ye", "yt",
-			"za", "zm", "zw" };
+	public static final String[] COUNTRY_SUFFIX = { "aero", "asia", "biz",
+			"cat", "com", "coop", "edu", "eu", "gov", "info", "int", "jobs",
+			"mil", "mobi", "museum", "name", "net", "org", "pro", "tel",
+			"travel", "xxx", "ac", "ae", "af", "ag", "ai", "al", "am", "an",
+			"ao", "aq", "ar", "as", "at", "aw", "ax", "az", "ba", "bb", "bd",
+			"be", "bf", "bg", "bh", "bi", "bj", "bm", "bn", "bo", "br", "bs",
+			"bt", "bv", "bw", "by", "bz", "ca", "cc", "cd", "cf", "cg", "ch",
+			"ck", "cl", "cm", "cn", "co", "cr", "cs", "cu", "cv", "cx", "cy",
+			"cz", "de", "dj", "dk", "dm", "do", "dz", "ec", "ee", "eg", "er",
+			"es", "et", "eu", "fi", "fj", "fk", "fm", "fo", "fr", "ga", "gb",
+			"gd", "ge", "gf", "gg", "gh", "gi", "gl", "gm", "gn", "gp", "gq",
+			"gr", "gs", "gt", "gu", "gw", "gy", "hk", "hm", "hn", "ht", "hu",
+			"id", "ie", "il", "in", "io", "iq", "ir", "je", "jm", "jo", "jp",
+			"kg", "ki", "km", "kn", "kp", "kr", "kw", "ky", "kz", "la", "lb",
+			"lc", "li", "lk", "lr", "ls", "lt", "lu", "lv", "ly", "ma", "mc",
+			"md", "me", "mg", "mh", "mk", "ml", "mm", "mn", "mo", "mp", "mq",
+			"mr", "ms", "mt", "mu", "mv", "mw", "mx", "my", "na", "nc", "ne",
+			"nf", "ng", "ni", "nl", "no", "np", "nr", "nu", "nz", "om", "pa",
+			"pe", "pf", "pg", "ph", "pk", "pl", "pm", "pn", "pr", "ps", "pt",
+			"pw", "py", "qa", "re", "ro", "rs", "ru", "rw", "sa", "sb", "sc",
+			"sd", "se", "sg", "sh", "si", "sj", "sk", "sl", "sm", "sn", "so",
+			"sr", "st", "su", "sv", "sy", "sz", "tc", "td", "tf", "tg", "th",
+			"tj", "tk", "tl", "tm", "tn", "to", "tp", "tr", "tt", "tv", "tw",
+			"tz", "ua", "ug", "uk", "us", "uy", "uz", "va", "vc", "ve", "vg",
+			"vi", "vn", "vu", "wf", "ws", "ye", "yt", "za", "zm", "zw" };
 
 	/** 键盘隐藏 */
 	public static void hideInput(View v) {
-		InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+		InputMethodManager imm = (InputMethodManager) v.getContext()
+				.getSystemService(Context.INPUT_METHOD_SERVICE);
 		if (imm.isActive()) {
 			imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
 		}
@@ -718,10 +742,12 @@ public class Util {
 				String[] v_net = version.split("\\.");
 				String[] v_local = v.split("\\.");
 
-				for (int i = 0; i < (Math.min(3, Math.min(v_net.length, v_local.length))); i++) {
+				for (int i = 0; i < (Math.min(3,
+						Math.min(v_net.length, v_local.length))); i++) {
 					if (Integer.valueOf(v_net[i]) > Integer.valueOf(v_local[i]))
 						return true;
-					else if (Integer.valueOf(v_net[i]) < Integer.valueOf(v_local[i])) {
+					else if (Integer.valueOf(v_net[i]) < Integer
+							.valueOf(v_local[i])) {
 						return false;
 					}
 				}
@@ -736,7 +762,8 @@ public class Util {
 	/**
 	 * 缩小图片
 	 * <p>
-	 * if width willing be zoom is bigger than default draw width, then return default draw immediately;
+	 * if width willing be zoom is bigger than default draw width, then return
+	 * default draw immediately;
 	 * </P>
 	 * 
 	 * @param drawable
@@ -761,7 +788,8 @@ public class Util {
 		float scaleHeight = ((float) h / height);
 
 		matrix.postScale(scaleWidth, scaleHeight);
-		Bitmap newbmp = Bitmap.createBitmap(oldbmp, 0, 0, width, height, matrix, true);
+		Bitmap newbmp = Bitmap.createBitmap(oldbmp, 0, 0, width, height,
+				matrix, true);
 		oldbmp.recycle();
 		BitmapDrawable bd = new BitmapDrawable(newbmp);
 
@@ -783,11 +811,11 @@ public class Util {
 	/**
 	 * ListView item 的间隔背景设置 供listView 的 Adapter 的getView()方法调用
 	 */
-	public static void setListViewItemIntervalBackground(int position, View convertView) {
+	public static void setListViewItemIntervalBackground(int position,
+			View convertView) {
 		if (0 == position % 2) {
 			convertView.setBackgroundColor(0);
-		}
-		else {
+		} else {
 			convertView.setBackgroundColor(0);
 		}
 	}
@@ -805,7 +833,8 @@ public class Util {
 
 	/**
 	 * 设置listview的高度为所有item的和，不显示滑动进度条 <br>
-	 * 注意：listview的item布局的最外层layout必须是Linearlayout, 如是其它在measure时会爆NullPointerException,因为其他layout无onmeasure()方法
+	 * 注意：listview的item布局的最外层layout必须是Linearlayout,
+	 * 如是其它在measure时会爆NullPointerException,因为其他layout无onmeasure()方法
 	 * 
 	 * @param listView
 	 */
@@ -826,7 +855,8 @@ public class Util {
 		// listView.getDividerHeight()获取子项间分隔符占用的高度
 		// params.height最后得到整个ListView完整显示需要的高度
 		params.width = LayoutParams.FILL_PARENT;
-		params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+		params.height = totalHeight
+				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
 		listView.setLayoutParams(params);
 	}
 
@@ -841,10 +871,12 @@ public class Util {
 	 *            字体样式 eg: normal | bold | bolder | lighter | number(100-199)
 	 * @return
 	 */
-	public static CharSequence getHtmlText(String text, String color, String style) {
+	public static CharSequence getHtmlText(String text, String color,
+			String style) {
 		String ss;
 		if (!TextUtils.isEmpty(color) && !TextUtils.isEmpty(style))
-			ss = "<font color=" + color + " weight=" + style + ">" + text + "</font>";
+			ss = "<font color=" + color + " weight=" + style + ">" + text
+					+ "</font>";
 		else if (TextUtils.isEmpty(color))
 			ss = "<font weight=" + style + ">" + text + "</font>";
 		else if (TextUtils.isEmpty(style))
@@ -883,19 +915,22 @@ public class Util {
 			else
 				sb.append("&");
 			if (encode) {
-				if (TextUtils.isEmpty(list.get(loc).getValue()) || TextUtils.isEmpty(list.get(loc).getValue().trim())) {
-					sb.append(URLEncoder.encode(list.get(loc).getName()) + "=null");
-				}
-				else
-					sb.append(URLEncoder.encode(list.get(loc).getName()) + "="
-							+ URLEncoder.encode(list.get(loc).getValue().trim().replace("+", "%2B")));
-			}
-			else {
-				if (TextUtils.isEmpty(list.get(loc).getValue()) || TextUtils.isEmpty(list.get(loc).getValue().trim())) {
+				if (TextUtils.isEmpty(list.get(loc).getValue())
+						|| TextUtils.isEmpty(list.get(loc).getValue().trim())) {
+					sb.append(URLEncoder.encode(list.get(loc).getName())
+							+ "=null");
+				} else
+					sb.append(URLEncoder.encode(list.get(loc).getName())
+							+ "="
+							+ URLEncoder.encode(list.get(loc).getValue().trim()
+									.replace("+", "%2B")));
+			} else {
+				if (TextUtils.isEmpty(list.get(loc).getValue())
+						|| TextUtils.isEmpty(list.get(loc).getValue().trim())) {
 					sb.append(list.get(loc).getName() + "=null");
-				}
-				else
-					sb.append(list.get(loc).getName() + "=" + list.get(loc).getValue().trim());
+				} else
+					sb.append(list.get(loc).getName() + "="
+							+ list.get(loc).getValue().trim());
 			}
 		}
 		return sb.toString();
@@ -911,7 +946,8 @@ public class Util {
 	public static boolean checkAppInstall(Context context, String appPath) {
 		boolean flag = false;
 		PackageManager pm = context.getPackageManager();
-		PackageInfo info = pm.getPackageArchiveInfo(appPath, PackageManager.GET_META_DATA);
+		PackageInfo info = pm.getPackageArchiveInfo(appPath,
+				PackageManager.GET_META_DATA);
 		if (null == info)
 			flag = false;
 		List<PackageInfo> infos = pm.getInstalledPackages(0);
@@ -981,7 +1017,8 @@ public class Util {
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
-	public static int getNumOfChineseChar(String content) throws UnsupportedEncodingException {
+	public static int getNumOfChineseChar(String content)
+			throws UnsupportedEncodingException {
 		// TODO Auto-generated method stub
 		int numOfChineseChar = 0;
 		for (int i = 0; i < content.length(); i++) {
@@ -1083,6 +1120,15 @@ public class Util {
 		}
 		s = s.replaceAll("%", "%25");
 		return s;
+	}
+
+	/** 转换适合屏幕尺寸的图片大小 */
+	public static SizeBean getFitSize(Context context, int oldWidth,
+			int oldHeight) {
+		int screenWidth = Util.getWindowWidth(context);
+		int width = screenWidth * oldWidth / 320;
+		int height = oldHeight * width / oldWidth;
+		return new SizeBean(width, height);
 	}
 
 }

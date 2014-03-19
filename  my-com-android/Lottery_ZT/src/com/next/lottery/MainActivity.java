@@ -2,11 +2,9 @@ package com.next.lottery;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dongfang.utils.ULog;
@@ -102,7 +100,7 @@ public class MainActivity extends BaseActivity {
 		// fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator("4"), AboutActivity.class, null);
 		// fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator("5"), AboutActivity.class, null);
 
-		fgtHost.setCurrentTab(1);
+		fgtHost.setCurrentTab(0);
 
 		// 在fragment代用之前就代用该listener
 		// fgtHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
@@ -157,5 +155,5 @@ public class MainActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 }

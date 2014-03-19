@@ -56,16 +56,14 @@ public class HomeFragment extends BaseFragment {
 		mRecommendFragmentManager = new HomeFragmentManager(getActivity(),
 				R.id.home_fragment_layout, R.id.home_fragment_layout,
 				mPullToRefreshView);
+		
+			mHandler.sendEmptyMessage(START_REFRESH);
 	}
 
 	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if (mRecommendFragmentManager != null
-				&& mRecommendFragmentManager.getFragmentCount() <= 0) {
-			mHandler.sendEmptyMessage(START_REFRESH);
-		}
 	}
 
 	@Override

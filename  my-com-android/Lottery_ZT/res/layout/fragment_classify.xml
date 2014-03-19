@@ -16,6 +16,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
+            android:scrollbars="none"
             android:divider="#00000000" />
 
         <LinearLayout
@@ -23,7 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.6"
-            android:background="@drawable/listview_classify_right_bg" 
+            android:background="@color/seek_bar_buffer_grey" 
             android:visibility="gone">
 
             <ListView

@@ -15,7 +15,7 @@ public class ComParams {
 	/** 推荐 */
 	public static final int AREA_CODE_HOME_FRAGMENT_RECOMMEND = 11;
 	/** 当季抢购 */
-	public static final int AREA_CODE_HOME_FRAGMENT_SEASON_PANIC_BUYING = 12;
+	public static final int AREA_CODE_HOME_FRAGMENT_SEASON_HOT_SALE = 12;
 	/** 销售冠军 */
 	public static final int AREA_CODE_HOME_FRAGMENT_SAIL_CHAMPION = 13;
 	/** 新品 */
