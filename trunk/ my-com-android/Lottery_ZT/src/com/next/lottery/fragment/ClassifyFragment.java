@@ -1,23 +1,24 @@
 package com.next.lottery.fragment;
 
 import android.os.Bundle;
-import android.view.GestureDetector;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseFragment;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.R;
 import com.next.lottery.fragment.adapter.ClassifyLeftListViewAdapter;
 import com.next.lottery.fragment.adapter.ClassifyRightListViewAdapter;
-import android.view.GestureDetector.OnGestureListener;
 
 /**
  * 分类
@@ -25,13 +26,11 @@ import android.view.GestureDetector.OnGestureListener;
  * @author dongfang
  * 
  */
-public class ClassifyFragment extends BaseFragment implements OnGestureListener {
+public class ClassifyFragment extends BaseFragment {
 	private String[] recipes2 = { "毛衣", "上衣", "衬衫", "连衣裙", "毛衣", "上衣", "衬衫",
 			"连衣裙", "毛衣", "上衣", "衬衫", "连衣裙" };
 	private String[] Lefttitles = { "热销商品", "经典系列", "男士系列", "女士系列", "儿童系列",
 			"箱包系列", "配件 礼品", "家居系列", "汽车用品", "母婴" };
-	
-	private GestureDetector gestureDetector;
 
 	@ViewInject(R.id.listview_content_left)
 	private ListView listViewleft;
@@ -39,6 +38,9 @@ public class ClassifyFragment extends BaseFragment implements OnGestureListener 
 	private ListView listViewRight;
 	@ViewInject(R.id.layout_content_right)
 	private LinearLayout lin_content_right;
+	
+	private float oldX=0;//记录滑动时横坐标
+	private float oldY=0;//记录滑动时竖坐标
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,6 +81,44 @@ public class ClassifyFragment extends BaseFragment implements OnGestureListener 
 
 			}
 		});
+		
+		listViewRight.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				
+				ULog.i("event-->"+event.getAction());
+				
+					switch (event.getAction()) {
+					case MotionEvent.ACTION_DOWN:
+						ULog.i("起始x坐标-->"+event.getX());
+						oldX = event.getX();
+						oldY = event.getY();
+						break;
+					case MotionEvent.ACTION_CANCEL:
+						oldX = 0F;
+						oldY = 0F;
+						break;
+					case MotionEvent.ACTION_MOVE:
+						ULog.i("正在活动的x坐标-->"+event.getX());
+						break;
+					case MotionEvent.ACTION_UP:
+						ULog.i("结束x坐标-->"+event.getX());
+						if (oldX>0&&event.getX()-oldX>120&&event.getY()-oldY<200) {
+							ULog.i("左划，消失右边Listview");
+							lin_content_right.setVisibility(View.GONE);
+						}
+						oldX = 0F;
+						oldY = 0F;
+						break;
+
+					default:
+						break;
+					}
+				return false;
+			}
+		});
 
 	}
 
@@ -87,44 +127,4 @@ public class ClassifyFragment extends BaseFragment implements OnGestureListener 
 		// TODO Auto-generated method stub
 
 	}
-
-	@Override
-	public boolean onDown(MotionEvent arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean onFling(MotionEvent arg0, MotionEvent arg1, float arg2,
-			float arg3) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void onLongPress(MotionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean onScroll(MotionEvent arg0, MotionEvent arg1, float arg2,
-			float arg3) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void onShowPress(MotionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean onSingleTapUp(MotionEvent arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	
 }
