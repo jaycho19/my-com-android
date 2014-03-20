@@ -27,7 +27,7 @@ import com.next.lottery.fragment.adapter.ClassifyRightListViewAdapter;
 /**
  * 分类
  * 
- * @author dongfang
+ * @author dongfang gfan
  * 
  */
 public class ClassifyFragment extends BaseFragment {
