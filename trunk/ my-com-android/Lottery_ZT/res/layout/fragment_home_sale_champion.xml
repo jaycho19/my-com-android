@@ -2,18 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@color/whitesmoke"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="10dp"
     android:orientation="vertical" >
 
-    <include layout="@layout/fragment_home_custom_title" />
+    <include layout="@layout/fragment_home_custom_title"
+        />
 
     <TableLayout
         android:id="@+id/fragment_home_sale_champion_tl"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-		android:layout_marginLeft="10dip"
-		android:layout_marginRight="10dip"
-		android:layout_marginTop="10dip"
         android:stretchColumns="0,1" >
     </TableLayout>
     <LinearLayout

@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@drawable/bg_white_grey" >
+     >
 
     <TextView
         android:id="@+id/fragment_classify_left_tv"
@@ -19,9 +19,10 @@
     <ImageView 
         android:id="@+id/fragment_classify_left_arrow_icon"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_gravity="center_vertical|right"
         android:src="@drawable/icon_fragment_classify_left_arrow"
+        android:background="@drawable/bg_white_grey"
          android:layout_weight="0.1"
         android:visibility="gone"/>
 
