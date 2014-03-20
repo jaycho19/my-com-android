@@ -5,10 +5,12 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dongfang.utils.ULog;
+import com.dongfang.v4.app.DeviceInfo;
 import com.dongfang.v4.app.LineLayout;
 import com.dongfang.views.ScrollViewExtend;
 import com.next.lottery.R;
@@ -31,12 +33,16 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		if (null != dialog && dialog.isShowing())
 			return;
 		dialog = new ShoppingSelectSKUDialog(context, R.style.SelectSKUDialog);
-		dialog.getWindow().setGravity(Gravity.BOTTOM);
+		dialog.getWindow().setGravity(Gravity.BOTTOM|Gravity.LEFT);
 		dialog.setContentView(R.layout.dialog_shopping_select_sku);
 		dialog.setCancelable(true);
+		dialog.getWindow().setLayout(DeviceInfo.SCREEN_WIDTH_PORTRAIT, -2);
 		init(context, bean);
-
+		
 		dialog.show();
+		
+		
+		
 	}
 
 	private static void init(Context context, SKUBean bean) {
@@ -69,7 +75,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 				});
 				l.addView(tv);
 			}
-			ll.addView(view);
+			ll.addView(view,0);
 		}
 
 		final TextView tvNumber = (TextView) dialog.findViewById(R.id.dialog_select_sku_tv_number);

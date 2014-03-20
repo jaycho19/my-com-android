@@ -86,6 +86,7 @@
 
     <style name="SelectSKUDialog" parent="@style/CustomDialog">
         <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFullscreen">true</item> 
         <item name="android:windowNoTitle">true</item>
         <item name="android:gravity">bottom</item>
         <item name="android:windowEnterAnimation">@anim/grow_from_top</item>
