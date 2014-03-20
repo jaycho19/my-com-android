@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:button="@drawable/btn_radio"
-        android:gravity="right"
         android:paddingBottom="15dp"
+        android:paddingRight="5dp"
         android:paddingTop="15dp"
         android:text="" />
 
@@ -24,8 +24,6 @@
         android:layout_toRightOf="@+id/fragment_shoppingcart_all_adp_item_radiobtn"
         android:src="@drawable/temp_03" />
 
-
-
     <RelativeLayout
         android:id="@+id/fragment_shoppingcart_all_adp_item_show_rl"
         android:layout_width="match_parent"
@@ -35,7 +33,7 @@
         android:layout_alignTop="@+id/fragment_shoppingcart_all_adp_item_iv"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/fragment_shoppingcart_all_adp_item_iv"
-        android:background="@color/white">
+        android:background="@color/white" >
 
         <LinearLayout
             android:id="@+id/fragment_shoppingcart_all_adp_item_show_llr"
@@ -125,7 +123,7 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/fragment_shoppingcart_all_adp_item_iv"
         android:background="@color/white"
-        android:orientation="vertical" 
+        android:orientation="vertical"
         android:visibility="gone" >
 
         <LinearLayout
@@ -215,6 +213,7 @@
                     android:id="@+id/fragment_shoppingcart_all_adp_item_edit_sku2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
                     android:layout_below="@+id/fragment_shoppingcart_all_adp_item_edit_sku1"
                     android:layout_toLeftOf="@+id/imageView1"
                     android:text="尺码：70B" />

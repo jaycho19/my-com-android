@@ -16,81 +16,82 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="5dp" />
+            android:padding="5dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#d8d8d8"
+                android:orientation="vertical"
+                android:padding="5dp" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp" >
+
+                    <TextView
+                        android:id="@+id/dialog_select_sku_tv_addnumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/btn_box"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@drawable/tv_color_shopping_sku_add_reduce"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/dialog_select_sku_tv_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/dialog_select_sku_tv_addnumber"
+                        android:layout_alignTop="@+id/dialog_select_sku_tv_addnumber"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/dialog_select_sku_tv_addnumber"
+                        android:background="@drawable/btn_box"
+                        android:ems="2"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="1"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/dialog_select_sku_tv_reducenumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/dialog_select_sku_tv_number"
+                        android:background="@drawable/btn_box"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="-"
+                        android:textColor="@drawable/tv_color_shopping_sku_add_reduce"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/dialog_select_sku_tv_reducenumber"
+                        android:text="购买数量"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#bababa" />
+            </LinearLayout>
+        </LinearLayout>
     </com.dongfang.views.ScrollViewExtend>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#d8d8d8"
-        android:orientation="vertical"
-        android:padding="5dp" >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp" >
-
-            <TextView
-                android:id="@+id/dialog_select_sku_tv_addnumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/btn_box"
-                android:clickable="true"
-                android:gravity="center"
-                android:text="+"
-                android:textColor="@drawable/tv_color_shopping_sku_add_reduce"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/dialog_select_sku_tv_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/dialog_select_sku_tv_addnumber"
-                android:layout_alignTop="@+id/dialog_select_sku_tv_addnumber"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/dialog_select_sku_tv_addnumber"
-                android:background="@drawable/btn_box"
-                android:ems="2"
-                android:gravity="center"
-                android:singleLine="true"
-                android:text="1"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/dialog_select_sku_tv_reducenumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/dialog_select_sku_tv_number"
-                android:background="@drawable/btn_box"
-                android:clickable="true"
-                android:gravity="center"
-                android:text="-"
-                android:textColor="@drawable/tv_color_shopping_sku_add_reduce"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/dialog_select_sku_tv_reducenumber"
-                android:text="购买数量"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#bababa" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
