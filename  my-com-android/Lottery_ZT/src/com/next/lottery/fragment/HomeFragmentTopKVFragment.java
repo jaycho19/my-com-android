@@ -25,6 +25,8 @@ import android.widget.TextView;
 
 import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseFragment;
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.R;
 import com.next.lottery.listener.OnClickTypeListener;
 import com.next.lottery.listener.OnPageScrolledListener;
@@ -38,26 +40,33 @@ import com.next.lottery.view.ImageGallery;
  * 
  */
 public class HomeFragmentTopKVFragment extends BaseFragment {
-	protected static String			TAG	= HomeFragmentTopKVFragment.class.getSimpleName();
+	protected static String TAG = HomeFragmentTopKVFragment.class
+			.getSimpleName();
 
-	private OnClickTypeListener		onClickTypeListener;
-	private OnPageScrolledListener	onPageScrolledListener;
-
-	private ImageGallery			imageGallery;
-	protected List<Integer>	list;
+	private OnClickTypeListener onClickTypeListener;
+	private OnPageScrolledListener onPageScrolledListener;
+	@ViewInject(R.id.fragment_home_kv_ig)
+	private ImageGallery imageGallery;
+	protected List<Integer> list;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_home_top_kv, container, false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_home_top_kv, container,
+				false);
 		initView(view);
+		ViewUtils.inject(this, view);
 		return view;
 	}
 
 	private void initView(View view) {
 		try {
-			imageGallery = (ImageGallery) view.findViewById(R.id.fragment_recommend_kv_ig);
+			imageGallery = (ImageGallery) view
+					.findViewById(R.id.fragment_home_kv_ig);
+			@SuppressWarnings("deprecation")
 			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-					LinearLayout.LayoutParams.FILL_PARENT, (int) (Util.getWindowWidth(getActivity()) * 170 / 480));
+					LinearLayout.LayoutParams.FILL_PARENT,
+					(int) (Util.getWindowWidth(getActivity()) * 170 / 480));
 			imageGallery.setLayoutParams(layoutParams);
 			imageGallery.setList(ImageGallery.IMAGE_VIEW_TYPE_1, list);
 			imageGallery.setOnPageScrolledListener(onPageScrolledListener);
@@ -67,7 +76,8 @@ public class HomeFragmentTopKVFragment extends BaseFragment {
 		}
 	}
 
-	public void setData( List<Integer>	list, OnClickTypeListener onClickTypeListener,
+	public void setData(List<Integer> list,
+			OnClickTypeListener onClickTypeListener,
 			OnPageScrolledListener onPageScrolledListener) {
 		this.list = list;
 		this.onClickTypeListener = onClickTypeListener;
@@ -77,6 +87,6 @@ public class HomeFragmentTopKVFragment extends BaseFragment {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

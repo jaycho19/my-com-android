@@ -8,33 +8,15 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
     
-	<LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-		android:layout_alignBottom="@+id/vp_main" >
 	    <LinearLayout
 	        android:id="@+id/ll_fling_desc_image"
 	        android:orientation="horizontal"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_marginBottom="8dip"
-	        android:gravity="center"
+	        android:layout_marginBottom="20dp"
+	        android:layout_alignBottom="@+id/vp_main"
+	        android:gravity="left"
+	        android:layout_marginLeft="30dp"
 	        android:minWidth="20dip" >
 	    </LinearLayout>
-	    <TextView
-		    android:id="@+id/tv_fling_desc"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:paddingLeft="10dip"
-		    android:paddingRight="10dip"
-		    android:gravity="center"
-		    android:singleLine="true"
-		    android:ellipsize="end"
-		    android:text="宝莱坞机器人之恋"
-		    android:textColor="@color/white"
-		    android:textSize="15sp"
-	      />
-    </LinearLayout>
-
 </RelativeLayout>

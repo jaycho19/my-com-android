@@ -38,7 +38,6 @@ public class ImageGallery extends LinearLayout {
 
 	private ViewPager				viewPager;
 	private LinearLayout			ll_fling_desc_image;
-	private TextView				tv_fling_desc;
 
 	private Context					context;
 	private List<Integer>		list;
@@ -84,9 +83,6 @@ public class ImageGallery extends LinearLayout {
 				RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		viewPager.setLayoutParams(layoutParams);
 		ll_fling_desc_image = (LinearLayout) view.findViewById(R.id.ll_fling_desc_image);
-		tv_fling_desc = (TextView) view.findViewById(R.id.tv_fling_desc);
-		tv_fling_desc.setVisibility(View.GONE);
-
 		addView(view);
 		// viewPager.setCurrentItem(1);
 	}
