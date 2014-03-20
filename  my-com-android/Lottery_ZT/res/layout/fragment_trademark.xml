@@ -6,4 +6,18 @@
 
     <include layout="@layout/fragment_trademark_top_bar" />
 
+        <com.next.lottery.view.MyHorizontalScrollView
+            android:id="@+id/fragment_trade_mark_horizontal_scroview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true" />
+          <ListView
+            android:id="@+id/fragment_trade_mark_listview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollbars="none"
+            android:divider="#00000000" />
+        
+        
+
 </LinearLayout>

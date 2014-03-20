@@ -109,6 +109,7 @@ public class HomeFragmentManager {
 						}*/
 					}
 				});
+				fKV.setHeightWightRadio(160);
 				fragmentTransaction.add(fragmentRes, fKV);
 				fragments.add(fKV);
 				
@@ -148,11 +149,7 @@ public class HomeFragmentManager {
 			
 			
 		}
-	
 
-		HomeFragmentBottemFragment hbf = new HomeFragmentBottemFragment();
-		fragmentTransaction.add(fragmentRes, hbf);
-		fragments.add(hbf);
 		fragmentTransaction.addToBackStack(null);
 		fragmentTransaction.commitAllowingStateLoss();
 	}

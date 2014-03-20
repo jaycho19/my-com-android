@@ -48,6 +48,7 @@ public class HomeFragmentTopKVFragment extends BaseFragment {
 	@ViewInject(R.id.fragment_home_kv_ig)
 	private ImageGallery imageGallery;
 	protected List<Integer> list;
+	private int heightWightRadio =0;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,6 +59,10 @@ public class HomeFragmentTopKVFragment extends BaseFragment {
 		ViewUtils.inject(this, view);
 		return view;
 	}
+	
+	public void setHeightWightRadio(int radio){
+		heightWightRadio = radio;
+	}
 
 	private void initView(View view) {
 		try {
@@ -66,7 +71,7 @@ public class HomeFragmentTopKVFragment extends BaseFragment {
 			@SuppressWarnings("deprecation")
 			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.FILL_PARENT,
-					(int) (Util.getWindowWidth(getActivity()) * 170 / 480));
+					(int) (Util.getWindowWidth(getActivity()) * heightWightRadio / 480));
 			imageGallery.setLayoutParams(layoutParams);
 			imageGallery.setList(ImageGallery.IMAGE_VIEW_TYPE_1, list);
 			imageGallery.setOnPageScrolledListener(onPageScrolledListener);

@@ -35,7 +35,7 @@ import com.next.lottery.utils.Util;
 /**
  * 首页销售冠军 Fragment
  * 
- * @author tangshaohua
+ * @author gfan
  * 
  */
 public class HomeFragmentSaleChampionFragment extends BaseFragment {
