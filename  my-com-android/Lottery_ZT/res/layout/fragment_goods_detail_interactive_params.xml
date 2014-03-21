@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:background="@color/whitesmoke"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:paddingTop="10dp" >
+
+    <TextView
+        android:id="@+id/fragment_goods_detail_interactive_tv"
+        style="@style/textview_arrow_item"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/icon_more"
+        android:gravity="left"
+        android:paddingLeft="3dp"
+        android:singleLine="true"
+        android:text="查看服务优惠活动"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/fragment_goods_detail_interactive_information_tv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:background="@color/white"
+        android:paddingLeft="3dp"
+        android:text="1.购买两件，第二件半价 .\n2.单价超过1000元，立减200元。\n3.仰天长啸，一声一块钱"
+        android:textColor="@color/grey"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/fragment_goods_detail_params_tv"
+        style="@style/textview_arrow_item"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/icon_more"
+        android:gravity="left"
+        android:paddingLeft="3dp"
+        android:singleLine="true"
+        android:text="请选择   颜色分类 尺码"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:id="@+id/fragment_goods_detail_item_edit_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="3dp"
+        android:visibility="gone" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/fragment_goods_detail_edit_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:padding="2dp"
+                android:text="￥380" />
+
+            <TextView
+                android:id="@+id/fragment_goods_detail_edit_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="x1" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="2dp" >
+
+                <EditText
+                    android:id="@+id/fragment_goods_detail_et_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edt_number"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:text="1" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/fragment_goods_detail_edit_iv_del"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:src="@drawable/btn_delete" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical" >
+
+            <RelativeLayout
+                android:id="@+id/fragment_goods_detail_item_edit_suv_rl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="@drawable/btn_sku_select"
+                android:padding="3dp" >
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrows_3" />
+
+                <TextView
+                    android:id="@+id/fragment_goods_detail_item_edit_sku1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/imageView1"
+                    android:text="颜色分类：红色" />
+
+                <TextView
+                    android:id="@+id/fragment_goods_detail_edit_sku2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/fragment_shoppingcart_all_adp_item_edit_sku1"
+                    android:layout_toLeftOf="@+id/imageView1"
+                    android:text="尺码：70B" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/fragment_goods_detail_edit_save"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:text="保存"
+                android:textColor="@color/red" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/fragment_goods_detail_recommend_tv"
+        style="@style/textview_arrow_item"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:gravity="left"
+        android:paddingLeft="3dp"
+        android:text="产品参数及同类推荐"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/fragment_goods_detail_recommend_tv"
+        style="@style/textview_arrow_item"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:paddingLeft="3dp"
+        android:text="评价详情（1650）"
+        android:textSize="16sp" />
+
+</LinearLayout>

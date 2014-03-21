@@ -16,11 +16,4 @@
         android:layout_height="wrap_content"
         android:stretchColumns="0,1" >
     </TableLayout>
-    <LinearLayout
-        android:id="@+id/ll_focus_item"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-    </LinearLayout>
-
 </LinearLayout>

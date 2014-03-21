@@ -33,7 +33,7 @@
         android:layout_alignTop="@+id/fragment_shoppingcart_all_adp_item_iv"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/fragment_shoppingcart_all_adp_item_iv"
-        android:background="@color/white" >
+        android:background="@color/white"  >
 
         <LinearLayout
             android:id="@+id/fragment_shoppingcart_all_adp_item_show_llr"

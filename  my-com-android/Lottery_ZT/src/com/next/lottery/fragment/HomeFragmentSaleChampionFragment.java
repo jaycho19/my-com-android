@@ -44,11 +44,7 @@ public class HomeFragmentSaleChampionFragment extends BaseFragment {
 	private OnClickTypeListener	onClickTypeListener;
 
 	private TableLayout			tableLayout;
-	private LinearLayout		ll_focus_item;
 
-	private Bitmap				bitmap;
-	private URL					url;
-	private ImageView			topic;
 	private List<String> list;
 
 	@Override
@@ -61,7 +57,6 @@ public class HomeFragmentSaleChampionFragment extends BaseFragment {
 	private void initView(View view) {
 		try {
 			tableLayout = (TableLayout) view.findViewById(R.id.fragment_home_sale_champion_tl);
-			ll_focus_item = (LinearLayout) view.findViewById(R.id.ll_focus_item);
 
 			int rowCount = list.size() / 2 + (list.size() % 2 == 0 ? 0 : 1);
 			for (int i = 0; i < rowCount; i++) {
@@ -76,30 +71,23 @@ public class HomeFragmentSaleChampionFragment extends BaseFragment {
 				int rowPosition = i - currentRowIndex * 2;
 				TableRow tr = (TableRow) tableLayout.getChildAt(currentRowIndex);
 				View itemView = tr.getChildAt(rowPosition);
+				
+				itemView.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						onClickTypeListener.onClickType(new Bundle());
+					}
+				});
 				if (i < list.size()) {
 					MyImageView coverIV = (MyImageView) itemView
 							.findViewById(R.id.fragment_home_item_pic);
 					TextView titleTV = (TextView) itemView.findViewById(R.id.fragment_home_item_title);
 					
 					coverIV.setBackgroundDrawable(getResources().getDrawable(R.drawable.icon_home_fragment_sale_champion_test));
-//
-//					SizeBean sizeBean = Util.getFitSize(getActivity(), 145, 90);
-//					coverIV.setLayoutParams(new RelativeLayout.LayoutParams(sizeBean.getWidth(), sizeBean.getHeight()));
-//					android.view.ViewGroup.LayoutParams lp = titleTV.getLayoutParams();
-//					lp.width = sizeBean.getWidth();
-//					titleTV.setLayoutParams(lp);
-//					if (itemData.getCover() != null && itemData.getCover().length() > 0) {
-//						coverIV.setImage(itemData.getCover());
-//					}
 					titleTV.setText(list.get(i));
 					ULog.i("saleChampionlist-->"+list.get(i));
-//					if (TextUtils.isEmpty(itemData.getIcon())) {
-//						topic.setVisibility(View.GONE);
-//					}
-//					else {
-//						topic.setVisibility(View.VISIBLE);
-//						getImageByUrl(itemData.getIcon());
-//					}
 				}
 				else {
 					itemView.setVisibility(View.INVISIBLE);

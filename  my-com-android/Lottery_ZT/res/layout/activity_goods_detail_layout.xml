@@ -4,33 +4,33 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-    
-     <include 
-         android:id="@+id/activity_goods_detail_top_bar"
-         layout="@layout/activity_user_setting_top_bar" />
-     
-     <com.next.lottery.view.PullToRefreshView
+
+    <include
+        android:id="@+id/activity_goods_detail_top_bar"
+        layout="@layout/activity_user_setting_top_bar" />
+
+    <!-- <com.next.lottery.view.PullToRefreshView
         android:id="@+id/activity_goods_detail_pull_to_refreshview"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical" 
-        android:layout_below="@+id/activity_goods_detail_top_bar">
+        android:layout_below="@+id/activity_goods_detail_top_bar"
+        android:orientation="vertical" > -->
 
         <com.next.lottery.view.VerticalScrollView
             android:id="@+id/activity_goods_detail_sv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/activity_goods_detail_top_bar"
             android:background="@color/transparent"
             android:fadingEdge="none" >
+
             <LinearLayout
                 android:id="@+id/activity_goods_detail_layout"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical" >
             </LinearLayout>
         </com.next.lottery.view.VerticalScrollView>
-    </com.next.lottery.view.PullToRefreshView>
-     
-
+ <!--    </com.next.lottery.view.PullToRefreshView> -->
 
 </RelativeLayout>

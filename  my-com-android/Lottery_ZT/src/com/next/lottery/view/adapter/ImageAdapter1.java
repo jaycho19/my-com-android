@@ -3,6 +3,8 @@ package com.next.lottery.view.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,19 +14,23 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.dongfang.utils.ULog;
+import com.next.lottery.GoodsDetailActivity;
+import com.next.lottery.listener.OnClickTypeListener;
 
 public class ImageAdapter1 extends PagerAdapter {
 	public static final String		TAG	= ImageAdapter1.class.getSimpleName();
 	protected Context				context;
 	protected List<Integer>	list;
 	private int						mCount;
+	private OnClickTypeListener		onClickTypeListener;
 	// private int mPosition;
 	//private ImageGallery			imageGallery;
 
-	public ImageAdapter1(Context context, List<Integer> list) {
+	public ImageAdapter1(Context context, List<Integer> list,OnClickTypeListener onClickTypeListener) {
 		this.context = context;
 		this.list = list;
 		mCount = list.size();
+		this.onClickTypeListener = onClickTypeListener;
 	}
 
 /*	public ImageAdapter1(Context context, List<RecommendData> list, ImageGallery imageGallery) {
@@ -113,22 +119,10 @@ public class ImageAdapter1 extends PagerAdapter {
 		fling_image.setImageResource(list.get(position));
 		fling_image.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 		//fling_image.setBackgroundResource(R.drawable.bg_selector);
-		/*if (imageGallery != null) {
-			fling_image.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					imageGallery.getOnClickTypeListener().onClickType(Util.setClickTypeData(list.get(v.getId())));
-				}
-			});
-
-		}
-		else {
-			fling_image.setOnClickListener(new MyOnClickListener(""));
-		}*/
 		fling_image.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//				AreacodeFragmentUtil.dealWithClickType(context, Util.setClickTypeData(list.get(v.getId())));
+				context.startActivity(new Intent(context,GoodsDetailActivity.class));
 			}
 		});
 		fling_image.setId(position);

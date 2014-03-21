@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/app_bottom_btn_rl" >
+
+    <!-- 底部，立即购买    加入购物车 -->
+
+    <TextView
+        android:id="@+id/btn_buy_now"
+        style="@style/textview_goods_detail_bottom"
+        android:background="@drawable/icon_buy_now"
+        android:text="立即购买" />
+
+    <TextView
+        android:id="@+id/btn_add_shopping_cart"
+        style="@style/textview_goods_detail_bottom"
+        android:background="@drawable/icon_add_shopping_cart"
+        android:text="加入购物车" />
+
+</LinearLayout>
