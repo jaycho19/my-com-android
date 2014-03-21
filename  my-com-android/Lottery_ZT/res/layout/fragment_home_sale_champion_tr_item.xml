@@ -5,7 +5,7 @@
     android:focusable="true"
     android:orientation="vertical" >
 
-    <com.dongfang.views.MyImageView
+    <ImageView
         android:id="@+id/fragment_home_item_pic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
