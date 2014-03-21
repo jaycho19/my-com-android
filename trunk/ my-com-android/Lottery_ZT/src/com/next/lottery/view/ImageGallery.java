@@ -139,7 +139,7 @@ public class ImageGallery extends LinearLayout {
 					viewPager.setAdapter(new ImageAdapter1(context, list, this));
 				}
 				else {*/
-					viewPager.setAdapter(new ImageAdapter1(context, list));
+					viewPager.setAdapter(new ImageAdapter1(context, list,onClickTypeListener));
 			//	}
 				viewPager.setCurrentItem(list.size() * 100);
 			}
