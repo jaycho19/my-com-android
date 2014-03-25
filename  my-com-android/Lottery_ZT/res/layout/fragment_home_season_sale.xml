@@ -4,8 +4,6 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_white_grey"
     android:gravity="center_horizontal"
-     android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
     android:orientation="vertical" >
 
     <LinearLayout

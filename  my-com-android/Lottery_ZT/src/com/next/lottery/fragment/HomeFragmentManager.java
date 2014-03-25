@@ -6,6 +6,7 @@ import java.util.List;
 import com.dongfang.v4.app.BaseActivity;
 import com.next.lottery.GoodsDetailActivity;
 import com.next.lottery.R;
+import com.next.lottery.GoodsDetailActivity;
 import com.next.lottery.listener.OnClickTypeListener;
 import com.next.lottery.listener.OnPageScrolledListener;
 import com.next.lottery.utils.ComParams;
@@ -77,10 +78,10 @@ public class HomeFragmentManager {
 				ComParams.AREA_CODE_HOME_FRAGMENT_RECOMMEND,
 				ComParams.AREA_CODE_HOME_FRAGMENT_SEASON_HOT_SALE,
 				ComParams.AREA_CODE_HOME_FRAGMENT_SAIL_CHAMPION,
-		/*
-		 * ComParams.AREA_CODE_HOME_FRAGMENT_NEW_PRODUCT,
-		 * ComParams.AREA_CODE_HOME_FRAGMENT_BOTTOM_KV
-		 */};
+		
+		 ComParams.AREA_CODE_HOME_FRAGMENT_NEW_PRODUCT,
+		 ComParams.AREA_CODE_HOME_FRAGMENT_BOTTOM_KV
+		 };
 
 		// KV图测试数据
 		List<Integer> KVlist = new ArrayList<Integer>();
@@ -141,14 +142,29 @@ public class HomeFragmentManager {
 				fragmentTransaction.add(fragmentRes, fSaleChampion);
 				fragments.add(fSaleChampion);
 				break;
-
 			case ComParams.AREA_CODE_HOME_FRAGMENT_NEW_PRODUCT:
-
+				HomeFragmentSaleChampionFragment fSaleChampion1 = new HomeFragmentSaleChampionFragment();
+				fSaleChampion1.setData(SaleChampionlist, onClickTypeListener);
+				fragmentTransaction.add(fragmentRes, fSaleChampion1);
+				fragments.add(fSaleChampion1);
 				break;
 			case ComParams.AREA_CODE_HOME_FRAGMENT_BOTTOM_KV:
+				HomeFragmentTopKVFragment fKV1 = new HomeFragmentTopKVFragment();
+				fKV1.setData(KVlist, onClickTypeListener,
+						new OnPageScrolledListener() {
+							@Override
+							public void OnPageScrolled() {
+								/*
+								 * if (pullToRefreshView != null) {
+								 * pullToRefreshView.needPull = false; }
+								 */
+							}
+						});
+				fKV1.setHeightWightRadio(160);
+				fragmentTransaction.add(fragmentRes, fKV1);
+				fragments.add(fKV1);
 
 				break;
-
 			default:
 				break;
 			}

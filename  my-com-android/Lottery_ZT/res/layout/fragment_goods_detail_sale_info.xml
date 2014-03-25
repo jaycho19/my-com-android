@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
     android:background="@color/white"
     android:focusable="true"
     android:orientation="horizontal"
     android:paddingTop="10dp" >
+ <!--    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp" -->
 
     <RelativeLayout
         android:id="@+id/fragment_goods_detail_goods"
@@ -25,8 +25,8 @@
             android:layout_weight="2"
             android:background="@color/white"
             android:paddingBottom="6dp"
-            android:paddingLeft="3dip"
-            android:paddingRight="3dip"
+            android:paddingLeft="8dip"
+            android:paddingRight="8dip"
             android:text="veryModa 2014年夏季 新款罗马元素精品凉鞋激情呈现" />
 
         <LinearLayout
