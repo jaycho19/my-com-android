@@ -2,12 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
     android:background="@color/whitesmoke"
     android:focusable="true"
     android:orientation="vertical"
     android:paddingTop="10dp" >
+
+    <!--
+         android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    -->
 
     <TextView
         android:id="@+id/fragment_goods_detail_interactive_tv"
@@ -16,8 +19,8 @@
         android:layout_height="wrap_content"
         android:drawableRight="@drawable/icon_more"
         android:gravity="left"
-        android:paddingLeft="3dp"
-        android:singleLine="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="查看服务优惠活动"
         android:textColor="@color/black"
         android:textSize="16sp" />
@@ -28,7 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
         android:background="@color/white"
-        android:paddingLeft="3dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="1.购买两件，第二件半价 .\n2.单价超过1000元，立减200元。\n3.仰天长啸，一声一块钱"
         android:textColor="@color/grey"
         android:textSize="14sp"
@@ -41,7 +45,8 @@
         android:layout_height="wrap_content"
         android:drawableRight="@drawable/icon_more"
         android:gravity="left"
-        android:paddingLeft="3dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:singleLine="true"
         android:text="请选择   颜色分类 尺码"
         android:textColor="@color/black"
@@ -53,7 +58,8 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="vertical"
-        android:paddingLeft="3dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:visibility="gone" >
 
         <LinearLayout
@@ -169,7 +175,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
         android:gravity="left"
-        android:paddingLeft="3dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="产品参数及同类推荐"
         android:textSize="16sp" />
 
@@ -179,7 +186,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:paddingLeft="3dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="评价详情（1650）"
         android:textSize="16sp" />
 

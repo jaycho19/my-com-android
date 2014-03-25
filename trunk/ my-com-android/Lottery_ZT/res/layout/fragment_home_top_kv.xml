@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
     android:background="@color/white"
     android:orientation="vertical" >
+    <!-- android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp" -->
 
     <com.next.lottery.view.ImageGallery
         android:id="@+id/fragment_home_kv_ig"

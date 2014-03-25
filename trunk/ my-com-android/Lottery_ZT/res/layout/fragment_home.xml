@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
     android:background="@color/whitesmoke">
 
-    <include layout="@layout/fragment_home_top_bar" />
+    <include 
+        android:id="@+id/fragment_home_top_bar"
+        layout="@layout/fragment_home_top_bar" />
 
     <com.next.lottery.view.PullToRefreshView
         android:id="@+id/home_fragment_pull_to_refreshview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layout_below="@+id/fragment_home_top_bar" >
 
         <com.next.lottery.view.VerticalScrollView
             android:id="@+id/home_fragment_sv"
@@ -29,5 +32,16 @@
             </LinearLayout>
         </com.next.lottery.view.VerticalScrollView>
     </com.next.lottery.view.PullToRefreshView>
+    
+    <ImageButton 
+        android:id="@+id/fragment_home_img_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/btn_croll_top"/>
+       <!--  android:src="@drawable/btn_croll_top" -->
 
-</LinearLayout>
+</RelativeLayout>

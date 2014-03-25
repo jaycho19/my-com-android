@@ -1,7 +1,9 @@
 package com.next.lottery;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -17,6 +19,8 @@ import com.next.lottery.fragment.HomeFragment;
 import com.next.lottery.fragment.ShoppingCartFragment;
 import com.next.lottery.fragment.TrademarkFragment;
 import com.next.lottery.fragment.UserCenterFragment;
+import com.next.lottery.utils.ComParams;
+import com.next.lottery.utils.Keys;
 
 /**
  * 主ACTIVITY
@@ -27,7 +31,8 @@ public class MainActivity extends BaseActivity {
 
 	@ViewInject(android.R.id.tabhost)
 	private FragmentTabHostDF fgtHost;
-	public static Context context;
+	
+	private static int changeTab = 0;
 
 	// @ViewInject(R.id.tv_topbar_menu)
 	// private TextView tvTopBarMenu;
@@ -44,13 +49,19 @@ public class MainActivity extends BaseActivity {
 		initData(getIntent());
 		setContentView(R.layout.activity_main);
 		ViewUtils.inject(this);
-		context= this;
 		initTabhostItems();
+		registerBoradcastReceiver();
 	}
 
 	/** 获取首页数据 */
 	private void initData(Intent intent) {
 		ULog.d("initData");
+	}
+	
+	public void registerBoradcastReceiver() {// 注册广播
+		IntentFilter myIntentFilter = new IntentFilter();
+		myIntentFilter.addAction(ComParams.ACTION_UPDATE_MAINACTIVITY);
+		registerReceiver(receiver, myIntentFilter);
 	}
 
 	/** 初始化底部菜单 */
@@ -138,6 +149,11 @@ public class MainActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		ULog.i("onResume");
+		if (changeTab!=0) {
+			fgtHost.setCurrentTab(changeTab);
+			changeTab = 0;
+		}
 	}
 
 	@Override
@@ -156,4 +172,21 @@ public class MainActivity extends BaseActivity {
 
 	}
 	
+	private BroadcastReceiver	receiver	= new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			if (action.equals(ComParams.ACTION_UPDATE_MAINACTIVITY)&&intent.hasExtra(Keys.Key_Main_item)) {
+				int targetTab = intent.getIntExtra(Keys.Key_Main_item, fgtHost.getCurrentTab());
+				ULog.i("getCurrentTabTag-->"+fgtHost.getCurrentTabTag());
+				if (fgtHost.getCurrentTab() !=targetTab) {
+					ULog.i("targetTab-->"+targetTab);
+					changeTab = targetTab;
+//					fgtHost.setCurrentTab(targetTab);
+				}
+				
+			}
+		}
+	};
 }

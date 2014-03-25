@@ -67,7 +67,7 @@ public class HomeFragment extends BaseFragment {
 	}
 
 	@Override
-	@OnClick({ R.id.app_top_title_iv_rigth, R.id.app_top_title_iv_left })
+	@OnClick({ R.id.app_top_title_iv_rigth, R.id.app_top_title_iv_left,R.id.fragment_home_img_btn })
 	public void onClick(View v) {
 		ULog.d("v.id = " + v.getId());
 		switch (v.getId()) {
@@ -78,7 +78,13 @@ public class HomeFragment extends BaseFragment {
 			startActivityForResult(intent, 1);
 			break;
 		case R.id.app_top_title_iv_rigth:
+			
 			startActivity(new Intent(getActivity(), SearchAcitivity.class));
+			break;
+		case R.id.fragment_home_img_btn:
+			if (mScrollView!=null) {
+				mScrollView.scrollTo(0, 0);
+			}
 			break;
 		default:
 			break;

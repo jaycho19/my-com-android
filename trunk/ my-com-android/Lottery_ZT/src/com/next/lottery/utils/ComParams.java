@@ -23,4 +23,6 @@ public class ComParams {
 	/** bottom KV 图 */
 	public static final int AREA_CODE_HOME_FRAGMENT_BOTTOM_KV = 15;
 
+	public static final String ACTION_UPDATE_MAINACTIVITY= "com.next.lottery.mainactivity.refresh.tab.item";
+
 }

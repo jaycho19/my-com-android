@@ -3,7 +3,8 @@
     android:id="@+id/ll_about"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@color/whitesmoke">
 
     <include
         android:id="@+id/activity_goods_detail_top_bar"
@@ -32,5 +33,4 @@
             </LinearLayout>
         </com.next.lottery.view.VerticalScrollView>
  <!--    </com.next.lottery.view.PullToRefreshView> -->
-
 </RelativeLayout>
