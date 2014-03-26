@@ -158,10 +158,6 @@ public class MainActivity extends BaseActivity {
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// if (KeyEvent.KEYCODE_BACK == keyCode && ribbonMenu.isShown()) {
-		// ribbonMenu.toggleMenu();
-		// return true;
-		// }
 
 		return super.onKeyDown(keyCode, event);
 	}
@@ -177,13 +173,12 @@ public class MainActivity extends BaseActivity {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
-			if (action.equals(ComParams.ACTION_UPDATE_MAINACTIVITY)&&intent.hasExtra(Keys.Key_Main_item)) {
-				int targetTab = intent.getIntExtra(Keys.Key_Main_item, fgtHost.getCurrentTab());
+			if (action.equals(ComParams.ACTION_UPDATE_MAINACTIVITY)&&intent.hasExtra(Keys.KEY_MAIN_ITEM)) {
+				int targetTab = intent.getIntExtra(Keys.KEY_MAIN_ITEM, fgtHost.getCurrentTab());
 				ULog.i("getCurrentTabTag-->"+fgtHost.getCurrentTabTag());
 				if (fgtHost.getCurrentTab() !=targetTab) {
 					ULog.i("targetTab-->"+targetTab);
 					changeTab = targetTab;
-//					fgtHost.setCurrentTab(targetTab);
 				}
 				
 			}

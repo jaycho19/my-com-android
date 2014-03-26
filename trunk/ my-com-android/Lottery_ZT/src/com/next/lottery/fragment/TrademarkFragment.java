@@ -26,17 +26,15 @@ import com.next.lottery.view.MyHorizontalScrollView.ItemClickListener;
 
 public class TrademarkFragment extends BaseFragment {
 	@ViewInject(R.id.fragment_trade_mark_horizontal_scroview)
-	private MyHorizontalScrollView mScrollView;
+	private MyHorizontalScrollView	mScrollView;
 	@ViewInject(R.id.fragment_trade_mark_listview)
-	private ListView mlistView;
+	private ListView				mlistView;
 
-	private List<ItemClickListener> itemClickList = new ArrayList<MyHorizontalScrollView.ItemClickListener>();
+	private List<ItemClickListener>	itemClickList	= new ArrayList<MyHorizontalScrollView.ItemClickListener>();
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_trademark, container,
-				false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_trademark, container, false);
 		ViewUtils.inject(this, view);
 		initHorizontalView();
 		initInteractiveListView();
@@ -74,16 +72,14 @@ public class TrademarkFragment extends BaseFragment {
 				.add("jackjones：2015-2016年 冬季新款西装十一折优惠，第一次购买还有三重优惠。\n1.购买两件，第二件半价 .\n2.单价超过1000元，立减200元。\n3.仰天长啸，一声一块钱");
 		interactiveList
 				.add("selected：2019-2026年 冬季新款西装十一折优惠，第一次购买还有三重优惠。\n1.购买两件，第二件半价 .\n2.单价超过1000元，立减200元。\n3.仰天长啸，一声一块钱");
-		TradeMarkListViewAdapter madapter = new TradeMarkListViewAdapter(
-				getActivity(), R.layout.fragment_trademark_listvew_item,
-				interactiveList);
+		TradeMarkListViewAdapter madapter = new TradeMarkListViewAdapter(getActivity(),
+				R.layout.fragment_trademark_listvew_item, interactiveList);
 		mlistView.setAdapter(madapter);
 
 	}
 
 	// 初始化导航栏监听
-	public List<ItemClickListener> initHSViewClickListenerList(
-			ArrayList<String> horizon) {
+	public List<ItemClickListener> initHSViewClickListenerList(ArrayList<String> horizon) {
 		for (int i = 0; i < horizon.size(); i++) {
 			ItemIntent itemIntent = new ItemIntent();
 			itemClickList.add(itemIntent);

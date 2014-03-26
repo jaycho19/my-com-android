@@ -11,6 +11,6 @@ import android.os.Environment;
  */
 public class Keys {
 
-	public static final String Key_Main_item= "main_item";
+	public static final String KEY_MAIN_ITEM= "main_item";
 
 }

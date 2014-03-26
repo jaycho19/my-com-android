@@ -1,5 +1,7 @@
 package com.next.lottery;
 
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.fragment.GoodsDetailFragment;
 import com.next.lottery.fragment.GoodsDetailRightMenuFragment;
 import com.next.lottery.view.SlidingMenu;
@@ -10,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 
 
 public class GoodsDetailActivity extends FragmentActivity {
+	@ViewInject(R.id.slidingMenu)
 	private SlidingMenu mSlidingMenu;
 	private GoodsDetailRightMenuFragment rightFragment;
 	private GoodsDetailFragment  mainFragment;
@@ -18,12 +21,11 @@ public class GoodsDetailActivity extends FragmentActivity {
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.sliding_menu_main);
+		ViewUtils.inject(this);
 		init();
-
 	}
 
 	private void init() {
-		mSlidingMenu = (SlidingMenu) findViewById(R.id.slidingMenu);
 		mSlidingMenu.setRightView(getLayoutInflater().inflate(
 				R.layout.sliding_menu_right_frame, null));
 		mSlidingMenu.setCenterView(getLayoutInflater().inflate(

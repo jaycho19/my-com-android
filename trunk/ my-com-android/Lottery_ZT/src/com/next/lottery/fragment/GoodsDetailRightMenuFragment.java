@@ -53,23 +53,23 @@ public class GoodsDetailRightMenuFragment extends Fragment implements
 		Intent intent = new Intent(ComParams.ACTION_UPDATE_MAINACTIVITY);// 发送刷新广播
 		switch (v.getId()) {
 		case R.id.fragment_goods_detail_right_home_tv:
-			intent.putExtra(Keys.Key_Main_item, 0);
+			intent.putExtra(Keys.KEY_MAIN_ITEM, 0);
 
 			break;
 		case R.id.fragment_goods_detail_right_fenlei_tv:
-			intent.putExtra(Keys.Key_Main_item, 1);
+			intent.putExtra(Keys.KEY_MAIN_ITEM, 1);
 
 			break;
 		case R.id.fragment_goods_detail_right_huodong_tv:
-			intent.putExtra(Keys.Key_Main_item, 2);
+			intent.putExtra(Keys.KEY_MAIN_ITEM, 2);
 
 			break;
 		case R.id.fragment_goods_detail_right_gouwuche_tv:
-			intent.putExtra(Keys.Key_Main_item, 3);
+			intent.putExtra(Keys.KEY_MAIN_ITEM, 3);
 
 			break;
 		case R.id.fragment_goods_detail_right_usercenter_tv:
-			intent.putExtra(Keys.Key_Main_item, 4);
+			intent.putExtra(Keys.KEY_MAIN_ITEM, 4);
 
 			break;
 
