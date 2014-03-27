@@ -1,16 +1,28 @@
 package com.next.lottery;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseActivity;
+import com.google.gson.Gson;
+import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.next.lottery.beans.UserBean;
+import com.next.lottery.dialog.ProgressDialog;
+import com.next.lottery.nets.HttpActions;
 import com.next.lottery.utils.User;
 import com.next.lottery.view.SlipButton;
 import com.next.lottery.view.SlipButton.OnChangedListener;
@@ -45,11 +57,15 @@ public class LRLoginActivity extends BaseActivity {
 	@ViewInject(R.id.activity_lr_login_mm)
 	private ImageView ivMM;
 
+	private ProgressDialog progDialog;
+	private Context context;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lr_login);
 		ViewUtils.inject(this);
+		context = this;
 
 		slipBtn.setCheck(true);
 
@@ -94,55 +110,12 @@ public class LRLoginActivity extends BaseActivity {
 	}
 
 	private void initlogin(Bundle savedInstanceState) {
-
-		// slipBtn.setCheck(true);
-		// slipBtn.SetOnChangedListener(new OnChangedListener() {
-		// @Override
-		// public void OnChanged(boolean CheckState) {
-		// // TODO Auto-generated method stub
-		// if (CheckState) {
-		// et_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-		// }
-		// else {
-		// et_password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-		//
-		// }
-		// }
-		//
-		// });
-
-		// if (!TextUtils.isEmpty(User.getUserId(this))) {
-		// et_username.setText(User.getUserId(this));
-		// // etPwd.requestFocus();
-		// }
-		// if (!TextUtils.isEmpty(User.getUserPassword(this))) {
-		// et_password.setText(User.getUserPassword(this));
-		// }
+		progDialog = ProgressDialog.show(this);
+		progDialog.setCancelable(true);
 
 		User.saveUserId(this, "");// 注销清除用户信息
 		User.saveUserPassword(this, "");
 	}
-
-	// class OnForgetListener implements View.OnClickListener {
-	// @Override
-	// public void onClick(View v) {
-	// startActivity(new Intent(getApplication(), FindPasswordByPhoneNumberActivity.class));
-	// }
-	// }
-
-	// private void initPopuWindow() {
-	// View loginwindow = (View) this.getLayoutInflater().inflate(R.layout.email_options_listview, null);
-	// mListView = (ListView) loginwindow.findViewById(R.id.register_list);
-	//
-	// // 设置自定义Adapter
-	// mAdapter = new EmailTextViewAdapter(this, mHandler);
-	// mListView.setAdapter(mAdapter);
-	// mPopupWindow = new PopupWindow(loginwindow, mParent_Width, LayoutParams.WRAP_CONTENT, false);
-	// mPopupWindow.setOutsideTouchable(true);
-	// // 这一句是为了实现弹出PopupWindow后，当点击屏幕其他部分及Back键时PopupWindow会消失，
-	// // 没有这一句则效果不能出来，但并不会影响背景
-	// // mpopupWindow.setBackgroundDrawable(new BitmapDrawable());
-	// }
 
 	/**
 	 * 显示PopupWindow窗口
@@ -180,6 +153,7 @@ public class LRLoginActivity extends BaseActivity {
 			finish();
 			break;
 		case R.id.activity_lr_login_tv_login:
+			login();
 			break;
 		case R.id.activity_lr_login_tv_register:
 			break;
@@ -265,83 +239,51 @@ public class LRLoginActivity extends BaseActivity {
 		}
 	}
 
-	/** login 异步线程 */
-	// class LoginTask extends AsyncTask<Bundle, Integer, Bundle> {
-	// private String TAG = LoginTask.class.getSimpleName();
-	// boolean isSave = false;
-	// String phone;
-	// String password;
-	// MyProgressDialog mpd;
-	//
-	// @Override
-	// protected void onPreExecute() {
-	// super.onPreExecute();
-	// mpd = MyProgressDialog.show(getApplication(), "", getApplication().getString(R.string.user_loging), true);
-	// mpd.setOnCancelListener(new OnCancelListener() {
-	//
-	// @Override
-	// public void onCancel(DialogInterface dialog) {
-	// LoginTask.this.cancel(true);
-	// }
-	// });
-	// mpd.show();
-	// }
-	//
-	// @Override
-	// protected Bundle doInBackground(Bundle... params) {
-	// phone = params[0].getString(Keys.KEY_USERNAME);
-	// password = params[0].getString(Keys.KEY_USERPASSWORD);
-	// isSave = params[0].getBoolean("isSave");
-	// ULog.v(TAG, "LoginTask#doInBackground");
-	// Bundle bundle = null;
-	// try {
-	// String loginResult = new HttpActions(getApplication()).login(getApplication(), phone, password);
-	// ULog.v(TAG, loginResult);
-	// bundle = JsonAnalytic.getInstance().analyseLogin(loginResult);
-	// // ComParams.isAutoLogin = false;
-	// } catch (TVException e) {
-	// if (e.getStatusCode() != TVException.JSON_ANALYTIC_LACK_TOKEN) {
-	// bundle = new Bundle();
-	// bundle.putString("msg", e.getMessage());
-	// bundle.putInt("erroCode", e.getStatusCode());
-	// }
-	// }
-	// return bundle;
-	// }
-	//
-	// @Override
-	// protected void onPostExecute(Bundle result) {
-	// super.onPostExecute(result);
-	//
-	// if (null != mpd)
-	// mpd.dismiss();
-	//
-	// if (result.containsKey("erroCode")) {
-	// if (926 != result.getInt("erroCode"))
-	// new DialogFactory(getApplication()).showDialog("信息提示", result.getString("msg"), "确定", null);
-	// return;
-	// }
-	// if (isSave) {
-	// Util.saveUserName(getApplication(), phone);
-	// Util.saveUserPassword(getApplication(), password);
-	// }
-	// Util.saveUserLoginStatu(getApplication(), true);
-	// MainActivity.getInstance().handler.sendEmptyMessage(1);
-	// Util.saveUserId(getApplication(), result.getString(Keys.KEY_USERID));
-	// Util.saveUserBindId(getApplication(), result.getString(Keys.KEY_USERBINDID));
-	//
-	// new DialogFactory(getApplication()).showToast("登陆成功！", Toast.LENGTH_SHORT);
-	// LRLoginActivity.this.finish();
-	//
-	// }
-	//
-	// @Override
-	// protected void onCancelled() {
-	// super.onCancelled();
-	// if (null != mpd)
-	// mpd.cancel();
-	// }
-	// }
+	/**
+	 * 登录
+	 */
+	private void login() {
+		String url = HttpActions.login(etUsername.getText().toString().trim(), etPassword.getText().toString().trim());
+		ULog.d("url = " + url);
+		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
+
+			@Override
+			public void onStart() {
+				progDialog.show();
+			}
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				progDialog.dismiss();
+				ULog.d(responseInfo.result);
+				
+				UserBean bean = new Gson().fromJson(responseInfo.result, UserBean.class);
+				if (null != bean && bean.getCode() == 0) {
+					// 保存token
+					User.saveToken(context, bean.getInfo().getUserToken());
+					User.savePhone(context, etUsername.getText().toString());
+					Toast.makeText(context, "登陆成功！", Toast.LENGTH_LONG).show();
+					
+					MainActivity.changeTab = 4;
+					finish();
+					
+				}
+				else {
+					// 保存token
+					User.saveToken(context, "");
+					User.savePhone(context, "");
+					Toast.makeText(context, "登陆失败！", Toast.LENGTH_LONG).show();
+				}
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				progDialog.dismiss();
+				ULog.e(error.toString() + "\n" + msg);
+			}
+		});
+
+	}
 
 	// private class CategoryPopupWindow extends BetterPopupWindow implements OnClickListener {
 	//

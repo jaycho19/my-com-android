@@ -17,8 +17,8 @@
         android:paddingRight="15dp"
         android:paddingTop="2dp" >
 
-        <RadioButton
-            android:id="@+id/fragment_shoppingcart_all_radiobtn"
+        <CheckBox
+            android:id="@+id/fragment_shoppingcart_all_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"

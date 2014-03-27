@@ -9,7 +9,7 @@ import com.next.lottery.R;
 import com.next.lottery.GoodsDetailActivity;
 import com.next.lottery.listener.OnClickTypeListener;
 import com.next.lottery.listener.OnPageScrolledListener;
-import com.next.lottery.utils.ComParams;
+import com.next.lottery.params.ComParams;
 import com.next.lottery.view.PullToRefreshView;
 
 import android.content.Context;

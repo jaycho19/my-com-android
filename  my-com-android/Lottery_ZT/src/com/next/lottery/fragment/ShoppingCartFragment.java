@@ -44,11 +44,22 @@ public class ShoppingCartFragment extends BaseFragment {
 		tab2.setText("降价商品");
 		tab3.setText("库存紧张");
 
-		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), ShoppingCartALLFragment.class, null);
-		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), ShoppingCartALLFragment.class, null);
-		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab3), ShoppingCartALLFragment.class, null);
+		Bundle args = new Bundle();
+		args.putInt("key", 1);
+		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), ShoppingCartALLFragment.class, args);
+		args = new Bundle();
+		args.putInt("key", 2);
+		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), ShoppingCartALLFragment.class, args);
+		args = new Bundle();
+		args.putInt("key", 3);
+		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab3), ShoppingCartALLFragment.class, args);
 
-		fgtHost.getTabWidget().setDividerDrawable(R.drawable.tab_focus_bar_left);
+//		fgtHost.getTabWidget().setLeftStripDrawable(R.drawable.tab_focus_bar_left);
+//		fgtHost.getTabWidget().setDividerDrawable(R.drawable.tab_focus_bar_left);
+		
+		
+		
+
 	}
 
 	@OnClick({})

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseFragment;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -25,6 +26,9 @@ public class ShoppingCartALLFragment extends BaseFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		if(null != getArguments() && getArguments().containsKey("key")){
+			ULog.d("key = " + getArguments().getInt("key"));
+		}
 		View view = inflater.inflate(R.layout.fragment_shoppingcart_all, container, false);
 		ViewUtils.inject(this, view);
 		list = new ArrayList<String>();
@@ -35,7 +39,6 @@ public class ShoppingCartALLFragment extends BaseFragment {
 		list.add("5");
 		list.add("6");
 		allAdapter = new ShoppingCartAllAdapter(getActivity(), list);
-
 		listView.setAdapter(allAdapter);
 		return view;
 	}

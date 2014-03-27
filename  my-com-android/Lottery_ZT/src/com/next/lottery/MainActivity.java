@@ -19,7 +19,7 @@ import com.next.lottery.fragment.HomeFragment;
 import com.next.lottery.fragment.ShoppingCartFragment;
 import com.next.lottery.fragment.TrademarkFragment;
 import com.next.lottery.fragment.UserCenterFragment;
-import com.next.lottery.utils.ComParams;
+import com.next.lottery.params.ComParams;
 import com.next.lottery.utils.Keys;
 
 /**
@@ -32,7 +32,7 @@ public class MainActivity extends BaseActivity {
 	@ViewInject(android.R.id.tabhost)
 	private FragmentTabHostDF fgtHost;
 	
-	private static int changeTab = 0;
+	public static int changeTab = 0;
 
 	// @ViewInject(R.id.tv_topbar_menu)
 	// private TextView tvTopBarMenu;

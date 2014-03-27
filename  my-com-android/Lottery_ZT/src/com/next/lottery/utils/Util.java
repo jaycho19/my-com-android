@@ -54,6 +54,7 @@ import android.widget.ListView;
 
 import com.dongfang.utils.ULog;
 import com.next.lottery.beans.SizeBean;
+import com.next.lottery.params.ComParams;
 
 public class Util {
 	public static final String TAG = "Util";
