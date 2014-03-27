@@ -27,7 +27,7 @@ public class LoadingAcitivity extends BaseActivity {
 
 	/** 跳转到MainActivity */
 	private void intent(HomeBean bean) {
-		User.saveToken(this, "111111111111"); // 表示登录
+		//User.saveToken(this, "111111111111"); // 表示登录
 		Intent intent = new Intent(LoadingAcitivity.this, MainActivity.class);
 		// intent.putExtra(ComParams.INTENT_HOMEBEAN, bean);
 		startActivity(intent);

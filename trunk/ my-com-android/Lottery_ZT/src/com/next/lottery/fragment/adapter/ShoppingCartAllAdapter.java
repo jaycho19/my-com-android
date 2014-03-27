@@ -9,13 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.dongfang.utils.ULog;
 import com.next.lottery.R;
 import com.next.lottery.beans.SKUBean;
 import com.next.lottery.beans.SKUEntity;
@@ -31,7 +33,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 
 	private List<String> list;
 	private Context context;
-	
+
 	public ShoppingCartAllAdapter(Context context, List<String> list) {
 		this.list = list;
 		this.context = context;
@@ -68,7 +70,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 	}
 
 	class Item implements View.OnClickListener {
-		RadioButton radioBtn;
+		CheckBox checkBox;
 		ImageView imageView;
 		TextView tvTitle;
 
@@ -86,7 +88,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 		EditText etNumber;
 
 		private void initView(View view) {
-			radioBtn = (RadioButton) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_radiobtn);
+			checkBox = (CheckBox) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_radiobtn);
 			imageView = (ImageView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_iv);
 			tvTitle = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_title);
 			layoutEdit = (LinearLayout) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_edit_ll);
@@ -106,21 +108,27 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 			ivDel = (ImageView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_edit_iv_del);
 			etNumber = (EditText) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_edit_et_number);
 
+			checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					ULog.d("isChecked = " + isChecked);
+				}
+			});
+
 			tvEdit.setOnClickListener(this);
 			tVSave.setOnClickListener(this);
 			ivDel.setOnClickListener(this);
 			layoutEditSKU.setOnClickListener(this);
-			
 
 		}
 
-		private SKUBean getTestSKUBean(){
+		private SKUBean getTestSKUBean() {
 			ArrayList<SKUEntity> all = new ArrayList<SKUEntity>();
-			for(int i =0 ; i < 2 ; i ++){
+			for (int i = 0; i < 2; i++) {
 				SKUEntity skuEntity = new SKUEntity();
 				skuEntity.setSkuName("颜色");
 				ArrayList<String> al = new ArrayList<String>();
-				for(int j =0 ; j < 18 ; j++)
+				for (int j = 0; j < 18; j++)
 					al.add("红色" + j);
 				skuEntity.setSkuTypesList(al);
 				all.add(skuEntity);
@@ -129,8 +137,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 			skuBean.setSkuList(all);
 			return skuBean;
 		}
-		
-		
+
 		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
@@ -149,14 +156,13 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 			case R.id.fragment_shoppingcart_all_adp_item_edit_iv_del:
 				break;
 			case R.id.fragment_shoppingcart_all_adp_item_edit_suv_rl:
-				ShoppingSelectSKUDialog.show(context,getTestSKUBean());
+				ShoppingSelectSKUDialog.show(context, getTestSKUBean());
 				break;
 
 			default:
 				break;
 			}
 		}
-
 	}
 
 }

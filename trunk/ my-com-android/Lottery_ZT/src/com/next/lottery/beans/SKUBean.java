@@ -18,6 +18,4 @@ public class SKUBean {
 	public void setSkuList(ArrayList<SKUEntity> skuList) {
 		this.skuList = skuList;
 	}
-
-
 }

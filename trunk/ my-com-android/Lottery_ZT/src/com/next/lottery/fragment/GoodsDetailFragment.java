@@ -17,7 +17,7 @@ import com.next.lottery.fragment.GoosDetailBottomFragment;
 import com.next.lottery.fragment.HomeFragmentTopKVFragment;
 import com.next.lottery.listener.OnClickTypeListener;
 import com.next.lottery.listener.OnPageScrolledListener;
-import com.next.lottery.utils.ComParams;
+import com.next.lottery.params.ComParams;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -31,6 +31,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.next.lottery.R;
 import com.next.lottery.GoodsDetailActivity;
 
