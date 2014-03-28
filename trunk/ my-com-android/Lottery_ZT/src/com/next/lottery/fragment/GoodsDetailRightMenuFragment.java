@@ -1,14 +1,5 @@
 package com.next.lottery.fragment;
 
-import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnClick;
-import com.next.lottery.GoodsDetailActivity;
-import com.next.lottery.MainActivity;
-import com.next.lottery.R;
-import com.next.lottery.params.ComParams;
-import com.next.lottery.utils.Keys;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,8 +9,15 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class GoodsDetailRightMenuFragment extends Fragment implements
-		OnClickListener {
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.next.lottery.GoodsDetailActivity;
+import com.next.lottery.R;
+import com.next.lottery.params.ComParams;
+import com.next.lottery.utils.Keys;
+
+public class GoodsDetailRightMenuFragment extends Fragment implements OnClickListener {
 	@ViewInject(R.id.fragment_goods_detail_right_home_tv)
 	private TextView homeTv;
 	@ViewInject(R.id.fragment_goods_detail_right_fenlei_tv)
@@ -31,10 +29,8 @@ public class GoodsDetailRightMenuFragment extends Fragment implements
 	@ViewInject(R.id.fragment_goods_detail_right_usercenter_tv)
 	private TextView userterTv;
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater
-				.inflate(R.layout.fragment_goods_detail_right, null);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_goods_detail_right, null);
 		ViewUtils.inject(this, view);
 		return view;
 	}
@@ -43,10 +39,8 @@ public class GoodsDetailRightMenuFragment extends Fragment implements
 		super.onActivityCreated(savedInstanceState);
 	}
 
-	@OnClick({ R.id.fragment_goods_detail_right_home_tv,
-			R.id.fragment_goods_detail_right_fenlei_tv,
-			R.id.fragment_goods_detail_right_huodong_tv,
-			R.id.fragment_goods_detail_right_gouwuche_tv,
+	@OnClick({ R.id.fragment_goods_detail_right_home_tv, R.id.fragment_goods_detail_right_fenlei_tv,
+			R.id.fragment_goods_detail_right_huodong_tv, R.id.fragment_goods_detail_right_gouwuche_tv,
 			R.id.fragment_goods_detail_right_usercenter_tv })
 	@Override
 	public void onClick(View v) {
@@ -54,23 +48,18 @@ public class GoodsDetailRightMenuFragment extends Fragment implements
 		switch (v.getId()) {
 		case R.id.fragment_goods_detail_right_home_tv:
 			intent.putExtra(Keys.KEY_MAIN_ITEM, 0);
-
 			break;
 		case R.id.fragment_goods_detail_right_fenlei_tv:
 			intent.putExtra(Keys.KEY_MAIN_ITEM, 1);
-
 			break;
 		case R.id.fragment_goods_detail_right_huodong_tv:
 			intent.putExtra(Keys.KEY_MAIN_ITEM, 2);
-
 			break;
 		case R.id.fragment_goods_detail_right_gouwuche_tv:
 			intent.putExtra(Keys.KEY_MAIN_ITEM, 3);
-
 			break;
 		case R.id.fragment_goods_detail_right_usercenter_tv:
 			intent.putExtra(Keys.KEY_MAIN_ITEM, 4);
-
 			break;
 
 		default:

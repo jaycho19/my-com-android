@@ -289,6 +289,7 @@
 <!--     <color name="red_topbg">#cc3000</color> 暗红,标题栏 -->
     <color name="top_bg">#FFFFFF</color> <!-- 暗红,标题栏 -->
     <color name="bottom_bg">#000000</color> <!-- 暗红,标题栏 -->
+<color name="slidingmenu_gb">#283340</color>
 
     <color name="background">#F6F6F6</color> <!-- 背景颜色 -->
     

@@ -52,38 +52,30 @@ public class GoodsDetailFragment extends BaseFragment {
 	@ViewInject(R.id.app_top_title_iv_rigth)
 	private TextView tvRight;
 	private Context context;
-	
-	
+
 	@ViewInject(R.id.activity_goods_detail_layout)
 	private LinearLayout contentLayout;
 	private List<Fragment> fragments = new ArrayList<Fragment>();
 
-/*	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-		setContentView(R.layout.activity_goods_detail_layout);
-		ViewUtils.inject(this);
-		initView();
-		initData();
-	}*/
-	
+	/*
+	 * @Override public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState);
+	 * 
+	 * setContentView(R.layout.activity_goods_detail_layout); ViewUtils.inject(this); initView(); initData(); }
+	 */
+
 	public GoodsDetailFragment(GoodsDetailActivity goodsDetailActivity) {
 		// TODO Auto-generated constructor stub
 		this.context = goodsDetailActivity;
-		}
-
+	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.activity_goods_detail_layout, container, false);
 		ViewUtils.inject(this, view);
 		initView();
 		initData();
 		return view;
 	}
-
 
 	private void initView() {
 		// TODO Auto-generated method stub
@@ -104,17 +96,14 @@ public class GoodsDetailFragment extends BaseFragment {
 				public void onClickType(Bundle bundle) {
 
 					ULog.i("onclick");
-					ShoppingSelectSKUDialog.show(context,
-							getTestSKUBean(),onSkuResultListener);
+					ShoppingSelectSKUDialog.show(context, getTestSKUBean(), onSkuResultListener);
 				}
 			};
-			
 
 			if (contentLayout != null) {
 				contentLayout.removeAllViews();
 				FragmentManager fragmentManager1 = getChildFragmentManager();
-				FragmentTransaction fragmentTransaction1 = fragmentManager1
-						.beginTransaction();
+				FragmentTransaction fragmentTransaction1 = fragmentManager1.beginTransaction();
 				for (int i = 0; i < fragments.size(); i++) {
 					fragmentTransaction1.remove(fragments.get(i));
 				}
@@ -123,41 +112,34 @@ public class GoodsDetailFragment extends BaseFragment {
 				fragmentManager1.popBackStack();
 
 				FragmentManager fragmentManager = getChildFragmentManager();
-				FragmentTransaction fragmentTransaction = fragmentManager
-						.beginTransaction();
+				FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
 				// KV图
 				HomeFragmentTopKVFragment fKV = new HomeFragmentTopKVFragment();
-				fKV.setData(KVlist, onClickTypeListener,
-						new OnPageScrolledListener() {
-							@Override
-							public void OnPageScrolled() {
-								/*
-								 * if (pullToRefreshView != null) {
-								 * pullToRefreshView.needPull = false; }
-								 */
-							}
-						});
+				fKV.setData(KVlist, onClickTypeListener, new OnPageScrolledListener() {
+					@Override
+					public void OnPageScrolled() {
+						/*
+						 * if (pullToRefreshView != null) { pullToRefreshView.needPull = false; }
+						 */
+					}
+				});
 				fKV.setHeightWightRadio(300);
 				fragmentTransaction.add(R.id.activity_goods_detail_layout, fKV);
 				fragments.add(fKV);
 
 				// 商品销售详情
 				GoodsDetailSaleInfoFragment fGoodsSaleInfo = new GoodsDetailSaleInfoFragment();
-				fragmentTransaction.add(R.id.activity_goods_detail_layout,
-						fGoodsSaleInfo);
+				fragmentTransaction.add(R.id.activity_goods_detail_layout, fGoodsSaleInfo);
 				fragments.add(fGoodsSaleInfo);
 
 				// 服务，选择颜色 分类尺码
 				GoodsDetailInteractiveAndSelectParamsFragment fGoodsInteractAndParams = new GoodsDetailInteractiveAndSelectParamsFragment();
-				fragmentTransaction.add(R.id.activity_goods_detail_layout,
-						fGoodsInteractAndParams);
+				fragmentTransaction.add(R.id.activity_goods_detail_layout, fGoodsInteractAndParams);
 				fragments.add(fGoodsInteractAndParams);
 
-				GoosDetailBottomFragment fGoodSBottomBar = new GoosDetailBottomFragment(
-						onClickTypeListener);
-				fragmentTransaction.add(R.id.activity_goods_detail_layout,
-						fGoodSBottomBar);
+				GoosDetailBottomFragment fGoodSBottomBar = new GoosDetailBottomFragment(onClickTypeListener);
+				fragmentTransaction.add(R.id.activity_goods_detail_layout, fGoodSBottomBar);
 				fragments.add(fGoodSBottomBar);
 
 				fragmentTransaction.commit();
@@ -184,16 +166,17 @@ public class GoodsDetailFragment extends BaseFragment {
 		skuBean.setSkuList(all);
 		return skuBean;
 	}
-	@OnClick({R.id.app_top_title_iv_left,R.id.app_top_title_iv_rigth})
+
+	@OnClick({ R.id.app_top_title_iv_left, R.id.app_top_title_iv_rigth })
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.app_top_title_iv_left:
-			((GoodsDetailActivity)context).finish();
+			((GoodsDetailActivity) context).finish();
 			break;
 		case R.id.app_top_title_iv_rigth:
-			((GoodsDetailActivity)context).showRight();
+			((GoodsDetailActivity) context).showRight();
 			break;
 
 		default:
@@ -201,12 +184,11 @@ public class GoodsDetailFragment extends BaseFragment {
 		}
 	}
 
-	
 	OnSkuResultListener onSkuResultListener = new OnSkuResultListener() {
-		
+
 		@Override
 		public void onSkuResult(SKUBean bean, String num) {
-			
+
 		}
 	};
 }
