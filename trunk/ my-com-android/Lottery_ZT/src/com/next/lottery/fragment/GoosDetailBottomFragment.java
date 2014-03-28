@@ -74,19 +74,7 @@ public class GoosDetailBottomFragment extends BaseFragment {
 				break;
 			case R.id.btn_add_shopping_cart:
 
-				try {
-					String orderinfo = AlipayUtil.getOrderInfo(AlipayConfig.PARTNER, "lottery", AlipayConfig.DESCRIPTION, 1,
-							2);
-					String encodeSign = URLEncoder.encode(AlipayConfig.SIGN, "UTF-8");
-					String info = orderinfo + "&sign=" + "\"" + encodeSign + "\"" + "&sign_type=" + "\"RSA\"";
-					ULog.v("alipay orderInfo = " + info);
-					
-					AlipayUtil.PayHelper(getActivity(), info);
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-//				Toast.makeText(getActivity(), "添加成功", 3000).show();
+				Toast.makeText(getActivity(), "添加成功", 3000).show();
 				break;
 
 			default:

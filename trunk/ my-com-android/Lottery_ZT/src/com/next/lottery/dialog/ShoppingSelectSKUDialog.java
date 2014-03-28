@@ -1,5 +1,7 @@
 package com.next.lottery.dialog;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import android.app.Dialog;
@@ -17,6 +19,8 @@ import com.dongfang.v4.app.DeviceInfo;
 import com.dongfang.v4.app.LineLayout;
 import com.dongfang.views.ScrollViewExtend;
 import com.next.lottery.R;
+import com.next.lottery.alipay.AlipayConfig;
+import com.next.lottery.alipay.AlipayUtil;
 import com.next.lottery.beans.SKUBean;
 import com.next.lottery.beans.SKUEntity;
 import com.next.lottery.listener.OnSkuResultListener;
@@ -54,7 +58,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 			return;
 		dialog = new ShoppingSelectSKUDialog(context, R.style.SelectSKUDialog);
 		dialog.getWindow().setGravity(Gravity.BOTTOM | Gravity.LEFT);
-		dialog.setContentView(R.layout.dialog_shopping_select_sku);
+		dialog.setContentView(R.layout.dialog_shopping_select_sku_2);
 		dialog.setCancelable(true);
 		dialog.getWindow().setLayout(DeviceInfo.SCREEN_WIDTH_PORTRAIT, -2);
 		init2(context, bean, onSkuResultListener);
@@ -87,31 +91,30 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		dialog.findViewById(R.id.dialog_select_sku_tv_buy_now).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				for (int i = 0; i < beanResult.getSkuList().size(); i++) {
-					if (null == beanResult.getSkuList().get(i)
-							|| null == beanResult.getSkuList().get(i).getSkuTypesList()) {
-						Toast.makeText(context, "请选择" + beanResult.getSkuList().get(i).getSkuName(), Toast.LENGTH_LONG)
-								.show();
-						return;
-					}
-				}
-				onSkuResultListener.onSkuResult(beanResult);
+//				onSkuResultListener.onSkuResult(beanResult);
 				dialog.dismiss();
+				try {
+					String orderinfo = AlipayUtil.getOrderInfo(AlipayConfig.PARTNER, "lottery", AlipayConfig.DESCRIPTION, 1,
+							2);
+					String encodeSign = URLEncoder.encode(AlipayConfig.SIGN, "UTF-8");
+					String info = orderinfo + "&sign=" + "\"" + encodeSign + "\"" + "&sign_type=" + "\"RSA\"";
+					ULog.v("alipay orderInfo = " + info);
+					
+					AlipayUtil.PayHelper(context, info);
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
 			}
 		});
 		dialog.findViewById(R.id.dialog_select_sku_tv_add_shopping_cart).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				for (int i = 0; i < beanResult.getSkuList().size(); i++) {
-					if (null == beanResult.getSkuList().get(i)
-							|| null == beanResult.getSkuList().get(i).getSkuTypesList()) {
-						Toast.makeText(context, "请选择" + beanResult.getSkuList().get(i).getSkuName(), Toast.LENGTH_LONG)
-								.show();
-						return;
-					}
-				}
-				onSkuResultListener.onSkuResult(beanResult);
+//				onSkuResultListener.onSkuResult(beanResult);
 				dialog.dismiss();
+				Toast.makeText(context, "添加成功", 3000).show();
 			}
 		});
 
