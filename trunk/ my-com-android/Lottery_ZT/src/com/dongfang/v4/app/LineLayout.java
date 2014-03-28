@@ -14,7 +14,7 @@ import android.view.ViewGroup;
  * 
  */
 public class LineLayout extends ViewGroup {
-	private final static int VIEW_MARGIN = 5;
+	private final static int	VIEW_MARGIN	= 5;
 
 	public LineLayout(Context context, AttributeSet attrs) {
 		this(context, attrs, 0);
@@ -29,7 +29,8 @@ public class LineLayout extends ViewGroup {
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		// ULog.d("widthMeasureSpec = " + widthMeasureSpec + ",heightMeasureSpec =  " + heightMeasureSpec);
+		// ULog.d("widthMeasureSpec = " + widthMeasureSpec +
+		// ",heightMeasureSpec =  " + heightMeasureSpec);
 		int r = getMeasuredWidth();
 		// ULog.d("getMeasuredWidth = " + r);
 
@@ -58,7 +59,8 @@ public class LineLayout extends ViewGroup {
 
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
-		// ULog.d("changed = " + changed + ",l =  " + l + ",t =  " + t + ",r =  " + r + ",b =  " + b);
+		// ULog.d("changed = " + changed + ",l =  " + l + ",t =  " + t +
+		// ",r =  " + r + ",b =  " + b);
 
 		final int count = getChildCount();
 		int row = 0;// which row lay you view relative to parent
@@ -79,23 +81,31 @@ public class LineLayout extends ViewGroup {
 			}
 			child.layout(lengthX - width, lengthY - height, lengthX, lengthY);
 
-			// ULog.d("lengthX - width = " + (lengthX - width) + ",lengthY - height =  " + (lengthY - height)
+			// ULog.d("lengthX - width = " + (lengthX - width) +
+			// ",lengthY - height =  " + (lengthY - height)
 			// + ",lengthX =  " + lengthX + ",lengthY =  " + lengthY);
 		}
 	}
 
-	public int setNOSelect() {
+	public int getSelectPosition() {
 		final int count = getChildCount();
 		int position = 0;
 		for (int i = 0; i < count; i++) {
-			
-			if (position==0&&getChildAt(i).isSelected()) 
+
+			if (position == 0 && getChildAt(i).isSelected())
 				position = i;
 			else
+				getChildAt(i).setSelected(false);;
+		}
+		ULog.i("position-->" + position);
+		return position;
+	}
+
+	public void setNOSelect() {
+		final int count = getChildCount();
+		for (int i = 0; i < count; i++) {
 			getChildAt(i).setSelected(false);;
 		}
-		ULog.i("position-->"+position);
-		return position;
 	}
 
 }

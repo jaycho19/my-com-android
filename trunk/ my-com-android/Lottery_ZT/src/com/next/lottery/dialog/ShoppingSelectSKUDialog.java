@@ -80,16 +80,16 @@ public class ShoppingSelectSKUDialog extends Dialog {
 					@Override
 					public void onClick(View v) {
 						int positon = 0;
-						v.setSelected(true);
 						if (v.getParent() instanceof LineLayout) {
-							positon = ((LineLayout) v.getParent()).setNOSelect();
+							((LineLayout) v.getParent()).setNOSelect();
 						}
+						v.setSelected(true);
 
 						for (int i = 0; i < beanResult.getSkuList().size(); i++) {
 							if (sku.getSkuName().equals(beanResult.getSkuList().get(i).getSkuName())) {
 								ArrayList<String> skuTypesList = new ArrayList<String>();
-								skuTypesList.add(bean.getSkuList().get(i).getSkuTypesList().get(positon));
-								ULog.i("getSkuTypesList-->"+bean.getSkuList().get(i).getSkuTypesList().get(positon));
+								skuTypesList.add(bean.getSkuList().get(i).getSkuTypesList().get(((LineLayout) v.getParent()).getSelectPosition()));
+								ULog.i("getSkuTypesList-->"+bean.getSkuList().get(i).getSkuTypesList().get(((LineLayout) v.getParent()).getSelectPosition()));
 								ULog.i("getSkuName-->"+bean.getSkuList().get(i).getSkuName());
 								beanResult.getSkuList().get(i).setSkuTypesList(skuTypesList);
 							}
