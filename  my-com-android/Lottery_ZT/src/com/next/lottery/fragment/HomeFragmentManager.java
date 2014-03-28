@@ -170,7 +170,6 @@ public class HomeFragmentManager {
 			}
 
 		}
-
 		fragmentTransaction.addToBackStack(null);
 		fragmentTransaction.commitAllowingStateLoss();
 	}
