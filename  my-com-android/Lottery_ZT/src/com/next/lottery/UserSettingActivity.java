@@ -1,44 +1,58 @@
 package com.next.lottery;
 
+import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+
 import com.dongfang.v4.app.BaseActivity;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnClick;
-
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
+import com.next.lottery.fragment.RightMenuFragment;
+import com.next.lottery.fragment.UserHelpCenterFragment;
+import com.next.lottery.fragment.UserSettingFragment;
+import com.next.lottery.view.SlidingMenu;
 
 /**
- * 设置
+ * 详情页
  * 
- * @author dongfang
+ * @author fgb,dongfang
  * 
  */
-
 public class UserSettingActivity extends BaseActivity {
-
-	@ViewInject(R.id.app_top_title_iv_left)
-	private ImageView ivBack;
+	@ViewInject(R.id.slidingMenu)
+	private SlidingMenu mSlidingMenu;
+	private RightMenuFragment rightFragment;
+	private UserSettingFragment mainFragment;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_user_setting);
+	protected void onCreate(Bundle arg0) {
+		super.onCreate(arg0);
+		setContentView(R.layout.sliding_menu_main);
 		ViewUtils.inject(this);
+		init();
+	}
+
+	private void init() {
+		mSlidingMenu.setRightView(getLayoutInflater().inflate(R.layout.sliding_menu_right_frame, null));
+		mSlidingMenu.setCenterView(getLayoutInflater().inflate(R.layout.center_frame, null));
+
+		FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
+
+		rightFragment = new RightMenuFragment();
+		t.replace(R.id.right_frame, rightFragment);
+		mainFragment = new UserSettingFragment();
+		mainFragment.setmSlidingMenu(mSlidingMenu);
+		t.replace(R.id.center_frame, mainFragment);
+		t.commit();
+	}
+
+	public void showRight() {
+		mSlidingMenu.showRightView();
 	}
 
 	@Override
-	@OnClick({ R.id.app_top_title_iv_left })
 	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.app_top_title_iv_left:
-			finish();
-			break;
-
-		default:
-			break;
-		}
+		// TODO Auto-generated method stub
 
 	}
 

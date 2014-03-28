@@ -8,7 +8,7 @@ import com.dongfang.v4.app.BaseActivity;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.fragment.GoodsDetailFragment;
-import com.next.lottery.fragment.GoodsDetailRightMenuFragment;
+import com.next.lottery.fragment.RightMenuFragment;
 import com.next.lottery.view.SlidingMenu;
 
 /**
@@ -20,7 +20,7 @@ import com.next.lottery.view.SlidingMenu;
 public class GoodsDetailActivity extends BaseActivity {
 	@ViewInject(R.id.slidingMenu)
 	private SlidingMenu mSlidingMenu;
-	private GoodsDetailRightMenuFragment rightFragment;
+	private RightMenuFragment rightFragment;
 	private GoodsDetailFragment mainFragment;
 
 	@Override
@@ -37,7 +37,7 @@ public class GoodsDetailActivity extends BaseActivity {
 
 		FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
 
-		rightFragment = new GoodsDetailRightMenuFragment();
+		rightFragment = new RightMenuFragment();
 		t.replace(R.id.right_frame, rightFragment);
 		mainFragment = new GoodsDetailFragment(this);
 		t.replace(R.id.center_frame, mainFragment);

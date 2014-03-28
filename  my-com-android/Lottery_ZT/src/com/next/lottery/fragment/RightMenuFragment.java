@@ -17,7 +17,7 @@ import com.next.lottery.R;
 import com.next.lottery.params.ComParams;
 import com.next.lottery.utils.Keys;
 
-public class GoodsDetailRightMenuFragment extends Fragment implements OnClickListener {
+public class RightMenuFragment extends Fragment implements OnClickListener {
 	@ViewInject(R.id.fragment_goods_detail_right_home_tv)
 	private TextView homeTv;
 	@ViewInject(R.id.fragment_goods_detail_right_fenlei_tv)
