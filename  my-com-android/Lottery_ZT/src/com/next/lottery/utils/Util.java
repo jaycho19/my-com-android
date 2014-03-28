@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -53,6 +54,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.dongfang.utils.ULog;
+import com.next.lottery.alipay.AlipayConfig;
 import com.next.lottery.beans.SizeBean;
 import com.next.lottery.params.ComParams;
 
@@ -1139,6 +1141,4 @@ public class Util {
 		return matcher.matches();
 	}
 	
-	
-
 }
