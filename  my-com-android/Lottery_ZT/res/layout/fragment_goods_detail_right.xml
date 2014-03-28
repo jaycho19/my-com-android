@@ -1,63 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="fill_parent"
-    android:background="@color/seek_bar_buffer_grey" >
+    android:background="@color/slidingmenu_gb"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingTop="40dp" >
 
-    <LinearLayout
-        android:layout_width="140dp"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:gravity="center" 
-        android:layout_marginTop="40dp">
+    <TextView
+        android:id="@+id/fragment_goods_detail_right_home_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/tab_home_big"
+        android:text="首页"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/fragment_goods_detail_right_home_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="首页"
-            android:layout_weight="1"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:drawableTop="@drawable/tab_home_big"
-             />
-        <TextView
-            android:id="@+id/fragment_goods_detail_right_fenlei_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="分类"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:drawableTop="@drawable/tab_fenlei_big" />
-        <TextView
-            android:id="@+id/fragment_goods_detail_right_huodong_tv"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="每日优惠"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:drawableTop="@drawable/tab_huodong_big" />
-        <TextView
-            android:id="@+id/fragment_goods_detail_right_gouwuche_tv"
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:layout_height="0dp"
-            android:text="购物车"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:drawableTop="@drawable/tab_gouwuche_big" />
-        <TextView
-            android:id="@+id/fragment_goods_detail_right_usercenter_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="我的"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:drawableTop="@drawable/tab_usercenter_big" />
-        
-    </LinearLayout>
+    <TextView
+        android:id="@+id/fragment_goods_detail_right_fenlei_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/tab_fenlei_big"
+        android:text="分类"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/fragment_goods_detail_right_huodong_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/tab_huodong_big"
+        android:text="每日优惠"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/fragment_goods_detail_right_gouwuche_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/tab_gouwuche_big"
+        android:text="购物车"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/fragment_goods_detail_right_usercenter_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/tab_usercenter_big"
+        android:text="我的"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+</LinearLayout>
