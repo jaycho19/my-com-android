@@ -1,5 +1,7 @@
 package com.next.lottery.fragment;
-
+/**
+ * 品牌
+ */
 import java.util.ArrayList;
 import java.util.List;
 

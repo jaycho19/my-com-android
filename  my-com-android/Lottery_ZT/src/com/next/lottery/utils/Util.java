@@ -1131,5 +1131,14 @@ public class Util {
 		int height = oldHeight * width / oldWidth;
 		return new SizeBean(width, height);
 	}
+	
+	/**判断字符串输入  是否为数字*/
+	public static boolean IsNumeric(String str) {
+		Pattern pattern = Pattern.compile("[0-9]*");
+		Matcher matcher = pattern.matcher(str);
+		return matcher.matches();
+	}
+	
+	
 
 }

@@ -84,11 +84,18 @@ public class LineLayout extends ViewGroup {
 		}
 	}
 
-	public void setNOSelect() {
+	public int setNOSelect() {
 		final int count = getChildCount();
+		int position = 0;
 		for (int i = 0; i < count; i++) {
+			
+			if (position==0&&getChildAt(i).isSelected()) 
+				position = i;
+			else
 			getChildAt(i).setSelected(false);;
 		}
+		ULog.i("position-->"+position);
+		return position;
 	}
 
 }
