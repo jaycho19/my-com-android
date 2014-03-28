@@ -263,7 +263,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 			    notifyDataSetChanged();
 				break;
 			case R.id.fragment_shoppingcart_all_adp_item_edit_suv_rl:
-				ShoppingSelectSKUDialog.show(context, getTestSKUBean(),onSkuResultListener);
+				ShoppingSelectSKUDialog.show1(context, getTestSKUBean(),onSkuResultListener);
 				break;
 
 			default:
@@ -296,11 +296,11 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 		OnSkuResultListener onSkuResultListener = new OnSkuResultListener() {
 			
 			@Override
-			public void onSkuResult(SKUBean bean, String num) {
+			public void onSkuResult(SKUBean bean) {
 				try {
-					tvNumberShow.setText(num);
-					tvNumberEdit.setText(num);
-					etNumber.setText(num);
+					tvNumberShow.setText(bean.getNum());
+					tvNumberEdit.setText(bean.getNum());
+					etNumber.setText(bean.getNum());
 					
 					String color =  bean.getSkuList().get(1).getSkuName()+":"+bean.getSkuList().get(1).getSkuTypesList().get(0);
 					String size =  bean.getSkuList().get(0).getSkuName()+":"+bean.getSkuList().get(0).getSkuTypesList().get(0);

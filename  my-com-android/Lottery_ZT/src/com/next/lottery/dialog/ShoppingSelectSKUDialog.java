@@ -27,13 +27,13 @@ import com.next.lottery.listener.OnSkuResultListener;
  * 
  */
 public class ShoppingSelectSKUDialog extends Dialog {
-	private static ShoppingSelectSKUDialog	dialog;
+	private static ShoppingSelectSKUDialog dialog;
 
 	public ShoppingSelectSKUDialog(Context context, int theme) {
 		super(context, theme);
 	}
 
-	public static void show(Context context, SKUBean bean, OnSkuResultListener onSkuResultListener) {
+	private static void show(Context context, SKUBean bean, OnSkuResultListener onSkuResultListener) {
 		if (null != dialog && dialog.isShowing())
 			return;
 		dialog = new ShoppingSelectSKUDialog(context, R.style.SelectSKUDialog);
@@ -41,13 +41,83 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		dialog.setContentView(R.layout.dialog_shopping_select_sku);
 		dialog.setCancelable(true);
 		dialog.getWindow().setLayout(DeviceInfo.SCREEN_WIDTH_PORTRAIT, -2);
-		init(context, bean, onSkuResultListener);
-
+		init1(context, bean, onSkuResultListener);
 		dialog.show();
+	}
+	
+	public static void show1(Context context, SKUBean bean, OnSkuResultListener onSkuResultListener) {
+		show(context,bean,onSkuResultListener);
+	}
+	
+	public static void show2(Context context, SKUBean bean, OnSkuResultListener onSkuResultListener) {
+		if (null != dialog && dialog.isShowing())
+			return;
+		dialog = new ShoppingSelectSKUDialog(context, R.style.SelectSKUDialog);
+		dialog.getWindow().setGravity(Gravity.BOTTOM | Gravity.LEFT);
+		dialog.setContentView(R.layout.dialog_shopping_select_sku);
+		dialog.setCancelable(true);
+		dialog.getWindow().setLayout(DeviceInfo.SCREEN_WIDTH_PORTRAIT, -2);
+		init2(context, bean, onSkuResultListener);
+		dialog.show();
+	}
+
+	private static void init1(final Context context, final SKUBean bean, final OnSkuResultListener onSkuResultListener) {
+		final SKUBean beanResult = init(context, bean, onSkuResultListener);
+
+		dialog.findViewById(R.id.dialog_select_sku_tv_ok).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				for (int i = 0; i < beanResult.getSkuList().size(); i++) {
+					if (null == beanResult.getSkuList().get(i)
+							|| null == beanResult.getSkuList().get(i).getSkuTypesList()) {
+						Toast.makeText(context, "请选择" + beanResult.getSkuList().get(i).getSkuName(), Toast.LENGTH_LONG)
+								.show();
+						return;
+					}
+				}
+				onSkuResultListener.onSkuResult(beanResult);
+				dialog.dismiss();
+			}
+		});
 
 	}
 
-	private static void init(final Context context, final SKUBean bean, final OnSkuResultListener onSkuResultListener) {
+	private static void init2(final Context context, final SKUBean bean, final OnSkuResultListener onSkuResultListener) {
+		final SKUBean beanResult = init(context, bean, onSkuResultListener);
+		dialog.findViewById(R.id.dialog_select_sku_tv_buy_now).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				for (int i = 0; i < beanResult.getSkuList().size(); i++) {
+					if (null == beanResult.getSkuList().get(i)
+							|| null == beanResult.getSkuList().get(i).getSkuTypesList()) {
+						Toast.makeText(context, "请选择" + beanResult.getSkuList().get(i).getSkuName(), Toast.LENGTH_LONG)
+								.show();
+						return;
+					}
+				}
+				onSkuResultListener.onSkuResult(beanResult);
+				dialog.dismiss();
+			}
+		});
+		dialog.findViewById(R.id.dialog_select_sku_tv_add_shopping_cart).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				for (int i = 0; i < beanResult.getSkuList().size(); i++) {
+					if (null == beanResult.getSkuList().get(i)
+							|| null == beanResult.getSkuList().get(i).getSkuTypesList()) {
+						Toast.makeText(context, "请选择" + beanResult.getSkuList().get(i).getSkuName(), Toast.LENGTH_LONG)
+								.show();
+						return;
+					}
+				}
+				onSkuResultListener.onSkuResult(beanResult);
+				dialog.dismiss();
+			}
+		});
+
+	}
+
+	private static SKUBean init(final Context context, final SKUBean bean, final OnSkuResultListener onSkuResultListener) {
 
 		/** 构造回调实列 */
 		final SKUBean beanResult = new SKUBean();
@@ -88,9 +158,12 @@ public class ShoppingSelectSKUDialog extends Dialog {
 						for (int i = 0; i < beanResult.getSkuList().size(); i++) {
 							if (sku.getSkuName().equals(beanResult.getSkuList().get(i).getSkuName())) {
 								ArrayList<String> skuTypesList = new ArrayList<String>();
-								skuTypesList.add(bean.getSkuList().get(i).getSkuTypesList().get(((LineLayout) v.getParent()).getSelectPosition()));
-								ULog.i("getSkuTypesList-->"+bean.getSkuList().get(i).getSkuTypesList().get(((LineLayout) v.getParent()).getSelectPosition()));
-								ULog.i("getSkuName-->"+bean.getSkuList().get(i).getSkuName());
+								skuTypesList.add(bean.getSkuList().get(i).getSkuTypesList()
+										.get(((LineLayout) v.getParent()).getSelectPosition()));
+								ULog.i("getSkuTypesList-->"
+										+ bean.getSkuList().get(i).getSkuTypesList()
+												.get(((LineLayout) v.getParent()).getSelectPosition()));
+								ULog.i("getSkuName-->" + bean.getSkuList().get(i).getSkuName());
 								beanResult.getSkuList().get(i).setSkuTypesList(skuTypesList);
 							}
 						}
@@ -116,20 +189,9 @@ public class ShoppingSelectSKUDialog extends Dialog {
 			}
 		});
 
-		dialog.findViewById(R.id.dialog_select_sku_tv_ok).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				for (int i = 0; i < beanResult.getSkuList().size(); i++) {
-					if (null==beanResult.getSkuList().get(i)||null==beanResult.getSkuList().get(i).getSkuTypesList()) {
-						Toast.makeText(context, "请选择" + beanResult.getSkuList().get(i).getSkuName(), Toast.LENGTH_LONG).show();
-						return;
-					}
-				}
-				onSkuResultListener.onSkuResult(beanResult, String.valueOf(tvNumber.getText()));
-				dialog.dismiss();
-			}
-		});
+		beanResult.setNum(Integer.valueOf(tvNumber.getText().toString()));
 
+		return beanResult;
 	}
 
 	private static void chgNumber(TextView tvNumber, int i) {

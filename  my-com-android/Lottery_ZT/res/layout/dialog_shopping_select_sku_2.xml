@@ -101,19 +101,16 @@
         android:padding="10dp" >
 
         <TextView
-            android:id="@+id/dialog_select_sku_tv_ok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_red_04_round"
-            android:clickable="true"
-            android:gravity="center"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:text="确定"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/white" />
+            android:id="@+id/dialog_select_sku_tv_buy_now"
+            style="@style/textview_goods_detail_bottom"
+            android:background="@drawable/btn_red_02_round"
+            android:text="立即购买" />
+
+        <TextView
+            android:id="@+id/dialog_select_sku_tv_add_shopping_cart"
+            style="@style/textview_goods_detail_bottom"
+            android:background="@drawable/btn_red_06_round"
+            android:text="加入购物车" />
     </LinearLayout>
-    
-    
 
 </LinearLayout>
