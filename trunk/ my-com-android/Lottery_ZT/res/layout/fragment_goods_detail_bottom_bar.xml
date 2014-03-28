@@ -7,13 +7,13 @@
     <TextView
         android:id="@+id/btn_buy_now"
         style="@style/textview_goods_detail_bottom"
-        android:background="@drawable/icon_buy_now"
+        android:background="@drawable/btn_red_02_round"
         android:text="立即购买" />
 
     <TextView
         android:id="@+id/btn_add_shopping_cart"
         style="@style/textview_goods_detail_bottom"
-        android:background="@drawable/icon_add_shopping_cart"
+        android:background="@drawable/btn_red_06_round"
         android:text="加入购物车" />
 
 </LinearLayout>

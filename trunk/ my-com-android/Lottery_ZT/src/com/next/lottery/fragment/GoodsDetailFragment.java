@@ -96,7 +96,7 @@ public class GoodsDetailFragment extends BaseFragment {
 				public void onClickType(Bundle bundle) {
 
 					ULog.i("onclick");
-					ShoppingSelectSKUDialog.show(context, getTestSKUBean(), onSkuResultListener);
+					ShoppingSelectSKUDialog.show1(context, getTestSKUBean(), onSkuResultListener);
 				}
 			};
 
@@ -187,7 +187,7 @@ public class GoodsDetailFragment extends BaseFragment {
 	OnSkuResultListener onSkuResultListener = new OnSkuResultListener() {
 
 		@Override
-		public void onSkuResult(SKUBean bean, String num) {
+		public void onSkuResult(SKUBean bean) {
 
 		}
 	};
