@@ -56,11 +56,11 @@
                 android:layout_margin="8dp"
                 android:background="@drawable/btn_red_04_round"
                 android:gravity="center"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp"
                 android:text="退出当前账号"
                 android:clickable="true"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
