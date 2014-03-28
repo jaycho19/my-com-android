@@ -96,7 +96,7 @@ public class GoodsDetailFragment extends BaseFragment {
 				public void onClickType(Bundle bundle) {
 
 					ULog.i("onclick");
-					ShoppingSelectSKUDialog.show1(context, getTestSKUBean(), onSkuResultListener);
+					ShoppingSelectSKUDialog.show2(context, getTestSKUBean(), onSkuResultListener);
 				}
 			};
 
