@@ -17,6 +17,7 @@ import com.next.lottery.fragment.GoosDetailBottomFragment;
 import com.next.lottery.fragment.HomeFragmentTopKVFragment;
 import com.next.lottery.listener.OnClickTypeListener;
 import com.next.lottery.listener.OnPageScrolledListener;
+import com.next.lottery.listener.OnSkuResultListener;
 import com.next.lottery.params.ComParams;
 
 import android.annotation.SuppressLint;
@@ -104,10 +105,10 @@ public class GoodsDetailFragment extends BaseFragment {
 
 					ULog.i("onclick");
 					ShoppingSelectSKUDialog.show(context,
-							getTestSKUBean());
-					// AreacodeFragmentUtil.dealWithClickType(context, bundle);
+							getTestSKUBean(),onSkuResultListener);
 				}
 			};
+			
 
 			if (contentLayout != null) {
 				contentLayout.removeAllViews();
@@ -200,4 +201,12 @@ public class GoodsDetailFragment extends BaseFragment {
 		}
 	}
 
+	
+	OnSkuResultListener onSkuResultListener = new OnSkuResultListener() {
+		
+		@Override
+		public void onSkuResult(SKUBean bean, String num) {
+			
+		}
+	};
 }

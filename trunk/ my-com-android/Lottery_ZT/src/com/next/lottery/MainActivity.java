@@ -155,6 +155,13 @@ public class MainActivity extends BaseActivity {
 			changeTab = 0;
 		}
 	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		unregisterReceiver(receiver);
+	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
