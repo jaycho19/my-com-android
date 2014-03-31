@@ -1,18 +1,14 @@
 package com.next.lottery.fragment.adapter;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.ListResourceBundle;
 
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
@@ -22,18 +18,26 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
 
 import com.dongfang.utils.ULog;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.next.lottery.R;
+import com.next.lottery.beans.BaseGateWayInterfaceEntity;
 import com.next.lottery.beans.SKUBean;
 import com.next.lottery.beans.SKUEntity;
+import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.dialog.ShoppingSelectSKUDialog;
 import com.next.lottery.listener.OnSkuResultListener;
+import com.next.lottery.nets.HttpActions;
 import com.next.lottery.utils.ComParams;
 import com.next.lottery.utils.Keys;
 import com.next.lottery.utils.Util;
@@ -46,14 +50,14 @@ import com.next.lottery.utils.Util;
  */
 public class ShoppingCartAllAdapter extends BaseAdapter {
 
-	private List<String>	list;
+	private ArrayList<ShopCartsInfo> list;
 	private Context			context;
 	private Handler			handler;
 	private int				isAllSelected	= 0;	// 1表示全选，2 表示全不选
 	
 
-	public ShoppingCartAllAdapter(Context context, List<String> list, Handler handler) {
-		this.list = list;
+	public ShoppingCartAllAdapter(Context context, ArrayList<ShopCartsInfo> shopCartslist, Handler handler) {
+		this.list = shopCartslist;
 		this.context = context;
 		this.handler = handler;
 
@@ -89,13 +93,6 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 		}
 		item.initView(view,position);
 		
-//      if (!item.checkBox.isChecked()) {
-//    	  item.checkBox.setButtonDrawable(context.getResources().getDrawable(R.drawable
-//    			  .btn_radio_01));
-//	}else{
-//		item.checkBox.setButtonDrawable(context.getResources().getDrawable(R.drawable
-//  			  .btn_radio_02));
-//	}
 		switch (isAllSelected) {
 		case 1:
 			item.checkBox.setChecked(true);
@@ -163,6 +160,9 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 			// checkBox.setOnClickListener(this);
 			ivDel.setOnClickListener(this);
 			layoutEditSKU.setOnClickListener(this);
+			
+			tvShowPrice.setText(list.get(position).getPrice());
+			tvEditPrice.setText(list.get(position).getPrice());
 			
 			checkBox.setOnCheckedChangeListener(this);
 			etNumber.addTextChangedListener(new TextWatcher() {
@@ -260,6 +260,8 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 				break;
 			case R.id.fragment_shoppingcart_all_adp_item_edit_iv_del:
 				ULog.i("position-->"+position);
+				delShopCart();
+				list.remove(position);
 			    notifyDataSetChanged();
 				break;
 			case R.id.fragment_shoppingcart_all_adp_item_edit_suv_rl:
@@ -315,6 +317,38 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 				
 			}
 		};
+	}
+
+	public void delShopCart() {
+		String url = HttpActions.DelShopCarts();
+		ULog.d("DelShopCarts url = " + url);
+		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
+
+			@Override
+			public void onStart() {
+//				progDialog.show();
+			}
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+//				progDialog.dismiss();
+				ULog.d(responseInfo.result);
+				
+				BaseGateWayInterfaceEntity bean = new Gson().fromJson(responseInfo.result,
+						BaseGateWayInterfaceEntity.class);
+				if (null != bean && bean.getCode() == 0) {
+					Toast.makeText(context, "删除成功", Toast.LENGTH_LONG).show();
+				}
+				else {
+					Toast.makeText(context, bean.getMsg(), Toast.LENGTH_LONG).show();
+				}
+			}
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				ULog.e(error.toString() + "\n" + msg);
+			}
+		});
+
 	}
 
 }
