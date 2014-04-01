@@ -2,6 +2,8 @@ package com.next.lottery.nets;
 
 import java.net.URLEncoder;
 
+import com.dongfang.utils.ULog;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.next.lottery.params.ComParams;
 
@@ -80,7 +82,8 @@ public class HttpActions {
 	}
 
 	/*
-	 * 删除购物车接口 {"userToken":"123456","merId":"1","userId":"3","Id":1}
+	 * 删除购物车接口
+	 * {"userToken":"123456","merId":"1","userId":"3","Id":1}
 	 */
 	public static String DelShopCarts() {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
@@ -92,6 +95,58 @@ public class HttpActions {
 		json.addProperty("userId", "3");
 		json.addProperty("userToken", "123456");
 		json.addProperty("Id", "1");
+		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
+		return sb.toString();
+	}
+	
+	/*
+	 * 生成订单接口
+	 * {"userId":"3","merId":1,"userToken":"532fea9f115d5","userDeliveryAddressId" :3,
+	 * "payModeId":1,"price":398700,"deliveryModeId":2,"branchId":0,"expressId":0,
+	 * "isLgtype":2,"invoice":{"title":"发票title","type":1,"content":"发票内容",
+	 * "isDetail" :2},"items":[{"itemId":1,"skuId":1,"count":2},{"itemId":2,"skuId":3,
+	 * "count":2}],"coupons":["1"],"activitys":[1,2]}
+	 */
+	public static String creatOrder() {
+		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
+		sb.append("?").append("class=").append("order");
+		sb.append("&").append("method=").append("create");
+
+		JsonObject json = new JsonObject();
+		json.addProperty("userId", "3");
+		json.addProperty("merId", 1);
+		json.addProperty("userToken", "123456");
+		json.addProperty("userDeliveryAddressId", 3);
+		json.addProperty("payModeId", 1);
+		json.addProperty("price", 398700);
+		json.addProperty("deliveryModeId", 2);
+		json.addProperty("branchId", 0);
+		json.addProperty("expressId", 0);
+		json.addProperty("isLgtype", 2);
+		
+		JsonObject jsonInvoice = new JsonObject();
+		jsonInvoice.addProperty("title", "发票title");
+		jsonInvoice.addProperty("type", 1);
+		jsonInvoice.addProperty("content", "发票内容");
+		jsonInvoice.addProperty("isDetail", 2);
+		json.add("invoice", jsonInvoice);
+		
+		JsonArray jsonArray = new JsonArray();
+		JsonObject  json1 = new JsonObject();
+		json1.addProperty("itemId", 1);
+		json1.addProperty("skuId", 1);
+		json1.addProperty("count", 2);
+		JsonObject  json11 = new JsonObject();
+		json11.addProperty("itemId", 2);
+		json11.addProperty("skuId", 3);
+		json11.addProperty("count", 2);
+		
+		jsonArray.add(json1);
+		jsonArray.add(json11);
+		json.add("items", jsonArray);
+		
+		
+		ULog.i(json.toString());
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		return sb.toString();
 	}

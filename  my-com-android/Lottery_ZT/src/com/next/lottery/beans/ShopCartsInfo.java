@@ -1,5 +1,7 @@
 package com.next.lottery.beans;
 
+import com.dongfang.utils.ULog;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -11,6 +13,8 @@ public class ShopCartsInfo implements Parcelable {
 	private String	merId;
 	private String	skuId;
 	private String	price;
+	private int		isSelected;	// 0表示未选中 1 表示选中 writeToParcel方法里面没有写入boolean值方法
+								// fuck!
 
 	public String getId() {
 		return id;
@@ -36,7 +40,6 @@ public class ShopCartsInfo implements Parcelable {
 		this.stickNum = stickNum;
 	}
 
-
 	public String getUserId() {
 		return userId;
 	}
@@ -61,6 +64,20 @@ public class ShopCartsInfo implements Parcelable {
 		this.skuId = skuId;
 	}
 
+	/**
+	 * 0表示未选中 1 表示选中
+	 */
+	public int getIsSelected() {
+		return isSelected;
+	}
+
+	/**
+	 * 0表示未选中 1 表示选中
+	 */
+	public void setIsSelected(int isSelected) {
+		this.isSelected = isSelected;
+	}
+
 	public String getPrice() {
 		return price;
 	}
@@ -79,6 +96,7 @@ public class ShopCartsInfo implements Parcelable {
 		sb.append("id = ").append(id).append("\n");
 		sb.append("count = ").append(count).append("\n");
 		sb.append("stickNum = ").append(stickNum).append("\n");
+		sb.append("isSelected = ").append(isSelected).append("\n");
 		return sb.toString();
 
 	}
@@ -96,6 +114,7 @@ public class ShopCartsInfo implements Parcelable {
 		dest.writeString(price);
 		dest.writeInt(count);
 		dest.writeInt(stickNum);
+		dest.writeInt(isSelected);
 		dest.writeString(id);
 	}
 
@@ -103,7 +122,9 @@ public class ShopCartsInfo implements Parcelable {
 
 																		public ShopCartsInfo createFromParcel(
 																				Parcel source) {
+																			
 																			ShopCartsInfo data = new ShopCartsInfo();
+																			ULog.i("source-->"+source.toString());
 																			data.userId = source.readString();
 																			data.merId = source.readString();
 																			data.skuId = source.readString();
@@ -111,10 +132,13 @@ public class ShopCartsInfo implements Parcelable {
 																			data.id = source.readString();
 																			data.stickNum = source.readInt();
 																			data.count = source.readInt();
+																			data.isSelected = source.readInt();
+																			ULog.i("data-->"+data.toString());
 																			return data;
 																		}
 
 																		public ShopCartsInfo[] newArray(int size) {
+																			ULog.i("size-->"+size);
 																			return new ShopCartsInfo[size];
 																		}
 																	};

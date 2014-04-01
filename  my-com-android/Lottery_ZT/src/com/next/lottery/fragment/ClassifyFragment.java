@@ -48,6 +48,7 @@ public class ClassifyFragment extends BaseFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		ULog.i("ClassifyFragment oncreat");
 		View view = inflater.inflate(R.layout.fragment_classify, container, false);
 		ViewUtils.inject(this, view);
 		initLeftListView();

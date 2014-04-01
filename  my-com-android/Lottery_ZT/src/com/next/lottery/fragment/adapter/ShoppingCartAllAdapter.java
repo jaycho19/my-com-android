@@ -50,11 +50,10 @@ import com.next.lottery.utils.Util;
  */
 public class ShoppingCartAllAdapter extends BaseAdapter {
 
-	private ArrayList<ShopCartsInfo> list;
-	private Context			context;
-	private Handler			handler;
-	private int				isAllSelected	= 0;	// 1表示全选，2 表示全不选
-	
+	private ArrayList<ShopCartsInfo>	list;
+	private Context						context;
+	private Handler						handler;
+	private boolean						isAllSelected;	// 1表示全选，2 表示全不选
 
 	public ShoppingCartAllAdapter(Context context, ArrayList<ShopCartsInfo> shopCartslist, Handler handler) {
 		this.list = shopCartslist;
@@ -63,7 +62,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 
 	}
 
-	public void setAllSelected(int flag) {
+	public void setAllSelected(boolean flag) {
 		this.isAllSelected = flag;
 	}
 
@@ -91,19 +90,26 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 		else {
 			view.getTag();
 		}
-		item.initView(view,position);
-		
-		switch (isAllSelected) {
-		case 1:
-			item.checkBox.setChecked(true);
-			break;
-		case 2:
-			item.checkBox.setChecked(false);
-			break;
+		item.initView(view, position);
 
-		default:
-			break;
+		if (list.get(position).getIsSelected() == 1) {
+			item.checkBox.setChecked(true);
 		}
+		else {
+			item.checkBox.setChecked(false);
+		}
+
+		// switch (isAllSelected) {
+		// case 1:
+		// item.checkBox.setChecked(true);
+		// break;
+		// case 2:
+		// item.checkBox.setChecked(false);
+		// break;
+		//
+		// default:
+		// break;
+		// }
 		return view;
 	}
 
@@ -127,10 +133,10 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 
 		ImageView		ivDel;
 		EditText		etNumber;
-		
-		int position;
 
-		private void initView(View view,int position) {
+		int				position;
+
+		private void initView(View view, int position) {
 			this.position = position;
 			checkBox = (CheckBox) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_radiobtn);
 			imageView = (ImageView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_iv);
@@ -160,11 +166,13 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 			// checkBox.setOnClickListener(this);
 			ivDel.setOnClickListener(this);
 			layoutEditSKU.setOnClickListener(this);
-			
+
 			tvShowPrice.setText(list.get(position).getPrice());
 			tvEditPrice.setText(list.get(position).getPrice());
-			
-			checkBox.setOnCheckedChangeListener(this);
+
+			// checkBox.setOnCheckedChangeListener(this);
+
+			checkBox.setOnClickListener(this);
 			etNumber.addTextChangedListener(new TextWatcher() {
 				@Override
 				public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -208,25 +216,25 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 
 		private SKUBean getTestSKUBean() {
 			ArrayList<SKUEntity> all = new ArrayList<SKUEntity>();
-				SKUEntity skuEntity = new SKUEntity();
-				skuEntity.setSkuName("颜色分类");
-				ArrayList<String> al = new ArrayList<String>();
-				
-				al.add("红色");
-				al.add("黄色");
-				al.add("灰色");
-				al.add("绿色");
-				skuEntity.setSkuTypesList(al);
-				
-				SKUEntity skuEntity1 = new SKUEntity();
-				skuEntity1.setSkuName("尺码");
-				ArrayList<String> al1 = new ArrayList<String>();
-				
-				for (int j = 0; j < 18; j++)
-					al1.add("尺码" + j);
-				skuEntity1.setSkuTypesList(al1);
-				all.add(skuEntity1);
-				all.add(skuEntity);
+			SKUEntity skuEntity = new SKUEntity();
+			skuEntity.setSkuName("颜色分类");
+			ArrayList<String> al = new ArrayList<String>();
+
+			al.add("红色");
+			al.add("黄色");
+			al.add("灰色");
+			al.add("绿色");
+			skuEntity.setSkuTypesList(al);
+
+			SKUEntity skuEntity1 = new SKUEntity();
+			skuEntity1.setSkuName("尺码");
+			ArrayList<String> al1 = new ArrayList<String>();
+
+			for (int j = 0; j < 18; j++)
+				al1.add("尺码" + j);
+			skuEntity1.setSkuTypesList(al1);
+			all.add(skuEntity1);
+			all.add(skuEntity);
 			SKUBean skuBean = new SKUBean();
 			skuBean.setSkuList(all);
 			return skuBean;
@@ -246,26 +254,44 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 				layoutShow.setVisibility(View.VISIBLE);
 				layoutShow.startAnimation(AnimationUtils.loadAnimation(context, R.anim.right_to_left));
 				layoutEdit.setVisibility(View.GONE);
-				
-				/**保存值 */
-				
+
+				/** 保存值 */
+
 				tvNumberShow.setText(tvNumberEdit.getText());
-				
+
 				tvSKU1Show.setText(tvSKU1Edit.getText());
 				tvSKU2Show.setText(tvSKU2Edit.getText());
 				tvShowPrice.setText(tvEditPrice.getText());
-				
+
 				// layoutEdit.startAnimation(AnimationUtils.loadAnimation(context,
 				// R.anim.right_to_gone));
 				break;
 			case R.id.fragment_shoppingcart_all_adp_item_edit_iv_del:
-				ULog.i("position-->"+position);
+				ULog.i("position-->" + position);
 				delShopCart();
 				list.remove(position);
-			    notifyDataSetChanged();
+				notifyDataSetChanged();
 				break;
 			case R.id.fragment_shoppingcart_all_adp_item_edit_suv_rl:
-				ShoppingSelectSKUDialog.show1(context, getTestSKUBean(),onSkuResultListener);
+				ShoppingSelectSKUDialog.show1(context, getTestSKUBean(), onSkuResultListener);
+				break;
+				
+			case R.id.fragment_shoppingcart_all_adp_item_radiobtn:
+				ULog.i("isChecked-->" + ((CheckBox)v).isChecked());
+				boolean isCheck = ((CheckBox)v).isChecked();
+				Message msg = new Message();
+				if (isCheck) {
+					msg.what = Keys.MSG_REFRESH_BUY_NUM_PLUS;
+					msg.arg1 = Integer.parseInt((String) tvShowPrice.getText());
+					handler.sendMessage(msg);
+					list.get(position).setIsSelected(1);
+				}else{
+					list.get(position).setIsSelected(0);
+					msg.what = Keys.MSG_REFRESH_BUY_NUM_REDUCE;
+					msg.arg1 = Integer.parseInt((String) tvShowPrice.getText());
+					handler.sendMessage(msg);
+				}
+				
 				break;
 
 			default:
@@ -275,48 +301,54 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 
 		@Override
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-			
-			ULog.i("isChecked-->"+isChecked);
-			
-			if (buttonView.getId()!=R.id.fragment_shoppingcart_all_adp_item_radiobtn) 
+
+			ULog.i("isChecked-->" + isChecked);
+
+			if (buttonView.getId() != R.id.fragment_shoppingcart_all_adp_item_radiobtn)
 				return;
 			Message msg = new Message();
-			if (isChecked) {
-				msg.what=Keys.MSG_REFRESH_BUY_NUM_PLUS;
+			if (isChecked && !isAllSelected) {
+				msg.what = Keys.MSG_REFRESH_BUY_NUM_PLUS;
 				msg.arg1 = Integer.parseInt((String) tvShowPrice.getText());
 				handler.sendMessage(msg);
-			}else{
-				msg.what=Keys.MSG_REFRESH_BUY_NUM_REDUCE;
+				list.get(position).setIsSelected(1);
+			}
+			else if (!isAllSelected) {
+				list.get(position).setIsSelected(0);
+				msg.what = Keys.MSG_REFRESH_BUY_NUM_REDUCE;
 				msg.arg1 = Integer.parseInt((String) tvShowPrice.getText());
 				handler.sendMessage(msg);
 			}
-			
-//			notifyDataSetChanged();
+
+			// notifyDataSetChanged();
 
 		}
-		
-		OnSkuResultListener onSkuResultListener = new OnSkuResultListener() {
-			
-			@Override
-			public void onSkuResult(SKUBean bean) {
-				try {
-					tvNumberShow.setText(bean.getNum());
-					tvNumberEdit.setText(bean.getNum());
-					etNumber.setText(bean.getNum());
-					
-					String color =  bean.getSkuList().get(1).getSkuName()+":"+bean.getSkuList().get(1).getSkuTypesList().get(0);
-					String size =  bean.getSkuList().get(0).getSkuName()+":"+bean.getSkuList().get(0).getSkuTypesList().get(0);
-					tvSKU1Edit.setText(color);
-					tvSKU2Edit.setText(size);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					ULog.e(e.toString());
-				}
-				
-				
-			}
-		};
+
+		OnSkuResultListener	onSkuResultListener	= new OnSkuResultListener() {
+
+													@Override
+													public void onSkuResult(SKUBean bean) {
+														try {
+															tvNumberShow.setText(bean.getNum());
+															tvNumberEdit.setText(bean.getNum());
+															etNumber.setText(bean.getNum());
+
+															String color = bean.getSkuList().get(1).getSkuName() + ":"
+																	+ bean.getSkuList().get(1).getSkuTypesList().get(0);
+															String size = bean.getSkuList().get(0).getSkuName() + ":"
+																	+ bean.getSkuList().get(0).getSkuTypesList().get(0);
+															tvSKU1Edit.setText(color);
+															tvSKU2Edit.setText(size);
+														} catch (Exception e) {
+															// TODO
+															// Auto-generated
+															// catch block
+															e.printStackTrace();
+															ULog.e(e.toString());
+														}
+
+													}
+												};
 	}
 
 	public void delShopCart() {
@@ -326,14 +358,14 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 
 			@Override
 			public void onStart() {
-//				progDialog.show();
+				// progDialog.show();
 			}
 
 			@Override
 			public void onSuccess(ResponseInfo<String> responseInfo) {
-//				progDialog.dismiss();
+				// progDialog.dismiss();
 				ULog.d(responseInfo.result);
-				
+
 				BaseGateWayInterfaceEntity bean = new Gson().fromJson(responseInfo.result,
 						BaseGateWayInterfaceEntity.class);
 				if (null != bean && bean.getCode() == 0) {
@@ -343,6 +375,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 					Toast.makeText(context, bean.getMsg(), Toast.LENGTH_LONG).show();
 				}
 			}
+
 			@Override
 			public void onFailure(HttpException error, String msg) {
 				ULog.e(error.toString() + "\n" + msg);

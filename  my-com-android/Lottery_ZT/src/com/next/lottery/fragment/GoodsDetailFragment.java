@@ -136,6 +136,7 @@ public class GoodsDetailFragment extends BaseFragment {
 				// 服务，选择颜色 分类尺码
 				GoodsDetailInteractiveAndSelectParamsFragment fGoodsInteractAndParams = new GoodsDetailInteractiveAndSelectParamsFragment();
 				fragmentTransaction.add(R.id.activity_goods_detail_layout, fGoodsInteractAndParams);
+				fGoodsInteractAndParams.setData(onClickTypeListener);
 				fragments.add(fGoodsInteractAndParams);
 
 				GoosDetailBottomFragment fGoodSBottomBar = new GoosDetailBottomFragment(onClickTypeListener);

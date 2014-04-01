@@ -11,5 +11,25 @@
     <declare-styleable name="DefaultScrollView">
         <attr name="defaultScrollViewStyle" format="reference" />
     </declare-styleable>
+    
+    
+      <declare-styleable name="ViewPagerIndicator">
+        <attr name="vpiTabPageIndicatorStyle" format="reference"/>
+    </declare-styleable>
+     <declare-styleable name="DefaultGridView">
+        <attr name="defaultGridViewStyle" format="reference"/>
+    </declare-styleable>
+      <declare-styleable name="DefaultListView">
+        <attr name="defaultListViewStyle" format="reference"/>
+    </declare-styleable>
+     <declare-styleable name="DefaultDialog">
+        <attr name="defaultDialogStyle" format="reference"/>
+    </declare-styleable>
+     <declare-styleable name="DefaultButton">
+        <attr name="defaultButtonStyle" format="reference"/>
+    </declare-styleable>
+     <declare-styleable name="DefaultEditText">
+        <attr name="defaultEditTextStyle" format="reference"/>
+    </declare-styleable>
 
 </resources>
