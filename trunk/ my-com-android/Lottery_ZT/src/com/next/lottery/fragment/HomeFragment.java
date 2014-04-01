@@ -49,6 +49,7 @@ public class HomeFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		ULog.i("HomeFragment oncreat");
 		View view = inflater.inflate(R.layout.fragment_home, container, false);
 		ViewUtils.inject(this, view);
 		initView();

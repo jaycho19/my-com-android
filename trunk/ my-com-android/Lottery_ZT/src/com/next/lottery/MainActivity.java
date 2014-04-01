@@ -1,10 +1,14 @@
 package com.next.lottery;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -17,6 +21,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.fragment.ClassifyFragment;
 import com.next.lottery.fragment.HomeFragment;
 import com.next.lottery.fragment.ShoppingCartFragment;
+import com.next.lottery.fragment.ShoppingCartNewFragment;
 import com.next.lottery.fragment.TrademarkFragment;
 import com.next.lottery.fragment.UserCenterFragment;
 import com.next.lottery.params.ComParams;
@@ -33,6 +38,8 @@ public class MainActivity extends BaseActivity {
 	private FragmentTabHostDF fgtHost;
 	
 	public static int changeTab = 0;
+	
+	private List<Fragment> frageMentList = new ArrayList<Fragment>();
 
 	// @ViewInject(R.id.tv_topbar_menu)
 	// private TextView tvTopBarMenu;
@@ -97,11 +104,11 @@ public class MainActivity extends BaseActivity {
 		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), HomeFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), ClassifyFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab3), TrademarkFragment.class, null);
-		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab4), ShoppingCartFragment.class, null);
+//		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab4), ShoppingCartFragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab4), ShoppingCartNewFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator(tab5), UserCenterFragment.class, null);
 
 		fgtHost.getTabWidget().setDividerDrawable(null);
-
 
 		// fgtHost.addTab(fgtHost.newTabSpec("6").setIndicator("66"), TypeFragment.class, null);
 

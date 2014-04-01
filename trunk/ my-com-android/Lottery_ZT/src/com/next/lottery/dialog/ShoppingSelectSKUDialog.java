@@ -92,6 +92,15 @@ public class ShoppingSelectSKUDialog extends Dialog {
 			@Override
 			public void onClick(View v) {
 //				onSkuResultListener.onSkuResult(beanResult);
+				for (int i = 0; i < beanResult.getSkuList().size(); i++) {
+					if (null == beanResult.getSkuList().get(i)
+							|| null == beanResult.getSkuList().get(i).getSkuTypesList()) {
+						Toast.makeText(context, "请选择" + beanResult.getSkuList().get(i).getSkuName(), Toast.LENGTH_LONG)
+								.show();
+						return;
+					}
+				}
+				
 				dialog.dismiss();
 				try {
 					String orderinfo = AlipayUtil.getOrderInfo(AlipayConfig.PARTNER, "lottery", AlipayConfig.DESCRIPTION, 1,

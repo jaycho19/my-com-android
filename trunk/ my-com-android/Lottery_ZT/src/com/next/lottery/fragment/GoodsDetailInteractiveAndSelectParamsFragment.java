@@ -17,6 +17,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.R;
 import com.next.lottery.listener.OnClickTypeListener;
+
 /**
  * 查看服务优惠活动，选择颜色分类fragment
  * 
@@ -24,25 +25,22 @@ import com.next.lottery.listener.OnClickTypeListener;
  * 
  */
 public class GoodsDetailInteractiveAndSelectParamsFragment extends BaseFragment {
-	protected static String TAG = GoodsDetailInteractiveAndSelectParamsFragment.class
-			.getSimpleName();
+	protected static String		TAG	= GoodsDetailInteractiveAndSelectParamsFragment.class.getSimpleName();
 
-	private OnClickTypeListener onClickTypeListener;
-	private List<String> list;
+	private OnClickTypeListener	onClickTypeListener;
+	private List<String>		list;
 	@ViewInject(R.id.fragment_goods_detail_interactive_tv)
-	private TextView interactiveMore;
+	private TextView			interactiveMore;
 	@ViewInject(R.id.fragment_goods_detail_params_tv)
-	private TextView paramsMore;
+	private TextView			paramsMore;
 	@ViewInject(R.id.fragment_goods_detail_interactive_information_tv)
-	private TextView  interactiveDetails;
+	private TextView			interactiveDetails;
 	@ViewInject(R.id.fragment_goods_detail_item_edit_ll)
-	private LinearLayout  detailItemEditLin;
+	private LinearLayout		detailItemEditLin;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_goods_detail_interactive_params,
-				container, false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_goods_detail_interactive_params, container, false);
 		ViewUtils.inject(this, view);
 		initView(view);
 		return view;
@@ -58,9 +56,7 @@ public class GoodsDetailInteractiveAndSelectParamsFragment extends BaseFragment 
 		}
 	}
 
-	public void setData(List<String> list,
-			OnClickTypeListener onClickTypeListener) {
-		this.list = list;
+	public void setData(OnClickTypeListener onClickTypeListener) {
 		this.onClickTypeListener = onClickTypeListener;
 	}
 
@@ -69,33 +65,32 @@ public class GoodsDetailInteractiveAndSelectParamsFragment extends BaseFragment 
 		// TODO Auto-generated method stub
 
 	}
-	
 
-	class itemClick implements OnClickListener{
+	class itemClick implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.fragment_goods_detail_interactive_tv:
-				if (interactiveDetails.getVisibility()==View.VISIBLE) 
+				if (interactiveDetails.getVisibility() == View.VISIBLE)
 					interactiveDetails.setVisibility(View.GONE);
 				else
 					interactiveDetails.setVisibility(View.VISIBLE);
-					
-				
+
 				break;
 			case R.id.fragment_goods_detail_params_tv:
-				if (detailItemEditLin.getVisibility()==View.VISIBLE) 
-					detailItemEditLin.setVisibility(View.GONE);
-				else
-					detailItemEditLin.setVisibility(View.VISIBLE);
+				onClickTypeListener.onClickType(new Bundle());
+				// if (detailItemEditLin.getVisibility()==View.VISIBLE)
+				// detailItemEditLin.setVisibility(View.GONE);
+				// else
+				// detailItemEditLin.setVisibility(View.VISIBLE);
 				break;
 
 			default:
 				break;
 			}
 		}
-		
+
 	}
 
 }
