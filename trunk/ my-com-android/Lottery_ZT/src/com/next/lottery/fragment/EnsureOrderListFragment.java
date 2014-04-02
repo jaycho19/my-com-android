@@ -40,12 +40,12 @@ public class EnsureOrderListFragment extends BaseFragment implements OnClickList
 
 	@ViewInject(R.id.fragment_ensure_order_listview)
 	private ListView					listView;
-	@ViewInject(R.id.app_top_title_tv_centre)
+//	@ViewInject(R.id.app_top_title_tv_centre)
 	private TextView					tvTitle;
-	@ViewInject(R.id.app_top_title_iv_left)
-	private TextView					tvBack;
-	@ViewInject(R.id.app_top_title_iv_rigth)
-	private TextView					tvRight;
+//	@ViewInject(R.id.app_top_title_iv_left)
+//	private TextView					tvBack;
+//	@ViewInject(R.id.app_top_title_iv_rigth)
+//	private TextView					tvRight;
 	@ViewInject(R.id.btn_buy_now)
 	private TextView					tvBuyNow;
 
@@ -56,6 +56,7 @@ public class EnsureOrderListFragment extends BaseFragment implements OnClickList
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_ensure_order_list_layout, container, false);
 		ViewUtils.inject(this, view);
+		tvTitle= (TextView)view.findViewById(R.id.app_top_title_tv_centre);
 		initView();
 		return view;
 	}

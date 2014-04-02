@@ -46,12 +46,12 @@ import com.next.lottery.GoodsDetailActivity;
 
 @SuppressLint("ValidFragment")
 public class GoodsDetailFragment extends BaseFragment {
-	@ViewInject(R.id.app_top_title_tv_centre)
+//	@ViewInject(R.id.app_top_title_tv_centre)
 	private TextView tvTitle;
-	@ViewInject(R.id.app_top_title_iv_left)
-	private TextView tvBack;
-	@ViewInject(R.id.app_top_title_iv_rigth)
-	private TextView tvRight;
+//	@ViewInject(R.id.app_top_title_iv_left)
+//	private TextView tvBack;
+//	@ViewInject(R.id.app_top_title_iv_rigth)
+//	private TextView tvRight;
 	private Context context;
 
 	@ViewInject(R.id.activity_goods_detail_layout)
@@ -73,6 +73,7 @@ public class GoodsDetailFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.activity_goods_detail_layout, container, false);
 		ViewUtils.inject(this, view);
+		tvTitle= (TextView)view.findViewById(R.id.app_top_title_tv_centre);
 		initView();
 		initData();
 		return view;
