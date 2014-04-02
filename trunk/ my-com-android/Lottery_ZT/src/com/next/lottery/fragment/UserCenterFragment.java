@@ -14,6 +14,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.LRLoginActivity;
+import com.next.lottery.MyOrderListActivity;
 import com.next.lottery.R;
 import com.next.lottery.UserCouponActivity;
 import com.next.lottery.UserHelpCenterActivity;
@@ -42,6 +43,8 @@ public class UserCenterFragment extends BaseFragment {
 	private TextView tvHelpCenter;//帮助中心
 	@ViewInject(R.id.fragment_usercenter_tv_mycoupon)
 	private TextView tvMyCoupon; // 我的优惠券
+	@ViewInject(R.id.fragment_usercenter_tv_myorder)
+	private TextView tvMyOrder; // 我的订单
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class UserCenterFragment extends BaseFragment {
 			R.id.usercenter_tv_user_tishenghuiyuan
 			,R.id.fragment_usercenter_tv_myhelp
 			,R.id.fragment_usercenter_tv_mycoupon
+			,R.id.fragment_usercenter_tv_myorder
 			
 
 	})
@@ -79,6 +83,9 @@ public class UserCenterFragment extends BaseFragment {
 		case R.id.usercenter_tv_user_name:
 		case R.id.usercenter_tv_user_tishenghuiyuan:
 			startActivity(new Intent(getActivity(), UserInfoActivity.class));
+			break;
+		case R.id.fragment_usercenter_tv_myorder:
+			startActivity(new Intent(getActivity(), MyOrderListActivity.class));
 			break;
 		default:
 			break;
