@@ -19,7 +19,7 @@ public class SKUBean {
 		this.skuList = skuList;
 	}
 	
-	private int num = 1;
+	private int num = 1; // 数量
 
 	public int getNum() {
 		return num;

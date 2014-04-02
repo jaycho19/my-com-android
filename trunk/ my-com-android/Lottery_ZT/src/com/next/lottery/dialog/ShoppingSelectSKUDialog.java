@@ -9,7 +9,6 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +22,7 @@ import com.next.lottery.alipay.AlipayConfig;
 import com.next.lottery.alipay.AlipayUtil;
 import com.next.lottery.beans.SKUBean;
 import com.next.lottery.beans.SKUEntity;
+import com.next.lottery.beans.SKUItem;
 import com.next.lottery.listener.OnSkuResultListener;
 
 /**
@@ -153,10 +153,10 @@ public class ShoppingSelectSKUDialog extends Dialog {
 			TextView skuName = (TextView) view.findViewById(R.id.dialog_shopping_select_sku_item_tv_skuname);
 			skuName.setText(sku.getSkuName());
 			LineLayout l = (LineLayout) view.findViewById(R.id.dialog_shopping_select_sku_item_linelayout);
-			for (String s : sku.getSkuTypesList()) {
+			for (SKUItem s : sku.getSkuTypesList()) {
 				TextView tv = (TextView) LayoutInflater.from(context).inflate(
 						R.layout.dialog_shopping_select_sku_item_element, null);
-				tv.setText(s);
+				tv.setText(s.getName());
 				tv.setOnClickListener(new View.OnClickListener() {
 
 					@Override
@@ -169,7 +169,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 
 						for (int i = 0; i < beanResult.getSkuList().size(); i++) {
 							if (sku.getSkuName().equals(beanResult.getSkuList().get(i).getSkuName())) {
-								ArrayList<String> skuTypesList = new ArrayList<String>();
+								ArrayList<SKUItem> skuTypesList = new ArrayList<SKUItem>();
 								skuTypesList.add(bean.getSkuList().get(i).getSkuTypesList()
 										.get(((LineLayout) v.getParent()).getSelectPosition()));
 								ULog.i("getSkuTypesList-->"

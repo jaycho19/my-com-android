@@ -10,8 +10,18 @@ import java.util.ArrayList;
  */
 public class SKUEntity {
 
+	private String skuId;
 	private String skuName;
-	private ArrayList<String> skuTypesList;
+
+	private ArrayList<SKUItem> skuTypesList;
+
+	public String getSkuId() {
+		return skuId;
+	}
+
+	public void setSkuId(String skuId) {
+		this.skuId = skuId;
+	}
 
 	public String getSkuName() {
 		return skuName;
@@ -21,11 +31,13 @@ public class SKUEntity {
 		this.skuName = skuName;
 	}
 
-	public ArrayList<String> getSkuTypesList() {
+	public ArrayList<SKUItem> getSkuTypesList() {
 		return skuTypesList;
 	}
 
-	public void setSkuTypesList(ArrayList<String> skuTypesList) {
+	public void setSkuTypesList(ArrayList<SKUItem> skuTypesList) {
 		this.skuTypesList = skuTypesList;
 	}
+
+
 }

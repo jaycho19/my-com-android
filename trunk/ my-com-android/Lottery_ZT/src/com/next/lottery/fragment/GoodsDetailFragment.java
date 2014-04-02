@@ -10,6 +10,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.beans.SKUBean;
 import com.next.lottery.beans.SKUEntity;
+import com.next.lottery.beans.SKUItem;
 import com.next.lottery.dialog.ShoppingSelectSKUDialog;
 import com.next.lottery.fragment.GoodsDetailInteractiveAndSelectParamsFragment;
 import com.next.lottery.fragment.GoodsDetailSaleInfoFragment;
@@ -157,9 +158,9 @@ public class GoodsDetailFragment extends BaseFragment {
 		for (int i = 0; i < 2; i++) {
 			SKUEntity skuEntity = new SKUEntity();
 			skuEntity.setSkuName("颜色");
-			ArrayList<String> al = new ArrayList<String>();
+			ArrayList<SKUItem> al = new ArrayList<SKUItem>();
 			for (int j = 0; j < 18; j++)
-				al.add("红色" + j);
+				al.add(new  SKUItem("红色" + j));
 			skuEntity.setSkuTypesList(al);
 			all.add(skuEntity);
 		}
