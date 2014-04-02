@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import com.dongfang.utils.ULog;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -34,11 +33,11 @@ import com.next.lottery.R;
 import com.next.lottery.beans.BaseGateWayInterfaceEntity;
 import com.next.lottery.beans.SKUBean;
 import com.next.lottery.beans.SKUEntity;
+import com.next.lottery.beans.SKUItem;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.dialog.ShoppingSelectSKUDialog;
 import com.next.lottery.listener.OnSkuResultListener;
 import com.next.lottery.nets.HttpActions;
-import com.next.lottery.utils.ComParams;
 import com.next.lottery.utils.Keys;
 import com.next.lottery.utils.Util;
 
@@ -218,20 +217,20 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 			ArrayList<SKUEntity> all = new ArrayList<SKUEntity>();
 			SKUEntity skuEntity = new SKUEntity();
 			skuEntity.setSkuName("颜色分类");
-			ArrayList<String> al = new ArrayList<String>();
+			ArrayList<SKUItem> al = new ArrayList<SKUItem>();
 
-			al.add("红色");
-			al.add("黄色");
-			al.add("灰色");
-			al.add("绿色");
+			al.add(new SKUItem("红色"));
+			al.add(new SKUItem("黄色"));
+			al.add(new SKUItem("灰色"));
+			al.add(new SKUItem("绿色"));
 			skuEntity.setSkuTypesList(al);
 
 			SKUEntity skuEntity1 = new SKUEntity();
 			skuEntity1.setSkuName("尺码");
-			ArrayList<String> al1 = new ArrayList<String>();
+			ArrayList<SKUItem> al1 = new ArrayList<SKUItem>();
 
 			for (int j = 0; j < 18; j++)
-				al1.add("尺码" + j);
+				al1.add(new SKUItem("尺码" + j));
 			skuEntity1.setSkuTypesList(al1);
 			all.add(skuEntity1);
 			all.add(skuEntity);
