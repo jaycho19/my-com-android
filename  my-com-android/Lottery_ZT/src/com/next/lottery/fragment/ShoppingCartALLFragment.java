@@ -230,6 +230,7 @@ public class ShoppingCartALLFragment extends BaseFragment implements OnClickList
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.fragment_shipping_all_settle_account_lin:
+			ULog.i("结算");
 			ArrayList<ShopCartsInfo> orderlist = new ArrayList<ShopCartsInfo>();
 			for (ShopCartsInfo info : shopCartslist) {
 				if (info.getIsSelected() == 1)
@@ -239,8 +240,6 @@ public class ShoppingCartALLFragment extends BaseFragment implements OnClickList
 			Intent intent = new Intent(getActivity(), EnsureOrderListActivity.class);
 			intent.putParcelableArrayListExtra("orderList", orderlist);
 			startActivity(intent);
-//			creatOrder();
-			ULog.i("结算");
 			break;
 
 		default:

@@ -1,5 +1,6 @@
 package com.next.lottery.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -66,7 +67,10 @@ public class RightMenuFragment extends Fragment implements OnClickListener {
 			break;
 		}
 		getActivity().sendBroadcast(intent);
-		((GoodsDetailActivity) getActivity()).finish();
+		
+		if (Activity.class.isInstance(getActivity())) {
+			getActivity().finish();
+		}
 
 	}
 

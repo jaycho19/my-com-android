@@ -47,7 +47,7 @@ public class EnsureOrderListActivity extends BaseActivity {
 		rightFragment = new RightMenuFragment();
 		t.replace(R.id.right_frame, rightFragment);
 		mainFragment = new EnsureOrderListFragment();
-		if (null!=this.getIntent().getParcelableArrayListExtra("orderlist")) {
+		if (null!=this.getIntent().getParcelableArrayListExtra("orderList")) {
 			ArrayList<ShopCartsInfo> orderlist = this.getIntent().getParcelableArrayListExtra("orderList");
 			mainFragment.setOrderlist(orderlist);
 		}

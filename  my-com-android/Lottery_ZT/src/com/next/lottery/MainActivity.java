@@ -157,9 +157,8 @@ public class MainActivity extends BaseActivity {
 	protected void onResume() {
 		super.onResume();
 		ULog.i("onResume");
-		if (changeTab!=0) {
+		if (changeTab!=fgtHost.getCurrentTab()) {
 			fgtHost.setCurrentTab(changeTab);
-			changeTab = 0;
 		}
 	}
 	
