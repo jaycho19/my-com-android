@@ -328,14 +328,14 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 													@Override
 													public void onSkuResult(SKUBean bean) {
 														try {
-															tvNumberShow.setText(bean.getNum());
-															tvNumberEdit.setText(bean.getNum());
-															etNumber.setText(bean.getNum());
+															tvNumberShow.setText("x"+bean.getNum());
+															tvNumberEdit.setText("x"+bean.getNum());
+															etNumber.setText("x"+bean.getNum());
 
 															String color = bean.getSkuList().get(1).getSkuName() + ":"
-																	+ bean.getSkuList().get(1).getSkuTypesList().get(0);
+																	+ bean.getSkuList().get(1).getSkuTypesList().get(0).getName();
 															String size = bean.getSkuList().get(0).getSkuName() + ":"
-																	+ bean.getSkuList().get(0).getSkuTypesList().get(0);
+																	+ bean.getSkuList().get(0).getSkuTypesList().get(0).getName();
 															tvSKU1Edit.setText(color);
 															tvSKU2Edit.setText(size);
 														} catch (Exception e) {

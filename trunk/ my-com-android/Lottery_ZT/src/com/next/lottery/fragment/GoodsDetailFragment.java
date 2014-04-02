@@ -73,14 +73,14 @@ public class GoodsDetailFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.activity_goods_detail_layout, container, false);
 		ViewUtils.inject(this, view);
-		tvTitle= (TextView)view.findViewById(R.id.app_top_title_tv_centre);
-		initView();
+		initView(view);
 		initData();
 		return view;
 	}
 
-	private void initView() {
+	private void initView(View view) {
 		// TODO Auto-generated method stub
+		tvTitle= (TextView)view.findViewById(R.id.app_top_title_tv_centre);
 		tvTitle.setText("宝贝详情");
 	}
 

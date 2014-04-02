@@ -1,5 +1,7 @@
 package com.next.lottery.alipay;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 
 import com.dongfang.utils.ULog;
@@ -108,6 +110,24 @@ public class AlipayUtil {
 				}
 			}
 		});
+		
+	}
+	
+	
+	/*调出支付宝 Activity*/
+	public static void doPayment(Context context){
+		try {
+			String orderinfo = AlipayUtil.getOrderInfo(AlipayConfig.PARTNER, "lottery", AlipayConfig.DESCRIPTION, 1,
+					2);
+			String encodeSign = URLEncoder.encode(AlipayConfig.SIGN, "UTF-8");
+			String info = orderinfo + "&sign=" + "\"" + encodeSign + "\"" + "&sign_type=" + "\"RSA\"";
+			ULog.v("alipay orderInfo = " + info);
+			
+			AlipayUtil.PayHelper(context, info);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 }

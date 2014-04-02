@@ -1,124 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/whitesmoke"
-    android:orientation="vertical" >
+    android:background="@color/whitesmoke" >
 
-    <include
-        android:id="@+id/fragment_ensure_order_list_top_bar"
-        layout="@layout/activity_user_setting_top_bar" />
-
-    <ListView
-        android:id="@+id/fragment_ensure_order_listview"
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <include
+            android:id="@+id/fragment_ensure_order_list_top_bar"
+            layout="@layout/activity_user_setting_top_bar" />
+
+        <!--
+        <ListView
+            android:id="@+id/fragment_ensure_order_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_ensure_order_list_top_bar"
+            android:scrollbarStyle="outsideOverlay" >
+        </ListView>
+        -->
+
+          <LinearLayout
+        android:id="@+id/fragment_ensure_order_item_ll"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/fragment_ensure_order_list_top_bar"
-        android:scrollbarStyle="outsideOverlay" >
-    </ListView>
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:orientation="vertical" >
+    </LinearLayout>
 
-    <LinearLayout style="@style/linearLayout_ensure_order" >
+        <LinearLayout style="@style/linearLayout_ensure_order" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="运费"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/fragment_ensure_order_delivery_money_tv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="25元"
+                android:textColor="@color/grey"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/linearLayout_ensure_order" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="会员折扣"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/fragment_ensure_order_member_money_tv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="-100元"
+                android:textColor="@color/blue"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/linearLayout_ensure_order" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="优惠卷"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/fragment_ensure_order_discount_money_tv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/arrows_2"
+                android:gravity="right"
+                android:text="-25元"
+                android:textColor="@color/blue"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/linearLayout_ensure_order" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="支付方式"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/fragment_ensure_order_pay_way_tv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/arrows_2"
+                android:gravity="right"
+                android:text="支付宝"
+                android:textColor="@color/grey"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/linearLayout_ensure_order" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发票信息"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/fragment_ensure_order_invoice_tv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/arrows_2"
+                android:gravity="right"
+                android:text="个人"
+                android:textColor="@color/grey"
+                android:textSize="22sp" />
+        </LinearLayout>
 
         <TextView
+            android:id="@+id/btn_buy_now"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="运费"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/fragment_ensure_order_delivery_money_tv"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="25元"
-            android:textColor="@color/grey"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_red_02_round"
+            android:gravity="center"
+            android:text="立即购买"
+            android:textColor="@color/white"
             android:textSize="22sp" />
     </LinearLayout>
 
-    <LinearLayout style="@style/linearLayout_ensure_order" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="会员折扣"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/fragment_ensure_order_member_money_tv"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="-100元"
-            android:textColor="@color/blue"
-            android:textSize="22sp" />
-    </LinearLayout>
-
-    <LinearLayout style="@style/linearLayout_ensure_order" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="优惠卷"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/fragment_ensure_order_discount_money_tv"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:drawableRight="@drawable/arrows_2"
-            android:gravity="right"
-            android:text="-25元"
-            android:textColor="@color/blue"
-            android:textSize="22sp" />
-    </LinearLayout>
-
-    <LinearLayout style="@style/linearLayout_ensure_order" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="支付方式"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/fragment_ensure_order_pay_way_tv"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:drawableRight="@drawable/arrows_2"
-            android:gravity="right"
-            android:text="支付宝"
-            android:textColor="@color/grey"
-            android:textSize="22sp" />
-    </LinearLayout>
-
-    <LinearLayout style="@style/linearLayout_ensure_order" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="发票信息"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/fragment_ensure_order_invoice_tv"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:drawableRight="@drawable/arrows_2"
-            android:gravity="right"
-            android:text="个人"
-            android:textColor="@color/grey"
-            android:textSize="22sp" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/btn_buy_now"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/btn_red_02_round"
-        android:gravity="center"
-        android:text="立即购买"
-        android:textColor="@color/white"
-        android:textSize="22sp" />
-
-</LinearLayout>
+</ScrollView>

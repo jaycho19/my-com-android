@@ -102,18 +102,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 				}
 				
 				dialog.dismiss();
-				try {
-					String orderinfo = AlipayUtil.getOrderInfo(AlipayConfig.PARTNER, "lottery", AlipayConfig.DESCRIPTION, 1,
-							2);
-					String encodeSign = URLEncoder.encode(AlipayConfig.SIGN, "UTF-8");
-					String info = orderinfo + "&sign=" + "\"" + encodeSign + "\"" + "&sign_type=" + "\"RSA\"";
-					ULog.v("alipay orderInfo = " + info);
-					
-					AlipayUtil.PayHelper(context, info);
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				AlipayUtil.doPayment(context);
 				
 				
 			}
@@ -174,7 +163,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 										.get(((LineLayout) v.getParent()).getSelectPosition()));
 								ULog.i("getSkuTypesList-->"
 										+ bean.getSkuList().get(i).getSkuTypesList()
-												.get(((LineLayout) v.getParent()).getSelectPosition()));
+												.get(((LineLayout) v.getParent()).getSelectPosition()).getName());
 								ULog.i("getSkuName-->" + bean.getSkuList().get(i).getSkuName());
 								beanResult.getSkuList().get(i).setSkuTypesList(skuTypesList);
 							}
@@ -192,16 +181,17 @@ public class ShoppingSelectSKUDialog extends Dialog {
 			@Override
 			public void onClick(View v) {
 				chgNumber(tvNumber, 1);
+				beanResult.setNum(Integer.valueOf(tvNumber.getText().toString()));
 			}
 		});
 		dialog.findViewById(R.id.dialog_select_sku_tv_reducenumber).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				chgNumber(tvNumber, -1);
+				beanResult.setNum(Integer.valueOf(tvNumber.getText().toString()));
 			}
 		});
 
-		beanResult.setNum(Integer.valueOf(tvNumber.getText().toString()));
 
 		return beanResult;
 	}

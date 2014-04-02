@@ -165,7 +165,7 @@ public class HttpActions {
 	 * 获取订单接口
 	 * {"userId":"3","merId":1,"userToken":"532fea9f115d5","page":1,"size":3}
 	 */
-	public static String GetMyOrderList() {
+	public static String GetMyOrderList(int page) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
 		sb.append("?").append("class=").append("order");
 		sb.append("&").append("method=").append("query");
@@ -174,7 +174,7 @@ public class HttpActions {
 		json.addProperty("userId", "3");
 		json.addProperty("merId", "1");
 		json.addProperty("userToken", "123456");
-		json.addProperty("page", "1");
+		json.addProperty("page", String.valueOf(page));
 		json.addProperty("size", 3);
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		return sb.toString();
