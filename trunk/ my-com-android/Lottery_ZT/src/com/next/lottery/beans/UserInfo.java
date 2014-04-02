@@ -45,9 +45,9 @@ public class UserInfo implements Parcelable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("userId = ").append(userId).append("\n");
-		sb.append("merId = ").append(merId).append("\n");
-		sb.append("userName = ").append(userName).append("\n");
+		sb.append("userId    = ").append(userId).append("\n");
+		sb.append("merId     = ").append(merId).append("\n");
+		sb.append("userName  = ").append(userName).append("\n");
 		sb.append("userToken = ").append(userToken).append("\n");
 		return sb.toString();
 
