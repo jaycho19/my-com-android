@@ -2,6 +2,8 @@ package com.next.lottery.nets;
 
 import java.net.URLEncoder;
 
+import org.json.JSONArray;
+
 import com.dongfang.utils.ULog;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -124,6 +126,7 @@ public class HttpActions {
 		json.addProperty("expressId", 0);
 		json.addProperty("isLgtype", 2);
 		
+		
 		JsonObject jsonInvoice = new JsonObject();
 		jsonInvoice.addProperty("title", "发票title");
 		jsonInvoice.addProperty("type", 1);
@@ -141,12 +144,38 @@ public class HttpActions {
 		json11.addProperty("skuId", 3);
 		json11.addProperty("count", 2);
 		
+//		"coupons":["1"],"activitys":[1,2]
+		JSONArray coupons = new JSONArray(); 
+		coupons.put("1");
+		JSONArray activitys = new JSONArray(); 
+		activitys.put(1).put(2);
+		
 		jsonArray.add(json1);
 		jsonArray.add(json11);
 		json.add("items", jsonArray);
-		
+		json.addProperty("coupons", coupons.toString());
+		json.addProperty("activitys", activitys.toString());
 		
 		ULog.i(json.toString());
+		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
+		return sb.toString();
+	}
+	
+	/*
+	 * 获取订单接口
+	 * {"userId":"3","merId":1,"userToken":"532fea9f115d5","page":1,"size":3}
+	 */
+	public static String GetMyOrderList() {
+		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
+		sb.append("?").append("class=").append("order");
+		sb.append("&").append("method=").append("query");
+
+		JsonObject json = new JsonObject();
+		json.addProperty("userId", "3");
+		json.addProperty("merId", "1");
+		json.addProperty("userToken", "123456");
+		json.addProperty("page", "1");
+		json.addProperty("size", 3);
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		return sb.toString();
 	}

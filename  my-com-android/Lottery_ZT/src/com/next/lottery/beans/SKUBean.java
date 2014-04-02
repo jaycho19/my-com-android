@@ -3,9 +3,9 @@ package com.next.lottery.beans;
 import java.util.ArrayList;
 
 /**
- * 商品SKU属性
+ * my order bean
  * 
- * @author dongfang
+ * @author gfan
  * 
  */
 public class SKUBean {

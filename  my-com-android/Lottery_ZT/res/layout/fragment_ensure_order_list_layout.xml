@@ -20,14 +20,13 @@
     <LinearLayout style="@style/linearLayout_ensure_order" >
 
         <TextView
-            android:id="@+id/fragment_usercenter_tv_myorder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="运费"
             android:textSize="22sp" />
 
         <TextView
-            android:id="@+id/fragment_usercenter_tv_myorder"
+            android:id="@+id/fragment_ensure_order_delivery_money_tv"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -39,14 +38,13 @@
     <LinearLayout style="@style/linearLayout_ensure_order" >
 
         <TextView
-            android:id="@+id/fragment_usercenter_tv_myorder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="会员折扣"
             android:textSize="22sp" />
 
         <TextView
-            android:id="@+id/fragment_usercenter_tv_myorder"
+            android:id="@+id/fragment_ensure_order_member_money_tv"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -58,14 +56,13 @@
     <LinearLayout style="@style/linearLayout_ensure_order" >
 
         <TextView
-            android:id="@+id/fragment_usercenter_tv_myorder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="优惠卷"
             android:textSize="22sp" />
 
         <TextView
-            android:id="@+id/fragment_usercenter_tv_myorder"
+            android:id="@+id/fragment_ensure_order_discount_money_tv"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/arrows_2"
@@ -78,14 +75,13 @@
     <LinearLayout style="@style/linearLayout_ensure_order" >
 
         <TextView
-            android:id="@+id/fragment_usercenter_tv_myorder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="支付方式"
             android:textSize="22sp" />
 
         <TextView
-            android:id="@+id/fragment_usercenter_tv_myorder"
+            android:id="@+id/fragment_ensure_order_pay_way_tv"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/arrows_2"
@@ -98,14 +94,13 @@
     <LinearLayout style="@style/linearLayout_ensure_order" >
 
         <TextView
-            android:id="@+id/fragment_usercenter_tv_myorder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="发票信息"
             android:textSize="22sp" />
 
         <TextView
-            android:id="@+id/fragment_usercenter_tv_myorder"
+            android:id="@+id/fragment_ensure_order_invoice_tv"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/arrows_2"
