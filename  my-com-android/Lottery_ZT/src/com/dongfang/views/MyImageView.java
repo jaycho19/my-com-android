@@ -42,7 +42,7 @@ public class MyImageView extends RelativeLayout {
 
 	public void init(Context context) {
 		this.context = context;
-		ImageView imageView = (ImageView) LayoutInflater.from(context).inflate(R.layout.my_imageview, null);
+		imageView = (ImageView) LayoutInflater.from(context).inflate(R.layout.my_imageview, null);
 		this.setGravity(Gravity.CENTER);
 		addView(imageView, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 	}
