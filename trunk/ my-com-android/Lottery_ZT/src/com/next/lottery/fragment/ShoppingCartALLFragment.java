@@ -237,6 +237,11 @@ public class ShoppingCartALLFragment extends BaseFragment implements OnClickList
 					orderlist.add(info);
 			}
 			
+			if (orderlist.size()==0) {
+				Toast.makeText(getActivity(), "至少选择一件商品",Toast.LENGTH_SHORT ).show();
+				return;
+			}
+			
 			Intent intent = new Intent(getActivity(), EnsureOrderListActivity.class);
 			intent.putParcelableArrayListExtra("orderList", orderlist);
 			startActivity(intent);
