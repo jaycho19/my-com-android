@@ -42,7 +42,7 @@ import com.next.lottery.fragment.adapter.ShoppingCartAllAdapter;
 import com.next.lottery.nets.HttpActions;
 
 @SuppressLint("ValidFragment")
-public class EnsureOrderListFragment extends BaseFragment implements OnClickListener {
+public class EnsureOrderListFragment extends BaseFragment {
 
 	/*
 	 * @ViewInject(R.id.fragment_ensure_order_listview) private ListView
@@ -72,7 +72,6 @@ public class EnsureOrderListFragment extends BaseFragment implements OnClickList
 	}
 
 	private void initView() {
-		// TODO Auto-generated method stub
 		tvTitle.setText("确定订单");
 
 		progDialog = ProgressDialog.show(getActivity());
