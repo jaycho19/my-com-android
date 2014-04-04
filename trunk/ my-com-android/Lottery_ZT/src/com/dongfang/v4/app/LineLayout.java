@@ -107,5 +107,12 @@ public class LineLayout extends ViewGroup {
 			getChildAt(i).setSelected(false);;
 		}
 	}
+	public void setNOEnable() {
+		final int count = getChildCount();
+//		for (int i = 0; i < count-1; i++) {
+//			getChildAt(i).setEnabled(false);;
+//		}
+		getChildAt(count-1).setEnabled(false);
+	}
 
 }

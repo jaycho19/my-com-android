@@ -35,6 +35,7 @@ import com.next.lottery.beans.SKUBean;
 import com.next.lottery.beans.SKUEntity;
 import com.next.lottery.beans.SKUItem;
 import com.next.lottery.beans.ShopCartsInfo;
+import com.next.lottery.beans.SkuList;
 import com.next.lottery.dialog.ShoppingSelectSKUDialog;
 import com.next.lottery.listener.OnSkuResultListener;
 import com.next.lottery.nets.HttpActions;
@@ -135,7 +136,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 
 		int				position;
 
-		private void initView(View view, int position) {
+		private void initView(View view, final int position) {
 			this.position = position;
 			checkBox = (CheckBox) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_radiobtn);
 			imageView = (ImageView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_iv);
@@ -187,22 +188,20 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 				public void afterTextChanged(Editable s) {
 					ULog.i("afterTextChanged-->" + s);
 					int num = 1;
-					if (Util.IsNumeric(String.valueOf(s))) {
+					String goodsNum =String.valueOf(s);
+					if (Util.IsNumeric(goodsNum)) {
 						try {
-							num = Integer.parseInt(String.valueOf(s));
+							num = Integer.parseInt(goodsNum);
 						} catch (NumberFormatException e) {
 							e.printStackTrace();
 						}
-						tvEditPrice.setText("" + String.valueOf(380 * num));
-						tvShowPrice.setText("" + String.valueOf(380 * num));
-
+						tvEditPrice.setText(String.valueOf( Float.parseFloat(list.get(position).getPrice())* num));
 						tvNumberEdit.setText("X" + num);
-						tvNumberShow.setText("X" + num);
 
 						if (checkBox.isChecked()) {
 							Message msg = new Message();
 							msg.what = Keys.MSG_REFRESH_BUY_NUM_ALL_GOODS_PRICE;
-							msg.arg1 = 380 * num;
+							msg.arg1 = (int) (Float.parseFloat(list.get(position).getPrice()) * num);
 							handler.sendMessage(msg);
 						}
 
@@ -272,7 +271,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 				notifyDataSetChanged();
 				break;
 			case R.id.fragment_shoppingcart_all_adp_item_edit_suv_rl:
-				ShoppingSelectSKUDialog.show1(context, getTestSKUBean(), onSkuResultListener);
+//				ShoppingSelectSKUDialog.show1(context, getTestSKUBean(), onSkuResultListener);
 				break;
 				
 			case R.id.fragment_shoppingcart_all_adp_item_radiobtn:
@@ -326,11 +325,10 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 		OnSkuResultListener	onSkuResultListener	= new OnSkuResultListener() {
 
 													@Override
-													public void onSkuResult(SKUBean bean) {
+													public void onSkuResult(ArrayList<SkuList> beanResult) {/*
 														try {
-															tvNumberShow.setText("x"+bean.getNum());
 															tvNumberEdit.setText("x"+bean.getNum());
-															etNumber.setText("x"+bean.getNum());
+															etNumber.setText(String.valueOf(bean.getNum()));
 
 															String color = bean.getSkuList().get(1).getSkuName() + ":"
 																	+ bean.getSkuList().get(1).getSkuTypesList().get(0).getName();
@@ -346,7 +344,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 															ULog.e(e.toString());
 														}
 
-													}
+													*/}
 												};
 	}
 

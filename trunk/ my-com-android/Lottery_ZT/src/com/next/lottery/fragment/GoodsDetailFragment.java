@@ -5,12 +5,27 @@ import java.util.List;
 
 import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseFragment;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.lidroid.xutils.DbUtils;
+import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.exception.DbException;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.next.lottery.alipay.AlipayUtil;
+import com.next.lottery.beans.BaseGateWayInterfaceEntity;
+import com.next.lottery.beans.GoodsBean;
 import com.next.lottery.beans.SKUBean;
+import com.next.lottery.beans.SKUBean2;
 import com.next.lottery.beans.SKUEntity;
 import com.next.lottery.beans.SKUItem;
+import com.next.lottery.beans.SkuList;
+import com.next.lottery.dialog.ProgressDialog;
 import com.next.lottery.dialog.ShoppingSelectSKUDialog;
 import com.next.lottery.fragment.GoodsDetailInteractiveAndSelectParamsFragment;
 import com.next.lottery.fragment.GoodsDetailSaleInfoFragment;
@@ -19,6 +34,7 @@ import com.next.lottery.fragment.HomeFragmentTopKVFragment;
 import com.next.lottery.listener.OnClickTypeListener;
 import com.next.lottery.listener.OnPageScrolledListener;
 import com.next.lottery.listener.OnSkuResultListener;
+import com.next.lottery.nets.HttpActions;
 import com.next.lottery.params.ComParams;
 
 import android.annotation.SuppressLint;
@@ -33,6 +49,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.next.lottery.R;
 import com.next.lottery.GoodsDetailActivity;
@@ -46,23 +63,16 @@ import com.next.lottery.GoodsDetailActivity;
 
 @SuppressLint("ValidFragment")
 public class GoodsDetailFragment extends BaseFragment {
-//	@ViewInject(R.id.app_top_title_tv_centre)
 	private TextView tvTitle;
-//	@ViewInject(R.id.app_top_title_iv_left)
-//	private TextView tvBack;
-//	@ViewInject(R.id.app_top_title_iv_rigth)
-//	private TextView tvRight;
 	private Context context;
+	private ProgressDialog progDialog;
 
 	@ViewInject(R.id.activity_goods_detail_layout)
 	private LinearLayout contentLayout;
 	private List<Fragment> fragments = new ArrayList<Fragment>();
+	private GoodsBean goodsBean;
+	private DbUtils dbUtils;
 
-	/*
-	 * @Override public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState);
-	 * 
-	 * setContentView(R.layout.activity_goods_detail_layout); ViewUtils.inject(this); initView(); initData(); }
-	 */
 
 	public GoodsDetailFragment(GoodsDetailActivity goodsDetailActivity) {
 		// TODO Auto-generated constructor stub
@@ -73,15 +83,112 @@ public class GoodsDetailFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.activity_goods_detail_layout, container, false);
 		ViewUtils.inject(this, view);
+		this.dbUtils = DbUtils.create(getActivity());
 		initView(view);
-		initData();
+		getDataFromInter();
 		return view;
+	}
+	/*通过接口获取详情数据*/
+	/*1.详情的接口返回的 sku 和image json解析错误  */
+	private void getDataFromInter() {
+		String[] fl = {};
+		String url = HttpActions.GetGoodsDetaiBean(getActivity(),fl);
+		ULog.d("GetGoodsDetaiBean url = " + url);
+		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
+
+			@Override
+			public void onStart() {
+				progDialog.show();
+			}
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				progDialog.dismiss();
+				ULog.d(responseInfo.result);
+
+				BaseGateWayInterfaceEntity<GoodsBean> bean = new Gson().fromJson(responseInfo.result,
+						new TypeToken<BaseGateWayInterfaceEntity<GoodsBean>>() {}.getType());
+				if (null != bean && bean.getCode() == 0) {
+					goodsBean = bean.getInfo();
+					
+					getSkuTest();
+					initData();
+//					AlipayUtil.doPayment(getActivity());
+//					Toast.makeText(getActivity(), bean.getInfo(), Toast.LENGTH_LONG).show();
+				}
+				else {
+					Toast.makeText(getActivity(), bean.getMsg(), Toast.LENGTH_LONG).show();
+				}
+				
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				progDialog.dismiss();
+				ULog.e(error.toString() + "\n" + msg);
+				Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
+			}
+		});
+
+	}
+ 
+	/**
+	 * 自己添加的 sku数据 并存入到数据库当中
+	 */
+	protected void getSkuTest() {
+		
+		try {
+			dbUtils.dropTable(SKUBean2.class);
+		} catch (DbException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		ArrayList<SKUBean2> skuBeanList = new ArrayList<SKUBean2>();
+		for (int i = 2; i < 18; i++) {
+			SKUBean2 skubean = new SKUBean2();
+			skubean.setCostPrice(0);
+			skubean.setPrice(149000);
+			skubean.setItemId(9);
+			skubean.setId(i);
+			skubean.setMarketPrice(0);
+			skubean.setStatus(0);
+			skubean.setStockNum(i);
+			
+			if (i<8) {
+				skubean.setSkuAttr("1627207:28335;20509:28381");
+				skubean.setSkuAttrname("1627207:28335:颜色分类:绿色;20509:28381:尺码:XXS");
+				
+			}else if (i>7&&i<11) {
+				skubean.setSkuAttr("1627207:3232480;20509:28381");
+				skubean.setSkuAttrname("1627207:3232480:颜色分类:粉红色;20509:28313:尺码:XS");
+				
+			}else if (i>11&&i<13) {
+				skubean.setSkuAttr("1627207:28341;20509:28381");
+				skubean.setSkuAttrname("1627207:28341:颜色分类:黑色;20509:28381:尺码:XXS");
+				
+			}else{
+				skubean.setSkuAttr("1627207:28341;20509:28313");
+				skubean.setSkuAttrname("1627207:28341:颜色分类:红色;20509:28313:尺码:XS");
+			}
+			try {
+				dbUtils.save(skubean);
+			} catch (DbException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
+		
 	}
 
 	private void initView(View view) {
 		// TODO Auto-generated method stub
 		tvTitle= (TextView)view.findViewById(R.id.app_top_title_tv_centre);
 		tvTitle.setText("宝贝详情");
+		progDialog = ProgressDialog.show(getActivity());
+		progDialog.setCancelable(true);
 	}
 
 	private void initData() {
@@ -98,7 +205,7 @@ public class GoodsDetailFragment extends BaseFragment {
 				public void onClickType(Bundle bundle) {
 
 					ULog.i("onclick");
-					ShoppingSelectSKUDialog.show2(context, getTestSKUBean(), onSkuResultListener);
+					ShoppingSelectSKUDialog.show2(context, goodsBean.getSkuList(), onSkuResultListener);
 				}
 			};
 
@@ -190,7 +297,7 @@ public class GoodsDetailFragment extends BaseFragment {
 	OnSkuResultListener onSkuResultListener = new OnSkuResultListener() {
 
 		@Override
-		public void onSkuResult(SKUBean bean) {
+		public void onSkuResult(ArrayList<SkuList> beanResult) {
 
 		}
 	};

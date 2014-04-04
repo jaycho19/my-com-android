@@ -1,6 +1,7 @@
 package com.next.lottery.listener;
 
-import com.next.lottery.beans.SKUBean;
+import java.util.ArrayList;
+import com.next.lottery.beans.SkuList;
 public interface OnSkuResultListener {
-	public void onSkuResult(SKUBean bean);
+	public void onSkuResult(ArrayList<SkuList> beanResult);
 }

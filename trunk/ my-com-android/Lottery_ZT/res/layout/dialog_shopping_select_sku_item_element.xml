@@ -7,4 +7,4 @@
     android:gravity="center"
     android:text="颜色"
     android:clickable="true"
-    android:textColor="@color/black" />
+    android:textColor="@color/tv_shop_dialog_color" />

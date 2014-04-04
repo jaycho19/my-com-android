@@ -50,6 +50,7 @@
                 android:text="帮助中心" />
 
             <TextView
+                android:id="@+id/fragment_usercenter_tv_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

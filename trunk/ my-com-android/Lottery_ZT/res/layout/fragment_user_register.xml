@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:slip="http://schemas.android.com/apk/res/com.next.lottery"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/whitesmoke"
+    android:orientation="vertical" >
+
+    <include layout="@layout/activity_user_setting_top_bar" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:autoLink="web"
+        android:lineSpacingMultiplier="1.4"
+        android:text="欢迎您成为XXXX会员，首次登入系统将会赠送你20元优惠卷"
+        android:textColor="@color/grey" />
+
+    <LinearLayout
+        android:id="@+id/register_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="43dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/inputbox_bg"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="帐号"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/fragment_usr_register_account_et"
+           android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:focusable="true"
+            android:hint="手机号码/电子邮件"
+            android:imeOptions="actionDone"
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:textColor="#666666"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="43dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/inputbox_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="密码"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/fragment_usr_register_password_et"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7.22"
+            android:background="@null"
+            android:focusable="true"
+            android:hint="请输入密码"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textColor="#666666"
+            android:textSize="15sp"  />
+
+        <com.next.lottery.view.SlipButton
+            android:id="@+id/fragment_usr_register_slip"
+            android:layout_width="82px"
+            android:layout_height="30px"
+            slip:bgoff="@drawable/slipbtn_abc"
+            slip:bgon="@drawable/slipbtn_password"
+            slip:slipbtn="@drawable/slipbtn_slipicon" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/fragment_usr_register_ok_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_login"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="17sp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:text="温馨提示"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:autoLink="web"
+        android:lineSpacingMultiplier="1.4"
+        android:text="@string/register_an_text"
+        android:textColor="@color/grey" />
+
+</LinearLayout>

@@ -1,6 +1,7 @@
 package com.next.lottery;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -66,8 +67,6 @@ public class LRLoginActivity extends BaseActivity {
 		setContentView(R.layout.activity_lr_login);
 		ViewUtils.inject(this);
 		context = this;
-
-		slipBtn.setCheck(true);
 
 		slipBtn.setCheck(true);
 		slipBtn.SetOnChangedListener(new OnChangedListener() {
@@ -156,6 +155,7 @@ public class LRLoginActivity extends BaseActivity {
 			login();
 			break;
 		case R.id.activity_lr_login_tv_register:
+			this.startActivity(new Intent(this,UserRegisterActivity.class));
 			break;
 		case R.id.activity_lr_login_tv_forgetpsw:
 			break;
