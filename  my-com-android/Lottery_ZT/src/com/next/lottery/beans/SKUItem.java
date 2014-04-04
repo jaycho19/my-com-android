@@ -2,28 +2,28 @@ package com.next.lottery.beans;
 
 public class SKUItem {
 	public SKUItem(String name) {
-		id = "";
-		this.name = name;
+		vid = "";
+		this.vname = name;
 	}
 
 	public SKUItem(String id, String name) {
-		this.id = id;
-		this.name = name;
+		this.vid = id;
+		this.vname = name;
 	}
 
-	private String id;   // 编号
-	private String name; // 编号说明，不如 蓝色，M号等
+	private String vid;   // 编号
+	private String vname; // 编号说明，不如 蓝色，M号等
 
 	public String getId() {
-		return id;
+		return vid;
 	}
 
 	public void setId(String id) {
-		this.id = id;
+		this.vid = id;
 	}
 
 	public String getName() {
-		return name;
+		return vname;
 	}
 
 	public void setName(String name) {

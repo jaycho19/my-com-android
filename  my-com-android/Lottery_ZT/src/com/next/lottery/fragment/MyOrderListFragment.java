@@ -50,7 +50,7 @@ import com.next.lottery.view.PullToRefreshView.OnHeaderRefreshListener;
  * 
  */
 @SuppressLint("ValidFragment")
-public class MyOrderListFragment extends BaseFragment implements OnClickListener, OnHeaderRefreshListener, OnFooterRefreshListener {
+public class MyOrderListFragment extends BaseFragment implements OnHeaderRefreshListener, OnFooterRefreshListener {
 
 	@ViewInject(R.id.fragment_my_order_listview)
 	private ListView					listView;

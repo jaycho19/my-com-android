@@ -43,7 +43,7 @@ import com.next.lottery.nets.HttpActions;
 import com.next.lottery.utils.Keys;
 
 @SuppressLint("ValidFragment")
-public class ShoppingCartALLFragment extends BaseFragment implements OnClickListener {
+public class ShoppingCartALLFragment extends BaseFragment  {
 
 	@ViewInject(R.id.fragment_shoppingcart_all_list)
 	private ListView					listView;
@@ -164,7 +164,6 @@ public class ShoppingCartALLFragment extends BaseFragment implements OnClickList
 		progDialog.setCancelable(true);
 		// getShopCartList();
 
-		settleAccountLin.setOnClickListener(this);
 		checkBoxAll.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
@@ -181,50 +180,27 @@ public class ShoppingCartALLFragment extends BaseFragment implements OnClickList
 	}
 
 	private void initAdapter() {
-		// if (null==allAdapter) {
 		allAdapter = new ShoppingCartAllAdapter(getActivity(), shopCartslist, handler);
 		listView.setAdapter(allAdapter);
-		// }else{
-		// allAdapter.notifyDataSetChanged();
-		// }
+		
+		/*切换tab之后 合计总额刷新*/
+		if (allAdapter!=null) {
+			float sum = 0;
+			int plusNum = 0;
+			for (int i = 0; i < shopCartslist.size(); i++) {
+				if (shopCartslist.get(i).getIsSelected()==1) {
+					sum=sum+Float.parseFloat(shopCartslist.get(i)
+							.getPrice());
+					plusNum++;
+				}
+			}
+			allPriceTv.setText(String.valueOf(sum));
+			settleAccountTv.setText(plusNum > 0 ? String
+					.valueOf(plusNum) : "0");
+			
+		}
 	}
 
-	// private void getShopCartList() {
-	// String url = HttpActions.GetShopCartsList();
-	// ULog.d("addShopCarts url = " + url);
-	// new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
-	//
-	// @Override
-	// public void onStart() {
-	// progDialog.show();
-	// }
-	//
-	// @Override
-	// public void onSuccess(ResponseInfo<String> responseInfo) {
-	// progDialog.dismiss();
-	// ULog.d(responseInfo.result);
-	//
-	// BaseGateWayInterfaceEntity<ArrayList<ShopCartsInfo>> bean = new
-	// Gson().fromJson(responseInfo.result,
-	// new TypeToken<BaseGateWayInterfaceEntity<ArrayList<ShopCartsInfo>>>()
-	// {}.getType());
-	// if (null != bean && bean.getCode() == 0) {
-	//
-	// shopCartslist = bean.getInfo();
-	// initAdapter();
-	// }
-	// else {
-	// Toast.makeText(getActivity(), bean.getMsg(), Toast.LENGTH_LONG).show();
-	// }
-	// }
-	// @Override
-	// public void onFailure(HttpException error, String msg) {
-	// progDialog.dismiss();
-	// ULog.e(error.toString() + "\n" + msg);
-	// }
-	// });
-	//
-	// }
 	@OnClick(R.id.fragment_shipping_all_settle_account_lin)
 	@Override
 	public void onClick(View v) {
@@ -236,15 +212,14 @@ public class ShoppingCartALLFragment extends BaseFragment implements OnClickList
 				if (info.getIsSelected() == 1)
 					orderlist.add(info);
 			}
-			
 			if (orderlist.size()==0) {
 				Toast.makeText(getActivity(), "至少选择一件商品",Toast.LENGTH_SHORT ).show();
-				return;
+			}else{
+				Intent intent = new Intent(getActivity(), EnsureOrderListActivity.class);
+				intent.putParcelableArrayListExtra("orderList", orderlist);
+				startActivity(intent);
 			}
 			
-			Intent intent = new Intent(getActivity(), EnsureOrderListActivity.class);
-			intent.putParcelableArrayListExtra("orderList", orderlist);
-			startActivity(intent);
 			break;
 
 		default:
@@ -257,41 +232,4 @@ public class ShoppingCartALLFragment extends BaseFragment implements OnClickList
 		// TODO Auto-generated method stub
 		this.shopCartslist = list;
 	}
-
-	/* 生成订单 */
-	private void creatOrder() {
-		String url = HttpActions.creatOrder();
-		ULog.d("addShopCarts url = " + url);
-		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
-
-			@Override
-			public void onStart() {
-				progDialog.show();
-			}
-
-			@Override
-			public void onSuccess(ResponseInfo<String> responseInfo) {
-				progDialog.dismiss();
-				ULog.d(responseInfo.result);
-
-				BaseGateWayInterfaceEntity<String> bean = new Gson().fromJson(responseInfo.result,
-						new TypeToken<BaseGateWayInterfaceEntity<String>>() {}.getType());
-				if (null != bean && bean.getCode() == 0) {
-
-					Toast.makeText(getActivity(), bean.getInfo(), Toast.LENGTH_LONG).show();
-				}
-				else {
-					Toast.makeText(getActivity(), bean.getMsg(), Toast.LENGTH_LONG).show();
-				}
-			}
-
-			@Override
-			public void onFailure(HttpException error, String msg) {
-				progDialog.dismiss();
-				ULog.e(error.toString() + "\n" + msg);
-			}
-		});
-
-	}
-
 }

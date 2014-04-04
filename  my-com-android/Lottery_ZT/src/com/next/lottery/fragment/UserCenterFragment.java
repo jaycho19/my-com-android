@@ -19,6 +19,7 @@ import com.next.lottery.R;
 import com.next.lottery.UserCouponActivity;
 import com.next.lottery.UserHelpCenterActivity;
 import com.next.lottery.UserInfoActivity;
+import com.next.lottery.UserPassWordModifyActivity;
 import com.next.lottery.UserSettingActivity;
 import com.next.lottery.utils.User;
 
@@ -45,6 +46,10 @@ public class UserCenterFragment extends BaseFragment {
 	private TextView tvMyCoupon; // 我的优惠券
 	@ViewInject(R.id.fragment_usercenter_tv_myorder)
 	private TextView tvMyOrder; // 我的订单
+	@ViewInject(R.id.fragment_usercenter_tv_logout)
+	private TextView tvLogout; // 注销用户
+	@ViewInject(R.id.fragment_usercenter_tv_mypassowrd)
+	private TextView tvMyPassWord; // 注销用户
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,6 +69,8 @@ public class UserCenterFragment extends BaseFragment {
 			,R.id.fragment_usercenter_tv_myhelp
 			,R.id.fragment_usercenter_tv_mycoupon
 			,R.id.fragment_usercenter_tv_myorder
+			,R.id.fragment_usercenter_tv_logout
+			,R.id.fragment_usercenter_tv_mypassowrd
 			
 
 	})
@@ -86,6 +93,14 @@ public class UserCenterFragment extends BaseFragment {
 			break;
 		case R.id.fragment_usercenter_tv_myorder:
 			startActivity(new Intent(getActivity(), MyOrderListActivity.class));
+			break;
+		case R.id.fragment_usercenter_tv_mypassowrd:
+			startActivity(new Intent(getActivity(), UserPassWordModifyActivity.class));
+			break;
+		case R.id.fragment_usercenter_tv_logout:
+			User.saveUserId(getActivity(), "");// 注销清除用户信息
+			User.saveUserPassword(getActivity(), "");
+			startActivity(new Intent(getActivity(), LRLoginActivity.class));
 			break;
 		default:
 			break;

@@ -39,8 +39,6 @@ public class MainActivity extends BaseActivity {
 	
 	public static int changeTab = 0;
 	
-	private List<Fragment> frageMentList = new ArrayList<Fragment>();
-
 	// @ViewInject(R.id.tv_topbar_menu)
 	// private TextView tvTopBarMenu;
 
