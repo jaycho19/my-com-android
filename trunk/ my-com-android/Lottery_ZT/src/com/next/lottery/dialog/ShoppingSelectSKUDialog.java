@@ -1,4 +1,5 @@
 package com.next.lottery.dialog;
+
 import java.util.ArrayList;
 import java.util.List;
 import android.app.Dialog;
@@ -30,7 +31,8 @@ import com.next.lottery.listener.OnSkuResultListener;
  * 
  */
 public class ShoppingSelectSKUDialog extends Dialog {
-	private static ShoppingSelectSKUDialog dialog;
+	private static ShoppingSelectSKUDialog	dialog;
+	static DbUtils									db;
 
 	public ShoppingSelectSKUDialog(Context context, int theme) {
 		super(context, theme);
@@ -47,12 +49,12 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		init1(context, bean, onSkuResultListener);
 		dialog.show();
 	}
-	
+
 	public static void show1(Context context, ArrayList<SkuList> bean, OnSkuResultListener onSkuResultListener) {
-		show(context,bean,onSkuResultListener);
-		
+		show(context, bean, onSkuResultListener);
+
 	}
-	
+
 	public static void show2(Context context, ArrayList<SkuList> bean, OnSkuResultListener onSkuResultListener) {
 		if (null != dialog && dialog.isShowing())
 			return;
@@ -61,21 +63,22 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		dialog.setContentView(R.layout.dialog_shopping_select_sku_2);
 		dialog.setCancelable(true);
 		dialog.getWindow().setLayout(DeviceInfo.SCREEN_WIDTH_PORTRAIT, -2);
+
+		db = DbUtils.create(context);
 		init2(context, bean, onSkuResultListener);
 		dialog.show();
 	}
 
-	private static void init1(final Context context, ArrayList<SkuList> arrayList, final OnSkuResultListener onSkuResultListener) {
+	private static void init1(final Context context, ArrayList<SkuList> arrayList,
+			final OnSkuResultListener onSkuResultListener) {
 		final ArrayList<SkuList> beanResult = init(context, arrayList, onSkuResultListener);
 
 		dialog.findViewById(R.id.dialog_select_sku_tv_ok).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				for (int i = 0; i <beanResult.size(); i++) {
-					if (null == beanResult.get(i)
-							|| null == beanResult.get(i).getValues()) {
-						Toast.makeText(context, "请选择" + "参数", Toast.LENGTH_LONG)
-						.show();
+				for (int i = 0; i < beanResult.size(); i++) {
+					if (null == beanResult.get(i) || null == beanResult.get(i).getValues()) {
+						Toast.makeText(context, "请选择" + "参数", Toast.LENGTH_LONG).show();
 						return;
 					}
 				}
@@ -86,33 +89,32 @@ public class ShoppingSelectSKUDialog extends Dialog {
 
 	}
 
-	private static void init2(final Context context, ArrayList<SkuList> bean, final OnSkuResultListener onSkuResultListener) {
+	private static void init2(final Context context, ArrayList<SkuList> bean,
+			final OnSkuResultListener onSkuResultListener) {
 		final ArrayList<SkuList> beanResult = init(context, bean, onSkuResultListener);
 		dialog.findViewById(R.id.dialog_select_sku_tv_buy_now).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
-				if (beanResult ==null) {
+
+				if (beanResult == null) {
 					return;
 				}
 				for (int i = 0; i < beanResult.size(); i++) {
-					if (null == beanResult.get(i)
-							|| null == beanResult.get(i).getValues()) {
-						Toast.makeText(context, "请选择" + "参数", Toast.LENGTH_LONG)
-								.show();
+					if (null == beanResult.get(i) || null == beanResult.get(i).getValues()) {
+						Toast.makeText(context, "请选择" + "参数", Toast.LENGTH_LONG).show();
 						return;
 					}
 				}
-				
+
 				dialog.dismiss();
-				//弹出支付宝
+				// 弹出支付宝
 				AlipayUtil.doPayment(context);
 			}
 		});
 		dialog.findViewById(R.id.dialog_select_sku_tv_add_shopping_cart).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//				onSkuResultListener.onSkuResult(beanResult);
+				// onSkuResultListener.onSkuResult(beanResult);
 				dialog.dismiss();
 				Toast.makeText(context, "添加成功", 3000).show();
 			}
@@ -120,10 +122,11 @@ public class ShoppingSelectSKUDialog extends Dialog {
 
 	}
 
-	private static ArrayList<SkuList> init(final Context context, final ArrayList<SkuList> bean, final OnSkuResultListener onSkuResultListener) {
+	private static ArrayList<SkuList> init(final Context context, final ArrayList<SkuList> bean,
+			final OnSkuResultListener onSkuResultListener) {
 
 		/** 构造回调实列 */
-		 final ArrayList<SkuList> EntityResult = new ArrayList<SkuList>();
+		final ArrayList<SkuList> EntityResult = new ArrayList<SkuList>();
 		for (int i = 0; i < bean.size(); i++) {
 			SkuList beanEntity = new SkuList();
 			beanEntity.setPid(bean.get(i).getPid());
@@ -143,7 +146,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 			skuName.setText(sku.getPname());
 			LineLayout l = (LineLayout) view.findViewById(R.id.dialog_shopping_select_sku_item_linelayout);
 			for (final SKUItem s : sku.getValues()) {
-				TextView tv = (TextView) LayoutInflater.from(context).inflate(
+				final TextView tv = (TextView) LayoutInflater.from(context).inflate(
 						R.layout.dialog_shopping_select_sku_item_element, null);
 				tv.setText(s.getName());
 				tv.setTag(s.getId());
@@ -156,33 +159,39 @@ public class ShoppingSelectSKUDialog extends Dialog {
 							((LineLayout) v.getParent()).setNOSelect();
 						}
 						v.setSelected(true);
-						
-						/*判断尺码/颜色 有无*/
+
+						/* 判断尺码/颜色 有无 */
 						for (int i = 0; i < bean.size(); i++) {
 							if (sku.getPname().equals(bean.get(i).getPname())) {
-//								DbUtils.create(context).findAll(Selector.from(SKUBean2.class));
-								try {
-									List<SKUBean2> skulistDb =DbUtils.create(context).findAll(Selector.from(SKUBean2.class));
-								} catch (DbException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-								((LineLayout)ll.getChildAt(i==0?i:1).findViewById(R.id.dialog_shopping_select_sku_item_linelayout)).setNOEnable();
-							}
+//									List<SKUBean2> skubean = db.findAll(Selector.from(SKUBean2.class));
+//									List<SkuList> skulist = db.findAll(Selector.from(SkuList.class));
+//									for (int j = 0; j < array.length; j++) {
+//									tv.gett
+//									}
+									ULog.i("v getText"+tv.getText()+"id"+tv.getTag());
+//									DbUtils.create(context).findAll(Selector.from(SKUBean2.class));
+//								} catch (DbException e1) {
+//									// TODO Auto-generated catch block
+//									e1.printStackTrace();
+//								}
+								((LineLayout) ll.getChildAt(i == 0 ? i : 1).findViewById(
+										R.id.dialog_shopping_select_sku_item_linelayout)).setNOEnable();
 						}
-						
-						
-						/*获取选中内容*/
+						}
+
+						/* 获取选中内容 */
 						for (int i = 0; i < bean.size(); i++) {
 							if (sku.getPname().equals(bean.get(i).getPname())) {
 								ArrayList<SKUItem> values = new ArrayList<SKUItem>();
-								
+
 								SkuList beanEntity = new SkuList();
-//								beanEntity.setPid(bean.get(i).getPid());
-//								beanEntity.setPname(bean.get(i).getPname());
-								values.add(bean.get(i).getValues().get(((LineLayout) v.getParent()).getSelectPosition()));
+								// beanEntity.setPid(bean.get(i).getPid());
+								// beanEntity.setPname(bean.get(i).getPname());
+								values.add(bean.get(i).getValues()
+										.get(((LineLayout) v.getParent()).getSelectPosition()));
 								beanEntity.setValues(values);
-								ULog.i(bean.get(i).getValues().get(((LineLayout) v.getParent()).getSelectPosition()).getName());
+								ULog.i(bean.get(i).getValues().get(((LineLayout) v.getParent()).getSelectPosition())
+										.getName());
 								EntityResult.get(i).setValues(values);
 							}
 						}
@@ -199,17 +208,16 @@ public class ShoppingSelectSKUDialog extends Dialog {
 			@Override
 			public void onClick(View v) {
 				chgNumber(tvNumber, 1);
-//				beanResult.setNum(Integer.valueOf(tvNumber.getText().toString()));
+				// beanResult.setNum(Integer.valueOf(tvNumber.getText().toString()));
 			}
 		});
 		dialog.findViewById(R.id.dialog_select_sku_tv_reducenumber).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				chgNumber(tvNumber, -1);
-//				beanResult.setNum(Integer.valueOf(tvNumber.getText().toString()));
+				// beanResult.setNum(Integer.valueOf(tvNumber.getText().toString()));
 			}
 		});
-
 
 		return EntityResult;
 	}
