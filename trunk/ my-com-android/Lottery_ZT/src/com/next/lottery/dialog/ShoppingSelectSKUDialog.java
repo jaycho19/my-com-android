@@ -1,6 +1,7 @@
 package com.next.lottery.dialog;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import android.app.Dialog;
 import android.content.Context;
@@ -15,15 +16,25 @@ import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.DeviceInfo;
 import com.dongfang.v4.app.LineLayout;
 import com.dongfang.views.ScrollViewExtend;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.google.zxing.client.result.ProductParsedResult;
 import com.lidroid.xutils.DbUtils;
+import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.exception.DbException;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.next.lottery.R;
 import com.next.lottery.alipay.AlipayUtil;
+import com.next.lottery.beans.BaseGateWayInterfaceEntity;
 import com.next.lottery.beans.SKUBean2;
 import com.next.lottery.beans.SkuList;
 import com.next.lottery.beans.SKUItem;
 import com.next.lottery.listener.OnSkuResultListener;
+import com.next.lottery.nets.HttpActions;
 
 /**
  * 
@@ -33,6 +44,7 @@ import com.next.lottery.listener.OnSkuResultListener;
 public class ShoppingSelectSKUDialog extends Dialog {
 	private static ShoppingSelectSKUDialog	dialog;
 	static DbUtils									db;
+	private static ProgressDialog				progDialog;
 
 	public ShoppingSelectSKUDialog(Context context, int theme) {
 		super(context, theme);
@@ -63,15 +75,21 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		dialog.setContentView(R.layout.dialog_shopping_select_sku_2);
 		dialog.setCancelable(true);
 		dialog.getWindow().setLayout(DeviceInfo.SCREEN_WIDTH_PORTRAIT, -2);
-
-		db = DbUtils.create(context);
-		init2(context, bean, onSkuResultListener);
+		List<SKUBean2> skubean = null;
+		try {
+			db = DbUtils.create(context);
+			skubean = db.findAll(Selector.from(SKUBean2.class));
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		init2(context, bean, onSkuResultListener,skubean);
 		dialog.show();
 	}
 
 	private static void init1(final Context context, ArrayList<SkuList> arrayList,
 			final OnSkuResultListener onSkuResultListener) {
-		final ArrayList<SkuList> beanResult = init(context, arrayList, onSkuResultListener);
+		final ArrayList<SkuList> beanResult = init(context, arrayList, onSkuResultListener, null);
 
 		dialog.findViewById(R.id.dialog_select_sku_tv_ok).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -90,8 +108,8 @@ public class ShoppingSelectSKUDialog extends Dialog {
 	}
 
 	private static void init2(final Context context, ArrayList<SkuList> bean,
-			final OnSkuResultListener onSkuResultListener) {
-		final ArrayList<SkuList> beanResult = init(context, bean, onSkuResultListener);
+			final OnSkuResultListener onSkuResultListener, List<SKUBean2> skubean) {
+		final ArrayList<SkuList> beanResult = init(context, bean, onSkuResultListener,skubean);
 		dialog.findViewById(R.id.dialog_select_sku_tv_buy_now).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -107,6 +125,8 @@ public class ShoppingSelectSKUDialog extends Dialog {
 				}
 
 				dialog.dismiss();
+				
+				creatOrder(context);
 				// 弹出支付宝
 				AlipayUtil.doPayment(context);
 			}
@@ -123,8 +143,9 @@ public class ShoppingSelectSKUDialog extends Dialog {
 	}
 
 	private static ArrayList<SkuList> init(final Context context, final ArrayList<SkuList> bean,
-			final OnSkuResultListener onSkuResultListener) {
-
+			final OnSkuResultListener onSkuResultListener, final List<SKUBean2> skubeanFromDB) {
+		Collections.reverse(bean);
+		
 		/** 构造回调实列 */
 		final ArrayList<SkuList> EntityResult = new ArrayList<SkuList>();
 		for (int i = 0; i < bean.size(); i++) {
@@ -159,34 +180,29 @@ public class ShoppingSelectSKUDialog extends Dialog {
 							((LineLayout) v.getParent()).setNOSelect();
 						}
 						v.setSelected(true);
-
 						/* 判断尺码/颜色 有无 */
-						for (int i = 0; i < bean.size(); i++) {
-							if (sku.getPname().equals(bean.get(i).getPname())) {
-//									List<SKUBean2> skubean = db.findAll(Selector.from(SKUBean2.class));
-//									List<SkuList> skulist = db.findAll(Selector.from(SkuList.class));
-//									for (int j = 0; j < array.length; j++) {
-//									tv.gett
-//									}
-									ULog.i("v getText"+tv.getText()+"id"+tv.getTag());
-//									DbUtils.create(context).findAll(Selector.from(SKUBean2.class));
-//								} catch (DbException e1) {
-//									// TODO Auto-generated catch block
-//									e1.printStackTrace();
-//								}
-								((LineLayout) ll.getChildAt(i == 0 ? i : 1).findViewById(
-										R.id.dialog_shopping_select_sku_item_linelayout)).setNOEnable();
-						}
+						for (int i = 0; i < (skubeanFromDB!=null?skubeanFromDB.size():0) ; i++) {
+							if (skubeanFromDB.get(i).getSkuAttr().contains((CharSequence) tv.getTag())) {
+								ULog.i(skubeanFromDB.get(i).getSkuAttrname());
+								String attrname = skubeanFromDB.get(i).getSkuAttrname();
+								String attrnameSubString = attrname.substring(0, attrname.lastIndexOf(":")-3);//减去3 是要去除  尺码是
+								String id = attrnameSubString.substring(attrnameSubString.lastIndexOf(":")+1);
+								String size = attrname.substring(attrname.lastIndexOf(":")+1);
+								for (int j = 0; j < bean.get(0).getValues().size(); j++) {
+									SKUItem item = bean.get(0).getValues().get(j);
+									if (id.equalsIgnoreCase(item.getId())) {
+										((LineLayout) ll.getChildAt(1).findViewById(
+												R.id.dialog_shopping_select_sku_item_linelayout)).setNOEnable(j);
+									}
+								}
+							}
 						}
 
 						/* 获取选中内容 */
 						for (int i = 0; i < bean.size(); i++) {
 							if (sku.getPname().equals(bean.get(i).getPname())) {
 								ArrayList<SKUItem> values = new ArrayList<SKUItem>();
-
 								SkuList beanEntity = new SkuList();
-								// beanEntity.setPid(bean.get(i).getPid());
-								// beanEntity.setPname(bean.get(i).getPname());
 								values.add(bean.get(i).getValues()
 										.get(((LineLayout) v.getParent()).getSelectPosition()));
 								beanEntity.setValues(values);
@@ -231,6 +247,46 @@ public class ShoppingSelectSKUDialog extends Dialog {
 	public interface OnShopingSKUListener {
 		public void ok(String phone, String authCode);
 		// public void cancel();
+	}
+	
+	/* 生成订单 */
+	private static void creatOrder(final Context context) {
+		String url = HttpActions.creatOrder(context);
+		ULog.d("addShopCarts url = " + url);
+		progDialog = ProgressDialog.show(context);
+		progDialog.setCancelable(true);
+		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
+
+			@Override
+			public void onStart() {
+				progDialog.show();
+			}
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				progDialog.dismiss();
+				ULog.d(responseInfo.result);
+
+				BaseGateWayInterfaceEntity<String> bean = new Gson().fromJson(responseInfo.result,
+						new TypeToken<BaseGateWayInterfaceEntity<String>>() {}.getType());
+				if (null != bean && bean.getCode() == 0) {
+
+					AlipayUtil.doPayment(context);
+					Toast.makeText(context, bean.getInfo(), Toast.LENGTH_LONG).show();
+				}
+				else {
+					Toast.makeText(context, bean.getMsg(), Toast.LENGTH_LONG).show();
+				}
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				progDialog.dismiss();
+				ULog.e(error.toString() + "\n" + msg);
+				Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+			}
+		});
+
 	}
 
 }

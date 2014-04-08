@@ -24,11 +24,13 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.MainActivity;
 import com.next.lottery.R;
 import com.next.lottery.beans.BaseGateWayInterfaceEntity;
+import com.next.lottery.beans.GoodsBean;
 import com.next.lottery.beans.UserBean;
 import com.next.lottery.dialog.ProgressDialog;
 import com.next.lottery.listener.OnClickTypeListener;
 import com.next.lottery.nets.HttpActions;
 import com.next.lottery.utils.User;
+import com.next.lottery.utils.Util;
 
 /**
  * 宝贝详情页 价格 销售量fragment
@@ -40,7 +42,7 @@ public class GoodsDetailSaleInfoFragment extends BaseFragment {
 	protected static String		TAG	= GoodsDetailSaleInfoFragment.class.getSimpleName();
 
 	private OnClickTypeListener	onClickTypeListener;
-	private List<String>		list;
+	private GoodsBean goodsBean;
 
 	@ViewInject(R.id.fragment_goods_detail_title)
 	private TextView			goodsTitle;
@@ -64,20 +66,22 @@ public class GoodsDetailSaleInfoFragment extends BaseFragment {
 	}
 
 	private void initView(View view) {
+		try {
 		goodsPriPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); // 添加删除线
+		goodsTitle.setText(goodsBean.getTitle());
 		
+		goodsNewPrice.setText(Util.fen2Yuan(goodsBean.getPrice()));
+		goodsPriPrice.setText(Util.fen2Yuan(goodsBean.getPrice()));
 		progDialog = ProgressDialog.show(getActivity());
 		progDialog.setCancelable(true);
-
-		try {
 
 		} catch (Exception e) {
 			ULog.e("initView exception: " + e.getMessage());
 		}
 	}
 
-	public void setData(List<String> list, OnClickTypeListener onClickTypeListener) {
-		this.list = list;
+	public void setData(GoodsBean goodsBean, OnClickTypeListener onClickTypeListener) {
+		this.goodsBean = goodsBean;
 		this.onClickTypeListener = onClickTypeListener;
 	}
 

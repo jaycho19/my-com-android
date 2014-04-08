@@ -1,6 +1,7 @@
 package com.next.lottery.fragment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.dongfang.utils.ULog;
@@ -140,9 +141,9 @@ public class GoodsDetailFragment extends BaseFragment {
 
 		try {
 			dbUtils.dropTable(SKUBean2.class);
-//			dbUtils.dropTable(SkuList.class);
+			// dbUtils.dropTable(SkuList.class);
 			ArrayList<SKUBean2> skuBeanList = new ArrayList<SKUBean2>();
-			for (int i = 2; i < 18; i++) {
+			for (int i = 0; i < 4; i++) {
 				SKUBean2 skubean = new SKUBean2();
 				skubean.setCostPrice(0);
 				skubean.setPrice(149000);
@@ -152,30 +153,63 @@ public class GoodsDetailFragment extends BaseFragment {
 				skubean.setStatus(0);
 				skubean.setStockNum(i);
 
-				if (i < 8) {
+				if (i == 0) {
 					skubean.setSkuAttr("1627207:28335;20509:28381");
 					skubean.setSkuAttrname("1627207:28335:颜色分类:绿色;20509:28381:尺码:XXS");
+					skuBeanList.add(skubean);
+//					skubean.setSkuAttr("1627207:28335;20509:28313");
+//					skubean.setSkuAttrname("1627207:28335:颜色分类:绿色;20509:28313:尺码:XS");
+//					skuBeanList.add(skubean);
+//					skubean.setSkuAttr("1627207:28335;20509:28314");
+//					skubean.setSkuAttrname("1627207:28335:颜色分类:绿色;20509:28314:尺码:S");
+//					skuBeanList.add(skubean);
 
 				}
-				else if (i > 7 && i < 11) {
+				else if (i == 1) {
 					skubean.setSkuAttr("1627207:3232480;20509:28381");
 					skubean.setSkuAttrname("1627207:3232480:颜色分类:粉红色;20509:28313:尺码:XS");
-
+					skuBeanList.add(skubean);
+//					skubean.setSkuAttr("1627207:3232480;20509:28314");
+//					skubean.setSkuAttrname("1627207:3232480:颜色分类:粉红色;20509:28314:尺码:S");
+//					skuBeanList.add(skubean);
+//					skubean.setSkuAttr("1627207:3232480;20509:28315");
+//					skubean.setSkuAttrname("1627207:3232480:颜色分类:粉红色;20509:28315:尺码:M");
+//					skuBeanList.add(skubean);
 				}
-				else if (i > 11 && i < 13) {
-					skubean.setSkuAttr("1627207:28341;20509:28381");
-					skubean.setSkuAttrname("1627207:28341:颜色分类:黑色;20509:28381:尺码:XXS");
-
+				else if (i == 2) {
+//					skubean.setSkuAttr("1627207:28341;20509:28381");
+//					skubean.setSkuAttrname("1627207:28341:颜色分类:黑色;20509:28381:尺码:XXS");
+//					skuBeanList.add(skubean);
+					skubean.setSkuAttr("1627207:28341;20509:28313");
+					skubean.setSkuAttrname("1627207:28341:颜色分类:黑色;20509:28313:尺码:XS");
+					skuBeanList.add(skubean);
+//					skubean.setSkuAttr("1627207:28341;20509:28314");
+//					skubean.setSkuAttrname("1627207:28341:颜色分类:黑色;20509:28314:尺码:S");
+//					skuBeanList.add(skubean);
 				}
-				else {
+				else if (i == 3) {
 					skubean.setSkuAttr("1627207:28341;20509:28313");
 					skubean.setSkuAttrname("1627207:28341:颜色分类:红色;20509:28313:尺码:XS");
+					skuBeanList.add(skubean);
+//					skubean.setSkuAttr("1627207:28326;20509:28381");
+//					skubean.setSkuAttrname("1627207:28326:颜色分类:红色;20509:28381:尺码:XXS");
+//					skuBeanList.add(skubean);
+//					skubean.setSkuAttr("1627207:28326;20509:28314");
+//					skubean.setSkuAttrname("1627207:28326:颜色分类:红色;20509:28314:尺码:S");
+//					skuBeanList.add(skubean);
+				}else{
+					skubean.setSkuAttr("1627207:28338;20509:28381");
+					skubean.setSkuAttrname("1627207:28338:颜色分类:蓝色;20509:28381:尺码:XXS");
+					skuBeanList.add(skubean);
+//					skubean.setSkuAttr("1627207:28338;20509:28313");
+//					skubean.setSkuAttrname("1627207:28338:颜色分类:蓝色;20509:28313:尺码:XS");
+//					skuBeanList.add(skubean);
 				}
 
-				dbUtils.save(skubean);
 			}
+			dbUtils.saveAll(skuBeanList);
 
-//			dbUtils.save(goodsBean.getSkuList());
+			// dbUtils.save(goodsBean.getSkuList());
 
 		} catch (DbException e) {
 			// TODO Auto-generated catch block
@@ -206,6 +240,7 @@ public class GoodsDetailFragment extends BaseFragment {
 				public void onClickType(Bundle bundle) {
 
 					ULog.i("onclick");
+
 					ShoppingSelectSKUDialog.show2(context, goodsBean.getSkuList(), onSkuResultListener);
 				}
 			};
@@ -242,6 +277,7 @@ public class GoodsDetailFragment extends BaseFragment {
 				// 商品销售详情
 				GoodsDetailSaleInfoFragment fGoodsSaleInfo = new GoodsDetailSaleInfoFragment();
 				fragmentTransaction.add(R.id.activity_goods_detail_layout, fGoodsSaleInfo);
+				fGoodsSaleInfo.setData(goodsBean, onClickTypeListener);
 				fragments.add(fGoodsSaleInfo);
 
 				// 服务，选择颜色 分类尺码

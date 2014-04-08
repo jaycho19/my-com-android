@@ -1140,5 +1140,11 @@ public class Util {
 		Matcher matcher = pattern.matcher(str);
 		return matcher.matches();
 	}
+	/**分 变成元*/
+	public static String fen2Yuan(int fen) {
+		
+		String yuan =fen/100+"."+fen%100;
+		return yuan;
+	}
 	
 }
