@@ -63,16 +63,15 @@ import com.next.lottery.GoodsDetailActivity;
 
 @SuppressLint("ValidFragment")
 public class GoodsDetailFragment extends BaseFragment {
-	private TextView tvTitle;
-	private Context context;
-	private ProgressDialog progDialog;
+	private TextView		tvTitle;
+	private Context			context;
+	private ProgressDialog	progDialog;
 
 	@ViewInject(R.id.activity_goods_detail_layout)
-	private LinearLayout contentLayout;
-	private List<Fragment> fragments = new ArrayList<Fragment>();
-	private GoodsBean goodsBean;
-	private DbUtils dbUtils;
-
+	private LinearLayout	contentLayout;
+	private List<Fragment>	fragments	= new ArrayList<Fragment>();
+	private GoodsBean		goodsBean;
+	private DbUtils			dbUtils;
 
 	public GoodsDetailFragment(GoodsDetailActivity goodsDetailActivity) {
 		// TODO Auto-generated constructor stub
@@ -88,11 +87,12 @@ public class GoodsDetailFragment extends BaseFragment {
 		getDataFromInter();
 		return view;
 	}
-	/*通过接口获取详情数据*/
-	/*1.详情的接口返回的 sku 和image json解析错误  */
+
+	/* 通过接口获取详情数据 */
+	/* 1.详情的接口返回的 sku 和image json解析错误 */
 	private void getDataFromInter() {
 		String[] fl = {};
-		String url = HttpActions.GetGoodsDetaiBean(getActivity(),fl);
+		String url = HttpActions.GetGoodsDetaiBean(getActivity(), fl);
 		ULog.d("GetGoodsDetaiBean url = " + url);
 		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
 
@@ -110,16 +110,17 @@ public class GoodsDetailFragment extends BaseFragment {
 						new TypeToken<BaseGateWayInterfaceEntity<GoodsBean>>() {}.getType());
 				if (null != bean && bean.getCode() == 0) {
 					goodsBean = bean.getInfo();
-					
+
 					getSkuTest();
 					initData();
-//					AlipayUtil.doPayment(getActivity());
-//					Toast.makeText(getActivity(), bean.getInfo(), Toast.LENGTH_LONG).show();
+					// AlipayUtil.doPayment(getActivity());
+					// Toast.makeText(getActivity(), bean.getInfo(),
+					// Toast.LENGTH_LONG).show();
 				}
 				else {
 					Toast.makeText(getActivity(), bean.getMsg(), Toast.LENGTH_LONG).show();
 				}
-				
+
 			}
 
 			@Override
@@ -131,61 +132,61 @@ public class GoodsDetailFragment extends BaseFragment {
 		});
 
 	}
- 
+
 	/**
 	 * 自己添加的 sku数据 并存入到数据库当中
 	 */
 	protected void getSkuTest() {
-		
+
 		try {
 			dbUtils.dropTable(SKUBean2.class);
-		} catch (DbException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		ArrayList<SKUBean2> skuBeanList = new ArrayList<SKUBean2>();
-		for (int i = 2; i < 18; i++) {
-			SKUBean2 skubean = new SKUBean2();
-			skubean.setCostPrice(0);
-			skubean.setPrice(149000);
-			skubean.setItemId(9);
-			skubean.setId(i);
-			skubean.setMarketPrice(0);
-			skubean.setStatus(0);
-			skubean.setStockNum(i);
-			
-			if (i<8) {
-				skubean.setSkuAttr("1627207:28335;20509:28381");
-				skubean.setSkuAttrname("1627207:28335:颜色分类:绿色;20509:28381:尺码:XXS");
-				
-			}else if (i>7&&i<11) {
-				skubean.setSkuAttr("1627207:3232480;20509:28381");
-				skubean.setSkuAttrname("1627207:3232480:颜色分类:粉红色;20509:28313:尺码:XS");
-				
-			}else if (i>11&&i<13) {
-				skubean.setSkuAttr("1627207:28341;20509:28381");
-				skubean.setSkuAttrname("1627207:28341:颜色分类:黑色;20509:28381:尺码:XXS");
-				
-			}else{
-				skubean.setSkuAttr("1627207:28341;20509:28313");
-				skubean.setSkuAttrname("1627207:28341:颜色分类:红色;20509:28313:尺码:XS");
-			}
-			try {
+//			dbUtils.dropTable(SkuList.class);
+			ArrayList<SKUBean2> skuBeanList = new ArrayList<SKUBean2>();
+			for (int i = 2; i < 18; i++) {
+				SKUBean2 skubean = new SKUBean2();
+				skubean.setCostPrice(0);
+				skubean.setPrice(149000);
+				skubean.setItemId(9);
+				skubean.setId(i);
+				skubean.setMarketPrice(0);
+				skubean.setStatus(0);
+				skubean.setStockNum(i);
+
+				if (i < 8) {
+					skubean.setSkuAttr("1627207:28335;20509:28381");
+					skubean.setSkuAttrname("1627207:28335:颜色分类:绿色;20509:28381:尺码:XXS");
+
+				}
+				else if (i > 7 && i < 11) {
+					skubean.setSkuAttr("1627207:3232480;20509:28381");
+					skubean.setSkuAttrname("1627207:3232480:颜色分类:粉红色;20509:28313:尺码:XS");
+
+				}
+				else if (i > 11 && i < 13) {
+					skubean.setSkuAttr("1627207:28341;20509:28381");
+					skubean.setSkuAttrname("1627207:28341:颜色分类:黑色;20509:28381:尺码:XXS");
+
+				}
+				else {
+					skubean.setSkuAttr("1627207:28341;20509:28313");
+					skubean.setSkuAttrname("1627207:28341:颜色分类:红色;20509:28313:尺码:XS");
+				}
+
 				dbUtils.save(skubean);
-			} catch (DbException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
+
+//			dbUtils.save(goodsBean.getSkuList());
+
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		
-		
-		
+
 	}
 
 	private void initView(View view) {
 		// TODO Auto-generated method stub
-		tvTitle= (TextView)view.findViewById(R.id.app_top_title_tv_centre);
+		tvTitle = (TextView) view.findViewById(R.id.app_top_title_tv_centre);
 		tvTitle.setText("宝贝详情");
 		progDialog = ProgressDialog.show(getActivity());
 		progDialog.setCancelable(true);
@@ -229,7 +230,8 @@ public class GoodsDetailFragment extends BaseFragment {
 					@Override
 					public void OnPageScrolled() {
 						/*
-						 * if (pullToRefreshView != null) { pullToRefreshView.needPull = false; }
+						 * if (pullToRefreshView != null) {
+						 * pullToRefreshView.needPull = false; }
 						 */
 					}
 				});
@@ -268,7 +270,7 @@ public class GoodsDetailFragment extends BaseFragment {
 			skuEntity.setSkuName("颜色");
 			ArrayList<SKUItem> al = new ArrayList<SKUItem>();
 			for (int j = 0; j < 18; j++)
-				al.add(new  SKUItem("红色" + j));
+				al.add(new SKUItem("红色" + j));
 			skuEntity.setSkuTypesList(al);
 			all.add(skuEntity);
 		}
@@ -294,11 +296,11 @@ public class GoodsDetailFragment extends BaseFragment {
 		}
 	}
 
-	OnSkuResultListener onSkuResultListener = new OnSkuResultListener() {
+	OnSkuResultListener	onSkuResultListener	= new OnSkuResultListener() {
 
-		@Override
-		public void onSkuResult(ArrayList<SkuList> beanResult) {
+												@Override
+												public void onSkuResult(ArrayList<SkuList> beanResult) {
 
-		}
-	};
+												}
+											};
 }
