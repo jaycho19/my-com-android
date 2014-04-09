@@ -1,7 +1,6 @@
 package com.next.lottery.fragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -10,36 +9,25 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseFragment;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.EnsureOrderListActivity;
 import com.next.lottery.R;
-import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.dialog.ProgressDialog;
 import com.next.lottery.fragment.adapter.ShoppingCartAllAdapter;
-import com.next.lottery.nets.HttpActions;
 import com.next.lottery.utils.Keys;
 
 @SuppressLint("ValidFragment")
@@ -67,9 +55,6 @@ public class ShoppingCartALLFragment extends BaseFragment {
 	private Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			// TODO
-			// Auto-generated
-			// method stub
 			super.handleMessage(msg);
 			switch (msg.what) {
 			case Keys.MSG_REFRESH_BUY_NUM_PLUS:
@@ -77,7 +62,6 @@ public class ShoppingCartALLFragment extends BaseFragment {
 				float allPrice = 0;
 				try {
 					plusNum = Integer.parseInt((String) settleAccountTv.getText()) + 1;
-
 					allPrice = msg.arg1 + Float.parseFloat((String) allPriceTv.getText());
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
@@ -105,7 +89,7 @@ public class ShoppingCartALLFragment extends BaseFragment {
 				float allPrice2 = 0;
 				for (int i = 0; i < shopCartslist.size(); i++) {
 					shopCartslist.get(i).setSelected(true);
-					allPrice2 = allPrice2 + Float.parseFloat(shopCartslist.get(i).getPrice());
+					allPrice2 += shopCartslist.get(i).getPrice();
 				}
 				allPriceTv.setText(String.valueOf(allPrice2));
 				settleAccountTv.setText(String.valueOf(shopCartslist.size()));
@@ -158,7 +142,6 @@ public class ShoppingCartALLFragment extends BaseFragment {
 					handler.sendEmptyMessage(Keys.MSG_REFRESH_BUY_NUM_ALL_SELECTED);
 				else
 					handler.sendEmptyMessage(Keys.MSG_REFRESH_BUY_NUM_ALL_UNSELECTED);
-
 			}
 		});
 
@@ -171,15 +154,15 @@ public class ShoppingCartALLFragment extends BaseFragment {
 
 		/* 切换tab之后 合计总额刷新 */
 		if (allAdapter != null) {
-			float sum = 0;
+			int sum = 0;
 			int plusNum = 0;
 			for (int i = 0; i < shopCartslist.size(); i++) {
 				if (shopCartslist.get(i).isSelected()) {
-					sum = sum + Float.parseFloat(shopCartslist.get(i).getPrice());
+					sum += shopCartslist.get(i).getPrice();
 					plusNum++;
 				}
 			}
-			allPriceTv.setText(String.valueOf(sum));
+			allPriceTv.setText(Integer.toString(sum));
 			settleAccountTv.setText(plusNum > 0 ? String.valueOf(plusNum) : "0");
 
 		}

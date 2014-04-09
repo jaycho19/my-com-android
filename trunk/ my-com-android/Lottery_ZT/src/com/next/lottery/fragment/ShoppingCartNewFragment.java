@@ -2,14 +2,11 @@ package com.next.lottery.fragment;
 
 import java.util.ArrayList;
 
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dongfang.utils.ULog;
@@ -40,34 +37,34 @@ import com.next.lottery.view.TabPageIndicator;
  */
 public class ShoppingCartNewFragment extends BaseFragment {
 
-	private ArrayList<ShopCartsInfo>		shopCartslist	= new ArrayList<ShopCartsInfo>();
-	private ProgressDialog					progDialog;
-	private ShoppingCartsFragmentAdapter	fragmentAdapter;
+	private ArrayList<ShopCartsInfo> shopCartslist = new ArrayList<ShopCartsInfo>();
+	private ProgressDialog progDialog;
+	private ShoppingCartsFragmentAdapter fragmentAdapter;
 	@ViewInject(R.id.fragment_live_main_viewPager)
-	private ViewPager						mViewPager;
+	private ViewPager mViewPager;
 	@ViewInject(R.id.fragment_live_main_indicator)
-	private TabPageIndicator				mIndicator;
-	private View							view;
+	private TabPageIndicator mIndicator;
+	private View view;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		ULog.i("ShoppingCartNewFragment onCreateView");
-//		if (view == null) {
+		// if (view == null) {
 		View view = inflater.inflate(R.layout.fragment_live_main, container, false);
-			ViewUtils.inject(this, view);
+		ViewUtils.inject(this, view);
 
-			// 缓存的rootView需要判断是否已经被加过parent，
-			// 如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
-			progDialog = ProgressDialog.show(getActivity());
-			progDialog.setCancelable(true);
-			getShopCartList();
-//		}
-//		else {
-//			ViewGroup parent = (ViewGroup) view.getParent();
-//			if (parent != null) {
-//				parent.removeView(view);
-//			}
-//		}
+		// 缓存的rootView需要判断是否已经被加过parent，
+		// 如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
+		progDialog = ProgressDialog.show(getActivity());
+		progDialog.setCancelable(true);
+		getShopCartList();
+		// }
+		// else {
+		// ViewGroup parent = (ViewGroup) view.getParent();
+		// if (parent != null) {
+		// parent.removeView(view);
+		// }
+		// }
 		return view;
 	}
 
@@ -80,7 +77,6 @@ public class ShoppingCartNewFragment extends BaseFragment {
 			mIndicator.setViewPager(mViewPager);
 			mIndicator.notifyDataSetChanged();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -100,11 +96,10 @@ public class ShoppingCartNewFragment extends BaseFragment {
 			public void onSuccess(ResponseInfo<String> responseInfo) {
 				progDialog.dismiss();
 				ULog.i(responseInfo.result);
-
 				BaseEntity<ArrayList<ShopCartsInfo>> bean = new Gson().fromJson(responseInfo.result,
 						new TypeToken<BaseEntity<ArrayList<ShopCartsInfo>>>() {}.getType());
+				ULog.d(bean.toString());
 				if (null != bean && bean.getCode() == 0) {
-
 					shopCartslist = bean.getInfo();
 					setViewPager(shopCartslist);
 				}
@@ -133,14 +128,12 @@ public class ShoppingCartNewFragment extends BaseFragment {
 
 	@Override
 	public void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		ULog.i("onDestroy");
 	}
 
 	@Override
 	public void onDestroyView() {
-		// TODO Auto-generated method stub
 		super.onDestroyView();
 		ULog.i("onDestroyView");
 	}

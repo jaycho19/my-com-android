@@ -12,7 +12,7 @@ public class ShopCartsInfo implements Parcelable {
 	private String userId;
 	private String merId;
 	private String skuId;
-	private String price;
+	private int price;
 	private boolean isSelected; // 0表示未选中 1 表示选中 writeToParcel方法里面没有写入boolean值方法
 
 	// fuck!
@@ -87,11 +87,11 @@ public class ShopCartsInfo implements Parcelable {
 	// this.isSelected = isSelected;
 	// }
 
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
@@ -120,7 +120,7 @@ public class ShopCartsInfo implements Parcelable {
 		dest.writeString(userId);
 		dest.writeString(merId);
 		dest.writeString(skuId);
-		dest.writeString(price);
+		dest.writeInt(price);
 		dest.writeInt(count);
 		dest.writeInt(stickNum);
 		dest.writeInt(isSelected ? 1 : 0);
@@ -136,7 +136,7 @@ public class ShopCartsInfo implements Parcelable {
 			data.userId = source.readString();
 			data.merId = source.readString();
 			data.skuId = source.readString();
-			data.price = source.readString();
+			data.price = source.readInt();
 			data.count = source.readInt();
 			data.stickNum = source.readInt();
 			data.isSelected = source.readInt() == 1 ? true : false;
