@@ -39,5 +39,17 @@ public class SKUEntity {
 		this.skuTypesList = skuTypesList;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("   skuId = ").append(skuId).append("\n");
+		sb.append("   skuName = ").append(skuName).append("\n");
+		for(SKUItem s : skuTypesList){
+			sb.append(s.toString());
+		}
+		return sb.toString();
+	}
+	
+	
 
 }

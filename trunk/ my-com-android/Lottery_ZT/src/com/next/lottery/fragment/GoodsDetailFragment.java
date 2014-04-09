@@ -19,7 +19,7 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.alipay.AlipayUtil;
-import com.next.lottery.beans.BaseGateWayInterfaceEntity;
+import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.GoodsBean;
 import com.next.lottery.beans.SKUBean;
 import com.next.lottery.beans.SKUBean2;
@@ -105,13 +105,12 @@ public class GoodsDetailFragment extends BaseFragment {
 			@Override
 			public void onSuccess(ResponseInfo<String> responseInfo) {
 				progDialog.dismiss();
-				ULog.d(responseInfo.result);
-
-				BaseGateWayInterfaceEntity<GoodsBean> bean = new Gson().fromJson(responseInfo.result,
-						new TypeToken<BaseGateWayInterfaceEntity<GoodsBean>>() {}.getType());
+				// ULog.d(responseInfo.result);
+				BaseEntity<GoodsBean> bean = new Gson().fromJson(responseInfo.result,
+						new TypeToken<BaseEntity<GoodsBean>>() {}.getType());
+				ULog.d(bean.toString());
 				if (null != bean && bean.getCode() == 0) {
 					goodsBean = bean.getInfo();
-
 					getSkuTest();
 					initData();
 					// AlipayUtil.doPayment(getActivity());

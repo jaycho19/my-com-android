@@ -29,7 +29,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.next.lottery.R;
 import com.next.lottery.alipay.AlipayUtil;
-import com.next.lottery.beans.BaseGateWayInterfaceEntity;
+import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.SKUBean2;
 import com.next.lottery.beans.SkuList;
 import com.next.lottery.beans.SKUItem;
@@ -147,12 +147,12 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		Collections.reverse(bean);
 		
 		/** 构造回调实列 */
-		final ArrayList<SkuList> EntityResult = new ArrayList<SkuList>();
+		final ArrayList<SkuList> entityResult = new ArrayList<SkuList>();
 		for (int i = 0; i < bean.size(); i++) {
 			SkuList beanEntity = new SkuList();
 			beanEntity.setPid(bean.get(i).getPid());
 			beanEntity.setPname(bean.get(i).getPname());
-			EntityResult.add(beanEntity);
+			entityResult.add(beanEntity);
 		}
 		((ScrollViewExtend) dialog.findViewById(R.id.dialog_select_sku_content_sl)).setAllow_match(false);
 		final LinearLayout ll = (LinearLayout) dialog.findViewById(R.id.dialog_select_sku_content_ll);
@@ -208,7 +208,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 								beanEntity.setValues(values);
 								ULog.i(bean.get(i).getValues().get(((LineLayout) v.getParent()).getSelectPosition())
 										.getName());
-								EntityResult.get(i).setValues(values);
+								entityResult.get(i).setValues(values);
 							}
 						}
 					}
@@ -235,7 +235,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 			}
 		});
 
-		return EntityResult;
+		return entityResult;
 	}
 
 	private static void chgNumber(TextView tvNumber, int i) {
@@ -267,8 +267,8 @@ public class ShoppingSelectSKUDialog extends Dialog {
 				progDialog.dismiss();
 				ULog.d(responseInfo.result);
 
-				BaseGateWayInterfaceEntity<String> bean = new Gson().fromJson(responseInfo.result,
-						new TypeToken<BaseGateWayInterfaceEntity<String>>() {}.getType());
+				BaseEntity<String> bean = new Gson().fromJson(responseInfo.result,
+						new TypeToken<BaseEntity<String>>() {}.getType());
 				if (null != bean && bean.getCode() == 0) {
 
 					AlipayUtil.doPayment(context);

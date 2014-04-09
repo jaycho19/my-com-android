@@ -20,7 +20,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.R;
-import com.next.lottery.beans.BaseGateWayInterfaceEntity;
+import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.UserBean;
 import com.next.lottery.dialog.ProgressDialog;
 import com.next.lottery.listener.OnClickTypeListener;
@@ -97,7 +97,7 @@ public class GoosDetailBottomFragment extends BaseFragment {
 				progDialog.dismiss();
 				ULog.d(responseInfo.result);
 				
-				BaseGateWayInterfaceEntity bean = new Gson().fromJson(responseInfo.result, BaseGateWayInterfaceEntity.class);
+				BaseEntity bean = new Gson().fromJson(responseInfo.result, BaseEntity.class);
 				if (null != bean && bean.getCode() == 0) {
 					
 					Toast.makeText(getActivity(), "添加成功!", Toast.LENGTH_LONG).show();

@@ -13,7 +13,7 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.next.lottery.beans.BaseGateWayInterfaceEntity;
+import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.OrderBean;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.dialog.ProgressDialog;

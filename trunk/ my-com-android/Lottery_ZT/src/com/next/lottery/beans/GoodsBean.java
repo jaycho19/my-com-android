@@ -1,7 +1,6 @@
 package com.next.lottery.beans;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class GoodsBean {
 	private String					id;					// "9",
@@ -12,6 +11,7 @@ public class GoodsBean {
 	private String					title;				// "NINE WEST玖熙女装 2014春装新款纯色圆领短袖修身气质连衣裙",
 	private int						type;				// 0,
 	private int						transportId;		// 0,
+	private String					categoryId;		// 0,
 	private int						length;				// 0,
 	private int						width;				// 0,
 	private int						height;				// 0,
@@ -46,9 +46,72 @@ public class GoodsBean {
 	private long					lastUpdateTime;		// 1396405437000,
 
 //	private ArrayList<KVImageBean>	image;
-	private ArrayList<SKUBean2>	skutest;
-//	private long _version_;
+	private ArrayList<SKUBean2>	sku;
+	private long _version_;
 	private ArrayList<SkuList>	skuList;
+	
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("id=").append(id).append("\n");
+		sb.append("source=").append(source).append("\n");
+		sb.append("sourceId=").append(sourceId).append("\n");
+		sb.append("sourceUrl=").append(sourceUrl).append("\n");
+		sb.append("merId=").append(merId).append("\n");
+		sb.append("title=").append(title).append("\n");
+		sb.append("type=").append(type).append("\n");
+		sb.append("categoryId=").append(categoryId).append("\n");
+		sb.append("transportId=").append(transportId).append("\n");
+		sb.append("length=").append(length).append("\n");
+		sb.append("width=").append(width).append("\n");
+		sb.append("height=").append(height).append("\n");
+		sb.append("costPrice=").append(costPrice).append("\n");
+		sb.append("price=").append(price).append("\n");
+		sb.append("marketPrice=").append(marketPrice).append("\n");
+		sb.append("stockNum=").append(stockNum).append("\n");
+		sb.append("isCanVat=").append(isCanVat).append("\n");
+		sb.append("isImported=").append(isImported).append("\n");
+		sb.append("isHealthProduct=").append(isHealthProduct).append("\n");
+		sb.append("isShelfLife=").append(isShelfLife).append("\n");
+		sb.append("isSerialNo=").append(isSerialNo).append("\n");
+		sb.append("params=").append(params).append("\n");
+		sb.append("paramsName=").append(paramsName).append("\n");
+		sb.append("paramsAlias=").append(paramsAlias).append("\n");
+		sb.append("isCheckCode=").append(isCheckCode).append("\n");
+		sb.append("status=").append(status).append("\n");
+		sb.append("isFenxiao=").append(isFenxiao).append("\n");
+		sb.append("isXinpin=").append(isXinpin).append("\n");
+		sb.append("subStock=").append(subStock).append("\n");
+		sb.append("picUrl=").append(picUrl).append("\n");
+		sb.append("postFee=").append(postFee).append("\n");
+		sb.append("expressFee=").append(expressFee).append("\n");
+		sb.append("emsFee=").append(emsFee).append("\n");
+		sb.append("hasInvoice=").append(hasInvoice).append("\n");
+		sb.append("hasWarranty=").append(hasWarranty).append("\n");
+		sb.append("violation=").append(violation).append("\n");
+		sb.append("codPostageId=").append(codPostageId).append("\n");
+		sb.append("sellPromise=").append(sellPromise).append("\n");
+		sb.append("isEdit=").append(isEdit).append("\n");
+		sb.append("createTime=").append(createTime).append("\n");
+		sb.append("lastUpdateTime=").append(lastUpdateTime).append("\n");
+		sb.append("_version_=").append(_version_).append("\n");
+		for (SKUBean2 s : sku) {
+			sb.append("sku -> " + s.toString());
+		}
+		for (SkuList s : skuList) {
+			sb.append("skuList -> " + s.toString());
+		}
+		return sb.toString();
+	}
+	
+	public String getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
+	}
 
 	public String getId() {
 		return id;
@@ -297,17 +360,17 @@ public class GoodsBean {
 //		this.image = image;
 //	}
 	public ArrayList<SKUBean2> getSku() {
-		return skutest;
+		return sku;
 	}
 	public void setSku(ArrayList<SKUBean2> sku) {
-		this.skutest = sku;
+		this.sku = sku;
 	}
-//	public long get_version_() {
-//		return _version_;
-//	}
-//	public void set_version_(long _version_) {
-//		this._version_ = _version_;
-//	}
+	public long get_version_() {
+		return _version_;
+	}
+	public void set_version_(long _version_) {
+		this._version_ = _version_;
+	}
 	public ArrayList<SkuList> getSkuList() {
 		return skuList;
 	}
@@ -364,6 +427,12 @@ public class GoodsBean {
 		}
 
 	}
+	
+	
+	
+	
+	
+	
 	/*{"costPrice":0,"id":12,"itemId":9,"marketPrice":0,"price":149000,
 		"skuAttr":"1627207:28335;20509:28381"
 		,"skuAttrname":"1627207:28335:颜色分类:绿色;20509:28381:尺码:XXS","status":1,"stockNum":0}

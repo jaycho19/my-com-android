@@ -30,7 +30,7 @@ import com.next.lottery.EnsureOrderListActivity;
 import com.next.lottery.GoodsDetailActivity;
 import com.next.lottery.MyOrderListActivity;
 import com.next.lottery.R;
-import com.next.lottery.beans.BaseGateWayInterfaceEntity;
+import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.OrderBean;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.beans.OrderBean.OrderEntity;
@@ -139,8 +139,8 @@ public class MyOrderListFragment extends BaseFragment implements OnHeaderRefresh
 				ULog.d(responseInfo.result);
 
 				try {
-					BaseGateWayInterfaceEntity<OrderBean> bean = new Gson().fromJson(responseInfo.result,
-							new TypeToken<BaseGateWayInterfaceEntity<OrderBean>>() {}.getType());
+					BaseEntity<OrderBean> bean = new Gson().fromJson(responseInfo.result,
+							new TypeToken<BaseEntity<OrderBean>>() {}.getType());
 					if (null != bean && bean.getCode() == 0) {
 						data.addAll(bean.getInfo().getData());
 						if (sumNum==0) 

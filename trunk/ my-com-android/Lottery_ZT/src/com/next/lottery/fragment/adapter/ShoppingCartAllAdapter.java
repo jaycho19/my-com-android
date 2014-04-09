@@ -30,7 +30,7 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.next.lottery.R;
-import com.next.lottery.beans.BaseGateWayInterfaceEntity;
+import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.SKUBean;
 import com.next.lottery.beans.SKUEntity;
 import com.next.lottery.beans.SKUItem;
@@ -92,7 +92,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 		}
 		item.initView(view, position);
 
-		if (list.get(position).getIsSelected() == 1) {
+		if (list.get(position).isSelected()) {
 			item.checkBox.setChecked(true);
 		}
 		else {
@@ -282,9 +282,9 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 					msg.what = Keys.MSG_REFRESH_BUY_NUM_PLUS;
 					msg.arg1 = Integer.parseInt((String) tvShowPrice.getText());
 					handler.sendMessage(msg);
-					list.get(position).setIsSelected(1);
+					list.get(position).setSelected(true);
 				}else{
-					list.get(position).setIsSelected(0);
+					list.get(position).setSelected(false);
 					msg.what = Keys.MSG_REFRESH_BUY_NUM_REDUCE;
 					msg.arg1 = Integer.parseInt((String) tvShowPrice.getText());
 					handler.sendMessage(msg);
@@ -309,10 +309,10 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 				msg.what = Keys.MSG_REFRESH_BUY_NUM_PLUS;
 				msg.arg1 = Integer.parseInt((String) tvShowPrice.getText());
 				handler.sendMessage(msg);
-				list.get(position).setIsSelected(1);
+				list.get(position).setSelected(true);;
 			}
 			else if (!isAllSelected) {
-				list.get(position).setIsSelected(0);
+				list.get(position).setSelected(false);
 				msg.what = Keys.MSG_REFRESH_BUY_NUM_REDUCE;
 				msg.arg1 = Integer.parseInt((String) tvShowPrice.getText());
 				handler.sendMessage(msg);
@@ -363,8 +363,8 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 				// progDialog.dismiss();
 				ULog.d(responseInfo.result);
 
-				BaseGateWayInterfaceEntity bean = new Gson().fromJson(responseInfo.result,
-						BaseGateWayInterfaceEntity.class);
+				BaseEntity bean = new Gson().fromJson(responseInfo.result,
+						BaseEntity.class);
 				if (null != bean && bean.getCode() == 0) {
 					Toast.makeText(context, "删除成功", Toast.LENGTH_LONG).show();
 				}
