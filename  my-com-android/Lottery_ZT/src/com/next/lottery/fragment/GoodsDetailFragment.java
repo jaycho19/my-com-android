@@ -12,6 +12,7 @@ import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.DbUtils.DaoConfig;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.db.annotation.Id;
 import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -84,7 +85,7 @@ public class GoodsDetailFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.activity_goods_detail_layout, container, false);
 		ViewUtils.inject(this, view);
-		this.dbUtils = DbUtils.create(getActivity());
+		this.dbUtils = DbUtils.create(context, context.getPackageName());
 		initView(view);
 		getDataFromInter();
 		return view;
@@ -111,6 +112,7 @@ public class GoodsDetailFragment extends BaseFragment {
 				ULog.d(bean.toString());
 				if (null != bean && bean.getCode() == 0) {
 					goodsBean = bean.getInfo();
+					Collections.reverse(goodsBean.getSkuList());
 					try {
 						dbUtils.dropTable(SKUBean2.class);
 						dbUtils.saveAll(goodsBean.getSku());
