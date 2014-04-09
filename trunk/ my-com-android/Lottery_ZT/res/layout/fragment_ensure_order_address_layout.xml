@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/slidingmenu_gb"
+    >
+<ImageView 
+    android:id="@+id/frament_ensure_address_img"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/icon_myaddress"
+    android:padding="10dp"
+    android:layout_centerVertical="true"/>
+
+<TextView 
+    style="@style/textview_address"
+    android:id="@+id/frament_ensure_address_consignee_name_tv"
+    android:text="收货人：XXX"
+    android:layout_toRightOf="@+id/frament_ensure_address_img"
+    />
+<TextView 
+    style="@style/textview_address"
+    android:id="@+id/frament_ensure_address_consignee_address_tv"
+    android:text="收货地址：上海市浦东新区盛夏路570号"
+    android:layout_toRightOf="@+id/frament_ensure_address_img"
+    android:layout_below="@+id/frament_ensure_address_consignee_name_tv"
+    android:paddingTop="1dp"
+    android:textSize="12sp"
+    />
+<TextView 
+    style="@style/textview_address"
+    android:id="@+id/frament_ensure_address_consignee_phone_tv"
+    android:text="18900000008"
+    android:layout_toRightOf="@+id/frament_ensure_address_consignee_name_tv"
+    />
+
+
+
+
+
+</RelativeLayout>
