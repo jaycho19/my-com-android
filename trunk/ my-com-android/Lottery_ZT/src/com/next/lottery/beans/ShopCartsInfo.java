@@ -7,15 +7,22 @@ import android.os.Parcelable;
 
 public class ShopCartsInfo implements Parcelable {
 	private String id;
-	private int count;
-	private int stickNum;
 	private String userId;
 	private String merId;
-	private String skuId;
+	private String itemId;
 	private int price;
-	private boolean isSelected; // 0表示未选中 1 表示选中 writeToParcel方法里面没有写入boolean值方法
+	private String skuId;
+	private int count;
+	private int stockNum;
+	private boolean isSelected; // 0表示未选中 1 表示选中 writeToParcel方法里面没有写入boolean值方法 fuck!
 
-	// fuck!
+	public String getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(String itemId) {
+		this.itemId = itemId;
+	}
 
 	public String getId() {
 		return id;
@@ -33,12 +40,13 @@ public class ShopCartsInfo implements Parcelable {
 		this.count = count;
 	}
 
-	public int getStickNum() {
-		return stickNum;
+
+	public int getStockNum() {
+		return stockNum;
 	}
 
-	public void setStickNum(int stickNum) {
-		this.stickNum = stickNum;
+	public void setStockNum(int stockNum) {
+		this.stockNum = stockNum;
 	}
 
 	public String getUserId() {
@@ -98,13 +106,14 @@ public class ShopCartsInfo implements Parcelable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append("itemId     = ").append(itemId).append("\n");
 		sb.append("userId     = ").append(userId).append("\n");
 		sb.append("merId      = ").append(merId).append("\n");
 		sb.append("skuId      = ").append(skuId).append("\n");
 		sb.append("price      = ").append(price).append("\n");
 		sb.append("id         = ").append(id).append("\n");
 		sb.append("count      = ").append(count).append("\n");
-		sb.append("stickNum   = ").append(stickNum).append("\n");
+		sb.append("stickNum   = ").append(stockNum).append("\n");
 		sb.append("isSelected = ").append(isSelected);
 		return sb.toString();
 
@@ -117,12 +126,13 @@ public class ShopCartsInfo implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(itemId);
 		dest.writeString(userId);
 		dest.writeString(merId);
 		dest.writeString(skuId);
 		dest.writeInt(price);
 		dest.writeInt(count);
-		dest.writeInt(stickNum);
+		dest.writeInt(stockNum);
 		dest.writeInt(isSelected ? 1 : 0);
 		dest.writeString(id);
 	}
@@ -133,12 +143,13 @@ public class ShopCartsInfo implements Parcelable {
 
 			ShopCartsInfo data = new ShopCartsInfo();
 			ULog.i("source-->" + source.toString());
+			data.itemId = source.readString();
 			data.userId = source.readString();
 			data.merId = source.readString();
 			data.skuId = source.readString();
 			data.price = source.readInt();
 			data.count = source.readInt();
-			data.stickNum = source.readInt();
+			data.stockNum = source.readInt();
 			data.isSelected = source.readInt() == 1 ? true : false;
 			data.id = source.readString();
 			return data;

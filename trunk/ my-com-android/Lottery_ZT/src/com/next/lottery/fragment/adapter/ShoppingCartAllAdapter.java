@@ -159,24 +159,33 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 
 			tvSKU1Show = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_sku1);
 			tvSKU1Edit = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_edit_sku1);
-			
 			tvSKU2Show = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_sku2);
 			tvSKU2Edit = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_edit_sku2);
-			tvNumberShow = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_number);
-			tvNumberEdit = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_edit_number);
-			
 			try {
 				SKUBean2 sku = db.findFirst(
 						Selector.from(SKUBean2.class)
-						.where("itemId","=",shopCartInfo.getId())
+						.where("itemId","=",shopCartInfo.getItemId())
 						.and("id", "=", shopCartInfo.getSkuId())
 						);
-				if (null != sku){
+				ULog.d("----"+shopCartInfo.getItemId()+"--" + shopCartInfo.getSkuId());
+				if (null != sku) {
+					int i = sku.getSkuAttrname().indexOf(';');
+					String s = sku.getSkuAttrname().substring(0,i);
 					ULog.d(sku.toString());
+					tvSKU1Show.setText(s);
+					tvSKU2Show.setText(s);
+					tvSKU1Edit.setText(sku.getSkuAttrname().substring(i + 1));
+					tvSKU2Edit.setText(sku.getSkuAttrname().substring(i + 1));
 				}
 			} catch (DbException e1) {
 				e1.printStackTrace();
 			}
+			
+			
+			
+			tvNumberShow = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_number);
+			tvNumberEdit = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_edit_number);
+			
 			
 			
 			tvNumberShow.setText(Integer.toString(shopCartInfo.getCount()));

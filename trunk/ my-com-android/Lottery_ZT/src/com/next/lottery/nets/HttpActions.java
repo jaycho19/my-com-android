@@ -114,7 +114,7 @@ public class HttpActions {
 		sb.append("&").append("method=").append("get");
 
 		JsonObject json = new JsonObject();
-		json.addProperty("merId", "100000");
+		json.addProperty("merId", "1");
 		json.addProperty("userId", "3");
 		json.addProperty("userToken", "123456");
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
