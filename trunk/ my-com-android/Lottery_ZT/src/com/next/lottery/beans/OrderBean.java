@@ -72,7 +72,7 @@ public class OrderBean {
 		private String					lastUpdateTime; // "2014-03-26 13;//54;//27",
 
 		private ArrayList<ActivityInfo>	activitys;
-		private UserDeliveryAddress	userDeliveryAddress;
+		private  ArrayList<UserDeliveryAddress>	userDeliveryAddress;
 		private Invoice	invoice;
 		private ArrayList<Items>	items;
 		private ArrayList<String>   coupons;
@@ -399,11 +399,11 @@ public class OrderBean {
 			this.activitys = activitys;
 		}
 
-		public UserDeliveryAddress getUserDeliveryAddress() {
+		public ArrayList<UserDeliveryAddress> getUserDeliveryAddress() {
 			return userDeliveryAddress;
 		}
 
-		public void setUserDeliveryAddress(UserDeliveryAddress userDeliveryAddress) {
+		public void setUserDeliveryAddress(ArrayList<UserDeliveryAddress> userDeliveryAddress) {
 			this.userDeliveryAddress = userDeliveryAddress;
 		}
 

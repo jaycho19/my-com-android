@@ -20,7 +20,7 @@ public class HttpActions {
 		sb.append("&").append("method=").append("login");
 
 		JsonObject json = new JsonObject();
-		json.addProperty("merId", "100000");
+		json.addProperty("merId", "1");
 		json.addProperty("phone", "15901871159");
 		json.addProperty("password", "654321");
 		// json.addProperty("phone", name);

@@ -43,8 +43,8 @@ import com.next.lottery.nets.HttpActions;
  */
 public class ShoppingSelectSKUDialog extends Dialog {
 	private static ShoppingSelectSKUDialog	dialog;
-	static DbUtils									db;
-	private static ProgressDialog				progDialog;
+	static DbUtils							db;
+	private static ProgressDialog			progDialog;
 
 	public ShoppingSelectSKUDialog(Context context, int theme) {
 		super(context, theme);
@@ -80,10 +80,9 @@ public class ShoppingSelectSKUDialog extends Dialog {
 			db = DbUtils.create(context);
 			skubean = db.findAll(Selector.from(SKUBean2.class));
 		} catch (DbException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		init2(context, bean, onSkuResultListener,skubean);
+		init2(context, bean, onSkuResultListener, skubean);
 		dialog.show();
 	}
 
@@ -109,7 +108,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 
 	private static void init2(final Context context, ArrayList<SkuList> bean,
 			final OnSkuResultListener onSkuResultListener, List<SKUBean2> skubean) {
-		final ArrayList<SkuList> beanResult = init(context, bean, onSkuResultListener,skubean);
+		final ArrayList<SkuList> beanResult = init(context, bean, onSkuResultListener, skubean);
 		dialog.findViewById(R.id.dialog_select_sku_tv_buy_now).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -123,9 +122,8 @@ public class ShoppingSelectSKUDialog extends Dialog {
 						return;
 					}
 				}
-
 				dialog.dismiss();
-				
+				//提交订单
 				creatOrder(context);
 				// 弹出支付宝
 				AlipayUtil.doPayment(context);
@@ -145,7 +143,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 	private static ArrayList<SkuList> init(final Context context, final ArrayList<SkuList> bean,
 			final OnSkuResultListener onSkuResultListener, final List<SKUBean2> skubeanFromDB) {
 		Collections.reverse(bean);
-		
+
 		/** 构造回调实列 */
 		final ArrayList<SkuList> entityResult = new ArrayList<SkuList>();
 		for (int i = 0; i < bean.size(); i++) {
@@ -181,13 +179,15 @@ public class ShoppingSelectSKUDialog extends Dialog {
 						}
 						v.setSelected(true);
 						/* 判断尺码/颜色 有无 */
-						for (int i = 0; i < (skubeanFromDB!=null?skubeanFromDB.size():0) ; i++) {
+						for (int i = 0; i < (skubeanFromDB != null ? skubeanFromDB.size() : 0); i++) {
 							if (skubeanFromDB.get(i).getSkuAttr().contains((CharSequence) tv.getTag())) {
 								ULog.i(skubeanFromDB.get(i).getSkuAttrname());
 								String attrname = skubeanFromDB.get(i).getSkuAttrname();
-								String attrnameSubString = attrname.substring(0, attrname.lastIndexOf(":")-3);//减去3 是要去除  尺码是
-								String id = attrnameSubString.substring(attrnameSubString.lastIndexOf(":")+1);
-								String size = attrname.substring(attrname.lastIndexOf(":")+1);
+								String attrnameSubString = attrname.substring(0, attrname.lastIndexOf(":") - 3);// 减去3
+																												// 是要去除
+																												// 尺码是
+								String id = attrnameSubString.substring(attrnameSubString.lastIndexOf(":") + 1);
+								String size = attrname.substring(attrname.lastIndexOf(":") + 1);
 								for (int j = 0; j < bean.get(0).getValues().size(); j++) {
 									SKUItem item = bean.get(0).getValues().get(j);
 									if (id.equalsIgnoreCase(item.getId())) {
@@ -248,7 +248,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		public void ok(String phone, String authCode);
 		// public void cancel();
 	}
-	
+
 	/* 生成订单 */
 	private static void creatOrder(final Context context) {
 		String url = HttpActions.creatOrder(context);
