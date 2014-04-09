@@ -1,24 +1,18 @@
 package com.next.lottery.fragment;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseFragment;
-import com.dongfang.views.MyImageView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
@@ -30,16 +24,13 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.EnsureOrderListActivity;
-import com.next.lottery.GoodsDetailActivity;
 import com.next.lottery.R;
-import com.next.lottery.alipay.AlipayConfig;
 import com.next.lottery.alipay.AlipayUtil;
 import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.dialog.ProgressDialog;
-import com.next.lottery.fragment.adapter.EnsureOrderListViewAdapter;
-import com.next.lottery.fragment.adapter.ShoppingCartAllAdapter;
 import com.next.lottery.nets.HttpActions;
+import com.next.lottery.utils.Util;
 
 @SuppressLint("ValidFragment")
 public class EnsureOrderListFragment extends BaseFragment {
@@ -56,11 +47,15 @@ public class EnsureOrderListFragment extends BaseFragment {
 	// private TextView tvRight;
 	@ViewInject(R.id.btn_buy_now)
 	private TextView					tvBuyNow;
+	@ViewInject(R.id.fragment_ensure_order_bottom_list_tv)
+	private TextView					tvBottomList;
 	@ViewInject(R.id.fragment_ensure_order_item_ll)
 	private LinearLayout				itemll;
 
 	private ArrayList<ShopCartsInfo>	orderlist	= new ArrayList<ShopCartsInfo>();
 	private ProgressDialog				progDialog;
+	
+	private int sum ;//商品总额
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -83,8 +78,9 @@ public class EnsureOrderListFragment extends BaseFragment {
 //			MyImageView img = (MyImageView) itemView.findViewById(R.id.fragment_shoppingcart_all_adp_item_iv);
 			TextView tvNum = (TextView) itemView.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_number);
 			itemll.addView(itemView);
+			sum = sum+Integer.valueOf(orderlist.get(i).getPrice()) ;
 		}
-
+		tvBottomList.setText("共计"+orderlist.size()+"件商品,"+"￥"+Util.fen2Yuan(sum)+"元");
 		// for (int i = 0; i < 2; i++) {
 		// ShopCartsInfo item = new ShopCartsInfo();
 		// item.setPrice("" + 1000);

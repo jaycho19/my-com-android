@@ -9,6 +9,7 @@ import com.dongfang.v4.app.BaseFragment;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.DbUtils;
+import com.lidroid.xutils.DbUtils.DaoConfig;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.DbException;
@@ -90,7 +91,6 @@ public class GoodsDetailFragment extends BaseFragment {
 	}
 
 	/* 通过接口获取详情数据 */
-	/* 1.详情的接口返回的 sku 和image json解析错误 */
 	private void getDataFromInter() {
 		String[] fl = {};
 		String url = HttpActions.GetGoodsDetaiBean(getActivity(), fl);
@@ -111,11 +111,15 @@ public class GoodsDetailFragment extends BaseFragment {
 				ULog.d(bean.toString());
 				if (null != bean && bean.getCode() == 0) {
 					goodsBean = bean.getInfo();
-					getSkuTest();
+					try {
+						dbUtils.dropTable(SKUBean2.class);
+						dbUtils.saveAll(goodsBean.getSku());
+//						dbUtils.saveOrUpdateAll(goodsBean.getSku());
+					} catch (DbException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					initData();
-					// AlipayUtil.doPayment(getActivity());
-					// Toast.makeText(getActivity(), bean.getInfo(),
-					// Toast.LENGTH_LONG).show();
 				}
 				else {
 					Toast.makeText(getActivity(), bean.getMsg(), Toast.LENGTH_LONG).show();
@@ -156,69 +160,39 @@ public class GoodsDetailFragment extends BaseFragment {
 					skubean.setSkuAttr("1627207:28335;20509:28381");
 					skubean.setSkuAttrname("1627207:28335:颜色分类:绿色;20509:28381:尺码:XXS");
 					skuBeanList.add(skubean);
-//					skubean.setSkuAttr("1627207:28335;20509:28313");
-//					skubean.setSkuAttrname("1627207:28335:颜色分类:绿色;20509:28313:尺码:XS");
-//					skuBeanList.add(skubean);
-//					skubean.setSkuAttr("1627207:28335;20509:28314");
-//					skubean.setSkuAttrname("1627207:28335:颜色分类:绿色;20509:28314:尺码:S");
-//					skuBeanList.add(skubean);
 
 				}
 				else if (i == 1) {
 					skubean.setSkuAttr("1627207:3232480;20509:28381");
 					skubean.setSkuAttrname("1627207:3232480:颜色分类:粉红色;20509:28313:尺码:XS");
 					skuBeanList.add(skubean);
-//					skubean.setSkuAttr("1627207:3232480;20509:28314");
-//					skubean.setSkuAttrname("1627207:3232480:颜色分类:粉红色;20509:28314:尺码:S");
-//					skuBeanList.add(skubean);
-//					skubean.setSkuAttr("1627207:3232480;20509:28315");
-//					skubean.setSkuAttrname("1627207:3232480:颜色分类:粉红色;20509:28315:尺码:M");
-//					skuBeanList.add(skubean);
 				}
 				else if (i == 2) {
-//					skubean.setSkuAttr("1627207:28341;20509:28381");
-//					skubean.setSkuAttrname("1627207:28341:颜色分类:黑色;20509:28381:尺码:XXS");
-//					skuBeanList.add(skubean);
 					skubean.setSkuAttr("1627207:28341;20509:28313");
 					skubean.setSkuAttrname("1627207:28341:颜色分类:黑色;20509:28313:尺码:XS");
 					skuBeanList.add(skubean);
-//					skubean.setSkuAttr("1627207:28341;20509:28314");
-//					skubean.setSkuAttrname("1627207:28341:颜色分类:黑色;20509:28314:尺码:S");
-//					skuBeanList.add(skubean);
 				}
 				else if (i == 3) {
 					skubean.setSkuAttr("1627207:28341;20509:28313");
 					skubean.setSkuAttrname("1627207:28341:颜色分类:红色;20509:28313:尺码:XS");
 					skuBeanList.add(skubean);
-//					skubean.setSkuAttr("1627207:28326;20509:28381");
-//					skubean.setSkuAttrname("1627207:28326:颜色分类:红色;20509:28381:尺码:XXS");
-//					skuBeanList.add(skubean);
-//					skubean.setSkuAttr("1627207:28326;20509:28314");
-//					skubean.setSkuAttrname("1627207:28326:颜色分类:红色;20509:28314:尺码:S");
-//					skuBeanList.add(skubean);
-				}else{
+				}
+				else {
 					skubean.setSkuAttr("1627207:28338;20509:28381");
 					skubean.setSkuAttrname("1627207:28338:颜色分类:蓝色;20509:28381:尺码:XXS");
 					skuBeanList.add(skubean);
-//					skubean.setSkuAttr("1627207:28338;20509:28313");
-//					skubean.setSkuAttrname("1627207:28338:颜色分类:蓝色;20509:28313:尺码:XS");
-//					skuBeanList.add(skubean);
 				}
 
 			}
 			dbUtils.saveAll(skuBeanList);
 
-			// dbUtils.save(goodsBean.getSkuList());
-
 		} catch (DbException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
 
 	private void initView(View view) {
-		// TODO Auto-generated method stub
 		tvTitle = (TextView) view.findViewById(R.id.app_top_title_tv_centre);
 		tvTitle.setText("宝贝详情");
 		progDialog = ProgressDialog.show(getActivity());
@@ -237,9 +211,7 @@ public class GoodsDetailFragment extends BaseFragment {
 			OnClickTypeListener onClickTypeListener = new OnClickTypeListener() {
 				@Override
 				public void onClickType(Bundle bundle) {
-
 					ULog.i("onclick");
-
 					ShoppingSelectSKUDialog.show2(context, goodsBean.getSkuList(), onSkuResultListener);
 				}
 			};
