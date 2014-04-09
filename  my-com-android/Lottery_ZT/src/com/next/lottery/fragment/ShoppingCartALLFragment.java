@@ -35,7 +35,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.EnsureOrderListActivity;
 import com.next.lottery.R;
-import com.next.lottery.beans.BaseGateWayInterfaceEntity;
+import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.dialog.ProgressDialog;
 import com.next.lottery.fragment.adapter.ShoppingCartAllAdapter;
@@ -43,109 +43,95 @@ import com.next.lottery.nets.HttpActions;
 import com.next.lottery.utils.Keys;
 
 @SuppressLint("ValidFragment")
-public class ShoppingCartALLFragment extends BaseFragment  {
+public class ShoppingCartALLFragment extends BaseFragment {
 
 	@ViewInject(R.id.fragment_shoppingcart_all_list)
-	private ListView					listView;
+	private ListView listView;
 	@ViewInject(R.id.fragment_shoppingcart_all_checkbox)
-	private CheckBox					checkBoxAll;
+	private CheckBox checkBoxAll;
 	@ViewInject(R.id.fragment_shipping_all_settle_account_lin)
-	private LinearLayout				settleAccountLin;
+	private LinearLayout settleAccountLin;
 	@ViewInject(R.id.fragment_shoppingcarts_bottom_price_tv)
-	private TextView					allPriceTv;
+	private TextView allPriceTv;
 
-	private ShoppingCartAllAdapter		allAdapter;
-	private ArrayList<ShopCartsInfo>	shopCartslist	= new ArrayList<ShopCartsInfo>();
+	private ShoppingCartAllAdapter allAdapter;
+	private ArrayList<ShopCartsInfo> shopCartslist = new ArrayList<ShopCartsInfo>();
 
 	@ViewInject(R.id.fragment_shipping_all_settle_account_tv)
-	private TextView					settleAccountTv;									// 结算
+	private TextView settleAccountTv; // 结算
 
-	private int							selectNum;
+	private int selectNum;
 
-	private ProgressDialog				progDialog;
+	private ProgressDialog progDialog;
 
-	private Handler						handler			= new Handler() {
-															@Override
-															public void handleMessage(Message msg) {
-																// TODO
-																// Auto-generated
-																// method stub
-																super.handleMessage(msg);
-																switch (msg.what) {
-																case Keys.MSG_REFRESH_BUY_NUM_PLUS:
-																	int plusNum = 0;
-																	float allPrice = 0;
-																	try {
-																		plusNum = Integer
-																				.parseInt((String) settleAccountTv
-																						.getText()) + 1;
+	private Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO
+			// Auto-generated
+			// method stub
+			super.handleMessage(msg);
+			switch (msg.what) {
+			case Keys.MSG_REFRESH_BUY_NUM_PLUS:
+				int plusNum = 0;
+				float allPrice = 0;
+				try {
+					plusNum = Integer.parseInt((String) settleAccountTv.getText()) + 1;
 
-																		allPrice = msg.arg1
-																				+ Float.parseFloat((String) allPriceTv
-																						.getText());
-																	} catch (NumberFormatException e) {
-																		e.printStackTrace();
-																		allPrice = msg.arg1;
-																	}
-																	ULog.i(msg.arg1 + "");
-																	allPriceTv.setText(String.valueOf(allPrice));
-																	settleAccountTv.setText(plusNum > 0 ? String
-																			.valueOf(plusNum) : "0");
-																	break;
-																case Keys.MSG_REFRESH_BUY_NUM_REDUCE:
-																	int reduceNum = 0;
-																	float allPrice1 = 0;
-																	try {
-																		reduceNum = Integer
-																				.parseInt((String) settleAccountTv
-																						.getText()) - 1;
-																		allPrice1 = -msg.arg1
-																				+ Float.parseFloat((String) allPriceTv
-																						.getText());
-																	} catch (NumberFormatException e) {
-																		e.printStackTrace();
-																	}
-																	settleAccountTv.setText(reduceNum > 0 ? String
-																			.valueOf(reduceNum) : "0");
-																	allPriceTv.setText(String.valueOf(allPrice1 < 0 ? 0
-																			: allPrice1));
-																	break;
-																case Keys.MSG_REFRESH_BUY_NUM_ALL_SELECTED:
-																	allAdapter.setAllSelected(true);
-																	// allAdapter.notifyDataSetInvalidated();
-																	float allPrice2 = 0;
-																	for (int i = 0; i < shopCartslist.size(); i++) {
-																		shopCartslist.get(i).setIsSelected(1);
-																		allPrice2 = allPrice2
-																				+ Float.parseFloat(shopCartslist.get(i)
-																						.getPrice());
-																	}
-																	allPriceTv.setText(String.valueOf(allPrice2));
-																	settleAccountTv.setText(String
-																			.valueOf(shopCartslist.size()));
-																	allAdapter.notifyDataSetChanged();
+					allPrice = msg.arg1 + Float.parseFloat((String) allPriceTv.getText());
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+					allPrice = msg.arg1;
+				}
+				ULog.i(msg.arg1 + "");
+				allPriceTv.setText(String.valueOf(allPrice));
+				settleAccountTv.setText(plusNum > 0 ? String.valueOf(plusNum) : "0");
+				break;
+			case Keys.MSG_REFRESH_BUY_NUM_REDUCE:
+				int reduceNum = 0;
+				float allPrice1 = 0;
+				try {
+					reduceNum = Integer.parseInt((String) settleAccountTv.getText()) - 1;
+					allPrice1 = -msg.arg1 + Float.parseFloat((String) allPriceTv.getText());
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				}
+				settleAccountTv.setText(reduceNum > 0 ? String.valueOf(reduceNum) : "0");
+				allPriceTv.setText(String.valueOf(allPrice1 < 0 ? 0 : allPrice1));
+				break;
+			case Keys.MSG_REFRESH_BUY_NUM_ALL_SELECTED:
+				allAdapter.setAllSelected(true);
+				// allAdapter.notifyDataSetInvalidated();
+				float allPrice2 = 0;
+				for (int i = 0; i < shopCartslist.size(); i++) {
+					shopCartslist.get(i).setSelected(true);
+					allPrice2 = allPrice2 + Float.parseFloat(shopCartslist.get(i).getPrice());
+				}
+				allPriceTv.setText(String.valueOf(allPrice2));
+				settleAccountTv.setText(String.valueOf(shopCartslist.size()));
+				allAdapter.notifyDataSetChanged();
 
-																	break;
-																case Keys.MSG_REFRESH_BUY_NUM_ALL_UNSELECTED:
-																	allAdapter.setAllSelected(false);
-																	for (int i = 0; i < shopCartslist.size(); i++) {
-																		shopCartslist.get(i).setIsSelected(0);
-																	}
-																	settleAccountTv.setText("0");
-																	allPriceTv.setText("0");
-																	allAdapter.notifyDataSetChanged();
-																	break;
-																case Keys.MSG_REFRESH_BUY_NUM_ALL_GOODS_PRICE:
-																	allPriceTv.setText(msg.arg1 + "");
-																	// allAdapter.notifyDataSetChanged();
-																	break;
+				break;
+			case Keys.MSG_REFRESH_BUY_NUM_ALL_UNSELECTED:
+				allAdapter.setAllSelected(false);
+				for (int i = 0; i < shopCartslist.size(); i++) {
+					shopCartslist.get(i).setSelected(false);
+				}
+				settleAccountTv.setText("0");
+				allPriceTv.setText("0");
+				allAdapter.notifyDataSetChanged();
+				break;
+			case Keys.MSG_REFRESH_BUY_NUM_ALL_GOODS_PRICE:
+				allPriceTv.setText(msg.arg1 + "");
+				// allAdapter.notifyDataSetChanged();
+				break;
 
-																default:
-																	break;
-																}
-															}
+			default:
+				break;
+			}
+		}
 
-														};
+	};
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -182,22 +168,20 @@ public class ShoppingCartALLFragment extends BaseFragment  {
 	private void initAdapter() {
 		allAdapter = new ShoppingCartAllAdapter(getActivity(), shopCartslist, handler);
 		listView.setAdapter(allAdapter);
-		
-		/*切换tab之后 合计总额刷新*/
-		if (allAdapter!=null) {
+
+		/* 切换tab之后 合计总额刷新 */
+		if (allAdapter != null) {
 			float sum = 0;
 			int plusNum = 0;
 			for (int i = 0; i < shopCartslist.size(); i++) {
-				if (shopCartslist.get(i).getIsSelected()==1) {
-					sum=sum+Float.parseFloat(shopCartslist.get(i)
-							.getPrice());
+				if (shopCartslist.get(i).isSelected()) {
+					sum = sum + Float.parseFloat(shopCartslist.get(i).getPrice());
 					plusNum++;
 				}
 			}
 			allPriceTv.setText(String.valueOf(sum));
-			settleAccountTv.setText(plusNum > 0 ? String
-					.valueOf(plusNum) : "0");
-			
+			settleAccountTv.setText(plusNum > 0 ? String.valueOf(plusNum) : "0");
+
 		}
 	}
 
@@ -209,17 +193,18 @@ public class ShoppingCartALLFragment extends BaseFragment  {
 			ULog.i("结算");
 			ArrayList<ShopCartsInfo> orderlist = new ArrayList<ShopCartsInfo>();
 			for (ShopCartsInfo info : shopCartslist) {
-				if (info.getIsSelected() == 1)
+				if (info.isSelected())
 					orderlist.add(info);
 			}
-			if (orderlist.size()==0) {
-				Toast.makeText(getActivity(), "至少选择一件商品",Toast.LENGTH_SHORT ).show();
-			}else{
+			if (orderlist.size() == 0) {
+				Toast.makeText(getActivity(), "至少选择一件商品", Toast.LENGTH_SHORT).show();
+			}
+			else {
 				Intent intent = new Intent(getActivity(), EnsureOrderListActivity.class);
 				intent.putParcelableArrayListExtra("orderList", orderlist);
 				startActivity(intent);
 			}
-			
+
 			break;
 
 		default:

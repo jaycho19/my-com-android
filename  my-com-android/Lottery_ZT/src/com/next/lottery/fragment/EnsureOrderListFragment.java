@@ -34,7 +34,7 @@ import com.next.lottery.GoodsDetailActivity;
 import com.next.lottery.R;
 import com.next.lottery.alipay.AlipayConfig;
 import com.next.lottery.alipay.AlipayUtil;
-import com.next.lottery.beans.BaseGateWayInterfaceEntity;
+import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.dialog.ProgressDialog;
 import com.next.lottery.fragment.adapter.EnsureOrderListViewAdapter;
@@ -138,8 +138,8 @@ public class EnsureOrderListFragment extends BaseFragment {
 				progDialog.dismiss();
 				ULog.d(responseInfo.result);
 
-				BaseGateWayInterfaceEntity<String> bean = new Gson().fromJson(responseInfo.result,
-						new TypeToken<BaseGateWayInterfaceEntity<String>>() {}.getType());
+				BaseEntity<String> bean = new Gson().fromJson(responseInfo.result,
+						new TypeToken<BaseEntity<String>>() {}.getType());
 				if (null != bean && bean.getCode() == 0) {
 
 					AlipayUtil.doPayment(getActivity());

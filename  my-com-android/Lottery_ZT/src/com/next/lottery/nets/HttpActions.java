@@ -158,7 +158,7 @@ public class HttpActions {
 		json.addProperty("userToken", User.getToken(context));
 		json.addProperty("userDeliveryAddressId", 6);
 		json.addProperty("payModeId", 1);
-		json.addProperty("price", 398700);
+		json.addProperty("price", 40000);
 		json.addProperty("deliveryModeId", 2);
 		json.addProperty("branchId", 0);
 		json.addProperty("expressId", 0);
@@ -173,12 +173,12 @@ public class HttpActions {
 
 		JsonArray jsonArray = new JsonArray();
 		JsonObject json1 = new JsonObject();
-		json1.addProperty("itemId", "1");
-		json1.addProperty("skuId", 1);
+		json1.addProperty("itemId", "9");
+		json1.addProperty("skuId", 18);
 		json1.addProperty("count", 2);
 		JsonObject json11 = new JsonObject();
-		json11.addProperty("itemId", "2");
-		json11.addProperty("skuId", 3);
+		json11.addProperty("itemId", "9");
+		json11.addProperty("skuId", 23);
 		json11.addProperty("count", 2);
 
 		// "coupons":["1"],"activitys":[1,2]

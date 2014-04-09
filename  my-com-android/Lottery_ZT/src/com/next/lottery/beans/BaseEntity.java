@@ -4,11 +4,11 @@ package com.next.lottery.beans;
  * 门户接口基本类型
  * 
  */
-public class BaseGateWayInterfaceEntity<T> {
+public class BaseEntity<T> {
 
-	int		code;
-	String	msg;
-	T		info;	// 活动对象
+	int code;
+	String msg;
+	T info; // 活动对象
 
 	public int getCode() {
 		return code;
@@ -32,6 +32,15 @@ public class BaseGateWayInterfaceEntity<T> {
 
 	public void setInfo(T info) {
 		this.info = info;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("code = ").append(code).append("\n");
+		sb.append("msg  = ").append(msg).append("\n");
+		sb.append("info = ").append(info.toString()).append("\n");
+		return sb.toString();
 	}
 
 }

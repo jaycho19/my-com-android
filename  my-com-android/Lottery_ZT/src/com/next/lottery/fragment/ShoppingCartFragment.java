@@ -24,7 +24,7 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.R;
-import com.next.lottery.beans.BaseGateWayInterfaceEntity;
+import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.dialog.ProgressDialog;
 import com.next.lottery.nets.HttpActions;
@@ -100,8 +100,8 @@ public class ShoppingCartFragment extends BaseFragment {
 				progDialog.dismiss();
 				ULog.d(responseInfo.result);
 
-				BaseGateWayInterfaceEntity<ArrayList<ShopCartsInfo>> bean = new Gson().fromJson(responseInfo.result,
-						new TypeToken<BaseGateWayInterfaceEntity<ArrayList<ShopCartsInfo>>>() {}.getType());
+				BaseEntity<ArrayList<ShopCartsInfo>> bean = new Gson().fromJson(responseInfo.result,
+						new TypeToken<BaseEntity<ArrayList<ShopCartsInfo>>>() {}.getType());
 				if (null != bean && bean.getCode() == 0) {
 
 					shopCartslist = bean.getInfo();

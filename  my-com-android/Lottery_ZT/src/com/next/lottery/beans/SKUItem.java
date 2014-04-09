@@ -11,7 +11,7 @@ public class SKUItem {
 		this.vname = name;
 	}
 
-	private String vid;   // 编号
+	private String vid; // 编号
 	private String vname; // 编号说明，不如 蓝色，M号等
 
 	public String getId() {
@@ -29,5 +29,15 @@ public class SKUItem {
 	public void setName(String name) {
 		name = name;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("   vid = ").append(vid).append("\n");
+		sb.append("   vname = ").append(vname).append("\n");
+		return sb.toString();
+	}
+	
+	
 
 }

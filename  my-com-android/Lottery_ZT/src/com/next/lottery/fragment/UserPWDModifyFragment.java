@@ -31,7 +31,7 @@ import com.next.lottery.R;
 import com.next.lottery.UserPassWordModifyActivity;
 import com.next.lottery.UserRegisterActivity;
 import com.next.lottery.alipay.AlipayUtil;
-import com.next.lottery.beans.BaseGateWayInterfaceEntity;
+import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.UserBean;
 import com.next.lottery.dialog.ProgressDialog;
 import com.next.lottery.nets.HttpActions;

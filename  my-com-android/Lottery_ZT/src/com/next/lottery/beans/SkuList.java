@@ -29,4 +29,20 @@ public class SkuList {
 	public void setValues(ArrayList<SKUItem> values) {
 		this.values = values;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("   pid = ").append(pid).append("\n");
+		sb.append("   pname = ").append(pname).append("\n");
+		for(SKUItem s : values){
+			sb.append(s.toString());
+		}
+		return sb.toString();
+	}
+	
+	
+	
+	
+	
 }

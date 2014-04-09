@@ -13,8 +13,9 @@ public class ShopCartsInfo implements Parcelable {
 	private String merId;
 	private String skuId;
 	private String price;
-	private int isSelected; // 0表示未选中 1 表示选中 writeToParcel方法里面没有写入boolean值方法
-							// fuck!
+	private boolean isSelected; // 0表示未选中 1 表示选中 writeToParcel方法里面没有写入boolean值方法
+
+	// fuck!
 
 	public String getId() {
 		return id;
@@ -64,19 +65,27 @@ public class ShopCartsInfo implements Parcelable {
 		this.skuId = skuId;
 	}
 
-	/**
-	 * 0表示未选中 1 表示选中
-	 */
-	public int getIsSelected() {
+	public void setSelected(boolean isSelected) {
+		this.isSelected = isSelected;
+	}
+
+	public boolean isSelected() {
 		return isSelected;
 	}
 
-	/**
-	 * 0表示未选中 1 表示选中
-	 */
-	public void setIsSelected(int isSelected) {
-		this.isSelected = isSelected;
-	}
+	// /**
+	// * 0表示未选中 1 表示选中
+	// */
+	// public int getIsSelected() {
+	// return isSelected;
+	// }
+	//
+	// /**
+	// * 0表示未选中 1 表示选中
+	// */
+	// public void setIsSelected(int isSelected) {
+	// this.isSelected = isSelected;
+	// }
 
 	public String getPrice() {
 		return price;
@@ -114,7 +123,7 @@ public class ShopCartsInfo implements Parcelable {
 		dest.writeString(price);
 		dest.writeInt(count);
 		dest.writeInt(stickNum);
-		dest.writeInt(isSelected);
+		dest.writeInt(isSelected ? 1 : 0);
 		dest.writeString(id);
 	}
 
@@ -124,14 +133,14 @@ public class ShopCartsInfo implements Parcelable {
 
 			ShopCartsInfo data = new ShopCartsInfo();
 			ULog.i("source-->" + source.toString());
-			data.userId =source.readString();
-			data.merId =source.readString();
-			data.skuId =source.readString();
-			data.price =source.readString();
-			data.count =source.readInt();
-			data.stickNum =source.readInt();
-			data.isSelected =source.readInt();
-			data.id =source.readString();
+			data.userId = source.readString();
+			data.merId = source.readString();
+			data.skuId = source.readString();
+			data.price = source.readString();
+			data.count = source.readInt();
+			data.stickNum = source.readInt();
+			data.isSelected = source.readInt() == 1 ? true : false;
+			data.id = source.readString();
 			return data;
 		}
 
