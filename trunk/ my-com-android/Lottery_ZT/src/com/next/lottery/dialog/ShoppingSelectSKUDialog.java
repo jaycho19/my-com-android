@@ -77,7 +77,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		dialog.getWindow().setLayout(DeviceInfo.SCREEN_WIDTH_PORTRAIT, -2);
 		List<SKUBean2> skubean = null;
 		try {
-			db = DbUtils.create(context);
+			db = DbUtils.create(context,context.getPackageName());
 			skubean = db.findAll(Selector.from(SKUBean2.class));
 		} catch (DbException e) {
 			e.printStackTrace();
@@ -142,8 +142,6 @@ public class ShoppingSelectSKUDialog extends Dialog {
 
 	private static ArrayList<SkuList> init(final Context context, final ArrayList<SkuList> bean,
 			final OnSkuResultListener onSkuResultListener, final List<SKUBean2> skubeanFromDB) {
-		Collections.reverse(bean);
-
 		/** 构造回调实列 */
 		final ArrayList<SkuList> entityResult = new ArrayList<SkuList>();
 		for (int i = 0; i < bean.size(); i++) {
@@ -184,12 +182,12 @@ public class ShoppingSelectSKUDialog extends Dialog {
 								ULog.i(skubeanFromDB.get(i).getSkuAttrname());
 								String attrname = skubeanFromDB.get(i).getSkuAttrname();
 								String attrnameSubString = attrname.substring(0, attrname.lastIndexOf(":") - 3);// 减去3
-																												// 是要去除
-																												// 尺码是
 								String id = attrnameSubString.substring(attrnameSubString.lastIndexOf(":") + 1);
 								String size = attrname.substring(attrname.lastIndexOf(":") + 1);
 								for (int j = 0; j < bean.get(0).getValues().size(); j++) {
 									SKUItem item = bean.get(0).getValues().get(j);
+									
+									ULog.i("item-->"+item.toString()+"-->id"+id);
 									if (id.equalsIgnoreCase(item.getId())) {
 										((LineLayout) ll.getChildAt(1).findViewById(
 												R.id.dialog_shopping_select_sku_item_linelayout)).setNOEnable(j);

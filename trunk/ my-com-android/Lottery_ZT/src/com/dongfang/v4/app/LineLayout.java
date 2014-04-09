@@ -107,17 +107,15 @@ public class LineLayout extends ViewGroup {
 			getChildAt(i).setSelected(false);;
 		}
 	}
-	/*测试数据少 就选择相反的*/
+
 	public void setNOEnable(int position) {
 		final int count = getChildCount();
-		
-		if (position>count) 
+
+		if (position > count)
 			return;
-			
-			for (int i = 0; i < count; i++) {
-				getChildAt(i).setEnabled(i==position? false:true);;
-			}
-		}
-			
+		getChildAt(position).setEnabled(true);
+		
+		ULog.i("item index-->"+position);
 	}
 
+}
