@@ -28,6 +28,7 @@ import com.next.lottery.beans.SKUBean2;
 import com.next.lottery.beans.SKUEntity;
 import com.next.lottery.beans.SKUItem;
 import com.next.lottery.beans.SkuList;
+import com.next.lottery.db.bean.SkulistDbBean;
 import com.next.lottery.dialog.ProgressDialog;
 import com.next.lottery.dialog.ShoppingSelectSKUDialog;
 import com.next.lottery.fragment.GoodsDetailInteractiveAndSelectParamsFragment;
@@ -112,13 +113,7 @@ public class GoodsDetailFragment extends BaseFragment {
 				ULog.d(bean.toString());
 				if (null != bean && bean.getCode() == 0) {
 					goodsBean = bean.getInfo();
-					Collections.reverse(goodsBean.getSkuList());
-					try {
-						dbUtils.saveOrUpdateAll(goodsBean.getSku());
-					} catch (DbException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					initDb();
 					initData();
 				}
 				else {
@@ -135,6 +130,32 @@ public class GoodsDetailFragment extends BaseFragment {
 			}
 		});
 
+	}
+
+	protected void initDb() {
+		//平台给的数据是 size 在前面 color在后面 所以我颠倒下
+		Collections.reverse(goodsBean.getSkuList());
+		
+		try {
+			//存储 sku 信息
+			dbUtils.saveOrUpdateAll(goodsBean.getSku());
+			
+			//转存 存储 sku 信息（暂时sqlite3 不支持自定义对象 存储）
+			for (SkuList skuList :goodsBean.getSkuList()) {
+				for (SKUItem skuItem:skuList.getValues()) {
+					SkulistDbBean dbBean = new SkulistDbBean();
+					dbBean.setItemId(Integer.parseInt(goodsBean.getId()));
+					dbBean.setPid(skuList.getPid());
+					dbBean.setPname(skuList.getPname());
+					dbBean.setVid(skuItem.getId());
+					dbBean.setVname(skuItem.getName());
+					dbUtils.saveOrUpdate(dbBean);
+				}
+			}
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -212,6 +233,7 @@ public class GoodsDetailFragment extends BaseFragment {
 				@Override
 				public void onClickType(Bundle bundle) {
 					ULog.i("onclick");
+					ShoppingSelectSKUDialog.setTitle(goodsBean.getTitle());
 					ShoppingSelectSKUDialog.show2(context, goodsBean.getSkuList(), onSkuResultListener);
 				}
 			};

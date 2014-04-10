@@ -465,6 +465,7 @@ public class OrderBean {
 		private String targetIds;// null,
 		private int status;// 1,
 		private int offsetPrice;// 1000
+		private int disPrice;
 		public String getId() {
 			return id;
 		}
@@ -548,6 +549,12 @@ public class OrderBean {
 		}
 		public void setOffsetPrice(int offsetPrice) {
 			this.offsetPrice = offsetPrice;
+		}
+		public int getDisPrice() {
+			return disPrice;
+		}
+		public void setDisPrice(int disPrice) {
+			this.disPrice = disPrice;
 		}
 		
 
