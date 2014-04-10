@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import android.app.Dialog;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,8 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.next.lottery.R;
 import com.next.lottery.alipay.AlipayUtil;
 import com.next.lottery.beans.BaseEntity;
+import com.next.lottery.beans.CalculateOrderListBean;
+import com.next.lottery.beans.OrderNoBean;
 import com.next.lottery.beans.SKUBean2;
 import com.next.lottery.beans.SkuList;
 import com.next.lottery.beans.SKUItem;
@@ -43,11 +46,12 @@ import com.next.lottery.nets.HttpActions;
  */
 public class ShoppingSelectSKUDialog extends Dialog {
 	private static ShoppingSelectSKUDialog	dialog;
-	static DbUtils							db;
+	private static DbUtils					db;
 	private static ProgressDialog			progDialog;
-	private static SKUBean2  skuBean = new SKUBean2();
-	private static TextView tvSelectNum;
-	private static TextView tvStockNum;
+	private static SKUBean2					skuBean	= new SKUBean2();
+	private static TextView					tvSelectNum;
+	private static TextView					tvStockNum;
+	private static String					title;
 
 	public ShoppingSelectSKUDialog(Context context, int theme) {
 		super(context, theme);
@@ -68,6 +72,10 @@ public class ShoppingSelectSKUDialog extends Dialog {
 	public static void show1(Context context, ArrayList<SkuList> bean, OnSkuResultListener onSkuResultListener) {
 		show(context, bean, onSkuResultListener);
 
+	}
+
+	public static void setTitle(String titleString) {
+		title = titleString;
 	}
 
 	public static void show2(Context context, ArrayList<SkuList> bean, OnSkuResultListener onSkuResultListener) {
@@ -116,7 +124,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 			@Override
 			public void onClick(View v) {
 
-				if (beanResult == null) {
+				if (beanResult == null || skuBean == null) {
 					return;
 				}
 				for (int i = 0; i < beanResult.size(); i++) {
@@ -127,12 +135,10 @@ public class ShoppingSelectSKUDialog extends Dialog {
 				}
 				dialog.dismiss();
 				// 提交订单
-				int SelectNum =Integer.valueOf((String) tvSelectNum.getText());
-				int StockNum = skuBean!=null? skuBean.getStockNum():0;
-				skuBean.setCostPrice((SelectNum<StockNum? SelectNum:StockNum)*skuBean.getPrice());
-				creatOrder(context);
-				// 弹出支付宝
-				AlipayUtil.doPayment(context);
+				int SelectNum = Integer.valueOf((String) tvSelectNum.getText());
+				int StockNum = skuBean != null ? skuBean.getStockNum() : 0;
+				skuBean.setCostPrice((SelectNum < StockNum ? SelectNum : StockNum) * skuBean.getPrice());
+				CalculateOrder(context);
 			}
 		});
 		dialog.findViewById(R.id.dialog_select_sku_tv_add_shopping_cart).setOnClickListener(new View.OnClickListener() {
@@ -141,6 +147,50 @@ public class ShoppingSelectSKUDialog extends Dialog {
 				// onSkuResultListener.onSkuResult(beanResult);
 				dialog.dismiss();
 				Toast.makeText(context, "添加成功", 3000).show();
+			}
+		});
+
+	}
+
+	protected static void CalculateOrder(final Context context) {
+		ArrayList<SKUBean2> skubeanList = new ArrayList<SKUBean2>();
+		skubeanList.add(skuBean);
+		String url = HttpActions.CalcuLateOrderList(context, skubeanList);
+		ULog.d("CalculateOrder url = " + url);
+		progDialog = ProgressDialog.show(context);
+		progDialog.setCancelable(true);
+		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
+
+			@Override
+			public void onStart() {
+				progDialog.show();
+			}
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				progDialog.dismiss();
+				ULog.d(responseInfo.result);
+
+				BaseEntity<CalculateOrderListBean> bean = new Gson().fromJson(responseInfo.result,
+						new TypeToken<BaseEntity<CalculateOrderListBean>>() {}.getType());
+				if (null != bean && bean.getCode() == 0) {
+
+					CreatOrder(context, bean);
+					ULog.i("price-->" + bean.getInfo().getPrice());
+					// Toast.makeText(context, bean.getInfo().getPrice(),
+					// Toast.LENGTH_LONG).show();
+				}
+				else {
+					// Toast.makeText(context, bean.getMsg(),
+					// Toast.LENGTH_LONG).show();
+				}
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				progDialog.dismiss();
+				ULog.e(error.toString() + "\n" + msg);
+				// Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
 			}
 		});
 
@@ -157,8 +207,8 @@ public class ShoppingSelectSKUDialog extends Dialog {
 			entityResult.add(beanEntity);
 		}
 		((ScrollViewExtend) dialog.findViewById(R.id.dialog_select_sku_content_sl)).setAllow_match(false);
-		
-		tvStockNum = (TextView)dialog.findViewById(R.id.dialog_select_sku_stock_tv_number);
+
+		tvStockNum = (TextView) dialog.findViewById(R.id.dialog_select_sku_stock_tv_number);
 		
 		final LinearLayout ll = (LinearLayout) dialog.findViewById(R.id.dialog_select_sku_content_ll);
 		if (null != bean) {
@@ -186,29 +236,10 @@ public class ShoppingSelectSKUDialog extends Dialog {
 						}
 						v.setSelected(true);
 						/* 判断尺码/颜色 有无 */
-						List<Integer> indexPosition = new ArrayList<Integer>();
+						List<Integer> indexPosition = judgeSizeExists(bean, skubeanFromDB, tv);
 
-						for (int i = 0; i < (skubeanFromDB != null ? skubeanFromDB.size() : 0); i++) {
-							int end = skubeanFromDB.get(i).getSkuAttr().indexOf(";");
-							if ((skubeanFromDB.get(i).getSkuAttr().substring(0, end)).contains((CharSequence) tv
-									.getTag())) {
-								ULog.i(skubeanFromDB.get(i).getSkuAttrname());
-								String attrname = skubeanFromDB.get(i).getSkuAttrname();
-								String attrnameSubString = attrname.substring(0, attrname.lastIndexOf(":") - 3);// 减去3
-								String id = attrnameSubString.substring(attrnameSubString.lastIndexOf(":") + 1);
-								String size = attrname.substring(attrname.lastIndexOf(":") + 1);
-
-								for (int j = 0; j < bean.get(0).getValues().size(); j++) {
-									SKUItem item = bean.get(0).getValues().get(j);
-									if (id.equalsIgnoreCase(item.getId())) {
-										indexPosition.add(j);
-										break;
-									}
-								}
-							}
-						}
 						if (indexPosition.size() > 0)
-							((LineLayout) ll.getChildAt(1)
+							((LineLayout) ll.getChildAt(2)
 									.findViewById(R.id.dialog_shopping_select_sku_item_linelayout))
 									.setNOEnable(indexPosition);
 
@@ -238,19 +269,48 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		dialog.findViewById(R.id.dialog_select_sku_tv_addnumber).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				chgNumber(context,tvSelectNum, 1);
+				chgNumber(context, tvSelectNum, 1);
 				// beanResult.setNum(Integer.valueOf(tvNumber.getText().toString()));
 			}
 		});
 		dialog.findViewById(R.id.dialog_select_sku_tv_reducenumber).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				chgNumber(context,tvSelectNum, -1);
+				chgNumber(context, tvSelectNum, -1);
 				// beanResult.setNum(Integer.valueOf(tvNumber.getText().toString()));
 			}
 		});
 
+		if (!TextUtils.isEmpty(title)) {
+			TextView tvTitle = (TextView) dialog.findViewById(R.id.dialog_select_sku_tv_titile);
+			tvTitle.setText(title);
+		}
 		return entityResult;
+	}
+
+	protected static List<Integer> judgeSizeExists(ArrayList<SkuList> bean, List<SKUBean2> skubeanFromDB, TextView tv) {
+		List<Integer> indexPosition = new ArrayList<Integer>();
+		for (int i = 0; i < (skubeanFromDB != null ? skubeanFromDB.size() : 0); i++) {
+			int end = skubeanFromDB.get(i).getSkuAttr().indexOf(";");
+			if ((skubeanFromDB.get(i).getSkuAttr().substring(0, end)).contains((CharSequence) tv.getTag())) {
+				ULog.i(skubeanFromDB.get(i).getSkuAttrname());
+				String attrname = skubeanFromDB.get(i).getSkuAttrname();
+				String attrnameSubString = attrname.substring(0, attrname.lastIndexOf(":") - 3);// 减去3
+				String id = attrnameSubString.substring(attrnameSubString.lastIndexOf(":") + 1);
+				String size = attrname.substring(attrname.lastIndexOf(":") + 1);
+
+				for (int j = 0; j < bean.get(0).getValues().size(); j++) {
+					SKUItem item = bean.get(0).getValues().get(j);
+					if (id.equalsIgnoreCase(item.getId())) {
+						indexPosition.add(j);
+						break;
+					}
+				}
+			}
+		}
+
+		return indexPosition;
+
 	}
 
 	/* "1627207:28326;20509:28314" */
@@ -270,9 +330,9 @@ public class ShoppingSelectSKUDialog extends Dialog {
 			String SkuAttrString = itemColor + ";" + itemSize;
 			try {
 				skuBean = db.findFirst(Selector.from(SKUBean2.class).where("skuAttr", "=", SkuAttrString));
-				
-				if (skuBean!=null) {
-					tvStockNum.setText("库存为："+skuBean.getStockNum());
+
+				if (skuBean != null) {
+					tvStockNum.setText("库存：" + skuBean.getStockNum());
 				}
 			} catch (DbException e) {
 				e.printStackTrace();
@@ -281,9 +341,9 @@ public class ShoppingSelectSKUDialog extends Dialog {
 
 	}
 
-	private static void chgNumber(Context context ,TextView tvNumber, int i) {
+	private static void chgNumber(Context context, TextView tvNumber, int i) {
 		int number = Integer.valueOf(tvNumber.getText().toString()) + i;
-		if (number>skuBean.getStockNum()) {
+		if (number > skuBean.getStockNum()) {
 			Toast.makeText(context, "库存不足！", Toast.LENGTH_LONG).show();
 			return;
 		}
@@ -297,10 +357,10 @@ public class ShoppingSelectSKUDialog extends Dialog {
 	}
 
 	/* 生成订单 */
-	private static void creatOrder(final Context context) {
-		ArrayList<SKUBean2> skubeanList = new ArrayList<SKUBean2>();
-		skubeanList.add(skuBean);
-		String url = HttpActions.creatOrder(context,skubeanList);
+	private static void CreatOrder(final Context context, BaseEntity<CalculateOrderListBean> bean) {
+		// ArrayList<SKUBean2> skubeanList = new ArrayList<SKUBean2>();
+		// skubeanList.add(skuBean);
+		String url = HttpActions.creatOrder(context, bean);
 		ULog.d("addShopCarts url = " + url);
 		progDialog = ProgressDialog.show(context);
 		progDialog.setCancelable(true);
@@ -316,12 +376,11 @@ public class ShoppingSelectSKUDialog extends Dialog {
 				progDialog.dismiss();
 				ULog.d(responseInfo.result);
 
-				BaseEntity<String> bean = new Gson().fromJson(responseInfo.result,
-						new TypeToken<BaseEntity<String>>() {}.getType());
+				BaseEntity<OrderNoBean> bean = new Gson().fromJson(responseInfo.result,
+						new TypeToken<BaseEntity<OrderNoBean>>() {}.getType());
 				if (null != bean && bean.getCode() == 0) {
-
+					ULog.i(bean.getInfo().getOrderNo());
 					AlipayUtil.doPayment(context);
-					Toast.makeText(context, bean.getInfo(), Toast.LENGTH_LONG).show();
 				}
 				else {
 					Toast.makeText(context, bean.getMsg(), Toast.LENGTH_LONG).show();

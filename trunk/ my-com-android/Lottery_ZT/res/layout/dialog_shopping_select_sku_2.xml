@@ -28,21 +28,23 @@
 
                 <TextView
                     android:id="@+id/dialog_select_sku_tv_titile"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:text="高端大气呢绒大衣"
                     android:textColor="@color/black"
+                    android:layout_weight="0.8"
                     android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/dialog_select_sku_stock_tv_number"
-                    android:layout_width="fill_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:ems="5"
                     android:gravity="right"
                     android:singleLine="true"
                     android:text="库存： 1"
+                     android:layout_weight="0.2"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>

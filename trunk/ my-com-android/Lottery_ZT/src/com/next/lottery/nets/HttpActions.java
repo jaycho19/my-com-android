@@ -2,6 +2,8 @@ package com.next.lottery.nets;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONArray;
 
@@ -10,6 +12,8 @@ import android.content.Context;
 import com.dongfang.utils.ULog;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.next.lottery.beans.BaseEntity;
+import com.next.lottery.beans.CalculateOrderListBean;
 import com.next.lottery.beans.SKUBean2;
 import com.next.lottery.params.ComParams;
 import com.next.lottery.utils.User;
@@ -139,6 +143,49 @@ public class HttpActions {
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		return sb.toString();
 	}
+	/**
+	 * 订单计算接口 {"userId":"3","merId":1,"userToken":"532fea9f115d5","userDeliveryAddressId":1,
+	 * "deliveryModeId":2,"isLgtype":2,"items":[{"itemId":9,"skuId":16,"count":2}],
+	 * "coupons":["1"],"activitys":[1,2]}
+	 */
+	public static String CalcuLateOrderList(Context context, ArrayList<SKUBean2> skubeanList) {
+		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
+		sb.append("?").append("class=").append("order");
+		sb.append("&").append("method=").append("calc");
+		
+		JsonObject json = new JsonObject();
+		json.addProperty("userId", "3");
+		json.addProperty("merId", 1);
+		json.addProperty("userToken", "123456");
+		json.addProperty("userDeliveryAddressId", 1);
+		json.addProperty("deliveryModeId", 2);
+		json.addProperty("isLgtype", 2);
+		
+		JSONArray coupons = new JSONArray();
+		coupons.put(1);
+		JSONArray activitys = new JSONArray();
+		activitys.put(1).put(2);
+		json.addProperty("coupons", coupons.toString());
+		json.addProperty("activitys", activitys.toString());
+		
+		
+		JsonArray jsonArray = new JsonArray();
+        for (int i = 0; i < skubeanList.size(); i++) {
+        	JsonObject jsonItem = new JsonObject();
+//        	jsonItem.addProperty("itemId", skubeanList.get(i).getItemId());
+//    		jsonItem.addProperty("skuId", skubeanList.get(i).getId());
+        	jsonItem.addProperty("itemId", 1);
+    		jsonItem.addProperty("skuId", 3);
+    		jsonItem.addProperty("count", skubeanList.get(i).getCostPrice()/skubeanList.get(i).getPrice());
+    		jsonArray.add(jsonItem);
+		}
+        json.add("items", jsonArray);
+        json.addProperty("coupons", coupons.toString());
+		json.addProperty("activitys", activitys.toString());
+        ULog.i(json.toString());
+		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
+		return sb.toString();
+	}
 
 	/**
 	 * 生成订单接口 {"userId":"3","merId":1,"userToken":"532fea9f115d5",
@@ -149,8 +196,9 @@ public class HttpActions {
 	 * :2},"items":[{"itemId":1,"skuId":1,"count":2},{"itemId":2,"skuId":3,
 	 * "count":2}],"coupons":["1"],"activitys":[1,2]}
 	 * @param skubeanList 
+	 * @param bean 
 	 */
-	public static String creatOrder(Context context, ArrayList<SKUBean2> skubeanList) {
+	public static String creatOrder(Context context, BaseEntity<CalculateOrderListBean> bean) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
 		sb.append("?").append("class=").append("order");
 		sb.append("&").append("method=").append("create");
@@ -176,15 +224,16 @@ public class HttpActions {
 		
         int price = 0;
 		JsonArray jsonArray = new JsonArray();
-        for (int i = 0; i < skubeanList.size(); i++) {
+        for (int i = 0; i < bean.getInfo().getItems().size(); i++) {
         	JsonObject jsonItem = new JsonObject();
-        	jsonItem.addProperty("itemId", skubeanList.get(i).getItemId());
-    		jsonItem.addProperty("skuId", skubeanList.get(i).getId());
-    		jsonItem.addProperty("count", skubeanList.get(i).getCostPrice()/skubeanList.get(i).getPrice());
-    		price = price +skubeanList.get(i).getCostPrice();
+        	jsonItem.addProperty("itemId", bean.getInfo().getItems().get(i).getItemId());
+    		jsonItem.addProperty("skuId", bean.getInfo().getItems().get(i).getSkuId());
+    		jsonItem.addProperty("count", bean.getInfo().getItems().get(i).getCount());
     		jsonArray.add(jsonItem);
 		}
-        json.addProperty("price", price);
+//        json.addProperty("price", price);
+        json.addProperty("price", bean.getInfo().getPrice());
+        json.add("items", jsonArray);
 		/*JsonObject json1 = new JsonObject();
 		json1.addProperty("itemId", "9");
 		json1.addProperty("skuId", 21);
@@ -199,10 +248,6 @@ public class HttpActions {
 		coupons.put(1);
 		JSONArray activitys = new JSONArray();
 		activitys.put(1).put(2);
-
-//		jsonArray.add(json1);
-//		jsonArray.add(json11);
-		json.add("items", jsonArray);
 		json.addProperty("coupons", coupons.toString());
 		json.addProperty("activitys", activitys.toString());
 
