@@ -1,5 +1,7 @@
 package com.dongfang.v4.app;
 
+import java.util.List;
+
 import com.dongfang.utils.ULog;
 
 import android.content.Context;
@@ -91,7 +93,7 @@ public class LineLayout extends ViewGroup {
 		final int count = getChildCount();
 		int position = 0;
 		for (int i = 0; i < count; i++) {
-
+			
 			if (position == 0 && getChildAt(i).isSelected())
 				position = i;
 			else
@@ -104,18 +106,21 @@ public class LineLayout extends ViewGroup {
 	public void setNOSelect() {
 		final int count = getChildCount();
 		for (int i = 0; i < count; i++) {
-			getChildAt(i).setSelected(false);;
+			getChildAt(i).setSelected(false);
 		}
 	}
 
-	public void setNOEnable(int position) {
+	public void setNOEnable(List<Integer> indexPosition) {
 		final int count = getChildCount();
-
-		if (position > count)
-			return;
-		getChildAt(position).setEnabled(true);
 		
-		ULog.i("item index-->"+position);
+		for (int i = 0; i < count; i++) {
+			if (indexPosition.get(i)!=i) {
+				indexPosition.add(i, -1);
+				getChildAt(i).setEnabled(false);
+				getChildAt(i).setSelected(false);
+			}else
+				getChildAt(i).setEnabled(true);
+		}
 	}
 
 }

@@ -114,9 +114,7 @@ public class GoodsDetailFragment extends BaseFragment {
 					goodsBean = bean.getInfo();
 					Collections.reverse(goodsBean.getSkuList());
 					try {
-						dbUtils.dropTable(SKUBean2.class);
-						dbUtils.saveAll(goodsBean.getSku());
-//						dbUtils.saveOrUpdateAll(goodsBean.getSku());
+						dbUtils.saveOrUpdateAll(goodsBean.getSku());
 					} catch (DbException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
