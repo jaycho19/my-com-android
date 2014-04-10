@@ -138,6 +138,8 @@ public class GoodsDetailFragment extends BaseFragment {
 		
 		try {
 			//存储 sku 信息
+			dbUtils.dropTable(SKUBean2.class);
+			dbUtils.dropTable(SkulistDbBean.class);
 			dbUtils.saveOrUpdateAll(goodsBean.getSku());
 			
 			//转存 存储 sku 信息（暂时sqlite3 不支持自定义对象 存储）
