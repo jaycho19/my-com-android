@@ -45,6 +45,8 @@ public class ShoppingSelectSKUDialog extends Dialog {
 	private static ShoppingSelectSKUDialog	dialog;
 	static DbUtils							db;
 	private static ProgressDialog			progDialog;
+	private static SKUBean2  skuBean = new SKUBean2();
+	private static TextView tvNumber;
 
 	public ShoppingSelectSKUDialog(Context context, int theme) {
 		super(context, theme);
@@ -77,7 +79,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		dialog.getWindow().setLayout(DeviceInfo.SCREEN_WIDTH_PORTRAIT, -2);
 		List<SKUBean2> skubean = null;
 		try {
-			db = DbUtils.create(context,context.getPackageName());
+			db = DbUtils.create(context, context.getPackageName());
 			skubean = db.findAll(Selector.from(SKUBean2.class));
 		} catch (DbException e) {
 			e.printStackTrace();
@@ -123,7 +125,8 @@ public class ShoppingSelectSKUDialog extends Dialog {
 					}
 				}
 				dialog.dismiss();
-				//提交订单
+				// 提交订单
+				skuBean.setCostPrice(Integer.valueOf((String) tvNumber.getText())*skuBean.getPrice());
 				creatOrder(context);
 				// 弹出支付宝
 				AlipayUtil.doPayment(context);
@@ -177,24 +180,31 @@ public class ShoppingSelectSKUDialog extends Dialog {
 						}
 						v.setSelected(true);
 						/* 判断尺码/颜色 有无 */
+						List<Integer> indexPosition = new ArrayList<Integer>();
+
 						for (int i = 0; i < (skubeanFromDB != null ? skubeanFromDB.size() : 0); i++) {
-							if (skubeanFromDB.get(i).getSkuAttr().contains((CharSequence) tv.getTag())) {
+							int end = skubeanFromDB.get(i).getSkuAttr().indexOf(";");
+							if ((skubeanFromDB.get(i).getSkuAttr().substring(0, end)).contains((CharSequence) tv
+									.getTag())) {
 								ULog.i(skubeanFromDB.get(i).getSkuAttrname());
 								String attrname = skubeanFromDB.get(i).getSkuAttrname();
 								String attrnameSubString = attrname.substring(0, attrname.lastIndexOf(":") - 3);// 减去3
 								String id = attrnameSubString.substring(attrnameSubString.lastIndexOf(":") + 1);
 								String size = attrname.substring(attrname.lastIndexOf(":") + 1);
+
 								for (int j = 0; j < bean.get(0).getValues().size(); j++) {
 									SKUItem item = bean.get(0).getValues().get(j);
-									
-									ULog.i("item-->"+item.toString()+"-->id"+id);
 									if (id.equalsIgnoreCase(item.getId())) {
-										((LineLayout) ll.getChildAt(1).findViewById(
-												R.id.dialog_shopping_select_sku_item_linelayout)).setNOEnable(j);
+										indexPosition.add(j);
+										break;
 									}
 								}
 							}
 						}
+						if (indexPosition.size() > 0)
+							((LineLayout) ll.getChildAt(1)
+									.findViewById(R.id.dialog_shopping_select_sku_item_linelayout))
+									.setNOEnable(indexPosition);
 
 						/* 获取选中内容 */
 						for (int i = 0; i < bean.size(); i++) {
@@ -204,11 +214,12 @@ public class ShoppingSelectSKUDialog extends Dialog {
 								values.add(bean.get(i).getValues()
 										.get(((LineLayout) v.getParent()).getSelectPosition()));
 								beanEntity.setValues(values);
-								ULog.i(bean.get(i).getValues().get(((LineLayout) v.getParent()).getSelectPosition())
-										.getName());
 								entityResult.get(i).setValues(values);
 							}
 						}
+
+						/* 获取相应库存 */
+						getStackNum(entityResult);
 					}
 
 				});
@@ -217,18 +228,18 @@ public class ShoppingSelectSKUDialog extends Dialog {
 			ll.addView(view, 0);
 		}
 
-		final TextView tvNumber = (TextView) dialog.findViewById(R.id.dialog_select_sku_tv_number);
+		tvNumber = (TextView) dialog.findViewById(R.id.dialog_select_sku_tv_number);
 		dialog.findViewById(R.id.dialog_select_sku_tv_addnumber).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				chgNumber(tvNumber, 1);
+				chgNumber(context,tvNumber, 1);
 				// beanResult.setNum(Integer.valueOf(tvNumber.getText().toString()));
 			}
 		});
 		dialog.findViewById(R.id.dialog_select_sku_tv_reducenumber).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				chgNumber(tvNumber, -1);
+				chgNumber(context,tvNumber, -1);
 				// beanResult.setNum(Integer.valueOf(tvNumber.getText().toString()));
 			}
 		});
@@ -236,8 +247,36 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		return entityResult;
 	}
 
-	private static void chgNumber(TextView tvNumber, int i) {
+	/* "1627207:28326;20509:28314" */
+	protected static void getStackNum(ArrayList<SkuList> entityResult) {
+		String itemColor = null;
+		String itemSize = null;
+
+		if (entityResult.get(0) != null & entityResult.get(0).getValues() != null) {
+			itemSize = entityResult.get(0).getPid() + ":" + entityResult.get(0).getValues().get(0).getId();
+		}
+		if (entityResult.get(1) != null & entityResult.get(1).getValues() != null) {
+			itemColor = entityResult.get(1).getPid() + ":" + entityResult.get(1).getValues().get(0).getId();
+		}
+		ULog.i(itemColor + ";" + itemSize);
+
+		if (itemColor != null && itemSize != null) {
+			String SkuAttrString = itemColor + ";" + itemSize;
+			try {
+				skuBean = db.findFirst(Selector.from(SKUBean2.class).where("skuAttr", "=", SkuAttrString));
+			} catch (DbException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	private static void chgNumber(Context context ,TextView tvNumber, int i) {
 		int number = Integer.valueOf(tvNumber.getText().toString()) + i;
+		if (number>skuBean.getStockNum()) {
+			Toast.makeText(context, "库存不足！", Toast.LENGTH_LONG).show();
+			return;
+		}
 		number = number < 1 ? 1 : number;
 		tvNumber.setText(Integer.toString(number));
 	}
@@ -249,7 +288,9 @@ public class ShoppingSelectSKUDialog extends Dialog {
 
 	/* 生成订单 */
 	private static void creatOrder(final Context context) {
-		String url = HttpActions.creatOrder(context);
+		ArrayList<SKUBean2> skubeanList = new ArrayList<SKUBean2>();
+		skubeanList.add(skuBean);
+		String url = HttpActions.creatOrder(context,skubeanList);
 		ULog.d("addShopCarts url = " + url);
 		progDialog = ProgressDialog.show(context);
 		progDialog.setCancelable(true);

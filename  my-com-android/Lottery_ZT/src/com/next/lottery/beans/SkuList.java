@@ -2,6 +2,8 @@ package com.next.lottery.beans;
 
 import java.util.ArrayList;
 
+import com.lidroid.xutils.db.annotation.Id;
+
 /**
  * 
  * @author gfan

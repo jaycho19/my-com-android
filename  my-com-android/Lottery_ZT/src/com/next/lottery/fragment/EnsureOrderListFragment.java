@@ -120,7 +120,7 @@ public class EnsureOrderListFragment extends BaseFragment {
 
 	/* 生成订单 */
 	private void creatOrder() {
-		String url = HttpActions.creatOrder(getActivity());
+		String url = HttpActions.creatOrder(getActivity(),null);
 		ULog.d("addShopCarts url = " + url);
 		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
 
