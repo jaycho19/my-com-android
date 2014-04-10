@@ -1,9 +1,12 @@
 package com.next.lottery.beans;
 
-import com.dongfang.utils.ULog;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.dongfang.utils.ULog;
 
 public class ShopCartsInfo implements Parcelable {
 	private String id;
@@ -15,6 +18,26 @@ public class ShopCartsInfo implements Parcelable {
 	private int count;
 	private int stockNum;
 	private boolean isSelected; // 0表示未选中 1 表示选中 writeToParcel方法里面没有写入boolean值方法 fuck!
+	
+	private ArrayList<String> skuList = new ArrayList<String>();
+	
+	public void addToSKUList(String sku){
+		skuList.add(sku);
+	}
+	
+	public void clearSKUList(){
+		skuList.clear();
+	}
+
+	public ArrayList<String> getSkuList() {
+		return skuList;
+	}
+
+
+	public void setSkuList(ArrayList<String> skuList) {
+		this.skuList = skuList;
+	}
+
 
 	public String getItemId() {
 		return itemId;
