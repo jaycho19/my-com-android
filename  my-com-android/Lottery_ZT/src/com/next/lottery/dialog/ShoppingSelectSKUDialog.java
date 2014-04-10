@@ -46,7 +46,8 @@ public class ShoppingSelectSKUDialog extends Dialog {
 	static DbUtils							db;
 	private static ProgressDialog			progDialog;
 	private static SKUBean2  skuBean = new SKUBean2();
-	private static TextView tvNumber;
+	private static TextView tvSelectNum;
+	private static TextView tvStockNum;
 
 	public ShoppingSelectSKUDialog(Context context, int theme) {
 		super(context, theme);
@@ -126,7 +127,9 @@ public class ShoppingSelectSKUDialog extends Dialog {
 				}
 				dialog.dismiss();
 				// 提交订单
-				skuBean.setCostPrice(Integer.valueOf((String) tvNumber.getText())*skuBean.getPrice());
+				int SelectNum =Integer.valueOf((String) tvSelectNum.getText());
+				int StockNum = skuBean!=null? skuBean.getStockNum():0;
+				skuBean.setCostPrice((SelectNum<StockNum? SelectNum:StockNum)*skuBean.getPrice());
 				creatOrder(context);
 				// 弹出支付宝
 				AlipayUtil.doPayment(context);
@@ -154,6 +157,9 @@ public class ShoppingSelectSKUDialog extends Dialog {
 			entityResult.add(beanEntity);
 		}
 		((ScrollViewExtend) dialog.findViewById(R.id.dialog_select_sku_content_sl)).setAllow_match(false);
+		
+		tvStockNum = (TextView)dialog.findViewById(R.id.dialog_select_sku_stock_tv_number);
+		
 		final LinearLayout ll = (LinearLayout) dialog.findViewById(R.id.dialog_select_sku_content_ll);
 		if (null != bean) {
 			ULog.e("null != bean ;size = " + bean.size());
@@ -225,21 +231,21 @@ public class ShoppingSelectSKUDialog extends Dialog {
 				});
 				l.addView(tv);
 			}
-			ll.addView(view, 0);
+			ll.addView(view, 1);
 		}
 
-		tvNumber = (TextView) dialog.findViewById(R.id.dialog_select_sku_tv_number);
+		tvSelectNum = (TextView) dialog.findViewById(R.id.dialog_select_sku_tv_number);
 		dialog.findViewById(R.id.dialog_select_sku_tv_addnumber).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				chgNumber(context,tvNumber, 1);
+				chgNumber(context,tvSelectNum, 1);
 				// beanResult.setNum(Integer.valueOf(tvNumber.getText().toString()));
 			}
 		});
 		dialog.findViewById(R.id.dialog_select_sku_tv_reducenumber).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				chgNumber(context,tvNumber, -1);
+				chgNumber(context,tvSelectNum, -1);
 				// beanResult.setNum(Integer.valueOf(tvNumber.getText().toString()));
 			}
 		});
@@ -264,6 +270,10 @@ public class ShoppingSelectSKUDialog extends Dialog {
 			String SkuAttrString = itemColor + ";" + itemSize;
 			try {
 				skuBean = db.findFirst(Selector.from(SKUBean2.class).where("skuAttr", "=", SkuAttrString));
+				
+				if (skuBean!=null) {
+					tvStockNum.setText("库存为："+skuBean.getStockNum());
+				}
 			} catch (DbException e) {
 				e.printStackTrace();
 			}
