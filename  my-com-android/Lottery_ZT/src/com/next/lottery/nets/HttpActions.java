@@ -14,6 +14,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.CalculateOrderListBean;
+import com.next.lottery.beans.GoodsBean;
 import com.next.lottery.beans.SKUBean2;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.params.ComParams;
@@ -95,19 +96,21 @@ public class HttpActions {
 	/**
 	 * 加入购物车接口 {"userToken":"123456","merId":"100000","itemId":"100000",
 	 * "userId":3,"skuId":60,"count":2}
+	 * @param skuBean 
+	 * @param goodsBean 
 	 */
-	public static String AddShopCarts() {
+	public static String AddShopCarts(SKUBean2 skuBean) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
 		sb.append("?").append("class=").append("shopcart");
 		sb.append("&").append("method=").append("add");
 
 		JsonObject json = new JsonObject();
-		json.addProperty("merId", "100000");
+		json.addProperty("merId", "1");
 		json.addProperty("userId", "3");
 		json.addProperty("userToken", "123456");
-		json.addProperty("itemId", "100000");
-		json.addProperty("skuId", "70");
-		json.addProperty("count", "2");
+		json.addProperty("itemId", skuBean.getItemId());
+		json.addProperty("skuId", skuBean.getId());
+		json.addProperty("count", skuBean.getCostPrice()/skuBean.getPrice());
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		return sb.toString();
 	}
@@ -280,7 +283,7 @@ public class HttpActions {
 	 * 获取订单接口
 	 * {"merId":"1","Id":"9","fl":"title,id,sku"}
 	 */
-	public static String GetGoodsDetaiBean(Context context ,String[] fl) {
+	public static String GetGoodsDetaiBean(Context context ,String fl) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
 		sb.append("?").append("class=").append("item");
 		sb.append("&").append("method=").append("get");
@@ -288,7 +291,7 @@ public class HttpActions {
 		JsonObject json = new JsonObject();
 		json.addProperty("Id", "9");
 		json.addProperty("merId", "1");
-		json.addProperty("fl", "");
+		json.addProperty("fl", fl);
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		ULog.i(json.toString());
 		return sb.toString();

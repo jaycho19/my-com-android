@@ -21,6 +21,7 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.R;
 import com.next.lottery.beans.BaseEntity;
+import com.next.lottery.beans.GoodsBean;
 import com.next.lottery.beans.UserBean;
 import com.next.lottery.dialog.ProgressDialog;
 import com.next.lottery.listener.OnClickTypeListener;
@@ -38,10 +39,9 @@ public class GoosDetailBottomFragment extends BaseFragment {
 	private TextView			btnBuyNow;
 	@ViewInject(R.id.btn_add_shopping_cart)
 	private TextView			btnAddShopCart;
+	private GoodsBean goodsBean;
 
-	public GoosDetailBottomFragment(OnClickTypeListener onClickTypeListener) {
-		this.OnClickTypeListener = onClickTypeListener;
-	}
+	public GoosDetailBottomFragment() {}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -83,36 +83,12 @@ public class GoosDetailBottomFragment extends BaseFragment {
 	}
 
 	public void addShopCarts() {
-		String url = HttpActions.AddShopCarts();
-		ULog.d("addShopCarts url = " + url);
-		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
+//		Toast.makeText(getActivity(), "添加成功", 3000).show();
+	}
 
-			@Override
-			public void onStart() {
-				progDialog.show();
-			}
-
-			@Override
-			public void onSuccess(ResponseInfo<String> responseInfo) {
-				progDialog.dismiss();
-				ULog.d(responseInfo.result);
-				
-				BaseEntity bean = new Gson().fromJson(responseInfo.result, BaseEntity.class);
-				if (null != bean && bean.getCode() == 0) {
-					
-					Toast.makeText(getActivity(), "添加成功!", Toast.LENGTH_LONG).show();
-				}
-				else {
-					Toast.makeText(getActivity(), bean.getMsg(), Toast.LENGTH_LONG).show();
-				}
-			}
-			@Override
-			public void onFailure(HttpException error, String msg) {
-				progDialog.dismiss();
-				ULog.e(error.toString() + "\n" + msg);
-			}
-		});
-
+	public void setData(GoodsBean goodsBean, OnClickTypeListener onClickTypeListener2) {
+			this.goodsBean = goodsBean;
+			this.OnClickTypeListener = onClickTypeListener2;
 	}
 
 }

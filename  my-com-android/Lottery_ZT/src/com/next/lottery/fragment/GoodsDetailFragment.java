@@ -94,8 +94,7 @@ public class GoodsDetailFragment extends BaseFragment {
 
 	/* 通过接口获取详情数据 */
 	private void getDataFromInter() {
-		String[] fl = {};
-		String url = HttpActions.GetGoodsDetaiBean(getActivity(), fl);
+		String url = HttpActions.GetGoodsDetaiBean(getActivity(), "");
 		ULog.d("GetGoodsDetaiBean url = " + url);
 		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
 
@@ -281,8 +280,9 @@ public class GoodsDetailFragment extends BaseFragment {
 				fGoodsInteractAndParams.setData(onClickTypeListener);
 				fragments.add(fGoodsInteractAndParams);
 
-				GoosDetailBottomFragment fGoodSBottomBar = new GoosDetailBottomFragment(onClickTypeListener);
+				GoosDetailBottomFragment fGoodSBottomBar = new GoosDetailBottomFragment();
 				fragmentTransaction.add(R.id.activity_goods_detail_layout, fGoodSBottomBar);
+				fGoodSBottomBar.setData(goodsBean, onClickTypeListener);
 				fragments.add(fGoodSBottomBar);
 
 				fragmentTransaction.commit();

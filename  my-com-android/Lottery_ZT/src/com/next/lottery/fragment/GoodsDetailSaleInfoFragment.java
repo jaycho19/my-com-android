@@ -101,7 +101,7 @@ public class GoodsDetailSaleInfoFragment extends BaseFragment {
 	}
 
 	private void doAddFavour() {
-		String url = HttpActions.AddShopCarts();
+		String url = HttpActions.doFavour();
 		ULog.d("doAddFavour url = " + url);
 		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
 
