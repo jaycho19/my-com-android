@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.dongfang.utils.ULog;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.db.sqlite.Selector;
@@ -37,6 +38,7 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.next.lottery.GoodsDetailActivity;
 import com.next.lottery.R;
 import com.next.lottery.beans.BaseEntity;
+import com.next.lottery.beans.GoodsBean;
 import com.next.lottery.beans.SKUBean;
 import com.next.lottery.beans.SKUBean2;
 import com.next.lottery.beans.SKUEntity;
@@ -44,6 +46,7 @@ import com.next.lottery.beans.SKUItem;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.beans.SkuList;
 import com.next.lottery.db.bean.SkulistDbBean;
+import com.next.lottery.dialog.ProgressDialog;
 import com.next.lottery.dialog.ShoppingSelectSKUDialog;
 import com.next.lottery.listener.OnSkuResultListener;
 import com.next.lottery.nets.HttpActions;
@@ -325,10 +328,54 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 				skulist.add(skubean2);
 			} catch (DbException e) {
 				// TODO Auto-generated catch block
+				ULog.i("DbException");
+				getDataFromInter();
 				e.printStackTrace();
+			} catch(Exception e){
+				getDataFromInter();
+				ULog.i("Exception"+e.toString());
 			}
-			ULog.i(skulist.toString());
 			return skulist;
+		}
+		
+
+		/* 通过接口获取详情数据 */
+		private void getDataFromInter() {
+			String url = HttpActions.GetGoodsDetaiBean(context, "sku");
+			ULog.d("GetGoodsDetaiBean url = " + url);
+			final ProgressDialog progDialog = ProgressDialog.show(context);
+			progDialog.setCancelable(true);
+			new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
+
+				@Override
+				public void onStart() {
+					progDialog.show();
+				}
+
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					progDialog.dismiss();
+					// ULog.d(responseInfo.result);
+					BaseEntity<GoodsBean> bean = new Gson().fromJson(responseInfo.result,
+							new TypeToken<BaseEntity<GoodsBean>>() {}.getType());
+					ULog.d(bean.toString());
+					if (null != bean && bean.getCode() == 0) {
+						ShoppingSelectSKUDialog.show1(context, bean.getInfo().getSkuList(), onSkuResultListener);
+					}
+					else {
+						Toast.makeText(context, bean.getMsg(), Toast.LENGTH_LONG).show();
+					}
+
+				}
+
+				@Override
+				public void onFailure(HttpException error, String msg) {
+					progDialog.dismiss();
+					ULog.e(error.toString() + "\n" + msg);
+					Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+				}
+			});
+
 		}
 
 		@Override
@@ -467,5 +514,5 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 		});
 
 	}
-
+	
 }

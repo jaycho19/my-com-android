@@ -59,7 +59,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 	}
 
 	private static void show(Context context, ArrayList<SkuList> bean, OnSkuResultListener onSkuResultListener) {
-		if (null != dialog && dialog.isShowing())
+		if (null != dialog && dialog.isShowing()||bean.size()==0)
 			return;
 		dialog = new ShoppingSelectSKUDialog(context, R.style.SelectSKUDialog);
 		dialog.getWindow().setGravity(Gravity.BOTTOM | Gravity.LEFT);
@@ -155,6 +155,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 			@Override
 			public void onClick(View v) {
 				// onSkuResultListener.onSkuResult(beanResult);
+				addShopCarts(context);
 				dialog.dismiss();
 				Toast.makeText(context, "添加成功", 3000).show();
 			}
@@ -408,6 +409,41 @@ public class ShoppingSelectSKUDialog extends Dialog {
 				progDialog.dismiss();
 				ULog.e(error.toString() + "\n" + msg);
 				Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+			}
+		});
+
+	}
+	
+	public static void addShopCarts(final Context context) {
+		String url = HttpActions.AddShopCarts(skuBean);
+		ULog.d("addShopCarts url = " + url);
+		progDialog = ProgressDialog.show(context);
+		progDialog.setCancelable(true);
+		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
+
+			@Override
+			public void onStart() {
+				progDialog.show();
+			}
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				progDialog.dismiss();
+				ULog.d(responseInfo.result);
+				
+				BaseEntity bean = new Gson().fromJson(responseInfo.result, BaseEntity.class);
+				if (null != bean && bean.getCode() == 0) {
+					
+					Toast.makeText(context, "添加成功!", Toast.LENGTH_LONG).show();
+				}
+				else {
+					Toast.makeText(context, bean.getMsg(), Toast.LENGTH_LONG).show();
+				}
+			}
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				progDialog.dismiss();
+				ULog.e(error.toString() + "\n" + msg);
 			}
 		});
 

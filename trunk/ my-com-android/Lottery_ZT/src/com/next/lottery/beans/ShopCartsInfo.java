@@ -3,6 +3,7 @@ package com.next.lottery.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.ClipData.Item;
 import android.os.Parcel;
 import android.os.Parcelable;
 
