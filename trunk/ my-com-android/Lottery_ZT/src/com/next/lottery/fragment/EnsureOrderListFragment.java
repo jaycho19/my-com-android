@@ -29,6 +29,8 @@ import com.next.lottery.R;
 import com.next.lottery.alipay.AlipayUtil;
 import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.CalculateOrderListBean;
+import com.next.lottery.beans.CalculateOrderListBean.Items;
+import com.next.lottery.beans.OrderBean;
 import com.next.lottery.beans.OrderNoBean;
 import com.next.lottery.beans.SKUBean2;
 import com.next.lottery.beans.ShopCartsInfo;
@@ -62,8 +64,6 @@ public class EnsureOrderListFragment extends BaseFragment {
 	private ProgressDialog				progDialog;
 	private BaseEntity<CalculateOrderListBean> calcuBean;
 	
-	private int sum ;//商品总额
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_ensure_order_list_layout, container, false);
@@ -71,30 +71,28 @@ public class EnsureOrderListFragment extends BaseFragment {
 		tvTitle = (TextView) view.findViewById(R.id.app_top_title_tv_centre);
 		
 		
-		initView();
+		progDialog = ProgressDialog.show(getActivity());
+		progDialog.setCancelable(true);
 		CalculateOrder(getActivity(),orderlist);
 		return view;
 	}
 
-	private void initView() {
-		
-		progDialog = ProgressDialog.show(getActivity());
-		progDialog.setCancelable(true);
-
-		for (int i = 0; i < orderlist.size(); i++) {
-			View itemView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_ensure_order_listview_item,
-					null);
-//			MyImageView img = (MyImageView) itemView.findViewById(R.id.fragment_shoppingcart_all_adp_item_iv);
-			TextView tvNum = (TextView) itemView.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_number);
-			itemll.addView(itemView);
-			sum = sum+Integer.valueOf(orderlist.get(i).getPrice()) ;
-		}
-		
-	}
 	
 	private void refreshView(){
 		tvBottomList.setText("共计"+calcuBean.getInfo().getItems().size()+"件商品,"+"￥"+(calcuBean.getInfo().getPrice()/100)+"元");
-		tvTraFee.setText(calcuBean.getInfo().getTraFee().getTraFee()+"元");
+		tvTraFee.setText(calcuBean.getInfo().getTraFee().getTraFee()/100+"元");
+		for (Items cartsInfo : calcuBean.getInfo().getItems()) {
+			View itemView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_ensure_order_listview_item,
+					null);
+//			MyImageView img = (MyImageView) itemView.findViewById(R.id.fragment_shoppingcart_all_adp_item_iv);
+			TextView tvTitle = (TextView) itemView.findViewById(R.id.fragment_ensure_orderlist_item_show_title);
+			TextView tvPrice = (TextView) itemView.findViewById(R.id.fragment_ensure_orderlist_item_show_price);
+			TextView tvCount = (TextView) itemView.findViewById(R.id.fragment_ensure_orderlist_item_show_number);
+//			tvTitle.setText(cartsInfo.getItemName());
+			tvPrice.setText(cartsInfo.getPrice()/100+"");
+			tvCount.setText(cartsInfo.getCount()+"");
+			itemll.addView(itemView);
+		}
 	}
 
 	public void setOrderlist(ArrayList<ShopCartsInfo> orderlist) {
