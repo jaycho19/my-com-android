@@ -15,6 +15,7 @@ import com.google.gson.JsonObject;
 import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.CalculateOrderListBean;
 import com.next.lottery.beans.SKUBean2;
+import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.params.ComParams;
 import com.next.lottery.utils.User;
 
@@ -148,7 +149,7 @@ public class HttpActions {
 	 * "deliveryModeId":2,"isLgtype":2,"items":[{"itemId":9,"skuId":16,"count":2}],
 	 * "coupons":["1"],"activitys":[1,2]}
 	 */
-	public static String CalcuLateOrderList(Context context, ArrayList<SKUBean2> skubeanList) {
+	public static String CalcuLateOrderList(Context context, ArrayList<ShopCartsInfo> skubeanList) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
 		sb.append("?").append("class=").append("order");
 		sb.append("&").append("method=").append("calc");
@@ -176,7 +177,7 @@ public class HttpActions {
 //    		jsonItem.addProperty("skuId", skubeanList.get(i).getId());
         	jsonItem.addProperty("itemId", 1);
     		jsonItem.addProperty("skuId", 3);
-    		jsonItem.addProperty("count", skubeanList.get(i).getCostPrice()/skubeanList.get(i).getPrice());
+    		jsonItem.addProperty("count", skubeanList.get(i).getCount());
     		jsonArray.add(jsonItem);
 		}
         json.add("items", jsonArray);

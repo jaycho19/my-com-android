@@ -124,6 +124,8 @@
 
             <LinearLayout
                 style="@style/linearLayout_ensure_order"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:gravity="center" >
 
                 <EditText
@@ -137,8 +139,8 @@
                     android:maxLength="100"
                     android:padding="2dp"
                     android:singleLine="true"
-                    android:textSize="12sp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <TextView

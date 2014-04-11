@@ -133,18 +133,18 @@ public class GoodsDetailFragment extends BaseFragment {
 	}
 
 	protected void initDb() {
-		//平台给的数据是 size 在前面 color在后面 所以我颠倒下
+		// 平台给的数据是 size 在前面 color在后面 所以我颠倒下
 		Collections.reverse(goodsBean.getSkuList());
-		
+
 		try {
-			//存储 sku 信息
+			// 存储 sku 信息
 			dbUtils.dropTable(SKUBean2.class);
 			dbUtils.dropTable(SkulistDbBean.class);
 			dbUtils.saveOrUpdateAll(goodsBean.getSku());
-			
-			//转存 存储 sku 信息（暂时sqlite3 不支持自定义对象 存储）
-			for (SkuList skuList :goodsBean.getSkuList()) {
-				for (SKUItem skuItem:skuList.getValues()) {
+
+			// 转存 存储 sku 信息（暂时sqlite3 不支持自定义对象 存储）
+			for (SkuList skuList : goodsBean.getSkuList()) {
+				for (SKUItem skuItem : skuList.getValues()) {
 					SkulistDbBean dbBean = new SkulistDbBean();
 					dbBean.setItemId(Integer.parseInt(goodsBean.getId()));
 					dbBean.setPid(skuList.getPid());
@@ -330,7 +330,7 @@ public class GoodsDetailFragment extends BaseFragment {
 	OnSkuResultListener	onSkuResultListener	= new OnSkuResultListener() {
 
 												@Override
-												public void onSkuResult(ArrayList<SkuList> beanResult) {
+												public void onSkuResult(ArrayList<SkuList> beanResult,int num) {
 
 												}
 											};

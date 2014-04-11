@@ -17,12 +17,45 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="5dp" >
+
+            <LinearLayout
+                android:id="@+id/dialog_select_sku_top_title_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#d8d8d8"
+                android:orientation="horizontal"
+                android:padding="5dp" >
+
+                <TextView
+                    android:id="@+id/dialog_select_sku_tv_titile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:singleLine="true"
+                    android:text="高端大气呢绒大衣"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/dialog_select_sku_stock_tv_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:ems="5"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="库存： 1"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#d8d8d8"
                 android:orientation="vertical"
                 android:padding="5dp" >
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

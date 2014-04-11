@@ -84,7 +84,7 @@ public class ShoppingCartNewFragment extends BaseFragment {
 
 	private void getShopCartList() {
 		String url = HttpActions.GetShopCartsList();
-		ULog.i("addShopCarts url = " + url);
+		ULog.i("getShopCartList url = " + url);
 		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
 
 			@Override

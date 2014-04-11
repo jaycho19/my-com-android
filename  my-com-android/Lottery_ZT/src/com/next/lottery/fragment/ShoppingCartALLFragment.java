@@ -62,7 +62,7 @@ public class ShoppingCartALLFragment extends BaseFragment {
 				float allPrice = 0;
 				try {
 					plusNum = Integer.parseInt((String) settleAccountTv.getText()) + 1;
-					allPrice = msg.arg1 + Float.parseFloat((String) allPriceTv.getText());
+					allPrice = msg.arg1/100 + Float.parseFloat((String) allPriceTv.getText());
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
 					allPrice = msg.arg1;
@@ -76,7 +76,7 @@ public class ShoppingCartALLFragment extends BaseFragment {
 				float allPrice1 = 0;
 				try {
 					reduceNum = Integer.parseInt((String) settleAccountTv.getText()) - 1;
-					allPrice1 = -msg.arg1 + Float.parseFloat((String) allPriceTv.getText());
+					allPrice1 = -msg.arg1/100 + Float.parseFloat((String) allPriceTv.getText());
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
 				}
@@ -89,7 +89,7 @@ public class ShoppingCartALLFragment extends BaseFragment {
 				float allPrice2 = 0;
 				for (int i = 0; i < shopCartslist.size(); i++) {
 					shopCartslist.get(i).setSelected(true);
-					allPrice2 += shopCartslist.get(i).getPrice();
+					allPrice2 += shopCartslist.get(i).getPrice()/100* shopCartslist.get(i).getCount();
 				}
 				allPriceTv.setText(String.valueOf(allPrice2));
 				settleAccountTv.setText(String.valueOf(shopCartslist.size()));
