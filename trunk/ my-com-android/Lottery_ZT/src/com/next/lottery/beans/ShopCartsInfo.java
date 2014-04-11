@@ -7,6 +7,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.dongfang.utils.ULog;
+import com.lidroid.xutils.db.annotation.Id;
 
 public class ShopCartsInfo implements Parcelable {
 	private String id;
@@ -17,7 +18,7 @@ public class ShopCartsInfo implements Parcelable {
 	private String skuId;
 	private int count;
 	private int stockNum;
-	private boolean isSelected; // 0表示未选中 1 表示选中 writeToParcel方法里面没有写入boolean值方法 fuck!
+	private boolean isSelected; 
 	
 	private ArrayList<String> skuList = new ArrayList<String>();
 	

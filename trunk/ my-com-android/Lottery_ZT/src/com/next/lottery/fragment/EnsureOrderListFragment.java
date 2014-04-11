@@ -3,6 +3,7 @@ package com.next.lottery.fragment;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,9 @@ import com.next.lottery.EnsureOrderListActivity;
 import com.next.lottery.R;
 import com.next.lottery.alipay.AlipayUtil;
 import com.next.lottery.beans.BaseEntity;
+import com.next.lottery.beans.CalculateOrderListBean;
+import com.next.lottery.beans.OrderNoBean;
+import com.next.lottery.beans.SKUBean2;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.dialog.ProgressDialog;
 import com.next.lottery.nets.HttpActions;
@@ -49,11 +53,14 @@ public class EnsureOrderListFragment extends BaseFragment {
 	private TextView					tvBuyNow;
 	@ViewInject(R.id.fragment_ensure_order_bottom_list_tv)
 	private TextView					tvBottomList;
+	@ViewInject(R.id.fragment_ensure_order_delivery_money_tv)
+	private TextView					tvTraFee;
 	@ViewInject(R.id.fragment_ensure_order_item_ll)
 	private LinearLayout				itemll;
 
 	private ArrayList<ShopCartsInfo>	orderlist	= new ArrayList<ShopCartsInfo>();
 	private ProgressDialog				progDialog;
+	private BaseEntity<CalculateOrderListBean> calcuBean;
 	
 	private int sum ;//商品总额
 
@@ -62,13 +69,15 @@ public class EnsureOrderListFragment extends BaseFragment {
 		View view = inflater.inflate(R.layout.fragment_ensure_order_list_layout, container, false);
 		ViewUtils.inject(this, view);
 		tvTitle = (TextView) view.findViewById(R.id.app_top_title_tv_centre);
+		
+		
 		initView();
+		CalculateOrder(getActivity(),orderlist);
 		return view;
 	}
 
 	private void initView() {
-		tvTitle.setText("确定订单");
-
+		
 		progDialog = ProgressDialog.show(getActivity());
 		progDialog.setCancelable(true);
 
@@ -80,18 +89,12 @@ public class EnsureOrderListFragment extends BaseFragment {
 			itemll.addView(itemView);
 			sum = sum+Integer.valueOf(orderlist.get(i).getPrice()) ;
 		}
-		tvBottomList.setText("共计"+orderlist.size()+"件商品,"+"￥"+Util.fen2Yuan(sum)+"元");
-		// for (int i = 0; i < 2; i++) {
-		// ShopCartsInfo item = new ShopCartsInfo();
-		// item.setPrice("" + 1000);
-		// orderlist.add(item);
-		// }
-
-		/*
-		 * EnsureOrderListViewAdapter allAdapter = new
-		 * EnsureOrderListViewAdapter(getActivity(), orderlist);
-		 * listView.setAdapter(allAdapter);
-		 */
+		
+	}
+	
+	private void refreshView(){
+		tvBottomList.setText("共计"+calcuBean.getInfo().getItems().size()+"件商品,"+"￥"+(calcuBean.getInfo().getPrice()/100)+"元");
+		tvTraFee.setText(calcuBean.getInfo().getTraFee().getTraFee()+"元");
 	}
 
 	public void setOrderlist(ArrayList<ShopCartsInfo> orderlist) {
@@ -110,7 +113,7 @@ public class EnsureOrderListFragment extends BaseFragment {
 			((EnsureOrderListActivity) getActivity()).showRight();
 			break;
 		case R.id.btn_buy_now:
-			creatOrder();
+			CreatOrder(getActivity());
 			break;
 
 		default:
@@ -119,9 +122,10 @@ public class EnsureOrderListFragment extends BaseFragment {
 	}
 
 	/* 生成订单 */
-	private void creatOrder() {
-		String url = HttpActions.creatOrder(getActivity(),null);
-		ULog.d("addShopCarts url = " + url);
+	private  void CreatOrder(final Context context) {
+		// ArrayList<SKUBean2> skubeanList = new ArrayList<SKUBean2>();
+		// skubeanList.add(skuBean);
+		String url = HttpActions.creatOrder(context, calcuBean);
 		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
 
 			@Override
@@ -134,24 +138,63 @@ public class EnsureOrderListFragment extends BaseFragment {
 				progDialog.dismiss();
 				ULog.d(responseInfo.result);
 
-				BaseEntity<String> bean = new Gson().fromJson(responseInfo.result,
-						new TypeToken<BaseEntity<String>>() {}.getType());
+				BaseEntity<OrderNoBean> bean = new Gson().fromJson(responseInfo.result,
+						new TypeToken<BaseEntity<OrderNoBean>>() {}.getType());
 				if (null != bean && bean.getCode() == 0) {
-
-					AlipayUtil.doPayment(getActivity());
-					Toast.makeText(getActivity(), bean.getInfo(), Toast.LENGTH_LONG).show();
+					ULog.i(bean.getInfo().getOrderNo());
+					AlipayUtil.doPayment(context);
 				}
 				else {
-					Toast.makeText(getActivity(), bean.getMsg(), Toast.LENGTH_LONG).show();
+					Toast.makeText(context, bean.getMsg(), Toast.LENGTH_LONG).show();
 				}
-				
 			}
 
 			@Override
 			public void onFailure(HttpException error, String msg) {
 				progDialog.dismiss();
 				ULog.e(error.toString() + "\n" + msg);
-				Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
+				Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+			}
+		});
+
+	}
+	
+	protected  void CalculateOrder(Context context,final ArrayList<ShopCartsInfo> orderlist2) {
+		String url = HttpActions.CalcuLateOrderList(context, orderlist2);
+		ULog.d("CalculateOrder url = " + url);
+		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
+
+			@Override
+			public void onStart() {
+				progDialog.show();
+			}
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				progDialog.dismiss();
+				ULog.d(responseInfo.result);
+
+			     calcuBean = new Gson().fromJson(responseInfo.result,
+						new TypeToken<BaseEntity<CalculateOrderListBean>>() {}.getType());
+				if (null != calcuBean && calcuBean.getCode() == 0) {
+
+//					CreatOrder(orderlist2, bean);
+					ULog.i("price-->" + calcuBean.getInfo().getPrice());
+					refreshView();
+					// Toast.makeText(context, bean.getInfo().getPrice(),
+					// Toast.LENGTH_LONG).show();
+				}
+				else {
+					// Toast.makeText(context, bean.getMsg(),
+					// Toast.LENGTH_LONG).show();
+				}
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				progDialog.dismiss();
+				ULog.e(error.toString() + "\n" + msg);
+				// Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
 			}
 		});
 

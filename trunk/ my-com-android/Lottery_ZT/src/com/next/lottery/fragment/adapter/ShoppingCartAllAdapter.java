@@ -1,6 +1,7 @@
 package com.next.lottery.fragment.adapter;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import android.content.Context;
 import android.content.Intent;
@@ -42,6 +43,8 @@ import com.next.lottery.beans.SKUEntity;
 import com.next.lottery.beans.SKUItem;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.beans.SkuList;
+import com.next.lottery.db.bean.SkulistDbBean;
+import com.next.lottery.dialog.ShoppingSelectSKUDialog;
 import com.next.lottery.listener.OnSkuResultListener;
 import com.next.lottery.nets.HttpActions;
 import com.next.lottery.utils.Keys;
@@ -55,11 +58,11 @@ import com.next.lottery.utils.Util;
  */
 public class ShoppingCartAllAdapter extends BaseAdapter {
 
-	private ArrayList<ShopCartsInfo> list;
-	private Context context;
-	private Handler handler;
-	private boolean isAllSelected; // 1表示全选，2 表示全不选
-	private DbUtils db;
+	private ArrayList<ShopCartsInfo>	list;
+	private Context						context;
+	private Handler						handler;
+	private boolean						isAllSelected;	// 1表示全选，2 表示全不选
+	private DbUtils						db;
 
 	public ShoppingCartAllAdapter(Context context, ArrayList<ShopCartsInfo> shopCartslist, Handler handler) {
 		this.list = shopCartslist;
@@ -121,28 +124,28 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 	}
 
 	class Item implements View.OnClickListener, OnCheckedChangeListener {
-		CheckBox checkBox;
+		CheckBox		checkBox;
 
-		ImageView imageView;
-		TextView tvTitle;
+		ImageView		imageView;
+		TextView		tvTitle;
 
-		LinearLayout layoutEdit;
-		RelativeLayout layoutShow;
-		RelativeLayout layoutEditSKU;
+		LinearLayout	layoutEdit;
+		RelativeLayout	layoutShow;
+		RelativeLayout	layoutEditSKU;
 
-		TextView tvSKU1Show, tvSKU1Edit;
-		TextView tvSKU2Show, tvSKU2Edit;
-		TextView tvPriceShow, tvPriceEdit;
-		TextView tvNumberShow;
-		EditText tvNumberEdit;
-		TextView tvEdit, tVSave;
+		TextView		tvSKU1Show, tvSKU1Edit;
+		TextView		tvSKU2Show, tvSKU2Edit;
+		TextView		tvPriceShow, tvPriceEdit;
+		TextView		tvNumberShow;
+		EditText		tvNumberEdit;
+		TextView		tvEdit, tVSave;
 
-		TextView tvEditPrice, tvShowPrice;
+		TextView		tvEditPrice, tvShowPrice;
 
-		ImageView ivDel;
+		ImageView		ivDel;
 
-		int position;
-		ShopCartsInfo shopCartInfo;
+		int				position;
+		ShopCartsInfo	shopCartInfo;
 
 		private void initView(View view, final int position) {
 			this.position = position;
@@ -150,7 +153,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 			checkBox = (CheckBox) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_radiobtn);
 			imageView = (ImageView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_iv);
 			imageView.setOnClickListener(this);
-			
+
 			tvTitle = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_title);
 			layoutEdit = (LinearLayout) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_edit_ll);
 			layoutShow = (RelativeLayout) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_rl);
@@ -163,10 +166,10 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 			if (shopCartInfo.getSkuList().size() > 1) {
 				tvSKU1Show.setText(shopCartInfo.getSkuList().get(0));
 				tvSKU1Edit.setText(shopCartInfo.getSkuList().get(0));
-				
+
 				tvSKU2Show.setText(shopCartInfo.getSkuList().get(1));
 				tvSKU2Edit.setText(shopCartInfo.getSkuList().get(1));
-				
+
 				ULog.d("[0]" + shopCartInfo.getSkuList().get(0));
 				ULog.d("[1]" + shopCartInfo.getSkuList().get(1));
 			}
@@ -198,13 +201,13 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 					e1.printStackTrace();
 				}
 			}
-			
+
 			tvNumberShow = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_number);
 			tvNumberEdit = (EditText) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_edit_et_number);
-			
-			tvNumberShow.setText("x" + Integer.toString( shopCartInfo.getCount()));
+
+			tvNumberShow.setText("x" + Integer.toString(shopCartInfo.getCount()));
 			tvNumberEdit.setText(Integer.toString(shopCartInfo.getCount()));
-			
+
 			tvEdit = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_edit);
 			tVSave = (TextView) view.findViewById(R.id.fragment_shoppingcart_all_adp_item_edit_save);
 
@@ -219,8 +222,8 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 			ivDel.setOnClickListener(this);
 			layoutEditSKU.setOnClickListener(this);
 
-			tvShowPrice.setText("￥" + Double.toString(shopCartInfo.getPrice()/100.0));
-			tvEditPrice.setText("￥" + Double.toString(shopCartInfo.getPrice()/100.0));
+			tvShowPrice.setText("￥" + Double.toString(shopCartInfo.getPrice() / 100.0));
+			tvEditPrice.setText("￥" + Double.toString(shopCartInfo.getPrice() / 100.0));
 
 			// checkBox.setOnCheckedChangeListener(this);
 
@@ -237,59 +240,96 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 				}
 
 				@Override
-				public void afterTextChanged(Editable s) {
-					ULog.i("afterTextChanged-->" + s);
-					int num = 1;
-					String goodsNum =String.valueOf(s);
-					if (Util.IsNumeric(goodsNum)) {
-						try {
-							num = Integer.parseInt(goodsNum);
-							num = num > list.get(position).getStockNum() ? list.get(position).getStockNum() : num;
-						} catch (NumberFormatException e) {
-							e.printStackTrace();
-							num = 1;
-						}
-						list.get(position).setCount(num);
-						
-						tvEditPrice.setText(String.valueOf( list.get(position).getPrice()* num));
-						//tvNumberEdit.setText(num);
-						if (checkBox.isChecked()) {
-							Message msg = new Message();
-							msg.what = Keys.MSG_REFRESH_BUY_NUM_ALL_GOODS_PRICE;
-							msg.arg1 = list.get(position).getPrice() * num;
-							handler.sendMessage(msg);
-						}
-					}
-				}
+				public void afterTextChanged(Editable s) {/*
+														 * ULog.i(
+														 * "afterTextChanged-->"
+														 * + s); int num = 1;
+														 * String goodsNum
+														 * =String.valueOf(s);
+														 * if
+														 * (Util.IsNumeric(goodsNum
+														 * )) { try { num =
+														 * Integer
+														 * .parseInt(goodsNum);
+														 * num = num >
+														 * list.get(position
+														 * ).getStockNum() ?
+														 * list.get(position).
+														 * getStockNum() : num;
+														 * } catch
+														 * (NumberFormatException
+														 * e) {
+														 * e.printStackTrace();
+														 * num = 1; }
+														 * list.get(position
+														 * ).setCount(num);
+														 * 
+														 * tvEditPrice.setText(
+														 * String.valueOf(
+														 * list.get
+														 * (position).getPrice
+														 * ()* num));
+														 * //tvNumberEdit
+														 * .setText(num); if
+														 * (checkBox
+														 * .isChecked()) {
+														 * Message msg = new
+														 * Message(); msg.what =
+														 * Keys.
+														 * MSG_REFRESH_BUY_NUM_ALL_GOODS_PRICE
+														 * ; msg.arg1 =
+														 * list.get(
+														 * position).getPrice()
+														 * * num;
+														 * handler.sendMessage
+														 * (msg); } }
+														 */}
 			});
 
 		}
 
-		// private SKUBean getTestSKUBean() {
-		// ArrayList<SKUEntity> all = new ArrayList<SKUEntity>();
-		// SKUEntity skuEntity = new SKUEntity();
-		// skuEntity.setSkuName("颜色分类");
-		// ArrayList<SKUItem> al = new ArrayList<SKUItem>();
-		//
-		// al.add(new SKUItem("红色"));
-		// al.add(new SKUItem("黄色"));
-		// al.add(new SKUItem("灰色"));
-		// al.add(new SKUItem("绿色"));
-		// skuEntity.setSkuTypesList(al);
-		//
-		// SKUEntity skuEntity1 = new SKUEntity();
-		// skuEntity1.setSkuName("尺码");
-		// ArrayList<SKUItem> al1 = new ArrayList<SKUItem>();
-		//
-		// for (int j = 0; j < 18; j++)
-		// al1.add(new SKUItem("尺码" + j));
-		// skuEntity1.setSkuTypesList(al1);
-		// all.add(skuEntity1);
-		// all.add(skuEntity);
-		// SKUBean skuBean = new SKUBean();
-		// skuBean.setSkuList(all);
-		// return skuBean;
-		// }
+		private ArrayList<SkuList> getTestSKUBean() {
+
+			ArrayList<SkuList> skulist = new ArrayList<SkuList>();
+			try {
+				SkuList skubean1 = new SkuList();
+				ArrayList<SKUItem> skuValues1 = new ArrayList<SKUItem>();
+				ArrayList<SkulistDbBean> skulistDb = (ArrayList<SkulistDbBean>) DbUtils.create(context,
+						context.getPackageName()).findAll(SkulistDbBean.class);
+
+				int index = 0;
+				String pid = (skulistDb != null && skulistDb.size() > 0 ? skulistDb.get(0).getPid() : "");
+				for (int i = 0; i < skulistDb.size(); i++) {
+					SkulistDbBean Dbbean = skulistDb.get(i);
+					if (!Dbbean.getPid().equalsIgnoreCase(pid)) {
+						skubean1.setValues(skuValues1);
+						skulist.add(skubean1);
+						index = i;
+						break;
+					}
+					skubean1.setPid(Dbbean.getPid());
+					skubean1.setPname(Dbbean.getPname());
+					SKUItem skubeanVaues = new SKUItem(Dbbean.getVid(), Dbbean.getVname());
+					skuValues1.add(skubeanVaues);
+				}
+				SkuList skubean2 = new SkuList();
+				ArrayList<SKUItem> skuValues2 = new ArrayList<SKUItem>();
+				for (int i = index; i < skulistDb.size(); i++) {
+					SkulistDbBean Dbbean = skulistDb.get(i);
+					skubean2.setPid(Dbbean.getPid());
+					skubean2.setPname(Dbbean.getPname());
+					SKUItem skubeanVaues = new SKUItem(Dbbean.getVid(), Dbbean.getVname());
+					skuValues2.add(skubeanVaues);
+					skubean2.setValues(skuValues2);
+				}
+				skulist.add(skubean2);
+			} catch (DbException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ULog.i(skulist.toString());
+			return skulist;
+		}
 
 		@Override
 		public void onClick(View v) {
@@ -327,7 +367,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 				notifyDataSetChanged();
 				break;
 			case R.id.fragment_shoppingcart_all_adp_item_edit_suv_rl:
-				// ShoppingSelectSKUDialog.show1(context, getTestSKUBean(), onSkuResultListener);
+				ShoppingSelectSKUDialog.show1(context, getTestSKUBean(), onSkuResultListener);
 				break;
 
 			case R.id.fragment_shoppingcart_all_adp_item_radiobtn:
@@ -379,27 +419,21 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 
 		}
 
-		OnSkuResultListener onSkuResultListener = new OnSkuResultListener() {
+		OnSkuResultListener	onSkuResultListener	= new OnSkuResultListener() {
 
-			@Override
-			public void onSkuResult(ArrayList<SkuList> beanResult) {/*
-																	 * try { tvNumberEdit.setText("x"+bean.getNum());
-																	 * etNumber.setText(String.valueOf(bean.getNum()));
-																	 * 
-																	 * String color =
-																	 * bean.getSkuList().get(1).getSkuName() + ":" +
-																	 * bean
-																	 * .getSkuList().get(1).getSkuTypesList().get(0).
-																	 * getName(); String size =
-																	 * bean.getSkuList().get(0).getSkuName() + ":" +
-																	 * bean
-																	 * .getSkuList().get(0).getSkuTypesList().get(0).
-																	 * getName(); tvSKU1Edit.setText(color);
-																	 * tvSKU2Edit.setText(size); } catch (Exception e) {
-																	 * // TODO // Auto-generated // catch block
-																	 * e.printStackTrace(); ULog.e(e.toString()); }
-																	 */}
-		};
+													@Override
+													public void onSkuResult(ArrayList<SkuList> beanResult, int num) {
+														try {
+															tvNumberEdit.setText(String.valueOf(num));
+															tvSKU1Edit.setText(beanResult.get(1).getPname() + ":"
+																	+ beanResult.get(1).getValues().get(0).getName());
+															tvSKU2Edit.setText(beanResult.get(0).getPname() + ":"
+																	+ beanResult.get(0).getValues().get(0).getName());
+														} catch (Exception e) {
+															e.printStackTrace();
+														}
+													}
+												};
 	}
 
 	public void delShopCart() {

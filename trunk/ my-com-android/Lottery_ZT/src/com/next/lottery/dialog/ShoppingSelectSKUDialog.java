@@ -34,6 +34,7 @@ import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.CalculateOrderListBean;
 import com.next.lottery.beans.OrderNoBean;
 import com.next.lottery.beans.SKUBean2;
+import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.beans.SkuList;
 import com.next.lottery.beans.SKUItem;
 import com.next.lottery.listener.OnSkuResultListener;
@@ -65,6 +66,13 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		dialog.setContentView(R.layout.dialog_shopping_select_sku);
 		dialog.setCancelable(true);
 		dialog.getWindow().setLayout(DeviceInfo.SCREEN_WIDTH_PORTRAIT, -2);
+		List<SKUBean2> skubean = null;
+		try {
+			db = DbUtils.create(context, context.getPackageName());
+			skubean = db.findAll(Selector.from(SKUBean2.class));
+		} catch (DbException e) {
+			e.printStackTrace();
+		}
 		init1(context, bean, onSkuResultListener);
 		dialog.show();
 	}
@@ -110,7 +118,9 @@ public class ShoppingSelectSKUDialog extends Dialog {
 						return;
 					}
 				}
-				onSkuResultListener.onSkuResult(beanResult);
+				int SelectNum = Integer.valueOf((String) tvSelectNum.getText());
+				int StockNum = skuBean != null ? skuBean.getStockNum() : 0;
+				onSkuResultListener.onSkuResult(beanResult,SelectNum < StockNum ? SelectNum : StockNum);
 				dialog.dismiss();
 			}
 		});
@@ -153,8 +163,14 @@ public class ShoppingSelectSKUDialog extends Dialog {
 	}
 
 	protected static void CalculateOrder(final Context context) {
-		ArrayList<SKUBean2> skubeanList = new ArrayList<SKUBean2>();
-		skubeanList.add(skuBean);
+		ArrayList<ShopCartsInfo> skubeanList = new ArrayList<ShopCartsInfo>();
+		
+		ShopCartsInfo info = new ShopCartsInfo();
+		info.setItemId(String.valueOf(skuBean.getItemId()));
+		info.setCount(skuBean.getCostPrice()/skuBean.getPrice());
+		info.setSkuId(String.valueOf(skuBean.getId()));
+		skubeanList.add(info);
+		
 		String url = HttpActions.CalcuLateOrderList(context, skubeanList);
 		ULog.d("CalculateOrder url = " + url);
 		progDialog = ProgressDialog.show(context);

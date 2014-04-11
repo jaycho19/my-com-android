@@ -20,7 +20,7 @@ public class SKUBean2 {
 	private int stockNum;
 	@Id(column="_id")
 	private int _id;//设置表主键
-
+	
 	// {
 	// "costPrice":0,
 	// "id":12,
