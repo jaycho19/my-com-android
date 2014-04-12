@@ -14,7 +14,7 @@
         <ListView
             android:id="@+id/listview_content_left"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.4"
             android:scrollbars="none"
             android:divider="#00000000" />
@@ -22,7 +22,7 @@
         <LinearLayout
             android:id="@+id/layout_content_right"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.6"
             android:background="@color/seek_bar_buffer_grey" 
             android:visibility="gone">

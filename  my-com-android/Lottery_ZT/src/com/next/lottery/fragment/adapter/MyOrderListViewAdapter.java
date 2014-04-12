@@ -110,14 +110,14 @@ public class MyOrderListViewAdapter extends BaseAdapter {
 			orderTime.setText("时间："+entity.getLastUpdateTime());
 			orderMoney.setText("总额：￥"+entity.getPrice());
 //			orderStatus.setText(entity.get)
-			for (int i = 0; itemll.getChildCount()<2; i++) {
-				View itemView = LayoutInflater.from(context).inflate(R.layout.fragment_my_order_listview_item_item, null);
-				MyImageView img = (MyImageView)itemView.findViewById(R.id.fragment_shoppingcart_all_adp_item_iv);
-				TextView     tvNum = (TextView)itemView.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_number);
-				img.setImage(entity.getItems().get(i).getItemImg());
-				ULog.i("url-->"+entity.getItems().get(i).getItemImg());
-				tvNum.setText("x"+entity.getItems().get(i).getCount());
-				itemll.addView(itemView);
+			for (int i = 0; itemll.getChildCount() < 2; i++) {
+				View v = LayoutInflater.from(context).inflate(R.layout.fragment_my_order_listview_item_item, null);
+				//MyImageView img = (MyImageView) v.findViewById(R.id.fragment_shoppingcart_all_adp_item_iv);
+				//TextView tvNum = (TextView) v.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_number);
+				// img.setImage(entity.getItems().get(i).getItemImg());
+				// ULog.i("url-->" + entity.getItems().get(i).getItemImg());
+				// tvNum.setText("x"+entity.getItems().get(i).getCount());
+				itemll.addView(v);
 			}
 		}
 

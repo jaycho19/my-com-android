@@ -10,8 +10,8 @@ import java.util.ArrayList;
  */
 public class OrderBean {
 
-	private int						total;
-	private ArrayList<OrderEntity>	data;
+	private int total;
+	private ArrayList<OrderEntity> data;
 
 	public int getTotal() {
 		return total;
@@ -30,54 +30,54 @@ public class OrderBean {
 	}
 
 	public class OrderEntity {
-		private String					orderNo;		// ;//
-														// "201403261395813267",
-		private String					userId;		// "3",
-		private int						merId;			// 1,
-		private String					buyerMsg;		// "",
-		private String					buyerComeFrom;	// "",
-		private String					buyerIp;		// "127.0.0.1",
-		private int						buyerArea;		// 0,
-		private int						type;			// 1,
-		private String					refOrderNo;	// "",
-		private int						sumOldPrice;	// 500000,
-		private int						sumRealPrice;	// 0,
-		private int						backPrice;		// 0,
-		private int						traFee;		// 500,
-		private int						sellerCodFee;	// 0,
-		private int						payPrice;		// 398700,
-		private int						offsetPrice;	// 0,
-		private int						price;			// 398700,
-		private int						isLgtype;		// 2,
-		private int						credits;		// 0,
-		private int						sumWeight;		// 0,
-		private int						deliveryModeId; // 2,
-		private int						branchId;		// 0,
-		private int						payModeId;		// 1,
-		private String					payOrderNo;	// "",
-		private String					payBackOrderNo; // "",
-		private String					payTime;		// "1970-01-01 08;//00;//00",
-		private int						codStatus;		// 2,
-		private int						status;		// 1,
-		private int						invoiceType;	// 1,
-		private int						isAppraise;	// private int 2,
-		private String					endTime;		// "1970-01-01 08;//00;//00",
-		private String					closeReason;	// "订单错误",
-		private String					appraiseTime;	// "1970-01-01 08;//00;//00",
-		private int						refundId;		// 0,
-		private int						isDelete;		// 2,
-		private String					creater;		// "3",
-		private String					createTime;	// "2014-03-26 13;//54;//27",
-		private String					lastUpdater;	// "3",
-		private String					lastUpdateTime; // "2014-03-26 13;//54;//27",
+		private String orderNo; // ;//
+								// "201403261395813267",
+		private String userId; // "3",
+		private int merId; // 1,
+		private String buyerMsg; // "",
+		private String buyerComeFrom; // "",
+		private String buyerIp; // "127.0.0.1",
+		private int buyerArea; // 0,
+		private int type; // 1,
+		private String refOrderNo; // "",
+		private int sumOldPrice; // 500000,
+		private int sumRealPrice; // 0,
+		private int backPrice; // 0,
+		private int traFee; // 500,
+		private int sellerCodFee; // 0,
+		private int payPrice; // 398700,
+		private int offsetPrice; // 0,
+		private int price; // 398700,
+		private int isLgtype; // 2,
+		private int credits; // 0,
+		private int sumWeight; // 0,
+		private int deliveryModeId; // 2,
+		private int branchId; // 0,
+		private int payModeId; // 1,
+		private String payOrderNo; // "",
+		private String payBackOrderNo; // "",
+		private String payTime; // "1970-01-01 08;//00;//00",
+		private int codStatus; // 2,
+		private int status; // 1,
+		private int invoiceType; // 1,
+		private int isAppraise; // private int 2,
+		private String endTime; // "1970-01-01 08;//00;//00",
+		private String closeReason; // "订单错误",
+		private String appraiseTime; // "1970-01-01 08;//00;//00",
+		private int refundId; // 0,
+		private int isDelete; // 2,
+		private String creater; // "3",
+		private String createTime; // "2014-03-26 13;//54;//27",
+		private String lastUpdater; // "3",
+		private String lastUpdateTime; // "2014-03-26 13;//54;//27",
 
-		private ArrayList<ActivityInfo>	activitys;
-		private  ArrayList<UserDeliveryAddress>	userDeliveryAddress;
-		private Invoice	invoice;
-		private ArrayList<Items>	items;
-		private ArrayList<String>   coupons;
-		private ArrayList<String>   opers;
-		private ArrayList<String>   packs;
+		private UserDeliveryAddress userDeliveryAddres;
+		private ArrayList<ActivityInfo> activitys;
+		private Invoice invoice;
+		private ArrayList<Items> items;
+		private ArrayList<String> coupons;
+		private ArrayList<String> opers;
+		private ArrayList<String> packs;
 
 		public String getOrderNo() {
 			return orderNo;
@@ -399,12 +399,12 @@ public class OrderBean {
 			this.activitys = activitys;
 		}
 
-		public ArrayList<UserDeliveryAddress> getUserDeliveryAddress() {
-			return userDeliveryAddress;
+		public UserDeliveryAddress getUserDeliveryAddres() {
+			return userDeliveryAddres;
 		}
 
-		public void setUserDeliveryAddress(ArrayList<UserDeliveryAddress> userDeliveryAddress) {
-			this.userDeliveryAddress = userDeliveryAddress;
+		public void setUserDeliveryAddres(UserDeliveryAddress userDeliveryAddres) {
+			this.userDeliveryAddres = userDeliveryAddres;
 		}
 
 		public Invoice getInvoice() {
@@ -466,97 +466,126 @@ public class OrderBean {
 		private int status;// 1,
 		private int offsetPrice;// 1000
 		private int disPrice;
+
 		public String getId() {
 			return id;
 		}
+
 		public void setId(String id) {
 			this.id = id;
 		}
+
 		public int getMerId() {
 			return merId;
 		}
+
 		public void setMerId(int merId) {
 			this.merId = merId;
 		}
+
 		public String getName() {
 			return name;
 		}
+
 		public void setName(String name) {
 			this.name = name;
 		}
+
 		public String getDescription() {
 			return description;
 		}
+
 		public void setDescription(String description) {
 			this.description = description;
 		}
+
 		public int getDecreaseNum() {
 			return decreaseNum;
 		}
+
 		public void setDecreaseNum(int decreaseNum) {
 			this.decreaseNum = decreaseNum;
 		}
+
 		public int getDiscountLine() {
 			return discountLine;
 		}
+
 		public void setDiscountLine(int discountLine) {
 			this.discountLine = discountLine;
 		}
+
 		public int getDiscountValue() {
 			return discountValue;
 		}
+
 		public void setDiscountValue(int discountValue) {
 			this.discountValue = discountValue;
 		}
+
 		public int getDiscountType() {
 			return discountType;
 		}
+
 		public void setDiscountType(int discountType) {
 			this.discountType = discountType;
 		}
+
 		public String getStartDate() {
 			return startDate;
 		}
+
 		public void setStartDate(String startDate) {
 			this.startDate = startDate;
 		}
+
 		public String getEndDate() {
 			return endDate;
 		}
+
 		public void setEndDate(String endDate) {
 			this.endDate = endDate;
 		}
+
 		public String getCategoryIds() {
 			return categoryIds;
 		}
+
 		public void setCategoryIds(String categoryIds) {
 			this.categoryIds = categoryIds;
 		}
+
 		public String getTargetIds() {
 			return targetIds;
 		}
+
 		public void setTargetIds(String targetIds) {
 			this.targetIds = targetIds;
 		}
+
 		public int getStatus() {
 			return status;
 		}
+
 		public void setStatus(int status) {
 			this.status = status;
 		}
+
 		public int getOffsetPrice() {
 			return offsetPrice;
 		}
+
 		public void setOffsetPrice(int offsetPrice) {
 			this.offsetPrice = offsetPrice;
 		}
+
 		public int getDisPrice() {
 			return disPrice;
 		}
+
 		public void setDisPrice(int disPrice) {
 			this.disPrice = disPrice;
 		}
-		
 
 	}
 
@@ -572,63 +601,83 @@ public class OrderBean {
 		private String post;// "200010",
 		private String email;// "fc0429@126.com",
 		private String deliveryTime;// ""
+
 		public String getId() {
 			return id;
 		}
+
 		public void setId(String id) {
 			this.id = id;
 		}
+
 		public String getOrderNo() {
 			return orderNo;
 		}
+
 		public void setOrderNo(String orderNo) {
 			this.orderNo = orderNo;
 		}
+
 		public String getConsignee() {
 			return consignee;
 		}
+
 		public void setConsignee(String consignee) {
 			this.consignee = consignee;
 		}
+
 		public int getAreaId() {
 			return areaId;
 		}
+
 		public void setAreaId(int areaId) {
 			this.areaId = areaId;
 		}
+
 		public String getAddress() {
 			return address;
 		}
+
 		public void setAddress(String address) {
 			this.address = address;
 		}
+
 		public String getPhone() {
 			return phone;
 		}
+
 		public void setPhone(String phone) {
 			this.phone = phone;
 		}
+
 		public String getTel() {
 			return tel;
 		}
+
 		public void setTel(String tel) {
 			this.tel = tel;
 		}
+
 		public String getPost() {
 			return post;
 		}
+
 		public void setPost(String post) {
 			this.post = post;
 		}
+
 		public String getEmail() {
 			return email;
 		}
+
 		public void setEmail(String email) {
 			this.email = email;
 		}
+
 		public String getDeliveryTime() {
 			return deliveryTime;
 		}
+
 		public void setDeliveryTime(String deliveryTime) {
 			this.deliveryTime = deliveryTime;
 		}
@@ -641,7 +690,7 @@ public class OrderBean {
 		private String orderNo;// "201403261395813267",
 		private String title;// "发票title",
 		private int type;// 0,
-		private String 		content;// "发票内容",
+		private String content;// "发票内容",
 		private int isDetail;// 2,
 		private String zzName;// "",
 		private String zzCode;// "",
@@ -649,80 +698,105 @@ public class OrderBean {
 		private String zzTel;// "",
 		private String zzBank;// "",
 		private String zzAccount;// ""
+
 		public String getId() {
 			return id;
 		}
+
 		public void setId(String id) {
 			this.id = id;
 		}
+
 		public String getOrderNo() {
 			return orderNo;
 		}
+
 		public void setOrderNo(String orderNo) {
 			this.orderNo = orderNo;
 		}
+
 		public String getTitle() {
 			return title;
 		}
+
 		public void setTitle(String title) {
 			this.title = title;
 		}
+
 		public int getType() {
 			return type;
 		}
+
 		public void setType(int type) {
 			this.type = type;
 		}
+
 		public String getContent() {
 			return content;
 		}
+
 		public void setContent(String content) {
 			this.content = content;
 		}
+
 		public int getIsDetail() {
 			return isDetail;
 		}
+
 		public void setIsDetail(int isDetail) {
 			this.isDetail = isDetail;
 		}
+
 		public String getZzName() {
 			return zzName;
 		}
+
 		public void setZzName(String zzName) {
 			this.zzName = zzName;
 		}
+
 		public String getZzCode() {
 			return zzCode;
 		}
+
 		public void setZzCode(String zzCode) {
 			this.zzCode = zzCode;
 		}
+
 		public String getZzAddress() {
 			return zzAddress;
 		}
+
 		public void setZzAddress(String zzAddress) {
 			this.zzAddress = zzAddress;
 		}
+
 		public String getZzTel() {
 			return zzTel;
 		}
+
 		public void setZzTel(String zzTel) {
 			this.zzTel = zzTel;
 		}
+
 		public String getZzBank() {
 			return zzBank;
 		}
+
 		public void setZzBank(String zzBank) {
 			this.zzBank = zzBank;
 		}
+
 		public String getZzAccount() {
 			return zzAccount;
 		}
+
 		public void setZzAccount(String zzAccount) {
 			this.zzAccount = zzAccount;
 		}
 
 	}
+
 	/** 商品信息 */
 	public class Items {
 		private int id;// 14,
@@ -740,97 +814,127 @@ public class OrderBean {
 		private int packId;// 0,
 		private int isAppraise;// 2,
 		private String appraiseTime;// "1970-01-01 08：00：00"
+
 		public int getId() {
 			return id;
 		}
+
 		public void setId(int id) {
 			this.id = id;
 		}
+
 		public String getOrderNo() {
 			return orderNo;
 		}
+
 		public void setOrderNo(String orderNo) {
 			this.orderNo = orderNo;
 		}
+
 		public String getItemId() {
 			return itemId;
 		}
+
 		public void setItemId(String itemId) {
 			this.itemId = itemId;
 		}
+
 		public int getType() {
 			return type;
 		}
+
 		public void setType(int type) {
 			this.type = type;
 		}
+
 		public int getSkuId() {
 			return skuId;
 		}
+
 		public void setSkuId(int skuId) {
 			this.skuId = skuId;
 		}
+
 		public String getSnapshotPath() {
 			return snapshotPath;
 		}
+
 		public void setSnapshotPath(String snapshotPath) {
 			this.snapshotPath = snapshotPath;
 		}
+
 		public String getItemImg() {
 			return itemImg;
 		}
+
 		public void setItemImg(String itemImg) {
 			this.itemImg = itemImg;
 		}
+
 		public String getItemName() {
 			return itemName;
 		}
+
 		public void setItemName(String itemName) {
 			this.itemName = itemName;
 		}
+
 		public int getCount() {
 			return count;
 		}
+
 		public void setCount(int count) {
 			this.count = count;
 		}
+
 		public int getSumRealPrice() {
 			return sumRealPrice;
 		}
+
 		public void setSumRealPrice(int sumRealPrice) {
 			this.sumRealPrice = sumRealPrice;
 		}
+
 		public int getCredits() {
 			return credits;
 		}
+
 		public void setCredits(int credits) {
 			this.credits = credits;
 		}
+
 		public int getWeight() {
 			return weight;
 		}
+
 		public void setWeight(int weight) {
 			this.weight = weight;
 		}
+
 		public int getPackId() {
 			return packId;
 		}
+
 		public void setPackId(int packId) {
 			this.packId = packId;
 		}
+
 		public int getIsAppraise() {
 			return isAppraise;
 		}
+
 		public void setIsAppraise(int isAppraise) {
 			this.isAppraise = isAppraise;
 		}
+
 		public String getAppraiseTime() {
 			return appraiseTime;
 		}
+
 		public void setAppraiseTime(String appraiseTime) {
 			this.appraiseTime = appraiseTime;
 		}
-		
+
 	}
 
 }

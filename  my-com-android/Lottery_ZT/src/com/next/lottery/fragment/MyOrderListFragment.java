@@ -124,7 +124,7 @@ public class MyOrderListFragment extends BaseFragment implements OnHeaderRefresh
 
 	/* 获取订单 */
 	private void getMyOrder(int page) {
-		String url = HttpActions.GetMyOrderList(page);
+		String url = HttpActions.GetMyOrderList(getActivity(),page);
 		ULog.d("addShopCarts url = " + url);
 		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
 

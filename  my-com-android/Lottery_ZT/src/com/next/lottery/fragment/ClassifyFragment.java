@@ -31,8 +31,8 @@ import com.next.lottery.fragment.adapter.ClassifyRightListViewAdapter;
  * 
  */
 public class ClassifyFragment extends BaseFragment {
-	private String[] recipes2 = { "毛衣", "上衣", "衬衫", "连衣裙", "毛衣", "上衣", "衬衫", "连衣裙", "毛衣", "上衣", "衬衫", "连衣裙" };
-	private String[] Lefttitles = { "热销商品", "经典系列", "男士系列", "女士系列", "儿童系列", "箱包系列", "配件 礼品", "家居系列", "汽车用品", "母婴" };
+	private String[][] recipes2 = { { "连衣裙", "半身裙", "包袋专区", "西裤" }, { "凉鞋", "单鞋" } };
+	private String[] Lefttitles = { "服装", "女鞋" };
 
 	@ViewInject(R.id.listview_content_left)
 	private ListView listViewleft;
@@ -64,23 +64,30 @@ public class ClassifyFragment extends BaseFragment {
 	private void setListener() {
 		listViewleft.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				lin_content_right.setVisibility(View.VISIBLE);
-				leftAdapter.setIsRightShowAndPosition(true, arg2);
-				leftAdapter.notifyDataSetChanged();
-				ClassifyRightListViewAdapter adapter = new ClassifyRightListViewAdapter(getActivity(),
-						R.layout.fragment_classify_right_item, recipes2);
-				listViewRight.setAdapter(adapter);
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				if (position == leftAdapter.getSelectPosition()) {
+					lin_content_right.setVisibility(View.GONE);
+					leftAdapter.setIsRightShowAndPosition(false, position);
+				}
+				else {
+					lin_content_right.setVisibility(View.VISIBLE);
+					leftAdapter.setIsRightShowAndPosition(true, position);
+					leftAdapter.notifyDataSetChanged();
+					ClassifyRightListViewAdapter adapter = new ClassifyRightListViewAdapter(getActivity(),
+							R.layout.fragment_classify_right_item, recipes2[position]);
+					listViewRight.setAdapter(adapter);
+				}
 
 			}
 		});
 
 		listViewRight.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
 
 			}
+
 		});
 
 		listViewRight.setOnTouchListener(new OnTouchListener() {
@@ -147,12 +154,13 @@ public class ClassifyFragment extends BaseFragment {
 	 * @return 右边的Listview是否为打开状态
 	 */
 	public boolean getRightLinearlayoutIsShow() {
-		int visible = lin_content_right.getVisibility();
+		return lin_content_right.isShown();
 
-		if (visible == View.VISIBLE)
-			return true;
-		else
-			return false;
-
+		// int visible = lin_content_right.getVisibility();
+		// if (visible == View.VISIBLE)
+		// return true;
+		// else
+		// return false;
 	}
+
 }
