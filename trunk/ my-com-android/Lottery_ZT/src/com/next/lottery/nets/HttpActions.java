@@ -2,9 +2,6 @@ package com.next.lottery.nets;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,12 +10,9 @@ import org.json.JSONObject;
 import android.content.Context;
 
 import com.dongfang.utils.ULog;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.CalculateOrderListBean;
-import com.next.lottery.beans.GoodsBean;
 import com.next.lottery.beans.SKUBean2;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.params.ComParams;
@@ -167,9 +161,8 @@ public class HttpActions {
 		JSONObject json = new JSONObject();
 		try {
 			json.put("userId", "3");
-
 			json.put("merId", 1);
-			json.put("userToken", "123456");
+			json.put("userToken", User.getToken(context));
 			json.put("userDeliveryAddressId", 1);
 			json.put("deliveryModeId", 2);
 			json.put("isLgtype", 2);
@@ -270,7 +263,7 @@ public class HttpActions {
 	 * 获取订单接口
 	 * {"userId":"3","merId":1,"userToken":"532fea9f115d5","page":1,"size":3}
 	 */
-	public static String GetMyOrderList(int page) {
+	public static String GetMyOrderList(Context context, int page) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
 		sb.append("?").append("class=").append("order");
 		sb.append("&").append("method=").append("query");
@@ -278,7 +271,7 @@ public class HttpActions {
 		JsonObject json = new JsonObject();
 		json.addProperty("userId", "3");
 		json.addProperty("merId", "1");
-		json.addProperty("userToken", "123456");
+		json.addProperty("userToken", User.getToken(context));
 		json.addProperty("page", String.valueOf(page));
 		json.addProperty("size", 3);
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
@@ -295,7 +288,7 @@ public class HttpActions {
 		sb.append("&").append("method=").append("get");
 
 		JsonObject json = new JsonObject();
-		json.addProperty("Id", "9");
+		json.addProperty("Id", "12");
 		json.addProperty("merId", "1");
 		json.addProperty("fl", fl);
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
