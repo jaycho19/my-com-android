@@ -121,7 +121,9 @@ public class ImageAdapter1 extends PagerAdapter {
 		fling_image.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				context.startActivity(new Intent(context,GoodsDetailActivity.class));
+				int id = (int)(Math.random()*28)+10;
+				
+				context.startActivity(new Intent(context,GoodsDetailActivity.class).putExtra("id", String.valueOf(id)));
 			}
 		});
 		fling_image.setId(position);

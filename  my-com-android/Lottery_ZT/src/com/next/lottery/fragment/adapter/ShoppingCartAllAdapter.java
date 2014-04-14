@@ -287,7 +287,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 
 		}
 
-		private ArrayList<SkuList> getTestSKUBean() {
+		private ArrayList<SkuList> getTestSKUBean(String id) {
 
 			ArrayList<SkuList> skulist = new ArrayList<SkuList>();
 			try {
@@ -325,10 +325,10 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 			} catch (DbException e) {
 				// TODO Auto-generated catch block
 				ULog.i("DbException");
-				getDataFromInter();
+				getDataFromInter(id);
 				e.printStackTrace();
 			} catch(Exception e){
-				getDataFromInter();
+				getDataFromInter(id);
 				ULog.i("Exception"+e.toString());
 			}
 			return skulist;
@@ -336,8 +336,8 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 		
 
 		/* 通过接口获取详情数据 */
-		private void getDataFromInter() {
-			String url = HttpActions.GetGoodsDetaiBean(context, "sku");
+		private void getDataFromInter(String Id) {
+			String url = HttpActions.GetGoodsDetaiBean(context,Id, "sku");
 			ULog.d("GetGoodsDetaiBean url = " + url);
 			final ProgressDialog progDialog = ProgressDialog.show(context);
 			progDialog.setCancelable(true);
@@ -378,7 +378,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.fragment_shoppingcart_all_adp_item_iv:
-				context.startActivity(new Intent(context, GoodsDetailActivity.class));
+				context.startActivity(new Intent(context, GoodsDetailActivity.class).putExtra("id", list.get(position).getId()));
 				break;
 			case R.id.fragment_shoppingcart_all_adp_item_show_edit:
 				layoutEdit.setVisibility(View.VISIBLE);
@@ -410,7 +410,7 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 				notifyDataSetChanged();
 				break;
 			case R.id.fragment_shoppingcart_all_adp_item_edit_suv_rl:
-				ShoppingSelectSKUDialog.show1(context, getTestSKUBean(), onSkuResultListener);
+				ShoppingSelectSKUDialog.show1(context, getTestSKUBean(list.get(position).getId()), onSkuResultListener);
 				break;
 
 			case R.id.fragment_shoppingcart_all_adp_item_radiobtn:

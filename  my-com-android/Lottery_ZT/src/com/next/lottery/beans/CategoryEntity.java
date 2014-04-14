@@ -1,6 +1,9 @@
 package com.next.lottery.beans;
 
-public class CategoryEntity {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class CategoryEntity implements Parcelable{
 	private String id;
 	private String name;
 	private int merId;
@@ -167,5 +170,62 @@ public class CategoryEntity {
 		sb.append("lastUpdateTime = ").append(lastUpdateTime).append("\n");
 		return sb.toString();
 	}
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(merId);
+		dest.writeInt(sort);
+		dest.writeInt(level);
+		dest.writeInt(parentId);
+		dest.writeInt(status);
+		dest.writeInt(isDelete);
+		dest.writeString(id);
+		dest.writeString(name);
+		dest.writeString(path);
+		dest.writeString(description);
+		dest.writeString(params);
+		dest.writeString(skus);
+		dest.writeString(creater);
+		dest.writeString(createTime);
+		dest.writeString(lastUpdater);
+		dest.writeString(lastUpdateTime);
+	}
+	
+	public static final Parcelable.Creator<CategoryEntity> CREATOR = new Parcelable.Creator<CategoryEntity>() {
+
+		@Override
+		public CategoryEntity createFromParcel(Parcel in) {
+			CategoryEntity data = new CategoryEntity();
+			data.setMerId(in.readInt());
+			data.setSort(in.readInt());
+			data.setLevel(in.readInt());
+			data.setParentId(in.readInt());
+			data.setStatus(in.readInt());
+			data.setIsDelete(in.readInt());
+			
+			data.setId(in.readString());
+			data.setName(in.readString());
+			data.setPath(in.readString());
+			data.setDescription(in.readString());
+			data.setParams(in.readString());
+			data.setSkus(in.readString());
+			data.setCreater(in.readString());
+			data.setCreateTime(in.readString());
+			data.setLastUpdater(in.readString());
+			data.setLastUpdateTime(in.readString());
+			return data;
+		}
+
+		@Override
+		public CategoryEntity[] newArray(int size) {
+			return new CategoryEntity[size];
+		}
+	};
 
 }

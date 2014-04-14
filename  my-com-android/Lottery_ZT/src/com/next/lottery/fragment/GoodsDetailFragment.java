@@ -55,15 +55,16 @@ import com.next.lottery.nets.HttpActions;
 
 @SuppressLint("ValidFragment")
 public class GoodsDetailFragment extends BaseFragment {
-	private TextView tvTitle;
-	private Context context;
-	private ProgressDialog progDialog;
+	private TextView		tvTitle;
+	private Context			context;
+	private ProgressDialog	progDialog;
 
 	@ViewInject(R.id.activity_goods_detail_layout)
-	private LinearLayout contentLayout;
-	private List<Fragment> fragments = new ArrayList<Fragment>();
-	private GoodsBean goodsBean;
-	private DbUtils dbUtils;
+	private LinearLayout	contentLayout;
+	private List<Fragment>	fragments	= new ArrayList<Fragment>();
+	private GoodsBean		goodsBean;
+	private DbUtils			dbUtils;
+	private Bundle			bundle;
 
 	public GoodsDetailFragment(GoodsDetailActivity goodsDetailActivity) {
 		this.context = goodsDetailActivity;
@@ -81,7 +82,11 @@ public class GoodsDetailFragment extends BaseFragment {
 
 	/* 通过接口获取详情数据 */
 	private void getDataFromInter() {
-		String url = HttpActions.GetGoodsDetaiBean(getActivity(), "");
+		String id = "40";
+		if (null!=getActivity().getIntent().getExtras()&&getActivity().getIntent().getExtras().containsKey("id")) {
+			id = getActivity().getIntent().getExtras().getString("id");
+		}
+		String url = HttpActions.GetGoodsDetaiBean(getActivity(), id, "");
 		ULog.d("GetGoodsDetaiBean url = " + url);
 		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
 
@@ -246,7 +251,8 @@ public class GoodsDetailFragment extends BaseFragment {
 					@Override
 					public void OnPageScrolled() {
 						/*
-						 * if (pullToRefreshView != null) { pullToRefreshView.needPull = false; }
+						 * if (pullToRefreshView != null) {
+						 * pullToRefreshView.needPull = false; }
 						 */
 					}
 				});
@@ -313,11 +319,11 @@ public class GoodsDetailFragment extends BaseFragment {
 		}
 	}
 
-	OnSkuResultListener onSkuResultListener = new OnSkuResultListener() {
+	OnSkuResultListener	onSkuResultListener	= new OnSkuResultListener() {
 
-		@Override
-		public void onSkuResult(ArrayList<SkuList> beanResult, int num) {
+												@Override
+												public void onSkuResult(ArrayList<SkuList> beanResult, int num) {
 
-		}
-	};
+												}
+											};
 }

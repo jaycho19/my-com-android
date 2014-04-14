@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.next.lottery.R;
+import com.next.lottery.alipay.AlipayUtil;
 import com.next.lottery.beans.OrderBean.OrderEntity;
 
 /**
@@ -64,6 +66,7 @@ public class MyOrderListViewAdapter extends BaseAdapter {
 		TextView orderTime;
 		TextView orderMoney;
 		LinearLayout itemll;
+		Button   btnBuy;
 
 		private void initView(View view, int position) {
 			OrderEntity entity = list.get(position);
@@ -73,7 +76,9 @@ public class MyOrderListViewAdapter extends BaseAdapter {
 			itemll = (LinearLayout) view.findViewById(R.id.fragment_my_order_item_ll);
 			orderTime = (TextView) view.findViewById(R.id.fragment_my_order_time_tv);
 			orderMoney = (TextView) view.findViewById(R.id.fragment_my_order_money_tv);
-
+			btnBuy = (Button)view.findViewById(R.id.fragment_my_order_buy_btn);
+			btnBuy.setOnClickListener(this);
+			
 			orderNum.setText(entity.getOrderNo());
 			orderTime.setText("时间：" + entity.getLastUpdateTime());
 			orderMoney.setText("总额：￥" + entity.getPrice());
@@ -88,10 +93,16 @@ public class MyOrderListViewAdapter extends BaseAdapter {
 				itemll.addView(v);
 			}
 		}
-
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
+			switch (v.getId()) {
+			case R.id.fragment_my_order_buy_btn:
+				AlipayUtil.doPayment(context);
+				break;
+
+			default:
+				break;
+			}
 
 		}
 

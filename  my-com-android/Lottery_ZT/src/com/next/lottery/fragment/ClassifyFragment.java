@@ -1,5 +1,8 @@
 package com.next.lottery.fragment;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,6 +31,7 @@ import com.next.lottery.R;
 import com.next.lottery.SearchAcitivity;
 import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.CategoryBean;
+import com.next.lottery.beans.CategoryEntity;
 import com.next.lottery.dialog.ProgressDialog;
 import com.next.lottery.fragment.adapter.ClassifyLeftListViewAdapter;
 import com.next.lottery.fragment.adapter.ClassifyRightListViewAdapter;
@@ -40,21 +44,25 @@ import com.next.lottery.nets.HttpActions;
  * 
  */
 public class ClassifyFragment extends BaseFragment {
-	private String[][] recipes2 = { { "连衣裙", "半身裙", "包袋专区", "西裤" }, { "凉鞋", "单鞋" } };
-	private String[] Lefttitles = { "服装", "女鞋" };
+	// private String[][] recipes2 = { { "连衣裙", "半身裙", "包袋专区", "西裤" }, { "凉鞋",
+	// "单鞋" } };
+	// private String[] Lefttitles = { "服装", "女鞋" };
+
+	private ArrayList<CategoryEntity>				Lefttitles;													// 一级分类
+	private ArrayList<ArrayList<CategoryEntity>>	RightContents	= new ArrayList<ArrayList<CategoryEntity>>();	// 二级分类
 
 	@ViewInject(R.id.listview_content_left)
-	private ListView listViewleft;
+	private ListView								listViewleft;
 	@ViewInject(R.id.listview_content_right)
-	private ListView listViewRight;
+	private ListView								listViewRight;
 	@ViewInject(R.id.layout_content_right)
-	private LinearLayout lin_content_right;
+	private LinearLayout							lin_content_right;
 
-	private ClassifyLeftListViewAdapter leftAdapter;
-	private ProgressDialog progDialog;
+	private ClassifyLeftListViewAdapter				leftAdapter;
+	private ProgressDialog							progDialog;
 
-	private float oldX = 0;// 记录滑动时横坐标
-	private float oldY = 0;// 记录滑动时竖坐标
+	private float									oldX			= 0;											// 记录滑动时横坐标
+	private float									oldY			= 0;											// 记录滑动时竖坐标
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,12 +71,12 @@ public class ClassifyFragment extends BaseFragment {
 		ViewUtils.inject(this, view);
 		init(view);
 
-		if (null != savedInstanceState) {
-			initLeftListView();
-		}
-		else {
+//		if (null != savedInstanceState) {
+//			initLeftListView();
+//		}
+//		else {
 			getLeftData();
-		}
+//		}
 		setListener();
 		return view;
 	}
@@ -89,10 +97,11 @@ public class ClassifyFragment extends BaseFragment {
 			@Override
 			public void onSuccess(ResponseInfo<String> responseInfo) {
 				// CategoryBean
-				CategoryBean bean = new Gson().fromJson(responseInfo.result,CategoryBean.class);
+				CategoryBean bean = new Gson().fromJson(responseInfo.result, CategoryBean.class);
 				ULog.d(bean.toString());
-
-				progDialog.dismiss();
+				Lefttitles = bean.getInfo();
+				initLeftListView();
+				// progDialog.dismiss();
 			}
 
 			@Override
@@ -103,15 +112,53 @@ public class ClassifyFragment extends BaseFragment {
 	}
 
 	private void initLeftListView() {
-		leftAdapter = new ClassifyLeftListViewAdapter(getActivity(), R.layout.fragment_classify_left, Lefttitles);
-		listViewleft.setAdapter(leftAdapter);
+
+		try {
+			// if(leftAdapter==null){
+			leftAdapter = new ClassifyLeftListViewAdapter(getActivity(), R.layout.fragment_classify_left, Lefttitles);
+			listViewleft.setAdapter(leftAdapter);
+			// }else
+			leftAdapter.notifyDataSetChanged();
+			for (CategoryEntity entity : Lefttitles) {
+				getRightListData(entity);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	private void getRightListData(CategoryEntity entity) {
+		new HttpUtils().send(HttpMethod.GET, HttpActions.GetCategory(entity), new RequestCallBack<String>() {
+
+			@Override
+			public void onStart() {
+				if (!progDialog.isShowing())
+					progDialog.show();
+			}
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				// CategoryBean
+				CategoryBean bean = new Gson().fromJson(responseInfo.result, CategoryBean.class);
+				ULog.d(bean.toString());
+				RightContents.add(bean.getInfo());
+				progDialog.dismiss();
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				progDialog.dismiss();
+			}
+		});
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		// outState.putStringArray("Lefttitles", Lefttitles);
-		// outState.putStringArrayList("recipes2", recipes2);
+//		 outState.putParcelableArrayList("Lefttitles", Lefttitles);
+//		 outState.putStringArrayList("recipes2", recipes2);
 	}
 
 	private void setListener() {
@@ -127,7 +174,7 @@ public class ClassifyFragment extends BaseFragment {
 					leftAdapter.setIsRightShowAndPosition(true, position);
 					leftAdapter.notifyDataSetChanged();
 					ClassifyRightListViewAdapter adapter = new ClassifyRightListViewAdapter(getActivity(),
-							R.layout.fragment_classify_right_item, recipes2[position]);
+							R.layout.fragment_classify_right_item, RightContents.get(position));
 					listViewRight.setAdapter(adapter);
 				}
 			}
@@ -185,8 +232,10 @@ public class ClassifyFragment extends BaseFragment {
 		switch (v.getId()) {
 		case R.id.app_top_title_iv_left:
 			/*
-			 * Intent intent = new Intent(); intent.setClass(getActivity(), MCaptureActivity.class);
-			 * intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); startActivityForResult(intent, 1); break;
+			 * Intent intent = new Intent(); intent.setClass(getActivity(),
+			 * MCaptureActivity.class);
+			 * intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			 * startActivityForResult(intent, 1); break;
 			 */
 			startActivity(new Intent(getActivity(), SearchAcitivity.class));
 			break;
@@ -201,12 +250,6 @@ public class ClassifyFragment extends BaseFragment {
 	 */
 	public boolean getRightLinearlayoutIsShow() {
 		return lin_content_right.isShown();
-
-		// int visible = lin_content_right.getVisibility();
-		// if (visible == View.VISIBLE)
-		// return true;
-		// else
-		// return false;
 	}
 
 }
