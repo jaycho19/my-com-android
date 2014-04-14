@@ -1,17 +1,11 @@
 package com.next.lottery.utils;
 
 import java.lang.ref.WeakReference;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
-import com.dongfang.utils.ULog;
-
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
 import android.content.Context;
@@ -20,6 +14,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.util.LruCache;
 import android.text.TextUtils;
+
+import com.dongfang.utils.ULog;
 public class ImageCache {
 	private static final String			TAG					= "ImageCache";
 	private static int					CACHE_SIZE			= 10 * 1024 * 1024;

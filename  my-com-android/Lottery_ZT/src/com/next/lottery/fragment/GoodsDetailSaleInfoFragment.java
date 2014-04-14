@@ -1,7 +1,5 @@
 package com.next.lottery.fragment;
 
-import java.util.List;
-
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,15 +19,12 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
-import com.next.lottery.MainActivity;
 import com.next.lottery.R;
 import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.GoodsBean;
-import com.next.lottery.beans.UserBean;
 import com.next.lottery.dialog.ProgressDialog;
 import com.next.lottery.listener.OnClickTypeListener;
 import com.next.lottery.nets.HttpActions;
-import com.next.lottery.utils.User;
 import com.next.lottery.utils.Util;
 
 /**

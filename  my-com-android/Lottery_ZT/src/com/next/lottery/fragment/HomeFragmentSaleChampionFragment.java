@@ -1,25 +1,12 @@
 package com.next.lottery.fragment;
 
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -28,9 +15,7 @@ import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseFragment;
 import com.dongfang.views.MyImageView;
 import com.next.lottery.R;
-import com.next.lottery.beans.SizeBean;
 import com.next.lottery.listener.OnClickTypeListener;
-import com.next.lottery.utils.Util;
 
 /**
  * 首页销售冠军 Fragment

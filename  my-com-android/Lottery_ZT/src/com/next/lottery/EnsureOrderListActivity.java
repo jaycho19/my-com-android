@@ -2,18 +2,17 @@ package com.next.lottery;
 
 import java.util.ArrayList;
 
+import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+
 import com.dongfang.v4.app.BaseActivity;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.fragment.EnsureOrderListFragment;
-import com.next.lottery.fragment.GoodsDetailFragment;
 import com.next.lottery.fragment.RightMenuFragment;
 import com.next.lottery.view.SlidingMenu;
-
-import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 
 /**
  * 确定订单界面

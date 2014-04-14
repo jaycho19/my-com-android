@@ -1,8 +1,5 @@
 package com.next.lottery.view;
 
-import com.dongfang.utils.ULog;
-import com.next.lottery.R;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -18,6 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.dongfang.utils.ULog;
+import com.next.lottery.R;
 
 public class PullToRefreshView extends LinearLayout {
 	private static final String		TAG					= "PullToRefreshView";

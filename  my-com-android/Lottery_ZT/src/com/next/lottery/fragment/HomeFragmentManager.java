@@ -3,24 +3,19 @@ package com.next.lottery.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dongfang.v4.app.BaseActivity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+
 import com.next.lottery.GoodsDetailActivity;
 import com.next.lottery.R;
-import com.next.lottery.GoodsDetailActivity;
 import com.next.lottery.listener.OnClickTypeListener;
 import com.next.lottery.listener.OnPageScrolledListener;
 import com.next.lottery.params.ComParams;
 import com.next.lottery.view.PullToRefreshView;
-
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.sax.StartElementListener;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.text.TextUtils;
-import android.widget.Toast;
 
 public class HomeFragmentManager {
 	public final String TAG = HomeFragmentManager.class.getSimpleName();

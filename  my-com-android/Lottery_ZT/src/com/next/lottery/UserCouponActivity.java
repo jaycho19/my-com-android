@@ -2,16 +2,16 @@ package com.next.lottery;
 
 import java.util.ArrayList;
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ListView;
+
 import com.dongfang.v4.app.BaseActivity;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.adapter.UserCouponAdapter;
-
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.ListView;
 
 /**
  * 设置

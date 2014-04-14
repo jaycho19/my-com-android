@@ -1,7 +1,5 @@
 package com.next.lottery.beans;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 
 /**
  * 订单号

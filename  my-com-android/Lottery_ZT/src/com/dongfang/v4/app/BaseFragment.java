@@ -1,7 +1,6 @@
 package com.dongfang.v4.app;
 
 import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
 import android.view.View;
 
 public abstract class BaseFragment extends Fragment {

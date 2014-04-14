@@ -5,9 +5,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import com.dongfang.utils.ULog;
-import com.next.lottery.utils.ImageManager;
-
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +12,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.dongfang.utils.ULog;
+import com.next.lottery.utils.ImageManager;
 
 public class VerticalScrollView extends TelecomScrollView implements Runnable {
 	private static final String			TAG						= "VerticalScrollView";

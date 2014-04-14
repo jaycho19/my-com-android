@@ -3,10 +3,6 @@ package com.next.lottery.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dongfang.utils.ULog;
-import com.next.lottery.R;
-import com.next.lottery.utils.Util;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -15,6 +11,10 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.dongfang.utils.ULog;
+import com.next.lottery.R;
+import com.next.lottery.utils.Util;
 
 /**
  * 横向滑动布局，子菜单

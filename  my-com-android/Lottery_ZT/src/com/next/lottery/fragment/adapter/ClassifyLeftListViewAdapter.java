@@ -1,31 +1,17 @@
 package com.next.lottery.fragment.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.R;
-import com.next.lottery.beans.SKUBean;
-import com.next.lottery.beans.SKUEntity;
-import com.next.lottery.dialog.ShoppingSelectSKUDialog;
-import com.next.lottery.fragment.ClassifyFragment;
 
 /**
  * 分类左边适配器

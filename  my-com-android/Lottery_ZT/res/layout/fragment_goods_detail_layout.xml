@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/activity_goods_detail_top_bar"
-        layout="@layout/activity_user_setting_top_bar" />
+        layout="@layout/fragment_goods_detail_layoutg_top_bar" />
 
     <!--
          <com.next.lottery.view.PullToRefreshView

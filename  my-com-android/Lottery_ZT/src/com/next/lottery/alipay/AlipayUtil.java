@@ -4,14 +4,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
 
-import com.dongfang.utils.ULog;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
+
+import com.dongfang.utils.ULog;
 
 public class AlipayUtil {
 	

@@ -6,7 +6,7 @@
     android:background="@color/background"
     android:orientation="vertical" >
 
-    <include layout="@layout/activity_user_setting_top_bar" />
+    <include layout="@layout/fragment_user_setting_top_bar" />
 
     <RelativeLayout
         android:layout_width="match_parent"

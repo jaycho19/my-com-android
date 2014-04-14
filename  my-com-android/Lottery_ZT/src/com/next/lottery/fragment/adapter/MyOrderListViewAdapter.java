@@ -3,46 +3,15 @@ package com.next.lottery.fragment.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.dongfang.utils.ULog;
-import com.dongfang.views.MyImageView;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.next.lottery.R;
-import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.OrderBean.OrderEntity;
-import com.next.lottery.beans.SKUBean;
-import com.next.lottery.beans.SKUEntity;
-import com.next.lottery.beans.ShopCartsInfo;
-import com.next.lottery.dialog.ShoppingSelectSKUDialog;
-import com.next.lottery.listener.OnSkuResultListener;
-import com.next.lottery.nets.HttpActions;
-import com.next.lottery.utils.ComParams;
-import com.next.lottery.utils.Keys;
-import com.next.lottery.utils.Util;
 
 /**
  * 我的 订单适配器
@@ -52,8 +21,8 @@ import com.next.lottery.utils.Util;
  */
 public class MyOrderListViewAdapter extends BaseAdapter {
 
-	private ArrayList<OrderEntity>	list;
-	private Context						context;
+	private ArrayList<OrderEntity> list;
+	private Context context;
 
 	public MyOrderListViewAdapter(Context context, ArrayList<OrderEntity> arrayList) {
 		this.list = arrayList;
@@ -94,26 +63,25 @@ public class MyOrderListViewAdapter extends BaseAdapter {
 		TextView orderStatus;
 		TextView orderTime;
 		TextView orderMoney;
-		LinearLayout itemll ;
+		LinearLayout itemll;
 
 		private void initView(View view, int position) {
 			OrderEntity entity = list.get(position);
-			
-			orderNum = (TextView)view.findViewById(R.id.fragment_my_order_number_tv);
-			orderStatus = (TextView)view.findViewById(R.id.fragment_my_order_status_tv);
-			itemll = (LinearLayout)view.findViewById(R.id.fragment_my_order_item_ll);
-			orderTime = (TextView)view.findViewById(R.id.fragment_my_order_time_tv);
-			orderMoney = (TextView)view.findViewById(R.id.fragment_my_order_money_tv);
-			
-			
+
+			orderNum = (TextView) view.findViewById(R.id.fragment_my_order_number_tv);
+			orderStatus = (TextView) view.findViewById(R.id.fragment_my_order_status_tv);
+			itemll = (LinearLayout) view.findViewById(R.id.fragment_my_order_item_ll);
+			orderTime = (TextView) view.findViewById(R.id.fragment_my_order_time_tv);
+			orderMoney = (TextView) view.findViewById(R.id.fragment_my_order_money_tv);
+
 			orderNum.setText(entity.getOrderNo());
-			orderTime.setText("时间："+entity.getLastUpdateTime());
-			orderMoney.setText("总额：￥"+entity.getPrice());
-//			orderStatus.setText(entity.get)
+			orderTime.setText("时间：" + entity.getLastUpdateTime());
+			orderMoney.setText("总额：￥" + entity.getPrice());
+			// orderStatus.setText(entity.get)
 			for (int i = 0; itemll.getChildCount() < 2; i++) {
 				View v = LayoutInflater.from(context).inflate(R.layout.fragment_my_order_listview_item_item, null);
-				//MyImageView img = (MyImageView) v.findViewById(R.id.fragment_shoppingcart_all_adp_item_iv);
-				//TextView tvNum = (TextView) v.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_number);
+				// MyImageView img = (MyImageView) v.findViewById(R.id.fragment_shoppingcart_all_adp_item_iv);
+				// TextView tvNum = (TextView) v.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_number);
 				// img.setImage(entity.getItems().get(i).getItemImg());
 				// ULog.i("url-->" + entity.getItems().get(i).getItemImg());
 				// tvNum.setText("x"+entity.getItems().get(i).getCount());
@@ -124,12 +92,9 @@ public class MyOrderListViewAdapter extends BaseAdapter {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
-
-
 	}
-
 
 }

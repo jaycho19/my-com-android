@@ -1,8 +1,5 @@
 package com.next.lottery.view;
 
-import com.dongfang.v4.app.DeviceInfo;
-import com.next.lottery.R;
-
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -14,6 +11,9 @@ import android.view.ViewConfiguration;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.Scroller;
+
+import com.dongfang.v4.app.DeviceInfo;
+import com.next.lottery.R;
 
 public class SlidingMenu extends RelativeLayout {
 

@@ -1,8 +1,8 @@
 package com.next.lottery.dialog;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.text.TextUtils;
@@ -19,7 +19,6 @@ import com.dongfang.v4.app.LineLayout;
 import com.dongfang.views.ScrollViewExtend;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.google.zxing.client.result.ProductParsedResult;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.db.sqlite.Selector;
@@ -34,9 +33,9 @@ import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.CalculateOrderListBean;
 import com.next.lottery.beans.OrderNoBean;
 import com.next.lottery.beans.SKUBean2;
+import com.next.lottery.beans.SKUItem;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.beans.SkuList;
-import com.next.lottery.beans.SKUItem;
 import com.next.lottery.listener.OnSkuResultListener;
 import com.next.lottery.nets.HttpActions;
 

@@ -1,14 +1,11 @@
 package com.next.lottery.beans;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import android.content.ClipData.Item;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.dongfang.utils.ULog;
-import com.lidroid.xutils.db.annotation.Id;
 
 public class ShopCartsInfo implements Parcelable {
 	private String id;

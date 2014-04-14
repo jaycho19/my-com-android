@@ -9,7 +9,6 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.fragment.RightMenuFragment;
 import com.next.lottery.fragment.UserInfoFragment;
-import com.next.lottery.fragment.UserSettingFragment;
 import com.next.lottery.view.SlidingMenu;
 
 /**

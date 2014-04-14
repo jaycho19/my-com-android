@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
-import com.next.lottery.GoodsDetailActivity;
 import com.next.lottery.R;
 import com.next.lottery.params.ComParams;
 import com.next.lottery.utils.Keys;

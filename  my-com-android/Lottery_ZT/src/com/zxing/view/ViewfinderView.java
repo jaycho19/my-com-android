@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -15,7 +14,6 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.google.zxing.ResultPoint;
-import com.next.lottery.R;
 import com.zxing.camera.CameraManager;
 
 /**
