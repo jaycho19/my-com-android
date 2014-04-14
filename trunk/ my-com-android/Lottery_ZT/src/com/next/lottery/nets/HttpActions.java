@@ -13,6 +13,7 @@ import com.dongfang.utils.ULog;
 import com.google.gson.JsonObject;
 import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.CalculateOrderListBean;
+import com.next.lottery.beans.CategoryEntity;
 import com.next.lottery.beans.SKUBean2;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.params.ComParams;
@@ -53,7 +54,9 @@ public class HttpActions {
 	}
 
 	/**
-	 * 修改密码接口 {"merId":"1","phone":"15901871159","password":"123456","newpassword": "654321"}
+	 * 修改密码接口
+	 * {"merId":"1","phone":"15901871159","password":"123456","newpassword":
+	 * "654321"}
 	 */
 	public static String ModifyPass(String name, String oldpwd, String newpwd) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
@@ -70,7 +73,8 @@ public class HttpActions {
 	}
 
 	/**
-	 * 添加收藏接口 {"merId":"100000","userId":"3", "userToken":"123456","itemId":"100000","price":"5000","stockNum":"99"}
+	 * 添加收藏接口 {"merId":"100000","userId":"3",
+	 * "userToken":"123456","itemId":"100000","price":"5000","stockNum":"99"}
 	 */
 	public static String doFavour() {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
@@ -89,7 +93,8 @@ public class HttpActions {
 	}
 
 	/**
-	 * 加入购物车接口 {"userToken":"123456","merId":"100000","itemId":"100000", "userId":3,"skuId":60,"count":2}
+	 * 加入购物车接口 {"userToken":"123456","merId":"100000","itemId":"100000",
+	 * "userId":3,"skuId":60,"count":2}
 	 * 
 	 * @param skuBean
 	 * @param goodsBean
@@ -144,8 +149,12 @@ public class HttpActions {
 	}
 
 	/**
-	 * 订单计算接口 {"userId":"3","merId":1,"userToken":"532fea9f115d5", "userDeliveryAddressId":1,
-	 * "deliveryModeId":2,"isLgtype":2,"items":[{"itemId" :9,"skuId":16,"count":2}], "coupons":["1"],"activitys":[1,2]}
+	 * 订单计算接口 {"userId":"3","merId":1,"userToken":"532fea9f115d5",
+	 * "userDeliveryAddressId":1,
+	 * "deliveryModeId":2,"isLgtype":2,"items":[{"itemId"
+	 * :9,"skuId":16,"count":2}], "coupons":["1"],"activitys":[1,2]}
+	 * 
+
 	 */
 	public static String CalcuLateOrderList(Context context, ArrayList<ShopCartsInfo> skubeanList) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
@@ -164,11 +173,13 @@ public class HttpActions {
 			JSONArray jsonArray = new JSONArray();
 			for (int i = 0; i < skubeanList.size(); i++) {
 				JSONObject jsonItem = new JSONObject();
-				// jsonItem.put("itemId", skubeanList.get(i).getItemId());
-				// jsonItem.put("skuId", skubeanList.get(i).getId());
-				jsonItem.put("itemId", 1);
-				jsonItem.put("skuId", 3);
-				jsonItem.put("count", skubeanList.get(i).getCount());
+				 jsonItem.put("itemId", skubeanList.get(i).getItemId());
+				 jsonItem.put("skuId", skubeanList.get(i).getSkuId());
+//				jsonItem.put("itemId", 1);
+//				jsonItem.put("skuId", 3);
+				 int count = skubeanList.get(i).getCount();
+				 int stackNum = skubeanList.get(i).getStockNum();
+				jsonItem.put("count", count>stackNum? stackNum:count);
 				jsonArray.put(jsonItem);
 			}
 			json.put("items", jsonArray);
@@ -190,9 +201,11 @@ public class HttpActions {
 	}
 
 	/**
-	 * 生成订单接口 {"userId":"3","merId":1,"userToken":"532fea9f115d5", "userDeliveryAddressId" :3,
-	 * "payModeId":1,"price":398700,"deliveryModeId":2,"branchId":0,"expressId" :0,
-	 * "isLgtype":2,"invoice":{"title":"发票title","type":1,"content":"发票内容", "isDetail"
+	 * 生成订单接口 {"userId":"3","merId":1,"userToken":"532fea9f115d5",
+	 * "userDeliveryAddressId" :3,
+	 * "payModeId":1,"price":398700,"deliveryModeId":2,"branchId":0,"expressId"
+	 * :0, "isLgtype":2,"invoice":{"title":"发票title","type":1,"content":"发票内容",
+	 * "isDetail"
 	 * :2},"items":[{"itemId":1,"skuId":1,"count":2},{"itemId":2,"skuId":3,
 	 * "count":2}],"coupons":["1"],"activitys":[1,2]}
 	 * 
@@ -252,7 +265,8 @@ public class HttpActions {
 	}
 
 	/**
-	 * 获取订单接口 {"userId":"3","merId":1,"userToken":"532fea9f115d5","page":1,"size":3}
+	 * 获取订单接口
+	 * {"userId":"3","merId":1,"userToken":"532fea9f115d5","page":1,"size":3}
 	 */
 	public static String GetMyOrderList(Context context, int page) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
@@ -271,15 +285,15 @@ public class HttpActions {
 	}
 
 	/**
-	 * 获取订单接口 {"merId":"1","Id":"9","fl":"title,id,sku"}
+	 * 获取商品详情接口 {"merId":"1","Id":"9","fl":"title,id,sku"}
 	 */
-	public static String GetGoodsDetaiBean(Context context, String fl) {
+	public static String GetGoodsDetaiBean(Context context,String id, String fl) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
 		sb.append("?").append("class=").append("item");
 		sb.append("&").append("method=").append("get");
 
 		JsonObject json = new JsonObject();
-		json.addProperty("Id", "12");
+		json.addProperty("Id", id);
 		json.addProperty("merId", "1");
 		json.addProperty("fl", fl);
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
@@ -288,7 +302,7 @@ public class HttpActions {
 	}
 
 	/**
-	 * 获取分类
+	 * 获取一级分类
 	 * 
 	 * @return
 	 */
@@ -296,9 +310,48 @@ public class HttpActions {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
 		sb.append("?").append("class=").append("category");
 		sb.append("&").append("method=").append("get");
-		
+
 		JsonObject json = new JsonObject();
 		json.addProperty("merId", "1");
+		ULog.i(json.toString());
+		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
+		return sb.toString();
+	}
+
+	/**
+	 * 获取二级分类
+	 * 
+	 * @return
+	 */
+	public static String GetCategory(CategoryEntity entity) {
+		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
+		sb.append("?").append("class=").append("category");
+		sb.append("&").append("method=").append("get");
+
+		JsonObject json = new JsonObject();
+		json.addProperty("merId", "1");
+		json.addProperty("parentId", entity.getId());
+		ULog.i(json.toString());
+		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
+		return sb.toString();
+	}
+
+	/**
+	 * 淘宝搜索商品接口 {"merId":"1","categoryId":"2","fl":"title,id","sort":"price"}
+	 * 
+	 * @return
+	 */
+	public static String SearchGoods(CategoryEntity entity) {
+		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
+		sb.append("?").append("class=").append("item");
+		sb.append("&").append("method=").append("search");
+
+		JsonObject json = new JsonObject();
+		json.addProperty("merId", "1");
+		json.addProperty("categoryId", entity.getId());
+		json.addProperty("fl", "title,id");
+		json.addProperty("sort", "price");
+		ULog.i(json.toString());
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		return sb.toString();
 	}

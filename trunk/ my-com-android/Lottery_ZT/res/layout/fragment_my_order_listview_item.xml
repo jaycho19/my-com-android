@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:paddingRight="10dp"
-            android:text="配送中" />
+            android:text="待支付" />
     </LinearLayout>
 
     <LinearLayout
@@ -87,13 +87,13 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/fragment_my_order_add_comment_btn"
+            android:id="@+id/fragment_my_order_buy_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="60dp"
             android:background="@color/transparent"
-            android:text="评论" />
+            android:text="购买" />
     </LinearLayout>
 
 </LinearLayout>

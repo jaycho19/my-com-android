@@ -40,6 +40,7 @@ public class GoodsDetailActivity extends BaseActivity {
 		rightFragment = new RightMenuFragment();
 		t.replace(R.id.right_frame, rightFragment);
 		mainFragment = new GoodsDetailFragment(this);
+		mainFragment.setArguments(this.getIntent().getExtras());
 		t.replace(R.id.center_frame, mainFragment);
 		t.commit();
 	}

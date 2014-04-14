@@ -2,12 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@color/whitesmoke">
 
     <ListView
-        android:id="@+id/fragment_search_history_lv_list"
+        android:id="@+id/fragment_search_history_lv_listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:visibility="gone">
     </ListView>
+    
+    <GridView
+        android:id="@+id/fragment_search_history_lv_gridView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:horizontalSpacing="6dip"
+        android:numColumns="2"
+        android:paddingBottom="8dip"
+        android:paddingLeft="6dip"
+        android:paddingRight="6dip"
+        android:verticalSpacing="6dip" />
 
 </LinearLayout>

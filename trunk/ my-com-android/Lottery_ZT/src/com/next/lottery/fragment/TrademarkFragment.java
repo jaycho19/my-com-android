@@ -1,4 +1,5 @@
 package com.next.lottery.fragment;
+
 /**
  * 品牌
  */
@@ -96,7 +97,10 @@ public class TrademarkFragment extends BaseFragment {
 		@Override
 		public void onClick(View v) {
 			System.gc();
-			startActivity(new Intent(getActivity(), GoodsDetailActivity.class));
+			int id = (int) (Math.random() * 28) + 10;
+
+			getActivity().startActivity(
+					new Intent(getActivity(), GoodsDetailActivity.class).putExtra("id", String.valueOf(id)));
 			ULog.i("press: no." + v.getId() + "  button");
 		}
 	}
