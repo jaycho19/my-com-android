@@ -1,10 +1,10 @@
 package com.next.lottery.view;
 
-import com.next.lottery.R;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ScrollView;
+
+import com.next.lottery.R;
 
 
 public class TelecomScrollView extends ScrollView {

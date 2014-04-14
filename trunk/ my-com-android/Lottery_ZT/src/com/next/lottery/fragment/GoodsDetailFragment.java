@@ -3,47 +3,8 @@ package com.next.lottery.fragment;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import com.dongfang.utils.ULog;
-import com.dongfang.v4.app.BaseFragment;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.lidroid.xutils.DbUtils;
-import com.lidroid.xutils.DbUtils.DaoConfig;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.db.annotation.Id;
-import com.lidroid.xutils.exception.DbException;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
-import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnClick;
-import com.next.lottery.alipay.AlipayUtil;
-import com.next.lottery.beans.BaseEntity;
-import com.next.lottery.beans.GoodsBean;
-import com.next.lottery.beans.SKUBean;
-import com.next.lottery.beans.SKUBean2;
-import com.next.lottery.beans.SKUEntity;
-import com.next.lottery.beans.SKUItem;
-import com.next.lottery.beans.SkuList;
-import com.next.lottery.db.bean.SkulistDbBean;
-import com.next.lottery.dialog.ProgressDialog;
-import com.next.lottery.dialog.ShoppingSelectSKUDialog;
-import com.next.lottery.fragment.GoodsDetailInteractiveAndSelectParamsFragment;
-import com.next.lottery.fragment.GoodsDetailSaleInfoFragment;
-import com.next.lottery.fragment.GoosDetailBottomFragment;
-import com.next.lottery.fragment.HomeFragmentTopKVFragment;
-import com.next.lottery.listener.OnClickTypeListener;
-import com.next.lottery.listener.OnPageScrolledListener;
-import com.next.lottery.listener.OnSkuResultListener;
-import com.next.lottery.nets.HttpActions;
-import com.next.lottery.params.ComParams;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -54,9 +15,36 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.next.lottery.R;
+import com.dongfang.utils.ULog;
+import com.dongfang.v4.app.BaseFragment;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.lidroid.xutils.DbUtils;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.exception.DbException;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
+import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.GoodsDetailActivity;
+import com.next.lottery.R;
+import com.next.lottery.beans.BaseEntity;
+import com.next.lottery.beans.GoodsBean;
+import com.next.lottery.beans.SKUBean;
+import com.next.lottery.beans.SKUBean2;
+import com.next.lottery.beans.SKUEntity;
+import com.next.lottery.beans.SKUItem;
+import com.next.lottery.beans.SkuList;
+import com.next.lottery.db.bean.SkulistDbBean;
+import com.next.lottery.dialog.ProgressDialog;
+import com.next.lottery.dialog.ShoppingSelectSKUDialog;
+import com.next.lottery.listener.OnClickTypeListener;
+import com.next.lottery.listener.OnPageScrolledListener;
+import com.next.lottery.listener.OnSkuResultListener;
+import com.next.lottery.nets.HttpActions;
 
 /**
  * 商品详情界面
@@ -67,24 +55,23 @@ import com.next.lottery.GoodsDetailActivity;
 
 @SuppressLint("ValidFragment")
 public class GoodsDetailFragment extends BaseFragment {
-	private TextView		tvTitle;
-	private Context			context;
-	private ProgressDialog	progDialog;
+	private TextView tvTitle;
+	private Context context;
+	private ProgressDialog progDialog;
 
 	@ViewInject(R.id.activity_goods_detail_layout)
-	private LinearLayout	contentLayout;
-	private List<Fragment>	fragments	= new ArrayList<Fragment>();
-	private GoodsBean		goodsBean;
-	private DbUtils			dbUtils;
+	private LinearLayout contentLayout;
+	private List<Fragment> fragments = new ArrayList<Fragment>();
+	private GoodsBean goodsBean;
+	private DbUtils dbUtils;
 
 	public GoodsDetailFragment(GoodsDetailActivity goodsDetailActivity) {
-		// TODO Auto-generated constructor stub
 		this.context = goodsDetailActivity;
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.activity_goods_detail_layout, container, false);
+		View view = inflater.inflate(R.layout.fragment_goods_detail_layout, container, false);
 		ViewUtils.inject(this, view);
 		this.dbUtils = DbUtils.create(context, context.getPackageName());
 		initView(view);
@@ -215,8 +202,8 @@ public class GoodsDetailFragment extends BaseFragment {
 	}
 
 	private void initView(View view) {
-		tvTitle = (TextView) view.findViewById(R.id.app_top_title_tv_centre);
-		tvTitle.setText("宝贝详情");
+		// tvTitle = (TextView) view.findViewById(R.id.app_top_title_tv_centre);
+		// tvTitle.setText("宝贝详情");
 		progDialog = ProgressDialog.show(getActivity());
 		progDialog.setCancelable(true);
 	}
@@ -259,8 +246,7 @@ public class GoodsDetailFragment extends BaseFragment {
 					@Override
 					public void OnPageScrolled() {
 						/*
-						 * if (pullToRefreshView != null) {
-						 * pullToRefreshView.needPull = false; }
+						 * if (pullToRefreshView != null) { pullToRefreshView.needPull = false; }
 						 */
 					}
 				});
@@ -327,11 +313,11 @@ public class GoodsDetailFragment extends BaseFragment {
 		}
 	}
 
-	OnSkuResultListener	onSkuResultListener	= new OnSkuResultListener() {
+	OnSkuResultListener onSkuResultListener = new OnSkuResultListener() {
 
-												@Override
-												public void onSkuResult(ArrayList<SkuList> beanResult,int num) {
+		@Override
+		public void onSkuResult(ArrayList<SkuList> beanResult, int num) {
 
-												}
-											};
+		}
+	};
 }

@@ -52,8 +52,8 @@
         android:background="@color/white"
         android:gravity="center"
         android:padding="10dp"
-        android:text="显示剩余商品" 
-        android:visibility="gone"/>
+        android:text="显示剩余商品"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/fragment_my_order_bottom_ll"
@@ -82,18 +82,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
-                android:text="总额：380元" 
-                android:textColor="@color/red"/>
+                android:text="总额：380元"
+                android:textColor="@color/red" />
         </LinearLayout>
 
         <Button
             android:id="@+id/fragment_my_order_add_comment_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="评论" 
-            android:background="@color/transparent"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="60dp"/>
+            android:layout_marginLeft="60dp"
+            android:background="@color/transparent"
+            android:text="评论" />
     </LinearLayout>
 
 </LinearLayout>

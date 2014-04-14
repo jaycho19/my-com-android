@@ -2,17 +2,17 @@ package com.next.lottery.fragment.adapter;
 
 import java.util.List;
 
-import com.dongfang.utils.ULog;
-import com.dongfang.views.MyImageView;
-import com.next.lottery.R;
-import com.next.lottery.utils.Util;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.dongfang.utils.ULog;
+import com.dongfang.views.MyImageView;
+import com.next.lottery.R;
+import com.next.lottery.utils.Util;
 
 public class HomeFragmentRecommendGridViewAdapter extends BaseAdapter {
 

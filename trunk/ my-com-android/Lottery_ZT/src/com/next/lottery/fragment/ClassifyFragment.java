@@ -2,7 +2,6 @@ package com.next.lottery.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,14 +14,24 @@ import android.widget.ListView;
 
 import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseFragment;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
-import com.next.lottery.MCaptureActivity;
 import com.next.lottery.R;
 import com.next.lottery.SearchAcitivity;
+import com.next.lottery.beans.BaseEntity;
+import com.next.lottery.beans.CategoryBean;
+import com.next.lottery.dialog.ProgressDialog;
 import com.next.lottery.fragment.adapter.ClassifyLeftListViewAdapter;
 import com.next.lottery.fragment.adapter.ClassifyRightListViewAdapter;
+import com.next.lottery.nets.HttpActions;
 
 /**
  * 分类
@@ -42,6 +51,7 @@ public class ClassifyFragment extends BaseFragment {
 	private LinearLayout lin_content_right;
 
 	private ClassifyLeftListViewAdapter leftAdapter;
+	private ProgressDialog progDialog;
 
 	private float oldX = 0;// 记录滑动时横坐标
 	private float oldY = 0;// 记录滑动时竖坐标
@@ -51,14 +61,57 @@ public class ClassifyFragment extends BaseFragment {
 		ULog.i("ClassifyFragment oncreat");
 		View view = inflater.inflate(R.layout.fragment_classify, container, false);
 		ViewUtils.inject(this, view);
-		initLeftListView();
+		init(view);
+
+		if (null != savedInstanceState) {
+			initLeftListView();
+		}
+		else {
+			getLeftData();
+		}
 		setListener();
 		return view;
+	}
+
+	private void init(View view) {
+		progDialog = ProgressDialog.show(getActivity());
+		progDialog.setCancelable(true);
+	}
+
+	private void getLeftData() {
+		new HttpUtils().send(HttpMethod.GET, HttpActions.GetCategory(), new RequestCallBack<String>() {
+
+			@Override
+			public void onStart() {
+				progDialog.show();
+			}
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				// CategoryBean
+				CategoryBean bean = new Gson().fromJson(responseInfo.result,CategoryBean.class);
+				ULog.d(bean.toString());
+
+				progDialog.dismiss();
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				progDialog.dismiss();
+			}
+		});
 	}
 
 	private void initLeftListView() {
 		leftAdapter = new ClassifyLeftListViewAdapter(getActivity(), R.layout.fragment_classify_left, Lefttitles);
 		listViewleft.setAdapter(leftAdapter);
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		// outState.putStringArray("Lefttitles", Lefttitles);
+		// outState.putStringArrayList("recipes2", recipes2);
 	}
 
 	private void setListener() {
@@ -77,16 +130,12 @@ public class ClassifyFragment extends BaseFragment {
 							R.layout.fragment_classify_right_item, recipes2[position]);
 					listViewRight.setAdapter(adapter);
 				}
-
 			}
 		});
 
 		listViewRight.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				// TODO Auto-generated method stub
-
-			}
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {}
 
 		});
 
@@ -94,10 +143,7 @@ public class ClassifyFragment extends BaseFragment {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				// TODO Auto-generated method stub
-
 				ULog.i("event-->" + event.getAction());
-
 				switch (event.getAction()) {
 				case MotionEvent.ACTION_DOWN:
 					ULog.i("起始x坐标-->" + event.getX());

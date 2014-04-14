@@ -1,13 +1,11 @@
 package com.dongfang.views;
 
-import com.dongfang.v4.app.DeviceInfo;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.ViewGroup;
 import android.widget.ScrollView;
-import android.widget.LinearLayout.LayoutParams;
+
+import com.dongfang.v4.app.DeviceInfo;
 
 /**
  * 能够兼容ViewPager的ScrollView

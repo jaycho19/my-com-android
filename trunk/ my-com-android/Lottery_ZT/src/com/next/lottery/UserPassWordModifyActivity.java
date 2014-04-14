@@ -1,16 +1,15 @@
 package com.next.lottery;
 
+import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+
 import com.dongfang.v4.app.BaseActivity;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.fragment.RightMenuFragment;
 import com.next.lottery.fragment.UserPWDModifyFragment;
-import com.next.lottery.fragment.UserRegisterFragment;
 import com.next.lottery.view.SlidingMenu;
-
-import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 
 /**
  * 用户密码修改界面

@@ -7,7 +7,7 @@
 
     <include
         android:id="@+id/fragment_ensure_order_list_top_bar"
-        layout="@layout/activity_user_setting_top_bar" />
+        layout="@layout/fragment_user_setting_top_bar" />
 
     <ScrollView
         android:layout_width="match_parent"

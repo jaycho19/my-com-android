@@ -1,7 +1,5 @@
 package com.next.lottery.utils;
 
-import android.app.AlarmManager;
-import android.os.Environment;
 
 /**
  * 公共数据

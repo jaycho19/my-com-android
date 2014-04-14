@@ -3,44 +3,17 @@ package com.next.lottery.fragment.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.dongfang.utils.ULog;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.next.lottery.R;
-import com.next.lottery.beans.BaseEntity;
-import com.next.lottery.beans.SKUBean;
-import com.next.lottery.beans.SKUEntity;
 import com.next.lottery.beans.ShopCartsInfo;
-import com.next.lottery.dialog.ShoppingSelectSKUDialog;
-import com.next.lottery.listener.OnSkuResultListener;
-import com.next.lottery.nets.HttpActions;
-import com.next.lottery.utils.ComParams;
-import com.next.lottery.utils.Keys;
-import com.next.lottery.utils.Util;
 
 /**
  * 确认订单  订单适配器

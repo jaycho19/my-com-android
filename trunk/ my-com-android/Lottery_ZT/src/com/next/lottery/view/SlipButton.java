@@ -47,21 +47,21 @@ public class SlipButton extends View implements OnTouchListener, OnClickListener
 	public SlipButton(Context context, AttributeSet attrs) {
 
 		super(context, attrs);
-		TypedArray typeArray = context.obtainStyledAttributes(attrs, R.styleable.silpinfo);
-		bgon = typeArray.getDrawable(R.styleable.silpinfo_bgon);
-		bgoff = typeArray.getDrawable(R.styleable.silpinfo_bgoff);
-		slipbtn = typeArray.getDrawable(R.styleable.silpinfo_slipbtn);
-		isChecked = typeArray.getBoolean(R.styleable.silpinfo_isclicked, isChecked);
+		TypedArray typeArray = context.obtainStyledAttributes(attrs, R.styleable.SlipButton);
+		bgon = typeArray.getDrawable(R.styleable.SlipButton_bgon);
+		bgoff = typeArray.getDrawable(R.styleable.SlipButton_bgoff);
+		slipbtn = typeArray.getDrawable(R.styleable.SlipButton_slipbtn);
+		isChecked = typeArray.getBoolean(R.styleable.SlipButton_isclicked, isChecked);
 		init(bgon, bgoff, slipbtn);
 	}
 
 	public SlipButton(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		TypedArray typeArray = context.obtainStyledAttributes(attrs, R.styleable.silpinfo);
-		bgon = typeArray.getDrawable(R.styleable.silpinfo_bgon);
-		bgoff = typeArray.getDrawable(R.styleable.silpinfo_bgoff);
-		slipbtn = typeArray.getDrawable(R.styleable.silpinfo_slipbtn);
-		isChecked = typeArray.getBoolean(R.styleable.silpinfo_isclicked, isChecked);
+		TypedArray typeArray = context.obtainStyledAttributes(attrs, R.styleable.SlipButton);
+		bgon = typeArray.getDrawable(R.styleable.SlipButton_bgon);
+		bgoff = typeArray.getDrawable(R.styleable.SlipButton_bgoff);
+		slipbtn = typeArray.getDrawable(R.styleable.SlipButton_slipbtn);
+		isChecked = typeArray.getBoolean(R.styleable.SlipButton_isclicked, isChecked);
 		init(bgon, bgoff, slipbtn);
 	}
 

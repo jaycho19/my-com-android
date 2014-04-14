@@ -2,13 +2,6 @@ package com.next.lottery.view;
 
 import java.util.List;
 
-import com.dongfang.utils.ULog;
-import com.next.lottery.R;
-import com.next.lottery.listener.OnClickTypeListener;
-import com.next.lottery.listener.OnPageScrolledListener;
-import com.next.lottery.utils.Util;
-import com.next.lottery.view.adapter.ImageAdapter1;
-
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -18,7 +11,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+
+import com.dongfang.utils.ULog;
+import com.next.lottery.R;
+import com.next.lottery.listener.OnClickTypeListener;
+import com.next.lottery.listener.OnPageScrolledListener;
+import com.next.lottery.view.adapter.ImageAdapter1;
 
 /**
  * 图片滑动

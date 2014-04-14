@@ -2,12 +2,12 @@ package com.dongfang.v4.app;
 
 import java.util.List;
 
-import com.dongfang.utils.ULog;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.dongfang.utils.ULog;
 
 /**
  * 内容会自动换行

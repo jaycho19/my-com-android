@@ -1,7 +1,9 @@
 package com.dongfang.views;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -11,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.dongfang.utils.BitmapHelp;
+import com.dongfang.utils.ULog;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
 import com.lidroid.xutils.bitmap.core.BitmapSize;
@@ -30,19 +33,33 @@ public class MyImageView extends RelativeLayout {
 	BitmapUtils bitmapUtils = null;
 	BitmapDisplayConfig bigPicDisplayConfig = null;
 
+	public MyImageView(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		init(context, attrs, defStyle);
+	}
+
 	public MyImageView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		init(context);
+		this(context, attrs, 0);
 	}
 
 	public MyImageView(Context context) {
-		super(context);
-		init(context);
+		this(context, null);
 	}
 
-	public void init(Context context) {
+	public void init(Context context, AttributeSet attrs, int defStyle) {
 		this.context = context;
+
 		imageView = (ImageView) LayoutInflater.from(context).inflate(R.layout.my_imageview, null);
+		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ImageView, defStyle, 0);
+		Drawable d = a.getDrawable(R.styleable.ImageView_src);
+		
+		ULog.d("d != null " + (d != null));
+		
+		
+		if (d != null) {
+			imageView.setImageDrawable(d);
+		}
+
 		this.setGravity(Gravity.CENTER);
 		addView(imageView, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 	}

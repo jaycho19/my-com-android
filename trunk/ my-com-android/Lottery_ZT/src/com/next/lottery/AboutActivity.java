@@ -1,9 +1,9 @@
 package com.next.lottery;
 
-import com.dongfang.v4.app.BaseActivity;
-
 import android.os.Bundle;
 import android.view.View;
+
+import com.dongfang.v4.app.BaseActivity;
 
 /**
  * 关于

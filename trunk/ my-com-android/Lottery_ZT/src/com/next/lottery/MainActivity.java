@@ -1,14 +1,10 @@
 package com.next.lottery;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -20,7 +16,6 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.fragment.ClassifyFragment;
 import com.next.lottery.fragment.HomeFragment;
-import com.next.lottery.fragment.ShoppingCartFragment;
 import com.next.lottery.fragment.ShoppingCartNewFragment;
 import com.next.lottery.fragment.TrademarkFragment;
 import com.next.lottery.fragment.UserCenterFragment;

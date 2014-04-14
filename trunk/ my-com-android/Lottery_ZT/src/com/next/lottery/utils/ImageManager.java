@@ -4,11 +4,11 @@ import java.util.LinkedHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.dongfang.utils.ULog;
-import com.next.lottery.utils.ImageCache.BitmapLoader;
-
 import android.annotation.SuppressLint;
 import android.util.SparseArray;
+
+import com.dongfang.utils.ULog;
+import com.next.lottery.utils.ImageCache.BitmapLoader;
 
 public class ImageManager {
 	private static final String												TAG					= "ImageManager";

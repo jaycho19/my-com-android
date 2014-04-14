@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.dongfang.encrypt.AESEncrypt;
 import com.dongfang.utils.ULog;
+import com.next.lottery.nets.HttpActions;
 
 /** 用户相关信息 */
 public class User {

@@ -6,10 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +19,6 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.GoodsDetailActivity;
 import com.next.lottery.R;
-import com.next.lottery.fragment.adapter.ClassifyLeftListViewAdapter;
 import com.next.lottery.fragment.adapter.TradeMarkListViewAdapter;
 import com.next.lottery.view.MyHorizontalScrollView;
 import com.next.lottery.view.MyHorizontalScrollView.ItemClickListener;

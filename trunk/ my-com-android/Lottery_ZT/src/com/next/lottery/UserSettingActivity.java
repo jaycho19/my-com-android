@@ -8,7 +8,6 @@ import com.dongfang.v4.app.BaseActivity;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.fragment.RightMenuFragment;
-import com.next.lottery.fragment.UserHelpCenterFragment;
 import com.next.lottery.fragment.UserSettingFragment;
 import com.next.lottery.view.SlidingMenu;
 
@@ -25,8 +24,8 @@ public class UserSettingActivity extends BaseActivity {
 	private UserSettingFragment mainFragment;
 
 	@Override
-	protected void onCreate(Bundle arg0) {
-		super.onCreate(arg0);
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sliding_menu_main);
 		ViewUtils.inject(this);
 		init();
@@ -41,19 +40,14 @@ public class UserSettingActivity extends BaseActivity {
 		rightFragment = new RightMenuFragment();
 		t.replace(R.id.right_frame, rightFragment);
 		mainFragment = new UserSettingFragment();
-		mainFragment.setmSlidingMenu(mSlidingMenu);
 		t.replace(R.id.center_frame, mainFragment);
 		t.commit();
 	}
 
+	@Override
+	public void onClick(View v) {}
+
 	public void showRight() {
 		mSlidingMenu.showRightView();
 	}
-
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

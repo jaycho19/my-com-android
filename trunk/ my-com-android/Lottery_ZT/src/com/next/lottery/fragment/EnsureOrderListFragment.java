@@ -30,13 +30,10 @@ import com.next.lottery.alipay.AlipayUtil;
 import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.CalculateOrderListBean;
 import com.next.lottery.beans.CalculateOrderListBean.Items;
-import com.next.lottery.beans.OrderBean;
 import com.next.lottery.beans.OrderNoBean;
-import com.next.lottery.beans.SKUBean2;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.dialog.ProgressDialog;
 import com.next.lottery.nets.HttpActions;
-import com.next.lottery.utils.Util;
 
 @SuppressLint("ValidFragment")
 public class EnsureOrderListFragment extends BaseFragment {

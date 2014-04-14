@@ -1,15 +1,14 @@
 package com.next.lottery.fragment;
 
-import com.dongfang.views.MyImageView;
-import com.next.lottery.R;
-import com.next.lottery.listener.OnClickTypeListener;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+
+import com.next.lottery.R;
+import com.next.lottery.listener.OnClickTypeListener;
 
 /**
  * 首页 季节热卖 fragment

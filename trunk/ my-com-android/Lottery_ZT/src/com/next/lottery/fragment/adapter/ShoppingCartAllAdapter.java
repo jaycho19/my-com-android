@@ -1,7 +1,6 @@
 package com.next.lottery.fragment.adapter;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import android.content.Context;
 import android.content.Intent;
@@ -39,9 +38,7 @@ import com.next.lottery.GoodsDetailActivity;
 import com.next.lottery.R;
 import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.GoodsBean;
-import com.next.lottery.beans.SKUBean;
 import com.next.lottery.beans.SKUBean2;
-import com.next.lottery.beans.SKUEntity;
 import com.next.lottery.beans.SKUItem;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.beans.SkuList;
@@ -51,7 +48,6 @@ import com.next.lottery.dialog.ShoppingSelectSKUDialog;
 import com.next.lottery.listener.OnSkuResultListener;
 import com.next.lottery.nets.HttpActions;
 import com.next.lottery.utils.Keys;
-import com.next.lottery.utils.Util;
 
 /**
  * 购物车适配器
