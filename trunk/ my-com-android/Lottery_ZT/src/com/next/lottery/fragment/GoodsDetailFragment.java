@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseFragment;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.HttpUtils;
@@ -97,18 +98,26 @@ public class GoodsDetailFragment extends BaseFragment {
 
 			@Override
 			public void onSuccess(ResponseInfo<String> responseInfo) {
-				progDialog.dismiss();
-				// ULog.d(responseInfo.result);
-				BaseEntity<GoodsBean> bean = new Gson().fromJson(responseInfo.result,
-						new TypeToken<BaseEntity<GoodsBean>>() {}.getType());
-				ULog.d(bean.toString());
-				if (null != bean && bean.getCode() == 0) {
-					goodsBean = bean.getInfo();
-					initDb();
-					initData();
-				}
-				else {
-					Toast.makeText(getActivity(), bean.getMsg(), Toast.LENGTH_LONG).show();
+				try {
+					progDialog.dismiss();
+					// ULog.d(responseInfo.result);
+					BaseEntity<GoodsBean> bean = new Gson().fromJson(responseInfo.result,
+							new TypeToken<BaseEntity<GoodsBean>>() {}.getType());
+
+					if (null != bean && bean.getCode() == 0&&null!=bean.getInfo()) {
+						ULog.d(bean.toString());
+						goodsBean = bean.getInfo();
+						initDb();
+						initData();
+					}
+					else {
+						Toast.makeText(getActivity(), bean.getMsg(), Toast.LENGTH_LONG).show();
+					}
+				} catch (JsonSyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}catch(Exception e){
+					e.printStackTrace();
 				}
 
 			}
@@ -129,8 +138,8 @@ public class GoodsDetailFragment extends BaseFragment {
 
 		try {
 			// 存储 sku 信息
-			dbUtils.dropTable(SKUBean2.class);
-			dbUtils.dropTable(SkulistDbBean.class);
+//			dbUtils.dropTable(SKUBean2.class);
+//			dbUtils.dropTable(SkulistDbBean.class);
 			dbUtils.saveOrUpdateAll(goodsBean.getSku());
 
 			// 转存 存储 sku 信息（暂时sqlite3 不支持自定义对象 存储）
@@ -157,7 +166,6 @@ public class GoodsDetailFragment extends BaseFragment {
 	protected void getSkuTest() {
 
 		try {
-			dbUtils.dropTable(SKUBean2.class);
 			// dbUtils.dropTable(SkuList.class);
 			ArrayList<SKUBean2> skuBeanList = new ArrayList<SKUBean2>();
 			for (int i = 0; i < 4; i++) {
@@ -227,7 +235,7 @@ public class GoodsDetailFragment extends BaseFragment {
 				public void onClickType(Bundle bundle) {
 					ULog.i("onclick");
 					ShoppingSelectSKUDialog.setTitle(goodsBean.getTitle());
-					ShoppingSelectSKUDialog.show2(context, goodsBean.getSkuList(), onSkuResultListener);
+					ShoppingSelectSKUDialog.show2(context, goodsBean.getSkuList(),goodsBean.getId(), onSkuResultListener);
 				}
 			};
 
