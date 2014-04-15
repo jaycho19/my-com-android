@@ -1,6 +1,7 @@
 package com.next.lottery.beans;
 
 import com.lidroid.xutils.db.annotation.Id;
+import com.lidroid.xutils.db.annotation.NoAutoIncrement;
 
 /**
  * my order bean
@@ -10,6 +11,7 @@ import com.lidroid.xutils.db.annotation.Id;
  */
 public class SKUBean2 {
 	private int costPrice;
+	@NoAutoIncrement
 	private int id;
 	private int itemId;
 	private int marketPrice;
@@ -18,8 +20,8 @@ public class SKUBean2 {
 	private String skuAttrname;
 	private int status;
 	private int stockNum;
-	@Id(column="_id")
-	private int _id;//设置表主键
+//	@Id(column="_id")
+//	private int _id;//设置表主键
 	
 	// {
 	// "costPrice":0,
@@ -123,11 +125,4 @@ public class SKUBean2 {
 		this.stockNum = stockNum;
 	}
 
-	public int getPrimaryId() {
-		return _id;
-	}
-
-	public void setPrimaryId(int primaryId) {
-		this._id = primaryId;
-	}
 }

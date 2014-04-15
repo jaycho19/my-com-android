@@ -57,8 +57,16 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		super(context, theme);
 	}
 
-	private static void show(Context context, ArrayList<SkuList> bean, OnSkuResultListener onSkuResultListener) {
-		if (null != dialog && dialog.isShowing()||bean.size()==0)
+	/**
+	 * 
+	 * @param context
+	 * @param bean         颜色和大小 数据集合
+	 * @param id    物品对应Id
+	 * @param onSkuResultListener
+	 */
+
+	private static void show(Context context, ArrayList<SkuList> bean, String id, OnSkuResultListener onSkuResultListener) {
+		if (null != dialog && dialog.isShowing() || bean.size() == 0)
 			return;
 		dialog = new ShoppingSelectSKUDialog(context, R.style.SelectSKUDialog);
 		dialog.getWindow().setGravity(Gravity.BOTTOM | Gravity.LEFT);
@@ -68,7 +76,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		List<SKUBean2> skubean = null;
 		try {
 			db = DbUtils.create(context, context.getPackageName());
-			skubean = db.findAll(Selector.from(SKUBean2.class));
+			skubean = db.findAll(Selector.from(SKUBean2.class).where("itemId", "=", id));
 		} catch (DbException e) {
 			e.printStackTrace();
 		}
@@ -76,8 +84,8 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		dialog.show();
 	}
 
-	public static void show1(Context context, ArrayList<SkuList> bean, OnSkuResultListener onSkuResultListener) {
-		show(context, bean, onSkuResultListener);
+	public static void show1(Context context, ArrayList<SkuList> bean, String id, OnSkuResultListener onSkuResultListener) {
+		show(context, bean, id, onSkuResultListener);
 
 	}
 
@@ -85,7 +93,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		title = titleString;
 	}
 
-	public static void show2(Context context, ArrayList<SkuList> bean, OnSkuResultListener onSkuResultListener) {
+	public static void show2(Context context, ArrayList<SkuList> bean,String id, OnSkuResultListener onSkuResultListener) {
 		if (null != dialog && dialog.isShowing())
 			return;
 		dialog = new ShoppingSelectSKUDialog(context, R.style.SelectSKUDialog);
@@ -96,7 +104,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		List<SKUBean2> skubean = null;
 		try {
 			db = DbUtils.create(context, context.getPackageName());
-			skubean = db.findAll(Selector.from(SKUBean2.class));
+			skubean = db.findAll(Selector.from(SKUBean2.class).where("itemId", "=", Integer.parseInt(id)));
 		} catch (DbException e) {
 			e.printStackTrace();
 		}
@@ -119,7 +127,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 				}
 				int SelectNum = Integer.valueOf((String) tvSelectNum.getText());
 				int StockNum = skuBean != null ? skuBean.getStockNum() : 0;
-				onSkuResultListener.onSkuResult(beanResult,SelectNum < StockNum ? SelectNum : StockNum);
+				onSkuResultListener.onSkuResult(beanResult, SelectNum < StockNum ? SelectNum : StockNum);
 				dialog.dismiss();
 			}
 		});
@@ -164,13 +172,13 @@ public class ShoppingSelectSKUDialog extends Dialog {
 
 	protected static void CalculateOrder(final Context context) {
 		ArrayList<ShopCartsInfo> skubeanList = new ArrayList<ShopCartsInfo>();
-		
+
 		ShopCartsInfo info = new ShopCartsInfo();
 		info.setItemId(String.valueOf(skuBean.getItemId()));
-		info.setCount(skuBean.getCostPrice()/skuBean.getPrice());
+		info.setCount(skuBean.getCostPrice() / skuBean.getPrice());
 		info.setSkuId(String.valueOf(skuBean.getId()));
 		skubeanList.add(info);
-		
+
 		String url = HttpActions.CalcuLateOrderList(context, skubeanList);
 		ULog.d("CalculateOrder url = " + url);
 		progDialog = ProgressDialog.show(context);
@@ -225,7 +233,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		((ScrollViewExtend) dialog.findViewById(R.id.dialog_select_sku_content_sl)).setAllow_match(false);
 
 		tvStockNum = (TextView) dialog.findViewById(R.id.dialog_select_sku_stock_tv_number);
-		
+
 		final LinearLayout ll = (LinearLayout) dialog.findViewById(R.id.dialog_select_sku_content_ll);
 		if (null != bean) {
 			ULog.e("null != bean ;size = " + bean.size());
@@ -412,7 +420,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		});
 
 	}
-	
+
 	public static void addShopCarts(final Context context) {
 		String url = HttpActions.AddShopCarts(skuBean);
 		ULog.d("addShopCarts url = " + url);
@@ -429,16 +437,17 @@ public class ShoppingSelectSKUDialog extends Dialog {
 			public void onSuccess(ResponseInfo<String> responseInfo) {
 				progDialog.dismiss();
 				ULog.d(responseInfo.result);
-				
+
 				BaseEntity bean = new Gson().fromJson(responseInfo.result, BaseEntity.class);
 				if (null != bean && bean.getCode() == 0) {
-					
+
 					Toast.makeText(context, "添加成功!", Toast.LENGTH_LONG).show();
 				}
 				else {
 					Toast.makeText(context, bean.getMsg(), Toast.LENGTH_LONG).show();
 				}
 			}
+
 			@Override
 			public void onFailure(HttpException error, String msg) {
 				progDialog.dismiss();

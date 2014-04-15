@@ -91,6 +91,7 @@ public class ClassifyFragment extends BaseFragment {
 
 			@Override
 			public void onStart() {
+				ULog.i(getRequestUrl());
 				progDialog.show();
 			}
 
@@ -134,6 +135,7 @@ public class ClassifyFragment extends BaseFragment {
 
 			@Override
 			public void onStart() {
+				ULog.i(getRequestUrl());
 				if (!progDialog.isShowing())
 					progDialog.show();
 			}
@@ -142,7 +144,7 @@ public class ClassifyFragment extends BaseFragment {
 			public void onSuccess(ResponseInfo<String> responseInfo) {
 				// CategoryBean
 				CategoryBean bean = new Gson().fromJson(responseInfo.result, CategoryBean.class);
-				ULog.d(bean.toString());
+				ULog.d("getRightListData-->"+bean.toString());
 				RightContents.add(bean.getInfo());
 				progDialog.dismiss();
 			}
@@ -158,7 +160,7 @@ public class ClassifyFragment extends BaseFragment {
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 //		 outState.putParcelableArrayList("Lefttitles", Lefttitles);
-//		 outState.putStringArrayList("recipes2", recipes2);
+//		 outState.putParcelableArrayList("recipes2", RightContents);
 	}
 
 	private void setListener() {

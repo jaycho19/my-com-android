@@ -1,15 +1,15 @@
 package com.next.lottery.db.bean;
 
 import com.lidroid.xutils.db.annotation.Id;
+import com.lidroid.xutils.db.annotation.NoAutoIncrement;
 
 public class SkulistDbBean  {
-	@Id(column="_id")
-	private int   _id;
 	private String pid;
 	private String pname;
 	private String vid; // 编号
 	private String vname; // 编号说明，不如 蓝色，M号等
-	private int    itemId;
+	@Id(column="id") @NoAutoIncrement
+	private int    id;
 	public String getPid() {
 		return pid;
 	}
@@ -35,9 +35,9 @@ public class SkulistDbBean  {
 		this.vname = vname;
 	}
 	public int getItemId() {
-		return itemId;
+		return id;
 	}
 	public void setItemId(int itemId) {
-		this.itemId = itemId;
+		this.id = itemId;
 	}
 }

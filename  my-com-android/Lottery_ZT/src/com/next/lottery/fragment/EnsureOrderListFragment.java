@@ -66,7 +66,7 @@ public class EnsureOrderListFragment extends BaseFragment {
 		View view = inflater.inflate(R.layout.fragment_ensure_order_list_layout, container, false);
 		ViewUtils.inject(this, view);
 		tvTitle = (TextView) view.findViewById(R.id.app_top_title_tv_centre);
-		
+		tvTitle.setText("确定订单");
 		
 		progDialog = ProgressDialog.show(getActivity());
 		progDialog.setCancelable(true);
@@ -121,6 +121,7 @@ public class EnsureOrderListFragment extends BaseFragment {
 		// ArrayList<SKUBean2> skubeanList = new ArrayList<SKUBean2>();
 		// skubeanList.add(skuBean);
 		String url = HttpActions.creatOrder(context, calcuBean);
+		ULog.i("creatOrder-->"+url);
 		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
 
 			@Override

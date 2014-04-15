@@ -327,17 +327,16 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 				ULog.i("DbException");
 				getDataFromInter(id);
 				e.printStackTrace();
-			} catch(Exception e){
+			} catch (Exception e) {
 				getDataFromInter(id);
-				ULog.i("Exception"+e.toString());
+				ULog.i("Exception" + e.toString());
 			}
 			return skulist;
 		}
-		
 
 		/* 通过接口获取详情数据 */
 		private void getDataFromInter(String Id) {
-			String url = HttpActions.GetGoodsDetaiBean(context,Id, "sku");
+			String url = HttpActions.GetGoodsDetaiBean(context, Id, "sku");
 			ULog.d("GetGoodsDetaiBean url = " + url);
 			final ProgressDialog progDialog = ProgressDialog.show(context);
 			progDialog.setCancelable(true);
@@ -356,7 +355,8 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 							new TypeToken<BaseEntity<GoodsBean>>() {}.getType());
 					ULog.d(bean.toString());
 					if (null != bean && bean.getCode() == 0) {
-						ShoppingSelectSKUDialog.show1(context, bean.getInfo().getSkuList(), onSkuResultListener);
+						ShoppingSelectSKUDialog.show1(context, bean.getInfo().getSkuList(), bean.getInfo().getId(),
+								onSkuResultListener);
 					}
 					else {
 						Toast.makeText(context, bean.getMsg(), Toast.LENGTH_LONG).show();
@@ -378,7 +378,8 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.fragment_shoppingcart_all_adp_item_iv:
-				context.startActivity(new Intent(context, GoodsDetailActivity.class).putExtra("id", list.get(position).getId()));
+				context.startActivity(new Intent(context, GoodsDetailActivity.class).putExtra("id", list.get(position)
+						.getId()));
 				break;
 			case R.id.fragment_shoppingcart_all_adp_item_show_edit:
 				layoutEdit.setVisibility(View.VISIBLE);
@@ -410,7 +411,8 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 				notifyDataSetChanged();
 				break;
 			case R.id.fragment_shoppingcart_all_adp_item_edit_suv_rl:
-				ShoppingSelectSKUDialog.show1(context, getTestSKUBean(list.get(position).getId()), onSkuResultListener);
+				ShoppingSelectSKUDialog.show1(context, getTestSKUBean(list.get(position).getId()), list.get(position)
+						.getId(), onSkuResultListener);
 				break;
 
 			case R.id.fragment_shoppingcart_all_adp_item_radiobtn:
@@ -510,5 +512,5 @@ public class ShoppingCartAllAdapter extends BaseAdapter {
 		});
 
 	}
-	
+
 }
