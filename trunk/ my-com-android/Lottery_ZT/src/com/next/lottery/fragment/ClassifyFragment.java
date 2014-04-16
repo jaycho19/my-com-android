@@ -181,6 +181,7 @@ public class ClassifyFragment extends BaseFragment {
 				if (position == leftAdapter.getSelectPosition()) {
 					lin_content_right.setVisibility(View.GONE);
 					leftAdapter.setIsRightShowAndPosition(false, position);
+					leftAdapter.setSelectPosition(-1);
 				}
 				else {
 					lin_content_right.setVisibility(View.VISIBLE);

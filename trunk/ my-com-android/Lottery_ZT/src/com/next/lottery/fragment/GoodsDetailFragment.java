@@ -111,7 +111,7 @@ public class GoodsDetailFragment extends BaseFragment {
 						initData();
 					}
 					else {
-						Toast.makeText(getActivity(), bean.getMsg(), Toast.LENGTH_LONG).show();
+//						Toast.makeText(getActivity(), bean.getMsg(), Toast.LENGTH_LONG).show();
 					}
 				} catch (JsonSyntaxException e) {
 					// TODO Auto-generated catch block
@@ -146,7 +146,7 @@ public class GoodsDetailFragment extends BaseFragment {
 			for (SkuList skuList : goodsBean.getSkuList()) {
 				for (SKUItem skuItem : skuList.getValues()) {
 					SkulistDbBean dbBean = new SkulistDbBean();
-					dbBean.setItemId(Integer.parseInt(goodsBean.getId()));
+					dbBean.setId(Integer.parseInt(goodsBean.getId()));
 					dbBean.setPid(skuList.getPid());
 					dbBean.setPname(skuList.getPname());
 					dbBean.setVid(skuItem.getId());

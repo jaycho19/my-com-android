@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseFragment;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
@@ -37,14 +38,14 @@ import com.next.lottery.view.TabPageIndicator;
  */
 public class ShoppingCartNewFragment extends BaseFragment {
 
-	private ArrayList<ShopCartsInfo> shopCartslist = new ArrayList<ShopCartsInfo>();
-	private ProgressDialog progDialog;
-	private ShoppingCartsFragmentAdapter fragmentAdapter;
+	private ArrayList<ShopCartsInfo>		shopCartslist	= new ArrayList<ShopCartsInfo>();
+	private ProgressDialog					progDialog;
+	private ShoppingCartsFragmentAdapter	fragmentAdapter;
 	@ViewInject(R.id.fragment_live_main_viewPager)
-	private ViewPager mViewPager;
+	private ViewPager						mViewPager;
 	@ViewInject(R.id.fragment_live_main_indicator)
-	private TabPageIndicator mIndicator;
-	private View view;
+	private TabPageIndicator				mIndicator;
+	private View							view;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -94,17 +95,24 @@ public class ShoppingCartNewFragment extends BaseFragment {
 
 			@Override
 			public void onSuccess(ResponseInfo<String> responseInfo) {
-				progDialog.dismiss();
-				ULog.i(responseInfo.result);
-				BaseEntity<ArrayList<ShopCartsInfo>> bean = new Gson().fromJson(responseInfo.result,
-						new TypeToken<BaseEntity<ArrayList<ShopCartsInfo>>>() {}.getType());
-				ULog.d(bean.toString());
-				if (null != bean && bean.getCode() == 0) {
-					shopCartslist = bean.getInfo();
-					setViewPager(shopCartslist);
-				}
-				else {
-					Toast.makeText(getActivity(), bean.getMsg(), Toast.LENGTH_LONG).show();
+				try {
+					progDialog.dismiss();
+					ULog.i(responseInfo.result);
+					BaseEntity<ArrayList<ShopCartsInfo>> bean = new Gson().fromJson(responseInfo.result,
+							new TypeToken<BaseEntity<ArrayList<ShopCartsInfo>>>() {}.getType());
+					if (null != bean && bean.getCode() == 0) {
+						ULog.d(bean.toString());
+						shopCartslist = bean.getInfo();
+						setViewPager(shopCartslist);
+					}
+					else {
+						Toast.makeText(getActivity(), bean.getMsg(), Toast.LENGTH_LONG).show();
+					}
+				} catch (JsonSyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 

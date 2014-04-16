@@ -1,6 +1,7 @@
 package com.next.lottery.dialog;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.app.Dialog;
@@ -48,7 +49,7 @@ public class ShoppingSelectSKUDialog extends Dialog {
 	private static ShoppingSelectSKUDialog	dialog;
 	private static DbUtils					db;
 	private static ProgressDialog			progDialog;
-	private static SKUBean2					skuBean	= new SKUBean2();
+	private static SKUBean2					skuBean;
 	private static TextView					tvSelectNum;
 	private static TextView					tvStockNum;
 	private static String					title;
@@ -60,12 +61,15 @@ public class ShoppingSelectSKUDialog extends Dialog {
 	/**
 	 * 
 	 * @param context
-	 * @param bean         颜色和大小 数据集合
-	 * @param id    物品对应Id
+	 * @param bean
+	 *            颜色和大小 数据集合
+	 * @param id
+	 *            物品对应Id
 	 * @param onSkuResultListener
 	 */
 
-	private static void show(Context context, ArrayList<SkuList> bean, String id, OnSkuResultListener onSkuResultListener) {
+	private static void show(Context context, ArrayList<SkuList> bean, String id,
+			OnSkuResultListener onSkuResultListener) {
 		if (null != dialog && dialog.isShowing() || bean.size() == 0)
 			return;
 		dialog = new ShoppingSelectSKUDialog(context, R.style.SelectSKUDialog);
@@ -73,10 +77,10 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		dialog.setContentView(R.layout.dialog_shopping_select_sku);
 		dialog.setCancelable(true);
 		dialog.getWindow().setLayout(DeviceInfo.SCREEN_WIDTH_PORTRAIT, -2);
-		List<SKUBean2> skubean = null;
+		List<SKUBean2> skubeanFromDb = null;
 		try {
 			db = DbUtils.create(context, context.getPackageName());
-			skubean = db.findAll(Selector.from(SKUBean2.class).where("itemId", "=", id));
+			skubeanFromDb = db.findAll(Selector.from(SKUBean2.class).where("itemId", "=", id));
 		} catch (DbException e) {
 			e.printStackTrace();
 		}
@@ -84,7 +88,8 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		dialog.show();
 	}
 
-	public static void show1(Context context, ArrayList<SkuList> bean, String id, OnSkuResultListener onSkuResultListener) {
+	public static void show1(Context context, ArrayList<SkuList> bean, String id,
+			OnSkuResultListener onSkuResultListener) {
 		show(context, bean, id, onSkuResultListener);
 
 	}
@@ -93,7 +98,8 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		title = titleString;
 	}
 
-	public static void show2(Context context, ArrayList<SkuList> bean,String id, OnSkuResultListener onSkuResultListener) {
+	public static void show2(Context context, ArrayList<SkuList> bean, String id,
+			OnSkuResultListener onSkuResultListener) {
 		if (null != dialog && dialog.isShowing())
 			return;
 		dialog = new ShoppingSelectSKUDialog(context, R.style.SelectSKUDialog);
@@ -101,14 +107,14 @@ public class ShoppingSelectSKUDialog extends Dialog {
 		dialog.setContentView(R.layout.dialog_shopping_select_sku_2);
 		dialog.setCancelable(true);
 		dialog.getWindow().setLayout(DeviceInfo.SCREEN_WIDTH_PORTRAIT, -2);
-		List<SKUBean2> skubean = null;
+		List<SKUBean2> skubeanFromDb = null;
 		try {
 			db = DbUtils.create(context, context.getPackageName());
-			skubean = db.findAll(Selector.from(SKUBean2.class).where("itemId", "=", Integer.parseInt(id)));
+			skubeanFromDb = db.findAll(Selector.from(SKUBean2.class).where("itemId", "=", Integer.parseInt(id)));
 		} catch (DbException e) {
 			e.printStackTrace();
 		}
-		init2(context, bean, onSkuResultListener, skubean);
+		init2(context, bean, onSkuResultListener, skubeanFromDb);
 		dialog.show();
 	}
 
@@ -141,7 +147,9 @@ public class ShoppingSelectSKUDialog extends Dialog {
 			@Override
 			public void onClick(View v) {
 
-				if (beanResult == null || skuBean == null) {
+				if (null == skuBean) {
+					ULog.e("缺少参数");
+					Toast.makeText(context, "缺少参数", 3000).show();
 					return;
 				}
 				for (int i = 0; i < beanResult.size(); i++) {
@@ -171,6 +179,11 @@ public class ShoppingSelectSKUDialog extends Dialog {
 	}
 
 	protected static void CalculateOrder(final Context context) {
+		if (null == skuBean) {
+			ULog.e("缺少参数");
+			Toast.makeText(context, "缺少参数", 3000).show();
+			return;
+		}
 		ArrayList<ShopCartsInfo> skubeanList = new ArrayList<ShopCartsInfo>();
 
 		ShopCartsInfo info = new ShopCartsInfo();
@@ -314,58 +327,72 @@ public class ShoppingSelectSKUDialog extends Dialog {
 
 	protected static List<Integer> judgeSizeExists(ArrayList<SkuList> bean, List<SKUBean2> skubeanFromDB, TextView tv) {
 		List<Integer> indexPosition = new ArrayList<Integer>();
-		for (int i = 0; i < (skubeanFromDB != null ? skubeanFromDB.size() : 0); i++) {
-			int end = skubeanFromDB.get(i).getSkuAttr().indexOf(";");
-			if ((skubeanFromDB.get(i).getSkuAttr().substring(0, end)).contains((CharSequence) tv.getTag())) {
-				ULog.i(skubeanFromDB.get(i).getSkuAttrname());
-				String attrname = skubeanFromDB.get(i).getSkuAttrname();
-				String attrnameSubString = attrname.substring(0, attrname.lastIndexOf(":") - 3);// 减去3
-				String id = attrnameSubString.substring(attrnameSubString.lastIndexOf(":") + 1);
-				String size = attrname.substring(attrname.lastIndexOf(":") + 1);
+		try {
+			for (int i = 0; i < (skubeanFromDB != null ? skubeanFromDB.size() : 0); i++) {
+				int end = skubeanFromDB.get(i).getSkuAttr().indexOf(";");
+				if ((skubeanFromDB.get(i).getSkuAttr().substring(0, end)).contains((CharSequence) tv.getTag())) {
+					ULog.i(skubeanFromDB.get(i).getSkuAttrname());
+					String attrname = skubeanFromDB.get(i).getSkuAttrname();
+					String attrnameSubString = attrname.substring(0, attrname.lastIndexOf(":") - 3);// 减去3
+					String id = attrnameSubString.substring(attrnameSubString.lastIndexOf(":") + 1);
+					String size = attrname.substring(attrname.lastIndexOf(":") + 1);
 
-				for (int j = 0; j < bean.get(0).getValues().size(); j++) {
-					SKUItem item = bean.get(0).getValues().get(j);
-					if (id.equalsIgnoreCase(item.getId())) {
-						indexPosition.add(j);
-						break;
+					for (int j = 0; j < bean.get(0).getValues().size(); j++) {
+						SKUItem item = bean.get(0).getValues().get(j);
+						if (id.equalsIgnoreCase(item.getId())) {
+							indexPosition.add(j);
+							break;
+						}
 					}
 				}
 			}
-		}
 
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return indexPosition;
 
 	}
 
 	/* "1627207:28326;20509:28314" */
 	protected static void getStackNum(ArrayList<SkuList> entityResult) {
-		String itemColor = null;
-		String itemSize = null;
-
-		if (entityResult.get(0) != null & entityResult.get(0).getValues() != null) {
-			itemSize = entityResult.get(0).getPid() + ":" + entityResult.get(0).getValues().get(0).getId();
-		}
-		if (entityResult.get(1) != null & entityResult.get(1).getValues() != null) {
-			itemColor = entityResult.get(1).getPid() + ":" + entityResult.get(1).getValues().get(0).getId();
-		}
-		ULog.i(itemColor + ";" + itemSize);
-
-		if (itemColor != null && itemSize != null) {
-			String SkuAttrString = itemColor + ";" + itemSize;
-			try {
-				skuBean = db.findFirst(Selector.from(SKUBean2.class).where("skuAttr", "=", SkuAttrString));
-
-				if (skuBean != null) {
-					tvStockNum.setText("库存：" + skuBean.getStockNum());
+		try {
+			StringBuffer stringbuffer = new StringBuffer();
+			for (SkuList bean : entityResult) {
+				if (bean != null && bean.getValues() != null) {
+					if (stringbuffer.length() > 0)
+						stringbuffer.insert(0, ";");
+					stringbuffer.insert(0,bean.getPid() + ":" + bean.getValues().get(0).getId());
 				}
-			} catch (DbException e) {
-				e.printStackTrace();
 			}
+			ULog.i(stringbuffer.toString());
+
+			if (stringbuffer.length()>0) {
+				try {
+					skuBean = db.findFirst(Selector.from(SKUBean2.class).where("skuAttr", "=", stringbuffer));
+
+					if (null!=skuBean) {
+						ULog.i("skuid"+skuBean.getId());
+						tvStockNum.setText("库存：" + skuBean.getStockNum());
+					}
+				} catch (DbException e) {
+					e.printStackTrace();
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
 
 	private static void chgNumber(Context context, TextView tvNumber, int i) {
+		if (null == skuBean) {
+			ULog.e("缺少参数");
+			Toast.makeText(context, "缺少参数", 3000).show();
+			return;
+		}
 		int number = Integer.valueOf(tvNumber.getText().toString()) + i;
 		if (number > skuBean.getStockNum()) {
 			Toast.makeText(context, "库存不足！", Toast.LENGTH_LONG).show();
@@ -422,6 +449,12 @@ public class ShoppingSelectSKUDialog extends Dialog {
 	}
 
 	public static void addShopCarts(final Context context) {
+		if (null == skuBean) {
+			ULog.e("缺少参数");
+			Toast.makeText(context, "缺少参数", 3000).show();
+			return;
+		}
+
 		String url = HttpActions.AddShopCarts(skuBean);
 		ULog.d("addShopCarts url = " + url);
 		progDialog = ProgressDialog.show(context);

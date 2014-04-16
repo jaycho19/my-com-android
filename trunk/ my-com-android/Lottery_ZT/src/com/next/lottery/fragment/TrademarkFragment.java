@@ -97,7 +97,7 @@ public class TrademarkFragment extends BaseFragment {
 		@Override
 		public void onClick(View v) {
 			System.gc();
-			int id = (int) (Math.random() * 28) + 10;
+			int id = (int) (Math.random() * 20) + 23;
 
 			getActivity().startActivity(
 					new Intent(getActivity(), GoodsDetailActivity.class).putExtra("id", String.valueOf(id)));
