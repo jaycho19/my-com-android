@@ -12,7 +12,7 @@ import com.next.lottery.fragment.UserSettingFragment;
 import com.next.lottery.view.SlidingMenu;
 
 /**
- * 详情页
+ * 系统设置
  * 
  * @author fgb,dongfang
  * 

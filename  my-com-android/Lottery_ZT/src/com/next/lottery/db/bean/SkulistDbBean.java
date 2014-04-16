@@ -34,10 +34,10 @@ public class SkulistDbBean  {
 	public void setVname(String vname) {
 		this.vname = vname;
 	}
-	public int getItemId() {
+	public int getId() {
 		return id;
 	}
-	public void setItemId(int itemId) {
-		this.id = itemId;
+	public void setId(int id) {
+		this.id = id;
 	}
 }

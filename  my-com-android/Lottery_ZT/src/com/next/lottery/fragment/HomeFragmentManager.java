@@ -58,7 +58,7 @@ public class HomeFragmentManager {
 			@Override
 			public void onClickType(Bundle bundle) {
 				// 暂时跳入测试 详情界面
-				int id = (int) (Math.random() * 28) + 10;
+				int id = (int) (Math.random() * 20) + 23;
 
 				context.startActivity(new Intent(context, GoodsDetailActivity.class).putExtra("id", String.valueOf(id)));
 			}
