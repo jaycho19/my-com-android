@@ -13,22 +13,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.dongfang.utils.ULog;
+import com.lidroid.xutils.BitmapUtils;
 import com.next.lottery.GoodsDetailActivity;
+import com.next.lottery.beans.HomeStaticBean.Data;
 import com.next.lottery.listener.OnClickTypeListener;
 
 public class ImageAdapter1 extends PagerAdapter {
 	public static final String		TAG	= ImageAdapter1.class.getSimpleName();
 	protected Context				context;
-	protected List<Integer>	list;
+	protected List<Data>	list;
 	private int						mCount;
 	private OnClickTypeListener		onClickTypeListener;
 	// private int mPosition;
 	//private ImageGallery			imageGallery;
 
-	public ImageAdapter1(Context context, List<Integer> list,OnClickTypeListener onClickTypeListener) {
+	public ImageAdapter1(Context context, List<Data> list2,OnClickTypeListener onClickTypeListener) {
 		this.context = context;
-		this.list = list;
-		mCount = list.size();
+		this.list = list2;
+		mCount = list2.size();
 		this.onClickTypeListener = onClickTypeListener;
 	}
 
@@ -104,7 +106,7 @@ public class ImageAdapter1 extends PagerAdapter {
 		// }
 
 		// mPosition = position;
-
+        final int index = position;
 		if (null == list.get(position)) {
 			list.remove(position);
 			position = 0;
@@ -115,15 +117,18 @@ public class ImageAdapter1 extends PagerAdapter {
 		ULog.d("instantiateItem --> position = " + position + "; mCount = " + mCount);
 		ImageView fling_image = new ImageView(context);
 		// fling_image.setImage("http://img3.douban.com/view/photo/photo/public/p1784571177.jpg");
-		fling_image.setImageResource(list.get(position));
+		BitmapUtils bitmapUtils = new BitmapUtils(context);
+		// 加载网络图片
+		bitmapUtils.display(fling_image, list.get(position).getCover());
+//		fling_image.setImageResource(list.get(position));
 		fling_image.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 		//fling_image.setBackgroundResource(R.drawable.bg_selector);
 		fling_image.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				int id = (int)(Math.random()*28)+10;
-				
-				context.startActivity(new Intent(context,GoodsDetailActivity.class).putExtra("id", String.valueOf(id)));
+				ULog.i("itemId-->"+list.get(index).getClickParam().getItemid());
+				context.startActivity(new Intent(context, GoodsDetailActivity.class).putExtra("id",
+						list.get(index).getClickParam().getItemid()));
 			}
 		});
 		fling_image.setId(position);

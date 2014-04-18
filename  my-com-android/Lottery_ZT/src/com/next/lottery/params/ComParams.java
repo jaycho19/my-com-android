@@ -13,17 +13,15 @@ public class ComParams {
 	public static final String HTTP_URL = HTTP_BASE + "/www/interface/index.php";
 
 	/** KV图 */
-	public static final int AREA_CODE_HOME_FRAGMENT_KV = 10;
+	public static final int AREA_CODE_HOME_FRAGMENT_KV = 1;
 	/** 推荐 */
-	public static final int AREA_CODE_HOME_FRAGMENT_RECOMMEND = 11;
-	/** 当季抢购 */
-	public static final int AREA_CODE_HOME_FRAGMENT_SEASON_HOT_SALE = 12;
+	public static final int AREA_CODE_HOME_FRAGMENT_RECOMMEND = 2;
 	/** 销售冠军 */
-	public static final int AREA_CODE_HOME_FRAGMENT_SAIL_CHAMPION = 13;
+	public static final int AREA_CODE_HOME_FRAGMENT_SAIL_CHAMPION = 3;
 	/** 新品 */
-	public static final int AREA_CODE_HOME_FRAGMENT_NEW_PRODUCT = 14;
+	public static final int AREA_CODE_HOME_FRAGMENT_NEW_PRODUCT = 4;
 	/** bottom KV 图 */
-	public static final int AREA_CODE_HOME_FRAGMENT_BOTTOM_KV = 15;
+	public static final int AREA_CODE_HOME_FRAGMENT_BOTTOM_KV = 5;
 
 	public static final String ACTION_UPDATE_MAINACTIVITY = "com.next.lottery.mainactivity.refresh.tab.item";
 

@@ -255,15 +255,15 @@ public class GoodsDetailFragment extends BaseFragment {
 
 				// KV图
 				HomeFragmentTopKVFragment fKV = new HomeFragmentTopKVFragment();
-				fKV.setData(KVlist, onClickTypeListener, new OnPageScrolledListener() {
-					@Override
-					public void OnPageScrolled() {
-						/*
-						 * if (pullToRefreshView != null) {
-						 * pullToRefreshView.needPull = false; }
-						 */
-					}
-				});
+//				fKV.setData(KVlist, onClickTypeListener, new OnPageScrolledListener() {
+//					@Override
+//					public void OnPageScrolled() {
+//						/*
+//						 * if (pullToRefreshView != null) {
+//						 * pullToRefreshView.needPull = false; }
+//						 */
+//					}
+//				});
 				fKV.setHeightWightRadio(300);
 				fragmentTransaction.add(R.id.activity_goods_detail_layout, fKV);
 				fragments.add(fKV);
@@ -309,8 +309,7 @@ public class GoodsDetailFragment extends BaseFragment {
 		skuBean.setSkuList(all);
 		return skuBean;
 	}
-
-	@OnClick({ R.id.app_top_title_iv_left, R.id.app_top_title_iv_rigth })
+	@OnClick({R.id.app_top_title_iv_left, R.id.app_top_title_iv_rigth })
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub

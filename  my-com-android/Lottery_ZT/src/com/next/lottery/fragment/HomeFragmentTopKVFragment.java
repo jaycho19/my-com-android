@@ -13,6 +13,7 @@ import com.dongfang.v4.app.BaseFragment;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.R;
+import com.next.lottery.beans.HomeStaticBean;
 import com.next.lottery.listener.OnClickTypeListener;
 import com.next.lottery.listener.OnPageScrolledListener;
 import com.next.lottery.utils.Util;
@@ -32,7 +33,7 @@ public class HomeFragmentTopKVFragment extends BaseFragment {
 	private OnPageScrolledListener onPageScrolledListener;
 	@ViewInject(R.id.fragment_home_kv_ig)
 	private ImageGallery imageGallery;
-	protected List<Integer> list;
+	protected HomeStaticBean bean;
 	private int heightWightRadio =0;
 
 	@Override
@@ -58,7 +59,7 @@ public class HomeFragmentTopKVFragment extends BaseFragment {
 					LinearLayout.LayoutParams.FILL_PARENT,
 					(int) (Util.getWindowWidth(getActivity()) * heightWightRadio / 480));
 			imageGallery.setLayoutParams(layoutParams);
-			imageGallery.setList(ImageGallery.IMAGE_VIEW_TYPE_1, list);
+			imageGallery.setList(ImageGallery.IMAGE_VIEW_TYPE_1, bean.getData());
 			imageGallery.setOnPageScrolledListener(onPageScrolledListener);
 			imageGallery.setOnClickTypeListener(onClickTypeListener);
 		} catch (Exception e) {
@@ -66,10 +67,10 @@ public class HomeFragmentTopKVFragment extends BaseFragment {
 		}
 	}
 
-	public void setData(List<Integer> list,
+	public void setData(HomeStaticBean homeBean,
 			OnClickTypeListener onClickTypeListener,
 			OnPageScrolledListener onPageScrolledListener) {
-		this.list = list;
+		this.bean = homeBean;
 		this.onClickTypeListener = onClickTypeListener;
 		this.onPageScrolledListener = onPageScrolledListener;
 	}
