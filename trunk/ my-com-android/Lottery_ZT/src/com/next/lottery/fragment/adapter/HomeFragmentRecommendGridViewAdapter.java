@@ -1,5 +1,6 @@
 package com.next.lottery.fragment.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -7,11 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dongfang.utils.ULog;
 import com.dongfang.views.MyImageView;
+import com.lidroid.xutils.BitmapUtils;
 import com.next.lottery.R;
+import com.next.lottery.beans.HomeStaticBean.Data;
 import com.next.lottery.utils.Util;
 
 public class HomeFragmentRecommendGridViewAdapter extends BaseAdapter {
@@ -20,7 +24,8 @@ public class HomeFragmentRecommendGridViewAdapter extends BaseAdapter {
 
 	private LayoutInflater		inflater;
 
-	private List<String>	list;
+	private List<Data>	list;
+	private BitmapUtils bitmapUtils ;
 
 
 	private static final String	TAG							= "HomeFragmentRecommendGridViewAdapter";
@@ -35,11 +40,12 @@ public class HomeFragmentRecommendGridViewAdapter extends BaseAdapter {
 	private static final int	COLUMN						= 3;
 	private static final int	GRIDVIEW_HORIZONAL_SPACE	= 6;							// dp
 
-	public HomeFragmentRecommendGridViewAdapter(Context context, List<String> list) {
+	public HomeFragmentRecommendGridViewAdapter(Context context, ArrayList<Data> mGridData) {
 		this.context = context;
 		this.inflater = LayoutInflater.from(context);
-		this.list = list;
-		ULog.i("list-->"+list.toString());
+		this.list = mGridData;
+		bitmapUtils = new BitmapUtils(context);
+		ULog.i("list-->"+mGridData.toString());
 	}
 
 	public int getCount() {
@@ -59,13 +65,13 @@ public class HomeFragmentRecommendGridViewAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup arg2) {
 		InfoHolder infoHolder = null;
-		String data = list.get(position);
+		Data data = list.get(position);
 		ULog.i("data-->"+data);
 		
 		if (convertView == null) {
 			convertView = inflater.from(context).inflate(R.layout.fragment_home_recommend_item, null);
 			infoHolder = new InfoHolder();
-			infoHolder.tag = (MyImageView) convertView.findViewById(R.id.icon_item);
+			infoHolder.tag = (ImageView) convertView.findViewById(R.id.icon_item);
 			infoHolder.title = (TextView) convertView.findViewById(R.id.tv_title);
 			infoHolder.describe = (TextView) convertView.findViewById(R.id.tv_describe);
 			convertView.setTag(infoHolder);
@@ -73,13 +79,14 @@ public class HomeFragmentRecommendGridViewAdapter extends BaseAdapter {
 		else {
 			infoHolder = (InfoHolder) convertView.getTag();
 		}
-		infoHolder.title.setText(data);
-//		measureItemImage(infoHolder.tag);
+		infoHolder.title.setText(data.getName());
+		measureItemImage(infoHolder.tag);
+		bitmapUtils.display(infoHolder.tag, data.getCover());
 		return convertView;
 	}
 
 	class InfoHolder {
-		MyImageView	tag;
+		ImageView	tag;
 		TextView	title;
 		TextView	describe;
 	}

@@ -337,7 +337,7 @@ public class HttpActions {
 	}
 
 	/**
-	 * 淘宝搜索商品接口 {"merId":"1","categoryId":"2","fl":"title,id","sort":"price"}
+	 * 搜索商品接口 {"merId":"1","categoryId":"2","fl":"title,id","sort":"price"}
 	 * 
 	 * @return
 	 */
@@ -351,6 +351,23 @@ public class HttpActions {
 		json.addProperty("categoryId", entity.getId());
 		json.addProperty("fl", "title,id");
 		json.addProperty("sort", "price");
+		ULog.i(json.toString());
+		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
+		return sb.toString();
+	}
+	/**
+	 * 获取首页静态数据接口
+	 * {"merId":"1","path":"index.json"}
+	 * @return
+	 */
+	public static String GetHomeStaticData(Context context) {
+		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
+		sb.append("?").append("class=").append("index");
+		sb.append("&").append("method=").append("get");
+		
+		JsonObject json = new JsonObject();
+		json.addProperty("merId", "1");
+		json.addProperty("path", "index.json");
 		ULog.i(json.toString());
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		return sb.toString();

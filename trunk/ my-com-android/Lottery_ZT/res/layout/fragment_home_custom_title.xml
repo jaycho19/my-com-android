@@ -33,7 +33,6 @@
         android:ellipsize="end"
         android:paddingRight="5dip"
         android:singleLine="true"
-        android:text="时尚"
         android:textColor="@color/grey"
         android:textSize="12sp" />
 
@@ -44,7 +43,6 @@
         android:ellipsize="end"
         android:paddingLeft="5dip"
         android:singleLine="true"
-        android:text="潮流"
         android:textColor="@color/grey"
         android:textSize="12sp" />
 

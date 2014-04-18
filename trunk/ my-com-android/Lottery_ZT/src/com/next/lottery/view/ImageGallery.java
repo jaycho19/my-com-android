@@ -1,5 +1,6 @@
 package com.next.lottery.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.widget.RelativeLayout;
 
 import com.dongfang.utils.ULog;
 import com.next.lottery.R;
+import com.next.lottery.beans.HomeStaticBean.Data;
 import com.next.lottery.listener.OnClickTypeListener;
 import com.next.lottery.listener.OnPageScrolledListener;
 import com.next.lottery.view.adapter.ImageAdapter1;
@@ -38,7 +40,7 @@ public class ImageGallery extends LinearLayout {
 	private LinearLayout			ll_fling_desc_image;
 
 	private Context					context;
-	private List<Integer>		list;
+	private List<Data>		list;
 	private OnPageScrolledListener	listener;
 	private OnClickTypeListener		onClickTypeListener;
 	/** 需要显示的图片的类型 */
@@ -51,7 +53,7 @@ public class ImageGallery extends LinearLayout {
 		init();
 	}
 
-	public ImageGallery(Context context, List<Integer> list, int imageViewType) {
+	public ImageGallery(Context context, List<Data> list, int imageViewType) {
 		super(context);
 		this.imageViewType = imageViewType;
 		this.context = context;
@@ -85,9 +87,9 @@ public class ImageGallery extends LinearLayout {
 		// viewPager.setCurrentItem(1);
 	}
 
-	public void setList(int imageViewType, List<Integer> list) {
+	public void setList(int imageViewType, ArrayList<Data> arrayList) {
 		this.imageViewType = imageViewType;
-		this.list = list;
+		this.list = arrayList;
 		setList();
 	}
 
