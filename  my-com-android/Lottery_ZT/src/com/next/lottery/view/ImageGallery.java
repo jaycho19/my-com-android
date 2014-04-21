@@ -14,11 +14,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.dongfang.utils.ULog;
+import com.next.lottery.GoodsDetailActivity;
 import com.next.lottery.R;
+import com.next.lottery.beans.GoodsBean.KVImageBean;
 import com.next.lottery.beans.HomeStaticBean.Data;
 import com.next.lottery.listener.OnClickTypeListener;
 import com.next.lottery.listener.OnPageScrolledListener;
 import com.next.lottery.view.adapter.ImageAdapter1;
+import com.next.lottery.view.adapter.ImageAdapter2;
 
 /**
  * 图片滑动
@@ -40,7 +43,8 @@ public class ImageGallery extends LinearLayout {
 	private LinearLayout			ll_fling_desc_image;
 
 	private Context					context;
-	private List<Data>		list;
+	private List<Data>				listFromHome;
+	private ArrayList<KVImageBean>	listFromDetail;
 	private OnPageScrolledListener	listener;
 	private OnClickTypeListener		onClickTypeListener;
 	/** 需要显示的图片的类型 */
@@ -49,7 +53,7 @@ public class ImageGallery extends LinearLayout {
 	public ImageGallery(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.context = context;
-		this.list = null;
+		this.listFromHome = null;
 		init();
 	}
 
@@ -57,7 +61,7 @@ public class ImageGallery extends LinearLayout {
 		super(context);
 		this.imageViewType = imageViewType;
 		this.context = context;
-		this.list = list;
+		this.listFromHome = list;
 
 		init();
 		setList();
@@ -89,12 +93,19 @@ public class ImageGallery extends LinearLayout {
 
 	public void setList(int imageViewType, ArrayList<Data> arrayList) {
 		this.imageViewType = imageViewType;
-		this.list = arrayList;
+		this.listFromHome = arrayList;
+		setList();
+	}
+
+	public void setGoodsDetailList(int imageViewType, ArrayList<KVImageBean> arrayList) {
+		this.imageViewType = imageViewType;
+		this.listFromDetail = arrayList;
 		setList();
 	}
 
 	public void setList() {
-		if (null == list || null == list.get(0))
+		if ((null == listFromDetail || null == listFromDetail.get(0))
+				&& (null == listFromHome || null == listFromHome.get(0)))
 			return;
 
 		int num = -1;
@@ -104,14 +115,16 @@ public class ImageGallery extends LinearLayout {
 			num = 2;
 		else if (IMAGE_VIEW_TYPE_3 == imageViewType)
 			num = 3;
-
-		final int size = list.size() / num;
+		 int size=0;
+		if (context instanceof GoodsDetailActivity)
+			size = listFromDetail.size() / num;
+		else
+		    size = listFromHome.size() / num;
 
 		if (0 < size) {
 			ll_fling_desc_image.removeAllViews();
 			if (1 == size) {
 				ll_fling_desc_image.setVisibility(View.GONE);
-				// tv_fling_desc.setText(list.get(0).getTitle());
 			}
 			else if (1 < size) {
 				ll_fling_desc_image.setVisibility(View.VISIBLE);
@@ -123,8 +136,6 @@ public class ImageGallery extends LinearLayout {
 					ll_fling_desc_image.addView(image, params);
 					if (i == 0) {
 						image.setBackgroundResource(R.drawable.icon_yuan_selected);
-						/* 用于显示文字 */
-						// tv_fling_desc.setText(list.get(0).getTitle());
 					}
 					else {
 						image.setBackgroundResource(R.drawable.icon_yuan);
@@ -133,37 +144,19 @@ public class ImageGallery extends LinearLayout {
 			}
 
 			if (IMAGE_VIEW_TYPE_1 == imageViewType) {
-				// list.add(list.get(list.size() -1));
-				// list.add(0, list.get(0));
-				/*if (context instanceof RecommendedActivity || context instanceof ComplexActivity) {
-					viewPager.setAdapter(new ImageAdapter1(context, list, this));
-				}
-				else {*/
-					viewPager.setAdapter(new ImageAdapter1(context, list,onClickTypeListener));
-			//	}
-				viewPager.setCurrentItem(list.size() * 100);
+				if (context instanceof GoodsDetailActivity)
+					viewPager.setAdapter(new ImageAdapter2(context, listFromDetail, onClickTypeListener));
+				else
+					viewPager.setAdapter(new ImageAdapter1(context, listFromHome, onClickTypeListener));
+				viewPager.setCurrentItem(listFromHome.size() * 100);
 			}
-			// else if (IMAGE_VIEW_TYPE_2 == imageViewType) {
-			// viewPager.setAdapter(new ImageAdapter2(context, list));
-			// }
-			// else if (IMAGE_VIEW_TYPE_3 == imageViewType) {
-			// viewPager.setAdapter(new ImageAdapter3(context, list));
-			// }
 
 			viewPager.setOnPageChangeListener(new OnPageChangeListener() {
 
 				@Override
 				public void onPageSelected(int arg0) {
 					ULog.d("onPageSelected arg0 = " + arg0);
-					changeDesc(arg0 % list.size());
-					// if (arg0 == 0) {
-					// viewPager.setCurrentItem(list.size() - 1, false);
-					// }
-					// else
-
-					// if (arg0 == list.size() - 1) {
-					// viewPager.setCurrentItem(0, false);
-					// }
+					changeDesc(arg0 % listFromHome.size());
 				}
 
 				@Override
@@ -191,4 +184,5 @@ public class ImageGallery extends LinearLayout {
 	public int getCurrentIndex() {
 		return viewPager.getCurrentItem();
 	}
+
 }

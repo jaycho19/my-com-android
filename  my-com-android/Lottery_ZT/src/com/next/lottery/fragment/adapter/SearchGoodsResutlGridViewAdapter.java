@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dongfang.views.MyImageView;
+import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.GoodsDetailActivity;
@@ -34,6 +35,7 @@ public class SearchGoodsResutlGridViewAdapter extends ArrayAdapter<ArrayList<Cat
 	private Context					context;
 	private ArrayList<SearchItem>	searchItemList;
 	private LayoutInflater			inflater;
+	
 
 	public SearchGoodsResutlGridViewAdapter(Context context, int LayoutResourceId, ArrayList<SearchItem> lefttitles) {
 		super(context, LayoutResourceId);
@@ -66,8 +68,7 @@ public class SearchGoodsResutlGridViewAdapter extends ArrayAdapter<ArrayList<Cat
 			convertView.setTag(holder);
 		}
 		holder.tvTitle.setText(searchItemList.get(position).getTitle());
-		holder.imgCover.setBackgroundDrawable(context.getResources().getDrawable(
-				R.drawable.icon_home_fragment_sale_champion_test));
+		holder.imgCover.setImage(searchItemList.get(position).getPicUrl());
 		convertView.setOnClickListener(new OnClickListener() {
 			
 			@Override

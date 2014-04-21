@@ -20,6 +20,7 @@ public class CategoryEntity implements Parcelable{
 	private String createTime;
 	private String lastUpdater;
 	private String lastUpdateTime;
+	private String keyword;
 
 	public String getId() {
 		return id;
@@ -148,6 +149,14 @@ public class CategoryEntity implements Parcelable{
 	public void setLastUpdateTime(String lastUpdateTime) {
 		this.lastUpdateTime = lastUpdateTime;
 	}
+	
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 
 	@Override
 	public String toString() {
@@ -168,6 +177,7 @@ public class CategoryEntity implements Parcelable{
 		sb.append("createTime     = ").append(createTime).append("\n");
 		sb.append("lastUpdater    = ").append(lastUpdater).append("\n");
 		sb.append("lastUpdateTime = ").append(lastUpdateTime).append("\n");
+		sb.append("keyword = ").append(keyword).append("\n");
 		return sb.toString();
 	}
 
@@ -195,6 +205,7 @@ public class CategoryEntity implements Parcelable{
 		dest.writeString(createTime);
 		dest.writeString(lastUpdater);
 		dest.writeString(lastUpdateTime);
+		dest.writeString(keyword);
 	}
 	
 	public static final Parcelable.Creator<CategoryEntity> CREATOR = new Parcelable.Creator<CategoryEntity>() {
@@ -219,6 +230,7 @@ public class CategoryEntity implements Parcelable{
 			data.setCreateTime(in.readString());
 			data.setLastUpdater(in.readString());
 			data.setLastUpdateTime(in.readString());
+			data.setKeyword(in.readString());
 			return data;
 		}
 

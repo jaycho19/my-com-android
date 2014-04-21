@@ -45,7 +45,7 @@ public class GoodsBean {
 	private long					createTime;			// 1396319029000,
 	private long					lastUpdateTime;		// 1396405437000,
 
-//	private ArrayList<KVImageBean>	image;
+	private ArrayList<KVImageBean>	image;
 	private ArrayList<SKUBean2>	sku;
 	private long _version_;
 	private ArrayList<SkuList>	skuList;
@@ -353,12 +353,12 @@ public class GoodsBean {
 	public void setLastUpdateTime(long lastUpdateTime) {
 		this.lastUpdateTime = lastUpdateTime;
 	}
-//	public ArrayList<KVImageBean> getImage() {
-//		return image;
-//	}
-//	public void setImage(ArrayList<KVImageBean> image) {
-//		this.image = image;
-//	}
+	public ArrayList<KVImageBean> getImage() {
+		return image;
+	}
+	public void setImage(ArrayList<KVImageBean> image) {
+		this.image = image;
+	}
 	public ArrayList<SKUBean2> getSku() {
 		return sku;
 	}
@@ -383,17 +383,54 @@ public class GoodsBean {
 	 * "position":0,"properties":"","type":0}" ],
 	 */
 	public class KVImageBean {
-		private int		id;
-		private int		isMain;
-		private int		position;
-		private int		type;
+		
+		private int h;
+		private int w;
+		private String		id;
+		private String imageId;
+		private int isMain;
+		private String name;
 		private String	path;
+		private int		position;
 		private String	properties;
-		public int getId() {
+		private int		type;
+		private int		size;
+		
+		public int getH() {
+			return h;
+		}
+		public void setH(int h) {
+			this.h = h;
+		}
+		public int getW() {
+			return w;
+		}
+		public void setW(int w) {
+			this.w = w;
+		}
+		public String getId() {
 			return id;
 		}
-		public void setId(int id) {
+		public void setId(String id) {
 			this.id = id;
+		}
+		public String getImageId() {
+			return imageId;
+		}
+		public void setImageId(String imageId) {
+			this.imageId = imageId;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public int getSize() {
+			return size;
+		}
+		public void setSize(int size) {
+			this.size = size;
 		}
 		public int getIsMain() {
 			return isMain;

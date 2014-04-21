@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.dongfang.utils.ULog;
 import com.google.gson.JsonObject;
@@ -154,7 +155,6 @@ public class HttpActions {
 	 * "deliveryModeId":2,"isLgtype":2,"items":[{"itemId"
 	 * :9,"skuId":16,"count":2}], "coupons":["1"],"activitys":[1,2]}
 	 * 
-
 	 */
 	public static String CalcuLateOrderList(Context context, ArrayList<ShopCartsInfo> skubeanList) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
@@ -173,13 +173,13 @@ public class HttpActions {
 			JSONArray jsonArray = new JSONArray();
 			for (int i = 0; i < skubeanList.size(); i++) {
 				JSONObject jsonItem = new JSONObject();
-				 jsonItem.put("itemId", skubeanList.get(i).getItemId());
-				 jsonItem.put("skuId", skubeanList.get(i).getSkuId());
-//				jsonItem.put("itemId", 1);
-//				jsonItem.put("skuId", 3);
-				 int count = skubeanList.get(i).getCount();
-				 int stackNum = skubeanList.get(i).getStockNum();
-				jsonItem.put("count", count>stackNum? stackNum:count);
+				jsonItem.put("itemId", skubeanList.get(i).getItemId());
+				jsonItem.put("skuId", skubeanList.get(i).getSkuId());
+				// jsonItem.put("itemId", 1);
+				// jsonItem.put("skuId", 3);
+				int count = skubeanList.get(i).getCount();
+				int stackNum = skubeanList.get(i).getStockNum();
+				jsonItem.put("count", count > stackNum ? stackNum : count);
 				jsonArray.put(jsonItem);
 			}
 			json.put("items", jsonArray);
@@ -287,7 +287,7 @@ public class HttpActions {
 	/**
 	 * 获取商品详情接口 {"merId":"1","Id":"9","fl":"title,id,sku"}
 	 */
-	public static String GetGoodsDetaiBean(Context context,String id, String fl) {
+	public static String GetGoodsDetaiBean(Context context, String id, String fl) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
 		sb.append("?").append("class=").append("item");
 		sb.append("&").append("method=").append("get");
@@ -348,23 +348,27 @@ public class HttpActions {
 
 		JsonObject json = new JsonObject();
 		json.addProperty("merId", "1");
-		json.addProperty("categoryId", entity.getId());
-		json.addProperty("fl", "title,id");
+		if (TextUtils.isEmpty(entity.getKeyword()))
+			json.addProperty("categoryId", entity.getId());
+		else
+			json.addProperty("keyword", entity.getKeyword());
+		json.addProperty("fl", "title,id,picUrl");
 		json.addProperty("sort", "price");
 		ULog.i(json.toString());
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		return sb.toString();
 	}
+
 	/**
-	 * 获取首页静态数据接口
-	 * {"merId":"1","path":"index.json"}
+	 * 获取首页静态数据接口 {"merId":"1","path":"index.json"}
+	 * 
 	 * @return
 	 */
 	public static String GetHomeStaticData(Context context) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
 		sb.append("?").append("class=").append("index");
 		sb.append("&").append("method=").append("get");
-		
+
 		JsonObject json = new JsonObject();
 		json.addProperty("merId", "1");
 		json.addProperty("path", "index.json");

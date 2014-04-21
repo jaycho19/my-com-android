@@ -58,6 +58,7 @@ public class SearchGoosBean {
 	public class SearchItem{
 		private String id ;
 		private String title;
+		private String picUrl;
 		public String getId() {
 			return id;
 		}
@@ -69,6 +70,12 @@ public class SearchGoosBean {
 		}
 		public void setTitle(String title) {
 			this.title = title;
+		}
+		public String getPicUrl() {
+			return picUrl;
+		}
+		public void setPicUrl(String picUrl) {
+			this.picUrl = picUrl;
 		}
 		
 	}
