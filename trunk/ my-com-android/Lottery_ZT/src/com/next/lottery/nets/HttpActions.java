@@ -92,6 +92,26 @@ public class HttpActions {
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		return sb.toString();
 	}
+	
+	/**
+	 * 获取收藏接口
+	 * {"merId":"1","userId":"3","userToken":"123456","page":"1","size":"1"}
+	 */
+	public static String GetMyCollections(Context context, int page) {
+		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
+		sb.append("?").append("class=").append("favorite");
+		sb.append("&").append("method=").append("get");
+		
+		JsonObject json = new JsonObject();
+		json.addProperty("userId", "3");
+		json.addProperty("merId", "1");
+		json.addProperty("userToken", User.getToken(context));
+		json.addProperty("page", String.valueOf(page));
+		json.addProperty("size", 6);
+		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
+		ULog.i(json.toString());
+		return sb.toString();
+	}
 
 	/**
 	 * 加入购物车接口 {"userToken":"123456","merId":"100000","itemId":"100000",

@@ -14,6 +14,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.LRLoginActivity;
+import com.next.lottery.MyCollectionsActivity;
 import com.next.lottery.MyOrderListActivity;
 import com.next.lottery.R;
 import com.next.lottery.UserCouponActivity;
@@ -46,6 +47,8 @@ public class UserCenterFragment extends BaseFragment {
 	private TextView tvMyCoupon; // 我的优惠券
 	@ViewInject(R.id.fragment_usercenter_tv_myorder)
 	private TextView tvMyOrder; // 我的订单
+	@ViewInject(R.id.fragment_usercenter_tv_myfavorites)
+	private TextView tvMyCollections; // 我的收藏
 	@ViewInject(R.id.fragment_usercenter_tv_logout)
 	private TextView tvLogout; // 注销用户
 	@ViewInject(R.id.fragment_usercenter_tv_mypassowrd)
@@ -71,6 +74,7 @@ public class UserCenterFragment extends BaseFragment {
 			,R.id.fragment_usercenter_tv_myorder
 			,R.id.fragment_usercenter_tv_logout
 			,R.id.fragment_usercenter_tv_mypassowrd
+			,R.id.fragment_usercenter_tv_myfavorites
 			
 
 	})
@@ -93,6 +97,9 @@ public class UserCenterFragment extends BaseFragment {
 			break;
 		case R.id.fragment_usercenter_tv_myorder:
 			startActivity(new Intent(getActivity(), MyOrderListActivity.class));
+			break;
+		case R.id.fragment_usercenter_tv_myfavorites:
+			startActivity(new Intent(getActivity(), MyCollectionsActivity.class));
 			break;
 		case R.id.fragment_usercenter_tv_mypassowrd:
 			startActivity(new Intent(getActivity(), UserPassWordModifyActivity.class));
