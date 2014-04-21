@@ -33,6 +33,7 @@ import com.next.lottery.SearchAcitivity;
 import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.GoodsBean;
 import com.next.lottery.beans.HomeStaticBean;
+import com.next.lottery.beans.HomeStaticBean.Data;
 import com.next.lottery.beans.UserBean;
 import com.next.lottery.dialog.ProgressDialog;
 import com.next.lottery.nets.HttpActions;
@@ -70,9 +71,9 @@ public class HomeFragment extends BaseFragment {
 		View view = inflater.inflate(R.layout.fragment_home, container, false);
 		ViewUtils.inject(this, view);
 		initView();
-
 		return view;
 	}
+
 
 	private void initView() {
 		progDialog = ProgressDialog.show(getActivity());
@@ -171,7 +172,6 @@ public class HomeFragment extends BaseFragment {
 					// new TypeToken<BaseEntity<GoodsBean>>() {}.getType());
 					homeBean = new Gson().fromJson(responseInfo.result,
 							new TypeToken<ArrayList<HomeStaticBean>>() {}.getType());
-
 					if (null != homeBean) {
 						mHandler.sendEmptyMessage(REFRESH_SUCCESS);
 						ULog.d(homeBean.toString());

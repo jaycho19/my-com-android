@@ -95,7 +95,7 @@ public class HomeFragmentSaleChampionFragment extends BaseFragment {
 				if (i >= (currentRowIndex + 1) * 2) {
 					currentRowIndex++;
 				}
-				final int index =i;
+				final int index = i;
 				int rowPosition = i - currentRowIndex * 2;
 				TableRow tr = (TableRow) tableLayout.getChildAt(currentRowIndex);
 				View itemView = tr.getChildAt(rowPosition);
@@ -104,10 +104,11 @@ public class HomeFragmentSaleChampionFragment extends BaseFragment {
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-						ULog.i("itemId-->"+list.get(index).getClickParam().getItemid());
-						ULog.i("itemId-->"+index);
-						getActivity().startActivity(new Intent(getActivity(), GoodsDetailActivity.class).putExtra("id",
-								list.get(index).getClickParam().getItemid()));
+						ULog.i("itemId-->" + list.get(index).getClickParam().getItemid());
+						ULog.i("itemId-->" + index);
+						getActivity().startActivity(
+								new Intent(getActivity(), GoodsDetailActivity.class).putExtra("id", list.get(index)
+										.getClickParam().getItemid()));
 					}
 				});
 				if (i < list.size()) {
@@ -132,27 +133,36 @@ public class HomeFragmentSaleChampionFragment extends BaseFragment {
 		this.list = homeBean.getData();
 		this.onClickTypeListener = onClickTypeListener;
 	}
-	@OnClick({R.id.fragment_home_custom_title_tag1, R.id.fragment_home_custom_title_tag2,R.id.fragment_home_custom_title_more})
+
+	@OnClick({ R.id.fragment_home_custom_title_tag1, R.id.fragment_home_custom_title_tag2,
+			R.id.fragment_home_custom_title_more })
 	@Override
 	public void onClick(View v) {
+		Intent intent = new Intent(getActivity(), SearchNewAcitivity.class);
+		CategoryEntity entity = new CategoryEntity();
 		switch (v.getId()) {
 		case R.id.fragment_home_custom_title_tag1:
-			
+			if (null != category.getTags() && null != category.getTags().get(0)
+					&& null != category.getTags().get(0).getClickParam().getKeyword()) {
+				entity.setKeyword(category.getTags().get(0).getClickParam().getKeyword());
+			}
 			break;
 		case R.id.fragment_home_custom_title_tag2:
-			
+			if (null != category.getTags() && null != category.getTags().get(1)
+					&& null != category.getTags().get(1).getClickParam().getKeyword()) {
+				entity.setKeyword(category.getTags().get(1).getClickParam().getKeyword());
+			}
+
 			break;
 		case R.id.fragment_home_custom_title_more:
-			Intent intent = new Intent(getActivity(),SearchNewAcitivity.class);
-			CategoryEntity entity = new CategoryEntity();
 			entity.setId(category.getMore().getClickParam().getCategoryId());
-			intent.putExtra("values", entity);
-			getActivity().startActivity(intent);
 			break;
 
 		default:
 			break;
 		}
+		intent.putExtra("values", entity);
+		getActivity().startActivity(intent);
 
 	}
 }

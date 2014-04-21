@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import com.dongfang.utils.ULog;
 import com.next.lottery.GoodsDetailActivity;
 import com.next.lottery.R;
 import com.next.lottery.beans.HomeStaticBean;
@@ -59,9 +60,10 @@ public class HomeFragmentManager {
 			@Override
 			public void onClickType(Bundle bundle) {
 				// 暂时跳入测试 详情界面
-				int id = (int) (Math.random() * 20) + 23;
-
-				context.startActivity(new Intent(context, GoodsDetailActivity.class).putExtra("id", String.valueOf(id)));
+				// int id = (int) (Math.random() * 20) + 23;
+				ULog.i(bundle.getString("id"));
+				context.startActivity(new Intent(context, GoodsDetailActivity.class).putExtra("id",
+						bundle.getString("id")));
 			}
 		};
 		// 测试数据，一次性添加所有fragment
@@ -120,7 +122,7 @@ public class HomeFragmentManager {
 				break;
 			case ComParams.AREA_CODE_HOME_FRAGMENT_SAIL_CHAMPION:
 				HomeFragmentSaleChampionFragment fSaleChampion = new HomeFragmentSaleChampionFragment();
-				 fSaleChampion.setData(homeBean, onClickTypeListener);
+				fSaleChampion.setData(homeBean, onClickTypeListener);
 				fragmentTransaction.add(fragmentRes, fSaleChampion);
 				fragments.add(fSaleChampion);
 				break;

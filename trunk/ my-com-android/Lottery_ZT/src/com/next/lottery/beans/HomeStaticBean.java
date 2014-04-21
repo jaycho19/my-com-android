@@ -6,15 +6,16 @@ public class HomeStaticBean {
 	private int				areaCode;
 	private ArrayList<Data>	data		= new ArrayList<Data>();
 	private Category		category	= new Category();
-	public HomeStaticBean(){
+
+	public HomeStaticBean() {
 		super();
 	}
-	
-	public HomeStaticBean(int areaCode ,ArrayList<Data>	data,Category category){
+
+	public HomeStaticBean(int areaCode, ArrayList<Data> data, Category category) {
 		this.areaCode = areaCode;
 		this.data = data;
 		this.category = category;
-		
+
 	}
 
 	public int getCode() {
@@ -47,18 +48,19 @@ public class HomeStaticBean {
 		private int			clickType;
 		private ClickParam	clickParam;
 		private String		name;
-		
-		public Data(){
+
+		public Data() {
 			super();
 		}
-		
-		public Data(String	title,String cover,int clickType,ClickParam clickParam ,String name){
+
+		public Data(String title, String cover, int clickType, ClickParam clickParam, String name) {
 			this.title = title;
 			this.cover = cover;
-			this.clickType  = clickType;
+			this.clickType = clickType;
 			this.clickParam = clickParam;
 			this.name = name;
 		}
+
 		public String getTitle() {
 			return title;
 		}
@@ -99,21 +101,33 @@ public class HomeStaticBean {
 			this.name = name;
 		}
 
+		@Override
+		public String toString() {
+			StringBuilder sb = new StringBuilder();
+			sb.append("title:").append(title);
+			sb.append("cover:").append(cover);
+			sb.append("clickType:").append(clickType);
+			sb.append("clickParam:").append(clickParam);
+			sb.append("name:").append(name);
+			return sb.toString();
+		}
 	}
 
 	public class ClickParam {
 		private String	itemid;
 		private String	categoryId;
 		private String	keyword;
-		public ClickParam(){
+
+		public ClickParam() {
 			super();
 		}
 
-		public ClickParam(String itemid,String categoryid,String keyword){
+		public ClickParam(String itemid, String categoryid, String keyword) {
 			this.itemid = itemid;
 			this.categoryId = categoryid;
 			this.keyword = keyword;
 		}
+
 		public String getItemid() {
 			return itemid;
 		}
@@ -136,6 +150,15 @@ public class HomeStaticBean {
 
 		public void setKeyword(String keyword) {
 			this.keyword = keyword;
+		}
+
+		@Override
+		public String toString() {
+			StringBuilder sb = new StringBuilder();
+			sb.append("itemid:").append(itemid);
+			sb.append("categoryId-->").append(categoryId);
+			sb.append("keyword-->").append(keyword);
+			return sb.toString();
 		}
 	}
 

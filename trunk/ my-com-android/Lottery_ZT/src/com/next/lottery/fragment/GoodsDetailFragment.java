@@ -223,13 +223,6 @@ public class GoodsDetailFragment extends BaseFragment {
 
 	private void initData() {
 		try {
-			/* KV图测试数据 */
-			List<Integer> KVlist = new ArrayList<Integer>();
-			KVlist.add(R.drawable.icon_goods_detail_kv_test);
-			KVlist.add(R.drawable.icon_goods_detail_kv_test);
-			KVlist.add(R.drawable.icon_goods_detail_kv_test);
-			KVlist.add(R.drawable.icon_goods_detail_kv_test);
-
 			OnClickTypeListener onClickTypeListener = new OnClickTypeListener() {
 				@Override
 				public void onClickType(Bundle bundle) {
@@ -255,15 +248,15 @@ public class GoodsDetailFragment extends BaseFragment {
 
 				// KV图
 				HomeFragmentTopKVFragment fKV = new HomeFragmentTopKVFragment();
-//				fKV.setData(KVlist, onClickTypeListener, new OnPageScrolledListener() {
-//					@Override
-//					public void OnPageScrolled() {
-//						/*
-//						 * if (pullToRefreshView != null) {
-//						 * pullToRefreshView.needPull = false; }
-//						 */
-//					}
-//				});
+				fKV.setData(goodsBean.getImage(), onClickTypeListener, new OnPageScrolledListener() {
+					@Override
+					public void OnPageScrolled() {
+						/*
+						 * if (pullToRefreshView != null) {
+						 * pullToRefreshView.needPull = false; }
+						 */
+					}
+				});
 				fKV.setHeightWightRadio(300);
 				fragmentTransaction.add(R.id.activity_goods_detail_layout, fKV);
 				fragments.add(fKV);
