@@ -36,11 +36,11 @@ public final class ViewfinderView extends View {
 	/**
 	 * 四个绿色边角对应的宽度
 	 */
-	private static final int CORNER_WIDTH = 10;
+	private static final int CORNER_WIDTH = 4;
 	/**
 	 * 扫描框中的中间线的宽度
 	 */
-	private static final int MIDDLE_LINE_WIDTH = 6;
+	private static final int MIDDLE_LINE_WIDTH = 2;
 
 	/**
 	 * 扫描框中的中间线的与扫描框左右的间隙

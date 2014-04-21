@@ -3,7 +3,6 @@ package com.next.lottery;
 import java.io.IOException;
 import java.util.Vector;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
@@ -20,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import com.dongfang.v4.app.BaseActivity;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.zxing.camera.CameraManager;
@@ -32,7 +32,7 @@ import com.zxing.view.ViewfinderView;
  * 
  * @author Ryan.Tang
  */
-public class MCaptureActivity extends Activity implements Callback {
+public class MCaptureActivity extends BaseActivity implements Callback {
 
 	private CaptureActivityHandler handler;
 	private ViewfinderView viewfinderView;
@@ -50,15 +50,12 @@ public class MCaptureActivity extends Activity implements Callback {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mcapture);
-		// ViewUtil.addTopView(getApplicationContext(), this, R.string.scan_card);
 		CameraManager.init(getApplication());
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
-
 		findViewById(R.id.app_top_title_iv_left).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				MCaptureActivity.this.finish();
-
 			}
 		});
 		hasSurface = false;
@@ -107,8 +104,6 @@ public class MCaptureActivity extends Activity implements Callback {
 	}
 
 	/**
-	 * ����ɨ����
-	 * 
 	 * @param result
 	 * @param barcode
 	 */
@@ -218,5 +213,11 @@ public class MCaptureActivity extends Activity implements Callback {
 			mediaPlayer.seekTo(0);
 		}
 	};
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
