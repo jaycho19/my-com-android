@@ -46,7 +46,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LRLoginActivity"
+            android:name=".UserLRLoginActivity"
             android:alwaysRetainTaskState="true"
             android:configChanges="orientation|keyboardHidden|locale|fontScale|layoutDirection"
             android:launchMode="singleTask"

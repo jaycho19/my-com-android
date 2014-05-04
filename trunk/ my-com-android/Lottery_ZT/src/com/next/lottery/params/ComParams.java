@@ -1,6 +1,5 @@
 package com.next.lottery.params;
 
-
 /**
  * 公共数据
  * 
@@ -23,6 +22,13 @@ public class ComParams {
 	/** bottom KV 图 */
 	public static final int AREA_CODE_HOME_FRAGMENT_BOTTOM_KV = 5;
 
-	public static final String ACTION_UPDATE_MAINACTIVITY = "com.next.lottery.mainactivity.refresh.tab.item";
+	public static final String ACTION_UPDATE_MAINACTIVITY = ComParams.class.getName() + ".refresh.tabitem";
+
+	// 右侧菜单行为
+	public static final int MENU_TAB_HOME = 0; // 首页
+	public static final int MENU_TAB_CLASSIFY = 1; // 分类
+	public static final int MENU_TAB_TRADEMARK = 2; // 品牌
+	public static final int MENU_TAB_SHOPPINGCART = 3; // 购物车
+	public static final int MENU_TAB_USERCENTER = 4; // 个人中心
 
 }

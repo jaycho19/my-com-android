@@ -288,7 +288,6 @@ public class SlidingMenu extends RelativeLayout {
 						}
 					}
 				}
-
 				smoothScrollTo(dx);
 
 			}
@@ -323,15 +322,14 @@ public class SlidingMenu extends RelativeLayout {
 	/*
 	 * 显示左侧边的view
 	 */
-	public void showLeftView() {/*
-								 * int menuWidth = mLeftView.getWidth(); int oldScrollX = mShowingView.getScrollX(); if
-								 * (oldScrollX == 0) { mLeftView.setVisibility(View.VISIBLE); //
-								 * mRightView.setVisibility(View.INVISIBLE); smoothScrollTo(-menuWidth); tCanSlideLeft =
-								 * canSlideLeft; tCanSlideRight = canSlideRight; hasClickLeft = true;
-								 * setCanSliding(true, false); } else if (oldScrollX == -menuWidth) {
-								 * smoothScrollTo(menuWidth); if (hasClickLeft) { hasClickLeft = false;
-								 * setCanSliding(tCanSlideLeft, tCanSlideRight); } }
-								 */
+	public void showLeftView() {
+		/*
+		 * int menuWidth = mLeftView.getWidth(); int oldScrollX = mShowingView.getScrollX(); if (oldScrollX == 0) {
+		 * mLeftView.setVisibility(View.VISIBLE); // mRightView.setVisibility(View.INVISIBLE);
+		 * smoothScrollTo(-menuWidth); tCanSlideLeft = canSlideLeft; tCanSlideRight = canSlideRight; hasClickLeft =
+		 * true; setCanSliding(true, false); } else if (oldScrollX == -menuWidth) { smoothScrollTo(menuWidth); if
+		 * (hasClickLeft) { hasClickLeft = false; setCanSliding(tCanSlideLeft, tCanSlideRight); } }
+		 */
 	}
 
 	/* 显示右侧边的view */
@@ -354,6 +352,11 @@ public class SlidingMenu extends RelativeLayout {
 				setCanSliding(tCanSlideLeft, tCanSlideRight);
 			}
 		}
+	}
+
+	// 相等表示右侧菜单处于显示状态
+	public boolean isRightViewShow() {
+		return mRightView.getWidth() == mShowingView.getScrollX();
 	}
 
 }

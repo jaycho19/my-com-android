@@ -4,24 +4,18 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
-import com.next.lottery.fragment.UserLRRegisterFragment;
+import com.next.lottery.fragment.UserLRLoginFragment;
 
-/**
- * 用户注册界面
- * 
- * @author gfan
- * 
- */
+public class UserLRLoginActivity extends BaseSlidingMenuActivity {
 
-public class UserRegisterActivity extends BaseSlidingMenuActivity {
-	private UserLRRegisterFragment mainFragment;
+	private UserLRLoginFragment mainFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
-		mainFragment = new UserLRRegisterFragment();
+		mainFragment = new UserLRLoginFragment();
 		t.replace(R.id.center_frame, mainFragment);
 		t.commit();
 	}

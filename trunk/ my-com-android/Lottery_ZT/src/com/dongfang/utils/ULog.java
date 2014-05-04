@@ -16,7 +16,7 @@ import com.next.lottery.BuildConfig;
 public class ULog {
 
 	public static String customTagPrefix = "";
-
+ 
 	private ULog() {}
 
 	public static final Boolean ISDUG = BuildConfig.DEBUG;

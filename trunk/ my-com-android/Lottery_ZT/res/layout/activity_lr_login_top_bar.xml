@@ -10,6 +10,12 @@
         android:contentDescription="@string/app_name"
         android:src="@drawable/arrows_back" />
 
+    <ImageView
+        android:id="@+id/app_top_title_iv_rigth"
+        style="@style/app_top_title_iv_right"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/icon_menu_02" />
+
     <TextView
         android:id="@+id/app_top_title_tv_centre"
         style="@style/app_top_title_tv_center"

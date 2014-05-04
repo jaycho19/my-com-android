@@ -13,13 +13,13 @@ import com.dongfang.v4.app.BaseFragment;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
-import com.next.lottery.LRLoginActivity;
 import com.next.lottery.MyCollectionsActivity;
 import com.next.lottery.MyOrderListActivity;
 import com.next.lottery.R;
 import com.next.lottery.UserCouponActivity;
 import com.next.lottery.UserHelpCenterActivity;
 import com.next.lottery.UserInfoActivity;
+import com.next.lottery.UserLRLoginActivity;
 import com.next.lottery.UserPassWordModifyActivity;
 import com.next.lottery.UserSettingActivity;
 import com.next.lottery.utils.User;
@@ -57,7 +57,7 @@ public class UserCenterFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		if (!User.isLogined(getActivity())) {
-			startActivity(new Intent(getActivity(), LRLoginActivity.class));
+			startActivity(new Intent(getActivity(), UserLRLoginActivity.class));
 			return null;
 		}
 		View view = inflater.inflate(R.layout.fragment_usercenter, container, false);
@@ -107,7 +107,7 @@ public class UserCenterFragment extends BaseFragment {
 		case R.id.fragment_usercenter_tv_logout:
 			User.saveUserId(getActivity(), "");// 注销清除用户信息
 			User.saveUserPassword(getActivity(), "");
-			startActivity(new Intent(getActivity(), LRLoginActivity.class));
+			startActivity(new Intent(getActivity(), UserLRLoginActivity.class));
 			break;
 		default:
 			break;
