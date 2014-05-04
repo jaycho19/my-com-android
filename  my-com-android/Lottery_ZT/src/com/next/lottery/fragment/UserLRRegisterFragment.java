@@ -1,14 +1,15 @@
 package com.next.lottery.fragment;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,13 +33,17 @@ import com.next.lottery.nets.HttpActions;
 import com.next.lottery.view.SlipButton;
 import com.next.lottery.view.SlipButton.OnChangedListener;
 
-@SuppressLint("ValidFragment")
-public class UserRegisterFragment extends BaseFragment  {
+public class UserLRRegisterFragment extends BaseFragment {
 
-	private TextView					tvTitle;
+	@ViewInject(R.id.fragment_user_register_ll_userid)
+	private LinearLayout llUserId; // 用户名布局
+	@ViewInject(R.id.fragment_user_register_ll_psw)
+	private LinearLayout llPsw; // 密码布局
 
-	private ProgressDialog				progDialog;
-	
+	private TextView tvTitle;
+
+	private ProgressDialog progDialog;
+
 	@ViewInject(R.id.fragment_usr_register_account_et)
 	private EditText etUsername;
 	@ViewInject(R.id.fragment_usr_register_password_et)
@@ -46,7 +51,7 @@ public class UserRegisterFragment extends BaseFragment  {
 	@ViewInject(R.id.fragment_usr_register_slip)
 	private SlipButton slipBtn;
 	@ViewInject(R.id.fragment_usr_register_ok_btn)
-	private  Button btnOk;
+	private Button btnOk;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,24 +63,33 @@ public class UserRegisterFragment extends BaseFragment  {
 	}
 
 	private void initView() {
-		// TODO Auto-generated method stub
 		tvTitle.setText("注册");
 		progDialog = ProgressDialog.show(getActivity());
-		
+
 		slipBtn.setCheck(true);
 		slipBtn.SetOnChangedListener(new OnChangedListener() {
 			@Override
 			public void OnChanged(boolean CheckState) {
-				// TODO Auto-generated method stub
 				if (CheckState) {
 					etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 				}
 				else {
-					etPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-
+					etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
 				}
 			}
+		});
 
+		etPassword.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				llPsw.setSelected(hasFocus);
+			}
+		});
+		etUsername.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				llUserId.setSelected(hasFocus);
+			}
 		});
 
 	}
@@ -103,7 +117,8 @@ public class UserRegisterFragment extends BaseFragment  {
 	 * 登录
 	 */
 	private void doRegister() {
-		String url = HttpActions.register(etUsername.getText().toString().trim(), etPassword.getText().toString().trim());
+		String url = HttpActions.register(etUsername.getText().toString().trim(), etPassword.getText().toString()
+				.trim());
 		ULog.d("url = " + url);
 		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
 
@@ -116,15 +131,15 @@ public class UserRegisterFragment extends BaseFragment  {
 			public void onSuccess(ResponseInfo<String> responseInfo) {
 				progDialog.dismiss();
 				ULog.d(responseInfo.result);
-				
+
 				UserBean bean = new Gson().fromJson(responseInfo.result, UserBean.class);
 				if (null != bean && bean.getCode() == 0) {
 					// 保存token
 					Toast.makeText(getActivity(), "注册成功！", Toast.LENGTH_LONG).show();
-					
+
 					MainActivity.changeTab = 4;
-					((Activity)getActivity()).finish();
-					
+					((Activity) getActivity()).finish();
+
 				}
 				else {
 					Toast.makeText(getActivity(), "注册失败！", Toast.LENGTH_LONG).show();

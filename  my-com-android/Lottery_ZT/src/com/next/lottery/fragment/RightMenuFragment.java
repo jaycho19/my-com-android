@@ -3,21 +3,22 @@ package com.next.lottery.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.dongfang.v4.app.BaseFragment;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.next.lottery.MainActivity;
 import com.next.lottery.R;
 import com.next.lottery.params.ComParams;
 import com.next.lottery.utils.Keys;
 
-public class RightMenuFragment extends Fragment implements OnClickListener {
+public class RightMenuFragment extends BaseFragment {
 	@ViewInject(R.id.fragment_goods_detail_right_home_tv)
 	private TextView homeTv;
 	@ViewInject(R.id.fragment_goods_detail_right_fenlei_tv)
@@ -44,32 +45,25 @@ public class RightMenuFragment extends Fragment implements OnClickListener {
 			R.id.fragment_goods_detail_right_usercenter_tv })
 	@Override
 	public void onClick(View v) {
-		Intent intent = new Intent(ComParams.ACTION_UPDATE_MAINACTIVITY);// 发送刷新广播
 		switch (v.getId()) {
 		case R.id.fragment_goods_detail_right_home_tv:
-			intent.putExtra(Keys.KEY_MAIN_ITEM, 0);
+			MainActivity.changeTab = ComParams.MENU_TAB_HOME;
 			break;
 		case R.id.fragment_goods_detail_right_fenlei_tv:
-			intent.putExtra(Keys.KEY_MAIN_ITEM, 1);
+			MainActivity.changeTab = ComParams.MENU_TAB_CLASSIFY;
 			break;
 		case R.id.fragment_goods_detail_right_huodong_tv:
-			intent.putExtra(Keys.KEY_MAIN_ITEM, 2);
+			MainActivity.changeTab = ComParams.MENU_TAB_TRADEMARK;
 			break;
 		case R.id.fragment_goods_detail_right_gouwuche_tv:
-			intent.putExtra(Keys.KEY_MAIN_ITEM, 3);
+			MainActivity.changeTab = ComParams.MENU_TAB_SHOPPINGCART;
 			break;
 		case R.id.fragment_goods_detail_right_usercenter_tv:
-			intent.putExtra(Keys.KEY_MAIN_ITEM, 4);
-			break;
-
-		default:
+			MainActivity.changeTab = ComParams.MENU_TAB_USERCENTER;
 			break;
 		}
-		getActivity().sendBroadcast(intent);
-		
-		if (Activity.class.isInstance(getActivity())) {
-			getActivity().finish();
-		}
+		getActivity().startActivity(new Intent(getActivity(), MainActivity.class));;
+		getActivity().finish();
 
 	}
 

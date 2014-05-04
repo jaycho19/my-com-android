@@ -17,8 +17,6 @@ import com.next.lottery.broadcast.CloseAppReceiver;
 
 /**
  * 1. 所有该项目activity都需要继承该类；<br>
- * 2. 该类集成了QAS功能
- * 
  * @author dongfang
  * 
  */
@@ -27,7 +25,6 @@ public abstract class BaseActivity extends FragmentActivity {
 	public abstract void onClick(View v);
 
 	protected String TAG = BaseActivity.class.getSimpleName();
-
 	private CloseAppReceiver closeApp;
 
 	@Override
@@ -56,7 +53,6 @@ public abstract class BaseActivity extends FragmentActivity {
 
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
-		// TODO Auto-generated method stub
 		super.onWindowFocusChanged(hasFocus);
 	}
 
@@ -116,7 +112,6 @@ public abstract class BaseActivity extends FragmentActivity {
 	}
 
 	private BroadcastReceiver connectReciver = new BroadcastReceiver() {
-
 		@Override
 		public void onReceive(Context context, Intent intent) {}
 	};

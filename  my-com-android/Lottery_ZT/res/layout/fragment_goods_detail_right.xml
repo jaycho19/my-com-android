@@ -32,8 +32,8 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:drawableTop="@drawable/tab_huodong_big"
-        android:text="每日优惠"
+        android:drawableTop="@drawable/tab_pinpai_3"
+        android:text="品牌"
         android:textColor="@color/white"
         android:textSize="15sp" />
 

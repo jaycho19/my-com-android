@@ -31,9 +31,9 @@ public class MainActivity extends BaseActivity {
 
 	@ViewInject(android.R.id.tabhost)
 	private FragmentTabHostDF fgtHost;
-	
+
 	public static int changeTab = 0;
-	
+
 	// @ViewInject(R.id.tv_topbar_menu)
 	// private TextView tvTopBarMenu;
 
@@ -57,11 +57,11 @@ public class MainActivity extends BaseActivity {
 	private void initData(Intent intent) {
 		ULog.d("initData");
 	}
-	
+
 	public void registerBoradcastReceiver() {// 注册广播
-		IntentFilter myIntentFilter = new IntentFilter();
-		myIntentFilter.addAction(ComParams.ACTION_UPDATE_MAINACTIVITY);
-		registerReceiver(receiver, myIntentFilter);
+	// IntentFilter myIntentFilter = new IntentFilter();
+	// myIntentFilter.addAction(ComParams.ACTION_UPDATE_MAINACTIVITY);
+	// registerReceiver(receiver, myIntentFilter);
 	}
 
 	/** 初始化底部菜单 */
@@ -97,7 +97,7 @@ public class MainActivity extends BaseActivity {
 		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), HomeFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), ClassifyFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab3), TrademarkFragment.class, null);
-//		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab4), ShoppingCartFragment.class, null);
+		// fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab4), ShoppingCartFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab4), ShoppingCartNewFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("5").setIndicator(tab5), UserCenterFragment.class, null);
 
@@ -149,18 +149,17 @@ public class MainActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		ULog.i("onResume");
-		if (changeTab!=0&&changeTab!=fgtHost.getCurrentTab()) {
+		ULog.d("onResume changeTab " + changeTab);
+		if (changeTab != 0 && changeTab != fgtHost.getCurrentTab()) {
 			fgtHost.setCurrentTab(changeTab);
 			changeTab = 0;
 		}
 	}
-	
+
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
-		unregisterReceiver(receiver);
+		// unregisterReceiver(receiver);
 	}
 
 	@Override
@@ -174,21 +173,13 @@ public class MainActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 
 	}
-	
-	private BroadcastReceiver	receiver	= new BroadcastReceiver() {
 
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			String action = intent.getAction();
-			if (action.equals(ComParams.ACTION_UPDATE_MAINACTIVITY)&&intent.hasExtra(Keys.KEY_MAIN_ITEM)) {
-				int targetTab = intent.getIntExtra(Keys.KEY_MAIN_ITEM, fgtHost.getCurrentTab());
-				ULog.i("getCurrentTabTag-->"+fgtHost.getCurrentTabTag());
-				if (fgtHost.getCurrentTab() !=targetTab) {
-					ULog.i("targetTab-->"+targetTab);
-					changeTab = targetTab;
-				}
-				
-			}
-		}
-	};
+	// private BroadcastReceiver receiver = new BroadcastReceiver() {
+	// @Override
+	// public void onReceive(Context context, Intent intent) {
+	// if (ComParams.ACTION_UPDATE_MAINACTIVITY.equals(intent.getAction()) && intent.hasExtra(Keys.KEY_MAIN_ITEM)) {
+	// changeTab = intent.getIntExtra(Keys.KEY_MAIN_ITEM, fgtHost.getCurrentTab());
+	// }
+	// }
+	// };
 }

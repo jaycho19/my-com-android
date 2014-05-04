@@ -18,14 +18,15 @@
         android:textColor="@color/grey" />
 
     <LinearLayout
-        android:id="@+id/register_parent"
+        android:id="@+id/fragment_user_register_ll_userid"
         android:layout_width="fill_parent"
-        android:layout_height="43dp"
+        android:layout_height="47dp"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/inputbox_bg"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical"
+        android:padding="5dp" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,7 +38,7 @@
 
         <EditText
             android:id="@+id/fragment_usr_register_account_et"
-           android:layout_width="match_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
             android:focusable="true"
@@ -50,19 +51,20 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/fragment_user_register_ll_psw"
         android:layout_width="fill_parent"
-        android:layout_height="43dp"
+        android:layout_height="47dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/inputbox_bg"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:padding="5dp" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:text="密码"
@@ -80,7 +82,7 @@
             android:inputType="textPassword"
             android:singleLine="true"
             android:textColor="#666666"
-            android:textSize="15sp"  />
+            android:textSize="15sp" />
 
         <com.next.lottery.view.SlipButton
             android:id="@+id/fragment_usr_register_slip"

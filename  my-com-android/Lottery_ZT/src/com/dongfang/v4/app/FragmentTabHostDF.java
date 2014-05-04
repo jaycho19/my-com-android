@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentTabHost;
 import android.util.AttributeSet;
 
 import com.dongfang.utils.ULog;
-import com.next.lottery.LRLoginActivity;
+import com.next.lottery.UserLRLoginActivity;
 import com.next.lottery.utils.User;
 
 /***
@@ -27,7 +27,7 @@ public class FragmentTabHostDF extends FragmentTabHost {
 	public void setCurrentTab(int index) {
 		if (4 == index && !User.isLogined(mContext)) {
 			ULog.d("startIntent");
-			mContext.startActivity(new Intent(mContext, LRLoginActivity.class));
+			mContext.startActivity(new Intent(mContext, UserLRLoginActivity.class));
 			return;
 		}
 		super.setCurrentTab(index);
