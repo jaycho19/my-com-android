@@ -6,9 +6,9 @@
     android:background="@color/whitesmoke"
     android:orientation="vertical" >
 
-    <include
-        android:id="@+id/activity_goods_detail_top_bar"
-        layout="@layout/fragment_goods_detail_layoutg_top_bar" />
+<!--     <include -->
+<!--         android:id="@+id/activity_goods_detail_top_bar" -->
+<!--         layout="@layout/fragment_goods_detail_layoutg_top_bar" /> -->
 
     <!--
          <com.next.lottery.view.PullToRefreshView

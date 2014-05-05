@@ -1,15 +1,8 @@
 package com.next.lottery;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 
-import com.dongfang.v4.app.BaseActivity;
-import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.fragment.GoodsDetailFragment;
-import com.next.lottery.fragment.RightMenuFragment;
-import com.next.lottery.view.SlidingMenu;
 
 /**
  * 详情页
@@ -17,41 +10,16 @@ import com.next.lottery.view.SlidingMenu;
  * @author fgb,dongfang
  * 
  */
-public class GoodsDetailActivity extends BaseActivity {
-	@ViewInject(R.id.slidingMenu)
-	private SlidingMenu mSlidingMenu;
-	private RightMenuFragment rightFragment;
-	private GoodsDetailFragment mainFragment;
+public class GoodsDetailActivity extends BaseSlidingMenuActivity {
+	private GoodsDetailFragment centerFragment;
 
 	@Override
-	protected void onCreate(Bundle arg0) {
-		super.onCreate(arg0);
-		setContentView(R.layout.sliding_menu_main);
-		ViewUtils.inject(this);
-		init();
-	}
-
-	private void init() {
-		mSlidingMenu.setRightView(getLayoutInflater().inflate(R.layout.sliding_menu_right_frame, null));
-		mSlidingMenu.setCenterView(getLayoutInflater().inflate(R.layout.center_frame, null));
-
-		FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
-
-		rightFragment = new RightMenuFragment();
-		t.replace(R.id.right_frame, rightFragment);
-		mainFragment = new GoodsDetailFragment(this);
-		mainFragment.setArguments(this.getIntent().getExtras());
-		t.replace(R.id.center_frame, mainFragment);
-		t.commit();
-	}
-
-	public void showRight() {
-		mSlidingMenu.showRightView();
-	}
-
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		centerFragment = new GoodsDetailFragment(this);
+		centerFragment.setArguments(this.getIntent().getExtras());
+		setCenterFragment(centerFragment);
+		setTopTitle("宝贝详情");
 
 	}
 

@@ -5,9 +5,9 @@
     android:background="@color/whitesmoke"
     android:orientation="vertical" >
 
-    <include
-        android:id="@+id/fragment_ensure_order_list_top_bar"
-        layout="@layout/fragment_my_order_list_layout_top_bar" />
+<!--     <include -->
+<!--         android:id="@+id/fragment_ensure_order_list_top_bar" -->
+<!--         layout="@layout/fragment_my_order_list_layout_top_bar" /> -->
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -9,6 +9,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.next.lottery.fragment.MyOrderListFragment;
 import com.next.lottery.fragment.RightMenuFragment;
+import com.next.lottery.fragment.UserSettingFragment;
 import com.next.lottery.view.SlidingMenu;
 
 /**
@@ -18,25 +19,10 @@ import com.next.lottery.view.SlidingMenu;
  * 
  */
 public class MyOrderListActivity extends BaseSlidingMenuActivity {
-	private MyOrderListFragment mainFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		ViewUtils.inject(this);
-		init();
+		setCenterFragment(new MyOrderListFragment());
 	}
-
-	private void init() {
-
-		FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
-		mainFragment = new MyOrderListFragment();
-		t.replace(R.id.center_frame, mainFragment);
-		t.commit();
-	}
-
-	@Override
-	public void onClick(View v) {}
-
-
 }

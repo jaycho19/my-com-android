@@ -1,14 +1,11 @@
 package com.next.lottery.view;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.Display;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
-import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.Scroller;
 
@@ -36,30 +33,24 @@ public class SlidingMenu extends RelativeLayout {
 	private boolean hasClickLeft = false;
 	private boolean hasClickRight = false;
 
-	public SlidingMenu(Context context) {
-		super(context);
-		init(context);
-	}
-
 	private void init(Context context) {
-
 		mContext = context;
 		bgShade = new RelativeLayout(context);
 		mScroller = new Scroller(getContext());
 		mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
-		WindowManager windowManager = ((Activity) context).getWindow().getWindowManager();
-		Display display = windowManager.getDefaultDisplay();
-		screenWidth = display.getWidth();
-		screenHeight = display.getHeight();
+		screenWidth = DeviceInfo.SCREEN_WIDTH_PORTRAIT;
+		screenHeight = DeviceInfo.SCREEN_HEIGHT_PORTRAIT;
 		LayoutParams bgParams = new LayoutParams(screenWidth, screenHeight);
 		bgParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 		bgShade.setLayoutParams(bgParams);
+	}
 
+	public SlidingMenu(Context context) {
+		this(context, null);
 	}
 
 	public SlidingMenu(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		init(context);
+		this(context, attrs, 0);
 	}
 
 	public SlidingMenu(Context context, AttributeSet attrs, int defStyle) {
@@ -74,12 +65,13 @@ public class SlidingMenu extends RelativeLayout {
 	}
 
 	public void setLeftView(View view) {
-		LayoutParams behindParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
-		addView(view, behindParams);
+		// LayoutParams behindParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+		// addView(view, behindParams);
 		// mLeftView = view;
 	}
 
 	public void setRightView(View view) {
+		// 设置右侧菜单宽度
 		LayoutParams behindParams = new LayoutParams(DeviceInfo.SCREEN_WIDTH_PORTRAIT * 70 / 170,
 				LayoutParams.MATCH_PARENT);
 		behindParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
@@ -132,8 +124,8 @@ public class SlidingMenu extends RelativeLayout {
 		}
 	}
 
-	private boolean canSlideLeft = true;
-	private boolean canSlideRight = false;
+	private boolean canSlideLeft = false;
+	private boolean canSlideRight = true;
 
 	public void setCanSliding(boolean left, boolean right) {
 		canSlideLeft = left;
@@ -289,12 +281,9 @@ public class SlidingMenu extends RelativeLayout {
 					}
 				}
 				smoothScrollTo(dx);
-
 			}
-
 			break;
 		}
-
 		return true;
 	}
 

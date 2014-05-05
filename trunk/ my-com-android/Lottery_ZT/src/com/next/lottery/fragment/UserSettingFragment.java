@@ -7,10 +7,7 @@ import android.view.ViewGroup;
 
 import com.dongfang.v4.app.BaseFragment;
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.R;
-import com.next.lottery.UserSettingActivity;
 
 /**
  * 系统设置
@@ -29,17 +26,5 @@ public class UserSettingFragment extends BaseFragment {
 	}
 
 	@Override
-	@OnClick({ R.id.app_top_title_iv_left, R.id.app_top_title_iv_rigth })
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.app_top_title_iv_left:
-			getActivity().finish();
-			break;
-		case R.id.app_top_title_iv_rigth:
-			((UserSettingActivity) getActivity()).showRight();
-			break;
-		default:
-			break;
-		}
-	}
+	public void onClick(View v) {}
 }

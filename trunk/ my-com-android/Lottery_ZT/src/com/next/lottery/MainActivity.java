@@ -1,9 +1,6 @@
 package com.next.lottery;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -19,8 +16,6 @@ import com.next.lottery.fragment.HomeFragment;
 import com.next.lottery.fragment.ShoppingCartNewFragment;
 import com.next.lottery.fragment.TrademarkFragment;
 import com.next.lottery.fragment.UserCenterFragment;
-import com.next.lottery.params.ComParams;
-import com.next.lottery.utils.Keys;
 
 /**
  * 主ACTIVITY
@@ -32,7 +27,7 @@ public class MainActivity extends BaseActivity {
 	@ViewInject(android.R.id.tabhost)
 	private FragmentTabHostDF fgtHost;
 
-	public static int changeTab = 0;
+	public static int changeTab = -1;
 
 	// @ViewInject(R.id.tv_topbar_menu)
 	// private TextView tvTopBarMenu;
@@ -59,9 +54,9 @@ public class MainActivity extends BaseActivity {
 	}
 
 	public void registerBoradcastReceiver() {// 注册广播
-	// IntentFilter myIntentFilter = new IntentFilter();
-	// myIntentFilter.addAction(ComParams.ACTION_UPDATE_MAINACTIVITY);
-	// registerReceiver(receiver, myIntentFilter);
+		// IntentFilter myIntentFilter = new IntentFilter();
+		// myIntentFilter.addAction(ComParams.ACTION_UPDATE_MAINACTIVITY);
+		// registerReceiver(receiver, myIntentFilter);
 	}
 
 	/** 初始化底部菜单 */
@@ -150,9 +145,9 @@ public class MainActivity extends BaseActivity {
 	protected void onResume() {
 		super.onResume();
 		ULog.d("onResume changeTab " + changeTab);
-		if (changeTab != 0 && changeTab != fgtHost.getCurrentTab()) {
+		if (changeTab != -1 && changeTab != fgtHost.getCurrentTab()) {
 			fgtHost.setCurrentTab(changeTab);
-			changeTab = 0;
+			changeTab = -1;
 		}
 	}
 

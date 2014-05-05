@@ -6,7 +6,7 @@
     android:background="@color/background"
     android:orientation="vertical" >
 
-    <include layout="@layout/activity_lr_login_top_bar" />
+<!--     <include layout="@layout/activity_lr_login_top_bar" /> -->
 
     <LinearLayout
         android:id="@+id/activity_lr_login_ll_userid"

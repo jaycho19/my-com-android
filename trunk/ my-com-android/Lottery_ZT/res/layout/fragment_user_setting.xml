@@ -6,7 +6,7 @@
     android:background="@color/background"
     android:orientation="vertical" >
 
-    <include layout="@layout/fragment_user_setting_top_bar" />
+    <!-- <include layout="@layout/fragment_user_setting_top_bar" /> -->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,10 +24,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_red_04_round"
+                android:clickable="true"
                 android:gravity="center"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:clickable="true"
                 android:text="退出当前账号"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/white" />

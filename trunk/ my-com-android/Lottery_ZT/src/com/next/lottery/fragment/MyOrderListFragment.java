@@ -45,12 +45,6 @@ public class MyOrderListFragment extends BaseFragment implements OnHeaderRefresh
 
 	@ViewInject(R.id.fragment_my_order_listview)
 	private ListView listView;
-	// @ViewInject(R.id.app_top_title_tv_centre)
-	// private TextView tvTitle;
-	// @ViewInject(R.id.app_top_title_iv_left)
-	// private TextView tvBack;
-	// @ViewInject(R.id.app_top_title_iv_rigth)
-	// private TextView tvRight;
 
 	ArrayList<OrderEntity> data = new ArrayList<OrderBean.OrderEntity>();
 	private ProgressDialog progDialog;
@@ -71,8 +65,6 @@ public class MyOrderListFragment extends BaseFragment implements OnHeaderRefresh
 	}
 
 	private void initView(View view) {
-		// tvTitle = (TextView) view.findViewById(R.id.app_top_title_tv_centre);
-		// tvTitle.setText("我的订单");
 
 		progDialog = ProgressDialog.show(getActivity());
 		progDialog.setCancelable(true);
@@ -97,16 +89,10 @@ public class MyOrderListFragment extends BaseFragment implements OnHeaderRefresh
 		ULog.i(orderlist.toString());
 	}
 
-	@OnClick({ R.id.app_top_title_iv_left, R.id.app_top_title_iv_rigth, R.id.btn_buy_now })
+	@OnClick({ R.id.btn_buy_now })
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.app_top_title_iv_left:
-			getActivity().finish();
-			break;
-		case R.id.app_top_title_iv_rigth:
-			((MyOrderListActivity) getActivity()).showRight();
-			break;
 		default:
 			break;
 		}

@@ -7,7 +7,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dongfang.utils.ULog;
@@ -22,15 +21,11 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnClick;
-import com.next.lottery.MyCollectionsActivity;
 import com.next.lottery.R;
-import com.next.lottery.UserHelpCenterActivity;
 import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.dialog.ProgressDialog;
 import com.next.lottery.fragment.adapter.MyCollectionsFragmentAdapter;
-import com.next.lottery.fragment.adapter.ShoppingCartsFragmentAdapter;
 import com.next.lottery.nets.HttpActions;
 import com.next.lottery.view.TabPageIndicator;
 
@@ -42,14 +37,13 @@ import com.next.lottery.view.TabPageIndicator;
  */
 public class MyCollectionsMainFragment extends BaseFragment {
 
-	private ArrayList<ShopCartsInfo>		shopCartslist	= new ArrayList<ShopCartsInfo>();
-	private ProgressDialog					progDialog;
-	private MyCollectionsFragmentAdapter	fragmentAdapter;
+	private ArrayList<ShopCartsInfo> shopCartslist = new ArrayList<ShopCartsInfo>();
+	private ProgressDialog progDialog;
+	private MyCollectionsFragmentAdapter fragmentAdapter;
 	@ViewInject(R.id.fragment_my_collections_main_viewPager)
-	private ViewPager						mViewPager;
+	private ViewPager mViewPager;
 	@ViewInject(R.id.fragment_my_collections_main_indicator)
-	private TabPageIndicator				mIndicator;
-	private View							view;
+	private TabPageIndicator mIndicator;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,7 +57,6 @@ public class MyCollectionsMainFragment extends BaseFragment {
 		progDialog = ProgressDialog.show(getActivity());
 		progDialog.setCancelable(true);
 		getShopCartList();
-		((TextView) view.findViewById(R.id.app_top_title_tv_centre)).setText("我的收藏");
 		return view;
 	}
 
@@ -124,22 +117,6 @@ public class MyCollectionsMainFragment extends BaseFragment {
 	}
 
 	@Override
-	@OnClick({ R.id.app_top_title_iv_left, R.id.app_top_title_iv_rigth })
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.app_top_title_iv_left:
-			getActivity().finish();
-			break;
-		case R.id.app_top_title_iv_rigth:
-			((MyCollectionsActivity) getActivity()).showRight();
-			break;
-
-		default:
-			break;
-		}
-	}
-
-	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		ULog.i("onDestroy");
@@ -149,5 +126,11 @@ public class MyCollectionsMainFragment extends BaseFragment {
 	public void onDestroyView() {
 		super.onDestroyView();
 		ULog.i("onDestroyView");
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+
 	}
 }

@@ -6,7 +6,7 @@
     android:background="@color/whitesmoke"
     android:orientation="vertical" >
 
-    <include layout="@layout/fragment_user_setting_top_bar" />
+    <!-- <include layout="@layout/fragment_user_setting_top_bar" /> -->
 
     <TextView
         android:layout_width="fill_parent"
