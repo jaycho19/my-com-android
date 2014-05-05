@@ -9,7 +9,7 @@
         android:id="@+id/fragment_search_history_lv_listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
-        android:visibility="gone">
+        android:visibility="visible">
     </ListView>
     
     <GridView
@@ -21,6 +21,7 @@
         android:paddingBottom="8dip"
         android:paddingLeft="6dip"
         android:paddingRight="6dip"
-        android:verticalSpacing="6dip" />
+        android:verticalSpacing="6dip" 
+        android:visibility="gone"/>
 
 </LinearLayout>

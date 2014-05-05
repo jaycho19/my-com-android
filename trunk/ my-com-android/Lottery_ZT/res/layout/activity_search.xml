@@ -9,16 +9,15 @@
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp" >
 
-        <TextView
+        <ImageView
             android:id="@+id/activity_search_tv_cancelsearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:paddingLeft="10dp"
-            android:text="取消"
-            android:textColor="@drawable/search_activity_cancel_tv_color"
-            android:textSize="16sp" />
+            android:src="@drawable/qr_code"
+           />
 
         <RelativeLayout
             android:layout_width="match_parent"
