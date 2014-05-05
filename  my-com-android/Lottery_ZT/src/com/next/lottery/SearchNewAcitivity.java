@@ -1,9 +1,12 @@
 package com.next.lottery;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentTabHost;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dongfang.utils.ULog;
@@ -14,13 +17,14 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.fragment.SearchHistoryFragment;
 import com.next.lottery.fragment.SearchHotWordFragment;
 import com.next.lottery.fragment.SearchNewHistoryFragment;
+import com.next.lottery.params.ComParams;
 
 public class SearchNewAcitivity extends BaseActivity {
 
 	@ViewInject(android.R.id.tabhost)
 	private FragmentTabHost fgtHost;
 	@ViewInject(R.id.activity_search_tv_cancelsearch)
-	private TextView tvCancelsearch;
+	private ImageView imgChangeAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +59,11 @@ public class SearchNewAcitivity extends BaseActivity {
 		ULog.d("id = " + v.getId());
 		switch (v.getId()) {
 		case R.id.activity_search_tv_cancelsearch:
-			finish();
+			Intent intent = new Intent(ComParams.ACTION_CHANGE_SEARCH_FRAGMENT_ADAPTER);
+			this.sendBroadcast(intent);
+			
+//			fgtHost.get
+//			finish();
 			break;
 		default:
 			break;

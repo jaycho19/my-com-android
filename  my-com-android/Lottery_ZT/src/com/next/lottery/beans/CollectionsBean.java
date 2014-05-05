@@ -54,6 +54,7 @@ public class CollectionsBean {
 		private int stockNum;// 0,
 		private String title;// "133款NINE WEST玖熙正品厚底坡跟高跟凉鞋-301033709L*2",
 		private String picUrl;// "http://img01.taobaocdn.com/bao/uploaded/i1/10328026524879122/T16ldYFitbXXXXXXXX_!!0-item_pic.jpg"
+		
 		public int getId() {
 			return id;
 		}

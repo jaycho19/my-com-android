@@ -43,6 +43,7 @@ import com.next.lottery.beans.CollectionsBean.CollectionsEnity;
 import com.next.lottery.beans.GoodsBean;
 import com.next.lottery.beans.SKUBean2;
 import com.next.lottery.beans.SKUItem;
+import com.next.lottery.beans.SearchGoosBean.SearchItem;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.beans.SkuList;
 import com.next.lottery.db.bean.SkulistDbBean;
@@ -58,13 +59,13 @@ import com.next.lottery.utils.Keys;
  * @author dongfang
  * 
  */
-public class MyCollectionslistViewAdapter extends BaseAdapter {
+public class SearchGoodsResultListViewAdapter extends BaseAdapter {
 
-	private ArrayList<CollectionsEnity>	list;
+	private ArrayList<SearchItem>	list;
 	private Context						context;
 
-	public MyCollectionslistViewAdapter(Context context, ArrayList<CollectionsEnity> shopCartslist) {
-		this.list = shopCartslist;
+	public SearchGoodsResultListViewAdapter(Context context, ArrayList<SearchItem> arrayList) {
+		this.list = arrayList;
 		this.context = context;
 
 	}
@@ -105,7 +106,7 @@ public class MyCollectionslistViewAdapter extends BaseAdapter {
 		MyImageView myImageView;
 
 		private void initView(View view, int position) {
-			CollectionsEnity entity = list.get(position);
+			SearchItem entity = list.get(position);
 			title = (TextView)view.findViewById(R.id.fragment_shoppingcart_all_adp_item_show_title);
 			myImageView=(MyImageView)view.findViewById(R.id.fragment_shoppingcart_all_adp_item_iv);
 			title.setText(entity.getTitle());
