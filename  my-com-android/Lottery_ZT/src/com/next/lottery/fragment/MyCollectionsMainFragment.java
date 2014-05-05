@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dongfang.utils.ULog;
@@ -22,7 +23,9 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.next.lottery.MyCollectionsActivity;
 import com.next.lottery.R;
+import com.next.lottery.UserHelpCenterActivity;
 import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.ShopCartsInfo;
 import com.next.lottery.dialog.ProgressDialog;
@@ -60,13 +63,7 @@ public class MyCollectionsMainFragment extends BaseFragment {
 		progDialog = ProgressDialog.show(getActivity());
 		progDialog.setCancelable(true);
 		getShopCartList();
-		// }
-		// else {
-		// ViewGroup parent = (ViewGroup) view.getParent();
-		// if (parent != null) {
-		// parent.removeView(view);
-		// }
-		// }
+		((TextView) view.findViewById(R.id.app_top_title_tv_centre)).setText("我的收藏");
 		return view;
 	}
 
@@ -126,10 +123,17 @@ public class MyCollectionsMainFragment extends BaseFragment {
 
 	}
 
-	@OnClick({})
+	@Override
+	@OnClick({ R.id.app_top_title_iv_left, R.id.app_top_title_iv_rigth })
 	public void onClick(View v) {
-		ULog.i("id = " + v.getId());
 		switch (v.getId()) {
+		case R.id.app_top_title_iv_left:
+			getActivity().finish();
+			break;
+		case R.id.app_top_title_iv_rigth:
+			((MyCollectionsActivity) getActivity()).showRight();
+			break;
+
 		default:
 			break;
 		}

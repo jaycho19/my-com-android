@@ -9,6 +9,8 @@ import com.dongfang.v4.app.BaseFragment;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.R;
+import com.next.lottery.UserHelpCenterActivity;
+import com.next.lottery.UserLRLoginActivity;
 import com.next.lottery.view.SlidingMenu;
 
 /**
@@ -19,21 +21,12 @@ import com.next.lottery.view.SlidingMenu;
  */
 
 public class UserHelpCenterFragment extends BaseFragment {
-	private SlidingMenu mSlidingMenu;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.activity_user_helpcenter, container, false);
 		ViewUtils.inject(this, view);
 		return view;
-	}
-
-	public SlidingMenu getmSlidingMenu() {
-		return mSlidingMenu;
-	}
-
-	public void setmSlidingMenu(SlidingMenu mSlidingMenu) {
-		this.mSlidingMenu = mSlidingMenu;
 	}
 
 	@Override
@@ -44,8 +37,7 @@ public class UserHelpCenterFragment extends BaseFragment {
 			getActivity().finish();
 			break;
 		case R.id.app_top_title_iv_rigth:
-			if (null != mSlidingMenu)
-				mSlidingMenu.showRightView();
+			((UserHelpCenterActivity) getActivity()).showRight();
 			break;
 
 		default:
