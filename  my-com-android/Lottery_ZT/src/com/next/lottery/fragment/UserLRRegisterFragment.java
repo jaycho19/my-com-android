@@ -40,8 +40,6 @@ public class UserLRRegisterFragment extends BaseFragment {
 	@ViewInject(R.id.fragment_user_register_ll_psw)
 	private LinearLayout llPsw; // 密码布局
 
-	private TextView tvTitle;
-
 	private ProgressDialog progDialog;
 
 	@ViewInject(R.id.fragment_usr_register_account_et)
@@ -57,13 +55,11 @@ public class UserLRRegisterFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_user_register, container, false);
 		ViewUtils.inject(this, view);
-		tvTitle = (TextView) view.findViewById(R.id.app_top_title_tv_centre);
 		initView();
 		return view;
 	}
 
 	private void initView() {
-		tvTitle.setText("注册");
 		progDialog = ProgressDialog.show(getActivity());
 
 		slipBtn.setCheck(true);
@@ -94,16 +90,10 @@ public class UserLRRegisterFragment extends BaseFragment {
 
 	}
 
-	@OnClick({ R.id.app_top_title_iv_left, R.id.app_top_title_iv_rigth, R.id.fragment_usr_register_ok_btn })
+	@OnClick({ R.id.fragment_usr_register_ok_btn })
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.app_top_title_iv_left:
-			((Activity) getActivity()).finish();
-			break;
-		case R.id.app_top_title_iv_rigth:
-			((UserRegisterActivity) getActivity()).showRight();
-			break;
 		case R.id.fragment_usr_register_ok_btn:
 			doRegister();
 			break;

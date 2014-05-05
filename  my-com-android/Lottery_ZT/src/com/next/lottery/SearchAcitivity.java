@@ -40,7 +40,7 @@ public class SearchAcitivity extends BaseActivity {
 
 		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), SearchHistoryFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), SearchHotWordFragment.class, null);
-		
+
 		fgtHost.getTabWidget().setDividerDrawable(new ColorDrawable(0xF4F4F4));
 	}
 

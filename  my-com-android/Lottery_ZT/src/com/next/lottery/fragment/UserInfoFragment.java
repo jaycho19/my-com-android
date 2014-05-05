@@ -14,19 +14,14 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.R;
-import com.next.lottery.UserInfoActivity;
-import com.next.lottery.view.SlidingMenu;
 
 /**
- * 个人中心
+ * 个人xi
  * 
  * @author dongfang
  * 
  */
 public class UserInfoFragment extends BaseFragment {
-
-	@ViewInject(R.id.app_top_title_iv_left)
-	private ImageView ivBack;
 
 	@ViewInject(R.id.activity_user_info_iv_edit)
 	private ImageView ivEdit;
@@ -48,8 +43,7 @@ public class UserInfoFragment extends BaseFragment {
 	private TextView tvUserName;
 
 	private boolean isEdit = false;
-	
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.activity_user_info, container, false);
@@ -57,10 +51,8 @@ public class UserInfoFragment extends BaseFragment {
 		return view;
 	}
 
-	
-	
 	@Override
-	@OnClick({ R.id.app_top_title_iv_left, R.id.app_top_title_iv_rigth,R.id.activity_user_info_tv_edit, R.id.activity_user_info_iv_edit })
+	@OnClick({ R.id.activity_user_info_tv_edit, R.id.activity_user_info_iv_edit })
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.activity_user_info_tv_edit:
@@ -73,13 +65,6 @@ public class UserInfoFragment extends BaseFragment {
 			if (!isEdit)
 				toEdit();
 			break;
-		case R.id.app_top_title_iv_left:
-			getActivity().finish();
-			break;
-		case R.id.app_top_title_iv_rigth:
-			((UserInfoActivity)getActivity()).showRight();
-			break;
-			
 		default:
 			break;
 		}

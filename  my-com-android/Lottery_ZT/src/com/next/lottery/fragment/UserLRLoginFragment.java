@@ -157,8 +157,8 @@ public class UserLRLoginFragment extends BaseFragment {
 
 	@OnClick({ R.id.app_top_title_iv_left, R.id.activity_lr_login_tv_login, R.id.activity_lr_login_tv_register,
 			R.id.activity_lr_login_sina, R.id.activity_lr_login_qq, R.id.activity_lr_login_rr,
-			R.id.activity_lr_login_baidu, R.id.activity_lr_login_zhifubao, R.id.activity_lr_login_mm,
-			R.id.app_top_title_iv_rigth })
+			R.id.activity_lr_login_baidu, R.id.activity_lr_login_zhifubao, R.id.activity_lr_login_mm
+			 })
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -184,9 +184,6 @@ public class UserLRLoginFragment extends BaseFragment {
 		case R.id.activity_lr_login_zhifubao:
 			break;
 		case R.id.activity_lr_login_mm:
-			break;
-		case R.id.app_top_title_iv_rigth:
-			((UserLRLoginActivity) getActivity()).showRight();
 			break;
 
 		// case R.id.btn_login:

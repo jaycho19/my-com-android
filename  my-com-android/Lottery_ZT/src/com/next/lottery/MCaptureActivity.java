@@ -217,7 +217,7 @@ public class MCaptureActivity extends BaseActivity implements Callback {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -21,6 +21,6 @@
         style="@style/app_top_title_tv_center"
         android:layout_toLeftOf="@+id/app_top_title_iv_rigth"
         android:layout_toRightOf="@+id/app_top_title_iv_left"
-        android:text="我的订单" />
+        android:text="sldingmenu" />
 
 </RelativeLayout>

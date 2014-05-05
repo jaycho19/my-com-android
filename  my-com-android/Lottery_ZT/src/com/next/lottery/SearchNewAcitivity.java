@@ -14,8 +14,6 @@ import com.dongfang.v4.app.BaseActivity;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
-import com.next.lottery.fragment.SearchHistoryFragment;
-import com.next.lottery.fragment.SearchHotWordFragment;
 import com.next.lottery.fragment.SearchNewHistoryFragment;
 import com.next.lottery.params.ComParams;
 
@@ -47,10 +45,14 @@ public class SearchNewAcitivity extends BaseActivity {
 		tab3.setText("销量");
 		tab4.setText("评论");
 
-		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), SearchNewHistoryFragment.class, this.getIntent().getExtras());
-		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), SearchNewHistoryFragment.class, this.getIntent().getExtras());
-		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab3), SearchNewHistoryFragment.class, this.getIntent().getExtras());
-		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab4), SearchNewHistoryFragment.class, this.getIntent().getExtras());
+		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab1), SearchNewHistoryFragment.class, this.getIntent()
+				.getExtras());
+		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab2), SearchNewHistoryFragment.class, this.getIntent()
+				.getExtras());
+		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab3), SearchNewHistoryFragment.class, this.getIntent()
+				.getExtras());
+		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab4), SearchNewHistoryFragment.class, this.getIntent()
+				.getExtras());
 		fgtHost.getTabWidget().setDividerDrawable(new ColorDrawable(0xF4F4F4));
 	}
 

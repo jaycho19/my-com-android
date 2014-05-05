@@ -3,6 +3,7 @@ package com.next.lottery.fragment;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
@@ -13,8 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
+
 import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseFragment;
 import com.google.gson.Gson;
@@ -29,7 +30,6 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.next.lottery.GoodsDetailActivity;
 import com.next.lottery.R;
 import com.next.lottery.beans.BaseEntity;
@@ -56,7 +56,6 @@ import com.next.lottery.nets.HttpActions;
 
 @SuppressLint("ValidFragment")
 public class GoodsDetailFragment extends BaseFragment {
-	private TextView		tvTitle;
 	private Context			context;
 	private ProgressDialog	progDialog;
 
@@ -215,8 +214,6 @@ public class GoodsDetailFragment extends BaseFragment {
 	}
 
 	private void initView(View view) {
-		// tvTitle = (TextView) view.findViewById(R.id.app_top_title_tv_centre);
-		// tvTitle.setText("宝贝详情");
 		progDialog = ProgressDialog.show(getActivity());
 		progDialog.setCancelable(true);
 	}
@@ -302,21 +299,8 @@ public class GoodsDetailFragment extends BaseFragment {
 		skuBean.setSkuList(all);
 		return skuBean;
 	}
-	@OnClick({R.id.app_top_title_iv_left, R.id.app_top_title_iv_rigth })
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		switch (v.getId()) {
-		case R.id.app_top_title_iv_left:
-			((GoodsDetailActivity) context).finish();
-			break;
-		case R.id.app_top_title_iv_rigth:
-			((GoodsDetailActivity) context).showRight();
-			break;
-
-		default:
-			break;
-		}
 	}
 
 	OnSkuResultListener	onSkuResultListener	= new OnSkuResultListener() {

@@ -39,55 +39,52 @@ import com.next.lottery.nets.HttpActions;
 public class EnsureOrderListFragment extends BaseFragment {
 
 	/*
-	 * @ViewInject(R.id.fragment_ensure_order_listview) private ListView
-	 * listView;
+	 * @ViewInject(R.id.fragment_ensure_order_listview) private ListView listView;
 	 */
 	// @ViewInject(R.id.app_top_title_tv_centre)
-	private TextView					tvTitle;
+	private TextView tvTitle;
 	// @ViewInject(R.id.app_top_title_iv_left)
 	// private TextView tvBack;
 	// @ViewInject(R.id.app_top_title_iv_rigth)
 	// private TextView tvRight;
 	@ViewInject(R.id.btn_buy_now)
-	private TextView					tvBuyNow;
+	private TextView tvBuyNow;
 	@ViewInject(R.id.fragment_ensure_order_bottom_list_tv)
-	private TextView					tvBottomList;
+	private TextView tvBottomList;
 	@ViewInject(R.id.fragment_ensure_order_delivery_money_tv)
-	private TextView					tvTraFee;
+	private TextView tvTraFee;
 	@ViewInject(R.id.fragment_ensure_order_item_ll)
-	private LinearLayout				itemll;
+	private LinearLayout itemll;
 
-	private ArrayList<ShopCartsInfo>	orderlist	= new ArrayList<ShopCartsInfo>();
-	private ProgressDialog				progDialog;
+	private ArrayList<ShopCartsInfo> orderlist = new ArrayList<ShopCartsInfo>();
+	private ProgressDialog progDialog;
 	private BaseEntity<CalculateOrderListBean> calcuBean;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_ensure_order_list_layout, container, false);
 		ViewUtils.inject(this, view);
-		tvTitle = (TextView) view.findViewById(R.id.app_top_title_tv_centre);
-		tvTitle.setText("确定订单");
-		
+
 		progDialog = ProgressDialog.show(getActivity());
 		progDialog.setCancelable(true);
-		CalculateOrder(getActivity(),orderlist);
+		CalculateOrder(getActivity(), orderlist);
 		return view;
 	}
 
-	
-	private void refreshView(){
-		tvBottomList.setText("共计"+calcuBean.getInfo().getItems().size()+"件商品,"+"￥"+(calcuBean.getInfo().getPrice()/100)+"元");
-		tvTraFee.setText(calcuBean.getInfo().getTraFee().getTraFee()/100+"元");
+	private void refreshView() {
+		tvBottomList.setText("共计" + calcuBean.getInfo().getItems().size() + "件商品," + "￥"
+				+ (calcuBean.getInfo().getPrice() / 100) + "元");
+		tvTraFee.setText(calcuBean.getInfo().getTraFee().getTraFee() / 100 + "元");
 		for (Items cartsInfo : calcuBean.getInfo().getItems()) {
 			View itemView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_ensure_order_listview_item,
 					null);
-//			MyImageView img = (MyImageView) itemView.findViewById(R.id.fragment_shoppingcart_all_adp_item_iv);
+			// MyImageView img = (MyImageView) itemView.findViewById(R.id.fragment_shoppingcart_all_adp_item_iv);
 			TextView tvTitle = (TextView) itemView.findViewById(R.id.fragment_ensure_orderlist_item_show_title);
 			TextView tvPrice = (TextView) itemView.findViewById(R.id.fragment_ensure_orderlist_item_show_price);
 			TextView tvCount = (TextView) itemView.findViewById(R.id.fragment_ensure_orderlist_item_show_number);
-//			tvTitle.setText(cartsInfo.getItemName());
-			tvPrice.setText(cartsInfo.getPrice()/100+"");
-			tvCount.setText(cartsInfo.getCount()+"");
+			// tvTitle.setText(cartsInfo.getItemName());
+			tvPrice.setText(cartsInfo.getPrice() / 100 + "");
+			tvCount.setText(cartsInfo.getCount() + "");
 			itemll.addView(itemView);
 		}
 	}
@@ -97,31 +94,15 @@ public class EnsureOrderListFragment extends BaseFragment {
 		ULog.i(orderlist.toString());
 	}
 
-	@OnClick({ R.id.app_top_title_iv_left, R.id.app_top_title_iv_rigth, R.id.btn_buy_now })
 	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.app_top_title_iv_left:
-			((EnsureOrderListActivity) getActivity()).finish();
-			break;
-		case R.id.app_top_title_iv_rigth:
-			((EnsureOrderListActivity) getActivity()).showRight();
-			break;
-		case R.id.btn_buy_now:
-			CreatOrder(getActivity());
-			break;
-
-		default:
-			break;
-		}
-	}
+	public void onClick(View v) {}
 
 	/* 生成订单 */
-	private  void CreatOrder(final Context context) {
+	private void CreatOrder(final Context context) {
 		// ArrayList<SKUBean2> skubeanList = new ArrayList<SKUBean2>();
 		// skubeanList.add(skuBean);
 		String url = HttpActions.creatOrder(context, calcuBean);
-		ULog.i("creatOrder-->"+url);
+		ULog.i("creatOrder-->" + url);
 		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
 
 			@Override
@@ -154,8 +135,8 @@ public class EnsureOrderListFragment extends BaseFragment {
 		});
 
 	}
-	
-	protected  void CalculateOrder(Context context,final ArrayList<ShopCartsInfo> orderlist2) {
+
+	protected void CalculateOrder(Context context, final ArrayList<ShopCartsInfo> orderlist2) {
 		String url = HttpActions.CalcuLateOrderList(context, orderlist2);
 		ULog.d("CalculateOrder url = " + url);
 		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
@@ -170,11 +151,11 @@ public class EnsureOrderListFragment extends BaseFragment {
 				progDialog.dismiss();
 				ULog.d(responseInfo.result);
 
-			     calcuBean = new Gson().fromJson(responseInfo.result,
+				calcuBean = new Gson().fromJson(responseInfo.result,
 						new TypeToken<BaseEntity<CalculateOrderListBean>>() {}.getType());
 				if (null != calcuBean && calcuBean.getCode() == 0) {
 
-//					CreatOrder(orderlist2, bean);
+					// CreatOrder(orderlist2, bean);
 					ULog.i("price-->" + calcuBean.getInfo().getPrice());
 					refreshView();
 					// Toast.makeText(context, bean.getInfo().getPrice(),
