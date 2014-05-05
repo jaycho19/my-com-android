@@ -17,30 +17,21 @@ import com.next.lottery.view.SlidingMenu;
  * @author gfan
  * 
  */
-public class UserPassWordModifyActivity extends BaseActivity {
-	@ViewInject(R.id.slidingMenu)
-	private SlidingMenu mSlidingMenu;
-	private RightMenuFragment rightFragment;
+public class UserPassWordModifyActivity extends BaseSlidingMenuActivity {
 	private UserPWDModifyFragment mainFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.sliding_menu_main);
 		ViewUtils.inject(this);
 		init();
 		
 	}
 
 	private void init() {
-		// TODO Auto-generated method stub
-		mSlidingMenu.setRightView(getLayoutInflater().inflate(R.layout.sliding_menu_right_frame, null));
-		mSlidingMenu.setCenterView(getLayoutInflater().inflate(R.layout.center_frame, null));
 
 		FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
 
-		rightFragment = new RightMenuFragment();
-		t.replace(R.id.right_frame, rightFragment);
 		mainFragment = new UserPWDModifyFragment();
 		t.replace(R.id.center_frame, mainFragment);
 		t.commit();
@@ -52,8 +43,4 @@ public class UserPassWordModifyActivity extends BaseActivity {
 
 	}
 	
-	public void showRight() {
-		mSlidingMenu.showRightView();
-	}
-
 }

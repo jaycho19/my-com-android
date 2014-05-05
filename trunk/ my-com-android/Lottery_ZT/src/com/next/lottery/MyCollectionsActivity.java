@@ -18,28 +18,19 @@ import com.next.lottery.view.SlidingMenu;
  * @author gfan
  * 
  */
-public class MyCollectionsActivity extends BaseActivity {
-	@ViewInject(R.id.slidingMenu)
-	private SlidingMenu mSlidingMenu;
-	private RightMenuFragment rightFragment;
+public class MyCollectionsActivity extends BaseSlidingMenuActivity {
 	private MyCollectionsMainFragment mainFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.sliding_menu_main);
 		ViewUtils.inject(this);
 		init();
 	}
 
 	private void init() {
-		mSlidingMenu.setRightView(getLayoutInflater().inflate(R.layout.sliding_menu_right_frame, null));
-		mSlidingMenu.setCenterView(getLayoutInflater().inflate(R.layout.center_frame, null));
 
 		FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
-
-		rightFragment = new RightMenuFragment();
-		t.replace(R.id.right_frame, rightFragment);
 		mainFragment = new MyCollectionsMainFragment();
 		t.replace(R.id.center_frame, mainFragment);
 		t.commit();
@@ -48,8 +39,5 @@ public class MyCollectionsActivity extends BaseActivity {
 	@Override
 	public void onClick(View v) {}
 
-	public void showRight() {
-		mSlidingMenu.showRightView();
-	}
 
 }

@@ -21,30 +21,21 @@ import com.next.lottery.view.SlidingMenu;
  * 
  */
 
-public class EnsureOrderListActivity extends BaseActivity {
-	@ViewInject(R.id.slidingMenu)
-	private SlidingMenu mSlidingMenu;
-	private RightMenuFragment rightFragment;
+public class EnsureOrderListActivity extends BaseSlidingMenuActivity {
 	private EnsureOrderListFragment mainFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.sliding_menu_main);
 		ViewUtils.inject(this);
 		init();
 		
 	}
 
 	private void init() {
-		// TODO Auto-generated method stub
-		mSlidingMenu.setRightView(getLayoutInflater().inflate(R.layout.sliding_menu_right_frame, null));
-		mSlidingMenu.setCenterView(getLayoutInflater().inflate(R.layout.center_frame, null));
 
 		FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
 
-		rightFragment = new RightMenuFragment();
-		t.replace(R.id.right_frame, rightFragment);
 		mainFragment = new EnsureOrderListFragment();
 		if (null!=this.getIntent().getParcelableArrayListExtra("orderList")) {
 			ArrayList<ShopCartsInfo> orderlist = this.getIntent().getParcelableArrayListExtra("orderList");
@@ -58,10 +49,6 @@ public class EnsureOrderListActivity extends BaseActivity {
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 
-	}
-	
-	public void showRight() {
-		mSlidingMenu.showRightView();
 	}
 
 }

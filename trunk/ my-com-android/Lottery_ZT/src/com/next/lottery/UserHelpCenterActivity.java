@@ -12,41 +12,27 @@ import com.next.lottery.fragment.UserHelpCenterFragment;
 import com.next.lottery.view.SlidingMenu;
 
 /**
- * 详情页
+ * 帮助中心
  * 
- * @author fgb,dongfang
+ * @author gfan,dongfang
  * 
  */
-public class UserHelpCenterActivity extends BaseActivity {
-	@ViewInject(R.id.slidingMenu)
-	private SlidingMenu mSlidingMenu;
-	private RightMenuFragment rightFragment;
+public class UserHelpCenterActivity extends BaseSlidingMenuActivity {
 	private UserHelpCenterFragment mainFragment;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		setContentView(R.layout.sliding_menu_main);
-		ViewUtils.inject(this);
 		init();
 	}
 
 	private void init() {
-		mSlidingMenu.setRightView(getLayoutInflater().inflate(R.layout.sliding_menu_right_frame, null));
-		mSlidingMenu.setCenterView(getLayoutInflater().inflate(R.layout.center_frame, null));
 
 		FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
 
-		rightFragment = new RightMenuFragment();
-		t.replace(R.id.right_frame, rightFragment);
 		mainFragment = new UserHelpCenterFragment();
-		mainFragment.setmSlidingMenu(mSlidingMenu);
 		t.replace(R.id.center_frame, mainFragment);
 		t.commit();
-	}
-
-	public void showRight() {
-		mSlidingMenu.showRightView();
 	}
 
 	@Override
