@@ -22,7 +22,6 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
-import com.next.lottery.MyOrderListActivity;
 import com.next.lottery.R;
 import com.next.lottery.beans.BaseEntity;
 import com.next.lottery.beans.OrderBean;
@@ -85,7 +84,6 @@ public class MyOrderListFragment extends BaseFragment implements OnHeaderRefresh
 	}
 
 	public void setOrderlist(ArrayList<ShopCartsInfo> orderlist) {
-		// this.orderBean = orderlist;
 		ULog.i(orderlist.toString());
 	}
 
