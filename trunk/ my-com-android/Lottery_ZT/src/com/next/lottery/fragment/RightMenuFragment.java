@@ -45,6 +45,7 @@ public class RightMenuFragment extends BaseFragment {
 			R.id.fragment_goods_detail_right_usercenter_tv })
 	@Override
 	public void onClick(View v) {
+		if (!v.isShown()) return;
 		switch (v.getId()) {
 		case R.id.fragment_goods_detail_right_home_tv:
 			MainActivity.changeTab = ComParams.MENU_TAB_HOME;

@@ -5,9 +5,9 @@ import android.os.Bundle;
 import com.next.lottery.fragment.UserInfoFragment;
 
 /**
- * 详情页
+ * 个人信息
  * 
- * @author fgb,dongfang
+ * @author dongfang
  * 
  */
 public class UserInfoActivity extends BaseSlidingMenuActivity {

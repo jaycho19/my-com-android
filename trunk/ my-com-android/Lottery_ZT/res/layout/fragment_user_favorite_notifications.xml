@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:slip="http://schemas.android.com/apk/res/com.next.lottery"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        style="@style/textview_arrow_item"
+        android:background="@color/white" >
+
+        <com.next.lottery.view.SlipButton
+            android:id="@+id/slipButton1"
+            android:layout_width="68px"
+            android:layout_height="34px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            slip:bgoff="@drawable/slipbtn_green"
+            slip:bgon="@drawable/slipbtn_grey"
+            slip:isclicked="false"
+            slip:slipbtn="@drawable/slipbtn_slipicon32" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="价格变动提醒"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/black" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line" />
+
+    <RelativeLayout
+        style="@style/textview_arrow_item"
+        android:background="@color/white" >
+
+        <com.next.lottery.view.SlipButton
+            android:id="@+id/slipButton2"
+            android:layout_width="68px"
+            android:layout_height="34px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            slip:bgoff="@drawable/slipbtn_green"
+            slip:bgon="@drawable/slipbtn_grey"
+            slip:isclicked="true"
+            slip:slipbtn="@drawable/slipbtn_slipicon32" />
+
+        <TextView
+            android:id="@+id/textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="库存变化提醒"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textview2"
+            android:layout_alignTop="@+id/textview2"
+            android:layout_toLeftOf="@+id/slipButton2"
+            android:layout_toRightOf="@+id/textview2"
+            android:gravity="center" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="少于"
+                android:textColor="@color/grey"
+                android:textSize="12sp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edt_number"
+                android:gravity="center"
+                android:text="10"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="件"
+                android:textColor="@color/grey"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line" />
+
+</LinearLayout>

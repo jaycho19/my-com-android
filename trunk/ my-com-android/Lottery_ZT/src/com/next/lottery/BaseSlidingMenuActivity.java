@@ -11,6 +11,11 @@ import com.dongfang.v4.app.BaseActivity;
 import com.next.lottery.fragment.RightMenuFragment;
 import com.next.lottery.view.SlidingMenu;
 
+/**
+ * 
+ * @author dongfang
+ * 
+ */
 public class BaseSlidingMenuActivity extends BaseActivity {
 
 	private SlidingMenu mSlidingMenu;
@@ -25,7 +30,7 @@ public class BaseSlidingMenuActivity extends BaseActivity {
 
 		mSlidingMenu = (SlidingMenu) findViewById(R.id.slidingMenu);
 		mSlidingMenu.setRightView(getLayoutInflater().inflate(R.layout.sliding_menu_right_frame, null));
-		
+
 		View centerView = getLayoutInflater().inflate(R.layout.center_frame, null);
 		topTitle = (TextView) centerView.findViewById(R.id.app_top_title_tv_centre);
 		centerView.findViewById(R.id.app_top_title_iv_left).setOnClickListener(new OnClickListener() {

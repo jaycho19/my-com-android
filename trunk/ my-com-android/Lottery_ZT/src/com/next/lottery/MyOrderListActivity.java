@@ -7,7 +7,7 @@ import com.next.lottery.fragment.MyOrderListFragment;
 /**
  * 我的订单
  * 
- * @author gfan
+ * @author dongfang
  * 
  */
 public class MyOrderListActivity extends BaseSlidingMenuActivity {

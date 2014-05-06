@@ -7,7 +7,7 @@ import com.next.lottery.fragment.UserPWDModifyFragment;
 /**
  * 用户密码修改界面
  * 
- * @author gfan
+ * @author dongfang
  * 
  */
 public class UserPassWordModifyActivity extends BaseSlidingMenuActivity {

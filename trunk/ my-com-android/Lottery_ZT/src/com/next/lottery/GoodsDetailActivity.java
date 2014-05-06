@@ -7,7 +7,7 @@ import com.next.lottery.fragment.GoodsDetailFragment;
 /**
  * 详情页
  * 
- * @author fgb,dongfang
+ * @author dongfang
  * 
  */
 public class GoodsDetailActivity extends BaseSlidingMenuActivity {
