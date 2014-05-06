@@ -10,7 +10,7 @@ import com.next.lottery.fragment.EnsureOrderListFragment;
 /**
  * 确定订单界面
  * 
- * @author gfan
+ * @author dongfang
  * 
  */
 
@@ -27,7 +27,7 @@ public class EnsureOrderListActivity extends BaseSlidingMenuActivity {
 			centerFragment.setOrderlist(orderlist);
 		}
 		setCenterFragment(centerFragment);
-		setTopTitle("系统设置");
+		setTopTitle("确认订单");
 
 	}
 

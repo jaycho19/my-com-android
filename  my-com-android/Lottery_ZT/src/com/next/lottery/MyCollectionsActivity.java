@@ -7,7 +7,7 @@ import com.next.lottery.fragment.MyCollectionsMainFragment;
 /**
  * 我的收藏
  * 
- * @author gfan
+ * @author dongfang
  * 
  */
 public class MyCollectionsActivity extends BaseSlidingMenuActivity {

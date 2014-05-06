@@ -13,18 +13,17 @@ import com.next.lottery.R;
 import com.next.lottery.UserFavoriteNotificationsActivity;
 
 /**
- * 系统设置
+ * 收藏变动提醒
  * 
  * @author dongfang
  * 
  */
-
-public class UserSettingFragment extends BaseFragment {
-
+public class UserFavoriteNotificationsFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_user_setting, container, false);
+		View view = inflater.inflate(R.layout.fragment_user_favorite_notifications, container, false);
 		ViewUtils.inject(this, view);
+
 		return view;
 	}
 
@@ -40,4 +39,5 @@ public class UserSettingFragment extends BaseFragment {
 			break;
 		}
 	}
+
 }

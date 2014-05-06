@@ -5,9 +5,8 @@ import android.os.Bundle;
 import com.next.lottery.fragment.UserHelpCenterFragment;
 
 /**
- * 详情页
  * 
- * @author fgb,dongfang
+ * @author dongfang
  * 
  */
 public class UserHelpCenterActivity extends BaseSlidingMenuActivity {
@@ -16,7 +15,7 @@ public class UserHelpCenterActivity extends BaseSlidingMenuActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setCenterFragment(new UserHelpCenterFragment());
-		setTopTitle("我的订单");
+		setTopTitle("帮助中心");
 
 	}
 

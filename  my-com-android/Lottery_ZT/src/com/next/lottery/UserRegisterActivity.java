@@ -7,7 +7,7 @@ import com.next.lottery.fragment.UserLRRegisterFragment;
 /**
  * 用户注册界面
  * 
- * @author gfan
+ * @author dongfang
  * 
  */
 

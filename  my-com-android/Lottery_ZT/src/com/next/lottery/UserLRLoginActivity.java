@@ -3,7 +3,12 @@ package com.next.lottery;
 import android.os.Bundle;
 
 import com.next.lottery.fragment.UserLRLoginFragment;
-
+/**
+ * 登录
+ * 
+ * @author dongfang
+ * 
+ */
 public class UserLRLoginActivity extends BaseSlidingMenuActivity {
 
 	@Override

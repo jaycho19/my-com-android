@@ -7,7 +7,7 @@ import com.next.lottery.fragment.UserSettingFragment;
 /**
  * 系统设置
  * 
- * @author fgb,dongfang
+ * @author dongfang
  * 
  */
 public class UserSettingActivity extends BaseSlidingMenuActivity {
