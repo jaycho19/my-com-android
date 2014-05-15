@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <include
+        android:id="@+id/fragment_home_top_bar_layout"
+        android:layout_alignParentTop="true"
+        layout="@layout/activity_main_top_bar" />
+
+    <com.dongfang.daohang.views.MyWebView
+        android:id="@+id/my_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/fragment_home_top_bar_layout" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragment_home_top_bar_layout"
+        android:background="@drawable/ic_launcher"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp" 
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我在哪?" />
+    </LinearLayout>
+
+</RelativeLayout>

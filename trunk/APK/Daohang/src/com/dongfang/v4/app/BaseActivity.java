@@ -1,4 +1,4 @@
-package com.dongfang.daohang;
+package com.dongfang.v4.app;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,18 +8,23 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.dongfang.broadcast.CloseAppReceiver;
+import com.dongfang.utils.ULog;
 
 /**
  * 1. 所有该项目activity都需要继承该类；<br>
- * 
  * @author dongfang
  * 
  */
 public abstract class BaseActivity extends FragmentActivity {
-	protected String TAG = BaseActivity.class.getSimpleName();
 
+	public abstract void onClick(View v);
+
+	protected String TAG = BaseActivity.class.getSimpleName();
 	private CloseAppReceiver closeApp;
 
 	@Override
@@ -48,7 +53,6 @@ public abstract class BaseActivity extends FragmentActivity {
 
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
-		// TODO Auto-generated method stub
 		super.onWindowFocusChanged(hasFocus);
 	}
 
@@ -72,6 +76,25 @@ public abstract class BaseActivity extends FragmentActivity {
 	}
 
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		ULog.d("onCreateOptionsMenu");
+		// getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+		// case R.id.menu_item_exit:
+		// appExit();
+		// return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
 	protected void onStop() {
 		super.onStop();
 	}
@@ -89,7 +112,6 @@ public abstract class BaseActivity extends FragmentActivity {
 	}
 
 	private BroadcastReceiver connectReciver = new BroadcastReceiver() {
-
 		@Override
 		public void onReceive(Context context, Intent intent) {}
 	};
