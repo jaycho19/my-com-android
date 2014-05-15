@@ -1,20 +1,20 @@
 package com.dongfang.daohang.views;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.PluginState;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 
 import com.dongfang.utils.ULog;
 
 public class MyWebView extends WebView {
 	private Context mContext;
 	private MyWebViewClient myWebViewClient;
+	private ProgressBar progressbar;
 
 	/**
 	 * 用户点击返回时认为当前页面加载完成。 复写stopLoading方法，设置webviewclient的超时状态位为false。
@@ -35,13 +35,16 @@ public class MyWebView extends WebView {
 	public MyWebView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		this.mContext = context;
+
+		progressbar = new ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
+		progressbar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 3, 0, 0));
+		addView(progressbar);
+
 		Init();
 
 	}
 
 	/** 初始化网页设置 */
-	@SuppressWarnings("deprecation")
-	@SuppressLint("SetJavaScriptEnabled")
 	private void Init() {
 		ULog.d("Init()");
 		this.getSettings().setPluginState(PluginState.ON);
@@ -65,29 +68,36 @@ public class MyWebView extends WebView {
 
 	}
 
+	public class WebChromeClient extends android.webkit.WebChromeClient {
+		@Override
+		public void onProgressChanged(WebView view, int newProgress) {
+			if (newProgress == 100) {
+				progressbar.setVisibility(GONE);
+			}
+			else {
+				if (progressbar.getVisibility() == GONE)
+					progressbar.setVisibility(VISIBLE);
+				progressbar.setProgress(newProgress);
+			}
+			super.onProgressChanged(view, newProgress);
+		}
+	}
 
+	@SuppressWarnings("deprecation")
+	@Override
+	protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+		ULog.d("l=" + l + ",t=" + t + ",oldl=" + oldl + ",oldt=" + oldt);
+		LayoutParams lp = (LayoutParams) progressbar.getLayoutParams();
+		lp.x = l;
+		lp.y = t;
+		progressbar.setLayoutParams(lp);
+		super.onScrollChanged(l, t, oldl, oldt);
+	}
 
 	@Override
 	public void loadUrl(String url) {
+		super.loadUrl(url);
 		ULog.d("url:" + url);
-		String loadurl = url;
-		// if (!TextUtils.isEmpty(loadurl) && !url.startsWith("javascript") && !url.startsWith("file") &&
-		// !url.startsWith("rtsp://"))
-		// if (loadurl.indexOf("?") != -1) {
-		// loadurl = loadurl + "&" + HeaderKeys.UUID + "=" + ComParams.UUID;
-		// } else {
-		// loadurl = loadurl + "?" + HeaderKeys.UUID + "=" + ComParams.UUID;
-		// }
-		super.loadUrl(loadurl);
-	}
-
-
-
-	@Override
-	protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-		ULog.d("onScrollChanged,l:" + l + ",t:" + t + ",oldl:" + oldl + ",oldt:" + oldt);
-		super.onScrollChanged(l, t, oldl, oldt);
-
 	}
 
 	@Override
