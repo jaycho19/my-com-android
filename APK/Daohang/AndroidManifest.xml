@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="14"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -25,6 +25,12 @@
             </intent-filter>
         </activity>
         <activity android:name="UserLRLoginActivity" >
+        </activity>
+        <activity android:name="UserFollowActivity" >
+        </activity>
+        <activity android:name="UserRecordActivity" >
+        </activity>
+        <activity android:name="UserLRRegisterActivity" >
         </activity>
     </application>
 

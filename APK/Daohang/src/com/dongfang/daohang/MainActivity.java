@@ -12,13 +12,12 @@ import android.view.ViewGroup;
 import com.dongfang.daohang.fragment.EventsFragment;
 import com.dongfang.daohang.fragment.HomeFragment;
 import com.dongfang.daohang.fragment.ListFragment;
-import com.dongfang.daohang.fragment.UserLRLoginFragment;
+import com.dongfang.daohang.fragment.SettingFragment;
+import com.dongfang.daohang.fragment.UserFragment;
 import com.dongfang.daohang.views.MyWebView;
 import com.dongfang.utils.ULog;
-import com.dongfang.utils.User;
 import com.dongfang.v4.app.BaseActivity;
 import com.dongfang.v4.app.FragmentTabHostDF;
-import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 /**
@@ -39,7 +38,7 @@ public class MainActivity extends BaseActivity {
 		setContentView(R.layout.activity_main);
 		context = this;
 		initData(getIntent());
-		ViewUtils.inject(this);
+		// ViewUtils.inject(this);
 		initTabhostItems();
 	}
 
@@ -92,8 +91,8 @@ public class MainActivity extends BaseActivity {
 		fgtHost.addTab(fgtHost.newTabSpec("0").setIndicator("地图"), HomeFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator("列表"), ListFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator("活动"), EventsFragment.class, null);
-		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator("我的"), UserLRLoginFragment.class, null);
-		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator("设置"), PlaceholderFragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator("我的"), UserFragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator("设置"), SettingFragment.class, null);
 
 //		fgtHost.setOnBeforeChangeTab(new FragmentTabHostDF.OnBeforeChangeTab() {
 //			@Override

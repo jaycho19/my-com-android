@@ -14,9 +14,12 @@ import android.view.View;
 
 import com.dongfang.broadcast.CloseAppReceiver;
 import com.dongfang.utils.ULog;
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.view.annotation.ViewInject;
 
 /**
  * 1. 所有该项目activity都需要继承该类；<br>
+ * 
  * @author dongfang
  * 
  */
@@ -36,6 +39,12 @@ public abstract class BaseActivity extends FragmentActivity {
 		registerReceiver(closeApp, filter);
 		// 系统崩溃日志,崩溃重启
 		// MyUnCaughtExceptionHandler.getInstance(this);
+	}
+
+	@Override
+	public void setContentView(int layoutResID) {
+		super.setContentView(layoutResID);
+		ViewUtils.inject(this);
 	}
 
 	@Override
