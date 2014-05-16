@@ -6,12 +6,13 @@
 
     <TextView
         android:id="@+id/fragment_userlr_login_tv_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:padding="5dp"
-        android:text="我的"
+        android:text="登录"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -90,7 +91,7 @@
         android:text="登录" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/top_bar_tv_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -105,8 +106,8 @@
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/top_bar_tv_back"
+        android:layout_below="@+id/top_bar_tv_back"
         android:layout_marginTop="10dp"
         android:src="@drawable/ic_launcher" />
 
