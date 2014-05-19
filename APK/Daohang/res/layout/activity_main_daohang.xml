@@ -6,6 +6,8 @@
     android:layout_alignParentTop="true"
     android:orientation="vertical" >
 
+    <include layout="@layout/top_bar" />
+
     <FrameLayout
         android:id="@+id/realtabcontent"
         android:layout_width="fill_parent"

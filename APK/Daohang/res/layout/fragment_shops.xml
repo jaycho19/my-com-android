@@ -9,24 +9,6 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="上海 >" />
-
-        <ImageView
-            android:id="@+id/fragment_list_top_bar_iv_ar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/icon_qr_code" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <Button
             android:id="@+id/activity_list_bar_btn_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
