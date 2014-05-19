@@ -39,7 +39,7 @@
         android:inputType="phone" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/fragment_setting_tv_invite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/editText1"
@@ -52,7 +52,7 @@
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView2"
+        android:layout_above="@+id/fragment_setting_tv_invite"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/include1"

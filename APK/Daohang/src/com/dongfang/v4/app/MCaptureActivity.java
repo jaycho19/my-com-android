@@ -17,6 +17,10 @@ import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.ScaleAnimation;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.dongfang.daohang.R;
@@ -25,7 +29,6 @@ import com.google.zxing.Result;
 import com.zxing.camera.CameraManager;
 import com.zxing.decoding.CaptureActivityHandler;
 import com.zxing.decoding.InactivityTimer;
-import com.zxing.view.ViewfinderView;
 
 /**
  * Initial the camera
@@ -35,7 +38,7 @@ import com.zxing.view.ViewfinderView;
 public class MCaptureActivity extends BaseActivity implements Callback {
 
 	private CaptureActivityHandler handler;
-	private ViewfinderView viewfinderView;
+	// private ViewfinderView viewfinderView;
 	private boolean hasSurface;
 	private Vector<BarcodeFormat> decodeFormats;
 	private String characterSet;
@@ -49,10 +52,18 @@ public class MCaptureActivity extends BaseActivity implements Callback {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_mcapture);
+		setContentView(R.layout.activity_qr_scan);
 		CameraManager.init(getApplication());
-		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
-		findViewById(R.id.top_bar_tv_back).setOnClickListener(new OnClickListener() {
+
+		ImageView mQrLineView = (ImageView) findViewById(R.id.capture_scan_line);
+		ScaleAnimation animation = new ScaleAnimation(1.0f, 1.0f, 0.0f, 1.0f);
+		animation.setRepeatCount(-1);
+		animation.setRepeatMode(Animation.RESTART);
+		animation.setInterpolator(new LinearInterpolator());
+		animation.setDuration(1200);
+		mQrLineView.startAnimation(animation);
+
+		findViewById(R.id.fragment_user_tv_edit).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				MCaptureActivity.this.finish();
@@ -158,18 +169,18 @@ public class MCaptureActivity extends BaseActivity implements Callback {
 
 	}
 
-	public ViewfinderView getViewfinderView() {
-		return viewfinderView;
-	}
+	// public ViewfinderView getViewfinderView() {
+	// return viewfinderView;
+	// }
 
 	public Handler getHandler() {
 		return handler;
 	}
 
-	public void drawViewfinder() {
-		viewfinderView.drawViewfinder();
-
-	}
+	// public void drawViewfinder() {
+	// viewfinderView.drawViewfinder();
+	//
+	// }
 
 	private void initBeepSound() {
 		if (playBeep && mediaPlayer == null) {
@@ -215,9 +226,6 @@ public class MCaptureActivity extends BaseActivity implements Callback {
 	};
 
 	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-
-	}
+	public void onClick(View v) {}
 
 }

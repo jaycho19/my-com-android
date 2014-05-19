@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/fragment_userlr_login_tv_title"
+        android:id="@+id/fragment_userlr_login_topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -15,31 +15,31 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/top_bar_tv_back"
+        android:id="@+id/fragment_user_tv_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/fragment_userlr_login_tv_title"
+        android:layout_below="@+id/fragment_userlr_login_topbar"
         android:text="编辑"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <ImageView
-        android:id="@+id/imageView1"
+    <com.dongfang.views.CircleImageView
+        android:id="@+id/fragment_user_civ_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/top_bar_tv_back"
+        android:layout_alignTop="@+id/fragment_user_tv_edit"
         android:layout_centerHorizontal="true"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="15dp"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/icon_temp" />
 
     <TextView
-        android:id="@+id/top_bar_tv_edit"
+        android:id="@+id/fragment_user_tv_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1"
+        android:layout_below="@+id/fragment_user_civ_icon"
         android:layout_centerHorizontal="true"
         android:text="Nick Name"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -49,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/top_bar_tv_edit"
+        android:layout_below="@+id/fragment_user_tv_nickname"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
@@ -63,12 +63,14 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
+            android:id="@+id/fragment_user_tv_cardnum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:gravity="right"
             android:text="0张"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -90,12 +92,14 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
+            android:id="@+id/fragment_user_tv_recode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:gravity="right"
             android:text="5个"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -117,12 +121,14 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
+            android:id="@+id/fragment_user_tv_follownum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:gravity="right"
             android:text="5个"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
     </RelativeLayout>
 
 </RelativeLayout>
