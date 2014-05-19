@@ -14,15 +14,16 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/fragment_setting_tv_map "
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="离线地图"
+        android:clickable="true"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/fragment_setting_tv_invite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -32,6 +33,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
+        android:id="@+id/fragment_setting_tv_feedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -41,6 +43,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
+        android:id="@+id/fragment_setting_tv_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -50,6 +53,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
+        android:id="@+id/fragment_setting_tv_evaluate "
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"

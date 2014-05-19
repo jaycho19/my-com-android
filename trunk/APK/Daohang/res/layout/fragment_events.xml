@@ -22,32 +22,34 @@
             android:src="@drawable/icon_qr_code" />
     </RelativeLayout>
 
-    <TextView
+    <ImageView
+        android:id="@+id/fragment_event_iv_kv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="30dp"
+        android:src="@drawable/icon_kv"
         android:text="多联广告" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <TextView
+        <ImageView
+            android:id="@+id/fragment_event_iv_ad_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:padding="30dp"
-            android:text="广告1" />
+            android:src="@drawable/icon_temp" />
 
-        <TextView
+        <ImageView
+            android:id="@+id/fragment_event_iv_ad_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:padding="30dp"
-            android:text="广告2" />
+            android:src="@drawable/icon_temp" />
+
     </LinearLayout>
 
     <ListView

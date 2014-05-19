@@ -1,20 +1,27 @@
 package com.dongfang.daohang.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.dongfang.daohang.R;
 import com.dongfang.daohang.views.MyWebView;
 import com.dongfang.v4.app.BaseFragment;
+import com.dongfang.v4.app.MCaptureActivity;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 
 public class HomeFragment extends BaseFragment {
 
 	@ViewInject(R.id.my_webview)
 	private MyWebView webView;
+	
+	@ViewInject(R.id.fragment_home_iv_qr)
+	private ImageView ivQr;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,7 +55,18 @@ public class HomeFragment extends BaseFragment {
 		return view;
 	}
 
+	@OnClick({R.id.fragment_home_iv_qr})
 	@Override
-	public void onClick(View v) {}
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.fragment_home_iv_qr:
+			getActivity().startActivity(new Intent(getActivity(), MCaptureActivity.class));
+			break;
+
+		default:
+			break;
+		}
+		
+	}
 
 }

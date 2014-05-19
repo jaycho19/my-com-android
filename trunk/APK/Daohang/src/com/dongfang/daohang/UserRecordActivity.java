@@ -6,7 +6,7 @@ import android.view.View;
 import com.dongfang.v4.app.BaseActivity;
 
 /**
- * 关注
+ * 记录点
  * 
  * @author dongfang
  *

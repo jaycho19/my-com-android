@@ -32,7 +32,6 @@ import com.dongfang.v4.app.MCaptureActivity;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.zxing.camera.CameraManager;
-import com.zxing.view.ViewfinderResultPointCallback;
 
 /**
  * This class handles all the messaging which comprises the state machine for capture.
@@ -52,8 +51,7 @@ public final class CaptureActivityHandler extends Handler {
 	public CaptureActivityHandler(MCaptureActivity activity, Vector<BarcodeFormat> decodeFormats,
 			String characterSet) {
 		this.activity = activity;
-		decodeThread = new DecodeThread(activity, decodeFormats, characterSet, new ViewfinderResultPointCallback(
-				activity.getViewfinderView()));
+		decodeThread = new DecodeThread(activity, decodeFormats, characterSet);
 		decodeThread.start();
 		state = State.SUCCESS;
 		// Start ourselves capturing previews and decoding.
@@ -128,7 +126,7 @@ public final class CaptureActivityHandler extends Handler {
 			state = State.PREVIEW;
 			CameraManager.get().requestPreviewFrame(decodeThread.getHandler(), R.id.decode);
 			CameraManager.get().requestAutoFocus(this, R.id.auto_focus);
-			activity.drawViewfinder();
+			// activity.drawViewfinder();
 		}
 	}
 

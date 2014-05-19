@@ -16,6 +16,7 @@ import com.dongfang.daohang.fragment.SettingFragment;
 import com.dongfang.daohang.fragment.UserFragment;
 import com.dongfang.daohang.views.MyWebView;
 import com.dongfang.utils.ULog;
+import com.dongfang.utils.User;
 import com.dongfang.v4.app.BaseActivity;
 import com.dongfang.v4.app.FragmentTabHostDF;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -94,17 +95,19 @@ public class MainActivity extends BaseActivity {
 		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator("我的"), UserFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator("设置"), SettingFragment.class, null);
 
-//		fgtHost.setOnBeforeChangeTab(new FragmentTabHostDF.OnBeforeChangeTab() {
-//			@Override
-//			public int onBeforeChangeTab(int index) {
-//				if (3 == index && !User.isLogined(context)) {
-//					context.startActivity(new Intent(context, UserLRLoginActivity.class));
-//					return index;
-//				}
-//				return -1;
-//			}
-//		});
-//		fgtHost.setCurrentTab(0);
+		User.saveToken(this, "11111111111111111");
+
+		fgtHost.setOnBeforeChangeTab(new FragmentTabHostDF.OnBeforeChangeTab() {
+			@Override
+			public int onBeforeChangeTab(int index) {
+				if (3 == index && !User.isLogined(context)) {
+					context.startActivity(new Intent(context, UserLRLoginActivity.class));
+					return index;
+				}
+				return -1;
+			}
+		});
+		// fgtHost.setCurrentTab(0);
 	}
 
 	/**
