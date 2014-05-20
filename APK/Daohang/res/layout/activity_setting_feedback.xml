@@ -9,7 +9,7 @@
         layout="@layout/top_bar" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/fragment_userinfo_modify_btn_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -22,7 +22,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
+        android:layout_above="@+id/fragment_userinfo_modify_btn_name"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:text="请留下您的联系方式。\n如果意见采纳，我们将提供丰厚的奖金。"

@@ -20,6 +20,11 @@ import android.widget.TextView;
 
 import com.dongfang.daohang.R;
 
+/**
+ * 底部弹出框
+ * @author dongfang
+ *
+ */
 public final class MMAlert {
 
 	public interface OnAlertSelectId {
