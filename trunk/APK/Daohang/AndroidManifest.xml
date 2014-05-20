@@ -29,19 +29,20 @@
         <activity
             android:name="com.dongfang.daohang.MainDaohangActivity"
             android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.dongfang.daohang.MainActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.dongfang.daohang.MainActivity"
-            android:label="@string/app_name" >
-        </activity>
         <activity android:name="UserLRLoginActivity" />
         <activity android:name="UserFollowActivity" />
         <activity android:name="UserInfoActivity" />
+        <activity android:name="UserInfoModifyActivity" />
         <activity android:name="UserRecordActivity" />
         <activity android:name="UserLRRegisterActivity" />
         <activity android:name="com.dongfang.v4.app.MCaptureActivity" />
