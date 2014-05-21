@@ -95,7 +95,7 @@ public class MainActivity extends BaseActivity {
 		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator("我的"), UserFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator("设置"), SettingFragment.class, null);
 
-		User.saveToken(this, "11111111111111111");
+		User.saveToken(this, "");
 
 		fgtHost.setOnBeforeChangeTab(new FragmentTabHostDF.OnBeforeChangeTab() {
 			@Override

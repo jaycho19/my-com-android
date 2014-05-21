@@ -25,7 +25,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme" android:name="com.dongfang.v4.app.BaseApplication">
         <activity
             android:name="com.dongfang.daohang.MainDaohangActivity"
             android:label="@string/app_name" >
