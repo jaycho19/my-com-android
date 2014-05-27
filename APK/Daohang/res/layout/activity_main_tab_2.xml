@@ -3,7 +3,7 @@
     android:id="@+id/activity_main_tab_tv"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/tab_bg_1"
+    android:background="@drawable/tab_bg_2"
     android:gravity="center"
     android:paddingTop="3dp"
     android:text="首页"

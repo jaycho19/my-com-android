@@ -29,7 +29,7 @@
         android:layout_alignRight="@+id/activity_userlr_tv_back"
         android:layout_below="@+id/activity_userlr_tv_back"
         android:layout_marginTop="10dp"
-        android:text="用户名" />
+        android:hint="用户名" />
 
     <EditText
         android:id="@+id/fragment_userlr_login_et_psw"
@@ -39,7 +39,7 @@
         android:layout_alignRight="@+id/activity_userlr_tv_back"
         android:layout_below="@+id/fragment_userlr_login_et_name"
         android:layout_marginTop="10dp"
-        android:text="密码" >
+        android:hint="密码" >
     </EditText>
 
     <CheckBox

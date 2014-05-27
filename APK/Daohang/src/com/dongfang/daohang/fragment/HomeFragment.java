@@ -51,7 +51,7 @@ public class HomeFragment extends BaseFragment {
 		// e.printStackTrace();
 		// }
 
-		webView.loadUrl("http://www.baidu.com");
+		webView.loadUrl("http://www.diandian.com/home");
 		// webView.loadUrl("http://www.google.com");
 		return view;
 	}

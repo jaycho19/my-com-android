@@ -1,134 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EFF1F3"
     android:orientation="vertical" >
 
-    <TextView
+    <include
         android:id="@+id/fragment_userlr_login_topbar"
+        layout="@layout/top_bar" />
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:gravity="center_horizontal"
-        android:padding="5dp"
-        android:text="我的"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/top_bar_btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/fragment_userlr_login_topbar"
-        android:text="编辑"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <com.dongfang.views.CircleImageView
-        android:id="@+id/fragment_user_civ_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/top_bar_btn_back"
-        android:layout_centerHorizontal="true"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="15dp"
-        android:src="@drawable/icon_temp" />
-
-    <TextView
-        android:id="@+id/fragment_user_tv_nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fragment_user_civ_icon"
-        android:layout_centerHorizontal="true"
-        android:text="Nick Name"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_height="1px"
+        android:background="#999999" />
 
     <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/fragment_user_info"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/top_bar_btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:text="编辑"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#616161" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <com.dongfang.views.CircleImageView
+                android:id="@+id/fragment_user_civ_icon"
+                android:layout_width="85px"
+                android:layout_height="85px"
+                android:src="@drawable/icon_temp" />
+
+            <TextView
+                android:id="@+id/fragment_user_tv_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="jaffice"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#616161" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#999999" />
+
+    <TextView
         android:id="@+id/fragment_user_rl_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/fragment_user_tv_nickname"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@android:color/holo_purple"
-        android:padding="10dp" >
+        android:drawableRight="@drawable/btn_goto"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text="我的会员卡"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#616161"
+        android:visibility="gone" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="我的会员卡"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#999999"
+        android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/fragment_user_tv_cardnum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:gravity="right"
-            android:text="0张"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
+    <TextView
         android:id="@+id/fragment_user_rl_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/fragment_user_rl_1"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@android:color/holo_purple"
-        android:padding="10dp" >
+        android:drawableRight="@drawable/btn_goto"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text="我的记录点(5个)"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#616161" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="我的记录点"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#999999" />
 
-        <TextView
-            android:id="@+id/fragment_user_tv_recode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:gravity="right"
-            android:text="5个"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
+    <TextView
         android:id="@+id/fragment_user_rl_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/fragment_user_rl_2"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@android:color/holo_purple"
-        android:padding="10dp" >
+        android:drawableRight="@drawable/btn_goto"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text="我的关注(5个)"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#616161" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="我的关注"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#999999" />
 
-        <TextView
-            android:id="@+id/fragment_user_tv_follownum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:gravity="right"
-            android:text="5个"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    </RelativeLayout>
-
-</RelativeLayout>
+</LinearLayout>
