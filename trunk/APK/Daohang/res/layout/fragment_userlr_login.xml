@@ -60,36 +60,34 @@
         android:text="忘记密码"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/fragment_userlr_login_bt_register"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/fragment_userlr_login_ll"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/checkBox1"
         android:layout_below="@+id/checkBox1"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:text="注册" />
+        android:layout_margin="20dp" >
 
-    <Button
-        android:id="@+id/fragment_userlr_login_bt_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/fragment_userlr_login_bt_register"
-        android:layout_alignBottom="@+id/fragment_userlr_login_bt_register"
-        android:layout_alignRight="@+id/fragment_userlr_login_tv_frogentpsw"
-        android:layout_marginRight="40dp"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:text="登录" />
+        <Button
+            android:id="@+id/fragment_userlr_login_bt_register"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="注册" />
+
+        <Button
+            android:id="@+id/fragment_userlr_login_bt_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="登录" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/fragment_user_tv_edit"
+        android:id="@+id/top_bar_btn_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/fragment_userlr_login_bt_register"
+        android:layout_below="@+id/fragment_userlr_login_ll"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
@@ -100,8 +98,8 @@
         android:id="@+id/fragment_user_civ_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/fragment_user_tv_edit"
-        android:layout_below="@+id/fragment_user_tv_edit"
+        android:layout_alignLeft="@+id/top_bar_btn_back"
+        android:layout_below="@+id/top_bar_btn_back"
         android:layout_marginTop="10dp"
         android:src="@drawable/ic_launcher" />
 

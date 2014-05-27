@@ -2,33 +2,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:background="@color/white_background" >
 
-    <TextView
-        android:id="@+id/fragment_user_tv_edit"
+    <ImageView
+        android:id="@+id/top_bar_btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="返回"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:src="@drawable/btn_back" />
 
     <TextView
-        android:id="@+id/fragment_user_tv_nickname"
+        android:id="@+id/top_bar_tv_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="编辑"
-        android:visibility="gone"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/top_bar_tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:text="title"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

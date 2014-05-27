@@ -19,34 +19,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:src="@drawable/icon_qr_code" />
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_qr" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dp" >
 
         <Button
-            android:id="@+id/activity_list_bar_btn_left"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
+            android:layout_weight="1"
+            android:text="500米>" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="全部 >" />
 
-        <EditText
-            android:id="@+id/activity_list_top_tv_title"
-            android:layout_width="wrap_content"
+        <Button
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/activity_list_bar_btn_left"
-            android:layout_alignBottom="@+id/activity_list_bar_btn_left"
-            android:layout_alignParentRight="true"
-            android:layout_toRightOf="@+id/activity_list_bar_btn_left"
-            android:gravity="center"
-            android:singleLine="true"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-    </RelativeLayout>
+            android:layout_weight="1"
+            android:text="默认>" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/listView1"

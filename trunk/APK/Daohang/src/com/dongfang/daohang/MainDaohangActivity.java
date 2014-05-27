@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.dongfang.daohang.fragment.DetailFragment;
-import com.dongfang.daohang.fragment.EventsFragment;
+import com.dongfang.daohang.fragment.ActivityFragment;
 import com.dongfang.daohang.fragment.FloorFragment;
 import com.dongfang.daohang.fragment.ShopsFragment;
 import com.dongfang.daohang.fragment.UserFragment;
@@ -86,7 +86,7 @@ public class MainDaohangActivity extends BaseActivity {
 
 		fgtHost.addTab(fgtHost.newTabSpec("0").setIndicator("楼层"), FloorFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator("商户"), ShopsFragment.class, null);
-		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator("活动"), EventsFragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator("活动"), ActivityFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator("我的"), UserFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator("详情"), DetailFragment.class, null);
 

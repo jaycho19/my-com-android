@@ -12,11 +12,11 @@ import com.dongfang.v4.app.BaseFragment;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 
-public class EventsFragment extends BaseFragment {
+public class ActivityFragment extends BaseFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_events, container, false);
+		View view = inflater.inflate(R.layout.fragment_activity, container, false);
 		ViewUtils.inject(this, view);
 		return view;
 	}

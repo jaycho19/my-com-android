@@ -4,29 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/fragment_user_tv_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="注册"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/activity_userlr_tv_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <include
+        android:id="@+id/top_bar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="&lt;返回"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        layout="@layout/top_bar" />
 
     <TextView
         android:id="@+id/top_bar_tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/activity_userlr_tv_back"
+        android:layout_below="@+id/top_bar"
         android:layout_marginTop="50dp"
         android:text="用户名"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -90,8 +79,9 @@
         android:id="@+id/activity_userlr_bt_rigister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/activity_userlr_et_phonenum"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
         android:text="注册" />
 
