@@ -52,7 +52,7 @@ public class UserLRLoginFragment extends BaseFragment {
 				.trim()));
 	}
 
-	@OnClick({ R.id.fragment_userlr_login_bt_register, R.id.fragment_userlr_login_bt_login,
+	@OnClick({ R.id.fragment_userlr_login_bt_register, R.id.fragment_userlr_login_bt_login
 
 	})
 	@Override
@@ -67,6 +67,12 @@ public class UserLRLoginFragment extends BaseFragment {
 			new HttpUtils().send(HttpMethod.GET,
 					HttpActions.login(etName.getText().toString().trim(), etPsw.getText().toString().trim()),
 					new RequestCallBack<String>() {
+						@Override
+						public void onStart() {
+							super.onStart();
+							ULog.d(this.getRequestUrl());
+							Toast.makeText(getActivity(), "ing", Toast.LENGTH_SHORT).show();
+						}
 
 						@Override
 						public void onSuccess(ResponseInfo<String> responseInfo) {
