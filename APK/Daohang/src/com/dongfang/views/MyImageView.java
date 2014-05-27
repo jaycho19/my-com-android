@@ -97,9 +97,7 @@ public class MyImageView extends RelativeLayout {
 				// bigPicDisplayConfig.setShowOriginal(true);
 				bigPicDisplayConfig.setBitmapConfig(Bitmap.Config.RGB_565);
 			}
-			BitmapSize bSize = new BitmapSize();
-			bSize.setWidth(maxWidth);
-			bSize.setHeight(maxHeight);
+			BitmapSize bSize = new BitmapSize(maxWidth,maxHeight);
 			bigPicDisplayConfig.setBitmapMaxSize(bSize);
 
 			bitmapUtils.display(imageView, url, bigPicDisplayConfig);

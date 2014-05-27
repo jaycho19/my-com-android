@@ -26,14 +26,14 @@ public class UserFragment extends BaseFragment {
 	}
 
 	@OnClick({ R.id.fragment_user_civ_icon, R.id.fragment_user_rl_1, R.id.fragment_user_rl_2, R.id.fragment_user_rl_3,
-			R.id.fragment_user_tv_edit
+			R.id.top_bar_btn_back
 
 	})
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.fragment_user_civ_icon:
-		case R.id.fragment_user_tv_edit:
+		case R.id.top_bar_btn_back:
 			getActivity().startActivity(new Intent(getActivity(), UserInfoActivity.class));
 			break;
 		case R.id.fragment_user_rl_1:

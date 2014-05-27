@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.dongfang.daohang.MainDaohangActivity;
 import com.dongfang.daohang.R;
 import com.dongfang.daohang.views.MyWebView;
 import com.dongfang.v4.app.BaseFragment;
@@ -19,7 +20,7 @@ public class HomeFragment extends BaseFragment {
 
 	@ViewInject(R.id.my_webview)
 	private MyWebView webView;
-	
+
 	@ViewInject(R.id.fragment_home_iv_qr)
 	private ImageView ivQr;
 
@@ -27,7 +28,7 @@ public class HomeFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_home, container, false);
 		ViewUtils.inject(this, view);
-		
+
 		// MyWebView v = (MyWebView) rootView.findViewById(R.id.my_webview);
 
 		// SVG svg;
@@ -50,23 +51,26 @@ public class HomeFragment extends BaseFragment {
 		// e.printStackTrace();
 		// }
 
-//		webView.loadUrl("http://www.baidu.com");
-		webView.loadUrl("http://www.google.com");
+		webView.loadUrl("http://www.baidu.com");
+		// webView.loadUrl("http://www.google.com");
 		return view;
 	}
 
-	@OnClick({R.id.fragment_home_iv_qr})
+	@OnClick({ R.id.fragment_home_iv_qr, R.id.activity_maini_top_bar_btn_left, })
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.fragment_home_iv_qr:
 			getActivity().startActivity(new Intent(getActivity(), MCaptureActivity.class));
 			break;
+		case R.id.activity_maini_top_bar_btn_left:
+			getActivity().startActivity(new Intent(getActivity(), MainDaohangActivity.class));
+			break;
 
 		default:
 			break;
 		}
-		
+
 	}
 
 }

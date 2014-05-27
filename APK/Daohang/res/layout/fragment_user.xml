@@ -15,7 +15,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/fragment_user_tv_edit"
+        android:id="@+id/top_bar_btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -27,7 +27,7 @@
         android:id="@+id/fragment_user_civ_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/fragment_user_tv_edit"
+        android:layout_alignTop="@+id/top_bar_btn_back"
         android:layout_centerHorizontal="true"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"

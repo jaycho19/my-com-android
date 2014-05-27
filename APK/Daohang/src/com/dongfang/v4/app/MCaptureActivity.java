@@ -63,7 +63,7 @@ public class MCaptureActivity extends BaseActivity implements Callback {
 		animation.setDuration(1200);
 		mQrLineView.startAnimation(animation);
 
-		findViewById(R.id.fragment_user_tv_edit).setOnClickListener(new OnClickListener() {
+		findViewById(R.id.top_bar_btn_back).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				MCaptureActivity.this.finish();

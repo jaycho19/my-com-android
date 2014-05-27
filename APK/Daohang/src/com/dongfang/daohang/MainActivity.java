@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dongfang.daohang.fragment.EventsFragment;
+import com.dongfang.daohang.fragment.ActivityFragment;
 import com.dongfang.daohang.fragment.HomeFragment;
 import com.dongfang.daohang.fragment.ListFragment;
 import com.dongfang.daohang.fragment.SettingFragment;
@@ -91,7 +91,7 @@ public class MainActivity extends BaseActivity {
 
 		fgtHost.addTab(fgtHost.newTabSpec("0").setIndicator("地图"), HomeFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator("列表"), ListFragment.class, null);
-		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator("活动"), EventsFragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator("活动"), ActivityFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator("我的"), UserFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator("设置"), SettingFragment.class, null);
 

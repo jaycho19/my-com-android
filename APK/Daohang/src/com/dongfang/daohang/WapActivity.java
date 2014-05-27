@@ -24,7 +24,7 @@ public class WapActivity extends BaseActivity {
 
 	}
 
-	@OnClick(R.id.fragment_user_tv_edit)
+	@OnClick(R.id.top_bar_btn_back)
 	@Override
 	public void onClick(View v) {
 		finish();
