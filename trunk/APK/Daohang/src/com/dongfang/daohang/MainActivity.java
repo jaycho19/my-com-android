@@ -25,6 +25,8 @@ import com.lidroid.xutils.view.annotation.ViewInject;
  */
 public class MainActivity extends BaseActivity {
 
+	public static int tab = 0;
+
 	@ViewInject(android.R.id.tabhost)
 	private FragmentTabHostDF fgtHost;
 
@@ -62,6 +64,12 @@ public class MainActivity extends BaseActivity {
 		tab3.setText("活动");
 		tab4.setText("我的");
 		tab5.setText("设置");
+		
+		tab1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mian_activity_tab_0, 0, 0, 0);
+		tab2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mian_activity_tab_1, 0, 0, 0);
+		tab3.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mian_activity_tab_2, 0, 0, 0);
+		tab4.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mian_activity_tab_3, 0, 0, 0);
+		tab5.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mian_activity_tab_4, 0, 0, 0);
 
 		fgtHost.getTabWidget().setDividerDrawable(null);
 
@@ -71,19 +79,26 @@ public class MainActivity extends BaseActivity {
 		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab4), UserFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab5), SettingFragment.class, null);
 
-		User.saveToken(this, "098753421");
+		User.saveToken(this, "25");
 
 		fgtHost.setOnBeforeChangeTab(new FragmentTabHostDF.OnBeforeChangeTab() {
 			@Override
 			public int onBeforeChangeTab(int index) {
 				if (3 == index && !User.isLogined(context)) {
 					context.startActivity(new Intent(context, UserLRLoginActivity.class));
+					tab = 0;
 					return index;
 				}
 				return -1;
 			}
 		});
-		// fgtHost.setCurrentTab(0);
+
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		fgtHost.setCurrentTab(tab);
 	}
 
 	@Override

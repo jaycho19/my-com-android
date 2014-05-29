@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dongfang.daohang.beans.UserBean;
@@ -30,10 +31,15 @@ public class UserLRRegisterActivity extends BaseActivity {
 	@ViewInject(R.id.activity_userlr_et_phonenum)
 	private EditText etPhonenum;
 
+	@ViewInject(R.id.top_bar_tv_title)
+	private TextView title;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_userlr_register);
+		title.setText("注册");
+
 	}
 
 	protected boolean isNotInputed() {
@@ -42,18 +48,32 @@ public class UserLRRegisterActivity extends BaseActivity {
 				|| TextUtils.isEmpty(etPhonenum.getText().toString().trim());
 	}
 
-	@OnClick({ R.id.activity_userlr_bt_rigister })
+	@OnClick({ R.id.activity_userlr_bt_rigister, R.id.top_bar_btn_back })
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.top_bar_btn_back: {
+			finish();
+		}
+			break;
 		case R.id.activity_userlr_bt_rigister: {
 			if (isNotInputed()) {
 				Toast.makeText(UserLRRegisterActivity.this, "请输入用户名,密码和手机号码", Toast.LENGTH_SHORT).show();
 				return;
 			}
 
-			new HttpUtils().send(HttpMethod.GET, HttpActions.register("df", "111111", "09876543216", "123456"),
+			String name = etName.getText().toString().trim();
+			String psw = etPsw.getText().toString().trim();
+			String phone = etPhonenum.getText().toString().trim();
+
+			new HttpUtils().send(HttpMethod.GET, HttpActions.register(name, psw, phone, "123456"),
 					new RequestCallBack<String>() {
+
+						@Override
+						public void onStart() {
+							super.onStart();
+							ULog.d(getRequestUrl());
+						}
 
 						@Override
 						public void onSuccess(ResponseInfo<String> responseInfo) {
@@ -64,10 +84,10 @@ public class UserLRRegisterActivity extends BaseActivity {
 								User.saveToken(UserLRRegisterActivity.this, user.getUserToken());
 								User.savePhone(UserLRRegisterActivity.this, user.getMobile());
 
+								finish();
+
 							} catch (DFException e) {
-								if (e.getStatusCode() == 1000)
-									Toast.makeText(UserLRRegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT)
-											.show();
+								Toast.makeText(UserLRRegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 								e.printStackTrace();
 							}
 

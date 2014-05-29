@@ -21,11 +21,7 @@ public class ActivityFragment extends BaseFragment {
 		return view;
 	}
 
-	@OnClick({
-
-	R.id.fragment_event_iv_ad_1, R.id.fragment_event_iv_ad_2, R.id.fragment_event_iv_kv,
-
-	})
+	@OnClick({R.id.fragment_activity_iv_ad})
 	@Override
 	public void onClick(View v) {
 		Intent intent = new Intent(getActivity(), WapActivity.class);
