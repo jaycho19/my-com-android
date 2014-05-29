@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <include layout="@layout/dialog_goto" />
+
     <com.dongfang.daohang.views.MyWebView
         android:id="@+id/fragment_floor_myWebView"
         android:layout_width="match_parent"

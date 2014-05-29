@@ -6,14 +6,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        >
+        android:layout_height="wrap_content"
+        android:background="@color/white_background" >
 
-        <Button
+        <ImageView
+            android:id="@+id/fragment_list_top_bar_iv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="上海 >" />
+            android:src="@drawable/main_top_shanghai" />
 
         <ImageView
             android:id="@+id/fragment_list_top_bar_iv_ar"
@@ -21,37 +22,22 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
             android:src="@drawable/icon_qr" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/fragment_list_top_bar_iv_title"
+            android:background="#999999" />
     </RelativeLayout>
 
     <ImageView
-        android:id="@+id/fragment_event_iv_kv"
+        android:id="@+id/fragment_activity_iv_ad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:src="@drawable/icon_kv"
-        android:text="多联广告" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <ImageView
-            android:id="@+id/fragment_event_iv_ad_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:src="@drawable/icon_temp" />
-
-        <ImageView
-            android:id="@+id/fragment_event_iv_ad_2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:src="@drawable/icon_temp" />
-    </LinearLayout>
+        android:adjustViewBounds="true"
+        android:src="@drawable/temp_1" />
 
     <ListView
         android:id="@+id/listView1"

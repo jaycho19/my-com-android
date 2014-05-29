@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dongfang.daohang.MainActivity;
 import com.dongfang.daohang.R;
 import com.dongfang.daohang.UserLRRegisterActivity;
 import com.dongfang.daohang.beans.UserBean;
@@ -34,6 +36,8 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
  *
  */
 public class UserLRLoginFragment extends BaseFragment {
+	@ViewInject(R.id.top_bar_tv_title)
+	private TextView title;
 
 	@ViewInject(R.id.fragment_userlr_login_et_name)
 	private EditText etName;
@@ -44,6 +48,8 @@ public class UserLRLoginFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_userlr_login, container, false);
 		ViewUtils.inject(this, view);
+		title.setText("登录");
+
 		return view;
 	}
 
@@ -52,12 +58,13 @@ public class UserLRLoginFragment extends BaseFragment {
 				.trim()));
 	}
 
-	@OnClick({ R.id.fragment_userlr_login_bt_register, R.id.fragment_userlr_login_bt_login
-
-	})
+	@OnClick({ R.id.fragment_userlr_login_bt_register, R.id.fragment_userlr_login_bt_login, R.id.top_bar_btn_back })
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.top_bar_btn_back:
+			getActivity().finish();
+			break;
 		case R.id.fragment_userlr_login_bt_login: {
 			if (!isInputed()) {
 				Toast.makeText(getActivity(), "请输入用户名和密码", Toast.LENGTH_SHORT).show();
@@ -83,8 +90,15 @@ public class UserLRLoginFragment extends BaseFragment {
 								ULog.d(user.toString());
 								User.saveToken(getActivity(), user.getUserToken());
 								User.savePhone(getActivity(), user.getMobile());
+
+								MainActivity.tab = 3;
+								getActivity().finish();
+
 							} catch (DFException e) {
 								e.printStackTrace();
+
+								Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+
 							}
 
 						}

@@ -5,13 +5,14 @@
     android:background="@color/white_background"
     android:padding="5dp" >
 
-    <Button
+    <ImageView
         android:id="@+id/activity_maini_top_bar_btn_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="上海 >" />
+        android:src="@drawable/main_top_shanghai"
+         />
 
     <ImageView
         android:id="@+id/fragment_home_iv_qr"

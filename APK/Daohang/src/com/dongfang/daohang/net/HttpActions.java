@@ -41,8 +41,8 @@ public final class HttpActions {
 		sb.append("&").append("method=").append("login");
 
 		JsonObject json = new JsonObject();
-		json.addProperty("uname", "1".equals(name) ? "fuchen" : name);
-		json.addProperty("upass", "1".equals(pwd) ? "123456" : pwd);
+		json.addProperty("uname", "q".equals(name) ? "fuchen" : name);
+		json.addProperty("upass", "q".equals(pwd) ? "654321" : pwd);
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		return sb.toString();
 	}

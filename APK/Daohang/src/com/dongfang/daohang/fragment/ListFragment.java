@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dongfang.daohang.R;
-import com.dongfang.daohang.R.layout;
 import com.dongfang.v4.app.BaseFragment;
 import com.lidroid.xutils.ViewUtils;
 
