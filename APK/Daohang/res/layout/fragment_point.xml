@@ -4,13 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include
-        layout="@layout/dialog_goto"
-        android:visibility="gone" />
-
-    <com.dongfang.daohang.views.MyWebView
-        android:id="@+id/fragment_floor_myWebView"
+    <ListView
+        android:id="@+id/fragment_point_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+    </ListView>
 
 </LinearLayout>

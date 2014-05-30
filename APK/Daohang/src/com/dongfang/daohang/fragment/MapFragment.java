@@ -11,23 +11,19 @@ import com.dongfang.v4.app.BaseFragment;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
-/**
- * 楼层
- * 
- * @author dongfang
- *
- */
-public class FloorFragment extends BaseFragment {
-	@ViewInject(R.id.fragment_floor_myWebView)
+public class MapFragment extends BaseFragment {
+
+	@ViewInject(R.id.my_webview_1)
 	private MyWebView webView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_floor, null);
-		ViewUtils.inject(this, v);
+		View view = inflater.inflate(R.layout.fragment_map, container, false);
+		ViewUtils.inject(this, view);
 
-		webView.loadUrl("http://211.149.200.227:30001/web/index.php?m=1&s=335&e=337");
-		return v;
+//		webView.loadUrl("http://www.baidu.com");
+		webView.loadUrl("http://211.149.200.227:30001/web/index.php");
+		return view;
 	}
 
 	@Override
