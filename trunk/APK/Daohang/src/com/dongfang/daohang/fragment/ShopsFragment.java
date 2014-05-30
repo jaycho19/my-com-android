@@ -26,9 +26,6 @@ public class ShopsFragment extends BaseFragment {
 	}
 
 	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-
-	}
+	public void onClick(View v) {}
 
 }
