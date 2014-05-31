@@ -88,8 +88,7 @@ public class Shops1Fragment extends BaseFragment {
 			@Override
 			public int onBeforeChangeTab(int index) {
 				if (2 == index) {
-					// PointTypeAlert.show(getActivity(), new String[]{"男卫生间","女卫生间","紧急逃生口","扶行梯"}, null);
-					horizontalscrollview.setVisibility(View.VISIBLE);
+					horizontalscrollview.setVisibility(horizontalscrollview.isShown() ? View.GONE : View.VISIBLE);
 					return 1;
 				}
 				else {
