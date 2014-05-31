@@ -1,7 +1,9 @@
 package com.dongfang.daohang.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,36 +25,19 @@ public class HomeFragment extends BaseFragment {
 
 	@ViewInject(R.id.fragment_home_iv_qr)
 	private ImageView ivQr;
+	
+	Contact contact;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_home, container, false);
 		ViewUtils.inject(this, view);
-
-		// MyWebView v = (MyWebView) rootView.findViewById(R.id.my_webview);
-
-		// SVG svg;
-		// try {
-		// svg = SVGParser.getSVGFromAsset(getActivity().getAssets(), "test1.svg");
-		// Picture picture = svg.getPicture();
-		// ULog.d(picture.getHeight() + "");
-		// // Drawable drawable = svg.createPictureDrawable();
-		// v.setImageDrawable(new PictureDrawable(picture));
-		// Bitmap bmp = v.getDrawingCache();
-		// Matrix matrix = new Matrix();
-		// matrix.postScale(0.05f, 0.05f);
-		// Bitmap newbm = Bitmap.createBitmap(bmp, 0, 0, picture.getWidth(), picture.getHeight(), matrix, true);
-		// v.setImageBitmap(newbm);
-		// } catch (SVGParseException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// } catch (IOException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-
-		webView.loadUrl("http://211.149.200.227:30001/web/index.php?m=1&s=335&e=337");
+		// webView.loadUrl("http://211.149.200.227:30001/web/index.php?m=1&s=335&e=337");
 		// webView.loadUrl("http://www.google.com");
+		// webView.loadUrl("http://www.google.com");
+		webView.loadUrl("file:///android_asset/index.html");
+		contact = new Contact();
+		webView.addJavascriptInterface(contact, "contact");
 		return view;
 	}
 
@@ -61,16 +46,32 @@ public class HomeFragment extends BaseFragment {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.fragment_home_iv_qr:
-			getActivity().startActivity(new Intent(getActivity(), MCaptureActivity.class));
+			contact.showcontacts("[{\"name\":\"zxx\", \"amount\":\"8888\", \"phone\":\"18600012345\"},{\"name\":\"zxx\", \"amount\":\"9999999\", \"phone\":\"18600012345\"}]");
+			//  getActivity().startActivity(new Intent(getActivity(), MCaptureActivity.class));
 			break;
 		case R.id.activity_maini_top_bar_btn_left:
 			getActivity().startActivity(new Intent(getActivity(), MainDaohangActivity.class));
 			break;
-
 		default:
 			break;
 		}
-
 	}
 
+	private final class Contact {
+		
+		
+		// JavaScript调用此方法拨打电话
+		public void call(String phone) {
+			startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone)));
+		}
+
+		// Html调用此方法传递数据
+		public void showcontacts(String s ) {
+			String json = "[{\"name\":\"zxx\", \"amount\":\"9999999\", \"phone\":\"18600012345\"}]";
+			
+			json = TextUtils.isEmpty(s) ? json : s;
+			// 调用JS中的方法
+			webView.loadUrl("javascript:show('" + json + "')");
+		}
+	}
 }
