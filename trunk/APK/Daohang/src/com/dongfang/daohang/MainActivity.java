@@ -79,7 +79,7 @@ public class MainActivity extends BaseActivity {
 		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab4), UserFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab5), SettingFragment.class, null);
 
-		User.saveToken(this, "25");
+//		User.saveToken(this, "25");
 
 		fgtHost.setOnBeforeChangeTab(new FragmentTabHostDF.OnBeforeChangeTab() {
 			@Override
@@ -89,6 +89,7 @@ public class MainActivity extends BaseActivity {
 					tab = 0;
 					return index;
 				}
+				tab = index;
 				return -1;
 			}
 		});

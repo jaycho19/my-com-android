@@ -3,7 +3,6 @@ package com.dongfang.daohang;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.dongfang.v4.app.BaseActivity;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -33,15 +32,12 @@ public class UserInfoModifyActivity extends BaseActivity {
 	private LinearLayout llUserPhoneNum;
 	@ViewInject(R.id.fragment_userinfo_modify_ll_userpsw)
 	private LinearLayout llUserPsw;
-	
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_info_modify);
 
-		
 		switch (getIntent().getIntExtra("type", TYPE_FRAGMENT_USERNAME)) {
 		case TYPE_FRAGMENT_NICKNAME:
 			llUserNickName.setVisibility(View.VISIBLE);
@@ -59,22 +55,8 @@ public class UserInfoModifyActivity extends BaseActivity {
 			llUserName.setVisibility(View.VISIBLE);
 			break;
 		}
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	@OnClick({ R.id.activity_user_info_rl_header })
 	@Override

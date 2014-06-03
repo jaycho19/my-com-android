@@ -1,8 +1,12 @@
 package com.dongfang.utils;
 
-import java.util.ArrayList;
+import java.lang.reflect.Type;
+import java.util.List;
+
 import org.json.JSONObject;
+
 import android.text.TextUtils;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -46,10 +50,30 @@ public class JsonAnalytic {
 	}
 
 	/**
+	 * 
 	 * 模版解析
 	 * 
 	 * @param json
 	 * @param tClass
+	 * @return
+	 * @throws DFException
+	 */
+	public <T> T analyseJsonT(String json, Type type) throws DFException {
+		if (TextUtils.isEmpty(json))
+			throw new DFException(DFException.JSON_ANALYTIC_STRING_NULL);
+		try {
+			return new Gson().fromJson(json, type);
+		} catch (Exception e) {
+			throw new DFException(e);
+		}
+	}
+
+	/**
+	 * 模版解析
+	 * 
+	 * @param json
+	 * @param tClass
+	 * @return
 	 * @return
 	 * @throws DFException
 	 */
@@ -65,22 +89,19 @@ public class JsonAnalytic {
 			return new Gson().fromJson(jsonObj.getString(KEY_INFO), tClass);
 		} catch (Exception e) {
 			throw new DFException(e);
-
 		}
 	}
 
 	/**
 	 * 模版解析2(针对返回110 的code)
 	 * 
-	 * @param <T>
-	 * 
-	 * @param <T>
 	 * @param json
 	 * @param tClass
 	 * @return
 	 * @throws DFException
 	 */
-	public <T> ArrayList<T> analyseJsonTList(String json, Class<T> tClass) throws DFException {
+
+	public <T> List<T> analyseJsonTList(String json, Type type) throws DFException {
 		if (TextUtils.isEmpty(json))
 			throw new DFException(DFException.JSON_ANALYTIC_STRING_NULL);
 		try {
@@ -89,7 +110,7 @@ public class JsonAnalytic {
 			if (0 != code) {
 				throw new DFException(jsonObj.optString(KEY_MSG), code);
 			}
-			return new Gson().fromJson(jsonObj.getString(KEY_INFO), new TypeToken<ArrayList<T>>() {}.getType());
+			return new Gson().fromJson(jsonObj.getString(KEY_INFO), type);
 		} catch (Exception e) {
 			throw new DFException(e);
 		}

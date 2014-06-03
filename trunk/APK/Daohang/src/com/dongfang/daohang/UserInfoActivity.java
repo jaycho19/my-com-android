@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.dongfang.daohang.dialog.MMAlert;
 import com.dongfang.daohang.dialog.MMAlert.OnAlertSelectId;
@@ -20,6 +21,11 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
  */
 public class UserInfoActivity extends BaseActivity {
 
+	@ViewInject(R.id.top_bar_btn_back)
+	private View v;
+	@ViewInject(R.id.top_bar_tv_title)
+	private TextView title;
+
 	@ViewInject(R.id.activity_user_info_rl_header)
 	private RelativeLayout rlHeader;
 
@@ -27,11 +33,12 @@ public class UserInfoActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_info);
+		title.setText("个人中心");
 	}
 
 	@OnClick({ R.id.activity_user_info_rl_header, R.id.activity_user_info_rl_nickname,
 			R.id.activity_user_info_rl_phonenumber, R.id.activity_user_info_rl_username,
-			R.id.activity_user_info_rl_userpsw, R.id.activity_user_info_rl_usersex
+			R.id.activity_user_info_rl_userpsw, R.id.top_bar_btn_back, R.id.activity_user_info_rl_usersex
 
 	})
 	@Override
@@ -65,6 +72,9 @@ public class UserInfoActivity extends BaseActivity {
 		case R.id.activity_user_info_rl_usersex:
 			intent.putExtra("type", UserInfoModifyActivity.TYPE_FRAGMENT_USERSEX);
 			break;
+		case R.id.top_bar_btn_back:
+			finish();
+			return;
 		default:
 			break;
 		}

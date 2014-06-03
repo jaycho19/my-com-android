@@ -3,6 +3,7 @@ package com.dongfang.daohang.fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
@@ -29,6 +30,8 @@ public class Shops1Fragment extends BaseFragment {
 	private HorizontalScrollView horizontalscrollview;
 	@ViewInject(R.id.fragment_shops_1_ll)
 	private LinearLayout ll;
+
+	private String[] items = new String[] { "男卫生间", "女卫生间", "紧急逃生口", "扶行梯" };
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,12 +79,25 @@ public class Shops1Fragment extends BaseFragment {
 		LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(-2, -2);
 		llp.setMargins(10, 5, 5, 5);
 
-		for (String s : new String[] { "男卫生间", "女卫生间", "紧急逃生口", "扶行梯" }) {
-			TextView view = new TextView(getActivity());
+		for (String s : items) {
+			// TextView view = new TextView(getActivity());
+			TextView view = (TextView) inflater.inflate(R.layout.fragment_shops_1_item, null);
 			view.setText(s);
-			view.setTextSize(18);
 			view.setLayoutParams(llp);
+			// view.setTextSize(18);
+			// view.setTextColor(Color.parseColor("black"));
 			ll.addView(view);
+			view.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					ULog.d("-------------- " + ((TextView) v).getText());
+					if (((TextView) v).getText().equals(items[0])) {}
+					else if (((TextView) v).getText().equals(items[1])) {}
+					else if (((TextView) v).getText().equals(items[2])) {}
+					else if (((TextView) v).getText().equals(items[3])) {}
+
+				}
+			});
 		}
 
 		fgtHost.setOnBeforeChangeTab(new FragmentTabHostDF.OnBeforeChangeTab() {

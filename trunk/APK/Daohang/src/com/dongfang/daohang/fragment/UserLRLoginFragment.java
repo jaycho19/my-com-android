@@ -78,7 +78,7 @@ public class UserLRLoginFragment extends BaseFragment {
 						public void onStart() {
 							super.onStart();
 							ULog.d(this.getRequestUrl());
-							Toast.makeText(getActivity(), "ing", Toast.LENGTH_SHORT).show();
+							Toast.makeText(getActivity(), "登录中...", Toast.LENGTH_SHORT).show();
 						}
 
 						@Override
@@ -89,7 +89,10 @@ public class UserLRLoginFragment extends BaseFragment {
 										UserBean.class);
 								ULog.d(user.toString());
 								User.saveToken(getActivity(), user.getUserToken());
+								User.saveUserId(getActivity(), user.getId());
 								User.savePhone(getActivity(), user.getMobile());
+								User.saveUserNickname(getActivity(), user.getNickName());
+								User.savaUserName(getActivity(), etName.getText().toString().trim());
 
 								MainActivity.tab = 3;
 								getActivity().finish();
