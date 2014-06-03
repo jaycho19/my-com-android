@@ -94,6 +94,60 @@ public class User {
 	}
 
 	/**
+	 * 保存用户信息
+	 * 
+	 * @param context
+	 * @param name
+	 * @return
+	 */
+	public static boolean savaUserName(Context context, String name) {
+		ULog.d("savaUserName name = " + name);
+		return context.getSharedPreferences(SHAREDPREFERENCES_ACCESS, Context.MODE_PRIVATE).edit()
+				.putString(SHAREDPREFERENCES_USER_INFO_USERNAME, name).commit();
+
+	}
+
+	/**
+	 * 获取账户
+	 * 
+	 * @param context
+	 * @return username, 如果不存在，这返回空串
+	 */
+	public static String getUserName(Context context) {
+		SharedPreferences sp = context.getSharedPreferences(SHAREDPREFERENCES_ACCESS, Context.MODE_PRIVATE);
+		return sp.getString(SHAREDPREFERENCES_USER_INFO_USERNAME, "");
+	}
+
+	/**
+	 * 更新password值
+	 * 
+	 * @param context
+	 * @param password
+	 * @return 更新是否成功
+	 */
+	public static boolean saveUserPassword(Context context, String password) {
+		ULog.d("saveToken password = " + password);
+		return context
+				.getSharedPreferences(SHAREDPREFERENCES_ACCESS, Context.MODE_PRIVATE)
+				.edit()
+				.putString(SHAREDPREFERENCES_USER_INFO_PASSWORD,
+						AESEncrypt.encrypt(SHAREDPREFERENCES_USER_INFO_PASSWORD, password)).commit();
+
+	}
+
+	/**
+	 * 获取password值
+	 * 
+	 * @param context
+	 * @return password, 如果不存在，这返回空串
+	 */
+	public static String getUserPassword(Context context) {
+		SharedPreferences sp = context.getSharedPreferences(SHAREDPREFERENCES_ACCESS, Context.MODE_PRIVATE);
+		return AESEncrypt.decrypt(SHAREDPREFERENCES_USER_INFO_PASSWORD,
+				sp.getString(SHAREDPREFERENCES_USER_INFO_PASSWORD, ""));
+	}
+
+	/**
 	 * 更新手机号码
 	 * 
 	 * @param context
@@ -223,32 +277,4 @@ public class User {
 		return sp.getString(SHAREDPREFERENCES_USER_INFO_USER_ID, "");
 	}
 
-	/**
-	 * 更新password值
-	 * 
-	 * @param context
-	 * @param password
-	 * @return 更新是否成功
-	 */
-	public static boolean saveUserPassword(Context context, String password) {
-		ULog.d("saveToken password = " + password);
-		return context
-				.getSharedPreferences(SHAREDPREFERENCES_USER_INFO_FILENAME, Context.MODE_PRIVATE)
-				.edit()
-				.putString(SHAREDPREFERENCES_USER_INFO_PASSWORD,
-						AESEncrypt.encrypt(SHAREDPREFERENCES_USER_INFO_PASSWORD, password)).commit();
-
-	}
-
-	/**
-	 * 获取password值
-	 * 
-	 * @param context
-	 * @return password, 如果不存在，这返回空串
-	 */
-	public static String getUserPassword(Context context) {
-		SharedPreferences sp = context.getSharedPreferences(SHAREDPREFERENCES_USER_INFO_FILENAME, Context.MODE_PRIVATE);
-		return AESEncrypt.decrypt(SHAREDPREFERENCES_USER_INFO_PASSWORD,
-				sp.getString(SHAREDPREFERENCES_USER_INFO_PASSWORD, ""));
-	}
 }

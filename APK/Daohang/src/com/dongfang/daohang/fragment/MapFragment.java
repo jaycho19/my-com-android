@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dongfang.daohang.R;
+import com.dongfang.daohang.bridge.ProxyBridge;
+import com.dongfang.daohang.params.ComParams;
 import com.dongfang.daohang.views.MyWebView;
 import com.dongfang.v4.app.BaseFragment;
 import com.lidroid.xutils.ViewUtils;
@@ -21,8 +23,9 @@ public class MapFragment extends BaseFragment {
 		View view = inflater.inflate(R.layout.fragment_map, container, false);
 		ViewUtils.inject(this, view);
 
-//		webView.loadUrl("http://www.baidu.com");
-		webView.loadUrl("http://211.149.200.227:30001/web/index.php");
+		// webView.loadUrl("http://www.baidu.com");.
+		webView.addJavascriptInterface(new ProxyBridge(getActivity(), webView), "ProxyBridge");
+		webView.loadUrl(ComParams.BASE_URL);
 		return view;
 	}
 

@@ -41,8 +41,10 @@ public final class HttpActions {
 		sb.append("&").append("method=").append("login");
 
 		JsonObject json = new JsonObject();
-		json.addProperty("uname", "q".equals(name) ? "fuchen" : name);
-		json.addProperty("upass", "q".equals(pwd) ? "654321" : pwd);
+		json.addProperty("uname", name);
+		json.addProperty("upass", pwd);
+		// json.addProperty("uname", "q".equals(name) ? "fuchen" : name);
+		// json.addProperty("upass", "q".equals(pwd) ? "654321" : pwd);
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		return sb.toString();
 	}
@@ -204,6 +206,42 @@ public final class HttpActions {
 		json.addProperty("type", type);
 		json.addProperty("pno", pno);
 		json.addProperty("psize", psize);
+		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
+		return sb.toString();
+	}
+	
+	/**
+	 * 添加记录点
+	 * 
+	 * @return
+	 */
+	public static String addRecords(Context context, String areaId, int placeId) {
+		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
+		sb.append("?").append("class=").append("record");
+		sb.append("&").append("method=").append("add");
+		
+		JsonObject json = new JsonObject();
+		json.addProperty("userId", User.getUserId(context));
+		json.addProperty("userToken", User.getToken(context));
+		json.addProperty("areaId", areaId);
+		json.addProperty("placeId", placeId);
+		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
+		return sb.toString();
+	}
+	/**
+	 * 获取记录点列表
+	 * 
+	 * @return
+	 */
+	public static String getRecords(Context context, int placeId) {
+		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
+		sb.append("?").append("class=").append("record");
+		sb.append("&").append("method=").append("getRecords");
+		
+		JsonObject json = new JsonObject();
+		json.addProperty("userId", User.getUserId(context));
+		json.addProperty("userToken", User.getToken(context));
+		json.addProperty("placeId", placeId);
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		return sb.toString();
 	}

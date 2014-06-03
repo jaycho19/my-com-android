@@ -4,22 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/fragment_setting_tv_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="5dp"
-        android:text="设置"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <include layout="@layout/top_bar" />
 
     <TextView
         android:id="@+id/fragment_setting_tv_map "
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="离线地图"
         android:clickable="true"
+        android:text="离线地图"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView

@@ -29,4 +29,9 @@ public class BaseEntity<T> {
 		this.info = info;
 	}
 
+	@Override
+	public String toString() {
+		return info.toString();
+	}
+
 }

@@ -2,6 +2,7 @@ package com.dongfang.daohang.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.dongfang.daohang.UserFollowActivity;
 import com.dongfang.daohang.UserInfoActivity;
 import com.dongfang.daohang.UserRecordActivity;
 import com.dongfang.utils.ULog;
+import com.dongfang.utils.User;
 import com.dongfang.v4.app.BaseFragment;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -24,9 +26,11 @@ public class UserFragment extends BaseFragment {
 
 	@ViewInject(R.id.top_bar_btn_back)
 	private View v;
-
 	@ViewInject(R.id.top_bar_tv_title)
 	private TextView title;
+	
+	@ViewInject(R.id.fragment_user_tv_nickname)
+	private TextView nickname;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,15 +48,20 @@ public class UserFragment extends BaseFragment {
 		return view;
 	}
 
-	@OnClick({ R.id.fragment_user_civ_icon, R.id.fragment_user_rl_1, R.id.fragment_user_rl_2, R.id.fragment_user_rl_3,
-			R.id.top_bar_btn_back
+	@Override
+	public void onResume() {
+		super.onResume();
+		nickname.setText(TextUtils.isEmpty(User.getUserNickname(getActivity())) ? User.getUserName(getActivity())
+				: User.getUserNickname(getActivity()));
+	}
 
-	})
+	@OnClick({ R.id.fragment_user_civ_icon, R.id.fragment_user_rl_1, R.id.fragment_user_rl_2, R.id.fragment_user_rl_3,
+			R.id.fragment_user_tv_edit })
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.fragment_user_civ_icon:
-		case R.id.top_bar_btn_back:
+		case R.id.fragment_user_tv_edit:
 			getActivity().startActivity(new Intent(getActivity(), UserInfoActivity.class));
 			break;
 		case R.id.fragment_user_rl_1:
