@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.zxing.decoding;
+package com.dongfang.zxing.decoding;
 
 import java.util.Hashtable;
 
@@ -22,18 +22,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 
 import com.dongfang.daohang.R;
+import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.MCaptureActivity;
+import com.dongfang.zxing.camera.CameraManager;
+import com.dongfang.zxing.camera.PlanarYUVLuminanceSource;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
-import com.zxing.camera.CameraManager;
-import com.zxing.camera.PlanarYUVLuminanceSource;
 
 final class DecodeHandler extends Handler {
 
@@ -52,7 +52,7 @@ final class DecodeHandler extends Handler {
 	public void handleMessage(Message message) {
 		switch (message.what) {
 		case R.id.decode:
-			// Log.d(TAG, "Got decode message");
+			// ULog.d( "Got decode message");
 			decode((byte[]) message.obj, message.arg1, message.arg2);
 			break;
 		case R.id.quit:
@@ -98,12 +98,12 @@ final class DecodeHandler extends Handler {
 
 		if (rawResult != null) {
 			long end = System.currentTimeMillis();
-			Log.d(TAG, "Found barcode (" + (end - start) + " ms):\n" + rawResult.toString());
+			ULog.d("Found barcode (" + (end - start) + " ms): " + rawResult.toString());
 			Message message = Message.obtain(activity.getHandler(), R.id.decode_succeeded, rawResult);
 			Bundle bundle = new Bundle();
 			bundle.putParcelable(DecodeThread.BARCODE_BITMAP, source.renderCroppedGreyscaleBitmap());
 			message.setData(bundle);
-			// Log.d(TAG, "Sending decode succeeded message...");
+			// ULog.d( "Sending decode succeeded message...");
 			message.sendToTarget();
 		}
 		else {

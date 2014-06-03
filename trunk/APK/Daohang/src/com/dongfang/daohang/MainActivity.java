@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -38,7 +40,6 @@ public class MainActivity extends BaseActivity {
 		setContentView(R.layout.activity_main);
 		context = this;
 		initData(getIntent());
-		// ViewUtils.inject(this);
 		initTabhostItems();
 	}
 
@@ -64,7 +65,7 @@ public class MainActivity extends BaseActivity {
 		tab3.setText("活动");
 		tab4.setText("我的");
 		tab5.setText("设置");
-		
+
 		tab1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mian_activity_tab_0, 0, 0, 0);
 		tab2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mian_activity_tab_1, 0, 0, 0);
 		tab3.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mian_activity_tab_2, 0, 0, 0);
@@ -79,7 +80,7 @@ public class MainActivity extends BaseActivity {
 		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab4), UserFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab5), SettingFragment.class, null);
 
-//		User.saveToken(this, "25");
+		// User.saveToken(this, "25");
 
 		fgtHost.setOnBeforeChangeTab(new FragmentTabHostDF.OnBeforeChangeTab() {
 			@Override

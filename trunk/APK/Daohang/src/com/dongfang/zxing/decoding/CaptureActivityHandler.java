@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.zxing.decoding;
+package com.dongfang.zxing.decoding;
 
 import java.util.Vector;
 
@@ -25,13 +25,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 import com.dongfang.daohang.R;
+import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.MCaptureActivity;
+import com.dongfang.zxing.camera.CameraManager;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
-import com.zxing.camera.CameraManager;
 
 /**
  * This class handles all the messaging which comprises the state machine for capture.
@@ -48,8 +48,7 @@ public final class CaptureActivityHandler extends Handler {
 	PREVIEW, SUCCESS, DONE
 	}
 
-	public CaptureActivityHandler(MCaptureActivity activity, Vector<BarcodeFormat> decodeFormats,
-			String characterSet) {
+	public CaptureActivityHandler(MCaptureActivity activity, Vector<BarcodeFormat> decodeFormats, String characterSet) {
 		this.activity = activity;
 		decodeThread = new DecodeThread(activity, decodeFormats, characterSet);
 		decodeThread.start();
@@ -63,7 +62,7 @@ public final class CaptureActivityHandler extends Handler {
 	public void handleMessage(Message message) {
 		switch (message.what) {
 		case R.id.auto_focus:
-			// Log.d(TAG, "Got auto-focus message");
+			// ULog.d("Got auto-focus message");
 			// When one auto focus pass finishes, start another. This is the closest thing to
 			// continuous AF. It does seem to hunt a bit, but I'm not sure what else to do.
 			if (state == State.PREVIEW) {
@@ -71,19 +70,18 @@ public final class CaptureActivityHandler extends Handler {
 			}
 			break;
 		case R.id.restart_preview:
-			Log.d(TAG, "Got restart preview message");
+			ULog.d("Got restart preview message");
 			restartPreviewAndDecode();
 			break;
 		case R.id.decode_succeeded:
-			Log.d(TAG, "Got decode succeeded message");
+			ULog.d("Got decode succeeded message");
 			state = State.SUCCESS;
 			Bundle bundle = message.getData();
 
 			/***********************************************************************/
-			Bitmap barcode = bundle == null ? null : (Bitmap) bundle.getParcelable(DecodeThread.BARCODE_BITMAP);// ���ñ����߳�
+			Bitmap barcode = bundle == null ? null : (Bitmap) bundle.getParcelable(DecodeThread.BARCODE_BITMAP);
 
-			activity.handleDecode((Result) message.obj, barcode);// ���ؽ��?
-																	// /***********************************************************************/
+			activity.handleDecode((Result) message.obj, barcode);
 			break;
 		case R.id.decode_failed:
 			// We're decoding as fast as possible, so when one decode fails, start another.
@@ -91,12 +89,12 @@ public final class CaptureActivityHandler extends Handler {
 			CameraManager.get().requestPreviewFrame(decodeThread.getHandler(), R.id.decode);
 			break;
 		case R.id.return_scan_result:
-			Log.d(TAG, "Got return scan result message");
+			ULog.d("Got return scan result message");
 			activity.setResult(Activity.RESULT_OK, (Intent) message.obj);
 			activity.finish();
 			break;
 		case R.id.launch_product_query:
-			Log.d(TAG, "Got product query message");
+			ULog.d("Got product query message");
 			String url = (String) message.obj;
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
