@@ -21,14 +21,16 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dongfang.daohang.R;
+import com.dongfang.utils.ULog;
+import com.dongfang.zxing.camera.CameraManager;
+import com.dongfang.zxing.decoding.CaptureActivityHandler;
+import com.dongfang.zxing.decoding.InactivityTimer;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
-import com.zxing.camera.CameraManager;
-import com.zxing.decoding.CaptureActivityHandler;
-import com.zxing.decoding.InactivityTimer;
 
 /**
  * Initial the camera
@@ -62,7 +64,7 @@ public class MCaptureActivity extends BaseActivity implements Callback {
 		animation.setInterpolator(new LinearInterpolator());
 		animation.setDuration(1200);
 		mQrLineView.startAnimation(animation);
-
+		((TextView)findViewById(R.id.top_bar_tv_title)).setText("二维码/条形码");
 		findViewById(R.id.top_bar_btn_back).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -119,6 +121,7 @@ public class MCaptureActivity extends BaseActivity implements Callback {
 	 * @param barcode
 	 */
 	public void handleDecode(Result result, Bitmap barcode) {
+		ULog.d(result.toString());
 		inactivityTimer.onActivity();
 		playBeepSoundAndVibrate();
 		String resultString = result.getText();

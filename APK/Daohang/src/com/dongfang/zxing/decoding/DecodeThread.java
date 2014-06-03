@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.zxing.decoding;
+package com.dongfang.zxing.decoding;
 
 import java.util.Hashtable;
 import java.util.Vector;
@@ -26,7 +26,6 @@ import android.os.Looper;
 import com.dongfang.v4.app.MCaptureActivity;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
-import com.google.zxing.ResultPointCallback;
 
 /**
  * This thread does all the heavy lifting of decoding the images. �����߳�

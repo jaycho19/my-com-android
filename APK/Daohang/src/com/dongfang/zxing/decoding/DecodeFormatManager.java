@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.zxing.decoding;
+package com.dongfang.zxing.decoding;
 
 import java.util.Arrays;
 import java.util.List;
