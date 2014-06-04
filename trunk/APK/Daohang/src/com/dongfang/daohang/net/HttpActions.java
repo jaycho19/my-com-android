@@ -87,10 +87,7 @@ public final class HttpActions {
 		return sb.toString();
 	}
 
-	/**
-	 * 添加收藏接口 {"merId":"100000","userId":"3", "userToken":"123456","itemId":"100000","price":"5000","stockNum":"99"}
-	 */
-	public static String modifyUser(Context context, String nickName) {
+	public static String modifyUserNickName(Context context, String nickName) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
 		sb.append("?").append("class=").append("user");
 		sb.append("&").append("method=").append("modifyUser");
@@ -99,6 +96,19 @@ public final class HttpActions {
 		json.addProperty("userId", User.getUserId(context));
 		json.addProperty("userToken", User.getToken(context));
 		json.addProperty("nickName", nickName);
+		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
+		return sb.toString();
+	}
+
+	public static String modifyUserSex(Context context, int sex) {
+		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
+		sb.append("?").append("class=").append("user");
+		sb.append("&").append("method=").append("modifyUser");
+
+		JsonObject json = new JsonObject();
+		json.addProperty("userId", User.getUserId(context));
+		json.addProperty("userToken", User.getToken(context));
+		json.addProperty("sex", sex);
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		return sb.toString();
 	}
@@ -209,7 +219,7 @@ public final class HttpActions {
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		return sb.toString();
 	}
-	
+
 	/**
 	 * 添加记录点
 	 * 
@@ -219,7 +229,7 @@ public final class HttpActions {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
 		sb.append("?").append("class=").append("record");
 		sb.append("&").append("method=").append("add");
-		
+
 		JsonObject json = new JsonObject();
 		json.addProperty("userId", User.getUserId(context));
 		json.addProperty("userToken", User.getToken(context));
@@ -228,6 +238,7 @@ public final class HttpActions {
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		return sb.toString();
 	}
+
 	/**
 	 * 获取记录点列表
 	 * 
@@ -237,7 +248,7 @@ public final class HttpActions {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
 		sb.append("?").append("class=").append("record");
 		sb.append("&").append("method=").append("getRecords");
-		
+
 		JsonObject json = new JsonObject();
 		json.addProperty("userId", User.getUserId(context));
 		json.addProperty("userToken", User.getToken(context));

@@ -15,6 +15,7 @@ import com.dongfang.daohang.R;
 import com.dongfang.daohang.UserLRRegisterActivity;
 import com.dongfang.daohang.beans.UserBean;
 import com.dongfang.daohang.net.HttpActions;
+import com.dongfang.dialog.ProgressDialog;
 import com.dongfang.utils.DFException;
 import com.dongfang.utils.JsonAnalytic;
 import com.dongfang.utils.ULog;
@@ -74,15 +75,19 @@ public class UserLRLoginFragment extends BaseFragment {
 			new HttpUtils().send(HttpMethod.GET,
 					HttpActions.login(etName.getText().toString().trim(), etPsw.getText().toString().trim()),
 					new RequestCallBack<String>() {
+
+						ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "登录中...");
+
 						@Override
 						public void onStart() {
 							super.onStart();
 							ULog.d(this.getRequestUrl());
-							Toast.makeText(getActivity(), "登录中...", Toast.LENGTH_SHORT).show();
+							progressDialog.show();
 						}
 
 						@Override
 						public void onSuccess(ResponseInfo<String> responseInfo) {
+							progressDialog.dismiss();
 							ULog.d(responseInfo.result);
 							try {
 								UserBean user = JsonAnalytic.getInstance().analyseJsonTInfo(responseInfo.result,
@@ -108,7 +113,9 @@ public class UserLRLoginFragment extends BaseFragment {
 
 						@Override
 						public void onFailure(HttpException error, String msg) {
+							progressDialog.dismiss();
 							ULog.e(error.toString());
+
 						}
 					});
 		}

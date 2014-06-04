@@ -4,187 +4,187 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include layout="@layout/top_bar" >
+    <include layout="@layout/top_bar" />
 
-        <LinearLayout
-            android:id="@+id/fragment_userinfo_modify_ll_name"
+    <LinearLayout
+        android:id="@+id/fragment_userinfo_modify_ll_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="gone" >
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp"
-            android:visibility="gone" >
+            android:text="姓名"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="姓名"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/editText1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" >
-
-                <requestFocus />
-            </EditText>
-
-            <Button
-                android:id="@+id/fragment_userinfo_modify_btn_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="完成" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/fragment_userinfo_modify_ll_nickname"
+        <EditText
+            android:id="@+id/editText1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp"
-            android:visibility="gone" >
+            android:ems="10"
+            android:inputType="textPersonName" >
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="昵称"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <requestFocus />
+        </EditText>
 
-            <EditText
-                android:id="@+id/editText1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" >
-
-                <requestFocus />
-            </EditText>
-
-            <Button
-                android:id="@+id/fragment_userinfo_modify_btn_nickname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="完成" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/fragment_userinfo_modify_ll_phonenum"
+        <Button
+            android:id="@+id/fragment_userinfo_modify_btn_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp"
-            android:visibility="gone" >
+            android:text="完成" />
+    </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="绑定手机号"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+    <LinearLayout
+        android:id="@+id/fragment_userinfo_modify_ll_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="gone" >
 
-            <EditText
-                android:id="@+id/editText1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" >
-
-                <requestFocus />
-            </EditText>
-
-            <Button
-                android:id="@+id/fragment_userinfo_modify_btn_phonenum"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="完成" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/fragment_userinfo_modify_ll_usersex"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp"
-            android:visibility="gone" >
+            android:text="昵称"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="性别"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
-                <RadioButton
-                    android:id="@+id/fragment_userinfo_modify_rbtn_male"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="男" />
-
-                <RadioButton
-                    android:id="@+id/fragment_userinfo_modify_rbtn_female"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="女" />
-            </RadioGroup>
-
-            <Button
-                android:id="@+id/fragment_userinfo_modify_btn_usersex"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="完成" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/fragment_userinfo_modify_ll_userpsw"
+        <EditText
+            android:id="@+id/editText1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp"
-            android:visibility="gone" >
+            android:ems="10"
+            android:inputType="textPersonName" >
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="修改密码"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <requestFocus />
+        </EditText>
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="原始密码"
-                android:inputType="textPassword" />
+        <Button
+            android:id="@+id/fragment_userinfo_modify_btn_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="完成" />
+    </LinearLayout>
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="新密码"
-                android:inputType="textPassword" />
+    <LinearLayout
+        android:id="@+id/fragment_userinfo_modify_ll_phonenum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="gone" >
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="确认新密码"
-                android:inputType="textPassword" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="绑定手机号"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <CheckBox
-                android:id="@+id/checkBox1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="显示密码" />
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" >
 
-            <Button
-                android:id="@+id/fragment_userinfo_modify_btn_userpsw"
-                android:layout_width="match_parent"
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/fragment_userinfo_modify_btn_phonenum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="完成" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_userinfo_modify_ll_usersex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="性别"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <RadioButton
+                android:id="@+id/fragment_userinfo_modify_rbtn_male"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="完成" />
-        </LinearLayout>
-    </include>
+                android:checked="true"
+                android:text="男" />
+
+            <RadioButton
+                android:id="@+id/fragment_userinfo_modify_rbtn_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="女" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/fragment_userinfo_modify_btn_usersex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="完成" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_userinfo_modify_ll_userpsw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="修改密码"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="原始密码"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="新密码"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="确认新密码"
+            android:inputType="textPassword" />
+
+        <CheckBox
+            android:id="@+id/checkBox1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="显示密码" />
+
+        <Button
+            android:id="@+id/fragment_userinfo_modify_btn_userpsw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="完成" />
+    </LinearLayout>
+
 
 </LinearLayout>

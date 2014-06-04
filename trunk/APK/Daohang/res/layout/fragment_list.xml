@@ -17,7 +17,7 @@
             android:src="@drawable/main_top_shanghai" />
 
         <ImageView
-            android:id="@+id/fragment_list_top_bar_iv_ar"
+            android:id="@+id/fragment_list_top_bar_iv_qr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

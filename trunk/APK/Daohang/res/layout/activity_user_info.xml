@@ -9,7 +9,7 @@
         layout="@layout/top_bar" />
 
     <Button
-        android:id="@+id/fragment_userinfo_modify_btn_name"
+        android:id="@+id/fragment_userinfo_btn_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
