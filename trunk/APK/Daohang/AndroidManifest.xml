@@ -79,8 +79,9 @@
             android:name="ShopWabActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name="TakeMeActivity"
-            android:launchMode="singleTask" />
+            android:name="TakeMeActivity" android:launchMode="singleTask" />
+        <activity
+            android:name="TakeMeSelectActivity" />
     </application>
 
 </manifest>

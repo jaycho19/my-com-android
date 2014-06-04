@@ -3,7 +3,6 @@ package com.dongfang.daohang.net;
 import java.net.URLEncoder;
 
 import android.content.Context;
-import android.text.TextUtils;
 
 import com.dongfang.daohang.params.ComParams;
 import com.dongfang.utils.ULog;
@@ -255,6 +254,28 @@ public final class HttpActions {
 		json.addProperty("placeId", placeId);
 		json.addProperty("pno", pno);
 		json.addProperty("psize", psize);
+		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
+		return sb.toString();
+	}
+
+	/**
+	 * 获取店铺信息
+	 * 
+	 * @param context
+	 * @param placeId
+	 * @param shopId
+	 * @return
+	 */
+	public static String getShop(Context context, int placeId, int shopId) {
+		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
+		sb.append("?").append("class=").append("shop");
+		sb.append("&").append("method=").append("getShop");
+
+		JsonObject json = new JsonObject();
+		json.addProperty("userId", User.getUserId(context));
+		json.addProperty("userToken", User.getToken(context));
+		json.addProperty("placeId", placeId);
+		json.addProperty("shopId", shopId);
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		return sb.toString();
 	}

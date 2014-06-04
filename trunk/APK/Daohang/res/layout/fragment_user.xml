@@ -80,7 +80,7 @@
         android:drawableRight="@drawable/btn_goto"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
-        android:text="我的记录点(5个)"
+        android:text="我的记录点"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#616161" />
 
@@ -96,7 +96,7 @@
         android:drawableRight="@drawable/btn_goto"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
-        android:text="我的关注(5个)"
+        android:text="我的关注"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#616161" />
 

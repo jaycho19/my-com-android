@@ -29,12 +29,12 @@ public class MainDaohangActivity extends BaseActivity {
 
 	@ViewInject(android.R.id.tabhost)
 	private FragmentTabHostDF fgtHost;
-	
+
 	@ViewInject(R.id.top_bar_tv_title)
 	private TextView title;
-	
-	
+
 	private Context context;
+	public static int tab = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +68,14 @@ public class MainDaohangActivity extends BaseActivity {
 		tab3.setText("活动");
 		tab4.setText("我的");
 		tab5.setText("详情");
-		fgtHost.getTabWidget().setDividerDrawable(null);
 
+		tab1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mian_activity_tab_0, 0, 0, 0);
+		tab2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mian_activity_tab_1, 0, 0, 0);
+		tab3.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mian_activity_tab_2, 0, 0, 0);
+		tab4.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mian_activity_tab_3, 0, 0, 0);
+		tab5.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mian_activity_tab_4, 0, 0, 0);
+
+		fgtHost.getTabWidget().setDividerDrawable(null);
 		fgtHost.addTab(fgtHost.newTabSpec("0").setIndicator(tab1), FloorFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab2), Shops2Fragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab3), ActivityFragment.class, null);
@@ -86,27 +92,41 @@ public class MainDaohangActivity extends BaseActivity {
 				return -1;
 			}
 		});
-		
+
 		title.setText("楼层");
 		fgtHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-			
+
 			@Override
 			public void onTabChanged(String tabId) {
-				switch (Integer.valueOf(tabId) ){
-				case 0:title.setText("楼层");break;
-				case 1:title.setText("商户");break;
-				case 2:title.setText("活动");break;
-				case 3:title.setText("我的");break;
-				case 4:title.setText("详情");break;
+				switch (Integer.valueOf(tabId)) {
+				case 0:
+					title.setText("楼层");
+					break;
+				case 1:
+					title.setText("商户");
+					break;
+				case 2:
+					title.setText("活动");
+					break;
+				case 3:
+					title.setText("我的");
+					break;
+				case 4:
+					title.setText("详情");
+					break;
 				default:
 					break;
 				}
 			}
 		});
-		
-		
-		
-		 fgtHost.setCurrentTab(1);
+
+		// fgtHost.setCurrentTab(1);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		fgtHost.setCurrentTab(tab);
 	}
 
 	@OnClick({ R.id.top_bar_btn_back })
