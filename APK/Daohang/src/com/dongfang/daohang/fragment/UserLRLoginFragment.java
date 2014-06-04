@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dongfang.daohang.MainActivity;
+import com.dongfang.daohang.MainDaohangActivity;
 import com.dongfang.daohang.R;
 import com.dongfang.daohang.UserLRRegisterActivity;
 import com.dongfang.daohang.beans.UserBean;
@@ -99,7 +100,7 @@ public class UserLRLoginFragment extends BaseFragment {
 								User.saveUserNickname(getActivity(), user.getNickName());
 								User.savaUserName(getActivity(), etName.getText().toString().trim());
 
-								MainActivity.tab = 3;
+								MainActivity.tab = MainDaohangActivity.tab = 3;
 								getActivity().finish();
 
 							} catch (DFException e) {

@@ -6,7 +6,7 @@
     android:paddingBottom="10dp" >
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/dialog_goto_im_qr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -20,7 +20,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="7dp"
-        android:layout_toLeftOf="@+id/imageView1"
+        android:layout_toLeftOf="@+id/dialog_goto_im_qr"
         android:background="@drawable/input_bg_1"
         android:gravity="center" >
 
@@ -30,10 +30,13 @@
             android:layout_marginLeft="10dp"
             android:text="起点：" />
 
-        <EditText
+        <TextView
+            android:id="@+id/dialog_goto_tv_qidian"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null" />
+            android:background="@null"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -42,7 +45,7 @@
         android:layout_alignLeft="@+id/linearLayout1"
         android:layout_below="@+id/linearLayout1"
         android:layout_marginTop="7dp"
-        android:layout_toLeftOf="@+id/imageView1"
+        android:layout_toLeftOf="@+id/dialog_goto_im_qr"
         android:background="@drawable/input_bg_1"
         android:gravity="center" >
 
@@ -52,10 +55,13 @@
             android:layout_marginLeft="10dp"
             android:text="终点：" />
 
-        <EditText
+        <TextView
+            android:id="@+id/dialog_goto_tv_zhongdian"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null" />
+            android:background="@null"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp" />
     </LinearLayout>
 
 </RelativeLayout>
