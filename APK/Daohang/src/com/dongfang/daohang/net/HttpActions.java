@@ -244,7 +244,7 @@ public final class HttpActions {
 	 * 
 	 * @return
 	 */
-	public static String getRecords(Context context, int placeId) {
+	public static String getRecords(Context context, int placeId, int pno, int psize) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
 		sb.append("?").append("class=").append("record");
 		sb.append("&").append("method=").append("getRecords");
@@ -253,6 +253,8 @@ public final class HttpActions {
 		json.addProperty("userId", User.getUserId(context));
 		json.addProperty("userToken", User.getToken(context));
 		json.addProperty("placeId", placeId);
+		json.addProperty("pno", pno);
+		json.addProperty("psize", psize);
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		return sb.toString();
 	}

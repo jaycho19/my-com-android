@@ -61,4 +61,31 @@ public class ProxyBridge {
 
 	}
 
+	/**
+	 * 打开窗口
+	 * 
+	 * @param type
+	 */
+	public void openDialog(int type, String jsons) {
+
+	}
+
+	/**
+	 * 打开activity
+	 * 
+	 * @param type
+	 */
+	public void openActivity(int type, String jsons) {
+
+	}
+
+	/**
+	 * 
+	 * @param func
+	 * @param params
+	 */
+	public void send(String func, String params) {
+
+	}
+
 }

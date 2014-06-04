@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.dongfang.daohang.fragment.ActivityFragment;
 import com.dongfang.daohang.fragment.DetailFragment;
 import com.dongfang.daohang.fragment.FloorFragment;
-import com.dongfang.daohang.fragment.Shops1Fragment;
+import com.dongfang.daohang.fragment.Shops2Fragment;
 import com.dongfang.daohang.fragment.UserFragment;
 import com.dongfang.utils.ULog;
 import com.dongfang.utils.User;
@@ -70,13 +70,10 @@ public class MainDaohangActivity extends BaseActivity {
 		tab5.setText("详情");
 		fgtHost.getTabWidget().setDividerDrawable(null);
 
-		Bundle data =new Bundle();
-		data.putBoolean("sdfsd", true);
-		
 		fgtHost.addTab(fgtHost.newTabSpec("0").setIndicator(tab1), FloorFragment.class, null);
-		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab2), Shops1Fragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab2), Shops2Fragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab3), ActivityFragment.class, null);
-		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab4), UserFragment.class, data);
+		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab4), UserFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab5), DetailFragment.class, null);
 
 		fgtHost.setOnBeforeChangeTab(new FragmentTabHostDF.OnBeforeChangeTab() {
