@@ -6,7 +6,9 @@
     android:layout_alignParentTop="true"
     android:orientation="vertical" >
 
-    <include layout="@layout/top_bar" />
+    <include
+        layout="@layout/top_bar"
+        android:visibility="gone" />
 
     <FrameLayout
         android:id="@+id/realtabcontent"

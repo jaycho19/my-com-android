@@ -2,7 +2,6 @@ package com.dongfang.daohang;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import android.os.Bundle;
@@ -11,15 +10,14 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-import com.dongfang.daohang.beans.BaseEntity;
 import com.dongfang.daohang.beans.RecordBean;
+import com.dongfang.daohang.beans.RecordEntity;
 import com.dongfang.daohang.net.HttpActions;
 import com.dongfang.dialog.ProgressDialog;
 import com.dongfang.utils.DFException;
 import com.dongfang.utils.JsonAnalytic;
 import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseActivity;
-import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -53,7 +51,7 @@ public class UserRecordActivity extends BaseActivity {
 	protected void onStart() {
 		super.onStart();
 
-		new HttpUtils().send(HttpMethod.GET, HttpActions.getRecords(this, 1), new RequestCallBack<String>() {
+		new HttpUtils().send(HttpMethod.GET, HttpActions.getRecords(this, 1, 1, 10), new RequestCallBack<String>() {
 
 			@Override
 			public void onStart() {
@@ -70,10 +68,10 @@ public class UserRecordActivity extends BaseActivity {
 				ULog.d(responseInfo.result);
 
 				try {
-					BaseEntity<List<RecordBean>> base = JsonAnalytic.getInstance().analyseJsonT(responseInfo.result,
-							new TypeToken<BaseEntity<List<RecordBean>>>() {}.getType());
+					RecordEntity recodeEntity = JsonAnalytic.getInstance().analyseJsonTInfo(responseInfo.result,
+							RecordEntity.class);
 					ArrayList<Map<String, String>> data = new ArrayList<Map<String, String>>();
-					for (RecordBean bean : base.getInfo()) {
+					for (RecordBean bean : recodeEntity.getRecords()) {
 						Map<String, String> map = new HashMap<String, String>();
 						map.put("t", bean.toString());
 						data.add(map);

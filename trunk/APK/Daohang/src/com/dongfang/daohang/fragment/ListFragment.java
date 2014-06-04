@@ -29,7 +29,8 @@ public class ListFragment extends BaseFragment {
 		StringBuilder sb = new StringBuilder();
 		sb.append("requestCode = ").append(requestCode);
 		sb.append("\n").append("resultCode = ").append(resultCode);
-		sb.append("\n").append("result = ").append(data.getStringExtra("result"));
+		if (null != data && data.hasExtra("result"))
+			sb.append("\n").append("result = ").append(data.getStringExtra("result"));
 		ULog.e(sb.toString());
 		if (resultCode == Activity.RESULT_OK && requestCode == 0x00f0 && null != data && data.hasExtra("result")) {
 			Intent intent = new Intent(getActivity(), MainDaohangActivity.class);

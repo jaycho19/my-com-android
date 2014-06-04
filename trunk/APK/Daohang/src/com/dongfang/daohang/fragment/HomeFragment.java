@@ -50,7 +50,8 @@ public class HomeFragment extends BaseFragment {
 		StringBuilder sb = new StringBuilder();
 		sb.append("requestCode = ").append(requestCode);
 		sb.append("\n").append("resultCode = ").append(resultCode);
-		sb.append("\n").append("result = ").append(data.getStringExtra("result"));
+		if (null != data && data.hasExtra("result"))
+			sb.append("\n").append("result = ").append(data.getStringExtra("result"));
 		ULog.e(sb.toString());
 	}
 
