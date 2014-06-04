@@ -86,7 +86,7 @@ public class MainActivity extends BaseActivity {
 			@Override
 			public int onBeforeChangeTab(int index) {
 				if (3 == index && !User.isLogined(context)) {
-					context.startActivity(new Intent(context, UserLRLoginActivity.class));
+					startActivity(new Intent(context, UserLRLoginActivity.class));
 					tab = 0;
 					return index;
 				}
