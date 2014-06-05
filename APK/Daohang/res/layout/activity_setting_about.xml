@@ -7,7 +7,7 @@
     <include layout="@layout/top_bar" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/shops_adapter_item_tv_floor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.10"

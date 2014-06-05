@@ -280,4 +280,28 @@ public final class HttpActions {
 		return sb.toString();
 	}
 
+	/**
+	 * 搜索地点
+	 * 
+	 * @param context
+	 * @param placeId
+	 * @param shopId
+	 * @return
+	 */
+	public static String searchArea(Context context, int placeId, String name, int pno, int psize) {
+		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
+		sb.append("?").append("class=").append("marketArea");
+		sb.append("&").append("method=").append("searchArea");
+
+		JsonObject json = new JsonObject();
+		json.addProperty("userId", User.getUserId(context));
+		json.addProperty("userToken", User.getToken(context));
+		json.addProperty("placeId", placeId);
+		json.addProperty("q", name);
+		json.addProperty("pno", pno);
+		json.addProperty("psize", psize);
+		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
+		return sb.toString();
+	}
+
 }

@@ -201,6 +201,17 @@ public class User {
 				.putString(SHAREDPREFERENCES_USER_INFO_USER_ID, userId).commit();
 	}
 
+/**
+	 * 获取uid值
+	 * 
+	 * @param context
+	 * @return uid, 如果不存在，这返回空串
+	 */
+	public static String getUserId(Context context) {
+		SharedPreferences sp = context.getSharedPreferences(SHAREDPREFERENCES_USER_INFO_FILENAME, Context.MODE_PRIVATE);
+		return sp.getString(SHAREDPREFERENCES_USER_INFO_USER_ID, "");
+	}
+
 /**  @deprecated see {@link #saveToken(Context, String)
 	 * 
 	 * 更新用户登陆状态
@@ -263,18 +274,6 @@ public class User {
 	public static String getUserNickname(Context context) {
 		SharedPreferences sp = context.getSharedPreferences(SHAREDPREFERENCES_USER_INFO_FILENAME, Context.MODE_PRIVATE);
 		return sp.getString(SHAREDPREFERENCES_USER_INFO_NICKNAME, "");
-	}
-
-	/**
-	 * 获取uid值
-	 * 
-	 * @param context
-	 * @return uid, 如果不存在，这返回空串
-	 */
-	public static String getUserId(Context context) {
-		// return context.getPackageName();
-		SharedPreferences sp = context.getSharedPreferences(SHAREDPREFERENCES_USER_INFO_FILENAME, Context.MODE_PRIVATE);
-		return sp.getString(SHAREDPREFERENCES_USER_INFO_USER_ID, "");
 	}
 
 }

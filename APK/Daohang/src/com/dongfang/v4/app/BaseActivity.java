@@ -15,7 +15,6 @@ import android.view.View;
 import com.dongfang.broadcast.CloseAppReceiver;
 import com.dongfang.utils.ULog;
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.view.annotation.ViewInject;
 
 /**
  * 1. 所有该项目activity都需要继承该类；<br>

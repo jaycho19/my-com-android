@@ -11,7 +11,7 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/fragment_piont_item_name"
+            android:id="@+id/fragment_record_item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -22,11 +22,11 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/fragment_piont_item_time"
+            android:id="@+id/fragment_record_item_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/fragment_piont_item_name"
+            android:layout_below="@+id/fragment_record_item_name"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
@@ -35,15 +35,15 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/fragment_piont_item_time"
+            android:id="@+id/fragment_record_item_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/fragment_piont_item_name"
+            android:layout_below="@+id/fragment_record_item_name"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/fragment_piont_item_time"
+            android:layout_toLeftOf="@+id/fragment_record_item_time"
             android:text="B1 地下车库307"
             android:textColor="#555555"
             android:textSize="14sp" />

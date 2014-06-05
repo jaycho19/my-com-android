@@ -16,7 +16,7 @@ public class RecordEntity implements Parcelable {
 	private int total;
 	private int nowPage;
 	private int nowSize;
-	private List<RecordBean> records;
+	private List<RecordBean> list;
 
 	public int getTotal() {
 		return total;
@@ -43,11 +43,11 @@ public class RecordEntity implements Parcelable {
 	}
 
 	public List<RecordBean> getRecords() {
-		return records;
+		return list;
 	}
 
 	public void setRecords(List<RecordBean> records) {
-		this.records = records;
+		this.list = records;
 	}
 
 	@Override
@@ -56,9 +56,9 @@ public class RecordEntity implements Parcelable {
 		sb.append("total  ").append(" = ").append(total).append("\n");
 		sb.append("nowPage ").append(" = ").append(nowPage).append("\n");
 		sb.append("nowSize").append(" = ").append(nowSize).append("\n");
-		if (null != records) {
-			for (int i = 0, l = records.size(); i < l; i++)
-				sb.append("records[").append(i).append("] = ").append(records.get(i).toString()).append("\n");
+		if (null != list) {
+			for (int i = 0, l = list.size(); i < l; i++)
+				sb.append("records[").append(i).append("] = ").append(list.get(i).toString()).append("\n");
 		}
 		return sb.toString();
 	}
@@ -73,7 +73,7 @@ public class RecordEntity implements Parcelable {
 		dest.writeInt(total);
 		dest.writeInt(nowPage);
 		dest.writeInt(nowSize);
-		dest.writeTypedList(records);
+		dest.writeTypedList(list);
 	}
 
 	public static final Parcelable.Creator<RecordEntity> CREATOR = new Creator<RecordEntity>() {
@@ -90,7 +90,7 @@ public class RecordEntity implements Parcelable {
 			bean.total = source.readInt();
 			bean.nowPage = source.readInt();
 			bean.nowSize = source.readInt();
-			source.readTypedList(bean.records, RecordBean.CREATOR);
+			source.readTypedList(bean.list, RecordBean.CREATOR);
 			return bean;
 		}
 	};
