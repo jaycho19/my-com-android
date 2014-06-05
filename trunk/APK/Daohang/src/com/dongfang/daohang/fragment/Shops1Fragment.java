@@ -72,7 +72,7 @@ public class Shops1Fragment extends BaseFragment {
 
 		ULog.d(tab3.getLayoutParams().height + "");
 
-		fgtHost.addTab(fgtHost.newTabSpec("0").setIndicator(tab1), PointFragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("0").setIndicator(tab1), RecordFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab2), MapFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab3), MapFragment.class, null);
 

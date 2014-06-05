@@ -101,7 +101,7 @@ public class JsonAnalytic {
 	 * @throws DFException
 	 */
 
-	public <T> List<T> analyseJsonTList(String json, Type type) throws DFException {
+	public <T> List<T> analyseJsonTInfoList(String json, Type type) throws DFException {
 		if (TextUtils.isEmpty(json))
 			throw new DFException(DFException.JSON_ANALYTIC_STRING_NULL);
 		try {

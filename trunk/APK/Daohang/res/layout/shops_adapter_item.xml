@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp" >
+
+    <ImageView
+        android:id="@+id/shops_adapter_item_iv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/icon_yyk_1" />
+
+    <TextView
+        android:id="@+id/shops_adapter_item_tv_floor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/shops_adapter_item_tv_name"
+        android:layout_toRightOf="@+id/shops_adapter_item_iv_logo"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/shops_adapter_item_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/shops_adapter_item_tv_floor"
+        android:layout_alignTop="@+id/shops_adapter_item_iv_logo"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/shops_adapter_item_tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/shops_adapter_item_tv_floor"
+        android:layout_alignBottom="@+id/shops_adapter_item_tv_floor"
+        android:layout_alignParentRight="true"
+        android:text="TextView" />
+
+</RelativeLayout>
