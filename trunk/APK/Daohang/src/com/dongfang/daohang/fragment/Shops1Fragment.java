@@ -35,7 +35,7 @@ public class Shops1Fragment extends BaseFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_shops_1, null);
+		View v = inflater.inflate(R.layout.fragment_shops_1, container, false);
 		ViewUtils.inject(this, v);
 
 		init(inflater);

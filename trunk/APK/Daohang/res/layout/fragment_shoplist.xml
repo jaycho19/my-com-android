@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.dongfang.views.PullToRefreshView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_takeme_select_pulltorefreshview"
+    android:id="@+id/fragment_shoplist_pulltorefreshview"
     android:layout_width="match_parent"
+    android:background="#990033"
     android:layout_height="match_parent" >
 
     <ListView

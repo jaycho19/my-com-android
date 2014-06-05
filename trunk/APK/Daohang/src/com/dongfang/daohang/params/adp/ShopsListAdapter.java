@@ -23,6 +23,14 @@ public class ShopsListAdapter extends BaseAdapter {
 		this.inflater = LayoutInflater.from(context);
 	}
 
+	public List<com.dongfang.daohang.beans.AreaBean> getList() {
+		return list;
+	}
+
+	public void setList(List<com.dongfang.daohang.beans.AreaBean> list) {
+		this.list = list;
+	}
+
 	@Override
 	public int getCount() {
 		return list.size();

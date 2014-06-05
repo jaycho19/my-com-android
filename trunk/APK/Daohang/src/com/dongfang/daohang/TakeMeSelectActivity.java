@@ -11,8 +11,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.dongfang.daohang.fragment.ShopListFragment;
-import com.dongfang.daohang.fragment.Shops1Fragment;
 import com.dongfang.v4.app.BaseActivity;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
@@ -33,28 +31,26 @@ public class TakeMeSelectActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_takeme_select);
 
-		selectFragment = new Shops1Fragment();
-		searchFragment = new ShopListFragment();
-		// selectFragment = getSupportFragmentManager().findFragmentById(R.id.activity_takeme_select_fragment);
-		// searchFragment = getSupportFragmentManager().findFragmentById(R.id.activity_takeme_search_fragment);
+		// selectFragment = new Shops1Fragment();
+		// searchFragment = new ShopListFragment();
+		selectFragment = getSupportFragmentManager().findFragmentById(R.id.activity_takeme_select_fragment);
+		searchFragment = getSupportFragmentManager().findFragmentById(R.id.activity_takeme_search_fragment);
 
-		getSupportFragmentManager().beginTransaction().add(R.id.activity_takeme_fragment_contain, selectFragment)
-				.commit();
+		// getSupportFragmentManager().beginTransaction().add(R.id.activity_takeme_fragment_contain, selectFragment)
+		// .commit();
 
 		inputEditText.addTextChangedListener(new TextWatcher() {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				if (TextUtils.isEmpty(s)) {
-					getSupportFragmentManager().beginTransaction()
-							.replace(R.id.activity_takeme_fragment_contain, selectFragment).commit();
+					getSupportFragmentManager().beginTransaction().show(selectFragment).commit();
 				}
 				else {
-					getSupportFragmentManager().beginTransaction()
-							.replace(R.id.activity_takeme_fragment_contain, searchFragment).commit();
 					Bundle data = new Bundle();
-					data.putCharSequence("name", s);
+					data.putString("name", s.toString());
 					searchFragment.setArguments(data);
+					getSupportFragmentManager().beginTransaction().hide(selectFragment).commit();
 				}
 			}
 
