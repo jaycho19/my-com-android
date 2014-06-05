@@ -16,8 +16,8 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.dongfang.daohang.R;
 import com.dongfang.utils.ULog;
+import com.dongfang.daohang.R;
 
 /**
  * 下拉更新
@@ -203,14 +203,13 @@ public class PullToRefreshView extends LinearLayout {
 		// footer layout
 		measureView(mFooterView);
 		mFooterViewHeight = mFooterView.getMeasuredHeight();
-		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, mFooterViewHeight);
+		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, mFooterViewHeight);
 		// int top = getHeight();
 		// params.topMargin
 		// =getHeight();//在这里getHeight()==0,但在onInterceptTouchEvent()方法里getHeight()已经有值了,不再是0;
 		// getHeight()什么时候会赋值,稍候再研究一下
 		// 由于是线性布局可以直接添加,只要AdapterView的高度是MATCH_PARENT,那么footer view就会被添加到最后,并隐藏
 		addView(mFooterView, params);
-		mHeaderView.setVisibility(View.INVISIBLE);
 	}
 
 	@Override

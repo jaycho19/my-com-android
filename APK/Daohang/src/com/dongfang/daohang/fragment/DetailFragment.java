@@ -26,7 +26,7 @@ public class DetailFragment extends BaseFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_detail, null);
+		View v = inflater.inflate(R.layout.fragment_detail, container,false);
 		ViewUtils.inject(this, v);
 
 		title.setText("详情");

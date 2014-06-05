@@ -15,8 +15,7 @@
         android:layout_marginLeft="30dip"
         android:layout_marginRight="20dip"
         android:layout_marginTop="10dip"
-        android:indeterminate="true"
-        android:visibility="gone" />
+        android:indeterminate="true" />
 
     <ImageView
         android:id="@+id/pull_to_load_image"
@@ -35,10 +34,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@color/white"
         android:text="@string/pull_to_refresh_footer_pull_label"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/white"
         android:textStyle="bold" />
+
     <TextView
         android:id="@+id/pull_to_load_updated_at"
         android:layout_width="fill_parent"
@@ -46,7 +46,8 @@
         android:layout_below="@+id/pull_to_load_text"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:textColor="@color/white"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:text="update_time"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

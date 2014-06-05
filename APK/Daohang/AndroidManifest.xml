@@ -30,8 +30,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.dongfang.daohang.MainDaohangActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleTask" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -81,7 +80,7 @@
         <activity
             android:name="TakeMeActivity" android:launchMode="singleTask" />
         <activity
-            android:name="TakeMeSelectActivity" />
+            android:name="TakeMeSelectActivity" android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>

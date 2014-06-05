@@ -18,8 +18,8 @@ public class RecordAdapter extends BaseAdapter {
 
 	private LayoutInflater inflater;// 动态布局映射
 
-	public RecordAdapter(Context context, List<RecordBean> list2) {
-		this.list = list2;
+	public RecordAdapter(Context context, List<RecordBean> list) {
+		this.list = list;
 		this.inflater = LayoutInflater.from(context);
 	}
 

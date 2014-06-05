@@ -1,13 +1,19 @@
 package com.dongfang.daohang.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
+import android.graphics.Movie;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.dongfang.daohang.R;
+import com.dongfang.daohang.beans.AreaBean;
 import com.dongfang.daohang.beans.AreaEntity;
 import com.dongfang.daohang.net.HttpActions;
 import com.dongfang.daohang.params.adp.ShopsListAdapter;
@@ -15,6 +21,9 @@ import com.dongfang.utils.DFException;
 import com.dongfang.utils.JsonAnalytic;
 import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseFragment;
+import com.dongfang.views.PullToRefreshView;
+import com.dongfang.views.PullToRefreshView.OnFooterRefreshListener;
+import com.dongfang.views.PullToRefreshView.OnHeaderRefreshListener;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -27,46 +36,88 @@ public class ShopListFragment extends BaseFragment {
 
 	@ViewInject(R.id.fragment_shoplist_listview)
 	private ListView listView;
-
-	private Context context;
+	@ViewInject(R.id.fragment_shoplist_pulltorefreshview)
+	private PullToRefreshView pulltoRefreshView;
+	private ShopsListAdapter searchAdp;
+	/** 每次请求长度 */
+	public static final int LIMIT = 10;
+	/** 每次请求页数 */
+	private int pageStart = 0;
+	private int lastTotal = 0;
+	private String searchValue = "";
+	private List<AreaBean> listData; // 显示列表
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_shoplist, null);
+		View v = inflater.inflate(R.layout.fragment_shoplist, container, false);
 		ViewUtils.inject(this, v);
-		context = getActivity();
-		refresh(this.getArguments());
+
+		pulltoRefreshView.setOnHeaderRefreshListener(new OnHeaderRefreshListener() {
+			@Override
+			public void onHeaderRefresh(PullToRefreshView view) {
+				listData.clear();
+				getSearchResult(searchValue, 0, LIMIT);
+			}
+		});
+		pulltoRefreshView.setOnFooterRefreshListener(new OnFooterRefreshListener() {
+			@Override
+			public void onFooterRefresh(PullToRefreshView view) {
+				getSearchResult(searchValue, pageStart, LIMIT);
+			}
+		});
+
+		listData = new ArrayList<AreaBean>();
+		searchAdp = new ShopsListAdapter(getActivity(), listData);
+		listView.setAdapter(searchAdp);
+
+		getSearchResult("", pageStart, LIMIT);
 		return v;
 	}
 
 	@Override
-	public void setArguments(Bundle args) {
-		// super.setArguments(args);
-		refresh(args);
+	public void setArguments(Bundle data) {
+		getSearchResult(data.containsKey("name") ? data.getString("name") : "", pageStart, LIMIT);
 	}
 
-	private void refresh(Bundle data) {
-		if (null == data)
+	private void getSearchResult(final String searchName, final int start, final int limit) {
+		if (start > 0 && limit > lastTotal) {
+			// Toast.makeText(getActivity(), "没有更多内容啦O(∩_∩)O", Toast.LENGTH_LONG).show();
+			pulltoRefreshView.onFooterRefreshComplete();
 			return;
+		}
 
-		String url = HttpActions.searchArea(context, 10, "0", 1, 10);
+		if (null == getActivity())
+			ULog.e("------------------------ null = getActivity() --------------------");
+		String url = HttpActions.searchArea(getActivity(), 10, searchName, start, limit);
 		ULog.d(url);
 		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
-
 			@Override
 			public void onSuccess(ResponseInfo<String> responseInfo) {
-				ULog.d(responseInfo.result);
-				try {
+				pageStart = 1 + start;
 
+				if (0 == start) {
+					pulltoRefreshView.onHeaderRefreshComplete();
+					listData.clear();
+				}
+				else {
+					pulltoRefreshView.onFooterRefreshComplete();
+				}
+
+				ULog.d(responseInfo.result);
+
+				try {
 					AreaEntity areaEntity = JsonAnalytic.getInstance().analyseJsonTInfo(responseInfo.result,
 							AreaEntity.class);
-
+					if (null == areaEntity)
+						return;
 					ULog.d(areaEntity.toString());
 
-					listView.setAdapter(new ShopsListAdapter(context, areaEntity.getList()));
-
+					listData.addAll(areaEntity.getList());
+					searchAdp.setList(listData);
+					searchAdp.notifyDataSetChanged();
 				} catch (DFException e) {
 					e.printStackTrace();
+					Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
 				}
 			}
 
