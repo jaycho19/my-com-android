@@ -224,7 +224,7 @@ public final class HttpActions {
 	 * 
 	 * @return
 	 */
-	public static String addRecords(Context context, String areaId, int placeId) {
+	public static String addRecord(Context context, int areaId, int placeId) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
 		sb.append("?").append("class=").append("record");
 		sb.append("&").append("method=").append("add");

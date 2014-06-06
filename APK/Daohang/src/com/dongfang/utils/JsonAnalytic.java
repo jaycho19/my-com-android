@@ -43,6 +43,12 @@ public class JsonAnalytic {
 		if (TextUtils.isEmpty(json))
 			throw new DFException(DFException.JSON_ANALYTIC_STRING_NULL);
 		try {
+			JSONObject jsonObj = new JSONObject(json);
+			int code = jsonObj.optInt(KEY_CODE);
+			if (0 != code) {
+				throw new DFException(jsonObj.optString(KEY_MSG), code);
+			}
+
 			return new Gson().fromJson(json, tClass);
 		} catch (Exception e) {
 			throw new DFException(e);
@@ -62,6 +68,12 @@ public class JsonAnalytic {
 		if (TextUtils.isEmpty(json))
 			throw new DFException(DFException.JSON_ANALYTIC_STRING_NULL);
 		try {
+			JSONObject jsonObj = new JSONObject(json);
+			int code = jsonObj.optInt(KEY_CODE);
+			if (0 != code) {
+				throw new DFException(jsonObj.optString(KEY_MSG), code);
+			}
+
 			return new Gson().fromJson(json, type);
 		} catch (Exception e) {
 			throw new DFException(e);
