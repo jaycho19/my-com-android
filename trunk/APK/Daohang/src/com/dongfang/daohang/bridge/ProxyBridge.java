@@ -3,7 +3,7 @@ package com.dongfang.daohang.bridge;
 import android.content.Context;
 import android.webkit.WebView;
 
-import com.dongfang.daohang.dialog.RecordAlert;
+import com.dongfang.daohang.dialog.RecordDialog;
 import com.dongfang.utils.User;
 
 /**
@@ -69,7 +69,7 @@ public class ProxyBridge {
 	 * @param type
 	 */
 	public void openDialog(int type, String jsons) {
-		RecordAlert.show(context, jsons).show();
+		RecordDialog.show(context, jsons).show();
 	}
 
 	/**

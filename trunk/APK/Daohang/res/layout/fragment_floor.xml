@@ -25,4 +25,12 @@
         android:layout_alignParentLeft="true"
         android:src="@drawable/dwq" />
 
+    <ImageView
+        android:id="@+id/fragment_floor_iv_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/dwq" />
+
 </RelativeLayout>

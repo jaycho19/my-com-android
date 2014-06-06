@@ -32,6 +32,8 @@ public class FloorFragment extends BaseFragment {
 	@ViewInject(R.id.top_bar_btn_back)
 	private View vBack;
 
+	private ProxyBridge proxyBridge;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_floor, container, false);
@@ -39,23 +41,25 @@ public class FloorFragment extends BaseFragment {
 
 		title.setText("楼层");
 		vBack.setVisibility(View.INVISIBLE);
-		ProxyBridge proxyBridge = new ProxyBridge(getActivity(), webView);
+		proxyBridge = new ProxyBridge(getActivity(), webView);
 		webView.addJavascriptInterface(proxyBridge, "ProxyBridge");
 		webView.loadUrl(ComParams.BASE_URL);
-		proxyBridge.setPosition("m=1&s=318", 3);
 
-		
-		
 		return v;
 	}
 
-	@OnClick({ R.id.fragment_floor_iv_dwq })
+	@OnClick({ R.id.fragment_floor_iv_dwq ,R.id.fragment_floor_iv_test})
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.fragment_floor_iv_dwq:
 			startActivity(new Intent(getActivity(), TakeMeActivity.class));
 			// RecordAlert.show(getActivity(), "33333").show();
+			break;
+		case R.id.fragment_floor_iv_test:
+			proxyBridge.setPosition("m=1&s=359", 1);
+			proxyBridge.setPosition("m=1&s=361", 2);
+
 			break;
 		default:
 			break;
