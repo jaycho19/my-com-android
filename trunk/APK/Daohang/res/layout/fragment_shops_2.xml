@@ -6,6 +6,10 @@
 
     <include layout="@layout/top_bar_search" />
 
+    <!-- <FrameLayout -->
+    <!-- android:id="@+id/fragment_shops_2_container" -->
+    <!-- android:layout_width="match_parent" -->
+    <!-- android:layout_height="match_parent" /> -->
     <!-- <ListView -->
     <!-- android:id="@+id/fragment_shops_lv" -->
     <!-- android:layout_width="match_parent" -->
@@ -13,6 +17,7 @@
     <!-- </ListView> -->
 
     <fragment
+        android:id="@+id/fragment_shops_2_shoplist"
         android:name="com.dongfang.daohang.fragment.ShopListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

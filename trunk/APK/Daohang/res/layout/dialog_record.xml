@@ -2,19 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/transparent"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="20dp" >
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@drawable/dialog_white_top" />
-
-    <TextView
+        android:id="@+id/dialog_record_share_mm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/dialog_white_center"
+        android:background="@drawable/dialog_white_top"
         android:gravity="center"
         android:text="微信分享我的位置"
         android:textColor="@color/tv_tab_text_color" />
@@ -25,6 +22,7 @@
         android:background="#999999" />
 
     <TextView
+        android:id="@+id/dialog_record_share_sms"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/dialog_white_center"
@@ -38,6 +36,7 @@
         android:background="#999999" />
 
     <TextView
+        android:id="@+id/dialog_record_recorded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/dialog_white_center"
@@ -51,16 +50,12 @@
         android:background="#999999" />
 
     <TextView
+        android:id="@+id/dialog_record_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/dialog_white_center"
+        android:background="@drawable/dialog_white_bottom"
         android:gravity="center"
         android:text="取消"
         android:textColor="@color/tv_tab_text_color" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@drawable/dialog_white_bottom" />
 
 </LinearLayout>

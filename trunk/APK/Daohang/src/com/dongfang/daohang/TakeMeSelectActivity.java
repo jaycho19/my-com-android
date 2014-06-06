@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.dongfang.daohang.fragment.ShopListFragment;
 import com.dongfang.v4.app.BaseActivity;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
@@ -49,7 +50,7 @@ public class TakeMeSelectActivity extends BaseActivity {
 				else {
 					Bundle data = new Bundle();
 					data.putString("name", s.toString());
-					searchFragment.setArguments(data);
+					((ShopListFragment) searchFragment).refresh(TakeMeSelectActivity.this, data);
 					getSupportFragmentManager().beginTransaction().hide(selectFragment).commit();
 				}
 			}

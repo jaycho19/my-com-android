@@ -3,6 +3,7 @@ package com.dongfang.daohang.bridge;
 import android.content.Context;
 import android.webkit.WebView;
 
+import com.dongfang.daohang.dialog.RecordAlert;
 import com.dongfang.utils.User;
 
 /**
@@ -37,6 +38,7 @@ public class ProxyBridge {
 	public void getRoadTextList() {
 		webView.loadUrl("javascript:page_getRoadTextList()");
 	}
+	
 
 	// ----------js调用本地接口------------------
 	public String getToken() {
@@ -67,7 +69,7 @@ public class ProxyBridge {
 	 * @param type
 	 */
 	public void openDialog(int type, String jsons) {
-
+		RecordAlert.show(context, jsons).show();
 	}
 
 	/**

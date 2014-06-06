@@ -301,6 +301,7 @@ public final class HttpActions {
 		json.addProperty("pno", pno);
 		json.addProperty("psize", psize);
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
+		ULog.d(json.toString());
 		return sb.toString();
 	}
 
