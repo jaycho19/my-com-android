@@ -15,7 +15,8 @@
         android:layout_marginLeft="30dip"
         android:layout_marginRight="20dip"
         android:layout_marginTop="10dip"
-        android:indeterminate="true" />
+        android:indeterminate="true"
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/pull_to_load_image"
@@ -36,7 +37,7 @@
         android:gravity="center"
         android:text="@string/pull_to_refresh_footer_pull_label"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/white"
+        android:textColor="#999999"
         android:textStyle="bold" />
 
     <TextView
@@ -46,8 +47,7 @@
         android:layout_below="@+id/pull_to_load_text"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:text="update_time"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/white" />
+        android:textColor="#999999" />
 
 </RelativeLayout>

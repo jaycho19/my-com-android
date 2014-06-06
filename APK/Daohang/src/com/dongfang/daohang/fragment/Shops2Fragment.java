@@ -1,6 +1,7 @@
 package com.dongfang.daohang.fragment;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +17,35 @@ import com.lidroid.xutils.ViewUtils;
  *
  */
 public class Shops2Fragment extends BaseFragment {
+	View view;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_shops_2, container, false);
-		ViewUtils.inject(this, v);
+		if (view != null) {
+			ViewGroup parent = (ViewGroup) view.getParent();
+			if (parent != null)
+				parent.removeView(view);
+		}
 
-		return v;
+		view = inflater.inflate(R.layout.fragment_shops_2, container, false);
+		ViewUtils.inject(this, view);
+
+		ShopListFragment shoplistFragment = (ShopListFragment) getFragmentManager().findFragmentById(
+				R.id.fragment_shops_2_shoplist);
+
+		Bundle data = new Bundle();
+		data.putString("name", "1");
+		shoplistFragment.refresh(getActivity(), data);
+
+		return view;
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		Fragment f = getFragmentManager().findFragmentById(R.id.fragment_shops_2_shoplist);
+		if (f != null)
+			getFragmentManager().beginTransaction().remove(f).commit();
 	}
 
 	@Override

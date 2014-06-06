@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.dongfang.daohang.fragment.ActivityFragment;
 import com.dongfang.daohang.fragment.DetailFragment;
 import com.dongfang.daohang.fragment.FloorFragment;
-import com.dongfang.daohang.fragment.ShopListFragment;
+import com.dongfang.daohang.fragment.Shops2Fragment;
 import com.dongfang.daohang.fragment.UserFragment;
 import com.dongfang.utils.ULog;
 import com.dongfang.utils.User;
@@ -34,7 +34,7 @@ public class MainDaohangActivity extends BaseActivity {
 	private TextView title;
 
 	private Context context;
-	public static int tab = 1;
+	public static int tab = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +77,8 @@ public class MainDaohangActivity extends BaseActivity {
 
 		fgtHost.getTabWidget().setDividerDrawable(null);
 		fgtHost.addTab(fgtHost.newTabSpec("0").setIndicator(tab1), FloorFragment.class, null);
-		 fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab2), ShopListFragment.class, null);
-//		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab2), Shops2Fragment.class, null);
+		// fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab2), ShopListFragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab2), Shops2Fragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab3), ActivityFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("3").setIndicator(tab4), UserFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("4").setIndicator(tab5), DetailFragment.class, null);

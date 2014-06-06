@@ -13,6 +13,7 @@ public class AreaBean implements Parcelable {
 	// "areaType": "10"
 
 	private String areaId;
+	private String marketId;
 	private String placeName;
 	private String floor;
 	private String floorId;
@@ -25,6 +26,14 @@ public class AreaBean implements Parcelable {
 
 	public void setAreaId(String areaId) {
 		this.areaId = areaId;
+	}
+
+	public String getMarketId() {
+		return marketId;
+	}
+
+	public void setMarketId(String marketId) {
+		this.marketId = marketId;
 	}
 
 	public String getPlaceName() {
@@ -70,12 +79,13 @@ public class AreaBean implements Parcelable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("areaId=").append(areaId).append("\n");
+		sb.append("areaId   =").append(areaId).append("\n");
+		sb.append("marketId =").append(marketId).append("\n");
 		sb.append("placeName=").append(placeName).append("\n");
-		sb.append("floor=").append(floor).append("\n");
-		sb.append("floorId=").append(floorId).append("\n");
-		sb.append("areaName=").append(areaName).append("\n");
-		sb.append("areatype=").append(areaType).append("\n");
+		sb.append("floor    =").append(floor).append("\n");
+		sb.append("floorId  =").append(floorId).append("\n");
+		sb.append("areaName =").append(areaName).append("\n");
+		sb.append("areatype =").append(areaType).append("\n");
 		return sb.toString();
 	}
 
@@ -87,6 +97,7 @@ public class AreaBean implements Parcelable {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(areaId);
+		dest.writeString(marketId);
 		dest.writeString(placeName);
 		dest.writeString(floor);
 		dest.writeString(floorId);
@@ -106,6 +117,7 @@ public class AreaBean implements Parcelable {
 		public AreaBean createFromParcel(Parcel source) {
 			AreaBean bean = new AreaBean();
 			bean.areaId = source.readString();
+			bean.marketId = source.readString();
 			bean.placeName = source.readString();
 			bean.floor = source.readString();
 			bean.floorId = source.readString();
