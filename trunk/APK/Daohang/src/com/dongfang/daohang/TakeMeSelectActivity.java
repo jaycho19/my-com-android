@@ -90,11 +90,11 @@ public class TakeMeSelectActivity extends BaseActivity {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.top_bar_search_iv_cancel:
-			Intent resultIntent = new Intent();
-			Bundle bundle = new Bundle();
-			bundle.putString("result", "0987654321");
-			resultIntent.putExtras(bundle);
-			setResult(RESULT_OK, resultIntent);
+			// Intent resultIntent = new Intent();
+			// Bundle bundle = new Bundle();
+			// bundle.putString("result", "0987654321");
+			// resultIntent.putExtras(bundle);
+			// setResult(RESULT_OK, resultIntent);
 
 			finish();
 			break;
