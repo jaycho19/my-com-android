@@ -1,6 +1,7 @@
 package com.dongfang.daohang.fragment;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dongfang.daohang.R;
+import com.dongfang.daohang.interf.OnSelectAreaListener;
 import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseFragment;
 import com.dongfang.v4.app.FragmentTabHostDF;
@@ -71,7 +73,7 @@ public class Shops1Fragment extends BaseFragment {
 		tab3.setLayoutParams(lp3);
 
 		ULog.d(tab3.getLayoutParams().height + "");
-
+		
 		fgtHost.addTab(fgtHost.newTabSpec("0").setIndicator(tab1), RecordFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab2), MapFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab3), MapFragment.class, null);
@@ -113,8 +115,27 @@ public class Shops1Fragment extends BaseFragment {
 				return -1;
 			}
 		});
+		
 
 		fgtHost.setCurrentTab(1);
+//		fgtHost.getCurrentTabTag();
+//		getChildFragmentManager().findFragmentByTag(fgtHost.getCurrentTabTag());
+	}
+
+	private OnSelectAreaListener onSelectAreaListener;
+
+	public OnSelectAreaListener getOnSelectAreaListener() {
+		return onSelectAreaListener;
+	}
+
+	public void setOnSelectAreaListener(OnSelectAreaListener onSelectAreaListener) {
+		this.onSelectAreaListener = onSelectAreaListener;
+
+		// for (Fragment f : getChildFragmentManager().getFragments()) {
+		// getChildFragmentManager().findFragmentByTag("0");
+		//
+		// ULog.d(f.getTag() + " ==== " + f.getClass().getSimpleName());
+		// }
 
 	}
 

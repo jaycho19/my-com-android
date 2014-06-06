@@ -23,6 +23,14 @@ public class RecordAdapter extends BaseAdapter {
 		this.inflater = LayoutInflater.from(context);
 	}
 
+	public List<com.dongfang.daohang.beans.RecordBean> getList() {
+		return list;
+	}
+
+	public void setList(List<com.dongfang.daohang.beans.RecordBean> list) {
+		this.list = list;
+	}
+
 	@Override
 	public int getCount() {
 		return list.size();
