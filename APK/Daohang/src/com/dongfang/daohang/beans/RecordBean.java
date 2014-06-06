@@ -13,6 +13,7 @@ public class RecordBean implements Parcelable {
 
 	private String areaId;
 	private String placeId;
+	private String createTime;
 	private String areaname;
 	private String mername;
 
@@ -30,6 +31,14 @@ public class RecordBean implements Parcelable {
 
 	public void setPlaceId(String placeId) {
 		this.placeId = placeId;
+	}
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
 	}
 
 	public String getAreaname() {
@@ -51,10 +60,11 @@ public class RecordBean implements Parcelable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("areaId  ").append(" = ").append(areaId).append("\n");
-		sb.append("placeId ").append(" = ").append(placeId).append("\n");
-		sb.append("areaname").append(" = ").append(areaname).append("\n");
-		sb.append("mername ").append(" = ").append(mername).append("\n");
+		sb.append("areaId     = ").append(areaId).append("\n");
+		sb.append("placeId    = ").append(placeId).append("\n");
+		sb.append("createTime = ").append(createTime).append("\n");
+		sb.append("areaname   = ").append(areaname).append("\n");
+		sb.append("mername    = ").append(mername).append("\n");
 		return sb.toString();
 	}
 
@@ -67,6 +77,7 @@ public class RecordBean implements Parcelable {
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(areaId);
 		dest.writeString(placeId);
+		dest.writeString(createTime);
 		dest.writeString(areaname);
 		dest.writeString(mername);
 	}
@@ -84,6 +95,7 @@ public class RecordBean implements Parcelable {
 			RecordBean bean = new RecordBean();
 			bean.areaId = source.readString();
 			bean.placeId = source.readString();
+			bean.createTime = source.readString();
 			bean.areaname = source.readString();
 			bean.mername = source.readString();
 			return bean;

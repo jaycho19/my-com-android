@@ -57,6 +57,7 @@ public class RecordAdapter extends BaseAdapter {
 
 		name.setText(position + ":" + list.get(position).getAreaname());
 		detail.setText(list.get(position).getAreaname());
+		time.setText(list.get(position).getCreateTime());
 
 		return v;
 	}

@@ -65,10 +65,11 @@ public class RecordFragment extends BaseFragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				ULog.d(new Gson().toJson(listData.get(position)));
-				
-				
-				getParentFragment().get
-				
+
+				if (getParentFragment() instanceof Shops1Fragment) {
+					onSelectAreaListener = ((Shops1Fragment) getParentFragment()).getOnSelectAreaListener();
+				}
+
 				if (onSelectAreaListener != null) {
 					onSelectAreaListener.onSelected(new Gson().toJson(listData.get(position)),
 							RecordFragment.class.getSimpleName());
