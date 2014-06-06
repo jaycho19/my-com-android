@@ -8,12 +8,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.dongfang.daohang.R;
 import com.dongfang.daohang.beans.AreaBean;
 import com.dongfang.daohang.beans.AreaEntity;
+import com.dongfang.daohang.interf.OnSelectAreaListener;
 import com.dongfang.daohang.net.HttpActions;
 import com.dongfang.daohang.params.adp.ShopsListAdapter;
 import com.dongfang.utils.DFException;
@@ -23,6 +26,7 @@ import com.dongfang.v4.app.BaseFragment;
 import com.dongfang.views.PullToRefreshView;
 import com.dongfang.views.PullToRefreshView.OnFooterRefreshListener;
 import com.dongfang.views.PullToRefreshView.OnHeaderRefreshListener;
+import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -72,6 +76,18 @@ public class ShopListFragment extends BaseFragment {
 		listData = new ArrayList<AreaBean>();
 		searchAdp = new ShopsListAdapter(getActivity(), listData);
 		listView.setAdapter(searchAdp);
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				ULog.d(new Gson().toJson(listData.get(position)));
+				if (onSelectAreaListener != null) {
+					onSelectAreaListener.onSelected(new Gson().toJson(listData.get(position)),
+							ShopListFragment.class.getSimpleName());
+
+				}
+			}
+		});
 
 		if (null != getArguments() && getArguments().containsKey("name"))
 			getSearchResult(getArguments().getString("name"), pageStart, LIMIT);
@@ -148,6 +164,17 @@ public class ShopListFragment extends BaseFragment {
 
 	}
 
+	private OnSelectAreaListener onSelectAreaListener;
+
+	public OnSelectAreaListener getOnSelectAreaListener() {
+		return onSelectAreaListener;
+	}
+
+	public void setOnSelectAreaListener(OnSelectAreaListener onSelectAreaListener) {
+		this.onSelectAreaListener = onSelectAreaListener;
+	}
+
 	@Override
 	public void onClick(View v) {}
+
 }

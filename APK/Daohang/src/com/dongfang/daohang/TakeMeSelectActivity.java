@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.dongfang.daohang.fragment.ShopListFragment;
+import com.dongfang.daohang.fragment.Shops1Fragment;
+import com.dongfang.daohang.interf.OnSelectAreaListener;
 import com.dongfang.v4.app.BaseActivity;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
@@ -27,6 +29,8 @@ public class TakeMeSelectActivity extends BaseActivity {
 	private Fragment selectFragment;
 	private Fragment searchFragment;
 
+	private OnSelectAreaListener onSelectAreaListener;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,6 +43,23 @@ public class TakeMeSelectActivity extends BaseActivity {
 
 		// getSupportFragmentManager().beginTransaction().add(R.id.activity_takeme_fragment_contain, selectFragment)
 		// .commit();
+
+		onSelectAreaListener = new OnSelectAreaListener() {
+
+			@Override
+			public void onSelected(String result, String from) {
+				Intent resultIntent = new Intent();
+				Bundle bundle = new Bundle();
+				bundle.putString("result", result);
+				bundle.putString("from", from);
+				resultIntent.putExtras(bundle);
+				setResult(RESULT_OK, resultIntent);
+				finish();
+			}
+		};
+
+		((Shops1Fragment) selectFragment).setOnSelectAreaListener(onSelectAreaListener);
+		((ShopListFragment) searchFragment).setOnSelectAreaListener(onSelectAreaListener);
 
 		inputEditText.addTextChangedListener(new TextWatcher() {
 
