@@ -72,8 +72,7 @@
             android:name="SettingMapDownloadActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name="ShopInfoActivity"
-            android:launchMode="singleTask" />
+            android:name="ShopInfoActivity"/>
         <activity
             android:name="ShopWabActivity"
             android:launchMode="singleTask" />

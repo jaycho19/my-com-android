@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dongfang.daohang.R;
+import com.dongfang.daohang.ShopInfoActivity;
 import com.dongfang.daohang.TakeMeActivity;
 import com.dongfang.daohang.bridge.ProxyBridge;
 import com.dongfang.daohang.params.ComParams;
@@ -48,17 +49,22 @@ public class FloorFragment extends BaseFragment {
 		return v;
 	}
 
-	@OnClick({ R.id.fragment_floor_iv_dwq ,R.id.fragment_floor_iv_test})
+	@OnClick({ R.id.fragment_floor_iv_dwq, R.id.fragment_floor_iv_test })
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.fragment_floor_iv_dwq:
 			startActivity(new Intent(getActivity(), TakeMeActivity.class));
-			// RecordAlert.show(getActivity(), "33333").show();
 			break;
 		case R.id.fragment_floor_iv_test:
-			proxyBridge.setPosition("m=1&s=359", 1);
-			proxyBridge.setPosition("m=1&s=361", 2);
+			// RecordAlert.show(getActivity(), "33333").show();
+			// proxyBridge.openDialog(1,"1234567890");
+//			proxyBridge.setPosition("m=1&s=359", 1);
+//			proxyBridge.setPosition("m=1&s=361", 2);
+//			proxyBridge.getRoadTextList();
+			
+			
+			startActivity(new Intent(getActivity(), ShopInfoActivity.class));
 
 			break;
 		default:
