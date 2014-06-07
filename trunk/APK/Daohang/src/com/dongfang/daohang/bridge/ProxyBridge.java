@@ -4,6 +4,7 @@ import android.content.Context;
 import android.webkit.WebView;
 
 import com.dongfang.daohang.dialog.RecordDialog;
+import com.dongfang.utils.ULog;
 import com.dongfang.utils.User;
 
 /**
@@ -38,7 +39,6 @@ public class ProxyBridge {
 	public void getRoadTextList() {
 		webView.loadUrl("javascript:page_getRoadTextList()");
 	}
-	
 
 	// ----------js调用本地接口------------------
 	public String getToken() {
@@ -60,6 +60,7 @@ public class ProxyBridge {
 	 * @param jsons
 	 */
 	public void setRoadTextList(String jsons) {
+		ULog.d(jsons);
 
 	}
 
@@ -78,7 +79,7 @@ public class ProxyBridge {
 	 * @param type
 	 */
 	public void openActivity(int type, String jsons) {
-
+		ULog.d(jsons);
 	}
 
 	/**
@@ -87,7 +88,7 @@ public class ProxyBridge {
 	 * @param params
 	 */
 	public void send(String func, String params) {
-
+		ULog.d(func + "(" + params + ")");
 	}
 
 }
