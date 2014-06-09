@@ -3,7 +3,7 @@ package com.dongfang.daohang.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.sax.StartElementListener;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -103,7 +103,8 @@ public class RecordDialog {
 			case R.id.dialog_record_share_mm:
 				break;
 			case R.id.dialog_record_share_sms: {
-				Intent intent = new Intent(Intent.ACTION_SEND);
+				Uri uri = Uri.parse("smsto:");
+				Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
 				intent.putExtra("sms_body", str);
 				context.startActivity(intent);
 			}

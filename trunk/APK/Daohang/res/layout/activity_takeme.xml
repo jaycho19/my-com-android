@@ -10,9 +10,8 @@
     <include layout="@layout/dialog_goto" />
 
     <include layout="@layout/activity_takeme_text_navigation" 
-        
-        
-        sdfsdf/>
+        android:visibility="gone"
+        />
 
     <TextView
         android:layout_width="match_parent"

@@ -3,6 +3,7 @@ package com.dongfang.daohang.bridge;
 import android.content.Context;
 import android.webkit.WebView;
 
+import com.dongfang.daohang.TakeMeActivity;
 import com.dongfang.daohang.TakeMeSelectActivity;
 import com.dongfang.daohang.beans.AreaBean;
 import com.dongfang.daohang.dialog.RecordDialog;
@@ -60,9 +61,18 @@ public class ProxyBridge {
 				&& null != ((TakeMeSelectActivity) context).getOnSelectAreaListener()) {
 			((TakeMeSelectActivity) context).getOnSelectAreaListener().onSelected(s, "ProxyBridge");
 			((TakeMeSelectActivity) context).finish();
-
 		}
+	}
 
+	/**
+	 * 显示文字导航
+	 * 
+	 * @param s
+	 */
+	public void showTextNavigation(String s) {
+		if ((context instanceof TakeMeActivity)) {
+			((TakeMeActivity) context).initTextNavigation(s);
+		}
 	}
 
 	// ----------js调用本地接口------------------
@@ -115,12 +125,11 @@ public class ProxyBridge {
 	public void send(String func, String params) {
 		ULog.d(func + "(" + params + ")");
 
-		if ("page_getRoadTextList".equalsIgnoreCase(func)) {
-
+		if ("page_getRoadTextList".equalsIgnoreCase(func) && !"undefined".equalsIgnoreCase(params)) {
+			showTextNavigation(params);
 		}
-		else if ("page_getAreaInfo".equalsIgnoreCase(func)) {
+		else if ("page_getAreaInfo".equalsIgnoreCase(func) && !"undefined".equalsIgnoreCase(params)) {
 			sendAreaInfo(params);
-
 		}
 	}
 }

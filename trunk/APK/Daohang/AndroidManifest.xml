@@ -77,7 +77,7 @@
             android:name="ShopWabActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name="TakeMeActivity" android:launchMode="singleTask" />
+            android:name="TakeMeActivity" />
         <activity
             android:name="TakeMeSelectActivity" android:windowSoftInputMode="adjustPan"/>
     </application>
