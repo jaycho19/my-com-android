@@ -35,7 +35,7 @@ public class HomeFragment extends BaseFragment {
 		// webView.loadUrl("file:///android_asset/index.html");
 		webView.loadUrl(ComParams.BASE_URL);
 		proxyBridge = new ProxyBridge(getActivity(), webView);
-		webView.addJavascriptInterface(proxyBridge, "ProxyBridge");
+		webView.addJavascriptInterface(proxyBridge);
 		return view;
 	}
 

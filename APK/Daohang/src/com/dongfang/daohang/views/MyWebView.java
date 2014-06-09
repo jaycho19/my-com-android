@@ -16,6 +16,10 @@ public class MyWebView extends WebView {
 	private MyWebViewClient myWebViewClient;
 	private ProgressBar progressbar;
 
+	public void addJavascriptInterface(Object object) {
+		this.addJavascriptInterface(object, "AliansBridge");
+	}
+
 	/**
 	 * 用户点击返回时认为当前页面加载完成。 复写stopLoading方法，设置webviewclient的超时状态位为false。
 	 * 

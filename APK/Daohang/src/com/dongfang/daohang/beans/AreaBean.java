@@ -2,23 +2,36 @@ package com.dongfang.daohang.beans;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 public class AreaBean implements Parcelable {
 
 	// "areaId": "322",
-	// "placeName": "测试商场",
-	// "floor": "B3",
-	// "floorId": "36",
 	// "areaName": "9",
 	// "areaType": "10"
+	// "floor": "B3",
+	// "floorId": "36",
+	// "placeName": "测试商场",
+
+	// {
+	// "areaId": "359",
+	// "areaType": "10",
+	// "areaname": "A02",
+	// "facilityId": null,
+	// "facilityName": "",
+	// "floorId": "28",
+	// "shopId": null
+	// "shopName": "",
+	// }
 
 	private String areaId;
-	private String marketId;
-	private String placeName;
-	private String floor;
-	private String floorId;
+	private String areaname;
 	private String areaName;
 	private String areaType;
+	private String floor;
+	private String floorId;
+	private String marketId;
+	private String placeName;
 
 	public String getAreaId() {
 		return areaId;
@@ -61,11 +74,11 @@ public class AreaBean implements Parcelable {
 	}
 
 	public String getAreaName() {
-		return areaName;
+		return TextUtils.isEmpty(areaname) ? areaName : areaname;
 	}
 
 	public void setAreaName(String areaName) {
-		this.areaName = areaName;
+		this.areaname = this.areaName = areaName;
 	}
 
 	public String getAreaType() {
