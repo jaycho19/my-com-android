@@ -7,6 +7,6 @@ public class ComParams {
 	private static final String HTTP_BASE = "http://211.149.200.227:30002";
 	public static final String HTTP_URL = HTTP_BASE + "/www/interface/index.php";
 	
-	public static final String BASE_URL = "http://211.149.200.227:30001/web/maps.php?m=1&hide=5";
+	public static final String BASE_URL = "http://211.149.200.227:30001/web/mapsn.php?m=1&hide=5";
 
 }

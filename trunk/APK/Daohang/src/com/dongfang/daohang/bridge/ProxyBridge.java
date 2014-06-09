@@ -3,9 +3,14 @@ package com.dongfang.daohang.bridge;
 import android.content.Context;
 import android.webkit.WebView;
 
+import com.dongfang.daohang.TakeMeSelectActivity;
+import com.dongfang.daohang.beans.AreaBean;
 import com.dongfang.daohang.dialog.RecordDialog;
+import com.dongfang.utils.DFException;
+import com.dongfang.utils.JsonAnalytic;
 import com.dongfang.utils.ULog;
 import com.dongfang.utils.User;
+import com.dongfang.zxing.decoding.FinishListener;
 
 /**
  * 和页面互调接口
@@ -38,6 +43,26 @@ public class ProxyBridge {
 	 */
 	public void getRoadTextList() {
 		webView.loadUrl("javascript:page_getRoadTextList()");
+	}
+
+	public void getAreaInfo() {
+		webView.loadUrl("javascript:page_getAreaInfo()");
+	}
+
+	// ----------js转本地接口------------------
+	/**
+	 * 设置起点和终点
+	 * 
+	 * @param s
+	 */
+	public void sendAreaInfo(String s) {
+		if ((context instanceof TakeMeSelectActivity)
+				&& null != ((TakeMeSelectActivity) context).getOnSelectAreaListener()) {
+			((TakeMeSelectActivity) context).getOnSelectAreaListener().onSelected(s, "ProxyBridge");
+			((TakeMeSelectActivity) context).finish();
+
+		}
+
 	}
 
 	// ----------js调用本地接口------------------
@@ -89,6 +114,13 @@ public class ProxyBridge {
 	 */
 	public void send(String func, String params) {
 		ULog.d(func + "(" + params + ")");
-	}
 
+		if ("page_getRoadTextList".equalsIgnoreCase(func)) {
+
+		}
+		else if ("page_getAreaInfo".equalsIgnoreCase(func)) {
+			sendAreaInfo(params);
+
+		}
+	}
 }

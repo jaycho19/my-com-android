@@ -101,7 +101,7 @@ public class RecordFragment extends BaseFragment {
 						ULog.d(responseInfo.result);
 
 						try {
-							RecordEntity recodeEntity = JsonAnalytic.getInstance().analyseJsonTInfo(
+							RecordEntity recodeEntity = JsonAnalytic.getInstance().analyseJsonTInfoDF(
 									responseInfo.result, RecordEntity.class);
 
 							if (null == listData)

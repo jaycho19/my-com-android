@@ -65,7 +65,7 @@ public class RecordDialog {
 				break;
 			case R.id.dialog_record_recorded: {
 				int placeId = 2;
-				int areaId = 1;
+				String areaId = "A1";
 				new HttpUtils().send(HttpMethod.GET, HttpActions.addRecord(context, areaId, placeId),
 						new RequestCallBack<String>() {
 							ProgressDialog pro = ProgressDialog.show(context);
@@ -87,7 +87,7 @@ public class RecordDialog {
 								pro.dismiss();
 								ULog.d(arg0.result);
 								try {
-									BaseEntity base = JsonAnalytic.getInstance().analyseJsonT(arg0.result,
+									BaseEntity base = JsonAnalytic.getInstance().analyseJsonTDF(arg0.result,
 											BaseEntity.class);
 									Toast.makeText(context, base.getMsg(), Toast.LENGTH_SHORT).show();
 								} catch (DFException e) {

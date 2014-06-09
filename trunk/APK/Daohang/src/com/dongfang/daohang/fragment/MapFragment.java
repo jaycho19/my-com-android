@@ -23,8 +23,7 @@ public class MapFragment extends BaseFragment {
 		View view = inflater.inflate(R.layout.fragment_map, container, false);
 		ViewUtils.inject(this, view);
 
-		// webView.loadUrl("http://www.baidu.com");.
-		webView.addJavascriptInterface(new ProxyBridge(getActivity(), webView), "ProxyBridge");
+		webView.addJavascriptInterface(new ProxyBridge(getActivity(), webView));
 		webView.loadUrl(ComParams.BASE_URL);
 		return view;
 	}

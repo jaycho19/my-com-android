@@ -69,7 +69,7 @@ public class UserFollowActivity extends BaseActivity {
 				ULog.d(responseInfo.result);
 
 				try {
-					CollectBean collect = JsonAnalytic.getInstance().analyseJsonTInfo(responseInfo.result, CollectBean.class);
+					CollectBean collect = JsonAnalytic.getInstance().analyseJsonTInfoDF(responseInfo.result, CollectBean.class);
 					ULog.d(collect.toString());
 
 					ArrayList<Map<String, String>> data = new ArrayList<Map<String, String>>();

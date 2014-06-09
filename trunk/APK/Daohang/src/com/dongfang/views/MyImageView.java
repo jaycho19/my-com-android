@@ -8,8 +8,9 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.dongfang.daohang.R;
@@ -48,20 +49,20 @@ public class MyImageView extends RelativeLayout {
 
 	public void init(Context context, AttributeSet attrs, int defStyle) {
 		this.context = context;
+		View view = LayoutInflater.from(context).inflate(R.layout.my_imageview, null);
 
-		imageView = (ImageView) LayoutInflater.from(context).inflate(R.layout.my_imageview, null);
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ImageView, defStyle, 0);
 		Drawable d = a.getDrawable(R.styleable.ImageView_src);
-		
+
 		ULog.d("d != null " + (d != null));
-		
-		
-		if (d != null) {
+
+		if (d != null && (view instanceof ImageView)) {
+			imageView = (ImageView) view;
 			imageView.setImageDrawable(d);
 		}
 
 		this.setGravity(Gravity.CENTER);
-		addView(imageView, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+		addView(view, new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 	}
 
 	/**
@@ -97,7 +98,7 @@ public class MyImageView extends RelativeLayout {
 				// bigPicDisplayConfig.setShowOriginal(true);
 				bigPicDisplayConfig.setBitmapConfig(Bitmap.Config.RGB_565);
 			}
-			BitmapSize bSize = new BitmapSize(maxWidth,maxHeight);
+			BitmapSize bSize = new BitmapSize(maxWidth, maxHeight);
 			bigPicDisplayConfig.setBitmapMaxSize(bSize);
 
 			bitmapUtils.display(imageView, url, bigPicDisplayConfig);

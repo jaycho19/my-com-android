@@ -29,8 +29,6 @@ public class TakeMeSelectActivity extends BaseActivity {
 	private Fragment selectFragment;
 	private Fragment searchFragment;
 
-	private OnSelectAreaListener onSelectAreaListener;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -102,6 +100,16 @@ public class TakeMeSelectActivity extends BaseActivity {
 		default:
 			break;
 		}
+	}
+
+	private OnSelectAreaListener onSelectAreaListener;
+
+	public OnSelectAreaListener getOnSelectAreaListener() {
+		return onSelectAreaListener;
+	}
+
+	public void setOnSelectAreaListener(OnSelectAreaListener onSelectAreaListener) {
+		this.onSelectAreaListener = onSelectAreaListener;
 	}
 
 }

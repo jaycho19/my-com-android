@@ -78,7 +78,7 @@ public class UserLRRegisterActivity extends BaseActivity {
 						@Override
 						public void onSuccess(ResponseInfo<String> responseInfo) {
 							try {
-								UserBean user = JsonAnalytic.getInstance().analyseJsonTInfo(responseInfo.result,
+								UserBean user = JsonAnalytic.getInstance().analyseJsonTInfoDF(responseInfo.result,
 										UserBean.class);
 								ULog.d(user.toString());
 								User.saveToken(UserLRRegisterActivity.this, user.getUserToken());

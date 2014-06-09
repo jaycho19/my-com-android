@@ -132,7 +132,7 @@ public class ShopListFragment extends BaseFragment {
 				ULog.d(responseInfo.result);
 
 				try {
-					AreaEntity areaEntity = JsonAnalytic.getInstance().analyseJsonTInfo(responseInfo.result,
+					AreaEntity areaEntity = JsonAnalytic.getInstance().analyseJsonTInfoDF(responseInfo.result,
 							AreaEntity.class);
 					if (null == areaEntity)
 						return;

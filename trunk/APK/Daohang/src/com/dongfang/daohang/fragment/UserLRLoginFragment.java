@@ -91,7 +91,7 @@ public class UserLRLoginFragment extends BaseFragment {
 							progressDialog.dismiss();
 							ULog.d(responseInfo.result);
 							try {
-								UserBean user = JsonAnalytic.getInstance().analyseJsonTInfo(responseInfo.result,
+								UserBean user = JsonAnalytic.getInstance().analyseJsonTInfoDF(responseInfo.result,
 										UserBean.class);
 								ULog.d(user.toString());
 								User.saveToken(getActivity(), user.getUserToken());

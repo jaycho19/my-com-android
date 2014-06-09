@@ -43,7 +43,7 @@ public class FloorFragment extends BaseFragment {
 		title.setText("楼层");
 		vBack.setVisibility(View.INVISIBLE);
 		proxyBridge = new ProxyBridge(getActivity(), webView);
-		webView.addJavascriptInterface(proxyBridge, "ProxyBridge");
+		webView.addJavascriptInterface(proxyBridge);
 		webView.loadUrl(ComParams.BASE_URL);
 
 		return v;
@@ -59,12 +59,16 @@ public class FloorFragment extends BaseFragment {
 		case R.id.fragment_floor_iv_test:
 			// RecordAlert.show(getActivity(), "33333").show();
 			// proxyBridge.openDialog(1,"1234567890");
-//			proxyBridge.setPosition("m=1&s=359", 1);
-//			proxyBridge.setPosition("m=1&s=361", 2);
-//			proxyBridge.getRoadTextList();
-			
-			
-			startActivity(new Intent(getActivity(), ShopInfoActivity.class));
+			proxyBridge.setPosition("359", 1);
+			proxyBridge.setPosition("361", 2);
+			proxyBridge.getRoadTextList();
+			proxyBridge.getAreaInfo();
+
+			// Intent intent = new Intent(getActivity(), ShopInfoActivity.class);
+			// intent.putExtra("title", "优衣库");
+			// intent.putExtra("placeId", 10);
+			// intent.putExtra("shopId", 1);
+			// startActivity(intent);
 
 			break;
 		default:
