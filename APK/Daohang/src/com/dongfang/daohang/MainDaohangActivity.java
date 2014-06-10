@@ -88,8 +88,10 @@ public class MainDaohangActivity extends BaseActivity {
 			public int onBeforeChangeTab(int index) {
 				if (3 == index && !User.isLogined(context)) {
 					context.startActivity(new Intent(context, UserLRLoginActivity.class));
+					tab = 0;
 					return index;
 				}
+				tab = index;
 				return -1;
 			}
 		});

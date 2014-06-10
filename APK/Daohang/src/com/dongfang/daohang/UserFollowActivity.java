@@ -73,7 +73,7 @@ public class UserFollowActivity extends BaseActivity {
 					ULog.d(collect.toString());
 
 					ArrayList<Map<String, String>> data = new ArrayList<Map<String, String>>();
-					for (CollectItem c : collect.getCollects()) {
+					for (CollectItem c : collect.getList()) {
 						Map<String, String> map = new HashMap<String, String>();
 						map.put("t", c.toString());
 						data.add(map);

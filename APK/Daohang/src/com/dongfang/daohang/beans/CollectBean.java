@@ -8,8 +8,8 @@ import android.os.Parcelable;
 public class CollectBean implements Parcelable {
 	private int total;
 	private int nowPage;
-	private int placeId;
-	private List<CollectItem> collects;
+	private int nowSize;
+	private List<CollectItem> list;
 
 	public int getTotal() {
 		return total;
@@ -27,31 +27,31 @@ public class CollectBean implements Parcelable {
 		this.nowPage = nowPage;
 	}
 
-	public int getPlaceId() {
-		return placeId;
+	public int getNowSize() {
+		return nowSize;
 	}
 
-	public void setPlaceId(int placeId) {
-		this.placeId = placeId;
+	public void setNowSize(int nowSize) {
+		this.nowSize = nowSize;
 	}
 
-	public List<CollectItem> getCollects() {
-		return collects;
+	public List<CollectItem> getList() {
+		return list;
 	}
 
-	public void setCollects(List<CollectItem> collects) {
-		this.collects = collects;
+	public void setList(List<CollectItem> list) {
+		this.list = list;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("total  ").append(" = ").append(total).append("\n");
-		sb.append("placeId").append(" = ").append(nowPage).append("\n");
-		sb.append("placeId").append(" = ").append(placeId).append("\n");
-		if (null != collects) {
-			for (int i = 0, l = collects.size(); i < l; i++) {
-				sb.append("collects[").append(i).append("] = ").append(collects.get(i).toString()).append("\n");
+		sb.append("total   = ").append(total).append("\n");
+		sb.append("nowPage = ").append(nowPage).append("\n");
+		sb.append("nowSize = ").append(nowSize).append("\n");
+		if (null != list) {
+			for (int i = 0, l = list.size(); i < l; i++) {
+				sb.append("list[").append(i).append("] = ").append(list.get(i).toString()).append("\n");
 			}
 		}
 		return sb.toString();
@@ -66,8 +66,8 @@ public class CollectBean implements Parcelable {
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeInt(total);
 		dest.writeInt(nowPage);
-		dest.writeInt(placeId);
-		dest.writeTypedList(collects);
+		dest.writeInt(nowSize);
+		dest.writeTypedList(list);
 	}
 
 	public static final Parcelable.Creator<CollectBean> CREATOR = new Creator<CollectBean>() {
@@ -83,8 +83,8 @@ public class CollectBean implements Parcelable {
 			CollectBean bean = new CollectBean();
 			bean.total = source.readInt();
 			bean.nowPage = source.readInt();
-			bean.placeId = source.readInt();
-			source.readTypedList(bean.collects, CollectItem.CREATOR);
+			bean.nowSize = source.readInt();
+			source.readTypedList(bean.list, CollectItem.CREATOR);
 			return bean;
 		}
 	};
