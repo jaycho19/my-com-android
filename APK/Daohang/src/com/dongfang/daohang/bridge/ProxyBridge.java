@@ -5,13 +5,9 @@ import android.webkit.WebView;
 
 import com.dongfang.daohang.TakeMeActivity;
 import com.dongfang.daohang.TakeMeSelectActivity;
-import com.dongfang.daohang.beans.AreaBean;
 import com.dongfang.daohang.dialog.RecordDialog;
-import com.dongfang.utils.DFException;
-import com.dongfang.utils.JsonAnalytic;
 import com.dongfang.utils.ULog;
 import com.dongfang.utils.User;
-import com.dongfang.zxing.decoding.FinishListener;
 
 /**
  * 和页面互调接口
@@ -46,8 +42,22 @@ public class ProxyBridge {
 		webView.loadUrl("javascript:page_getRoadTextList()");
 	}
 
-	public void getAreaInfo() {
-		webView.loadUrl("javascript:page_getAreaInfo()");
+	/**
+	 * 显示atm等信息
+	 */
+	public void setShowSpecialArea() {
+		webView.loadUrl("javascript:page_setShowArea('1')");
+	}
+
+	/**
+	 * 导航时，显示上一个下一个位置点
+	 * 
+	 * @param floor
+	 * @param x
+	 * @param y
+	 */
+	public void nextRoadTextList(String floor, String x, String y) {
+		webView.loadUrl("javascript:page_nextRoadTextList('" + floor + "','" + x + "','" + y + "')");
 	}
 
 	// ----------js转本地接口------------------

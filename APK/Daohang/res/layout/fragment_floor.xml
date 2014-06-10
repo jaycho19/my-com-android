@@ -57,7 +57,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="8"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/fragment_floor_text_navigation_btn_right"

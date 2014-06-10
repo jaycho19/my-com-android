@@ -82,10 +82,12 @@ public class FloorFragment extends BaseFragment {
 		case R.id.fragment_floor_text_navigation_btn_left:
 			i = i < 1 ? 0 : --i;
 			tvNavigation.setText(listData.get(i).getText());
+			proxyBridge.nextRoadTextList(listData.get(i).getFloor(), listData.get(i).getX(), listData.get(i).getY());
 			break;
 		case R.id.fragment_floor_text_navigation_btn_right:
 			i = i > (listData.size() - 2) ? listData.size() - 1 : ++i;
 			tvNavigation.setText(listData.get(i).getText());
+			proxyBridge.nextRoadTextList(listData.get(i).getFloor(), listData.get(i).getX(), listData.get(i).getY());
 			break;
 		case R.id.fragment_floor_iv_dwq:
 			startActivityForResult(new Intent(getActivity(), TakeMeActivity.class), 0x00E0);
@@ -96,8 +98,6 @@ public class FloorFragment extends BaseFragment {
 			proxyBridge.setPosition("359", 1);
 			proxyBridge.setPosition("361", 2);
 			proxyBridge.getRoadTextList();
-			proxyBridge.getAreaInfo();
-
 			// Intent intent = new Intent(getActivity(), ShopInfoActivity.class);
 			// intent.putExtra("title", "优衣库");
 			// intent.putExtra("placeId", 10);
