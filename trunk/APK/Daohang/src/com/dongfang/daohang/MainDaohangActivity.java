@@ -34,7 +34,7 @@ public class MainDaohangActivity extends BaseActivity {
 	private TextView title;
 
 	private Context context;
-	public static int tab = 4;
+	public static int tab = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

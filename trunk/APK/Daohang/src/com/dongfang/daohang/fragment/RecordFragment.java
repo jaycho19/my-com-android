@@ -84,7 +84,7 @@ public class RecordFragment extends BaseFragment {
 	public void onStart() {
 		super.onStart();
 
-		new HttpUtils().send(HttpMethod.GET, HttpActions.getRecords(getActivity(), 1, 1, 10),
+		new HttpUtils().send(HttpMethod.GET, HttpActions.getRecords(getActivity(), 10, 1, 10),
 				new RequestCallBack<String>() {
 					ProgressDialog progress = ProgressDialog.show(getActivity());
 

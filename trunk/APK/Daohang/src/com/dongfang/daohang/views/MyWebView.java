@@ -77,6 +77,9 @@ public class MyWebView extends WebView {
 		public void onProgressChanged(WebView view, int newProgress) {
 			if (newProgress == 100) {
 				progressbar.setVisibility(GONE);
+				if (null != onLoadCompleted){
+					onLoadCompleted.toDO();
+				}
 			}
 			else {
 				if (progressbar.getVisibility() == GONE)
@@ -141,18 +144,13 @@ public class MyWebView extends WebView {
 		return zoomDensity;
 	}
 
-	public void setWebViewFlipperinter(WebViewFlipperinter wvflipperinter) {
-		webviewflipperinter = wvflipperinter;
+	public void setOnLoadCompleted(OnLoadCompleted onLoadCompleted) {
+		this.onLoadCompleted = onLoadCompleted;
 	}
 
-	public WebViewFlipperinter webviewflipperinter;
+	public OnLoadCompleted onLoadCompleted;
 
-	public interface WebViewFlipperinter {
-		public void showNextFlip();
-
-		public void showPreviousFlip();
-
-		// public void showMore();
-
+	public interface OnLoadCompleted {
+		public void toDO();
 	}
 }
