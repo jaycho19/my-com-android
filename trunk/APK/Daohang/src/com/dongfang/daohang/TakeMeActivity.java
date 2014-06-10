@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.dongfang.daohang.beans.TextNavBean;
 import com.dongfang.daohang.bridge.ProxyBridge;
 import com.dongfang.daohang.params.ComParams;
+import com.dongfang.daohang.params.adp.TextNavAdapter;
 import com.dongfang.daohang.views.MyWebView;
 import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseActivity;
@@ -52,6 +53,7 @@ public class TakeMeActivity extends BaseActivity {
 	private ProxyBridge proxyBridge;
 	private MyWebView webView;
 	private ArrayList<TextNavBean> listData;
+	private TextNavAdapter textNavAdapter;
 	private Context context;
 
 	@Override
@@ -65,6 +67,9 @@ public class TakeMeActivity extends BaseActivity {
 		proxyBridge = new ProxyBridge(context, webView);
 		webView.addJavascriptInterface(proxyBridge);
 		webView.loadUrl(ComParams.BASE_URL);
+
+		textNavAdapter = new TextNavAdapter(context, listData);
+		lvTextNavigation.setAdapter(textNavAdapter);
 	}
 
 	@Override
@@ -194,18 +199,22 @@ public class TakeMeActivity extends BaseActivity {
 
 			ULog.d(msg.obj.toString());
 			listData = new Gson().fromJson(msg.obj.toString(), new TypeToken<List<TextNavBean>>() {}.getType());
-			List<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
-			for (TextNavBean tnb : listData) {
-				// ULog.d(tnb.toString());
-				HashMap<String, String> map = new HashMap<String, String>();
-				map.put("text", tnb.getText());
-				data.add(map);
-			}
+			textNavAdapter.setList(listData);
+			textNavAdapter.notifyDataSetChanged();
 
-			SimpleAdapter adpAdapter = new SimpleAdapter(TakeMeActivity.this, data,
-					android.R.layout.simple_list_item_1, new String[] { "text" }, new int[] { android.R.id.text1 });
-
-			lvTextNavigation.setAdapter(adpAdapter);
+			// List<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
+			// for (TextNavBean tnb : listData) {
+			// // ULog.d(tnb.toString());
+			// HashMap<String, String> map = new HashMap<String, String>();
+			// map.put("text", tnb.getText());
+			// data.add(map);
+			// }
+			//
+			// SimpleAdapter adpAdapter = new SimpleAdapter(TakeMeActivity.this, data,
+			// R.layout.activity_takeme_text_navigation_adp_item, new String[] { "text" }, new int[] {
+			// android.R.id.text1 });
+			//
+			// lvTextNavigation.setAdapter(adpAdapter);
 			rlTextNavigation.setVisibility(View.VISIBLE);
 
 		}
