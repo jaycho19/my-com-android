@@ -115,7 +115,7 @@ public final class HttpActions {
 	/**
 	 * 获取商场信息
 	 */
-	public static String getPlace(int placeId) {
+	public static String getPlace(String placeId) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
 		sb.append("?").append("class=").append("place");
 		sb.append("&").append("method=").append("getPlace");
@@ -144,7 +144,7 @@ public final class HttpActions {
 	/**
 	 * 获取商场活动列表
 	 */
-	public static String getActivitys(int placeId, int pno, int psize) {
+	public static String getActivitys(int placeId, int pno, int psize, int type) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
 		sb.append("?").append("class=").append("activity");
 		sb.append("&").append("method=").append("getActivitys");
@@ -153,6 +153,8 @@ public final class HttpActions {
 		json.addProperty("placeId", placeId);
 		json.addProperty("pno", pno);
 		json.addProperty("psize", psize);
+		if (type > -1)
+			json.addProperty("activityType", type);
 		sb.append("&").append("params=").append(URLEncoder.encode(json.toString()));
 		return sb.toString();
 	}
