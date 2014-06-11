@@ -8,9 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.dongfang.daohang.MainActivity;
+import com.dongfang.daohang.MainDaohangActivity;
 import com.dongfang.daohang.R;
 import com.dongfang.daohang.UserFollowActivity;
 import com.dongfang.daohang.UserInfoActivity;
+import com.dongfang.daohang.UserLRLoginActivity;
 import com.dongfang.daohang.UserRecordActivity;
 import com.dongfang.utils.ULog;
 import com.dongfang.utils.User;
@@ -36,17 +39,32 @@ public class UserFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_user, container, false);
 		ViewUtils.inject(this, view);
-
+		
 		ULog.d((null != getArguments()) + "---------------------------");
 
 		if (null != getArguments()) {
 			ll.setVisibility(View.GONE);
 		}
-
 		v.setVisibility(View.INVISIBLE);
 		title.setText("我的");
 		return view;
 	}
+
+	
+	
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		if (!User.isLogined(getActivity())){
+			MainActivity.tab = MainDaohangActivity.tab = 0;
+			startActivity(new Intent(getActivity(), UserLRLoginActivity.class));
+		}
+		
+	}
+
+
+
 
 	@Override
 	public void onResume() {

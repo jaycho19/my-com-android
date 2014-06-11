@@ -62,7 +62,7 @@ public class UserLRRegisterActivity extends BaseActivity {
 				return;
 			}
 
-			String name = etName.getText().toString().trim();
+			final String name = etName.getText().toString().trim();
 			String psw = etPsw.getText().toString().trim();
 			String phone = etPhonenum.getText().toString().trim();
 
@@ -82,7 +82,10 @@ public class UserLRRegisterActivity extends BaseActivity {
 										UserBean.class);
 								ULog.d(user.toString());
 								User.saveToken(UserLRRegisterActivity.this, user.getUserToken());
+								User.saveUserId(UserLRRegisterActivity.this, user.getId());
 								User.savePhone(UserLRRegisterActivity.this, user.getMobile());
+								User.saveUserNickname(UserLRRegisterActivity.this, user.getNickName());
+								User.savaUserName(UserLRRegisterActivity.this, name);
 
 								finish();
 
@@ -94,10 +97,7 @@ public class UserLRRegisterActivity extends BaseActivity {
 						}
 
 						@Override
-						public void onFailure(HttpException error, String msg) {
-							// TODO Auto-generated method stub
-
-						}
+						public void onFailure(HttpException error, String msg) {}
 					});
 		}
 			break;

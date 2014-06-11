@@ -85,7 +85,7 @@ public class UserInfoActivity extends BaseActivity {
 					progressDialog.dismiss();
 
 					try {
-						BaseEntity entity = JsonAnalytic.getInstance().analyseJsonTDF(responseInfo.result,
+						BaseEntity entity = JsonAnalytic.getInstance().analyseJsonT(responseInfo.result,
 								BaseEntity.class);
 						if (0 == entity.getCode()) {
 							User.saveToken(context, "");
@@ -102,11 +102,13 @@ public class UserInfoActivity extends BaseActivity {
 							if (1002 == entity.getCode()) {
 								User.saveToken(context, "");
 								startActivity(new Intent(context, UserLRLoginActivity.class));
+								finish();
 							}
 						}
 
 					} catch (DFException e) {
 						e.printStackTrace();
+
 					}
 				}
 
