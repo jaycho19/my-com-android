@@ -3,6 +3,7 @@ package com.dongfang.daohang.bridge;
 import android.content.Context;
 import android.webkit.WebView;
 
+import com.dongfang.daohang.MainDaohangActivity;
 import com.dongfang.daohang.TakeMeActivity;
 import com.dongfang.daohang.TakeMeSelectActivity;
 import com.dongfang.daohang.dialog.RecordDialog;
@@ -64,13 +65,16 @@ public class ProxyBridge {
 	/**
 	 * 设置起点和终点
 	 * 
-	 * @param s
+	 * @param json
 	 */
-	public void sendAreaInfo(String s) {
+	public void sendAreaInfo(String json) {
 		if ((context instanceof TakeMeSelectActivity)
 				&& null != ((TakeMeSelectActivity) context).getOnSelectAreaListener()) {
-			((TakeMeSelectActivity) context).getOnSelectAreaListener().onSelected(s, "ProxyBridge");
+			((TakeMeSelectActivity) context).getOnSelectAreaListener().onSelected(json, "ProxyBridge");
 			((TakeMeSelectActivity) context).finish();
+		}
+		else if (context instanceof MainDaohangActivity){
+			RecordDialog.show(context, json).show();
 		}
 	}
 
@@ -107,15 +111,6 @@ public class ProxyBridge {
 	public void setRoadTextList(String jsons) {
 		ULog.d(jsons);
 
-	}
-
-	/**
-	 * 打开窗口
-	 * 
-	 * @param type
-	 */
-	public void openDialog(int type, String jsons) {
-		RecordDialog.show(context, jsons).show();
 	}
 
 	/**
