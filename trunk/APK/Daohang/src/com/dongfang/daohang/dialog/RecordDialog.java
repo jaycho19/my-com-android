@@ -78,7 +78,8 @@ public class RecordDialog {
 							@Override
 							public void onFailure(HttpException arg0, String arg1) {
 								pro.dismiss();
-								Toast.makeText(context, "添加记录点失败〒_〒", Toast.LENGTH_SHORT).show();
+								//Toast.makeText(context, "添加记录点失败〒_〒", Toast.LENGTH_SHORT).show();
+								ULog.d("添加记录点失败〒_〒");
 								dialog.dismiss();
 							}
 
@@ -89,9 +90,13 @@ public class RecordDialog {
 								try {
 									BaseEntity base = JsonAnalytic.getInstance().analyseJsonTDF(arg0.result,
 											BaseEntity.class);
-									Toast.makeText(context, base.getMsg(), Toast.LENGTH_SHORT).show();
+									ULog.d(base.getMsg());
+
+									//Toast.makeText(context, base.getMsg(), Toast.LENGTH_SHORT).show();
 								} catch (DFException e) {
-									Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+									ULog.d(e.getMessage());
+
+									//Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
 								}
 
 								dialog.dismiss();
