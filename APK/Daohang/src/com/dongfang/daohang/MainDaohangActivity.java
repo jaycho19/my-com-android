@@ -69,11 +69,11 @@ public class MainDaohangActivity extends BaseActivity {
 		tab4.setText("我的");
 		tab5.setText("详情");
 
-		tab1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mian_activity_tab_0, 0, 0, 0);
-		tab2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mian_activity_tab_1, 0, 0, 0);
-		tab3.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mian_activity_tab_2, 0, 0, 0);
-		tab4.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mian_activity_tab_3, 0, 0, 0);
-		tab5.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mian_activity_tab_4, 0, 0, 0);
+		tab1.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.mian_activity_tab_0, 0, 0);
+		tab2.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.mian_activity_tab_1, 0, 0);
+		tab3.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.mian_activity_tab_2, 0, 0);
+		tab4.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.mian_activity_tab_3, 0, 0);
+		tab5.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.mian_activity_tab_4, 0, 0);
 
 		fgtHost.getTabWidget().setDividerDrawable(null);
 		fgtHost.addTab(fgtHost.newTabSpec("0").setIndicator(tab1), FloorFragment.class, null);
@@ -129,7 +129,6 @@ public class MainDaohangActivity extends BaseActivity {
 	protected void onResume() {
 		super.onResume();
 		fgtHost.setCurrentTab(tab);
-
 	}
 
 	@OnClick({ R.id.top_bar_btn_back })

@@ -35,6 +35,8 @@ public class FloorFragment extends BaseFragment {
 	private TextView title;
 	@ViewInject(R.id.top_bar_btn_back)
 	private View vBack;
+	@ViewInject(R.id.top_bar_btn_qr)
+	private View vQR;
 
 	@ViewInject(R.id.fragment_floor_myWebView)
 	private MyWebView webView;
@@ -53,8 +55,9 @@ public class FloorFragment extends BaseFragment {
 		View v = inflater.inflate(R.layout.fragment_floor, container, false);
 		ViewUtils.inject(this, v);
 
-		title.setText("楼层");
+		title.setText("上海日月光广场");
 		vBack.setVisibility(View.INVISIBLE);
+		vQR.setVisibility(View.VISIBLE);
 		proxyBridge = new ProxyBridge(getActivity(), webView);
 		webView.addJavascriptInterface(proxyBridge);
 		webView.loadUrl(ComParams.BASE_URL);

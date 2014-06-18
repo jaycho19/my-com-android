@@ -18,6 +18,7 @@ import com.dongfang.daohang.beans.AreaBean;
 import com.dongfang.daohang.beans.AreaEntity;
 import com.dongfang.daohang.interf.OnSelectAreaListener;
 import com.dongfang.daohang.net.HttpActions;
+import com.dongfang.daohang.params.ComParams;
 import com.dongfang.daohang.params.adp.ShopsListAdapter;
 import com.dongfang.utils.DFException;
 import com.dongfang.utils.JsonAnalytic;
@@ -115,7 +116,7 @@ public class ShopListFragment extends BaseFragment {
 		if (null == context)
 			ULog.e("------------------------ null = context --------------------");
 
-		String url = HttpActions.searchArea(context, 10, searchName, start, limit);
+		String url = HttpActions.searchArea(context, ComParams.BASE_PLACEID, searchName, start, limit);
 		ULog.d(url);
 		new HttpUtils().send(HttpMethod.GET, url, new RequestCallBack<String>() {
 			@Override

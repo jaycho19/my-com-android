@@ -115,7 +115,7 @@ public final class HttpActions {
 	/**
 	 * 获取商场信息
 	 */
-	public static String getPlace(String placeId) {
+	public static String getPlace(int placeId) {
 		StringBuilder sb = new StringBuilder(ComParams.HTTP_URL);
 		sb.append("?").append("class=").append("place");
 		sb.append("&").append("method=").append("getPlace");
