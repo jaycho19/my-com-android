@@ -100,7 +100,7 @@ public class FloorFragment extends BaseFragment {
 			// proxyBridge.openDialog(1,"1234567890");
 			proxyBridge.setPosition("359", 1);
 			proxyBridge.setPosition("361", 2);
-			proxyBridge.getRoadTextList();
+			proxyBridge.getRoadTextList(0);
 			// Intent intent = new Intent(getActivity(), ShopInfoActivity.class);
 			// intent.putExtra("title", "优衣库");
 			// intent.putExtra("placeId", 10);

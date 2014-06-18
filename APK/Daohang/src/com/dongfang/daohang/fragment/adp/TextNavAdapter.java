@@ -1,4 +1,4 @@
-package com.dongfang.daohang.params.adp;
+package com.dongfang.daohang.fragment.adp;
 
 import java.util.List;
 
