@@ -37,10 +37,14 @@ public class ProxyBridge {
 	}
 
 	/**
+	 * 
 	 * 获取文字路径，会回调方法 {@link setRoadTextList}
+	 * 
+	 * @param type
+	 *            0:最短 ；1：路过洗手间； 2：不坐电梯
 	 */
-	public void getRoadTextList() {
-		webView.loadUrl("javascript:page_getRoadTextList()");
+	public void getRoadTextList(int type) {
+		webView.loadUrl("javascript:page_getRoadTextList(" + type + ")");
 	}
 
 	/**
@@ -73,7 +77,7 @@ public class ProxyBridge {
 			((TakeMeSelectActivity) context).getOnSelectAreaListener().onSelected(json, "ProxyBridge");
 			((TakeMeSelectActivity) context).finish();
 		}
-		else if (context instanceof MainDaohangActivity){
+		else if (context instanceof MainDaohangActivity) {
 			RecordDialog.show(context, json).show();
 		}
 	}

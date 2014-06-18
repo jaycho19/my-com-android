@@ -20,13 +20,12 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.dongfang.daohang.beans.TextNavBean;
 import com.dongfang.daohang.bridge.ProxyBridge;
+import com.dongfang.daohang.fragment.adp.TextNavAdapter;
 import com.dongfang.daohang.params.ComParams;
-import com.dongfang.daohang.params.adp.TextNavAdapter;
 import com.dongfang.daohang.views.MyWebView;
 import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseActivity;
@@ -139,7 +138,8 @@ public class TakeMeActivity extends BaseActivity {
 	}
 
 	@OnClick({ R.id.top_bar_btn_back, R.id.dialog_goto_im_qr, R.id.dialog_goto_tv_qidian,
-			R.id.dialog_goto_tv_zhongdian, R.id.activity_takeme_btn_1, R.id.activity_takeme_text_navigation_btn_share,
+			R.id.dialog_goto_tv_zhongdian, R.id.activity_takeme_btn_1, R.id.activity_takeme_btn_2,
+			R.id.activity_takeme_btn_3, R.id.activity_takeme_text_navigation_btn_share,
 			R.id.activity_takeme_text_navigation_btn_goto })
 	@Override
 	public void onClick(View v) {
@@ -154,7 +154,13 @@ public class TakeMeActivity extends BaseActivity {
 			startActivityForResult(new Intent(this, TakeMeSelectActivity.class), 0x00FD);
 			break;
 		case R.id.activity_takeme_btn_1:
-			proxyBridge.getRoadTextList();
+			proxyBridge.getRoadTextList(0);
+			break;
+		case R.id.activity_takeme_btn_2:
+			proxyBridge.getRoadTextList(1);
+			break;
+		case R.id.activity_takeme_btn_3:
+			proxyBridge.getRoadTextList(2);
 			break;
 		case R.id.activity_takeme_text_navigation_btn_share: {
 			Uri uri = Uri.parse("smsto:");

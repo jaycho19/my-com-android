@@ -4,26 +4,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/blue_background" >
+    <include layout="@layout/top_bar" />
 
-        <ImageView
-            android:id="@+id/fragment_list_top_bar_iv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/main_top_shanghai" />
+    <!-- <RelativeLayout -->
+    <!-- android:layout_width="match_parent" -->
+    <!-- android:layout_height="wrap_content" -->
+    <!-- android:background="@color/blue_background" > -->
 
-        <ImageView
-            android:id="@+id/fragment_activity_top_bar_iv_qr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/icon_qr_1" />
-    </RelativeLayout>
+
+    <!-- <TextView -->
+    <!-- android:id="@+id/fragment_list_top_bar_iv_title" -->
+    <!-- android:layout_width="wrap_content" -->
+    <!-- android:layout_height="wrap_content" -->
+    <!-- android:layout_centerInParent="true" -->
+    <!-- android:textSize="20sp" -->
+    <!-- android:textColor="@android:color/white" -->
+    <!-- android:text="上海" /> -->
+
+
+    <!-- <ImageView -->
+    <!-- android:id="@+id/fragment_activity_top_bar_iv_qr" -->
+    <!-- android:layout_width="wrap_content" -->
+    <!-- android:layout_height="wrap_content" -->
+    <!-- android:layout_alignParentRight="true" -->
+    <!-- android:layout_centerVertical="true" -->
+    <!-- android:src="@drawable/icon_qr_1" /> -->
+    <!-- </RelativeLayout> -->
 
     <ImageView
         android:id="@+id/fragment_activity_iv_ad"
