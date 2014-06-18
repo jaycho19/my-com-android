@@ -18,6 +18,7 @@ import com.dongfang.daohang.beans.ActivityBean;
 import com.dongfang.daohang.beans.ActivityEntity;
 import com.dongfang.daohang.beans.PlaceBean;
 import com.dongfang.daohang.net.HttpActions;
+import com.dongfang.daohang.params.ComParams;
 import com.dongfang.daohang.params.adp.DetailActivityAdapter;
 import com.dongfang.dialog.ProgressDialog;
 import com.dongfang.utils.DFException;
@@ -89,7 +90,7 @@ public class DetailFragment extends BaseFragment {
 			return;
 		}
 
-		new HttpUtils().send(HttpMethod.GET, HttpActions.getPlace("10"), new RequestCallBack<String>() {
+		new HttpUtils().send(HttpMethod.GET, HttpActions.getPlace(ComParams.BASE_PLACEID), new RequestCallBack<String>() {
 
 			ProgressDialog progressDialog = ProgressDialog.show(getActivity());
 
@@ -155,37 +156,38 @@ public class DetailFragment extends BaseFragment {
 	}
 
 	private void getActivity(final int type) {
-		new HttpUtils().send(HttpMethod.GET, HttpActions.getActivitys(10, 1, 5, type), new RequestCallBack<String>() {
-			ProgressDialog progressDialog = ProgressDialog.show(getActivity());
+		new HttpUtils().send(HttpMethod.GET, HttpActions.getActivitys(ComParams.BASE_PLACEID, 1, 5, type),
+				new RequestCallBack<String>() {
+					ProgressDialog progressDialog = ProgressDialog.show(getActivity());
 
-			@Override
-			public void onStart() {
-				super.onStart();
-				ULog.d(this.getRequestUrl());
-				progressDialog.show();
+					@Override
+					public void onStart() {
+						super.onStart();
+						ULog.d(this.getRequestUrl());
+						progressDialog.show();
 
-			}
+					}
 
-			@Override
-			public void onFailure(HttpException arg0, String arg1) {
-				progressDialog.dismiss();
-			}
+					@Override
+					public void onFailure(HttpException arg0, String arg1) {
+						progressDialog.dismiss();
+					}
 
-			@Override
-			public void onSuccess(ResponseInfo<String> arg0) {
-				progressDialog.dismiss();
-				ULog.d(arg0.result);
-				try {
-					ActivityEntity bean = JsonAnalytic.getInstance().analyseJsonTInfoDF(arg0.result,
-							ActivityEntity.class);
-					ULog.d(bean.toString());
-					add(bean.getList());
-				} catch (DFException e) {
-					e.printStackTrace();
-				}
+					@Override
+					public void onSuccess(ResponseInfo<String> arg0) {
+						progressDialog.dismiss();
+						ULog.d(arg0.result);
+						try {
+							ActivityEntity bean = JsonAnalytic.getInstance().analyseJsonTInfoDF(arg0.result,
+									ActivityEntity.class);
+							ULog.d(bean.toString());
+							add(bean.getList());
+						} catch (DFException e) {
+							e.printStackTrace();
+						}
 
-			}
-		});
+					}
+				});
 	}
 
 	@OnClick({ R.id.fragment_detail_tv_around_carport })

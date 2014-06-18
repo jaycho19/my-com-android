@@ -14,6 +14,7 @@ import com.dongfang.daohang.R;
 import com.dongfang.daohang.beans.AreaBean;
 import com.dongfang.daohang.beans.BaseEntity;
 import com.dongfang.daohang.net.HttpActions;
+import com.dongfang.daohang.params.ComParams;
 import com.dongfang.utils.DFException;
 import com.dongfang.utils.JsonAnalytic;
 import com.dongfang.utils.ULog;
@@ -82,7 +83,7 @@ public class RecordDialog {
 
 				pb.setVisibility(View.VISIBLE);
 
-				new HttpUtils().send(HttpMethod.GET, HttpActions.addRecord(context, bean.getAreaId(), 10),
+				new HttpUtils().send(HttpMethod.GET, HttpActions.addRecord(context, bean.getAreaId(), ComParams.BASE_PLACEID),
 						new RequestCallBack<String>() {
 							@Override
 							public void onFailure(HttpException arg0, String arg1) {

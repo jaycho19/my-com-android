@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white_background" >
+        android:background="@color/blue_background" >
 
         <ImageView
             android:id="@+id/fragment_list_top_bar_iv_title"
@@ -22,14 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/icon_qr" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_below="@+id/fragment_list_top_bar_iv_title"
-            android:background="#999999" />
+            android:src="@drawable/icon_qr_1" />
     </RelativeLayout>
 
     <ImageView
