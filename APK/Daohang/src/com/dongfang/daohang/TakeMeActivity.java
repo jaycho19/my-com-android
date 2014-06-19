@@ -69,19 +69,22 @@ public class TakeMeActivity extends BaseActivity {
 
 		textNavAdapter = new TextNavAdapter(context, listData);
 		lvTextNavigation.setAdapter(textNavAdapter);
+
+		ULog.d("---> " + getIntent().getExtras().getString("result"));
+
 	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK && null != data && data.hasExtra("result")) {
 			switch (requestCode) {
-			case 0x00FF:
-			case 0x00FE:
+			case ComParams.REQUESTCODE_START_QR:
+			case ComParams.REQUESTCODE_START:
 				analyticJson(1, data.getStringExtra("result"), data.getStringExtra("from"));
 				qidian.setText(start.get("name"));
 				proxyBridge.setPosition(start.get("areaId"), 1);
 				break;
-			case 0x00FD:
+			case ComParams.REQUESTCODE_END:
 				analyticJson(2, data.getStringExtra("result"), data.getStringExtra("from"));
 				zhongdian.setText(end.get("name"));
 				proxyBridge.setPosition(end.get("areaId"), 2);
@@ -145,13 +148,13 @@ public class TakeMeActivity extends BaseActivity {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.dialog_goto_im_qr:
-			startActivityForResult(new Intent(this, MCaptureActivity.class), 0x00FF);
+			startActivityForResult(new Intent(this, MCaptureActivity.class), ComParams.REQUESTCODE_START_QR);
 			break;
 		case R.id.dialog_goto_tv_qidian:
-			startActivityForResult(new Intent(this, TakeMeSelectActivity.class), 0x00FE);
+			startActivityForResult(new Intent(this, TakeMeSelectActivity.class), ComParams.REQUESTCODE_START);
 			break;
 		case R.id.dialog_goto_tv_zhongdian:
-			startActivityForResult(new Intent(this, TakeMeSelectActivity.class), 0x00FD);
+			startActivityForResult(new Intent(this, TakeMeSelectActivity.class), ComParams.REQUESTCODE_END);
 			break;
 		case R.id.activity_takeme_btn_1:
 			proxyBridge.getRoadTextList(0);

@@ -30,7 +30,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.dongfang.daohang.MainDaohangActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,46 +41,64 @@
         <activity
             android:name="com.dongfang.daohang.MainActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTask" >
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="UserLRLoginActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name="UserFollowActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name="UserInfoActivity"
-            android:launchMode="singleTask" />
-        <activity android:name="UserInfoModifyActivity" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="UserInfoModifyActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="UserRecordActivity"
             android:launchMode="singleTask" />
         <activity
             android:name="UserLRRegisterActivity"
-            android:launchMode="singleTask" />
-        <activity android:name="com.dongfang.v4.app.MCaptureActivity" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dongfang.v4.app.MCaptureActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="WapActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name="SettingFeedbackActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name="SettingAboutActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name="SettingMapDownloadActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="ShopInfoActivity"/>
+            android:name="ShopInfoActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="ShopWabActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="TakeMeActivity" />
+            android:name="TakeMeActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="TakeMeSelectActivity" android:windowSoftInputMode="adjustPan"/>
+            android:name="TakeMeSelectActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

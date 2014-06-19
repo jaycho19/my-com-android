@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,6 +19,7 @@ import com.dongfang.daohang.params.ComParams;
 import com.dongfang.daohang.views.MyWebView;
 import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseFragment;
+import com.dongfang.v4.app.MCaptureActivity;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
@@ -75,13 +75,23 @@ public class FloorFragment extends BaseFragment {
 			tvNavigation.setText(listData.get(i).getText());
 			ll.setVisibility(View.VISIBLE);
 		}
+		
+		else if (resultCode == Activity.RESULT_OK && requestCode == 0x00f0 && null != data && data.hasExtra("result")) {
+			Intent intent = new Intent(getActivity(), TakeMeActivity.class);
+			intent.putExtras(data.getExtras());
+			startActivity(intent);
+		}
+		
 	}
 
 	@OnClick({ R.id.fragment_floor_iv_dwq, R.id.fragment_floor_iv_test, R.id.fragment_floor_text_navigation_btn_right,
-			R.id.fragment_floor_text_navigation_btn_left })
+			R.id.fragment_floor_text_navigation_btn_left,R.id.top_bar_btn_qr})
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.top_bar_btn_qr:
+			startActivityForResult(new Intent(getActivity(), MCaptureActivity.class), 0x00f0);
+			break;
 		case R.id.fragment_floor_text_navigation_btn_left:
 			i = i < 1 ? 0 : --i;
 			tvNavigation.setText(listData.get(i).getText());
