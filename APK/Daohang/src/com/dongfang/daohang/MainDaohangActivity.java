@@ -34,7 +34,9 @@ public class MainDaohangActivity extends BaseActivity {
 	private TextView title;
 
 	private Context context;
-	public static int tab = 0;
+	public static int tab = 2;
+	
+	private Bundle data; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,12 @@ public class MainDaohangActivity extends BaseActivity {
 	/** 获取首页数据 */
 	private void initData(Intent intent) {
 		ULog.d("initData");
+		
+		if (null != getIntent() && null != getIntent().getExtras() && getIntent().getExtras().containsKey("result")) {
+			data = getIntent().getExtras();
+		}
+		
+		
 	}
 
 	/** 初始化底部菜单 */
@@ -76,7 +84,7 @@ public class MainDaohangActivity extends BaseActivity {
 		tab5.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.mian_activity_tab_4, 0, 0);
 
 		fgtHost.getTabWidget().setDividerDrawable(null);
-		fgtHost.addTab(fgtHost.newTabSpec("0").setIndicator(tab1), FloorFragment.class, null);
+		fgtHost.addTab(fgtHost.newTabSpec("0").setIndicator(tab1), FloorFragment.class, data);
 		// fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab2), ShopListFragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("1").setIndicator(tab2), Shops2Fragment.class, null);
 		fgtHost.addTab(fgtHost.newTabSpec("2").setIndicator(tab3), ActivityFragment.class, null);

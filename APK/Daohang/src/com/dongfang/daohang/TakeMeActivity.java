@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.dongfang.daohang.beans.AreaBean;
 import com.dongfang.daohang.beans.TextNavBean;
 import com.dongfang.daohang.bridge.ProxyBridge;
 import com.dongfang.daohang.fragment.adp.TextNavAdapter;
@@ -66,11 +67,29 @@ public class TakeMeActivity extends BaseActivity {
 		proxyBridge = new ProxyBridge(context, webView);
 		webView.addJavascriptInterface(proxyBridge);
 		webView.loadUrl(ComParams.BASE_URL);
+		webView.setOnLoadCompleted(new MyWebView.OnLoadCompleted() {
+			@Override
+			public void toDO() {
+				if (start.containsKey("name") && start.containsKey("areaId")) {
+					qidian.setText(start.get("name"));
+					proxyBridge.setPosition(start.get("areaId"), 1);
+				}
+
+			}
+		});
 
 		textNavAdapter = new TextNavAdapter(context, listData);
 		lvTextNavigation.setAdapter(textNavAdapter);
 
-		ULog.d("---> " + getIntent().getExtras().getString("result"));
+		if (null != getIntent() && null != getIntent().getExtras() && getIntent().getExtras().containsKey("result")) {
+			String s = getIntent().getExtras().getString("result");
+			ULog.d("---> " + s);
+
+			if (s.startsWith("http") && s.contains("&s=")) {
+				start.put("name", "我的位置");
+				start.put("areaId", s.substring(s.indexOf("&s=") + 3));
+			}
+		}
 
 	}
 

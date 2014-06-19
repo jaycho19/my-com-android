@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.dongfang.daohang.MainDaohangActivity;
 import com.dongfang.daohang.R;
-import com.dongfang.daohang.TakeMeActivity;
 import com.dongfang.daohang.WapActivity;
 import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseFragment;
@@ -55,10 +55,12 @@ public class ActivityFragment extends BaseFragment {
 		if (null != data && data.hasExtra("result"))
 			sb.append("\n").append("result = ").append(data.getStringExtra("result"));
 		ULog.e(sb.toString());
-		if (resultCode == Activity.RESULT_OK && requestCode == 0x00f0 && null != data && data.hasExtra("result")) {
-			Intent intent = new Intent(getActivity(), TakeMeActivity.class);
+		if (resultCode == Activity.RESULT_OK && requestCode == 0x00F0 && null != data && data.hasExtra("result")) {
+			MainDaohangActivity.tab=0;
+			Intent intent = new Intent(getActivity(), MainDaohangActivity.class);
 			intent.putExtras(data.getExtras());
 			startActivity(intent);
+			getActivity().finish();
 		}
 	}
 
@@ -67,7 +69,7 @@ public class ActivityFragment extends BaseFragment {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.top_bar_btn_qr:
-			startActivityForResult(new Intent(getActivity(), MCaptureActivity.class), 0x00f0);
+			startActivityForResult(new Intent(getActivity(), MCaptureActivity.class), 0x00F0);
 			break;
 		case R.id.fragment_activity_iv_ad: {
 			Intent intent = new Intent(getActivity(), WapActivity.class);

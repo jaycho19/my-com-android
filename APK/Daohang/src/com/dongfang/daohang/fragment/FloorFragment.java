@@ -61,6 +61,16 @@ public class FloorFragment extends BaseFragment {
 		proxyBridge = new ProxyBridge(getActivity(), webView);
 		webView.addJavascriptInterface(proxyBridge);
 		webView.loadUrl(ComParams.BASE_URL);
+		webView.setOnLoadCompleted(new MyWebView.OnLoadCompleted() {
+
+			@Override
+			public void toDO() {
+				if (null != getArguments()) {
+					String s = getArguments().getString("result");
+					proxyBridge.setPosition(s.substring(s.indexOf("&s=") + 3), 3);
+				}
+			}
+		});
 
 		return v;
 	}
@@ -75,22 +85,25 @@ public class FloorFragment extends BaseFragment {
 			tvNavigation.setText(listData.get(i).getText());
 			ll.setVisibility(View.VISIBLE);
 		}
-		
-		else if (resultCode == Activity.RESULT_OK && requestCode == 0x00f0 && null != data && data.hasExtra("result")) {
-			Intent intent = new Intent(getActivity(), TakeMeActivity.class);
-			intent.putExtras(data.getExtras());
-			startActivity(intent);
+
+		else if (resultCode == Activity.RESULT_OK && requestCode == 0x00F0 && null != data && data.hasExtra("result")) {
+			// Intent intent = new Intent(getActivity(), TakeMeActivity.class);
+			// intent.putExtra("result", data.getExtras().getString("result"));
+			// intent.putExtra("from", FloorFragment.class.getSimpleName());
+			// startActivity(intent);
+			String s = data.getExtras().getString("result");
+			proxyBridge.setPosition(s.substring(s.indexOf("&s=") + 3), 3);
 		}
-		
+
 	}
 
 	@OnClick({ R.id.fragment_floor_iv_dwq, R.id.fragment_floor_iv_test, R.id.fragment_floor_text_navigation_btn_right,
-			R.id.fragment_floor_text_navigation_btn_left,R.id.top_bar_btn_qr})
+			R.id.fragment_floor_text_navigation_btn_left, R.id.top_bar_btn_qr })
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.top_bar_btn_qr:
-			startActivityForResult(new Intent(getActivity(), MCaptureActivity.class), 0x00f0);
+			startActivityForResult(new Intent(getActivity(), MCaptureActivity.class), 0x00F0);
 			break;
 		case R.id.fragment_floor_text_navigation_btn_left:
 			i = i < 1 ? 0 : --i;
