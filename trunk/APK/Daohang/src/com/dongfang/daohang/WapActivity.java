@@ -3,6 +3,7 @@ package com.dongfang.daohang;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import com.dongfang.daohang.views.MyWebView;
 import com.dongfang.v4.app.BaseActivity;
@@ -14,12 +15,18 @@ public class WapActivity extends BaseActivity {
 	@ViewInject(R.id.activity_wap_webview)
 	private MyWebView webView;
 
+	@ViewInject(R.id.top_bar_tv_title)
+	private TextView title;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_wap);
-		String url = TextUtils.isEmpty(getIntent().getStringExtra("ulr")) ? "http://douban.fm/" : getIntent()
-				.getStringExtra("ulr");
+		title.setText("上海");
+		
+		
+		String url = TextUtils.isEmpty(getIntent().getStringExtra("url")) ? "http://www.baidu.com/" : getIntent()
+				.getStringExtra("url");
 		webView.loadUrl(url);
 
 	}

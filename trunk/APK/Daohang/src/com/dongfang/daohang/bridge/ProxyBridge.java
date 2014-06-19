@@ -28,12 +28,12 @@ public class ProxyBridge {
 	// ----------调用js接口------------------
 	/**
 	 * 
-	 * @param s
+	 * @param name
 	 * @param type
 	 *            1-设置起始点, 2-设置结束点, 3-当前位置（扫码）
 	 */
-	public void setPosition(String s, int type) {
-		webView.loadUrl("javascript:page_setPosition('" + s + "','" + type + "')");
+	public void setPosition(String name, int type) {
+		webView.loadUrl("javascript:page_setPosition('" + name + "','" + type + "')");
 	}
 
 	/**

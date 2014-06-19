@@ -9,6 +9,8 @@ import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,6 +27,7 @@ import com.dongfang.utils.DFException;
 import com.dongfang.utils.JsonAnalytic;
 import com.dongfang.utils.ULog;
 import com.dongfang.v4.app.BaseFragment;
+import com.dongfang.v4.app.DeviceInfo;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -47,6 +50,8 @@ public class DetailFragment extends BaseFragment {
 	private TextView tvCarport;
 	@ViewInject(R.id.fragment_detail_listview_activity)
 	private ListView lvActivity;
+	@ViewInject(R.id.fragment_detail_tv_detail)
+	private TextView tvDetail;
 
 	private PlaceBean placeBean = null;
 	private List<ActivityBean> listData;
@@ -59,6 +64,10 @@ public class DetailFragment extends BaseFragment {
 
 		title.setText("详情");
 		vBack.setVisibility(View.INVISIBLE);
+
+		tvDetail.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+				DeviceInfo.SCREEN_WIDTH_PORTRAIT * 246 / 480));
+
 		if (savedInstanceState != null) {
 			if (savedInstanceState.containsKey("bean")) {
 				placeBean = savedInstanceState.getParcelable("bean");
@@ -90,39 +99,40 @@ public class DetailFragment extends BaseFragment {
 			return;
 		}
 
-		new HttpUtils().send(HttpMethod.GET, HttpActions.getPlace(ComParams.BASE_PLACEID), new RequestCallBack<String>() {
+		new HttpUtils().send(HttpMethod.GET, HttpActions.getPlace(ComParams.BASE_PLACEID),
+				new RequestCallBack<String>() {
 
-			ProgressDialog progressDialog = ProgressDialog.show(getActivity());
+					ProgressDialog progressDialog = ProgressDialog.show(getActivity());
 
-			@Override
-			public void onStart() {
-				super.onStart();
-				ULog.d(this.getRequestUrl());
-				progressDialog.show();
+					@Override
+					public void onStart() {
+						super.onStart();
+						ULog.d(this.getRequestUrl());
+						progressDialog.show();
 
-			}
+					}
 
-			@Override
-			public void onFailure(HttpException arg0, String arg1) {
-				progressDialog.dismiss();
-			}
+					@Override
+					public void onFailure(HttpException arg0, String arg1) {
+						progressDialog.dismiss();
+					}
 
-			@Override
-			public void onSuccess(ResponseInfo<String> arg0) {
-				progressDialog.dismiss();
-				ULog.d(arg0.result);
-				try {
-					placeBean = JsonAnalytic.getInstance().analyseJsonTInfoDF(arg0.result, PlaceBean.class);
+					@Override
+					public void onSuccess(ResponseInfo<String> arg0) {
+						progressDialog.dismiss();
+						ULog.d(arg0.result);
+						try {
+							placeBean = JsonAnalytic.getInstance().analyseJsonTInfoDF(arg0.result, PlaceBean.class);
 
-					ULog.d(placeBean.toString());
+							ULog.d(placeBean.toString());
 
-					init(placeBean);
-				} catch (DFException e) {
-					e.printStackTrace();
-				}
+							init(placeBean);
+						} catch (DFException e) {
+							e.printStackTrace();
+						}
 
-			}
-		});
+					}
+				});
 
 		if (null == listData || listData.size() < 1) {
 			getActivity(-10);

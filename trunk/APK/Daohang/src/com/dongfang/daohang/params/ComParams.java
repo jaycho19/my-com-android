@@ -11,4 +11,10 @@ public class ComParams {
 
 	public static final int BASE_PLACEID = 12;
 
+	/** startActivityForResult的第二个参数，用于获取起点 */
+	public static final int REQUESTCODE_START_QR = 0x00FF;
+	public static final int REQUESTCODE_START = 0x00FE;
+	/** startActivityForResult的第二个参数，用于获取终点 */
+	public static final int REQUESTCODE_END = 0x00FD;
+
 }
